@@ -1,0 +1,22 @@
+Given a solidity function giveBlockReward and the related parts from a smart contract.
+Whether the function giveBlockReward and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.22;
+contract Egypt {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+
+    function giveBlockReward() public {
+        balanceOf[block.coinbase] += 1;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are minting or allocating
+"""

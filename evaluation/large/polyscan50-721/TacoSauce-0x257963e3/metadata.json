@@ -1,0 +1,252 @@
+{
+    "file": "evaluation/polyscan50-721/TacoSauce-0x257963e3.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.17",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/transferOwnership_address",
+                "paused() returns(bool)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/paused",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/supportsInterface_bytes4",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor() returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/constructor",
+                "setURI(string) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/setURI_string",
+                "setBaseExtension(string) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/setBaseExtension_string",
+                "setGuac(IGUAC) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/setGuac_IGUAC",
+                "setGuacPrice(uint256) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/setGuacPrice_uint256",
+                "setMaxMinted(uint256) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/setMaxMinted_uint256",
+                "setUserAllowance(uint256) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/setUserAllowance_uint256",
+                "pause() returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/pause",
+                "unpause() returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/unpause",
+                "withdraw() returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/withdraw",
+                "safeMint(uint256) returns()": ".temp/polyscan50-721/TacoSauce-0x257963e3/TacoSauce/f/safeMint_uint256"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "paused() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseExtension(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setGuac(IGUAC) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setGuacPrice(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMaxMinted(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setUserAllowance(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "pause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unpause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeMint(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "userMints(address) returns(uint256)",
+                "maxMinted() returns(uint256)",
+                "OPERATOR_FILTER_REGISTRY() returns(IOperatorFilterRegistry)",
+                "guac() returns(IGUAC)",
+                "baseExtension() returns(string)",
+                "userAllowance() returns(uint256)",
+                "totalSupply() returns(uint256)",
+                "guacPrice() returns(uint256)"
+            ],
+            "ercs": [
+                "165",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Paused",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Unpaused",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "TacoSauce"
+        }
+    ]
+}

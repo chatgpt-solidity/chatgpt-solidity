@@ -1,0 +1,5 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function with the correct arguments according to the rule provided. The `_values` argument in the event is passed as `amounts`, which is the list of number of tokens that the holder's balance is decreased by. This same `amounts` list is used to increase the recipient's balance, thus matching the rule that the `_values` argument must match what the recipient balance is increased by.
+
+The event is emitted just after the balances have been updated and before the `_doSafeBatchTransferAcceptanceCheck` function is called, which ensures that the event reflects the actual changes in balances as a result of the batch transfer.

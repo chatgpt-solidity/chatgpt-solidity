@@ -1,0 +1,36 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a solidity function <function> and the related parts from a smart contract.
+      Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+      <example>
+
+      Function(and related parts) to audit:"""
+      <code>
+      """
+
+      Action:"""
+      <condition>
+      """
+    stopIf: "NO"
+
+  - template: |
+      Whether it emits the event <event>? Reply in "YES" or "NO".
+      Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+examples:
+  - example: | 
+      Example of "initial token distribution" are provided below. 
+      Example:"""
+      construct <Contract Name> {
+          constructor() {
+              // tokens are transfer during the initial token distribution:
+              balances[msg.sender] = total;
+          }
+      }
+      """
+    matcher: "initial token distribution"
+
+
+
+

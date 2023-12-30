@@ -1,0 +1,29 @@
+Given a solidity function setDistributionCriteria and the related parts from a smart contract.
+Whether the function setDistributionCriteria and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+
+    IDividendDistributor public dividendDistributor;
+    address public tokenOwner;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function setDistributionCriteria(uint256 newMinPeriod, uint256 newMinDistribution) external onlyOwner {
+        dividendDistributor.setDistributionCriteria(newMinPeriod, newMinDistribution);        
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

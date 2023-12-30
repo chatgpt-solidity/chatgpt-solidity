@@ -1,0 +1,9 @@
+NO
+
+The `_transfer` function within the `PEPA` contract includes a requirement that the `amount` must be greater than zero:
+
+```solidity
+require(amount > 0, "Transfer amount must be greater than zero");
+```
+
+This means that if a transfer of 0 value is attempted, the function will revert with the message "Transfer amount must be greater than zero". Therefore, the `transferFrom` function, which calls `_transfer`, will also revert in the case of a transfer of 0 value.

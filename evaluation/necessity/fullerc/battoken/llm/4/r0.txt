@@ -1,0 +1,29 @@
+The provided Solidity function `allowance` within the `StandardToken` contract appears to be compliant with the ERC-20 token standard as described in the given ERC documentation. The ERC-20 standard specifies that the `allowance` function should:
+
+1. Return the amount which `_spender` is still allowed to withdraw from `_owner`.
+2. Be a public view function that returns a `uint256` representing the remaining allowance.
+
+The provided `allowance` function matches these requirements:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) constant returns (uint256 remaining) {
+    return allowed[_owner][_spender];
+}
+```
+
+Here are the key points that confirm compliance:
+
+- The function is named `allowance`, which is the correct name as per the ERC-20 standard.
+- It takes two `address` type parameters: `_owner` and `_spender`, which represent the token owner and the spender respectively.
+- It is a `constant` function, which in the context of Solidity versions before 0.5.0 (as indicated by the ERC using syntax from Solidity 0.4.17 or above) is equivalent to a `view` function in later versions. This means it does not modify the state and is used to return a value.
+- It returns a `uint256` type value, which is the remaining allowance that `_spender` has from `_owner`'s balance.
+
+However, there are a couple of minor points to note:
+
+- The `constant` keyword has been deprecated in favor of `view` and `pure` in later Solidity versions (0.5.0 and above). If the contract is being written for a newer Solidity version, it should use `view` instead of `constant`.
+- The ERC-20 standard does not specify the `constant` keyword, but rather expects the function to be a `view` function, which does not modify the state.
+
+In conclusion, the `allowance` function provided does not violate the ERC-20 standard based on the information given in the ERC documentation. However, if the Solidity compiler version is 0.5.0 or newer, it would be more appropriate to use the `view` keyword instead of `constant`.

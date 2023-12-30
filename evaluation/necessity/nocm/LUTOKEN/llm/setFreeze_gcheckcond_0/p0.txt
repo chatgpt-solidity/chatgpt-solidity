@@ -1,0 +1,37 @@
+Given a solidity function setFreeze and the related parts from a smart contract and a rule.
+Whether the function setFreeze and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract LutToken is
+    LutTokenInterface,
+    UpgradeableToken,
+    DetailedERC20,
+    BurnableToken,
+    Pausable
+{
+
+    function setFreeze(bool newFreeze) public onlyOwner {
+        freeze = newFreeze;
+    }
+}
+
+contract LutTokenInterface is ERC20 {
+    bool public freeze;
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

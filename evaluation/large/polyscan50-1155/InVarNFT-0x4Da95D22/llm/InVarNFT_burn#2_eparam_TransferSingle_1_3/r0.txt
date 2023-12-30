@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted correctly according to the given rule. The `_burn` function takes `id` as an argument, which represents the token type being burned (transferred from the `account` to the zero address, which signifies token destruction). The `TransferSingle` event is then emitted with the correct parameters, including the `id` as the `_id` argument, which matches the token type being transferred.

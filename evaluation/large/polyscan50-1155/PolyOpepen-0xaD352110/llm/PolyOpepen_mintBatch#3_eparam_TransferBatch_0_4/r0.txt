@@ -1,0 +1,7 @@
+YES
+
+The `TransferBatch` event is emitted in the `_mintBatch` function of the `ERC1155` contract, which is called by the `mintBatch` function in the `PolyOpepen` contract. The `_mintBatch` function ensures that the `ids` and `amounts` arrays have the same length, which is a requirement for the `TransferBatch` event according to the rule provided.
+
+The `_mintBatch` function updates the balances of the `to` address for each token id in the `ids` array by the corresponding amount in the `amounts` array. After updating the balances, the `TransferBatch` event is emitted with the `_operator` (the message sender), `_from` address (which is zero since it's a mint operation), `_to` address, `_ids` array, and `_values` array (which is the `amounts` array). This matches the rule that the `_values` argument must be the list of the number of tokens the holder balance is increased by, which in this case is the minting operation.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule.

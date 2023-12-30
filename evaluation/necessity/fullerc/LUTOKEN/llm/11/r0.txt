@@ -1,0 +1,16 @@
+The function `setUpgradeMaster` and the related parts provided in the `UpgradeableToken` contract do not directly violate the ERC-20 standard as described in the provided ERC documentation. The ERC-20 standard specifies a set of functions and events that a compliant token must implement to enable token transfers and allow tokens to be approved for use by other addresses. The functions and events listed in the ERC-20 standard are:
+
+- `totalSupply`
+- `balanceOf`
+- `transfer`
+- `transferFrom`
+- `approve`
+- `allowance`
+- `Transfer` event
+- `Approval` event
+
+The `setUpgradeMaster` function is not part of the ERC-20 standard. It is an additional function that is specific to the `UpgradeableToken` contract, which seems to be designed to allow the token to be upgraded by a designated address known as the `upgradeMaster`. This function allows the current `upgradeMaster` to change the address that has the authority to set the upgrade path for the token.
+
+Since the ERC-20 standard does not dictate the internal mechanisms for contract upgradeability or ownership management, adding such a function does not inherently conflict with the standard. However, it is important to note that the upgradeability feature should be implemented with caution to ensure that it does not introduce security vulnerabilities or allow for unexpected behavior that could affect the standard ERC-20 functions.
+
+In summary, the `setUpgradeMaster` function does not violate the ERC-20 standard, but it is an additional feature that is not covered by the standard. When implementing such features, it is crucial to ensure that they do not interfere with the core ERC-20 functionality and that they are designed with security best practices in mind.

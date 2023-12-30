@@ -1,0 +1,13 @@
+YES
+
+The `_mint` function in the `RecipientNFT` contract calls the `_mint` function from the `ERC1155` contract, which emits the `TransferSingle` event. The `_id` argument passed to the `TransferSingle` event is the `coinbase` variable from the `RecipientNFT` contract, which represents the token type being transferred. The `_mint` function in `ERC1155` is designed to handle the creation of `amount` tokens of token type `id`, and assigns them to `to`, which is exactly what the rule specifies.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are being transferred, which is `address(0)` since it's a mint operation.
+- `_to`: The address to which the tokens are being minted.
+- `_id`: The token type being transferred, which is `coinbase` in this case.
+- `_value`: The number of tokens being transferred, which is `1` in this case.
+
+The rule is satisfied because the `_id` argument (`coinbase`) represents the token type being transferred, and the `TransferSingle` event is emitted accordingly.

@@ -1,0 +1,7 @@
+NO
+
+The `batchBurn` function in the `AssetContract` contract calls the `_burnBatch` function in the `ERC1155Tradable` contract, which emits the `TransferBatch` event. However, the rule specifies that the `_values` argument in the `TransferBatch` event must match the list and order of tokens specified in `_ids` and reflect the number of tokens the holder's balance is decreased by.
+
+In the provided code, the `TransferBatch` event is emitted with the `amounts` array as the `_values` argument, which does represent the number of tokens burned for each corresponding ID in the `ids` array. This means that the event is emitted according to the rule specified, as the `amounts` array contains the number of tokens that the holder's balance is decreased by, and it matches the list and order of tokens specified in the `ids` array.
+
+However, without the full context of the contract and how the `_burnBatch` function is implemented in the `ERC1155` base contract, we cannot be certain that the `amounts` array is not modified before the event is emitted. If the `amounts` array is modified in any way that does not reflect the actual number of tokens burned, then the rule would be violated. But based on the given code snippet and the assumption that the standard implementation of `_burnBatch` is used without modification to the `amounts` array, the event appears to be emitted correctly according to the rule.

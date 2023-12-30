@@ -1,0 +1,15 @@
+YES
+
+The `HelpMembertoMintCard` function in the `NFTBigPartnerV2` contract calls the `_mint` function of the `ERC1155` contract. The `_mint` function is designed to create `_amount` tokens of token type `_id`, and assign them to the address `to`.
+
+In the `_mint` function, the following steps occur:
+
+1. It checks that the `to` address is not the zero address.
+2. It sets the `operator` to the message sender.
+3. It calls `_beforeTokenTransfer` hook with the appropriate arguments.
+4. It increases the balance of `to` for the token `id` by `amount`.
+5. It emits the `TransferSingle` event with the `operator`, `from` (which is the zero address for minting), `to`, `id`, and `amount`.
+6. It calls `_afterTokenTransfer` hook with the appropriate arguments.
+7. It performs a safe transfer acceptance check if `to` is a contract.
+
+The `TransferSingle` event is emitted with the `_to` argument being the address of the recipient whose balance is increased, which is the `_member` address passed to the `HelpMembertoMintCard` function. This is in accordance with the given rule that the `_to` argument must be the address of the recipient whose balance is increased. Therefore, the `TransferSingle` event is emitted correctly according to the rule.

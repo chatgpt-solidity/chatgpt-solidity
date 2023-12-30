@@ -1,0 +1,5 @@
+NO
+
+The `transferFrom` function in the `WiT` contract does not always return whether the transfer is successful according to the ERC rule. The function has a condition that checks if the `_from` account is frozen and if the `frozen` flag is set to `true`. If the `_from` account is frozen, it will throw an error due to the `require` statement. If the `frozen` flag is `true`, it will return `false` without attempting the transfer, regardless of whether the transfer could have been successful or not.
+
+The ERC rule requires that the function should return `true` if the transfer is successful and `false` otherwise. However, the `transferFrom` function in the `WiT` contract may return `false` even if the transfer could have been successful (if not for the frozen state), which does not comply with the ERC rule that the return value should reflect the actual success of the transfer operation.

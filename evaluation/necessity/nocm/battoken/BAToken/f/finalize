@@ -1,0 +1,29 @@
+contract BAToken is StandardToken, SafeMath {
+
+    // contracts
+    address public ethFundDeposit; // deposit address for ETH for Brave International
+
+    // crowdsale parameters
+    bool public isFinalized; // switched to true in operational state
+    uint256 public fundingEndBlock;
+    uint256 public constant tokenCreationCap =
+        1500 * (10 ** 6) * 10 ** decimals;
+    uint256 public constant tokenCreationMin = 675 * (10 ** 6) * 10 ** decimals;
+
+    /// @dev Ends the funding period and sends the ETH home
+    function finalize() external {
+        if (isFinalized) throw;
+        if (msg.sender != ethFundDeposit) throw; // locks finalize to the ultimate ETH owner
+        if (totalSupply < tokenCreationMin) throw; // have to sell minimum to move to operational
+        if (block.number <= fundingEndBlock && totalSupply != tokenCreationCap)
+            throw;
+        // move to operational
+        isFinalized = true;
+        if (!ethFundDeposit.send(this.balance)) throw; // send the eth to Brave International
+    }
+}
+
+contract Token {
+    uint256 public totalSupply;
+}
+

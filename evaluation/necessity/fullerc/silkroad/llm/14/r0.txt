@@ -1,0 +1,17 @@
+The function `getBalanceTAI()` in the provided Solidity code is a custom function that retrieves the balance of the message sender (`msg.sender`) from the `balanceOf` mapping defined in the `TokenERC20` contract. This function is not part of the ERC20 standard, but it does not violate the standard either.
+
+The ERC20 standard specifies a set of functions and events that a compliant token contract must implement. These include `totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, and `allowance`, as well as the `Transfer` and `Approval` events. The standard also allows for optional functions such as `name`, `symbol`, and `decimals`.
+
+The `getBalanceTAI()` function is essentially a convenience function that provides the same information as the standard `balanceOf` function, but it is hardcoded to return the balance of the message sender. It does not interfere with any of the required ERC20 functions or change the behavior of the token in any way that would violate the standard.
+
+However, it is important to note that the `getBalanceTAI()` function is marked as `constant`, which is a deprecated keyword in Solidity. The `constant` keyword has been replaced by `view` and `pure` in newer versions of Solidity to specify functions that do not modify the state. Therefore, to be more up-to-date with the current Solidity version, the function should be marked as `view`:
+
+```solidity
+function getBalanceTAI() public view returns (uint256) {
+    uint256 balTAI;
+    balTAI = balanceOf[msg.sender];
+    return balTAI;
+}
+```
+
+In conclusion, the `getBalanceTAI()` function does not violate the ERC20 standard, but it should be updated to use the `view` keyword instead of `constant` to reflect the current best practices in Solidity.

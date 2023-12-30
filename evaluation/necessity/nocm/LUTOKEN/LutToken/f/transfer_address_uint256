@@ -1,0 +1,100 @@
+contract LutToken is
+    LutTokenInterface,
+    UpgradeableToken,
+    DetailedERC20,
+    BurnableToken,
+    Pausable
+{
+
+    /// @notice set of sale account which can freeze tokens
+    address public sale;
+
+    /// @notice when true - all tokens are frozen and only sales or contract owner can move their tokens
+    ///         when false - all tokens are unfrozen and can be moved by their owners
+
+    bool public frozen = true;
+    /// @dev makes transfer possible if tokens are unfrozen OR if the caller is a sale account
+    modifier saleOrUnfrozen() {
+        require(
+            (frozen == false) ||
+                msg.sender == sale ||
+                msg.sender == owner ||
+                !freeze
+        );
+        _;
+    }
+
+    /**
+     * @dev transfer token for a specified address
+     * @param _to The address to transfer to.
+     * @param _value The amount to be transferred.
+     */
+    function transfer(
+        address _to,
+        uint256 _value
+    ) public whenNotPaused saleOrUnfrozen returns (bool) {
+        super.transfer(_to, _value);
+    }
+}
+
+contract Ownable {
+    address public owner;
+}
+
+contract LutTokenInterface is ERC20 {
+    bool public freeze;
+}
+
+library SafeMath {
+
+    /**
+     * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256 c) {
+        c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract Pausable is Ownable {
+
+
+    bool public paused = false;
+    /**
+     * @dev Modifier to make a function callable only when the contract is not paused.
+     */
+    modifier whenNotPaused() {
+        require(!paused);
+        _;
+    }
+}
+
+contract BasicToken is ERC20Basic {
+
+    mapping(address => uint256) balances;
+
+    /**
+     * @dev transfer token for a specified address
+     * @param _to The address to transfer to.
+     * @param _value The amount to be transferred.
+     */
+    function transfer(address _to, uint256 _value) public returns (bool) {
+        require(_to != address(0));
+        require(_value <= balances[msg.sender]);
+
+        balances[msg.sender] = balances[msg.sender].sub(_value);
+        balances[_to] = balances[_to].add(_value);
+        emit Transfer(msg.sender, _to, _value);
+        return true;
+    }
+}
+

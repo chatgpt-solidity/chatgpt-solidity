@@ -1,0 +1,322 @@
+Given a solidity function migrate and the related parts from a smart contract.
+Check whether the event TransferSingle is emitted according to the given rule? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract ERC1155Tradable is
+    ContextMixin,
+    ERC1155,
+    NativeMetaTransaction,
+    Ownable,
+    Pausable
+{
+
+    address public proxyRegistryAddress;
+
+
+    mapping(uint256 => mapping(address => uint256)) private balances;
+    mapping(uint256 => uint256) private _supply;
+
+    modifier onlyOwnerOrProxy() {
+        require(
+            _isOwnerOrProxy(_msgSender()),
+            "ERC1155Tradable#onlyOwner: CALLER_IS_NOT_OWNER"
+        );
+        _;
+    }
+
+    function _isOwnerOrProxy(address _address) internal view returns (bool) {
+        return owner() == _address || _isProxyForUser(owner(), _address);
+    }
+
+    function totalSupply(uint256 _id) public view returns (uint256) {
+        return _supply[_id];
+    }
+
+    function _mint(
+        address _to,
+        uint256 _id,
+        uint256 _amount,
+        bytes memory _data
+    ) internal virtual override whenNotPaused {
+        address operator = _msgSender();
+
+        _beforeTokenTransfer(
+            operator,
+            address(0),
+            _to,
+            asSingletonArray(_id),
+            asSingletonArray(_amount),
+            _data
+        );
+
+        _beforeMint(_id, _amount);
+
+        balances[_id][_to] += _amount;
+        _supply[_id] += _amount;
+
+        emit TransferSingle(operator, address(0), _to, _id, _amount);
+
+        doSafeTransferAcceptanceCheck(
+            operator,
+            address(0),
+            _to,
+            _id,
+            _amount,
+            _data
+        );
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        virtual
+        returns (bool)
+    {
+        if (!proxyRegistryAddress.isContract()) {
+            return false;
+        }
+        ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
+        return address(proxyRegistry.proxies(_user)) == _address;
+
+    }
+    function doSafeTransferAcceptanceCheck(
+        address operator,
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) private {
+        if (to.isContract()) {
+            try
+                IERC1155Receiver(to).onERC1155Received(
+                    operator,
+                    from,
+                    id,
+                    amount,
+                    data
+                )
+            returns (bytes4 response) {
+                if (
+                    response != IERC1155Receiver(to).onERC1155Received.selector
+                ) {
+                    revert("ERC1155: ERC1155Receiver rejected tokens");
+                }
+            } catch Error(string memory reason) {
+                revert(reason);
+            } catch {
+                revert("ERC1155: transfer to non ERC1155Receiver implementer");
+            }
+        }
+    }
+
+    function asSingletonArray(uint256 element)
+        private
+        pure
+        returns (uint256[] memory)
+    {
+        uint256[] memory array = new uint256[](1);
+        array[0] = element;
+
+        return array;
+
+    }
+    function _msgSender() internal view override returns (address sender) {
+        return ContextMixin.msgSender();
+    }
+}
+
+contract AssetContract is ERC1155Tradable {
+
+
+    mapping(uint256 => string) private _tokenURI;
+    mapping(uint256 => bool) private _isPermanentURI;
+
+    function _beforeMint(uint256 _id, uint256 _quantity)
+        internal
+        view
+        override
+    {
+        require(
+            _quantity <= _remainingSupply(_id),
+            "AssetContract#_beforeMint: QUANTITY_EXCEEDS_TOKEN_SUPPLY_CAP"
+        );
+    }
+
+    function _mint(
+        address _to,
+        uint256 _id,
+        uint256 _quantity,
+        bytes memory _data
+    ) internal override {
+        super._mint(_to, _id, _quantity, _data);
+        if (_data.length > 1) {
+            _setURI(_id, string(_data));
+        }
+    }
+
+    function _setURI(uint256 _id, string memory _uri) internal {
+        _tokenURI[_id] = _uri;
+        emit URI(_uri, _id);
+
+    }
+    function _setPermanentURI(uint256 _id, string memory _uri)
+        internal
+        virtual
+    {
+        require(
+            bytes(_uri).length > 0,
+            "AssetContract#setPermanentURI: ONLY_VALID_URI"
+        );
+        _isPermanentURI[_id] = true;
+        _setURI(_id, _uri);
+        emit PermanentURI(_uri, _id);
+    }
+}
+
+contract AssetContractShared is AssetContract, ReentrancyGuard {
+
+    AssetContractShared public migrationTarget;
+    mapping(address => bool) public sharedProxyAddresses;
+
+    function migrate(Ownership[] memory _ownerships) public onlyOwnerOrProxy {
+        AssetContractShared _migrationTarget = migrationTarget;
+        require(
+            _migrationTarget != AssetContractShared(address(0)),
+            "AssetContractShared#migrate: MIGRATE_DISABLED"
+        );
+
+        string memory _migrationTargetTemplateURI = _migrationTarget
+            .templateURI();
+
+        for (uint256 i = 0; i < _ownerships.length; ++i) {
+            uint256 id = _ownerships[i].id;
+            address owner = _ownerships[i].owner;
+
+            require(
+                owner != address(0),
+                "AssetContractShared#migrate: ZERO_ADDRESS_NOT_ALLOWED"
+            );
+
+            uint256 previousAmount = _migrationTarget.balanceOf(owner, id);
+
+            if (previousAmount == 0) {
+                continue;
+            }
+
+            _mint(owner, id, previousAmount, "");
+
+            if (
+                keccak256(bytes(_migrationTarget.uri(id))) !=
+                keccak256(bytes(_migrationTargetTemplateURI))
+            ) {
+                _setPermanentURI(id, _migrationTarget.uri(id));
+            }
+        }
+    }
+
+    function maxSupply(uint256 _id) public pure returns (uint256) {
+        return _id.tokenMaxSupply();
+    }
+
+    function _remainingSupply(uint256 _id)
+        internal
+        view
+        override
+        returns (uint256)
+    {
+        return maxSupply(_id) - totalSupply(_id);
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        if (sharedProxyAddresses[_address]) {
+            return true;
+        }
+        return super._isProxyForUser(_user, _address);
+    }
+}
+
+library TokenIdentifiers {
+
+    uint256 constant SUPPLY_MASK = (uint256(1) << SUPPLY_BITS) - 1;
+
+    function tokenMaxSupply(uint256 _id) internal pure returns (uint256) {
+        return _id & SUPPLY_MASK;
+    }
+}
+abstract contract Pausable is Context {
+
+    bool private _paused;
+
+    function paused() public view virtual returns (bool) {
+        return _paused;
+
+    }
+    modifier whenNotPaused() {
+        require(!paused(), "Pausable: paused");
+        _;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+}
+
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {}
+}
+
+library Address {
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize, which returns 0 for contracts in
+        // construction, since the code is only stored at the end of the
+        // constructor execution.
+
+        uint256 size;
+        assembly {
+            size := extcodesize(account)
+        }
+        return size > 0;
+    }
+}
+
+abstract contract ContextMixin {
+    function msgSender() internal view returns (address payable sender) {
+        if (msg.sender == address(this)) {
+            bytes memory array = msg.data;
+            uint256 index = msg.data.length;
+            assembly {
+                sender := and(
+                    mload(add(array, index)),
+                    0xffffffffffffffffffffffffffffffffffffffff
+                )
+            }
+        } else {
+            sender = payable(msg.sender);
+        }
+        return sender;
+    }
+}
+"""
+
+Rule:"""
+The `_to` argument MUST be the address of the recipient whose balance is increased.
+event TransferSingle(address indexed _operator, address indexed _from, address indexed _to, uint256 _id, uint256 _value);
+"""

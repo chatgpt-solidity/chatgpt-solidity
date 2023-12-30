@@ -1,0 +1,15 @@
+YES
+
+The `mintBatch` function in the provided Smartnft_Pro_ERC1155 contract correctly emits the `TransferBatch` event according to the given rule. The `_values` argument in the `TransferBatch` event is the `amounts` array, which represents the number of tokens to be minted for each token ID specified in the `ids` array. The `mintBatch` function constructs the `ids` array by incrementing `tokenCounts` for each new token and assigns the corresponding URI to `_tokenURIs`. It then calls `_mintBatch`, which performs the actual minting process.
+
+The `_mintBatch` function ensures that the `ids` and `amounts` arrays have the same length, as required by the ERC1155 standard. It then iterates over these arrays, updating the balance of the `to` address for each token ID by the corresponding amount. After updating the balances, it emits the `TransferBatch` event with the `operator` (the message sender), the `from` address (which is zero since tokens are being minted), the `to` address, the `ids` array, and the `amounts` array (as `_values`). This matches the rule that the `_values` argument must be the list of the number of tokens the holder balance is increased by, which in the case of minting, is the number of tokens created for the recipient.
+
+The `TransferBatch` event is emitted with the following arguments:
+
+- `_operator`: The address performing the minting, obtained by `_msgSender()`.
+- `_from`: The address the tokens are minted from, which is the zero address in the case of minting.
+- `_to`: The address the tokens are minted to.
+- `_ids`: The list of token IDs.
+- `_values`: The list of amounts for each token ID, which represents the number of tokens minted for each ID.
+
+Therefore, the `TransferBatch` event is emitted according to the rule specified.

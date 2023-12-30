@@ -1,0 +1,5 @@
+contract Yotsuba4chan is Context, IERC20, Ownable {
+
+
+    receive() external payable {}
+}

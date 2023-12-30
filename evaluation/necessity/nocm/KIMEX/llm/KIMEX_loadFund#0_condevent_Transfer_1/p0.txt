@@ -1,0 +1,35 @@
+Given a solidity function loadFund and the related parts from a smart contract.
+Whether the function loadFund and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract KIMEX is Owner {
+    uint256 public totalLoadedRefund; // Total ether will be loaded to contract for refund
+
+    // Load ether amount to contract for refunding or revoking
+    function loadFund() external payable {
+        require(msg.value > 0);
+
+        totalLoadedRefund = totalLoadedRefund.add(msg.value);
+    }
+}
+
+library SafeMath {
+
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred, including zero value transfers.
+"""

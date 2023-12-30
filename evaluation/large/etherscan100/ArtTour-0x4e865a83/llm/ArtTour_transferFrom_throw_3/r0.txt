@@ -1,0 +1,5 @@
+YES
+
+The `transferFrom` function in the provided code snippet does not depend on the validity of a `_tokenId` because it does not take a `_tokenId` parameter, nor does it reference one. Instead, the function immediately calls `_transferRevert()`, which unconditionally reverts the transaction with the message "Cannot perform transfers on a non-transferable token".
+
+Therefore, regardless of the condition of `_tokenId` being valid or not, the function will throw (revert the transaction) every time it is called.

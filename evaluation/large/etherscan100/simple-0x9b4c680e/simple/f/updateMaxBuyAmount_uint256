@@ -1,0 +1,34 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract simple is ERC20, Ownable {
+
+    uint256 public maxBuyAmount;
+
+    function updateMaxBuyAmount(uint256 newNum) external onlyOwner {
+        require(newNum >= (totalSupply() * 2 / 1000)/1e18, "Cannot set max buy amount lower than 0.2%");
+        maxBuyAmount = newNum * (10**18);
+        emit UpdatedMaxBuyAmount(maxBuyAmount);
+    }
+}
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    uint256 private _totalSupply;
+
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+

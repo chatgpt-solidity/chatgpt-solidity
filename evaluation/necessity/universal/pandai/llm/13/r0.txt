@@ -1,0 +1,3 @@
+YES
+
+The provided Solidity code does emit an "Approval" event in the `_approve` function, which is in line with the ERC rule that states "emit Event Approval." The event is emitted with the line `emit Approval(owner, spender, amount);` after setting the allowance in the `_allowances` mapping. This is compliant with the ERC-20 standard, which requires an Approval event to be emitted whenever the approval function is called.

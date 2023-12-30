@@ -1,0 +1,9 @@
+contract zepump is IERC20, tokenStaking, Ownable {
+    mapping (address => uint256) _balances;
+    mapping(address => uint256) public amountStaked;
+    function availableBalance(address wallet) public view returns (uint256) {return _balances[wallet].sub(amountStaked[wallet]);}
+}
+library SafeMath {
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {return a - b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+

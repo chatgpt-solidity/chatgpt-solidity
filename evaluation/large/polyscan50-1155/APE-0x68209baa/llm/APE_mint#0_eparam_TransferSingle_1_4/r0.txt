@@ -1,0 +1,7 @@
+YES
+
+The `_mint` function in the provided `APE` contract calls the `emit TransferSingle` event with the correct `_value` argument. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`. In the context of the `mint` function in the `APE` contract, it calls `_mint` with the `_currentTokenId` and an `amount` of `1`.
+
+The `_mint` function then emits the `TransferSingle` event with the `amount` that was minted, which in this case is `1`. The `_value` argument in the `TransferSingle` event is set to the `amount` variable, which is the number of tokens the holder balance is increased by, and since the tokens are being minted, it matches the number that the recipient balance is increased by.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, where the `_value` argument matches the number of tokens the recipient balance is increased by, which is also the number of tokens minted for the recipient.

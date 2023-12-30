@@ -1,0 +1,38 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The event is emitted with the `_to` argument being the address of the recipient whose balance is increased, as required by the rule.
+
+Here is the relevant part of the code that confirms this:
+
+```solidity
+function _safeTransferFrom(
+    address from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+) internal virtual {
+    require(to != address(0), "ERC1155: transfer to the zero address");
+
+    address operator = _msgSender();
+    uint256[] memory ids = _asSingletonArray(id);
+    uint256[] memory amounts = _asSingletonArray(amount);
+
+    _beforeTokenTransfer(operator, from, to, ids, amounts, data);
+
+    uint256 fromBalance = _balances[id][from];
+    require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+    unchecked {
+        _balances[id][from] = fromBalance - amount;
+    }
+    _balances[id][to] += amount;
+
+    emit TransferSingle(operator, from, to, id, amount);
+
+    _afterTokenTransfer(operator, from, to, ids, amounts, data);
+
+    _doSafeTransferAcceptanceCheck(operator, from, to, id, amount, data);
+}
+```
+
+In the `_safeTransferFrom` function, the `to` argument is checked to ensure it is not the zero address, and the balance of the `from` address for the token `id` is decreased by `amount`, while the balance of the `to` address is increased by the same `amount`. The `TransferSingle` event is then emitted with the `to` address as the recipient, which complies with the rule.

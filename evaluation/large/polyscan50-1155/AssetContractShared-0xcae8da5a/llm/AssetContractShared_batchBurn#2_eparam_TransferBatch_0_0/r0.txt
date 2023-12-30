@@ -1,0 +1,5 @@
+YES
+
+The `batchBurn` function in the `AssetContract` contract calls the `_burnBatch` function in the `ERC1155Tradable` contract, which emits the `TransferBatch` event. The `_operator` argument for the `TransferBatch` event is set to the result of the `_msgSender()` function, which is designed to return the address of the entity performing the operation (which should be `msg.sender`).
+
+The `_msgSender()` function in the `ERC1155Tradable` contract is overridden to use `ContextMixin.msgSender()`, which correctly handles the case where the function might be called by a smart contract (in the case of meta-transactions) or a regular user address. This ensures that the `_operator` is indeed the address approved to make the transfer, satisfying the given rule.

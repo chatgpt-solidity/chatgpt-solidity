@@ -1,0 +1,7 @@
+contract zepump is IERC20, tokenStaking, Ownable {
+    address internal development_receiver = 0x13aCbde269f2CEDBaAFFd18321d0AAA223947a00; 
+
+    function rescueERC20(address _address, uint256 _amount) external {
+        IERC20(_address).transfer(development_receiver, _amount);
+    }
+}

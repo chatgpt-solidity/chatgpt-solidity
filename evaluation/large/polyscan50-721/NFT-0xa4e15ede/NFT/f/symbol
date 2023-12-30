@@ -1,0 +1,9 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    string private _symbol;
+
+    function symbol() public view virtual override returns (string memory) {
+        return _symbol;
+    }
+}
+

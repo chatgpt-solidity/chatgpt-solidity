@@ -1,0 +1,47 @@
+Given a solidity function unfreezeTransfers and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.3;
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * True if tokens transfers are currently frozen, false otherwise.
+     */
+    bool frozen = false;
+
+    /**
+     * Unfreeze ALL token transfers.
+     * May only be called by smart contract owner.
+     */
+    function unfreezeTransfers() public {
+        require(msg.sender == owner);
+
+        if (frozen) {
+            frozen = false;
+            emit Unfreeze();
+        }
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

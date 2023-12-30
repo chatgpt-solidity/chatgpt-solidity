@@ -1,0 +1,165 @@
+{
+    "file": "evaluation/audited/wit.sol",
+    "contracts": [
+        {
+            "solc_version": "0.5.3",
+            "func2file": {
+                "balanceOf(address) returns(uint256)": "result-necessity/s-noos/wit/WiT/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-noos/wit/WiT/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-noos/wit/WiT/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-noos/wit/WiT/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-noos/wit/WiT/f/allowance_address_address",
+                "constructor() returns()": "result-necessity/s-noos/wit/WiT/f/constructor",
+                "totalSupply() returns(uint256)": "result-necessity/s-noos/wit/WiT/f/totalSupply",
+                "createTokens(uint256) returns(bool)": "result-necessity/s-noos/wit/WiT/f/createTokens_uint256",
+                "mintToken(address,uint256) returns(bool)": "result-necessity/s-noos/wit/WiT/f/mintToken_address_uint256",
+                "setOwner(address) returns()": "result-necessity/s-noos/wit/WiT/f/setOwner_address",
+                "freezeTransfers() returns()": "result-necessity/s-noos/wit/WiT/f/freezeTransfers",
+                "unfreezeTransfers() returns()": "result-necessity/s-noos/wit/WiT/f/unfreezeTransfers",
+                "refundTokens(address,address,uint256) returns()": "result-necessity/s-noos/wit/WiT/f/refundTokens_address_address_uint256",
+                "freezeAccount(address,bool) returns()": "result-necessity/s-noos/wit/WiT/f/freezeAccount_address_bool"
+            },
+            "func2attrs": {
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "createTokens(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintToken(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setOwner(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "freezeTransfers() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unfreezeTransfers() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "refundTokens(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "freezeAccount(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "name() returns(string)",
+                "decimals() returns(uint8)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Freeze",
+                    "params": []
+                },
+                {
+                    "name": "Unfreeze",
+                    "params": []
+                },
+                {
+                    "name": "FrozenFunds",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "RefundTokens",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "WiT"
+        }
+    ]
+}

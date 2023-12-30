@@ -1,0 +1,4 @@
+contract ONII_CHAN_Bot  is Context, IERC20, Ownable {
+
+    receive() external payable {}
+}

@@ -1,0 +1,12 @@
+YES
+
+The `RedempBIGP` function in the `NFTBigPartnerV2` contract calls the `burn` function from the `ERC1155Burnable` contract, which in turn calls the `_burn` function from the `ERC1155` contract.
+
+The `_burn` function in the `ERC1155` contract is designed to destroy (`burn`) a certain `amount` of tokens of a specific token type `id` from the `from` address. It has the following requirements:
+
+- `from` cannot be the zero address.
+- `from` must have at least `amount` tokens of token type `id`.
+
+After validating these requirements, the `_burn` function reduces the balance of the `from` address by the `amount` specified and then emits the `TransferSingle` event with the `_from` argument set to the `from` address that was passed to the function.
+
+In the `RedempBIGP` function, the `burn` function is called with `MintAddr[_batch]` as the `account` (which corresponds to `_from` in the `_burn` function), `CardType[_batch]` as the `id`, and `CardAmount[_batch]` as the `value`. This means that the `TransferSingle` event will be emitted with `_from` set to `MintAddr[_batch]`, which is the address of the holder whose balance is decreased, in accordance with the given rule.

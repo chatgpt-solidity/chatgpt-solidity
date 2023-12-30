@@ -1,0 +1,13 @@
+YES
+
+The `_mint` function in the `ERC1155` contract is responsible for creating `amount` tokens of token type `id` and assigning them to the address `to`. The function emits a `TransferSingle` event with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred, which is the zero address (`address(0)`) since tokens are being minted.
+- `_to`: The address to which the tokens are transferred, which is the `to` parameter of the `_mint` function.
+- `_id`: The token type that is being minted, which is the `id` parameter of the `_mint` function.
+- `_value`: The number of tokens that are being minted, which is the `amount` parameter of the `_mint` function.
+
+The `_mint` function correctly updates the balance of the `to` address by increasing it by `amount` with `_balances[id][to] += amount;`. Then, it emits the `TransferSingle` event with the `_value` argument set to the same `amount`, which is the number of tokens the holder balance is increased by.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, where the `_value` argument matches the number of tokens the recipient balance is increased by.

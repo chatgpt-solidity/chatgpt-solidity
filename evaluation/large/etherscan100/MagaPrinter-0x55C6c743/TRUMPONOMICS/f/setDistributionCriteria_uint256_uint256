@@ -1,0 +1,19 @@
+contract TRUMPONOMICS is IERC20, Auth {
+    MagaPrinter public magaPrinter;
+
+    function setDistributionCriteria(uint256 newMinPeriod, uint256 newMinDistribution) external onlyOwner {
+        magaPrinter.setDistributionCriteria(newMinPeriod, newMinDistribution);        
+    }
+}
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+

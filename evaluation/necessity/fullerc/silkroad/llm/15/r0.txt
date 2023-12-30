@@ -1,0 +1,23 @@
+The provided Solidity code for the `SilkToken` contract and the `getSalesPrice` function does not directly violate the ERC-20 standard as described in the provided ERC excerpt. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to ensure interoperability with other contracts and clients that expect ERC-20 tokens.
+
+The `getSalesPrice` function in the `SilkToken` contract is not part of the ERC-20 standard. It is an additional function that the contract developers have included, presumably to provide information about the price at which the token can be bought (if the contract also implements some kind of sale or exchange functionality).
+
+The ERC-20 standard includes the following methods and events:
+
+- `name()`
+- `symbol()`
+- `decimals()`
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `Transfer` event
+- `Approval` event
+
+As long as the `SilkToken` contract implements all of the above methods and events as specified by the ERC-20 standard, it can be considered ERC-20 compliant. The `getSalesPrice` function is an extra feature and does not impact the compliance of the contract with the ERC-20 standard.
+
+However, it is important to note that the `getSalesPrice` function is marked as `constant`, which is a deprecated keyword in newer versions of Solidity. The `constant` keyword has been replaced by `view` and `pure` in Solidity 0.4.17 and later. This does not affect ERC-20 compliance, but it is a point to consider for best practices and future compatibility.
+
+In summary, the `getSalesPrice` function does not violate the ERC-20 standard, but the contract must implement all the required ERC-20 methods and events to be compliant. Additionally, the contract should be updated to use the latest Solidity syntax if it is intended to be used with newer Solidity compilers.

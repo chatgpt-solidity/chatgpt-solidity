@@ -1,0 +1,11 @@
+YES
+
+The provided Solidity function `safeBatchTransferFrom` and the related parts of the smart contract show that the `TransferBatch` event is emitted in the `_safeBatchTransferFrom` private function, which is called by `safeBatchTransferFrom`. The event is emitted with the correct arguments, including `_ids` which represents the list of tokens being transferred, as per the rule provided. The arguments passed to the `TransferBatch` event match the order and types specified in the rule:
+
+- `_operator`: The address which initiated the transfer, in this case `msg.sender`.
+- `_from`: The address from which the tokens are being transferred.
+- `_to`: The address to which the tokens are being transferred.
+- `_ids`: The list of token IDs being transferred.
+- `_values`: The corresponding list of amounts for each token ID being transferred.
+
+The event is emitted before the `_doSafeBatchTransferAcceptanceCheck` function is called, which ensures that the event is emitted regardless of the outcome of the acceptance check.

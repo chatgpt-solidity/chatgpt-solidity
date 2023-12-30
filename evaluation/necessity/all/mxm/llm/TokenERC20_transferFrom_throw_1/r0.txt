@@ -1,0 +1,25 @@
+YES
+
+The `transferFrom` function and its related parts will not throw if transfers of 0 values are made. Here's why:
+
+1. The `require(!blacklist[msg.sender]);` line checks if the `msg.sender` is blacklisted. If the sender is not blacklisted, this check will pass regardless of the transfer value.
+
+2. The `require(_value <= allowance[_from][msg.sender]);` line checks if the `msg.sender` is allowed to spend at least `_value` tokens on behalf of `_from`. If `_value` is 0, this check will pass because spending 0 is always within the allowance.
+
+3. The `allowance[_from][msg.sender] -= _value;` line will not underflow because subtracting 0 from any number does not change the number.
+
+4. The `_transfer` function is called with `_value` as an argument. Inside `_transfer`:
+
+   - The `require(_to != 0x0);` line checks that the recipient address is not the zero address. This check is independent of the transfer value.
+   
+   - The `require(balanceOf[_from] >= _value);` line checks if the sender has enough balance to send `_value` tokens. If `_value` is 0, this check will pass because any balance is greater than or equal to 0.
+   
+   - The `require(balanceOf[_to] + _value > balanceOf[_to]);` line checks for overflows. When `_value` is 0, `balanceOf[_to] + _value` is equal to `balanceOf[_to]`, so there is no overflow, and the check will pass.
+   
+   - The `balanceOf[_from] -= _value;` and `balanceOf[_to] += _value;` lines will not change the balances because subtracting and adding 0 has no effect.
+   
+   - The `Transfer(_from, _to, _value);` line emits an event. This will work fine even if `_value` is 0.
+   
+   - The `assert(balanceOf[_from] + balanceOf[_to] == previousBalances);` line checks that the sum of the balances before and after the transfer is the same. Since no actual transfer of value occurs when `_value` is 0, this assertion will hold true.
+
+Therefore, the function will not throw an error if `_value` is 0. However, it is important to note that the actual behavior can depend on the rest of the contract and the state of the blockchain, which are not provided here.

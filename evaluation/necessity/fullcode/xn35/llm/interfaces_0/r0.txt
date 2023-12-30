@@ -1,0 +1,3 @@
+YES
+
+The given Solidity interfaces contain the interface `totalSupply() returns(uint256)` within the `IERC20` interface and the `Projecton` contract. The parameter types and return types match the expected signature for the `totalSupply` function.

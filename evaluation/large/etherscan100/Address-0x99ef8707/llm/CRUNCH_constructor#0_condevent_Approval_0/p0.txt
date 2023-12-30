@@ -1,0 +1,42 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.4;
+abstract contract Ownable is Context {
+    address private _owner;
+    constructor () {
+        _owner = 0x4DaB2327B1028cD17Ed2C11c2E6926fFFA6BBc9E;
+        emit OwnershipTransferred(address(0), _owner);
+    }
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+}
+
+contract CRUNCH is Context, IERC20, Ownable {
+    mapping (address => uint256) private _rOwned;
+    mapping (address => bool) private _isExcludedFromFee;
+    uint256 private _tTotal = 140632136384 * 10**18;
+    uint256 private _rTotal = (MAX - (MAX % _tTotal));
+
+    IUniswapV2Router02 public immutable uniswapV2Router;
+    address public immutable uniswapV2Pair;
+    constructor () {
+        _rOwned[owner()] = _rTotal;
+        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
+        uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
+            .createPair(address(this), _uniswapV2Router.WETH());
+        uniswapV2Router = _uniswapV2Router;
+        _isExcludedFromFee[owner()] = true;
+        _isExcludedFromFee[address(this)] = true;
+        emit Transfer(address(0), owner(), _tTotal);
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

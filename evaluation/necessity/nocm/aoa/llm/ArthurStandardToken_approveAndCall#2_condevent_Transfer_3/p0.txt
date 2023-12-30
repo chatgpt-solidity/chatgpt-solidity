@@ -1,0 +1,47 @@
+Given a solidity function approveAndCall and the related parts from a smart contract.
+Whether the function approveAndCall and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.19;
+contract ArthurStandardToken is StandardToken {
+
+    function approveAndCall(
+        address _spender,
+        uint256 _value,
+        bytes _extraData
+    ) public returns (bool success) {
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+
+        if (
+            !_spender.call(
+                bytes4(
+                    bytes32(
+                        keccak256(
+                            "receiveApproval(address,uint256,address,bytes)"
+                        )
+                    )
+                ),
+                msg.sender,
+                _value,
+                this,
+                _extraData
+            )
+        ) {
+            return false;
+        }
+        return true;
+    }
+}
+
+contract StandardToken is Token {
+    mapping(address => mapping(address => uint256)) allowed;
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are burning or deallocating
+"""

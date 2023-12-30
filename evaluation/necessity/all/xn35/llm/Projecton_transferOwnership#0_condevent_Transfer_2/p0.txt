@@ -1,0 +1,24 @@
+Given a solidity function transferOwnership and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.25;
+contract owned {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+
+    function transferOwnership(address newOwner) onlyOwner {
+        owner = newOwner;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

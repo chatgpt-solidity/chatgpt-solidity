@@ -1,0 +1,53 @@
+Let's analyze the provided `transferFrom` function step by step to determine if it throws an error unless the `_from` account has authorized the sender of the message:
+
+1. **Authorization Check:**
+   The function starts with a `require` statement that checks several conditions:
+   ```solidity
+   require(
+       allowed[_from][msg.sender] >= _value &&
+       balances[_from] >= _value &&
+       _value > 0
+   );
+   ```
+   This `require` statement checks that:
+   - The sender (`msg.sender`) is authorized to spend at least `_value` tokens from the `_from` account (`allowed[_from][msg.sender] >= _value`).
+   - The `_from` account has enough balance to transfer (`balances[_from] >= _value`).
+   - The `_value` to transfer is greater than 0 (`_value > 0`).
+
+   If any of these conditions are not met, the `require` statement will revert the transaction, effectively "throwing" an error.
+
+2. **Subtraction of Value from Balances:**
+   ```solidity
+   balances[_from] = balances[msg.sender].sub(_value);
+   ```
+   The `sub` function from the `SafeMath` library is used to subtract `_value` from the `_from` account's balance. The `sub` function includes an `assert` statement that will throw an error if the subtraction would result in a negative number (which is not possible with unsigned integers in Solidity).
+
+3. **Addition of Value to Recipient's Balance:**
+   ```solidity
+   balances[_to] = balances[_to].add(_value);
+   ```
+   The `add` function from the `SafeMath` library is used to add `_value` to the `_to` account's balance. The `add` function includes an `assert` statement that will throw an error if the addition would overflow the maximum value for a `uint256`.
+
+4. **Subtraction of Value from Allowances:**
+   ```solidity
+   allowed[_from][msg.sender] = balances[msg.sender].sub(_value);
+   ```
+   This line is intended to subtract `_value` from the sender's allowance for the `_from` account. However, there is a mistake in this line. It should be using the `allowed` mapping, not the `balances` mapping. The correct line should be:
+   ```solidity
+   allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+   ```
+   The `sub` function will throw an error if the subtraction would result in a negative number.
+
+5. **Emitting the Transfer Event:**
+   ```solidity
+   Transfer(_from, _to, _value);
+   ```
+   This line emits the `Transfer` event to log the transfer operation on the blockchain.
+
+6. **Returning Success:**
+   ```solidity
+   return true;
+   ```
+   If all the above steps are executed without any errors, the function will return `true`, indicating that the transfer was successful.
+
+In conclusion, the `transferFrom` function does throw an error (reverts the transaction) unless the `_from` account has authorized the sender of the message via the `allowed` mapping. However, there is a bug in the code where the allowance is incorrectly updated using the `balances` mapping instead of the `allowed` mapping. This bug needs to be fixed to ensure the function works as intended.

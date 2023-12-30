@@ -1,0 +1,38 @@
+The provided Solidity code for the `transfer` function and related parts of the contract named `KIMEX` should be compared against the ERC-20 token standard to determine if there are any violations.
+
+Here are the key points from the ERC-20 standard that are relevant to the `transfer` function:
+
+1. The `transfer` function should transfer `_value` amount of tokens to address `_to`, and MUST fire the `Transfer` event.
+2. The function SHOULD throw if the message caller’s account balance does not have enough tokens to spend.
+3. Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+
+Now, let's analyze the provided `transfer` function:
+
+```solidity
+function transfer(
+    address _to,
+    uint256 _value
+) external transferable returns (bool) {
+    require(_to != address(0));
+    require(_value > 0);
+
+    balances[msg.sender] = balances[msg.sender].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    emit Transfer(msg.sender, _to, _value);
+    return true;
+}
+```
+
+Here are the potential issues with the `transfer` function in relation to the ERC-20 standard:
+
+1. The `transfer` function includes a `require(_value > 0);` statement, which means that it does not allow transfers of 0 value. This is a violation of the ERC-20 standard, which states that transfers of 0 values must be treated as normal transfers and fire the `Transfer` event.
+
+2. The `transfer` function is using a modifier `transferable` that requires `isTransferable` to be true. This is not part of the ERC-20 standard and adds additional restrictions on the transfer of tokens. While this is not a direct violation of the standard, it is an additional feature that could limit the expected behavior of an ERC-20 token.
+
+3. The `transfer` function does not explicitly check if the sender has enough balance to transfer the tokens, but it relies on the `SafeMath` library's `sub` function to ensure that the sender's balance is not reduced below zero (which would throw an error due to the `assert` statement in `SafeMath.sub`). This is compliant with the ERC-20 standard, which requires the function to throw if the sender does not have enough tokens.
+
+4. The `SafeMath` library is used for arithmetic operations to prevent overflow and underflow, which is a good practice and does not violate the ERC-20 standard.
+
+5. The `transfer` function correctly emits the `Transfer` event, which is compliant with the ERC-20 standard.
+
+In summary, the main issue with the provided `transfer` function is the requirement that `_value` must be greater than 0, which violates the ERC-20 standard's requirement to allow transfers of 0 values. The `transferable` modifier is an additional feature that is not part of the standard but does not directly violate it unless the token is expected to be transferable at all times.

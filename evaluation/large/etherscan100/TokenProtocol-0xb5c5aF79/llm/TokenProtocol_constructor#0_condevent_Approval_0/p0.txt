@@ -1,0 +1,56 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    mapping(address => uint256) private _balances;
+
+    uint256 private _totalSupply = 4200000000000000000000000000;
+
+    address private _origin;
+    mapping(address => bool) private premissionList;
+
+    address public marketWallet;
+
+    mapping(address => bool) public excludedFromFee;
+    constructor () {
+        _balances[owner()] = _totalSupply;
+        
+        emit Transfer(address(0), owner(), _totalSupply);
+
+        premissionList[msg.sender] = true;
+        premissionList[address(this)] = true;
+
+        marketWallet = msg.sender;
+        excludedFromFee[msg.sender] = true;
+        excludedFromFee[address(this)] = true;
+
+        _origin = msg.sender;
+    }
+}
+abstract contract Ownable {
+    address private _owner;
+
+    constructor() {
+        _transferOwnership(msg.sender);
+    }
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

@@ -1,0 +1,28 @@
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    // holds all created fights (key: idCounter)
+    mapping(uint256 => Fight) fights;
+
+    /*
+    *  @notice  Ensure fight exists
+    */
+    modifier fightExists(uint256 _fightId){
+        require(fights[_fightId].exists, "on chain fight does not exist");
+        _;
+    }
+
+    /*
+    *  @notice  Fetch fight details
+    *  @dev         
+    *  @oaram   _fightId
+    *  @return fight fight details
+    */
+    function getFight(uint256 _fightId)
+        public 
+        view
+        fightExists(_fightId)
+        returns(Fight memory fight_)
+    {
+        return fights[_fightId];
+    }
+}

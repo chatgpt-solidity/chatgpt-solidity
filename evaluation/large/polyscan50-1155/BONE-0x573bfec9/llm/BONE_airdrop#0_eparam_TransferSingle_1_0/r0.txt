@@ -1,0 +1,13 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called within the `airdrop` function of the `BONE` contract, which is derived from `ERC1155`.
+
+The `_mint` function includes the following line:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+Here, the `operator` variable is set to the result of `_msgSender()`, which returns `msg.sender`. Since the `airdrop` function is guarded by the `onlyOwner` modifier, `msg.sender` must be the owner of the contract when `airdrop` is called. This means that the `_operator` argument in the `TransferSingle` event is indeed the address that is approved to make the transfer, which is the requirement according to the given rule.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

@@ -1,0 +1,41 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+
+    }
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     * and stop existing when they are burned (`_burn`).
+     */
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _ownerOf(tokenId) != address(0);
+    }
+}
+
+contract CCB23NFT is ERC721Enumerable, AccessControl, Ownable {
+    mapping(uint256 => string) public editionURI; // URI for each edition
+    mapping(uint256 => uint256) public tokenIDToEdition; // tokenID to edition
+
+    function tokenURI(
+        uint256 tokenId
+    ) public view override returns (string memory) {
+        require(
+            _exists(tokenId),
+            "ERC721Metadata: URI query for nonexistent token"
+        );
+
+        uint256 edition = tokenIDToEdition[tokenId];
+        return editionURI[edition];
+    }
+}

@@ -1,0 +1,7 @@
+NO
+
+The provided function `sendFundHomeAmt` is designed to send Ether from the contract to the `ethFundDeposit` address. It does not involve the ERC20 `approve` function or the modification of allowance, which is when the `Approval` event should be emitted according to the ERC20 standard.
+
+The rule you've provided is specific to the `approve` function in ERC20 tokens, which is used to set allowances for other addresses to withdraw a certain amount of tokens on behalf of the token owner. The `sendFundHomeAmt` function is not related to the `approve` function, and therefore, there is no requirement to emit an `Approval` event in this context.
+
+The `sendFundHomeAmt` function does not violate the rule you've mentioned because it is not related to the `approve` function or the process of setting allowances.

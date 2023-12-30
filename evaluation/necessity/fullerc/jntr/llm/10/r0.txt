@@ -1,0 +1,9 @@
+The `lockAccount` function in the provided Solidity code is not part of the ERC-20 standard. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperability across different applications and services within the Ethereum ecosystem. These functions include `totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, and `allowance`, along with the `Transfer` and `Approval` events.
+
+The `lockAccount` function appears to be a custom function that is not required by the ERC-20 standard. It is designed to disable an account from being able to transfer tokens by setting an `_active` flag to `false`. This kind of functionality is not covered by the ERC-20 standard, which focuses on token transfer and approval mechanisms.
+
+While the `lockAccount` function does not directly violate the ERC-20 standard, it introduces additional behavior that is not part of the standard. If the locking mechanism prevents the transfer of tokens from locked accounts, it could potentially interfere with the expected behavior of the `transfer` and `transferFrom` functions as defined by ERC-20. Users and contracts interacting with this token might not expect or handle such behavior correctly, which could lead to confusion or errors.
+
+It is important to note that adding custom functionality to an ERC-20 token is not inherently wrong, but it should be clearly documented and communicated to users. Additionally, the custom functionality should not prevent the contract from complying with the core ERC-20 functions and events.
+
+In summary, the `lockAccount` function does not violate the ERC-20 standard as long as the core ERC-20 functions and events are correctly implemented and the custom behavior is well-documented. However, it is essential to ensure that the additional functionality does not disrupt the expected behavior of the standard ERC-20 functions.

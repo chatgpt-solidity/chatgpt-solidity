@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function, which is the correct place according to the ERC-1155 standard. The event is emitted after the balances have been updated, ensuring that the `_value` argument reflects the actual number of tokens transferred from `_from` to `_to`. The balance of the sender (`_from`) is decreased by the amount specified in the `_value` argument, and the balance of the recipient (`_to`) is increased by the same amount. This matches the rule provided, as the `_value` argument must be the number of tokens the holder's balance is decreased by and must match what the recipient's balance is increased by.

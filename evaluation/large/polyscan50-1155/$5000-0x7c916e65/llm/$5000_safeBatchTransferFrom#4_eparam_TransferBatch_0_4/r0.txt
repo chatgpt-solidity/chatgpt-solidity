@@ -1,0 +1,5 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_values` argument in the `TransferBatch` event is the `amounts` array, which represents the number of tokens to be transferred for each token ID specified in the `ids` array.
+
+The function ensures that the `ids` and `amounts` arrays have the same length and that each token transfer decreases the balance of the sender (`from`) by the specified amount and increases the balance of the recipient (`to`) by the same amount. After updating the balances, the `TransferBatch` event is emitted with the `operator`, `from`, `to`, `ids`, and `amounts` (as `_values`) arguments, which satisfies the rule that the `_values` argument must match the list and order of tokens specified in `_ids` and reflect the balance changes.

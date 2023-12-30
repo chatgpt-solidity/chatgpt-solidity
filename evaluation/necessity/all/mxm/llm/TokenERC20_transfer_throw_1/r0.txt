@@ -1,0 +1,9 @@
+YES
+
+The provided Solidity function `_transfer` and the `transfer` function in the `TokenERC20` contract do not have any explicit checks that would cause a revert or throw if the `_value` (the amount to be transferred) is 0. The function checks:
+
+1. The recipient address is not the 0x0 address.
+2. The sender has enough balance.
+3. The transfer does not cause an overflow in the recipient's balance.
+
+None of these checks would fail if `_value` is 0. Therefore, a transfer of 0 tokens should succeed, assuming the sender is not on the blacklist and the recipient is not the 0x0 address.

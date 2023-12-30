@@ -1,0 +1,28 @@
+The provided Solidity function `allowance` from the `StandardToken` contract appears to be compliant with the ERC-20 token standard as described in the given ERC documentation. The ERC-20 standard specifies that the `allowance` function should have the following signature:
+
+```solidity
+function allowance(address _owner, address _spender) public view returns (uint256 remaining)
+```
+
+The purpose of the `allowance` function is to return the amount which `_spender` is still allowed to withdraw from `_owner`. This is typically used in conjunction with the `approve` and `transferFrom` functions to enable delegated token transfers.
+
+The `allowance` function in the provided code snippet matches the ERC-20 specification:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) constant returns (uint256 remaining) {
+    return allowed[_owner][_spender];
+}
+```
+
+However, there are a couple of minor points to note:
+
+1. The `constant` keyword is used in the provided function, which is an older Solidity syntax for specifying that a function does not alter the state. In more recent versions of Solidity (0.4.17 and above, as mentioned in the ERC), the `view` keyword is recommended to indicate that the function does not modify the state. The `constant` keyword is still valid but considered deprecated in favor of `view`.
+
+2. The ERC-20 standard does not specify the visibility of the `allowance` function. In the provided code snippet, the visibility is not explicitly stated, which means it defaults to `public` in Solidity. This is compliant with the standard, as the function should be callable by external entities.
+
+3. The ERC-20 standard does not specify the use of the `returns` keyword in the function signature. However, this is a minor syntactic difference and does not affect the compliance of the function with the standard.
+
+In conclusion, the `allowance` function provided in the `StandardToken` contract does not violate the ERC-20 standard. It correctly implements the required functionality as per the specification. The use of `constant` instead of `view` is a minor syntactic difference due to the evolution of Solidity, but it does not affect compliance with the standard.

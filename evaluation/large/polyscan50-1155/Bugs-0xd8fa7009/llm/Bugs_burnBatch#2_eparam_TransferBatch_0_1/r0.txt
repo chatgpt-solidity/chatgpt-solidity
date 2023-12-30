@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_burnBatch` function after the balances have been decreased and the `_beforeTokenTransfer` hook has been called. The `_from` argument in the `TransferBatch` event is set to the `from` parameter of the `_burnBatch` function, which is the address of the holder whose balance is decreased. This is in accordance with the given rule.

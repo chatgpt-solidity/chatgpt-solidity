@@ -1,0 +1,31 @@
+The provided Solidity code for the `approve` function in the `CMBToken` contract appears to be an implementation of the ERC-20 token standard's `approve` function. However, there are a few issues with the code that need to be addressed to ensure full compliance with the ERC-20 standard:
+
+1. The `approve` function should be marked as `public` to match the ERC-20 specification, which states that the `approve` function should be a public function.
+
+2. The `approve` function should explicitly specify the return type as `bool` in the function declaration. In Solidity, the return type should be included in the function signature.
+
+3. The `Approval` event should be emitted using the `emit` keyword, which is the recommended way to emit events in Solidity versions 0.4.21 and later.
+
+4. The ERC-20 standard mentions that clients should set the allowance to 0 before setting it to another value for the same spender to prevent certain attack vectors. While the contract itself shouldn't enforce this, it's important to note this in the documentation or comments so that users of the contract are aware of the best practices.
+
+Here is the corrected `approve` function with the necessary changes:
+
+```solidity
+pragma solidity ^0.4.17; // or a more recent version
+
+contract CMBToken is IERC20 {
+    mapping(address => mapping(address => uint256)) public allowed;
+
+    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+
+    function approve(address _spender, uint256 _value) public returns (bool success) {
+        allowed[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value); // Using 'emit' keyword for emitting events
+        return true;
+    }
+
+    // Other ERC-20 functions...
+}
+```
+
+With these changes, the `approve` function and related parts of the `CMBToken` contract would be in compliance with the ERC-20 standard. It's also important to ensure that the rest of the contract implements all the required functions and events as specified by the ERC-20 standard.

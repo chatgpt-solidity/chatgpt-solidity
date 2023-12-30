@@ -1,0 +1,12 @@
+contract Egypt {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+    // 18 decimals is the strongly suggested default, avoid changing it
+    uint256 public totalSupply;
+
+    function totalSupply() public constant returns (uint) {
+        return totalSupply - balanceOf[address(0)];
+    }
+}
+

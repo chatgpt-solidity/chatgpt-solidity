@@ -1,0 +1,47 @@
+Given a solidity function balanceOf and the related parts from a smart contract and an rule for its return value.
+Whether function balanceOf The number of NFTs owned by `_owner`, possibly zero? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract ERC721 is
+    Context,
+    ERC165,
+    IERC721,
+    IERC721Metadata,
+    IERC721Enumerable
+{
+
+    // Mapping from holder address to their (enumerable) set of owned tokens
+    mapping(address => EnumerableSet.UintSet) private _holderTokens;
+
+    /**
+     * @dev See {IERC721-balanceOf}.
+     */
+    function balanceOf(address owner) public view override returns (uint256) {
+        require(
+            owner != address(0),
+            "ERC721: balance query for the zero address"
+        );
+
+        return _holderTokens[owner].length();
+    }
+}
+
+library EnumerableSet {
+
+    /**
+     * @dev Returns the number of values on the set. O(1).
+     */
+    function _length(Set storage set) private view returns (uint256) {
+        return set._values.length;
+    }
+
+    /**
+     * @dev Returns the number of values on the set. O(1).
+     */
+    function length(UintSet storage set) internal view returns (uint256) {
+        return _length(set._inner);
+    }
+}
+"""

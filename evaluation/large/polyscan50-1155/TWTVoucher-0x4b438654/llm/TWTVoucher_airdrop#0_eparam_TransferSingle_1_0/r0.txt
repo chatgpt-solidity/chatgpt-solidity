@@ -1,0 +1,15 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is responsible for emitting the `TransferSingle` event. The `_mint` function is called from the `airdrop` function in the `TWTVoucher` contract, which is derived from `ERC1155`.
+
+In the `_mint` function, the `operator` variable is set to the result of `_msgSender()`, which returns the address of the sender of the message (transaction), which should be the owner of the contract since the `airdrop` function has the `onlyOwner` modifier applied. This means that the `_operator` argument in the `TransferSingle` event will be the address of the account that initiated the transaction, which is the expected behavior according to the given rule.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address of the sender of the message, which is the owner of the contract due to the `onlyOwner` modifier.
+- `_from`: The zero address, indicating that tokens are being minted.
+- `_to`: The recipient's address.
+- `_id`: The token ID.
+- `_value`: The amount of tokens minted.
+
+Since the `_operator` is indeed the address that is approved to make the transfer (in this case, the owner of the contract), and it should be `msg.sender` as per the rule provided, the `TransferSingle` event is emitted correctly according to the given rule.

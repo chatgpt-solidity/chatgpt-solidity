@@ -1,0 +1,13 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a list of solidity event interfaces from a smart contract and a ERC.
+      Whether it violates the given ERC? 
+
+      Code:"""
+      <code>
+      """
+
+      ERC:"""
+      <erc>
+      """

@@ -1,0 +1,32 @@
+Given a solidity function toggleDead and the related parts from a smart contract.
+Whether the function toggleDead and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.24;
+contract AxpireToken is AxpirePausableToken {
+    bool public dead = false;
+
+    function toggleDead() external onlyOwner returns (bool) {
+        dead = !dead;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are burning or deallocating
+"""

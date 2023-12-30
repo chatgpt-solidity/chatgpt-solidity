@@ -1,0 +1,15 @@
+The provided Solidity code for the `getCurrencyPrice` function and related parts do not directly violate the ERC-20 standard as described in the provided ERC excerpt. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable token transfers and allow tokens to be approved so they can be spent by another on-chain third party.
+
+The `getCurrencyPrice` function in the provided code is not part of the ERC-20 standard. It is an additional function that seems to be used to retrieve the price of a currency from a separate contract, `CurrencyPrices`, which is referenced by the `currencyPricesContract` address.
+
+The ERC-20 standard does not restrict the addition of extra functionality to the token contract, as long as the required methods and events are implemented correctly. Therefore, adding a `getCurrencyPrice` function does not violate the standard.
+
+However, it is important to note that the provided code snippet does not show the implementation of the ERC-20 required functions and events. To fully assess compliance with the ERC-20 standard, one would need to review the entire contract to ensure that all required functions (`totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, `allowance`) and events (`Transfer`, `Approval`) are implemented according to the specification.
+
+Additionally, the code snippet has a syntax error where the `currencyPricesContract` address is not properly assigned. It should be something like:
+
+```solidity
+address public currencyPricesContract = 0x92F87532eDB5e7fc43F0641b37c5687f7fc7F04a;
+```
+
+This error needs to be corrected for the contract to compile and work as intended. Apart from this, the `getCurrencyPrice` function itself does not violate the ERC-20 standard.

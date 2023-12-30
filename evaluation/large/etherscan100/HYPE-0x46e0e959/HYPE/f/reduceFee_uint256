@@ -1,0 +1,17 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract HYPE is Context , IERC20, Ownable {
+    address payable private _taxWallet;
+    uint256 private _finalBuyTax=0;
+    uint256 private _finalSellTax=2;
+    function reduceFee(uint256 _newFee) external{
+      require(_msgSender()==_taxWallet);
+      require(_newFee<=_finalBuyTax && _newFee<=_finalSellTax);
+      _finalBuyTax=_newFee;
+      _finalSellTax=_newFee;
+    }
+}

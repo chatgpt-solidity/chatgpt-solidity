@@ -1,0 +1,7 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not have any explicit checks that would cause it to throw an error when transferring a value of 0. The `SafeMath` library's `sub` and `add` functions are used to prevent overflow and underflow, but these functions will not throw an error when the value being subtracted or added is 0, as 0 is a valid operand for both addition and subtraction in the context of uint256 arithmetic.
+
+The `transferFrom` function checks that the `_to` address is not the zero address, that the `_value` is less than or equal to the balance of `_from`, and that the `_value` is less than or equal to the allowance that `_from` has given to the `msg.sender`. If `_value` is 0, these checks will pass assuming that the `_to` address is not the zero address and that the allowance is not negative (which it cannot be due to the nature of unsigned integers in Solidity).
+
+Therefore, if the function is called with a `_value` of 0, and the contract is not paused, and the tokens are not frozen (or the sender is the sale account or the owner), the function should execute without throwing an error.

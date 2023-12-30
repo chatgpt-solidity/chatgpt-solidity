@@ -1,0 +1,5 @@
+contract ERC20 {
+
+    function transfer(address dst, uint amount) public returns (bool) {}
+}
+

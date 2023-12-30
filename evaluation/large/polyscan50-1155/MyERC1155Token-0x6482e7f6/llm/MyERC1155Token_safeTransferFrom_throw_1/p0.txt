@@ -1,0 +1,26 @@
+Given a solidity function safeTransferFrom and the related parts from a smart contract.
+Whether the function safeTransferFrom and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Function(and related parts) to audit:"""
+abstract contract BasicERC1155 {
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    function safeTransferFrom(address from, address to, uint256 id, uint256 value, bytes memory data) public {
+        _update(from, to, id, value);
+    }
+
+    function _update(address from, address to, uint256 id, uint256 value) internal {
+        if (from != address(0)) {
+            _balances[id][from] -= value;
+        }
+        if (to != address(0)) {
+            _balances[id][to] += value;
+        }
+    }
+}
+"""
+
+Condition:"""
+balance of holder for token `_id` is lower than the `_value` sent.
+"""

@@ -1,0 +1,353 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+
+    IDividendDistributor public dividendDistributor;
+
+    uint256 public distributorGas = 50000;
+    mapping(address => uint256) private _balances;
+    mapping(address => mapping(address => uint256)) private _allowances;
+
+    bool public restrictWhales = true;
+
+    mapping (address => bool) public isFeeExempt;
+    mapping (address => bool) public isTxLimitExempt;
+    mapping (address => bool) public isDividendExempt;
+    address public lpWallet = DEAD;
+    uint256 public lpFee;
+    uint256 public devFee;
+    uint256 public lpFeeOnSell;
+    uint256 public devFeeOnSell;
+
+    uint256 public totalFee;
+    uint256 public totalFeeIfSelling;
+
+    IUniswapV2Router02 public router;
+    address public pair;
+
+    address payable public devWallet;
+    bool inSwapAndLiquify;
+    bool public swapAndLiquifyEnabled = true;
+
+    mapping (address => bool) private bots;    
+
+    uint256 public _maxTxAmount;
+    uint256 public _walletMax;
+    uint256 public swapThreshold;
+
+    modifier lockTheSwap {
+        inSwapAndLiquify = true;
+        _;
+        inSwapAndLiquify = false;
+    }
+
+    /**
+     * @dev See {IERC20-allowance}.
+     */
+    function allowance(address owner, address spender) public view virtual override returns (uint256) {
+        return _allowances[owner][spender];
+    }
+
+    /**
+     *
+     * @dev See {IERC20-transferFrom}.
+     *
+     * Emits an {Approval} event indicating the updated allowance. This is not
+     * required by the EIP. See the note at the beginning of {ERC20}.
+     *
+     * NOTE: Does not update the allowance if the current allowance
+     * is the maximum `uint256`.
+     *
+     * Requirements:
+     *
+     * - `from` and `to` cannot be the zero address.
+     * - `from` must have a balance of at least `amount`.
+     * - the caller must have allowance for ``from``'s tokens of at least
+     * `amount`.
+     */
+
+    function transferFrom(
+        address from,
+        address to,
+        uint256 amount
+    ) public virtual override returns (bool) {
+        address spender = _msgSender();
+        _spendAllowance(from, spender, amount);
+        _transfer(from, to, amount);
+        return true;
+    }
+
+    function _transfer(address sender, address recipient, uint256 amount) internal returns (bool) {
+        
+        require(!bots[sender] && !bots[recipient]);
+
+        if(inSwapAndLiquify){ return _basicTransfer(sender, recipient, amount); }
+
+        require(amount <= _maxTxAmount || isTxLimitExempt[sender], "tx");
+
+        if(!isTxLimitExempt[recipient] && restrictWhales)
+        {
+            require(_balances[recipient].add(amount) <= _walletMax, "wallet");
+        }
+
+        if(msg.sender != pair && !inSwapAndLiquify && swapAndLiquifyEnabled && _balances[address(this)] >= swapThreshold){ swapBack(); }
+
+        _balances[sender] = _balances[sender].sub(amount, "Insufficient Balance");
+        
+        uint256 finalAmount = !isFeeExempt[sender] && !isFeeExempt[recipient] ? takeFee(sender, recipient, amount) : amount;
+        _balances[recipient] = _balances[recipient].add(finalAmount);
+
+        // Dividend tracker
+        if(!isDividendExempt[sender]) {
+            try dividendDistributor.setShare(sender, _balances[sender]) {} catch {}
+        }
+
+        if(!isDividendExempt[recipient]) {
+            try dividendDistributor.setShare(recipient, _balances[recipient]) {} catch {} 
+        }
+
+        if (distributorGas > 0) {
+            try dividendDistributor.process(distributorGas) {} catch {}
+        }
+
+        emit Transfer(sender, recipient, finalAmount);
+        return true;
+    }    
+
+    function _basicTransfer(address sender, address recipient, uint256 amount) internal returns (bool) {
+        _balances[sender] = _balances[sender].sub(amount, "Insufficient Balance");
+        _balances[recipient] = _balances[recipient].add(amount);
+        emit Transfer(sender, recipient, amount);
+        return true;
+    }    
+
+    /** @dev Creates `amount` tokens and assigns them to `account`, increasing
+     * the total supply.
+     *
+     * Emits a {Transfer} event with `from` set to the zero address.
+     *
+     * Requirements:
+     *
+     * - `account` cannot be the zero address.
+     */
+
+
+
+    /**
+     * @dev Sets `amount` as the allowance of `spender` over the `owner` s tokens.
+     *
+     * This internal function is equivalent to `approve`, and can be used to
+     * e.g. set automatic allowances for certain subsystems, etc.
+     *
+     * Emits an {Approval} event.
+     *
+     * Requirements:
+     *
+     * - `owner` cannot be the zero address.
+     * - `spender` cannot be the zero address.
+     */
+    function _approve(
+        address owner,
+        address spender,
+        uint256 amount
+    ) internal virtual {
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+
+        _allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
+
+    }
+    /**
+     * @dev Spend `amount` form the allowance of `owner` toward `spender`.
+     *
+     * Does not update the allowance amount in case of infinite allowance.
+     * Revert if not enough allowance is available.
+     *
+     * Might emit an {Approval} event.
+     */
+    function _spendAllowance(
+        address owner,
+        address spender,
+        uint256 amount
+    ) internal virtual {
+        uint256 currentAllowance = allowance(owner, spender);
+        if (currentAllowance != type(uint256).max) {
+            require(currentAllowance >= amount, "ERC20: insufficient allowance");
+            unchecked {
+                _approve(owner, spender, currentAllowance - amount);
+            }
+        }
+    }
+
+    function takeFee(address sender, address recipient, uint256 amount) internal returns (uint256) {
+        
+        uint256 feeApplicable = pair == recipient ? totalFeeIfSelling : totalFee;
+        uint256 feeAmount = amount.mul(feeApplicable).div(100);
+
+        _balances[address(this)] = _balances[address(this)].add(feeAmount);
+        emit Transfer(sender, address(this), feeAmount);
+
+        return amount.sub(feeAmount);
+
+    }
+    function swapBack() internal lockTheSwap {
+    
+        uint256 tokensToLiquify = _balances[address(this)];
+
+        uint256 amountToLiquify;
+        uint256 devBalance;
+        uint256 amountEthLiquidity;        
+
+        // Use sell ratios if buy tax too low
+        if (totalFee <= 2) {
+            amountToLiquify = tokensToLiquify.mul(lpFeeOnSell).div(totalFeeIfSelling).div(2);
+        } else {
+            amountToLiquify = tokensToLiquify.mul(lpFee).div(totalFee).div(2);                 
+        }
+
+        uint256 amountToSwap = tokensToLiquify.sub(amountToLiquify);
+
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = router.WETH();
+
+        router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+            amountToSwap,
+            0,
+            path,
+            address(this),
+            block.timestamp
+        );
+
+        uint256 amountETH = address(this).balance;
+
+        // Use sell ratios if buy tax too low
+        if (totalFee <= 2) {
+            devBalance = amountETH.mul(devFeeOnSell).div(totalFeeIfSelling);
+            amountEthLiquidity = amountETH.mul(lpFeeOnSell).div(totalFeeIfSelling).div(2);
+
+        } else {
+            devBalance = amountETH.mul(devFee).div(totalFee);
+            amountEthLiquidity = amountETH.mul(lpFee).div(totalFee).div(2);            
+        }
+
+        uint256 amountEthReflection = amountETH.sub(devBalance).sub(amountEthLiquidity);
+
+        if(amountETH > 0){  
+            devWallet.transfer(devBalance);
+        }        
+
+        try dividendDistributor.deposit{value: amountEthReflection}() {} catch {}
+
+        if(amountToLiquify > 0){
+            router.addLiquidityETH{value: amountEthLiquidity}(
+                address(this),
+                amountToLiquify,
+                0,
+                0,
+                lpWallet,
+                block.timestamp
+            );
+        }      
+    
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+library SafeMath {
+
+    /**
+     * @dev Returns the addition of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `+` operator.
+     *
+     * Requirements:
+     *
+     * - Addition cannot overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a + b;
+
+    }
+    /**
+     * @dev Returns the subtraction of two unsigned integers, reverting on
+     * overflow (when the result is negative).
+     *
+     * Counterpart to Solidity's `-` operator.
+     *
+     * Requirements:
+     *
+     * - Subtraction cannot overflow.
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a - b;
+
+    }
+    /**
+     * @dev Returns the multiplication of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `*` operator.
+     *
+     * Requirements:
+     *
+     * - Multiplication cannot overflow.
+     */
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a * b;
+
+    }
+    /**
+     * @dev Returns the integer division of two unsigned integers, reverting on
+     * division by zero. The result is rounded towards zero.
+     *
+     * Counterpart to Solidity's `/` operator.
+     *
+     * Requirements:
+     *
+     * - The divisor cannot be zero.
+     */
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a / b;
+    }
+
+    /**
+     * @dev Returns the subtraction of two unsigned integers, reverting with custom message on
+     * overflow (when the result is negative).
+     *
+     * CAUTION: This function is deprecated because it requires allocating memory for the error
+     * message unnecessarily. For custom revert reasons use {trySub}.
+     *
+     * Counterpart to Solidity's `-` operator.
+     *
+     * Requirements:
+     *
+     * - Subtraction cannot overflow.
+     */
+    function sub(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
+        unchecked {
+            require(b <= a, errorMessage);
+            return a - b;
+        }
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

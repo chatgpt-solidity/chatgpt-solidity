@@ -1,0 +1,4 @@
+contract kaloulu is IERC20, Auth {
+    uint256 private constant _tSupp  = 2_000_000 * (10**_decimals);
+    function tSupp() external pure override returns (uint256) { return _tSupp; }
+}

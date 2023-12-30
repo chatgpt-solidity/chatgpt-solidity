@@ -1,0 +1,43 @@
+Given a solidity function SetMaxSupply and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract EBLivePremios is ERC721 {
+    uint256 COUNTER;
+    address private _Admin;
+
+    function SetMaxSupply(uint256 MaxSupply) public onlyAdmin {
+        require(
+            MaxSupply >= COUNTER,
+            "MaxSupply: MaxSupply must be greater than the current amount of NFTs"
+        );
+        _setMaxSupply(MaxSupply);
+    }
+
+    //Ownable
+    modifier onlyAdmin() {
+        require(_Admin == _msgSender(), "Ownable: caller is not the admin");
+        _;
+    }
+}
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+    uint256 private _MaxSupply;
+
+    function _setMaxSupply(uint256 MaxSupply) internal virtual {
+        _MaxSupply = MaxSupply;
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

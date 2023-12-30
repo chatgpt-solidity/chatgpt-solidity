@@ -1,0 +1,26 @@
+Given a solidity function setPUMP and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract zepump is IERC20, tokenStaking, Ownable {
+    bool public PUMP = true;
+    uint256 public PUMPTrigger = 3;
+    uint256 public PUMPMinAmount = 1;
+
+    function setPUMP(bool enabled, uint256 trigger, uint256 minAmount) external onlyOwner {
+        PUMP = enabled; PUMPTrigger = trigger; PUMPMinAmount = minAmount;
+    }
+}
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

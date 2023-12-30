@@ -1,0 +1,27 @@
+The provided Solidity function interfaces appear to be for an ERC-20 compliant token contract. Let's compare the given interfaces with the ERC-20 standard as described in the provided ERC documentation:
+
+1. `CMBToken() returns()` - This appears to be a constructor for the token contract. It is not part of the ERC-20 standard, but it does not violate the standard either.
+
+2. `totalSupply() returns(uint256)` - This matches the ERC-20 `totalSupply` function specification.
+
+3. `balanceOf(address) returns(uint256)` - This matches the ERC-20 `balanceOf` function specification.
+
+4. `transfer(address,uint256) returns(bool)` - This matches the ERC-20 `transfer` function specification.
+
+5. `transferFrom(address,address,uint256) returns(bool)` - This matches the ERC-20 `transferFrom` function specification.
+
+6. `approve(address,uint256) returns(bool)` - This matches the ERC-20 `approve` function specification.
+
+7. `allowance(address,address) returns(uint256)` - This matches the ERC-20 `allowance` function specification.
+
+8. `symbol() returns(string)` - This matches the ERC-20 `symbol` function specification, which is optional.
+
+9. `name() returns(string)` - This matches the ERC-20 `name` function specification, which is optional.
+
+10. `_totalSupply() returns(uint256)` - This does not match any function in the ERC-20 standard. It seems to be a private or internal version of the `totalSupply` function. It does not violate the standard as long as it is not part of the public interface.
+
+11. `decimals() returns(uint8)` - This matches the ERC-20 `decimals` function specification, which is optional.
+
+Based on the provided information, the given list of Solidity function interfaces does not violate the ERC-20 standard. However, it is important to note that the actual compliance with the ERC-20 standard also depends on the implementation of these functions and the presence of the required `Transfer` and `Approval` events, which are not listed in the provided interfaces but are required by the standard.
+
+Additionally, the `_totalSupply()` function is not part of the ERC-20 standard, but as long as it is not part of the public interface and does not interfere with the `totalSupply()` function, it should not be an issue. It is common for contracts to have additional functions and state variables that are not part of the standard interface as long as the standard's requirements are met.

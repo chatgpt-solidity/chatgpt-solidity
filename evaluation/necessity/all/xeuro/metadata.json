@@ -1,0 +1,350 @@
+{
+    "file": "evaluation/audited/xeuro.sol",
+    "contracts": [
+        {
+            "solc_version": "0.5.7",
+            "func2file": {
+                "constructor() returns()": "result-necessity/s-cm/xeuro/xEuro/f/constructor",
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/transferFrom_address_address_uint256",
+                "transferAndCall(address,uint256,bytes) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/transferAndCall_address_uint256_bytes",
+                "transferAllAndCall(address,bytes) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/transferAllAndCall_address_bytes",
+                "addAdmin(address) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/addAdmin_address",
+                "removeAdmin(address) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/removeAdmin_address",
+                "changeMinExchangeAmount(uint256) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/changeMinExchangeAmount_uint256",
+                "addToCanMint(address) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/addToCanMint_address",
+                "removeFromCanMint(address) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/removeFromCanMint_address",
+                "addToCanTransferFromContract(address) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/addToCanTransferFromContract_address",
+                "removeFromCanTransferFromContract(address) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/removeFromCanTransferFromContract_address",
+                "addToCanBurn(address) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/addToCanBurn_address",
+                "removeFromCanBurn(address) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/removeFromCanBurn_address",
+                "mintTokens(uint256,uint256) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/mintTokens_uint256_uint256",
+                "mintAndTransfer(uint256,uint256,address) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/mintAndTransfer_uint256_uint256_address",
+                "burnTokens(uint256,uint256,uint256) returns(bool)": "result-necessity/s-cm/xeuro/xEuro/f/burnTokens_uint256_uint256_uint256"
+            },
+            "func2attrs": {
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferAndCall(address,uint256,bytes) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferAllAndCall(address,bytes) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addAdmin(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeAdmin(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeMinExchangeAmount(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addToCanMint(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeFromCanMint(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addToCanTransferFromContract(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeFromCanTransferFromContract(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addToCanBurn(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeFromCanBurn(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintTokens(uint256,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintAndTransfer(uint256,uint256,address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnTokens(uint256,uint256,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "balanceOf(address) returns(uint256)",
+                "allowance(address,address) returns(uint256)",
+                "totalSupply() returns(uint256)",
+                "tokensInTransfer(uint256) returns(address,uint256,uint256)",
+                "mintTokensEvent(uint256) returns(address,uint256,uint256,uint256,uint256)",
+                "canMint(address) returns(bool)",
+                "canTransferFromContract(address) returns(bool)",
+                "symbol() returns(string)",
+                "fiatInPaymentIds(uint256) returns(bool)",
+                "mintTokensEventsCounter() returns(uint256)",
+                "fiatOutPaymentIdsUsed(uint256) returns(bool)",
+                "burnTokensEvents(uint256) returns(address,uint256,uint256,uint256,uint256,uint256)",
+                "fiatInPaymentsToMintTokensEvent(uint256) returns(address,uint256,uint256,uint256,uint256)",
+                "tokensInEventsCounter() returns(uint256)",
+                "isAdmin(address) returns(bool)",
+                "name() returns(string)",
+                "canBurn(address) returns(bool)",
+                "decimals() returns(uint8)",
+                "burnTokensEventsCounter() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "DataSentToAnotherContract",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AdminAdded",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "AdminRemoved",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "minExchangeAmountChanged",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AddressAddedToCanMint",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "AddressRemovedFromCanMint",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "AddressAddedToCanTransferFromContract",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "AddressRemovedFromCanTransferFromContract",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "AddressAddedToCanBurn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "AddressRemovedFromCanBurn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "TokensMinted",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "TokensIn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "TokensBurned",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "xEuro"
+        }
+    ]
+}

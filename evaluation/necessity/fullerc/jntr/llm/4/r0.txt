@@ -1,0 +1,50 @@
+The provided Solidity code for the `transfer` function and related parts of the `JNTR` contract appears to be an implementation of an ERC20 token with some additional restrictions on who can send and receive tokens. To determine if the `transfer` function violates the ERC20 standard, we need to compare the implementation with the ERC20 specification provided.
+
+Here are some key points from the ERC20 specification regarding the `transfer` function:
+
+1. The `transfer` function should transfer `_value` amount of tokens to address `_to` and MUST fire the `Transfer` event.
+2. The function SHOULD throw if the message caller’s account balance does not have enough tokens to spend.
+3. Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+
+Now, let's analyze the provided `transfer` function:
+
+```solidity
+function transfer(address _to, uint _value) public returns (bool ok) {
+    require(verifyTransaction(msg.sender, _to));
+    uint256 senderBalance = balances[msg.sender];
+    require(senderBalance >= _value);
+    senderBalance = safeSub(senderBalance, _value);
+    balances[msg.sender] = senderBalance;
+    balances[_to] = safeAdd(balances[_to], _value);
+    emit Transfer(msg.sender, _to, _value);
+    return true;
+}
+```
+
+The `transfer` function in the `JNTR` contract does the following:
+
+- It checks if the transaction is verified by calling `verifyTransaction(msg.sender, _to)`.
+- It checks if the sender has enough balance to send the `_value` amount of tokens.
+- It uses `safeSub` and `safeAdd` from the `SafeMath` contract to prevent underflows and overflows.
+- It updates the sender's and receiver's balances.
+- It emits the `Transfer` event.
+- It returns `true` to indicate a successful transfer.
+
+The `transfer` function seems to comply with the ERC20 standard regarding balance checks, updating balances, emitting the `Transfer` event, and returning a boolean value. However, there are additional restrictions due to the `verifyTransaction` function:
+
+```solidity
+function verifyTransaction(
+    address _sender,
+    address _reciver
+) internal returns (bool) {
+    require(allowedAddress[allowedIndex[_sender]]._address == _sender);
+    require(allowedAddress[allowedIndex[_reciver]]._address == _reciver);
+    require(allowedAddress[allowedIndex[_sender]]._active == true);
+    require(allowedAddress[allowedIndex[_reciver]]._active == true);
+    return true;
+}
+```
+
+The `verifyTransaction` function requires that both the sender and receiver are in the `allowedAddress` array and that their `_active` status is `true`. This is not part of the ERC20 standard and adds an additional layer of control over who can send and receive tokens. This could be seen as a violation of the ERC20 standard if the intention is to create a token that should be freely transferable by anyone without additional restrictions.
+
+In conclusion, the `transfer` function itself adheres to the ERC20 standard, but the additional restrictions imposed by the `verifyTransaction` function mean that the `JNTR` contract does not fully comply with the ERC20 standard's intention of allowing tokens to be freely transferable without additional constraints.

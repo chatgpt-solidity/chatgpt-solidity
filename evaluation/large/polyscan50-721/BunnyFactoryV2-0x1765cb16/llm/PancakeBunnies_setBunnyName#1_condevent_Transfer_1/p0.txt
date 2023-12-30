@@ -1,0 +1,45 @@
+Given a solidity function setBunnyName and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.6.12;
+contract PancakeBunnies is ERC721, Ownable {
+
+    // Map the bunnyName for a tokenId
+    mapping(uint8 => string) private bunnyNames;
+
+    /**
+     * @dev Set a unique name for each bunnyId. It is supposed to be called once.
+     */
+    function setBunnyName(uint8 _bunnyId, string calldata _name)
+        external
+        onlyOwner
+    {
+        bunnyNames[_bunnyId] = _name;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is created with `owner` address as the owner.
+"""

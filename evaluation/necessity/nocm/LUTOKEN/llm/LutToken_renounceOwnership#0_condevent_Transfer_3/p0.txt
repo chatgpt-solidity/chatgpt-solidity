@@ -1,0 +1,32 @@
+Given a solidity function renounceOwnership and the related parts from a smart contract.
+Whether the function renounceOwnership and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.22;
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+
+    /**
+     * @dev Allows the current owner to relinquish control of the contract.
+     */
+    function renounceOwnership() public onlyOwner {
+        emit OwnershipRenounced(owner);
+        owner = address(0);
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are burning or deallocating
+"""

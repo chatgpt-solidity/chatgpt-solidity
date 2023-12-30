@@ -1,0 +1,52 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract SilkToken is owned, TokenERC20 {
+
+    mapping(address => bool) public frozenAccount;
+
+    /* Internal transfer, only can be called by this contract */
+    function _transfer(address _from, address _to, uint _value) internal {
+        require(_to != 0x0); // Prevent transfer to 0x0 address. Use burn() instead
+        require(balanceOf[_from] >= _value); // Check if the sender has enough
+        require(balanceOf[_to] + _value > balanceOf[_to]); // Check for overflows
+        require(!frozenAccount[_from]); // Check if sender is frozen
+        require(!frozenAccount[_to]); // Check if recipient is frozen
+        balanceOf[_from] -= _value; // Subtract from the sender
+        balanceOf[_to] += _value; // Add the same to the recipient
+        Transfer(_from, _to, _value);
+    }
+}
+
+contract TokenERC20 {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    /**
+     * Transfer tokens from other address
+     *
+     * Send `_value` tokens to `_to` in behalf of `_from`
+     *
+     * @param _from The address of the sender
+     * @param _to The address of the recipient
+     * @param _value the amount to send
+     */
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        require(_value <= allowance[_from][msg.sender]); // Check allowance
+        allowance[_from][msg.sender] -= _value;
+        _transfer(_from, _to, _value);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

@@ -1,0 +1,16 @@
+Given a solidity function receive and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract kaloulu is IERC20, Auth {
+
+    receive() external payable {}
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

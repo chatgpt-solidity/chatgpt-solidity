@@ -1,0 +1,13 @@
+YES
+
+The `airdrop` function in the `$5000` contract calls the `_mint` function for each recipient in the `recipients` array, provided that the recipient is not a contract (checked by the `isContract` function). The `_mint` function, as defined in the `ERC1155` contract, emits a `TransferSingle` event with the appropriate arguments, including the `_to` argument which is set to the address of the recipient whose balance is increased.
+
+The `TransferSingle` event is emitted within the `_mint` function with the following line:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+Here, `to` is the address of the recipient, `id` is the token ID (in this case `coinbase`), and `amount` is the number of tokens to mint (in this case `1`). The `_from` argument is `address(0)` because minting tokens is equivalent to transferring them from the zero address.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, with `_to` being the address of the recipient whose balance is increased.

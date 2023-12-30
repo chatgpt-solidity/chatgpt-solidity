@@ -1,0 +1,29 @@
+The provided Solidity function `allowance` within the `Projecton` contract appears to be compliant with the ERC-20 token standard as described in the provided ERC documentation. The ERC-20 standard specifies that the `allowance` function should:
+
+1. Return the amount which `_spender` is still allowed to withdraw from `_owner`.
+2. Be a public view function that returns a `uint256` representing the remaining allowance.
+
+The provided `allowance` function in the `Projecton` contract matches these requirements:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) constant returns (uint256 remaining) {
+    return allowed[_owner][_spender];
+}
+```
+
+It takes two addresses as parameters (`_owner` and `_spender`) and returns the remaining allowance that `_spender` has from `_owner`'s balance. The `constant` keyword in Solidity is synonymous with `view` in more recent versions of Solidity, indicating that the function does not modify the state and can return data without any transaction cost when called externally.
+
+However, there are a couple of points to note:
+
+1. The `constant` keyword is used in the provided function, which is an older Solidity syntax. In more recent versions of Solidity (0.5.0 and above), the `view` keyword is used instead. While this does not violate the ERC-20 standard, it is recommended to use the latest Solidity syntax for better compatibility and clarity.
+
+2. The ERC-20 standard does not specify the visibility of the `allowance` function. However, it is generally expected to be `public` to ensure that it can be called by external entities. The provided function does not explicitly state its visibility, which by default is `public` in Solidity versions prior to 0.5.0. If the contract is using Solidity 0.5.0 or later, it is recommended to explicitly state the visibility as `public`.
+
+3. The ERC-20 standard mentions that the `allowance` function should be a `view` function, which means it should not modify the contract's state. The provided function complies with this requirement.
+
+4. The ERC-20 standard does not require events to be emitted for the `allowance` function since it is a read-only function.
+
+In conclusion, the provided `allowance` function does not violate the ERC-20 standard based on the information given. However, it is important to ensure that the contract is using the appropriate Solidity version and syntax, and that the visibility of the function is explicitly stated if necessary.

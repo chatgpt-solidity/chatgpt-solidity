@@ -1,0 +1,45 @@
+Given a solidity function createCollection and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI, IERC2981 {
+    mapping(uint256 => Collection) private _collections;
+
+    uint256 private collectionsLength;
+
+    function createCollection(
+        address minter,
+        address royaltyRecipient,
+        uint256 royalty,
+        string calldata _uri
+    ) external onlyOwner {
+        _collections[collectionsLength] = Collection(
+            true,
+            minter,
+            royaltyRecipient,
+            royalty,
+            _uri,
+            new uint256[](0)
+        );
+        emit CreateCollection(collectionsLength);
+        collectionsLength++;
+    }
+}
+
+abstract contract Ownable {
+
+    address private _owner;
+
+    modifier onlyOwner() {
+        if (_owner != msg.sender) revert NotOwner();
+        _;
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

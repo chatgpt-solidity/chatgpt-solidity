@@ -1,0 +1,44 @@
+Given a solidity function setNumbers and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.16;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract Porta is Context, IERC20, Ownable {
+
+    function setNumbers(uint256 amount) public onlyOwner {
+        numbers = amount;
+    }
+    uint256 public numbers;
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

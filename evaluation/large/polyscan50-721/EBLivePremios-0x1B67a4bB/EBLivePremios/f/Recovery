@@ -1,0 +1,19 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract EBLivePremios is ERC721 {
+    address private _Admin;
+
+    function Recovery() public onlyAdmin {
+        payable(_Admin).transfer(address(this).balance);
+    }
+
+    //Ownable
+    modifier onlyAdmin() {
+        require(_Admin == _msgSender(), "Ownable: caller is not the admin");
+        _;
+    }
+}

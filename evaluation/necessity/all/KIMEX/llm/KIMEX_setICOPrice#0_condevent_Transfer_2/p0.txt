@@ -1,0 +1,37 @@
+Given a solidity function setICOPrice and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    uint256 public icoStandardPrice;
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Set ICO price including ICO standard price
+    function setICOPrice(
+        uint256 _tokenPerEther
+    ) external onlyOwnerOrAdmin returns (bool) {
+        require(_tokenPerEther > 0);
+
+        icoStandardPrice = _tokenPerEther;
+        emit SetICOPrice(icoStandardPrice);
+        return true;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

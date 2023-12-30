@@ -1,0 +1,3 @@
+YES
+
+The `burn` function in the `ERC1155Burnable` contract calls the `_burn` function, which in turn emits the `TransferSingle` event. The `_from` argument in the `TransferSingle` event is set to the `from` parameter of the `_burn` function, which is the address of the holder whose balance is being decreased. This is in accordance with the rule that the `_from` argument must be the address of the holder whose balance is decreased. Therefore, the `TransferSingle` event is emitted correctly according to the given rule.

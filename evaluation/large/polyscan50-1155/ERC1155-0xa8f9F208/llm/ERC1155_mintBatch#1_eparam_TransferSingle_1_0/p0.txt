@@ -1,0 +1,37 @@
+Given a solidity function mintBatch and the related parts from a smart contract.
+Check whether the event TransferSingle is emitted according to the given rule? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable {
+
+    address private _owner;
+
+    modifier onlyOwner() {
+        if (_owner != msg.sender) revert NotOwner();
+        _;
+    }
+}
+
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    function mintBatch(
+        address[] calldata to,
+        uint32[] calldata itemsIds
+    ) external onlyOwner {
+        for (uint128 i; i < itemsIds.length; ) {
+            emit TransferSingle(msg.sender, address(0), to[i], itemsIds[i], 1);
+            unchecked {
+                _balances[itemsIds[i]][to[i]]++;
+                i++;
+            }
+        }
+    }
+}
+"""
+
+Rule:"""
+The `_operator` argument MUST be the address of an account/contract that is approved to make the transfer (SHOULD be msg.sender)
+event TransferSingle(address indexed _operator, address indexed _from, address indexed _to, uint256 _id, uint256 _value);
+"""

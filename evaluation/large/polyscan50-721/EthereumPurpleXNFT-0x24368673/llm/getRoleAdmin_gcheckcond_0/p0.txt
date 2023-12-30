@@ -1,0 +1,23 @@
+Given a solidity function getRoleAdmin and the related parts from a smart contract.
+Whether the function getRoleAdmin and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract AccessControl is Context, IAccessControl, ERC165 {
+
+    mapping(bytes32 => RoleData) private _roles;
+
+    /**
+     * @dev Returns the admin role that controls `role`. See {grantRole} and
+     * {revokeRole}.
+     *
+     * To change a role's admin, use {_setRoleAdmin}.
+     */
+    function getRoleAdmin(bytes32 role) public view virtual override returns (bytes32) {
+        return _roles[role].adminRole;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

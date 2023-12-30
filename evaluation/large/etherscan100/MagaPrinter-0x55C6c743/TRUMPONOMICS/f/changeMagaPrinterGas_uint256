@@ -1,0 +1,19 @@
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+    uint256 public magaPrinterGas = 0;
+
+    function changeMagaPrinterGas(uint256 newGas) external onlyOwner {
+        magaPrinterGas = newGas;
+    }           
+}

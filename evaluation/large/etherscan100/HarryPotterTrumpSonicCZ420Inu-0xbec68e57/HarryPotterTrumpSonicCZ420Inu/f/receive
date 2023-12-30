@@ -1,0 +1,4 @@
+contract HarryPotterTrumpSonicCZ420Inu is Context, IERC20, Ownable {
+
+    receive() external payable {}
+}

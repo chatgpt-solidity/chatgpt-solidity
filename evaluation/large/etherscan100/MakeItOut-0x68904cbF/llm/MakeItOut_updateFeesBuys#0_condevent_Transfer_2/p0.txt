@@ -1,0 +1,35 @@
+Given a solidity function updateFeesBuys and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract MakeItOut is Context, IERC20, Ownable {
+
+    uint256 private _finalBuyTax = 1;
+
+    function updateFeesBuys(uint256 newBuyTax) external onlyOwner {
+        _finalBuyTax = newBuyTax;
+        require(newBuyTax <= 5);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

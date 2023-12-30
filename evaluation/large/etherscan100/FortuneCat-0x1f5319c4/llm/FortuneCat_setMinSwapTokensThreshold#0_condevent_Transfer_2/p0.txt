@@ -1,0 +1,32 @@
+Given a solidity function setMinSwapTokensThreshold and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract FortuneCat is Context, IERC20, Ownable {
+    uint256 public _swapTokensAtAmount = 5 * 10 ** 6 * 10**9;
+    //Set minimum tokens required to swap.
+    function setMinSwapTokensThreshold(uint256 swapTokensAtAmount) public onlyOwner {
+        _swapTokensAtAmount = swapTokensAtAmount;
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

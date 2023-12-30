@@ -1,0 +1,27 @@
+Given a solidity function removeFromCanBurn and the related parts from a smart contract and a rule.
+Whether the function removeFromCanBurn and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    // addresses allowed to burn tokens (on contract's own address):
+    mapping(address => bool) public canBurn;
+
+    function removeFromCanBurn(address _addressToRemove) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canBurn[_addressToRemove] = false;
+        emit AddressRemovedFromCanBurn(msg.sender, _addressToRemove);
+        return true;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

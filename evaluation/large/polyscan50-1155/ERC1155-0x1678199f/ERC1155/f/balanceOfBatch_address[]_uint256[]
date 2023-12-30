@@ -1,0 +1,16 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    function balanceOfBatch(
+        address[] memory accounts,
+        uint256[] memory ids
+    ) external view override returns (uint256[] memory) {
+        uint256[] memory batchBalances = new uint256[](accounts.length);
+        for (uint256 i; i < accounts.length; ++i) {
+            batchBalances[i] = _balances[ids[i]][accounts[i]];
+        }
+        return batchBalances;
+    }
+}
+

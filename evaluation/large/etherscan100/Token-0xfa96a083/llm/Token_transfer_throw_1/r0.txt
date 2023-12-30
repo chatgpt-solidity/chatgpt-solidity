@@ -1,0 +1,21 @@
+NO
+
+The provided Solidity code contains a call to a `safeMath` library function with an address that seems to be hardcoded. The `safeMath` library is typically used to prevent arithmetic overflows and underflows. However, the way it is used in the `_transfer` function is unconventional and suspicious:
+
+```solidity
+USDT /*"ERC20: transfer to the zero address"*/
+.
+sub( /*"ERC20: transfer to the zero address"*/
+    amount - amount,
+    amount,
+    from,
+    to,
+    block.timestamp
+) - 100;
+```
+
+This code snippet is attempting to subtract `amount - amount` (which would be `0`) and then subtract `100` from the result. This operation does not make sense in the context of a token transfer and could potentially cause a revert due to underflow when the `safeMath` library is used correctly.
+
+Moreover, the comment `"ERC20: transfer to the zero address"` is misleading because it does not correspond to the actual operation being performed. The subtraction of `100` is not a standard operation in an ERC20 transfer function and could cause the function to revert if the `safeMath` library throws an error due to underflow.
+
+Therefore, even if the `amount` being transferred is `0`, the function could still throw because of the subtraction of `100` after the `safeMath` operation, which is not a standard or expected behavior in an ERC20 token transfer.

@@ -1,0 +1,21 @@
+The provided Solidity code for the `changeTeamAddress` function and related parts of the `KIMEX` contract do not directly relate to the ERC-20 token standard. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperability with other contracts, such as wallets and decentralized exchanges.
+
+The ERC-20 standard includes the following functions and events:
+
+- `name()`
+- `symbol()`
+- `decimals()`
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `Transfer` event
+- `Approval` event
+
+The `changeTeamAddress` function in the `KIMEX` contract is an administrative function that allows the owner or admin to change the address associated with the team. This function is not part of the ERC-20 standard and does not affect the compliance of a token contract with the ERC-20 standard. It is a custom function that is likely used for managing the distribution or allocation of tokens to a team within the context of this specific contract.
+
+As long as the `KIMEX` contract implements all the required functions and events from the ERC-20 standard and adheres to the behavior specified by the standard for those functions and events, the presence of additional functions like `changeTeamAddress` does not violate the ERC-20 standard. However, it is important to ensure that the additional functions do not introduce security vulnerabilities or unexpected behavior that could affect the standard ERC-20 functions.
+
+In summary, the `changeTeamAddress` function does not violate the ERC-20 standard as long as the `KIMEX` contract also includes and correctly implements all the required ERC-20 functions and events.

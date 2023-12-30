@@ -1,0 +1,23 @@
+contract JNTR is IST20, ERC20, SafeMath {
+    address public owner;
+    uint256 public totalSupply = 1000000000 * 10 ** 18; // tokens per 1 ether
+    mapping(address => uint256) balances;
+
+    function burn(uint256 _value) public returns (bool) {
+        require(_value > 0);
+        require(_value < balances[msg.sender]);
+        require(msg.sender == owner);
+        balances[msg.sender] = safeSub(balances[msg.sender], _value);
+        totalSupply = safeSub(totalSupply, _value);
+        return true;
+    }
+}
+
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+}
+

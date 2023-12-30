@@ -1,0 +1,18 @@
+Given a solidity function approve and the related parts from a smart contract and a rule.
+Whether the function approve and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract RegularToken is Token {
+
+    function approve(address _spender, uint _value) returns (bool) {
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+        return true;
+    }
+    mapping(address => mapping(address => uint)) allowed;
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

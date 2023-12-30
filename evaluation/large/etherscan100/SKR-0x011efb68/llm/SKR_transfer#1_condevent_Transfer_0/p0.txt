@@ -1,0 +1,244 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+library SafeMath {
+
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a, "SafeMath: addition overflow");
+
+        return c;
+
+    }
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        return sub(a, b, "SafeMath: subtraction overflow");
+    }
+
+    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        require(b <= a, errorMessage);
+        uint256 c = a - b;
+
+        return c;
+    }
+
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        if (a == 0) {
+            return 0;
+        }
+
+        uint256 c = a * b;
+        require(c / a == b, "SafeMath: multiplication overflow");
+
+        return c;
+    }
+
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        return div(a, b, "SafeMath: division by zero");
+
+    }
+    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        require(b > 0, errorMessage);
+        uint256 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+
+        return c;
+    }
+}
+
+contract SKR is Context, IERC20, Ownable {
+
+    address payable public marketingWallet = payable(0xE3d1BD7D3036F4E8DA2187E74d9De2fABeB4581d
+
+);
+    address payable public lpWallet = payable(0xE3d1BD7D3036F4E8DA2187E74d9De2fABeB4581d
+
+);
+    mapping (address => uint256) _balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
+    mapping (address => bool) public isExcludedFromFee;
+    mapping (address => bool) public isMarketPair;
+
+    uint256 public _marketingShare = 20;
+
+    uint256 public _lpShare = 0;
+    uint256 public _totalTaxIfBuying = _buyMarketingFee + _buyLpFee;
+    uint256 public _totalTaxIfSelling = _sellMarketingFee + _sellLpFee;
+    uint256 public _totalDistributionShares = 20;
+    uint256 private minimumTokensBeforeSwap = 100000000 * 10 ** _decimals; 
+
+    IUniswapV2Router02 public uniswapV2Router;
+    bool inSwapAndLiquify;
+    bool public swapAndLiquifyEnabled = true;
+    bool public swapAndLiquifyByLimitOnly = false;
+    modifier lockTheSwap {
+        inSwapAndLiquify = true;
+        _;
+        inSwapAndLiquify = false;
+    }
+
+    function balanceOf(address account) public view override returns (uint256) {
+        return _balances[account];
+    }
+
+    function _approve(address owner, address spender, uint256 amount) private {
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+
+        _allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
+    }
+
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+        _transfer(_msgSender(), recipient, amount);
+        return true;
+    }
+    function _transfer(address sender, address recipient, uint256 amount) private returns (bool) {
+
+        require(sender != address(0), "ERC20: transfer from the zero address");
+        require(recipient != address(0), "ERC20: transfer to the zero address");
+        if(inSwapAndLiquify)
+        { 
+            return _basicTransfer(sender, recipient, amount); 
+        }
+        else
+        {
+            uint256 contractTokenBalance = balanceOf(address(this));
+            bool overMinimumTokenBalance = contractTokenBalance >= minimumTokensBeforeSwap;
+            
+            if (overMinimumTokenBalance && !inSwapAndLiquify && !isMarketPair[sender] && swapAndLiquifyEnabled && recipient!=owner()) 
+            {
+                if(swapAndLiquifyByLimitOnly)
+                    contractTokenBalance = minimumTokensBeforeSwap;
+                swapAndLiquify(contractTokenBalance);    
+            }
+
+            _balances[sender] = _balances[sender].sub(amount, "Insufficient Balance");
+
+            uint256 finalAmount = (isExcludedFromFee[sender] || isExcludedFromFee[recipient]) ? 
+                                         amount : takeFee(sender,recipient, amount);
+
+            _balances[recipient] = _balances[recipient].add(finalAmount);
+
+            emit Transfer(sender, recipient, finalAmount);
+            return true;
+        }
+    }
+
+    function _basicTransfer(address sender, address recipient, uint256 amount) internal returns (bool) {
+        _balances[sender] = _balances[sender].sub(amount, "Insufficient Balance");
+        _balances[recipient] = _balances[recipient].add(amount);
+        emit Transfer(sender, recipient, amount);
+        return true;
+    }
+    function swapAndLiquify(uint256 tAmount) private lockTheSwap {
+        if(_totalDistributionShares==0)
+            return;
+
+        uint256 lpAmount  = tAmount.mul(_lpShare).div(_totalDistributionShares).div(2);
+        uint256 AmountforETH = tAmount.sub(lpAmount);
+
+        swapTokensForETH(AmountforETH);
+        uint256 ETHBalance = address(this).balance;
+        
+        uint256 amountETHForMarketing = ETHBalance.mul(_marketingShare).div(_totalDistributionShares);
+        if(amountETHForMarketing > 0)
+            transferToAddressETH(marketingWallet,amountETHForMarketing);
+        
+        uint256 amountETHLp = address(this).balance;
+        if(lpAmount > 0 && amountETHLp>0)
+            addLiquidity(lpAmount, amountETHLp);
+
+        uint256 leftETH = address(this).balance;
+        if(leftETH>0)
+            transferToAddressETH(marketingWallet,leftETH);
+    }
+
+    function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
+
+        // approve token transfer to cover all possible scenarios
+        _approve(address(this), address(uniswapV2Router), tokenAmount);
+
+        // add the liquidity
+        uniswapV2Router.addLiquidityETH{value: ethAmount}(
+            address(this),
+            tokenAmount,
+            0, // slippage is unavoidable
+            0, // slippage is unavoidable
+            lpWallet,
+            block.timestamp
+        );
+
+    }
+    function transferToAddressETH(address payable recipient, uint256 amount) private {
+        recipient.transfer(amount);
+    }
+
+    function swapTokensForETH(uint256 tokenAmount) private {
+        // generate the uniswap pair path of token -> weth
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = uniswapV2Router.WETH();
+
+        _approve(address(this), address(uniswapV2Router), tokenAmount);
+
+        // make the swap
+        uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0, // accept any amount of ETH
+            path,
+            address(this),
+            block.timestamp
+        );
+    }
+
+    function takeFee(address sender,address recipient,uint256 amount) internal returns (uint256) {
+        uint256 feeAmount = 0;
+           
+        if(isMarketPair[sender]) {
+            feeAmount = amount.mul(_totalTaxIfBuying).div(100);
+        }
+        else if(isMarketPair[recipient]) {
+            feeAmount = amount.mul(_totalTaxIfSelling).div(100);
+        }
+        
+        if(feeAmount > 0) {
+            _balances[address(this)] = _balances[address(this)].add(feeAmount);
+            emit Transfer(sender, address(this), feeAmount);
+        }
+
+        return amount.sub(feeAmount);
+    }
+}
+abstract contract Context {
+
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view returns (address) {
+        return _owner;
+    }   
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

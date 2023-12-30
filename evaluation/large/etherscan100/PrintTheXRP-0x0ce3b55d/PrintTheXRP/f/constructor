@@ -1,0 +1,104 @@
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+
+    IDividendDistributor public dividendDistributor;
+
+    mapping(address => uint256) private _balances;
+    mapping(address => mapping(address => uint256)) private _allowances;
+
+
+    uint256 private _totalSupply;
+    string private _name;
+
+    string private _symbol;
+
+    address DEAD = 0x000000000000000000000000000000000000dEaD;
+    address ZERO = 0x0000000000000000000000000000000000000000;
+
+    mapping (address => bool) public isFeeExempt;
+    mapping (address => bool) public isTxLimitExempt;
+    mapping (address => bool) public isDividendExempt;
+
+    uint256 public reflectionFee;
+    uint256 public lpFee;
+
+    uint256 public devFee;
+    uint256 public reflectionFeeOnSell;
+    uint256 public lpFeeOnSell;
+    uint256 public devFeeOnSell;
+
+    uint256 public totalFee;
+    uint256 public totalFeeIfSelling;
+
+    IUniswapV2Router02 public router;
+    address public pair;
+    address public tokenOwner;
+    address payable public devWallet;
+
+    uint256 public _maxTxAmount;
+    uint256 public _walletMax;
+    uint256 public swapThreshold;
+    constructor() {
+
+        _name = "PrintTheXRP";
+        _symbol = "PTX";
+        _totalSupply = 1000000*10**18;
+        _balances[msg.sender] += _totalSupply;                                                          
+
+        _maxTxAmount = _totalSupply * 2 / 200;
+        _walletMax = _totalSupply * 3 / 100;    
+        swapThreshold = _totalSupply * 5 / 4000;
+
+        router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+        pair = IUniswapV2Factory(router.factory()).createPair(router.WETH(), address(this));
+
+        _allowances[address(this)][address(router)] = type(uint256).max;
+
+        dividendDistributor = new DividendDistributor(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, 0x07E0EDf8ce600FB51d44F51E3348D77D67F298ae, address(this));
+
+
+        isFeeExempt[address(this)] = true;
+        isFeeExempt[msg.sender] = true;
+
+        isTxLimitExempt[msg.sender] = true;
+        isTxLimitExempt[pair] = true;
+        isTxLimitExempt[DEAD] = true;
+        isTxLimitExempt[ZERO] = true; 
+
+        isDividendExempt[pair] = true;
+        isDividendExempt[address(this)] = true;
+        isDividendExempt[DEAD] = true;
+        isDividendExempt[ZERO] = true;
+
+
+        reflectionFee = 2;
+        lpFee = 0;
+        devFee = 3;
+
+        reflectionFeeOnSell = 2;
+        lpFeeOnSell = 0;
+        devFeeOnSell = 3;
+
+        totalFee = devFee.add(lpFee).add(reflectionFee);
+        totalFeeIfSelling = devFeeOnSell.add(lpFeeOnSell).add(reflectionFeeOnSell);
+
+        tokenOwner = msg.sender;
+        devWallet = payable(msg.sender);
+    }
+}
+library SafeMath {
+
+    /**
+     * @dev Returns the addition of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `+` operator.
+     *
+     * Requirements:
+     *
+     * - Addition cannot overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a + b;
+    }
+}
+

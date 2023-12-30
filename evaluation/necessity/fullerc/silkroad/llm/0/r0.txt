@@ -1,0 +1,56 @@
+The provided Solidity code for the `transfer` function and related parts of the `TokenERC20` and `SilkToken` contracts need to be compared against the ERC-20 token standard to determine if there are any violations.
+
+Here are the key points from the ERC-20 standard that are relevant to the `transfer` function:
+
+1. The `transfer` function should transfer `_value` amount of tokens to address `_to`, and MUST fire the `Transfer` event.
+2. The function SHOULD throw if the message caller’s account balance does not have enough tokens to spend.
+3. Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+4. The `transfer` function should return a boolean value indicating success or failure.
+
+Now, let's analyze the provided code:
+
+```solidity
+function transfer(address _to, uint256 _value) public {
+    _transfer(msg.sender, _to, _value);
+}
+```
+
+The `transfer` function in the `TokenERC20` contract does not return a boolean value as required by the ERC-20 standard. It should return `true` upon successful completion of the transfer.
+
+```solidity
+function _transfer(address _from, address _to, uint _value) internal {
+    require(_to != 0x0); // Prevent transfer to 0x0 address. Use burn() instead
+    require(balanceOf[_from] >= _value); // Check if the sender has enough
+    require(balanceOf[_to] + _value > balanceOf[_to]); // Check for overflows
+    require(!frozenAccount[_from]); // Check if sender is frozen
+    require(!frozenAccount[_to]); // Check if recipient is frozen
+    balanceOf[_from] -= _value; // Subtract from the sender
+    balanceOf[_to] += _value; // Add the same to the recipient
+    Transfer(_from, _to, _value);
+}
+```
+
+The `_transfer` function is internal and is called by the public `transfer` function. It includes the necessary checks for the sender's balance and for overflows. It also checks if either the sender or the recipient is frozen, which is not part of the ERC-20 standard but is a custom feature of this particular token implementation.
+
+However, there are a few issues with the `_transfer` function:
+
+- The `Transfer` event is not correctly emitted. In Solidity, events are emitted using the `emit` keyword, which is missing in the provided code. The correct syntax should be `emit Transfer(_from, _to, _value);`.
+- The function does not return a boolean value. Since this is an internal function, it's not strictly necessary for it to return a value, but the public `transfer` function that calls it should handle the return value according to the ERC-20 standard.
+- The `require(_to != 0x0);` line prevents transfers to the `0x0` address, which is a good practice to prevent accidental loss of tokens. However, the ERC-20 standard does not explicitly forbid transfers to the `0x0` address. This is a design choice and not necessarily a violation of the standard.
+
+To comply with the ERC-20 standard, the `transfer` function should be modified to return a boolean value indicating success, and the `Transfer` event should be emitted correctly using the `emit` keyword. Here is a corrected version of the `transfer` function:
+
+```solidity
+function transfer(address _to, uint256 _value) public returns (bool success) {
+    _transfer(msg.sender, _to, _value);
+    return true;
+}
+```
+
+And the `_transfer` function should emit the event correctly:
+
+```solidity
+emit Transfer(_from, _to, _value);
+```
+
+In conclusion, the provided code does not fully comply with the ERC-20 standard due to the missing return value in the `transfer` function and the incorrect syntax for emitting the `Transfer` event. These issues should be addressed to ensure full compliance with the ERC-20 standard.

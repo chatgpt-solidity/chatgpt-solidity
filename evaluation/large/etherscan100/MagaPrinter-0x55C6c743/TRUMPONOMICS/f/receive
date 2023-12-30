@@ -1,0 +1,4 @@
+contract TRUMPONOMICS is IERC20, Auth {
+
+    receive() external payable { }
+}

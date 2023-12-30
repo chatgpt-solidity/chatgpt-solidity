@@ -1,0 +1,5 @@
+NO
+
+The `TransferSingle` event is emitted with `from` as an argument, which is passed to the `airdrop` function. However, the rule states that the `_from` argument must be the address of the holder whose balance is decreased. In the given function, there is no check to ensure that the `from` address is indeed the holder of the tokens, nor is there any logic to decrease the balance of the `from` address. The function simply emits the event with the provided `from` address, which could be any address and does not necessarily reflect the actual balance change.
+
+To comply with the rule, the contract should have logic to verify that the `from` address is the current holder of the tokens and that their balance is being decreased as a result of the airdrop. This would typically involve updating the internal balance mapping of the ERC1155 contract and ensuring that the `from` address has enough tokens to cover the airdrop. Since this logic is not present in the provided function, the rule is not followed.

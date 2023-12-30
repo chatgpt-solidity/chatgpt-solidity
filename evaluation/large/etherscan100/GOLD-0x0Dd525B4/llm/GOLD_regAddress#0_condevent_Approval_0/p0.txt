@@ -1,0 +1,22 @@
+Given a solidity function regAddress and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract GOLD is IERC20, Push, Ownable {
+    uint256 private counting;
+    address[] private regAddresses;
+
+    function regAddress(address addr) public {
+        require(addr != address(0), "Invalid address");
+        regAddresses.push(addr);
+        counting++;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

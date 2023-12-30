@@ -1,0 +1,11 @@
+YES
+
+The `airdrop` function in the `RecipientNFT` contract calls the `_mint` function for each recipient in the provided `recipients` array, provided that the recipient is not a contract (checked by `isContract(recipients[i])`). The `_mint` function, in turn, emits the `TransferSingle` event with the correct arguments, including the `_to` argument which is set to the recipient's address (`to`), thus increasing the recipient's balance by the `amount` specified (in this case, 1).
+
+The `TransferSingle` event is emitted within the `_mint` function with the following line:
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+Here, `operator` is the address performing the operation (the message sender), `address(0)` indicates that tokens are being minted (not transferred from another address), `to` is the recipient's address, `id` is the token ID, and `amount` is the number of tokens minted.
+
+This matches the rule that the `_to` argument must be the address of the recipient whose balance is increased.

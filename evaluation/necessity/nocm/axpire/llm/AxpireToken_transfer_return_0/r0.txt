@@ -1,0 +1,7 @@
+YES
+
+The `transfer` function in the `StandardToken` contract checks if the sender has enough balance and if the value to be transferred is greater than 0. If both conditions are met, it performs the transfer, emits a `Transfer` event, and returns `true`. If any of the conditions are not met, it returns `false`.
+
+The `AxpirePausableToken` contract's `transfer` function adds an additional condition by using the `whenNotPaused` modifier, which ensures that the transfer can only occur when the contract is not paused. If the contract is paused, the `require` statement in the `whenNotPaused` modifier will revert the transaction. If the contract is not paused, it calls the `transfer` function from the `StandardToken` contract using `super.transfer(_to, _value)` and returns the result.
+
+Both implementations comply with the ERC rule to return whether the transfer is successful.

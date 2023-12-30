@@ -1,0 +1,3 @@
+YES
+
+In the given Solidity code, if the message caller's account balance does not have enough tokens to spend, the `transferFrom` function will throw an error. This is because the `sub` function in the `DSMath` contract uses a `require` statement to ensure that the result of the subtraction is less than or equal to the original value. If the message caller does not have enough tokens, the subtraction `_balances[src] - wad` will result in a number that is not less than or equal to `_balances[src]`, causing the `require` statement to fail and the transaction to revert.

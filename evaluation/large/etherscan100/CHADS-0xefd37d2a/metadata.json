@@ -1,0 +1,114 @@
+{
+    "file": "evaluation/etherscan100/CHADS-0xefd37d2a.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "name() returns(string)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/decreaseAllowance_address_uint256",
+                "constructor() returns()": ".temp/etherscan100/CHADS-0xefd37d2a/CHADS/f/constructor"
+            },
+            "func2attrs": {
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "20",
+                "20metadata"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "CHADS"
+        }
+    ]
+}

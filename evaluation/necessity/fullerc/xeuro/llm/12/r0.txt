@@ -1,0 +1,21 @@
+The provided Solidity function `addToCanBurn` and the related parts from the smart contract `xEuro` do not directly violate the ERC-20 standard as described in the provided ERC excerpt. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable token transfers, approvals, and other related functionalities.
+
+The `addToCanBurn` function in the `xEuro` contract appears to be an additional administrative function that is not part of the ERC-20 standard. It allows addresses with the `isAdmin` role to grant other addresses the permission to burn tokens. This is a custom feature that is not covered by the ERC-20 standard.
+
+The ERC-20 standard includes the following functions and events:
+
+- `name()`
+- `symbol()`
+- `decimals()`
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `Transfer` event
+- `Approval` event
+
+The `addToCanBurn` function does not interfere with any of these functions or events. It is an additional feature that the contract developers have included for their specific use case. As long as the contract also implements the required ERC-20 functions and events, it can be considered ERC-20 compliant, even with additional functions like `addToCanBurn`.
+
+However, it is important to note that adding custom administrative functions like `addToCanBurn` can introduce additional security considerations and should be carefully reviewed and audited to ensure they do not introduce vulnerabilities or unexpected behaviors that could affect the standard ERC-20 functionalities or the overall security of the contract.

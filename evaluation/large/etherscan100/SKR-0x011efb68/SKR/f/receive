@@ -1,0 +1,5 @@
+contract SKR is Context, IERC20, Ownable {
+
+    //to recieve ETH from uniswapV2Router when swaping
+    receive() external payable {}
+}

@@ -1,0 +1,9 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct arguments according to the rule provided. The `_id` argument is indeed the token type being transferred, which is the `id` parameter of the `_mint` function. The `TransferSingle` event is emitted after updating the balance with the line:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This line correctly uses the `id` variable as the `_id` argument for the `TransferSingle` event, which represents the token type being minted and transferred to the `to` address. The `operator` is the one performing the mint operation, `_from` is the zero address (since tokens are being minted), `_to` is the recipient of the minted tokens, `_id` is the token type (`id`), and `_value` is the amount of tokens being minted (`amount`).

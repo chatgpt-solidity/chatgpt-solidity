@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract with the correct arguments according to the given rule. The `_operator` argument is set to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`. Since `msg.sender` is the entity that initiated the transaction, this satisfies the rule that the `_operator` must be the address approved to make the transfer.
+
+The `mint` function in the `InVarNFT` contract, which is a child of `ERC1155`, calls `_mint` and is restricted to the contract owner by the `onlyOwner` modifier. This ensures that only the owner can mint new tokens, and when they do, the `TransferSingle` event is emitted with the owner's address as the `_operator`. This is compliant with the rule that the `_operator` should be `msg.sender`, as the owner is the one sending the transaction in this case.

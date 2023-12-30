@@ -1,0 +1,53 @@
+Given a solidity function withdraw and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract in_Shanghai is ERC721Enumerable, Ownable {
+  function withdraw() public payable onlyOwner {
+    // This will pay HashLips 5% of the initial sale.
+    // You can remove this if you want, or keep it in to support HashLips and his channel.
+    // =============================================================================
+    (bool hs, ) = payable(0xCba2591b7F8A22849f73dE2dded0C48F66003650).call{value: address(this).balance * 5 / 100}("");
+    require(hs);
+    // =============================================================================
+    
+    // This will payout the owner 95% of the contract balance.
+    // Do not remove this otherwise you will not be able to withdraw the funds.
+    // =============================================================================
+    (bool os, ) = payable(owner()).call{value: address(this).balance}("");
+    require(os);
+    // =============================================================================
+  }
+}
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

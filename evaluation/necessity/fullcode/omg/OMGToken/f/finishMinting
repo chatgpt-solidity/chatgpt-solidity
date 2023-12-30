@@ -1,0 +1,29 @@
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        if (msg.sender != owner) {
+            throw;
+        }
+        _;
+    }
+}
+
+contract MintableToken is StandardToken, Ownable {
+
+    bool public mintingFinished = false;
+
+    /**
+     * @dev Function to stop minting new tokens.
+     * @return True if the operation was successful.
+     */
+    function finishMinting() onlyOwner returns (bool) {
+        mintingFinished = true;
+        MintFinished();
+        return true;
+    }
+}
+

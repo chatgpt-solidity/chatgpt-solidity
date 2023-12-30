@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function of the `ERC1155` contract, which is called by the `burn` function of the `ERC1155Burnable` contract. The `_burn` function is designed to destroy (`burn`) a certain `amount` of tokens of a specific `id` from the `from` address. The `TransferSingle` event is emitted with the `_value` argument set to the `amount` of tokens burned, which is the number of tokens the holder's balance is decreased by.
+
+The `_burn` function checks that the `from` address has at least the `amount` of tokens being burned and then decreases the balance by that `amount`. The `TransferSingle` event is then emitted with the `operator` as the `_operator`, the `from` address as the `_from`, the zero address (`address(0)`) as the `_to` (since the tokens are being burned and not transferred to another address), the `id` as the `_id`, and the `amount` as the `_value`. This matches the rule that the `_value` must be the number of tokens the holder's balance is decreased by, which in the case of burning, is not matched by an increase in the recipient's balance since the tokens are destroyed.

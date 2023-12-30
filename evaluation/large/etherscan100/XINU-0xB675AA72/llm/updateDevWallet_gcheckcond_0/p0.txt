@@ -1,0 +1,34 @@
+Given a solidity function updateDevWallet and the related parts from a smart contract.
+Whether the function updateDevWallet and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract XINU is Context, IERC20, Ownable {
+    address public devAddress = 0x170bc93cC417FEcF65488aAbffA8b7F8FA5f2E6e;
+    function updateDevWallet(address newDevWallet) external onlyOwner{
+        devAddress = newDevWallet;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

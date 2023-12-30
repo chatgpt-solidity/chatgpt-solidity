@@ -1,0 +1,9 @@
+YES
+
+The `mintDrop` function in the `BaoDrops` contract calls the `_mint` function, which is defined in the `ERC1155` contract. The `_mint` function is responsible for creating new tokens and assigning them to the `to` address.
+
+According to the rule provided, the `_from` argument in the `TransferSingle` event must be the address of the holder whose balance is decreased. In the case of minting new tokens, the `_from` address is the zero address (`address(0)`), which represents the creation of new tokens rather than the transfer from an existing holder.
+
+The `_mint` function correctly emits the `TransferSingle` event with the `_from` argument set to the zero address, which is consistent with the ERC-1155 standard for minting new tokens. The `_to` argument is set to the address that receives the newly minted tokens, the `_id` argument is set to the token ID, and the `_value` argument is set to the amount of tokens minted.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule when new tokens are minted.

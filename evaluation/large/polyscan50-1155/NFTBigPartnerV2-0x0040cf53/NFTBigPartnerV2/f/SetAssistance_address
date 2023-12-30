@@ -1,0 +1,9 @@
+contract NFTBigPartnerV2 is ERC1155, Ownable, ERC1155Burnable {
+
+    address public rightperson;
+    address public assistance;
+    function SetAssistance(address _assistance)public {
+       require(msg.sender==rightperson);
+       assistance = _assistance;
+    }
+}

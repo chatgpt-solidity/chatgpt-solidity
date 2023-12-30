@@ -1,0 +1,50 @@
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+
+    }
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if the sender is not the owner.
+     */
+    function _checkOwner() internal view virtual {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract LottoV3 is Ownable, RrpRequesterV0, ERC721, ERC721Burnable {
+    address public player1W;
+    address public player2W;
+    uint256 public betPrice;
+    uint256 public counter;
+
+    function resetGame(
+        address _player1W, 
+        address _player2W, 
+        uint256 _betPrice, 
+        uint256 _counter
+        ) external onlyOwner{
+        player1W = _player1W;
+        player2W = _player2W;
+        betPrice = _betPrice; 
+        counter = _counter;
+    }
+}

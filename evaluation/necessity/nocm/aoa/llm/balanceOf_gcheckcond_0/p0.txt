@@ -1,0 +1,19 @@
+Given a solidity function balanceOf and the related parts from a smart contract and a rule.
+Whether the function balanceOf and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract StandardToken is Token {
+
+    function balanceOf(
+        address _owner
+    ) public constant returns (uint256 balance) {
+        return balances[_owner];
+    }
+
+    mapping(address => uint256) balances;
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

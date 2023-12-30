@@ -1,0 +1,48 @@
+Given a solidity function setICOPrice and the related parts from a smart contract.
+Whether the function setICOPrice and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    uint256 public icoStandardPrice;
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Set ICO price including ICO standard price
+    function setICOPrice(
+        uint256 _tokenPerEther
+    ) external onlyOwnerOrAdmin returns (bool) {
+        require(_tokenPerEther > 0);
+
+        icoStandardPrice = _tokenPerEther;
+        emit SetICOPrice(icoStandardPrice);
+        return true;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred during the initial token distribution or crowdsale.
+"""

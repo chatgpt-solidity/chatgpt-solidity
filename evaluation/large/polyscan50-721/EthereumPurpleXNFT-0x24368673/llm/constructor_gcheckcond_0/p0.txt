@@ -1,0 +1,87 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether the function constructor and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    string private _name;
+
+    string private _symbol;
+    /**
+     * @dev Sets the values for {name} and {symbol}.
+     *
+     * All two of these values are immutable: they can only be set once during
+     * construction.
+     */
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+}
+
+abstract contract Pausable is Context {
+
+
+    bool private _paused;
+    /**
+     * @dev Initializes the contract in unpaused state.
+     */
+    constructor() {
+        _paused = false;
+    }
+}
+
+abstract contract AccessControl is Context, IAccessControl, ERC165 {
+
+    mapping(bytes32 => RoleData) private _roles;
+
+    bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
+
+    /**
+     * @dev Returns `true` if `account` has been granted `role`.
+     */
+    function hasRole(bytes32 role, address account) public view virtual override returns (bool) {
+        return _roles[role].members[account];
+    }
+
+    /**
+     * @dev Grants `role` to `account`.
+     *
+     * Internal function without access restriction.
+     *
+     * May emit a {RoleGranted} event.
+     */
+    function _grantRole(bytes32 role, address account) internal virtual {
+        if (!hasRole(role, account)) {
+            _roles[role].members[account] = true;
+            emit RoleGranted(role, account, _msgSender());
+        }
+    }
+}
+
+contract IndexxExchange is ERC20, ERC20Burnable, Pausable, AccessControl {
+
+    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    address public feeAdmin;
+    /**
+     * @dev Constructor assigning Token name, symbol and minter, pauser and admin role to msg.sender
+     */
+    constructor() ERC20("IndexxExchange", "INEX") {
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(PAUSER_ROLE, msg.sender);
+        _grantRole(MINTER_ROLE, msg.sender);
+        feeAdmin = msg.sender;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

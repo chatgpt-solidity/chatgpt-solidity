@@ -1,0 +1,8 @@
+contract BabyShark is IERC20 {
+    mapping(address => mapping (address => uint256)) allowed;
+
+    function allowance(address owner, address delegate) public override view returns (uint) {
+        return allowed[owner][delegate];
+    }
+}
+

@@ -1,0 +1,15 @@
+The ERC standard being referred to here is the ERC-20 standard, which is a common standard for creating fungible tokens on the Ethereum blockchain. The ERC-20 standard specifies a set of rules and functions that a token contract must implement to be considered ERC-20 compliant.
+
+One of the optional functions in the ERC-20 standard is `decimals`, which returns the number of decimals the token uses. This is used to determine the smallest unit of the token that can be transacted. For example, if a token has 18 decimals, it means that the token can be divided down to 0.000000000000000001 of a token.
+
+The ERC-20 standard does not specify what the value of `decimals` should be; it only requires that the function returns a `uint8` indicating the number of decimals. Therefore, the implementation of the `decimals` function in the provided Solidity code is compliant with the ERC-20 standard:
+
+```solidity
+function decimals() public view virtual override returns (uint8) {
+    return 6;
+}
+```
+
+This function correctly returns a `uint8` value, and the choice of `6` as the number of decimals is a design decision made by the creators of the PandAIToken. It does not violate the ERC-20 standard, as the standard allows for any number of decimals to be used.
+
+In conclusion, the `decimals` function and the related parts of the provided Solidity code do not violate the ERC-20 standard.

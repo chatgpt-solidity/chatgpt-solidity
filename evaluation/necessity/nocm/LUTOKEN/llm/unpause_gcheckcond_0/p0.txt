@@ -1,0 +1,41 @@
+Given a solidity function unpause and the related parts from a smart contract and a rule.
+Whether the function unpause and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract Pausable is Ownable {
+
+    bool public paused = false;
+
+    /**
+     * @dev Modifier to make a function callable only when the contract is paused.
+     */
+    modifier whenPaused() {
+        require(paused);
+        _;
+    }
+
+    /**
+     * @dev called by the owner to unpause, returns to normal state
+     */
+    function unpause() public onlyOwner whenPaused {
+        paused = false;
+        emit Unpause();
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

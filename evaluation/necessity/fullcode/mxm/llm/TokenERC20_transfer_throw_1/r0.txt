@@ -1,0 +1,5 @@
+NO
+
+The provided Solidity code for the `TokenERC20` contract does not contain any explicit checks that would prevent transfers of 0 values. The `_transfer` internal function, which is called by the `transfer` function, checks for the sender having enough balance and for overflows, but it does not explicitly check for the transfer value to be greater than 0.
+
+Therefore, if a transfer of 0 value is attempted, the function will not throw an error; it will execute normally and return successfully, assuming all other conditions (such as the sender not being blacklisted and having enough balance) are met.

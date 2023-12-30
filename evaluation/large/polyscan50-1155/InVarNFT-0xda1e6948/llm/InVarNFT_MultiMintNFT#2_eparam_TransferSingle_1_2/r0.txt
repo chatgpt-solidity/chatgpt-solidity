@@ -1,0 +1,7 @@
+YES
+
+The `MultiMintNFT` function in the `InVarNFT` contract calls the `_mint` function for each token ID in the range from `startId` to `endId`. The `_mint` function, as defined in the `ERC1155` contract, is responsible for creating tokens and assigning them to an account.
+
+The `_mint` function takes `account` as an argument, which is the address of the recipient whose balance is increased. This address is passed as the `_to` argument in the `TransferSingle` event emitted by the `_mint` function. The `_from` argument is the zero address, indicating that tokens are being minted rather than transferred from another account.
+
+The `TransferSingle` event is emitted with the correct `_to` argument as per the rule provided, which states that the `_to` argument must be the address of the recipient whose balance is increased. Therefore, the `TransferSingle` event is emitted according to the given rule.

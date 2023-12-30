@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function with the `operator` argument set to the result of `_msgSender()`, which is a function that returns `msg.sender`. This is consistent with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+In the `burn` function of the `InVarNFT` contract, it is required that `msg.sender` is the same as the `account` argument, ensuring that the caller of the `burn` function is the owner of the tokens being burned. This means that when `_burn` is called from `burn`, the `operator` (which is `msg.sender`) is indeed approved to make the transfer, satisfying the given rule.

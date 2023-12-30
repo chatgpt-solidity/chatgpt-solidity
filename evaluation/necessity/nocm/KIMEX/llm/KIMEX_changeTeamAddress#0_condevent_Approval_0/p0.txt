@@ -1,0 +1,34 @@
+Given a solidity function changeTeamAddress and the related parts from a smart contract.
+Whether the function changeTeamAddress and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    address public teamAddress;
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Modify team address to receive team tokens allocation
+    function changeTeamAddress(address _newAddress) external onlyOwnerOrAdmin {
+        require(_newAddress != address(0));
+        require(teamAddress != _newAddress);
+        teamAddress = _newAddress;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Rule:"""
+Emit Approval if any successful call to approve(address _spender, uint256 _value)
+"""

@@ -1,0 +1,7 @@
+contract AssetContract is ERC1155Tradable {
+
+    function supportsFactoryInterface() public pure returns (bool) {
+        return true;
+    }
+}
+

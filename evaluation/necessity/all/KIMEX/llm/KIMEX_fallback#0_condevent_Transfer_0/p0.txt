@@ -1,0 +1,129 @@
+Given a solidity function fallback and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+library SafeMath {
+    /**
+     * @dev Multiplies two numbers, throws on overflow.
+     */
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        if (a == 0) {
+            return 0;
+        }
+        uint256 c = a * b;
+        assert(c / a == b);
+        return c;
+
+    }
+    /**
+     * @dev Integer division of two numbers, truncating the quotient.
+     */
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        // assert(b > 0); // Solidity automatically throws when dividing by 0
+        uint256 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+        return c;
+
+    }
+    /**
+     * @dev Substracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract KIMEX is Owner {
+
+    mapping(address => uint256) internal balances;
+    address public walletAddress;
+    mapping(address => uint256) public totalInvestedAmountOf;
+    uint constant IN_SALE = 1; // In sales
+    uint constant END_SALE = 2; // End sales
+
+    uint256 public constant minInvestedAmount = 0.1 * 10 ** 18; // 0.1 ether for mininum ether contribution per transaction
+    uint saleState;
+    uint256 totalInvestedAmount;
+    bool public inActive;
+    bool public isSelling;
+    uint256 public icoStandardPrice;
+
+    uint256 public totalRemainingTokensForSales; // Total tokens remaining for sales
+
+    modifier isActive() {
+        require(inActive == false);
+        _;
+
+    }
+    modifier isInSale() {
+        require(isSelling == true);
+        _;
+    }
+
+    // Fallback function for token purchasing
+    function() external payable isActive isInSale {
+        uint state = getCurrentState();
+        require(state < END_SALE);
+        require(msg.value >= minInvestedAmount);
+
+        if (state <= IN_SALE) {
+            return issueTokensForICO(state);
+        }
+        revert();
+    }
+
+    // Get current sales state
+    function getCurrentState() public view returns (uint256) {
+        return saleState;
+    }
+
+    // Issue tokens to normal investors through ICO rounds
+    function issueTokensForICO(uint _state) private {
+        uint256 price = icoStandardPrice;
+        issueTokens(price, _state);
+    }
+
+    // Issue tokens to investors and transfer ether to wallet
+    function issueTokens(uint256 _price, uint _state) private {
+        require(walletAddress != address(0));
+
+        uint tokenAmount = msg.value.mul(_price).mul(10 ** 18).div(1 ether);
+        balances[msg.sender] = balances[msg.sender].add(tokenAmount);
+        totalInvestedAmountOf[msg.sender] = totalInvestedAmountOf[msg.sender]
+            .add(msg.value);
+        totalRemainingTokensForSales = totalRemainingTokensForSales.sub(
+            tokenAmount
+        );
+        totalInvestedAmount = totalInvestedAmount.add(msg.value);
+        walletAddress.transfer(msg.value);
+        emit IssueTokens(msg.sender, msg.value, tokenAmount, _state);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

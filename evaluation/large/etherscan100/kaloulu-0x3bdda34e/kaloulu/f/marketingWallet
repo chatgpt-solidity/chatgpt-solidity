@@ -1,0 +1,7 @@
+contract kaloulu is IERC20, Auth {
+    address payable private _walletMarketing = payable(0xE7721Ce47beFB821Bf11Fb04f8F86b2F898D0A3a); 
+
+
+
+    function marketingWallet() external view returns (address) {        return _walletMarketing;    }
+}

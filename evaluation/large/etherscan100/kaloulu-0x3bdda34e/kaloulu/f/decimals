@@ -1,0 +1,4 @@
+contract kaloulu is IERC20, Auth {
+    uint8 private constant _decimals       = 9;
+    function decimals() external pure override returns (uint8) { return _decimals; }
+}

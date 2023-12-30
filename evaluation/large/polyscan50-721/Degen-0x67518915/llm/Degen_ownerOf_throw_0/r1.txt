@@ -1,0 +1,5 @@
+The function `ownerOf` in the provided Solidity code is designed to return the owner of a given `tokenId`. If the `tokenId` does not have an associated owner (i.e., it has not been minted or has been burned), the `_owners` mapping will return the zero address (`address(0)`).
+
+The `ownerOf` function includes a `require` statement that checks whether the returned owner address is the zero address. If it is, the `require` statement will fail, and the function will revert with the error message "ERC721: invalid token ID".
+
+Therefore, if you query the `ownerOf` function with a `tokenId` that is mapped to the zero address, the condition in the `require` statement will not be met, and the function will throw (revert the transaction). This is why the answer to whether the function will throw if the given condition exists (querying a zero address) is "YES".

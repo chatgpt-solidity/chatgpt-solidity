@@ -1,0 +1,3 @@
+YES
+
+The given Solidity interfaces contain the interface `decimals() returns(uint8)` as a public state variable. In Solidity, public state variables automatically have a getter function created by the compiler. The `decimals` state variable is declared as `uint8 public decimals;`, which means that the getter function for `decimals` will match the interface `decimals() returns(uint8)`.

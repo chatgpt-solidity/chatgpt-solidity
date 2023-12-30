@@ -1,0 +1,3 @@
+YES
+
+The `_burn` function in the `ERC1155` contract correctly emits the `TransferSingle` event with the `_from` argument being the address from which the tokens are burned. The `burn` function in the `ERC1155Burnable` contract calls `_burn`, passing the `account` as the `_from` argument, which is the address of the holder whose balance is decreased. This complies with the given rule.

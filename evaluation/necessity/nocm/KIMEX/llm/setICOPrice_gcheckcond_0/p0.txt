@@ -1,0 +1,34 @@
+Given a solidity function setICOPrice and the related parts from a smart contract and a rule.
+Whether the function setICOPrice and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    uint256 public icoStandardPrice;
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Set ICO price including ICO standard price
+    function setICOPrice(
+        uint256 _tokenPerEther
+    ) external onlyOwnerOrAdmin returns (bool) {
+        require(_tokenPerEther > 0);
+
+        icoStandardPrice = _tokenPerEther;
+        emit SetICOPrice(icoStandardPrice);
+        return true;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

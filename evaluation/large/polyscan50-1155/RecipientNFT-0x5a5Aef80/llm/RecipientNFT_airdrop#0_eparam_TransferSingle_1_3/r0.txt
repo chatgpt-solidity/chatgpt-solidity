@@ -1,0 +1,15 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called within the `airdrop` function of the `RecipientNFT` contract, which inherits from `ERC1155`.
+
+The `_mint` function takes the `to` address, the `id` of the token, the `amount` to be minted, and some `data`. It then calls `_beforeTokenTransfer`, updates the balances, emits the `TransferSingle` event, calls `_afterTokenTransfer`, and performs a safe transfer acceptance check.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred, which is the zero address in the case of minting.
+- `_to`: The address to which the tokens are minted.
+- `_id`: The token type being transferred, which is the `id` argument passed to the `_mint` function.
+- `_value`: The number of tokens being transferred, which is the `amount` argument passed to the `_mint` function.
+
+The rule states that the `_id` argument must be the token type being transferred, and in this case, it is. The `id` is passed to the `_mint` function and used in the `TransferSingle` event without modification, thus satisfying the rule.

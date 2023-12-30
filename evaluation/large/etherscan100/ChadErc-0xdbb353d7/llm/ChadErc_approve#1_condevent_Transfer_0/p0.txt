@@ -1,0 +1,36 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.7;
+contract ChadErc is Context, Ownable, IERC20 {
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    function approve(address spender, uint256 amount) public virtual override returns (bool) {
+        _allowances[_msgSender()][spender] = amount;
+        emit Approval(_msgSender(), spender, amount);
+        return true;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

@@ -1,0 +1,27 @@
+contract BITCOINSVGOLD is StandardToken {
+    address public fundsWallet;
+    /* Public variables of the token */
+
+    string public name;
+    uint256 public unitsOneEthCanBuy;
+    string public symbol;
+    uint8 public decimals;
+
+    //constructor function
+    function BITCOINSVGOLD() {
+        balances[msg.sender] = 21000000000000000000000000;
+        totalSupply = 21000000000000000000000000;
+        name = "BITCOIN SVGOLD";
+        decimals = 18;
+        symbol = "BSVG";
+        unitsOneEthCanBuy = 500;
+        fundsWallet = msg.sender;
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+    uint256 public totalSupply;
+}
+

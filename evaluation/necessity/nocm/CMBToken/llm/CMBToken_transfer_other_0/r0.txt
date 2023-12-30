@@ -1,0 +1,5 @@
+NO
+
+The given `transfer` function in the `CMBToken` contract does not violate the ERC rule that states "Transfers of 0 values MUST be treated as normal transfers." The function does not explicitly forbid transfers of 0 value; it only requires that the sender has a balance greater than or equal to the `_value` being transferred and that `_value` is greater than 0. However, the second part of the condition `_value > 0` is not in compliance with the ERC-20 standard, which states that transfers of 0 values should be treated as normal transfers. This means that the function should allow transfers of 0 value to succeed.
+
+Therefore, the correct answer is YES, the function does violate the ERC rule because it does not allow transfers of 0 value.

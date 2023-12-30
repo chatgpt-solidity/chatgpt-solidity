@@ -1,0 +1,35 @@
+Given a solidity function excludeFromMaxTransaction and the related parts from a smart contract.
+Whether the function excludeFromMaxTransaction and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract ERC20Token is ERC20, Ownable {
+    mapping(address => bool) public _isExcludedMaxTransactionAmount;
+
+    function excludeFromMaxTransaction(address updAds, bool isEx)
+        public
+        onlyOwner
+    {
+        _isExcludedMaxTransactionAmount[updAds] = isEx;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

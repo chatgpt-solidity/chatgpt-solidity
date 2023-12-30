@@ -1,0 +1,3 @@
+NO
+
+The `TransferBatch` event is emitted with the `origin` as the `_from` argument, which is derived from the `_origin(_ids[0])` call. The `origin` is expected to be the creator of the token, as per the `_origin` function implementation. However, the rule states that the `_from` argument must be the address of the holder whose balance is decreased. In the context of minting new tokens, the `_from` address should be the zero address (0x000...000) to indicate that tokens are being created rather than transferred from an existing holder. The code does not check if the `origin` is indeed the zero address before emitting the event, which means it does not strictly follow the given rule.

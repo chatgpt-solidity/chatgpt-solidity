@@ -1,0 +1,7 @@
+YES
+
+The `safeMultiMintBatch` function in the `W3Tour1155` contract calls the `_safeMint` function for each id in the `_ids` array. The `_safeMint` function, in turn, calls the `_mint` function from the `ERC1155` contract.
+
+In the `_mint` function, the `operator` is set to `_msgSender()`, which is the `msg.sender` of the transaction (the account that initiated the transaction). This is in line with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer and should be `msg.sender`.
+
+The `TransferSingle` event is then emitted with the `operator` as the `_operator` argument, which satisfies the given rule. The event is emitted within the `_mint` function, which is called by `_safeMint`, and `_safeMint` is called within the loop of the `safeMultiMintBatch` function for each token id and quantity pair.

@@ -1,0 +1,7 @@
+YES
+
+The `transferFrom` function in the provided Solidity code uses the `SafeMath` library for subtraction, which includes a check that prevents underflow. If the `amount` to transfer is 0, the subtraction `_balances[sender].sub(amount, "ERC20: transfer amount exceeds balance")` will not underflow because subtracting 0 from any balance (including a balance of 0) will not result in a negative number.
+
+Additionally, the `_approve` function that is called after the `_transfer` function will also not throw an error for a 0 value because it is simply setting the allowance mapping to the new amount, which can be 0.
+
+Therefore, transfers of 0 values will not throw an error in this contract.

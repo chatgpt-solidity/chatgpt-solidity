@@ -1,0 +1,9 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function with the correct arguments, including the `_to` argument which is the address of the recipient whose balance is increased. The event is emitted after the balance update and before the `_doSafeTransferAcceptanceCheck` function is called, which ensures that the recipient is capable of receiving the tokens (if it's a contract). The event signature matches the rule provided:
+
+```solidity
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+Here, `to` is the recipient's address, `id` is the token ID, and `amount` is the value of tokens to be transferred. The `from` and `to` addresses are never both zero as per the requirements in the comments, and the balance of `from` is checked to be sufficient before the transfer occurs.

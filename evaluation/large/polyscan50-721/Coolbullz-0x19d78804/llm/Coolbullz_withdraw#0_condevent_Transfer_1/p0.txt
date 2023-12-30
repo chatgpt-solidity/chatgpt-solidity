@@ -1,0 +1,26 @@
+Given a solidity function withdraw and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract Coolbullz is ERC721, ERC721URIStorage, Pausable, AccessControl {
+
+    //PAID MINT(AUTO-MINT) VARIABLES
+    mapping(address => bool) public has_paid;
+    mapping(address => uint256) public amount_paid;
+
+    function withdraw() external {
+        require(has_paid[msg.sender], "User has not yet paid");
+        has_paid[msg.sender] = false;
+        amount_paid[msg.sender] = 0;
+        bool success = payable(msg.sender).send(amount_paid[msg.sender]);
+        require(success, "Ether transfer failed.");
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is created with `owner` address as the owner.
+"""

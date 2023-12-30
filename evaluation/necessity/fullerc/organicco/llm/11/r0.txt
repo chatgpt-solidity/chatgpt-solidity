@@ -1,0 +1,24 @@
+The provided Solidity function interfaces are meant to be compared against the ERC-20 token standard, which is the ERC specified in the provided documentation. The ERC-20 standard outlines a common set of rules that Ethereum tokens must follow, allowing them to be shared, exchanged, or transferred to wallets or other smart contracts that also use the standard.
+
+Let's compare the provided function interfaces with the ERC-20 standard:
+
+1. `name() returns(string)` - Optional in ERC-20, matches the standard.
+2. `symbol() returns(string)` - Optional in ERC-20, matches the standard.
+3. `decimals() returns(uint8)` - Optional in ERC-20, matches the standard.
+4. `totalSupply() returns(uint256)` - Required in ERC-20, matches the standard.
+5. `Organicco() returns()` - Not part of ERC-20, custom function.
+6. `balanceOf(address) returns(uint256)` - Required in ERC-20, matches the standard.
+7. `transfer(address,uint256) returns(bool)` - Required in ERC-20, matches the standard.
+8. `transfer(address,uint256,bytes) returns(bool)` - Not part of ERC-20, this is an overloaded version of the `transfer` function with an additional `bytes` parameter, which is not standard.
+9. `transferFrom(address,address,uint256) returns(bool)` - Required in ERC-20, matches the standard.
+10. `approve(address,uint256) returns(bool)` - Required in ERC-20, matches the standard.
+11. `allowance(address,address) returns(uint256)` - Required in ERC-20, matches the standard.
+12. `PARTNER_SALES() returns(address)` - Not part of ERC-20, custom function.
+13. `PRESALES() returns(address)` - Not part of ERC-20, custom function.
+14. `ICO() returns(address)` - Not part of ERC-20, custom function.
+15. `FOUNDING_TEAM() returns(address)` - Not part of ERC-20, custom function.
+16. `BONUS() returns(address)` - Not part of ERC-20, custom function.
+
+Based on the comparison, the provided list of functions includes all the required ERC-20 functions, but it also includes several additional functions that are not part of the ERC-20 standard. The presence of additional functions does not necessarily mean the token violates the ERC-20 standard, as the standard does not forbid additional functionality. However, the overloaded `transfer` function with the `bytes` parameter is not standard and could potentially cause issues with contracts or services expecting strict adherence to the ERC-20 interface.
+
+In conclusion, while the token contract includes all the necessary ERC-20 functions, it also contains non-standard functions and an overloaded `transfer` function, which are not part of the ERC-20 standard. This does not mean it violates the standard, but it does extend beyond it. Users and developers interacting with this token should be aware of these additional functions and the potential implications of the overloaded `transfer` function.

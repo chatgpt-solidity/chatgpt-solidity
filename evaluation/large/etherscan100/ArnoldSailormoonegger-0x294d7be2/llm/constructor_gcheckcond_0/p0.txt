@@ -1,0 +1,63 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether the function constructor and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract ERC20 is Context, IERC20 {
+    mapping(address => uint256) private _balances;
+
+
+    uint256 private _totalSupply;
+    string private _name;
+
+    string private _symbol;
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+
+    function decimals() public view virtual override returns (uint8) {
+        return 18;
+    }
+
+    function _mint(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: mint to the zero address");
+
+        _totalSupply += amount;
+        unchecked {
+            // Overflow not possible: balance + amount is at most totalSupply + amount, which is checked above.
+            _balances[account] += amount;
+        }
+        emit Transfer(address(0), account, amount);
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    constructor() {
+        _transferOwnershipForever(_msgSender());
+    }
+
+    function _transferOwnershipForever(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract ArnoldSailormoonegger is ERC20, Ownable {
+    constructor() ERC20("ArnoldSailormoonegger", "ARNIE") {
+        _mint(msg.sender, 1000000 * 10 ** decimals());
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

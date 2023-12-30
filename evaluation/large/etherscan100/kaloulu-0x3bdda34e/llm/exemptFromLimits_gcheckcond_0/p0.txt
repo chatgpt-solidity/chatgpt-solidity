@@ -1,0 +1,15 @@
+Given a solidity function exemptFromLimits and the related parts from a smart contract.
+Whether the function exemptFromLimits and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract kaloulu is IERC20, Auth {
+    mapping (address => bool) private _noLimits;
+    function exemptFromLimits(address wlt) external view returns (bool) {
+        return _noLimits[wlt];
+    } 
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

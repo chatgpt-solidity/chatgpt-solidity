@@ -1,0 +1,30 @@
+Given a solidity function mint and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 {
+    mapping(uint256 => mapping(address => uint256)) private balances;
+
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
+    }
+
+    function mint(
+        address account,
+        uint256 tokenId,
+        uint256 amount
+    ) external onlyOwner {
+        balances[tokenId][account] += amount;
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

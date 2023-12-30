@@ -1,0 +1,18 @@
+contract Ownable {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract BlackList is Ownable, BasicToken {
+
+    mapping (address => bool) public isBlackListed;
+    function addBlackList (address _evilUser) public onlyOwner {
+        isBlackListed[_evilUser] = true;
+        emit AddedBlackList(_evilUser);
+    }
+}
+

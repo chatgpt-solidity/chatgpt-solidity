@@ -1,0 +1,13 @@
+YES
+
+The `mint` function in the `USDC` contract calls the `_mint` function from the `ERC1155` contract. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`, which is the recipient's address. The function requires that `to` is not the zero address, which ensures that the tokens are being minted to a valid address.
+
+The `_mint` function then emits the `TransferSingle` event with the following parameters:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred, which is the zero address (`address(0)`) since tokens are being minted.
+- `_to`: The address of the recipient whose balance is increased, which is the `to` parameter passed to the `_mint` function.
+- `_id`: The token type that is being minted.
+- `_value`: The amount of tokens that are being minted.
+
+The `TransferSingle` event is emitted with the correct `_to` argument as per the rule provided, which is the address of the recipient whose balance is increased. Therefore, the event `TransferSingle` is emitted according to the given rule.

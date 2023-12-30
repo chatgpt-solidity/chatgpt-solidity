@@ -1,0 +1,24 @@
+Given a solidity function balanceOf and the related parts from a smart contract and an rule for its return value.
+Whether function balanceOf returns the _owner's balance of the token type requested? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+
+    // Mapping from token ID to account balances
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    /**
+     * @dev See {IERC1155-balanceOf}.
+     *
+     * Requirements:
+     *
+     * - `account` cannot be the zero address.
+     */
+    function balanceOf(address account, uint256 id) public view virtual override returns (uint256) {
+        require(account != address(0), "ERC1155: balance query for the zero address");
+        return _balances[id][account];
+    }
+}
+"""

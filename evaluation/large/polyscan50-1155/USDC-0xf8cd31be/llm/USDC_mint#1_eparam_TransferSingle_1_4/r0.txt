@@ -1,0 +1,13 @@
+YES
+
+The `_mint` function within the `USDC` contract, which inherits from `ERC1155`, is designed to mint a specific amount of tokens of a given token type `id` to the address `to`. The function is called with a hardcoded `amount` of `1`, which means exactly one token of the specified `id` is minted to the `to` address.
+
+The `TransferSingle` event is emitted within the `_mint` function with the following parameters:
+
+- `_operator`: The address performing the mint operation, obtained by calling `_msgSender()`.
+- `_from`: The zero address, indicating that tokens are being minted rather than transferred from another address.
+- `_to`: The recipient's address.
+- `_id`: The token type identifier.
+- `_value`: The number of tokens minted, which is `1` in this case.
+
+The rule states that the `_value` argument must match the number of tokens the holder's balance is increased by, which is indeed the case here. The recipient's balance is increased by `1` token of type `id`, and the `_value` in the `TransferSingle` event is also `1`. Therefore, the event `TransferSingle` is emitted according to the given rule.

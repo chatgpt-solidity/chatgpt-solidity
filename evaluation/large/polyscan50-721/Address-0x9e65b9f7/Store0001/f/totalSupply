@@ -1,0 +1,16 @@
+library Counters {
+
+    function current(Counter storage counter) internal view returns (uint256) {
+        return counter._value;
+    }
+}
+
+contract Store0001 is ERC721, Ownable {
+
+  Counters.Counter private supply;
+
+  function totalSupply() public view returns (uint256) {
+    return supply.current();
+  }
+}
+

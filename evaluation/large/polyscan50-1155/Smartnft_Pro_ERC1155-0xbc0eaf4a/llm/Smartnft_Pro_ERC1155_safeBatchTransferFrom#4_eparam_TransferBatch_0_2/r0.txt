@@ -1,0 +1,9 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function after the balances have been updated and before the `_afterTokenTransfer` hook is called. The event is emitted with the correct arguments, including the `_to` address which is the recipient whose balance is increased. The function ensures that the `_to` address is not the zero address and that the lengths of the `ids` and `amounts` arrays match, which are prerequisites for a valid batch transfer. The event signature matches the rule provided:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+This line is in compliance with the rule that the `_to` argument must be the address of the recipient whose balance is increased.

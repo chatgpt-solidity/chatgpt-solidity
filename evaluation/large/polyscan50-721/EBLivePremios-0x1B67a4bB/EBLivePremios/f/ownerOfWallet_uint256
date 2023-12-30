@@ -1,0 +1,13 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    function ownerOfWallet(
+        uint256 tokenId
+    ) public view virtual returns (address) {
+        address owner = _owners[tokenId];
+        return owner;
+    }
+}
+

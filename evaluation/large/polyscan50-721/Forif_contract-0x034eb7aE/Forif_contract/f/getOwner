@@ -1,0 +1,13 @@
+contract ManagersRepo{
+    Manager[] managers = new Manager[](0);
+
+    function getOwner()public view returns(address){
+        for(uint256 i = 0; i < managers.length; i++){
+            if(managers[i].isOwner()){
+                return managers[i].getManagerAddress();
+            }
+        }
+        return address(0);
+    }
+}
+

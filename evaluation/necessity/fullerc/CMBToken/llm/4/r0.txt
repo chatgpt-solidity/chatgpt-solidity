@@ -1,0 +1,47 @@
+The provided `transferFrom` function in the `CMBToken` contract has several issues that do not comply with the ERC20 standard as described in the given ERC documentation:
+
+1. Incorrect Balance Update:
+   The line `balances[_from] = balances[msg.sender].sub(_value);` incorrectly updates the balance of `_from` by subtracting `_value` from `balances[msg.sender]`. It should subtract `_value` from `balances[_from]` instead.
+
+2. Incorrect Allowance Update:
+   The line `allowed[_from][msg.sender] = balances[msg.sender].sub(_value);` incorrectly updates the allowance by subtracting `_value` from `balances[msg.sender]`. It should subtract `_value` from `allowed[_from][msg.sender]` instead.
+
+3. Missing Return Type Declaration:
+   The `transferFrom` function is missing the `public` visibility specifier and the `returns (bool success)` declaration in the function signature.
+
+4. Missing `require` for Zero Value Transfers:
+   According to the ERC20 standard, transfers of 0 values must be treated as normal transfers and fire the `Transfer` event. The `require` statement in the `transferFrom` function does not explicitly allow for zero-value transfers.
+
+5. Missing Event Declaration:
+   The `Transfer` event is called, but it is not declared in the provided code snippet. According to the ERC20 standard, the `Transfer` event must be declared and must trigger when tokens are transferred.
+
+6. Missing `SafeMath` Usage:
+   The `SafeMath` library is included, but its functions are not used correctly. The `.sub` and `.add` functions should be called with the `SafeMath` library's syntax, e.g., `balances[_to] = SafeMath.add(balances[_to], _value);`.
+
+7. Missing `require` for Transfer Success:
+   The ERC20 standard states that the function should throw if the transfer is not possible. The `require` statements should ensure that the transfer is valid before proceeding with state changes.
+
+8. Missing `emit` Keyword:
+   The `Transfer` event is called without the `emit` keyword, which is required in Solidity versions 0.4.21 and above.
+
+Here is a corrected version of the `transferFrom` function:
+
+```solidity
+function transferFrom(
+    address _from,
+    address _to,
+    uint256 _value
+) public returns (bool success) {
+    require(_value <= allowed[_from][msg.sender], "Allowance is not enough");
+    require(_value <= balances[_from], "Balance is not enough");
+    require(_to != address(0), "Transfer to the zero address");
+
+    balances[_from] = balances[_from].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+    emit Transfer(_from, _to, _value);
+    return true;
+}
+```
+
+In this corrected version, the `SafeMath` library's functions are used correctly, the `require` statements are in place to ensure the transfer is valid, and the `emit` keyword is used for the `Transfer` event. Additionally, the function signature now includes the `public` visibility specifier and the `returns (bool success)` declaration.

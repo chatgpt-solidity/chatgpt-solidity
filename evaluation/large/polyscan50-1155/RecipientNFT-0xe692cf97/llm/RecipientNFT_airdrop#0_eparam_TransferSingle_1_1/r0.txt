@@ -1,0 +1,30 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called within the `airdrop` function of the `RecipientNFT` contract, which inherits from `ERC1155`.
+
+The `_mint` function is designed to create (`mint`) new tokens and assign them to a recipient (`to`). In the context of minting new tokens, the `_from` address is conventionally the zero address (`address(0)`), because the tokens are being created rather than transferred from an existing holder. This is a standard practice in ERC-1155 token contracts to indicate minting.
+
+The `_mint` function emits the `TransferSingle` event with the `_from` argument set to the zero address, which is correct according to the rule provided. The `_to` argument is set to the address of the recipient receiving the newly minted tokens, and the `_id` and `_value` arguments represent the token type and the amount being minted, respectively.
+
+Here is the relevant part of the `_mint` function that emits the event:
+
+```solidity
+function _mint(address to, uint256 id, uint256 amount, bytes memory data) internal virtual {
+    require(to != address(0), "ERC1155: mint to the zero address");
+
+    address operator = _msgSender();
+    uint256[] memory ids = _asSingletonArray(id);
+    uint256[] memory amounts = _asSingletonArray(amount);
+
+    _beforeTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+    _balances[id][to] += amount;
+    emit TransferSingle(operator, address(0), to, id, amount);
+
+    _afterTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+    _doSafeTransferAcceptanceCheck(operator, address(0), to, id, amount, data);
+}
+```
+
+The `TransferSingle` event is emitted with `_from` set to `address(0)`, which is the correct representation of the token holder whose balance is decreased (in this case, it's the "minting" action, so the balance is increased from zero). Therefore, the event is emitted according to the given rule.

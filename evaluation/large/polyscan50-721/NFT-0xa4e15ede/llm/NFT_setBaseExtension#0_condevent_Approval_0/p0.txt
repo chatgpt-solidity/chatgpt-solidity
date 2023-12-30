@@ -1,0 +1,35 @@
+Given a solidity function setBaseExtension and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+abstract contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract NFT is ERC721Enumerable, Ownable {
+  string public baseExtension = ".json";
+
+  function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
+    baseExtension = _newBaseExtension;
+  }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is changed or reaffirmed
+"""

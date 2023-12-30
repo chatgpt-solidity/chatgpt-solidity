@@ -1,0 +1,21 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract CheeseCakeERC is IERC20 {
+
+    uint256 public constant totalSupply = 420690000 * 10 ** decimals;
+    mapping(address => uint256) public balanceOf;
+
+    constructor() {
+        balanceOf[msg.sender] = totalSupply;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

@@ -1,0 +1,11 @@
+YES
+
+The `mintErc20` function in the provided Solidity code is responsible for minting new tokens of a given `tokenId` and `amount`. When a new token is minted, the `_from` address should be the zero address (0x0), which represents the creation of new tokens rather than a transfer from an existing holder.
+
+In the `_mint` function within the `ERC1155` contract, we can see that the `_from` parameter is set to the zero address when emitting the `TransferSingle` event:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This is consistent with the ERC-1155 standard for minting new tokens, where the `_from` address is zero to indicate that tokens are being created and not transferred from an existing balance. Therefore, the `TransferSingle` event is emitted correctly according to the given rule when new tokens are minted.

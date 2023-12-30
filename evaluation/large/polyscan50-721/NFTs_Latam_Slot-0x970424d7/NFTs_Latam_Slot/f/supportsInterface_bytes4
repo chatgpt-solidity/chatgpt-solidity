@@ -1,0 +1,96 @@
+contract NFTs_Latam_Slot is
+    Initializable,
+    INFTlatamContract,
+    IOwnable,
+    IRoyalty,
+    IPrimarySale,
+    IPlatformFee,
+    ReentrancyGuardUpgradeable,
+    EIP712Upgradeable,
+    MulticallUpgradeable,
+    AccessControlEnumerableUpgradeable,
+    ERC721EnumerableUpgradeable,
+    ITokenERC721
+{
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(
+            AccessControlEnumerableUpgradeable,
+            ERC721EnumerableUpgradeable,
+            IERC165Upgradeable,
+            IERC165
+        )
+        returns (bool)
+    {
+        return
+            super.supportsInterface(interfaceId) ||
+            interfaceId == type(IERC2981Upgradeable).interfaceId;
+    }
+}
+
+abstract contract ERC165Upgradeable is Initializable, IERC165Upgradeable {
+
+    /**
+     * @dev See {IERC165-supportsInterface}.
+     */
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override
+        returns (bool)
+    {
+        return interfaceId == type(IERC165Upgradeable).interfaceId;
+    }
+}
+
+contract ERC721Upgradeable is
+    Initializable,
+    ContextUpgradeable,
+    ERC165Upgradeable,
+    IERC721Upgradeable,
+    IERC721MetadataUpgradeable
+{
+
+    /**
+     * @dev See {IERC165-supportsInterface}.
+     */
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(ERC165Upgradeable, IERC165Upgradeable)
+        returns (bool)
+    {
+        return
+            interfaceId == type(IERC721Upgradeable).interfaceId ||
+            interfaceId == type(IERC721MetadataUpgradeable).interfaceId ||
+            super.supportsInterface(interfaceId);
+    }
+}
+
+abstract contract ERC721EnumerableUpgradeable is
+    Initializable,
+    ERC721Upgradeable,
+    IERC721EnumerableUpgradeable
+{
+
+    /**
+     * @dev See {IERC165-supportsInterface}.
+     */
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(IERC165Upgradeable, ERC721Upgradeable)
+        returns (bool)
+    {
+        return
+            interfaceId == type(IERC721EnumerableUpgradeable).interfaceId ||
+            super.supportsInterface(interfaceId);
+    }
+}
+

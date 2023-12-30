@@ -1,0 +1,376 @@
+{
+    "file": "evaluation/polyscan50-721/StreamFightersBet-0x031b18fe.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.18",
+            "func2file": {
+                "approve(address,uint256) returns(bool)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/ERC20/f/approve_address_uint256",
+                "deposit() returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/ERC20/f/deposit",
+                "transfer(address,uint256) returns(bool)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/ERC20/f/transfer_address_uint256"
+            },
+            "func2attrs": {
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "deposit() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "balanceOf(address) returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [],
+            "name": "ERC20"
+        },
+        {
+            "solc_version": "0.8.18",
+            "func2file": {
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/supportsInterface_bytes4",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor() returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/constructor",
+                "createFight(uint256,string,string,string,uint256) returns(uint256)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/createFight_uint256_string_string_string_uint256",
+                "placeBetCRT(uint256,uint8,uint256) returns(uint256)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/placeBetCRT_uint256_uint8_uint256",
+                "startFight(uint256) returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/startFight_uint256",
+                "closeFight(uint256,uint8) returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/closeFight_uint256_uint8",
+                "liquidateAssetCRT(uint256) returns(bool)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/liquidateAssetCRT_uint256",
+                "toggleCircuitBreaker() returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/toggleCircuitBreaker",
+                "getFight(uint256) returns(StreamFightersBet.Fight)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/getFight_uint256",
+                "getSmartAsset(uint256) returns(StreamFightersBet.SmartAsset)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/getSmartAsset_uint256",
+                "getTotalBettors() returns(uint256)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/getTotalBettors",
+                "getPoolCRT() returns(uint256)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/getPoolCRT",
+                "isAdmin() returns(bool)": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/isAdmin",
+                "changeOwner(address) returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/changeOwner_address",
+                "receive() returns()": ".temp/polyscan50-721/StreamFightersBet-0x031b18fe/StreamFightersBet/f/receive"
+            },
+            "func2attrs": {
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "createFight(uint256,string,string,string,uint256) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "placeBetCRT(uint256,uint8,uint256) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "startFight(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "closeFight(uint256,uint8) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "liquidateAssetCRT(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "toggleCircuitBreaker() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getFight(uint256) returns(StreamFightersBet.Fight)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getSmartAsset(uint256) returns(StreamFightersBet.SmartAsset)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getTotalBettors() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getPoolCRT() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "isAdmin() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "changeOwner(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "CRT() returns(address)",
+                "hasBet(address) returns(bool)"
+            ],
+            "ercs": [
+                "165",
+                "721metadata",
+                "721errors",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "FightCreatedEvent",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "BetPlacedEvent",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "SmartAssetAwardedEvent",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "FightClosedEvent",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "FightResultSetEvent",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "StreamFightersBet.FightResult",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AssetLiquidatedEvent",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TokenURISet",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "string",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "StreamFightersBet"
+        }
+    ]
+}

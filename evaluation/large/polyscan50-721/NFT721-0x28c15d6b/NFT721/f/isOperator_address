@@ -1,0 +1,37 @@
+abstract contract AccessControl is Context {
+
+    mapping (bytes32 => RoleData) private _roles;
+
+    /**
+     * @dev Returns `true` if `account` has been granted `role`.
+     */
+    function hasRole(bytes32 role, address account) public view returns (bool) {
+        return _roles[role].members.contains(account);
+    }
+}
+
+abstract contract Operable is AccessControl {
+    bytes32 public constant OPERATOR_ROLE = keccak256("OPERATOR");
+
+    function isOperator(address account) public view virtual returns (bool) {
+        return hasRole(OPERATOR_ROLE, account);
+    }
+}
+
+library EnumerableSet {
+
+    /**
+     * @dev Returns true if the value is in the set. O(1).
+     */
+    function _contains(Set storage set, bytes32 value) private view returns (bool) {
+        return set._indexes[value] != 0;
+    }
+
+    /**
+     * @dev Returns true if the value is in the set. O(1).
+     */
+    function contains(AddressSet storage set, address value) internal view returns (bool) {
+        return _contains(set._inner, bytes32(uint256(uint160(value))));
+    }
+}
+

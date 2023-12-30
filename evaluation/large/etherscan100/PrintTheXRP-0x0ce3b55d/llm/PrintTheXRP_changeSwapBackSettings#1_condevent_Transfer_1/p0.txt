@@ -1,0 +1,33 @@
+Given a solidity function changeSwapBackSettings and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+    address public tokenOwner;
+    bool public swapAndLiquifyEnabled = true;
+    uint256 public swapThreshold;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function changeSwapBackSettings(bool enableSwapBack, uint256 newSwapBackLimit) external onlyOwner {
+        swapAndLiquifyEnabled  = enableSwapBack;
+        swapThreshold = newSwapBackLimit;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

@@ -1,0 +1,53 @@
+Given a solidity function setFee and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+contract FortuneCat is Context, IERC20, Ownable {
+    uint256 private _redisFeeOnBuy = 0;  
+    uint256 private _taxFeeOnBuy = 1;  
+    uint256 private _redisFeeOnSell = 0;  
+    uint256 private _taxFeeOnSell = 1;
+    function setFee(uint256 redisFeeOnBuy, uint256 redisFeeOnSell, uint256 taxFeeOnBuy, uint256 taxFeeOnSell) public onlyOwner {
+        require(redisFeeOnBuy >= 0 && redisFeeOnBuy <= 4, "Buy rewards must be between 0% and 4%");
+        require(taxFeeOnBuy >= 0 && taxFeeOnBuy <= 98, "Buy tax must be between 0% and 98%");
+        require(redisFeeOnSell >= 0 && redisFeeOnSell <= 4, "Sell rewards must be between 0% and 4%");
+        require(taxFeeOnSell >= 0 && taxFeeOnSell <= 98, "Sell tax must be between 0% and 98%");
+
+        _redisFeeOnBuy = redisFeeOnBuy;
+        _redisFeeOnSell = redisFeeOnSell;
+        _taxFeeOnBuy = taxFeeOnBuy;
+        _taxFeeOnSell = taxFeeOnSell;
+
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

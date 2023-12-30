@@ -1,0 +1,29 @@
+The provided Solidity function interfaces are meant to be compared against the ERC-20 token standard, which is the ERC specified in the provided text. The ERC-20 standard defines a common list of rules that an Ethereum token has to implement, giving developers the ability to program how new tokens will function within the Ethereum ecosystem.
+
+Let's compare the provided function interfaces with the ERC-20 standard:
+
+1. `transfer(address,uint256) returns(bool)` - **Compliant**
+2. `transferFrom(address,address,uint256) returns(bool)` - **Compliant**
+3. `balanceOf(address) returns(uint256)` - **Compliant**
+4. `approve(address,uint256) returns(bool)` - **Compliant**
+5. `allowance(address,address) returns(uint256)` - **Compliant**
+6. `totalSupply() returns(uint256)` - **Compliant**
+7. `BITCOINSVGOLD() returns()` - **Not part of ERC-20**
+8. `fallback() returns()` - **Not part of ERC-20** and also not compliant with the standard fallback function as it should not return anything.
+9. `approveAndCall(address,uint256,bytes) returns(bool)` - **Not part of ERC-20**
+10. `name() returns(string)` - **Compliant** (Optional)
+11. `decimals() returns(uint8)` - **Compliant** (Optional)
+12. `fundsWallet() returns(address)` - **Not part of ERC-20**
+13. `symbol() returns(string)` - **Compliant** (Optional)
+14. `unitsOneEthCanBuy() returns(uint256)` - **Not part of ERC-20**
+15. `version() returns(string)` - **Not part of ERC-20**
+16. `totalEthInWei() returns(uint256)` - **Not part of ERC-20**
+17. `totalSupply() returns(uint256)` - **Compliant** (Duplicate, already listed)
+
+The ERC-20 standard also requires two events to be emitted:
+- `event Transfer(address indexed _from, address indexed _to, uint256 _value)`
+- `event Approval(address indexed _owner, address indexed _spender, uint256 _value)`
+
+These events are not listed in the provided interfaces, but they are a crucial part of the ERC-20 standard. The contract must implement these events to be fully compliant.
+
+In summary, the provided list of function interfaces includes all the necessary functions for ERC-20 compliance, but it also includes additional functions that are not part of the standard. The presence of extra functions does not necessarily mean the token is not ERC-20 compliant, as long as the required functions and events are correctly implemented. However, the `fallback()` function is not compliant with the standard as it should not return anything. Additionally, the contract must implement the required `Transfer` and `Approval` events to be fully compliant with ERC-20.

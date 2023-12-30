@@ -1,0 +1,17 @@
+Given a solidity function isExcluded and the related parts from a smart contract and a rule.
+Whether the function isExcluded and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract SiberianHusky is Context, IERC20, Ownable {
+
+    mapping(address => bool) private _isExcluded;
+
+    function isExcluded(address account) public view returns (bool) {
+        return _isExcluded[account];
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

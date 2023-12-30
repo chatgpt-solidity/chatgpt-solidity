@@ -1,0 +1,21 @@
+The provided Solidity function `totalSupply` and the related parts from the smart contract do not appear to violate the ERC-20 token standard based on the information given. The ERC-20 standard specifies that the `totalSupply` function should return the total token supply, and the provided function does exactly that:
+
+```solidity
+function totalSupply() public view returns (uint256 supply) {
+    return tokenCount;
+}
+```
+
+This function is a public view function that returns the total number of tokens in circulation, which is stored in the `tokenCount` state variable. This is in line with the ERC-20 specification:
+
+```plaintext
+totalSupply
+Returns the total token supply.
+function totalSupply() public view returns (uint256)
+```
+
+The ERC-20 standard does not specify how the total supply should be stored or updated within the contract; it only requires that the `totalSupply` function returns the current total supply. As long as the `tokenCount` variable is correctly maintained throughout the contract (e.g., updated when tokens are minted or burned), the `totalSupply` function will comply with the ERC-20 standard.
+
+It's important to note that the rest of the contract would need to be reviewed to ensure full compliance with the ERC-20 standard, including the implementation of other required functions and events such as `balanceOf`, `transfer`, `transferFrom`, `approve`, `allowance`, `Transfer`, and `Approval`. Additionally, the contract should handle edge cases and security considerations as outlined in the ERC-20 standard and best practices.
+
+Without the full contract code, we cannot determine whether the entire contract is ERC-20 compliant, but the `totalSupply` function itself does not violate the ERC-20 standard based on the information provided.

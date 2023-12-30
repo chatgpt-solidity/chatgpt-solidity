@@ -1,0 +1,59 @@
+Given a solidity function updateMaxWalletAmount and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.10;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract USdebtcoin is ERC20, Ownable {
+    uint256 public maxWallet;
+
+    function updateMaxWalletAmount(uint256 newNum) external onlyOwner {
+        require(
+            newNum >= ((totalSupply() * 5) / 1000) / 1e18,
+            "Cannot set maxWallet lower than 0.5%"
+        );
+        maxWallet = newNum * (10**18);
+    }
+}
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    uint256 private _totalSupply;
+
+    /**
+     * @dev See {IERC20-totalSupply}.
+     */
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

@@ -1,0 +1,28 @@
+The `balanceOf` function provided in the Solidity code snippet appears to be compliant with the ERC-20 token standard as described in the ERC documentation you provided. The ERC-20 standard specifies that the `balanceOf` function should:
+
+- Accept an address `_owner` as a parameter.
+- Return the balance of the `_owner` address.
+
+The Solidity code for the `balanceOf` function does exactly that:
+
+```solidity
+function balanceOf(address _owner) constant returns (uint256 balance) {
+    return balances[_owner];
+}
+```
+
+It takes an address `_owner` and returns the balance associated with that address from the `balances` mapping.
+
+However, there are a few points to consider for full compliance and best practices:
+
+1. The `constant` keyword is deprecated in newer versions of Solidity. Instead, you should use `view` or `pure` depending on whether the function reads state or computes a value without reading the state, respectively. In this case, `view` is appropriate because `balanceOf` reads from the contract's state.
+
+2. The ERC-20 standard specifies that `balanceOf` should be a `public view` function, which means it should not modify the contract's state and should be callable by external accounts and contracts.
+
+3. The `owned` and `IERC20` contracts/interfaces are not shown in the snippet, so it's assumed that `owned` is a contract that provides ownership functionality and `IERC20` is an interface that includes the ERC-20 standard functions. It's important to ensure that the `IERC20` interface is correctly defined and that the `Projecton` contract implements all required functions and events as per the ERC-20 standard.
+
+4. The ERC documentation mentions that the contract should handle false returns (bool success) for certain functions, but this is not relevant to the `balanceOf` function, as it returns a `uint256` and not a `bool`.
+
+5. The ERC-20 standard also requires two events, `Transfer` and `Approval`, to be emitted on successful transfers and approvals, respectively. These events are not shown in the provided code snippet, but they should be present in the full contract for full ERC-20 compliance.
+
+In conclusion, the provided `balanceOf` function does not violate the ERC-20 standard based on the information given. However, to ensure full compliance, the contract should be updated to use `public view` instead of `constant` for the `balanceOf` function, and the full contract should implement all required functions and events as specified by the ERC-20 standard.

@@ -1,0 +1,8 @@
+contract SilkToken is owned, TokenERC20 {
+    uint256 public buyPrice = 1000000000000000000; // Initialization with default value
+
+    function getSalesPrice() public constant returns (uint256) {
+        return buyPrice;
+    }
+}
+

@@ -1,0 +1,9 @@
+YES
+
+The `transferFrom` function in the provided code includes the following line:
+
+```solidity
+require(_value > 0);
+```
+
+This line requires that the `_value` (the amount to be transferred) must be greater than 0. According to the ERC rule provided, transfers of 0 values must be treated as normal transfers. However, the `require` statement in the `transferFrom` function will revert the transaction if the `_value` is 0, which violates the ERC rule that states transfers of 0 values must be allowed and treated as normal transfers.

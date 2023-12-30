@@ -1,0 +1,9 @@
+The function `getTaiAMT` in the provided Solidity code is a utility function that calculates the amount of tokens that would be received for a given amount of ether (`amtETH`) based on a predefined `buyPrice`. This function does not directly interact with token balances or perform any token transfers; it simply performs a calculation and returns the result.
+
+The ERC-20 standard, as described in the provided ERC excerpt, specifies a set of functions and events that a compliant token contract must implement. These include functions for transferring tokens, checking balances, and allowing tokens to be spent by third parties, as well as events that must be emitted on successful transfers and approvals.
+
+The `getTaiAMT` function does not violate the ERC-20 standard because it does not conflict with any of the required functions or behaviors specified by the standard. It is an additional function that is not part of the ERC-20 specification, and adding such functions is allowed as long as the core ERC-20 functionality is correctly implemented and not altered.
+
+However, it is important to note that the `getTaiAMT` function assumes that the `decimals` value is defined in the `TokenERC20` contract and uses it to adjust the calculated token amount. This is consistent with the ERC-20 standard, which allows for a `decimals` function to define the number of decimal places used by the token. The `decimals` value is used to determine how to display token amounts in a user-friendly way and is not part of the core transfer mechanics of the ERC-20 standard.
+
+In summary, the `getTaiAMT` function does not violate the ERC-20 standard, as it is an additional utility function that does not interfere with the standard's required token transfer mechanisms. However, it is essential that the rest of the `SilkToken` contract correctly implements all the required ERC-20 functions and events to be considered ERC-20 compliant.

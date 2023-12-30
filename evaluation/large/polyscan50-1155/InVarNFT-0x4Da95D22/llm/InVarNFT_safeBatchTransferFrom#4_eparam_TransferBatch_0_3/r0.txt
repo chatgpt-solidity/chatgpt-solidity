@@ -1,0 +1,11 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_ids` argument is indeed the list of tokens being transferred, and the event is emitted with the appropriate parameters: `_operator`, `_from`, `_to`, `_ids`, and `_values` (which corresponds to `amounts` in the function parameters).
+
+The relevant part of the code is:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+This line is called within the `_safeBatchTransferFrom` function after the balances have been updated to reflect the batch transfer. The `ids` array represents the list of token IDs being transferred, and the `amounts` array represents the corresponding amounts for each token ID. The `operator` is the address that initiated the transfer (obtained by `_msgSender()`), `from` is the address from which the tokens are being transferred, and `to` is the address to which the tokens are being transferred. This matches the rule provided for the `TransferBatch` event.

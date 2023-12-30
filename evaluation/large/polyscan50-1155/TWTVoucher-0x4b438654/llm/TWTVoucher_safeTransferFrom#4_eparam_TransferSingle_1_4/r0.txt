@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function, which is called by the `safeTransferFrom` function. The `_value` argument in the `TransferSingle` event corresponds to the `amount` parameter of the `_safeTransferFrom` function.
+
+The `_safeTransferFrom` function ensures that the `amount` of tokens to be transferred is available in the `from` address's balance by checking `require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");`. It then decreases the balance of the `from` address by `amount` and increases the balance of the `to` address by the same `amount`.
+
+The `TransferSingle` event is emitted with the `operator` (the address performing the transfer), `from` and `to` addresses, the `id` of the token, and the `amount` of tokens transferred, which satisfies the given rule that the `_value` argument must match the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by.

@@ -1,0 +1,26 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract simple is ERC20, Ownable {
+    address public lpPair;
+    mapping (address => bool) public _isExcludedMaxTransactionAmount;
+
+    function excludeFromMaxTransaction(address updAds, bool isEx) external onlyOwner {
+        if(!isEx){
+            require(updAds != lpPair, "Cannot remove uniswap pair from max txn");
+        }
+        _isExcludedMaxTransactionAmount[updAds] = isEx;
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+

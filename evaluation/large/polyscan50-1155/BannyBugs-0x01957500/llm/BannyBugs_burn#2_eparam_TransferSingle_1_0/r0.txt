@@ -1,0 +1,3 @@
+YES
+
+The `_burn` function within the `ERC1155Burnable` contract calls the `emit TransferSingle(operator, from, address(0), id, amount);` line, where `operator` is set to the result of `_msgSender()`, which is the Solidity global `msg.sender`. This means that the `_operator` argument in the `TransferSingle` event is indeed the address of an account/contract that is approved to make the transfer, as it should be according to the given rule.

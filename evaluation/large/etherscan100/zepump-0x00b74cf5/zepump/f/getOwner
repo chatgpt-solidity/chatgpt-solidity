@@ -1,0 +1,7 @@
+contract zepump is IERC20, tokenStaking, Ownable {
+    function getOwner() external view override returns (address) { return owner; }
+}
+abstract contract Ownable {
+    address internal owner;
+}
+

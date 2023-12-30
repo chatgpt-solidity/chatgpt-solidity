@@ -1,0 +1,267 @@
+Given a solidity function closeFight and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    ////////////////////////////////////////
+    //                                    //
+    //         STATE VARIABLES            //
+    //                                    //
+    ////////////////////////////////////////
+    // contract owner adress
+    address private owner;
+
+    // holds all created fights (key: idCounter)
+    mapping(uint256 => Fight) fights;
+
+    // holds all bets on a fight
+    // mapping(fightId => mapping(gameResult => smartAssetId[])) fightBets;
+    mapping(uint256 => mapping(FightResult => uint256[])) fightBets;
+
+    ////////////////////////////////////////
+    //                                    //
+    //              MODIFIERS             //
+    //                                    //      
+    ////////////////////////////////////////
+
+    /*
+    *  @notice  Restrict caller only owner
+    */
+    modifier onlyOwner() {
+        require(msg.sender == owner, "caller is not owner");
+        _;
+    }
+
+    /*
+    *  @notice  Ensure fight exists
+    */
+    modifier fightExists(uint256 _fightId){
+        require(fights[_fightId].exists, "on chain fight does not exist");
+        _;
+    }
+
+    /*
+    *  @notice  Ensure fight has started
+    */
+    modifier fightStarted(uint256 _fightId){
+        require(fights[_fightId].state == FightState.STARTED, "fight not started");
+        _;
+    }
+    modifier validateFightResult(uint8 _fightResult) {
+        require(FightResult(_fightResult) == FightResult.BOXER_A_WON || FightResult(_fightResult) == FightResult.BOXER_B_WON, "Invalid fight result");
+        _;
+    }
+
+
+    /*
+    *  @notice  Closes the fight and sets the result
+    *  @dev     Marks a fight as finished and sets the winning boxer. Invalidates losing bets.
+    *  @param   _fightId The ID of the fight to close
+    *  @param   _fightResult The result of the fight (winning boxer)
+    *  @return  success The status of the operation (true/false)
+    */
+    function closeFight(uint256 _fightId, uint8 _fightResult)
+        public 
+        onlyOwner
+        fightExists(_fightId) 
+        fightStarted(_fightId)
+        validateFightResult(_fightResult)
+        nonReentrant
+    {
+        fights[_fightId].state = FightState.FINISHED;
+        
+        FightResult fightResult = FightResult(_fightResult);
+        setFightResult(_fightId, fightResult);
+        
+        if (fightResult == FightResult.BOXER_A_WON) {
+            invalidateAssets(fightBets[_fightId][FightResult.BOXER_B_WON]);
+        } else if (fightResult == FightResult.BOXER_B_WON) {
+            invalidateAssets(fightBets[_fightId][FightResult.BOXER_A_WON]);
+        } else {
+            invalidateAssets(fightBets[_fightId][FightResult.BOXER_A_WON]);
+            invalidateAssets(fightBets[_fightId][FightResult.BOXER_B_WON]);
+        }
+        
+        
+        emit FightClosedEvent(msg.sender, _fightId, block.timestamp);
+    }
+    /*
+    *  @notice  Sets the result of a fight
+    *  @dev     Updates the fight with the final result (Boxer A won, Boxer B won)
+    *  @param   _fightId The ID of the fight
+    *  @param   _fightResult The final result of the fight
+    */
+    function setFightResult(uint256 _fightId, FightResult _fightResult) internal {
+        fights[_fightId].result = _fightResult;
+        emit FightResultSetEvent(_fightId, fights[_fightId].result, block.timestamp);
+    }
+    /*
+    *  @notice  Invalidates a list of smart assets (NFTs)
+    *  @dev     Burns the NFT tokens in the provided list
+    *  @param   assets An array containing the IDs of the NFT tokens to invalidate
+    */
+    function invalidateAssets(uint256[] memory assets) internal {
+        for (uint i = 0; i < assets.length; i++) {
+            invalidateAsset(assets[i]);
+        }
+    }
+
+    /*
+    *  @notice  Invalidates a single smart asset (NFT)
+    *  @dev     Burns the NFT token with the given ID
+    *  @param   _smartAssetId The ID of the NFT to invalidate
+    */
+    function invalidateAsset(uint256 _smartAssetId) internal {
+        _burn(_smartAssetId);
+    }
+}
+abstract contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Errors {
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    // Mapping owner address to token count
+
+    mapping(address => uint256) private _balances;
+    // Mapping from token ID to approved address
+    mapping(uint256 => address) private _tokenApprovals;
+
+    /**
+     * @dev See {IERC721-ownerOf}.
+     */
+    function ownerOf(uint256 tokenId) public view virtual returns (address) {
+        address owner = _ownerOf(tokenId);
+        if (owner == address(0)) {
+            revert ERC721NonexistentToken(tokenId);
+        }
+        return owner;
+    }
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+    }
+
+    /**
+     * @dev Destroys `tokenId`.
+     * The approval is cleared when the token is burned.
+     * This is an internal function that does not check if the sender is authorized to operate on the token.
+     *
+     * Requirements:
+     *
+     * - `tokenId` must exist.
+     *
+     * Emits a {Transfer} event.
+     */
+    function _burn(uint256 tokenId) internal virtual {
+        address owner = ownerOf(tokenId);
+
+        _beforeTokenTransfer(owner, address(0), tokenId, 1);
+
+        // Update ownership in case tokenId was transferred by `_beforeTokenTransfer` hook
+        owner = ownerOf(tokenId);
+
+        // Clear approvals
+        delete _tokenApprovals[tokenId];
+
+        // Decrease balance with checked arithmetic, because an `ownerOf` override may
+        // invalidate the assumption that `_balances[from] >= 1`.
+        _balances[owner] -= 1;
+
+        delete _owners[tokenId];
+
+        emit Transfer(owner, address(0), tokenId);
+
+        _afterTokenTransfer(owner, address(0), tokenId, 1);
+    }
+
+    /**
+     * @dev Hook that is called before any token transfer. This includes minting and burning. If {ERC721Consecutive} is
+     * used, the hook may be called as part of a consecutive (batch) mint, as indicated by `batchSize` greater than 1.
+     *
+     * Calling conditions:
+     *
+     * - When `from` and `to` are both non-zero, ``from``'s tokens will be transferred to `to`.
+     * - When `from` is zero, the tokens will be minted for `to`.
+     * - When `to` is zero, ``from``'s tokens will be burned.
+     * - `from` and `to` are never both zero.
+     * - `batchSize` is non-zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+
+    function _beforeTokenTransfer(address from, address to, uint256 firstTokenId, uint256 batchSize) internal virtual {}
+    /**
+     * @dev Hook that is called after any token transfer. This includes minting and burning. If {ERC721Consecutive} is
+     * used, the hook may be called as part of a consecutive (batch) mint, as indicated by `batchSize` greater than 1.
+     *
+     * Calling conditions:
+     *
+     * - When `from` and `to` are both non-zero, ``from``'s tokens were transferred to `to`.
+     * - When `from` is zero, the tokens were minted for `to`.
+     * - When `to` is zero, ``from``'s tokens were burned.
+     * - `from` and `to` are never both zero.
+     * - `batchSize` is non-zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+    function _afterTokenTransfer(address from, address to, uint256 firstTokenId, uint256 batchSize) internal virtual {}
+}
+
+abstract contract ReentrancyGuard {
+    // Booleans are more expensive than uint256 or any type that takes up a full
+    // word because each write operation emits an extra SLOAD to first read the
+    // slot's contents, replace the bits taken up by the boolean, and then write
+    // back. This is the compiler's defense against contract upgrades and
+    // pointer aliasing, and it cannot be disabled.
+
+    // The values being non-zero value makes deployment a bit more expensive,
+    // but in exchange the refund on every call to nonReentrant will be lower in
+    // amount. Since refunds are capped to a percentage of the total
+    // transaction's gas, it is best to keep them low in cases like this one, to
+    // increase the likelihood of the full refund coming into effect.
+    uint256 private constant NOT_ENTERED = 1;
+    uint256 private constant ENTERED = 2;
+
+    uint256 private _status;
+
+    /**
+     * @dev Prevents a contract from calling itself, directly or indirectly.
+     * Calling a `nonReentrant` function from another `nonReentrant`
+     * function is not supported. It is possible to prevent this from happening
+     * by making the `nonReentrant` function external, and making it call a
+     * `private` function that does the actual work.
+     */
+    modifier nonReentrant() {
+        _nonReentrantBefore();
+        _;
+        _nonReentrantAfter();
+
+    }
+    function _nonReentrantBefore() private {
+        // On the first call to nonReentrant, _status will be NOT_ENTERED
+        if (_status == ENTERED) {
+            revert ReentrancyGuardReentrantCall();
+        }
+
+        // Any calls to nonReentrant after this point will fail
+        _status = ENTERED;
+    }
+
+    function _nonReentrantAfter() private {
+        // By storing the original value once again, a refund is triggered (see
+        // https://eips.ethereum.org/EIPS/eip-2200)
+        _status = NOT_ENTERED;
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

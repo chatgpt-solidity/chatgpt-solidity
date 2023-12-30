@@ -1,0 +1,317 @@
+Given a solidity function batchMint and the related parts from a smart contract.
+Check whether the event TransferBatch is emitted according to the given rule? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract ReentrancyGuard {
+    uint256 private constant _NOT_ENTERED = 1;
+
+    uint256 private constant _ENTERED = 2;
+    uint256 private _status;
+
+    modifier nonReentrant() {
+        // On the first call to nonReentrant, _notEntered will be true
+        require(_status != _ENTERED, "ReentrancyGuard: reentrant call");
+
+        // Any calls to nonReentrant after this point will fail
+        _status = _ENTERED;
+
+        _;
+
+        // By storing the original value once again, a refund is triggered (see
+        // https://eips.ethereum.org/EIPS/eip-2200)
+        _status = _NOT_ENTERED;
+    }
+}
+
+contract AssetContract is ERC1155Tradable {
+
+    mapping(uint256 => string) private _tokenURI;
+
+    function _beforeMint(uint256 _id, uint256 _quantity)
+        internal
+        view
+        override
+    {
+        require(
+            _quantity <= _remainingSupply(_id),
+            "AssetContract#_beforeMint: QUANTITY_EXCEEDS_TOKEN_SUPPLY_CAP"
+        );
+    }
+
+    function _batchMint(
+        address _to,
+        uint256[] memory _ids,
+        uint256[] memory _quantities,
+        bytes memory _data
+    ) internal virtual override {
+        super._batchMint(_to, _ids, _quantities, _data);
+        if (_data.length > 1) {
+            for (uint256 i = 0; i < _ids.length; i++) {
+                _setURI(_ids[i], string(_data));
+            }
+        }
+    }
+
+    function _setURI(uint256 _id, string memory _uri) internal {
+        _tokenURI[_id] = _uri;
+        emit URI(_uri, _id);
+    }
+}
+
+contract ERC1155Tradable is
+    ContextMixin,
+    ERC1155,
+    NativeMetaTransaction,
+    Ownable,
+    Pausable
+{
+
+    address public proxyRegistryAddress;
+
+
+    mapping(uint256 => mapping(address => uint256)) private balances;
+    mapping(uint256 => uint256) private _supply;
+
+    function totalSupply(uint256 _id) public view returns (uint256) {
+        return _supply[_id];
+    }
+
+    function _batchMint(
+        address _to,
+        uint256[] memory _ids,
+        uint256[] memory _amounts,
+        bytes memory _data
+    ) internal virtual whenNotPaused {
+        require(
+            _ids.length == _amounts.length,
+            "ERC1155Tradable#batchMint: INVALID_ARRAYS_LENGTH"
+        );
+
+        uint256 nMint = _ids.length;
+
+        address origin = _origin(_ids[0]);
+
+        address operator = _msgSender();
+
+        _beforeTokenTransfer(operator, address(0), _to, _ids, _amounts, _data);
+
+        for (uint256 i = 0; i < nMint; i++) {
+            uint256 id = _ids[i];
+            uint256 amount = _amounts[i];
+            _beforeMint(id, amount);
+            require(
+                _origin(id) == origin,
+                "ERC1155Tradable#batchMint: MULTIPLE_ORIGINS_NOT_ALLOWED"
+            );
+            balances[id][_to] += amount;
+            _supply[id] += amount;
+        }
+
+        emit TransferBatch(operator, origin, _to, _ids, _amounts);
+
+        doSafeBatchTransferAcceptanceCheck(
+            operator,
+            origin,
+            _to,
+            _ids,
+            _amounts,
+            _data
+        );
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        virtual
+        returns (bool)
+    {
+        if (!proxyRegistryAddress.isContract()) {
+            return false;
+        }
+        ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
+        return address(proxyRegistry.proxies(_user)) == _address;
+    }
+
+    function doSafeBatchTransferAcceptanceCheck(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal {
+        if (to.isContract()) {
+            try
+                IERC1155Receiver(to).onERC1155BatchReceived(
+                    operator,
+                    from,
+                    ids,
+                    amounts,
+                    data
+                )
+            returns (bytes4 response) {
+                if (
+                    response !=
+                    IERC1155Receiver(to).onERC1155BatchReceived.selector
+                ) {
+                    revert("ERC1155: ERC1155Receiver rejected tokens");
+                }
+            } catch Error(string memory reason) {
+                revert(reason);
+            } catch {
+                revert("ERC1155: transfer to non ERC1155Receiver implementer");
+            }
+        }
+    }
+
+    function _msgSender() internal view override returns (address sender) {
+        return ContextMixin.msgSender();
+    }
+}
+
+contract AssetContractShared is AssetContract, ReentrancyGuard {
+
+    mapping(address => bool) public sharedProxyAddresses;
+
+    mapping(uint256 => address) internal _creatorOverride;
+
+    function batchMint(
+        address _to,
+        uint256[] memory _ids,
+        uint256[] memory _quantities,
+        bytes memory _data
+    ) public override nonReentrant {
+        for (uint256 i = 0; i < _ids.length; i++) {
+            require(
+                _isCreatorOrProxy(_ids[i], _msgSender()),
+                "AssetContractShared#_batchMint: ONLY_CREATOR_ALLOWED"
+            );
+        }
+        _batchMint(_to, _ids, _quantities, _data);
+    }
+
+    function creator(uint256 _id) public view returns (address) {
+        if (_creatorOverride[_id] != address(0)) {
+            return _creatorOverride[_id];
+        } else {
+            return _id.tokenCreator();
+        }
+    }
+
+    function maxSupply(uint256 _id) public pure returns (uint256) {
+        return _id.tokenMaxSupply();
+
+    }
+    function _origin(uint256 _id) internal pure override returns (address) {
+        return _id.tokenCreator();
+    }
+
+    function _remainingSupply(uint256 _id)
+        internal
+        view
+        override
+        returns (uint256)
+    {
+        return maxSupply(_id) - totalSupply(_id);
+
+    }
+    function _isCreatorOrProxy(uint256 _id, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        address creator_ = creator(_id);
+        return creator_ == _address || _isProxyForUser(creator_, _address);
+
+    }
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        if (sharedProxyAddresses[_address]) {
+            return true;
+        }
+        return super._isProxyForUser(_user, _address);
+    }
+}
+
+library TokenIdentifiers {
+    uint8 constant INDEX_BITS = 56;
+    uint8 constant SUPPLY_BITS = 40;
+
+    uint256 constant SUPPLY_MASK = (uint256(1) << SUPPLY_BITS) - 1;
+
+    function tokenMaxSupply(uint256 _id) internal pure returns (uint256) {
+        return _id & SUPPLY_MASK;
+    }
+
+    function tokenCreator(uint256 _id) internal pure returns (address) {
+        return address(uint160(_id >> (INDEX_BITS + SUPPLY_BITS)));
+    }
+}
+abstract contract Pausable is Context {
+
+    bool private _paused;
+
+    function paused() public view virtual returns (bool) {
+        return _paused;
+
+    }
+    modifier whenNotPaused() {
+        require(!paused(), "Pausable: paused");
+        _;
+    }
+}
+
+library Address {
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize, which returns 0 for contracts in
+        // construction, since the code is only stored at the end of the
+        // constructor execution.
+
+        uint256 size;
+        assembly {
+            size := extcodesize(account)
+        }
+        return size > 0;
+    }
+}
+
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {}
+}
+
+abstract contract ContextMixin {
+    function msgSender() internal view returns (address payable sender) {
+        if (msg.sender == address(this)) {
+            bytes memory array = msg.data;
+            uint256 index = msg.data.length;
+            assembly {
+                sender := and(
+                    mload(add(array, index)),
+                    0xffffffffffffffffffffffffffffffffffffffff
+                )
+            }
+        } else {
+            sender = payable(msg.sender);
+        }
+        return sender;
+    }
+}
+"""
+
+Rule:"""
+The `_from` argument MUST be the address of the holder whose balance is decreased.
+event TransferBatch(address indexed _operator, address indexed _from, address indexed _to, uint256[] _ids, uint256[] _values);
+"""

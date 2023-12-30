@@ -1,0 +1,29 @@
+Given a solidity function setAccount and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.22;
+contract JNTR is IST20, ERC20, SafeMath {
+    address public owner;
+
+    Account[] allowedAddress;
+    mapping(address => uint256) balances;
+    mapping(address => uint256) allowedIndex;
+
+    function setAccount(address _address) public returns (bool) {
+        require(msg.sender == owner);
+        require(allowedAddress[allowedIndex[_address]]._address != _address);
+        uint256 x = allowedAddress.length;
+        allowedIndex[_address] = x;
+        allowedAddress.push(Account({_address: _address, _active: true}));
+        balances[_address] = 0;
+        return true;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

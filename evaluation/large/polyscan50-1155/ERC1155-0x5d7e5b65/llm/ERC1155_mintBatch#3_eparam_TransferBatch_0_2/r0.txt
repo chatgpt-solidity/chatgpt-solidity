@@ -1,0 +1,3 @@
+YES
+
+The `mintBatch` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_to` argument in the `TransferBatch` event is set to the `to` parameter of the `mintBatch` function, which is the address of the recipient whose balance is increased with the specified `amounts` of the `itemsIds`. The event is emitted after the balances have been updated, ensuring that the recipient's balance is indeed increased before the event is emitted.

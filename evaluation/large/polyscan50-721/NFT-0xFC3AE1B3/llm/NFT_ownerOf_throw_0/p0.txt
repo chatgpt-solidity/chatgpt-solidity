@@ -1,0 +1,20 @@
+Given a solidity function ownerOf and the related parts from a smart contract.
+Whether the function ownerOf and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Function(and related parts) to audit:"""
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    mapping(uint256 => address) private _owners;
+
+    function ownerOf(uint256 tokenId) public view virtual override returns (address) {
+        address owner = _owners[tokenId];
+        require(owner != address(0), "ERC721: owner query for nonexistent token");
+        return owner;
+    }
+}
+"""
+
+Condition:"""
+Query zero address
+"""

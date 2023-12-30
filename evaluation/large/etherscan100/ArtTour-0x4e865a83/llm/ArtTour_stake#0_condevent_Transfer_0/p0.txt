@@ -1,0 +1,29 @@
+Given a solidity function stake and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    address public _fomoMofo;
+
+    function stake(uint256[] calldata tokenIds) external {
+        for (uint256 i = 0; i < tokenIds.length; ) {
+            IERC721(_fomoMofo).safeTransferFrom(
+                msg.sender,
+                address(this),
+                tokenIds[i]
+            );
+            unchecked {
+                i++;
+            }
+        }
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

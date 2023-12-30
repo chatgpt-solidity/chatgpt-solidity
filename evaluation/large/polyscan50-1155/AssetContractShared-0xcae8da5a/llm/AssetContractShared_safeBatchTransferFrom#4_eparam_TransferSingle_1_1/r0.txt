@@ -1,0 +1,28 @@
+NO
+
+The `safeBatchTransferFrom` function in the `AssetContract` contract calls `safeTransferFrom` for each pair of token ID and amount. However, the `safeTransferFrom` function in the `AssetContract` contract has been overridden to potentially mint new tokens if the `_from` address does not have enough balance of the token ID being transferred.
+
+Here's the relevant part of the overridden `safeTransferFrom` function:
+
+```solidity
+function safeTransferFrom(
+    address _from,
+    address _to,
+    uint256 _id,
+    uint256 _amount,
+    bytes memory _data
+) public override {
+    uint256 mintedBalance = super.balanceOf(_from, _id);
+    if (mintedBalance < _amount) {
+        // Only mint what _from doesn't already have
+        mint(_to, _id, _amount - mintedBalance, _data);
+        if (mintedBalance > 0) {
+            super.safeTransferFrom(_from, _to, _id, mintedBalance, _data);
+        }
+    } else {
+        super.safeTransferFrom(_from, _to, _id, _amount, _data);
+    }
+}
+```
+
+In the case where `_from` does not have enough balance, the contract will mint the difference directly to `_to`, and if `_from` has a non-zero balance, it will transfer that amount to `_to`. This means that the `TransferSingle` event could be emitted with a `_from` address that is not the actual holder of the tokens being transferred (since some of the tokens are minted and not transferred from `_from`), which violates the given rule.

@@ -1,0 +1,376 @@
+{
+    "file": "evaluation/etherscan100/MemeDev-0xb57ee3de.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.17",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/transferOwnership_address",
+                "name() returns(string)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/decreaseAllowance_address_uint256",
+                "constructor() returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/constructor",
+                "receive() returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/receive",
+                "enableTrading() returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/enableTrading",
+                "removeLimits() returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/removeLimits",
+                "disableTransferDelay() returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/disableTransferDelay",
+                "setEarlySellTax(bool) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/setEarlySellTax_bool",
+                "updateSwapTokensAtAmount(uint256) returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/updateSwapTokensAtAmount_uint256",
+                "updateMaxTxnAmount(uint256) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/updateMaxTxnAmount_uint256",
+                "updateMaxWalletAmount(uint256) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/updateMaxWalletAmount_uint256",
+                "excludeFromMaxTransaction(address,bool) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/excludeFromMaxTransaction_address_bool",
+                "updateSwapEnabled(bool) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/updateSwapEnabled_bool",
+                "updateBuyFees(uint256,uint256,uint256) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/updateBuyFees_uint256_uint256_uint256",
+                "updateSellFees(uint256,uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/updateSellFees_uint256_uint256_uint256_uint256_uint256",
+                "excludeFromFees(address,bool) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/excludeFromFees_address_bool",
+                "blacklistAccount(address,bool) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/blacklistAccount_address_bool",
+                "setAutomatedMarketMakerPair(address,bool) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/setAutomatedMarketMakerPair_address_bool",
+                "updateMarketingWallet(address) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/updateMarketingWallet_address",
+                "updateDevWallet(address) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/updateDevWallet_address",
+                "isExcludedFromFees(address) returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/isExcludedFromFees_address",
+                "setAutoLPBurnSettings(uint256,uint256,bool) returns()": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/setAutoLPBurnSettings_uint256_uint256_bool",
+                "manualBurnLiquidityPairTokens(uint256) returns(bool)": ".temp/etherscan100/MemeDev-0xb57ee3de/MemeDev/f/manualBurnLiquidityPairTokens_uint256"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "enableTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeLimits() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "disableTransferDelay() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setEarlySellTax(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSwapTokensAtAmount(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateMaxTxnAmount(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateMaxWalletAmount(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeFromMaxTransaction(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSwapEnabled(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateBuyFees(uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSellFees(uint256,uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeFromFees(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "blacklistAccount(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setAutomatedMarketMakerPair(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateMarketingWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateDevWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isExcludedFromFees(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setAutoLPBurnSettings(uint256,uint256,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualBurnLiquidityPairTokens(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "maxWallet() returns(uint256)",
+                "percentForLPBurn() returns(uint256)",
+                "limitsInEffect() returns(bool)",
+                "sellTotalFees() returns(uint256)",
+                "transferDelayEnabled() returns(bool)",
+                "swapEnabled() returns(bool)",
+                "deadAddress() returns(address)",
+                "_isExcludedMaxTransactionAmount(address) returns(bool)",
+                "tokensForLiquidity() returns(uint256)",
+                "uniswapV2Pair() returns(address)",
+                "lastLpBurnTime() returns(uint256)",
+                "enableEarlySellTax() returns(bool)",
+                "buyMarketingFee() returns(uint256)",
+                "marketingWallet() returns(address)",
+                "lastManualLpBurnTime() returns(uint256)",
+                "buyDevFee() returns(uint256)",
+                "buyLiquidityFee() returns(uint256)",
+                "swapTokensAtAmount() returns(uint256)",
+                "tradingActive() returns(bool)",
+                "maxTransactionAmount() returns(uint256)",
+                "tokensForDev() returns(uint256)",
+                "uniswapV2Router() returns(IUniswapV2Router02)",
+                "automatedMarketMakerPairs(address) returns(bool)",
+                "devWallet() returns(address)",
+                "buyTotalFees() returns(uint256)",
+                "tokensForMarketing() returns(uint256)",
+                "sellDevFee() returns(uint256)",
+                "sellLiquidityFee() returns(uint256)",
+                "sellMarketingFee() returns(uint256)",
+                "lpBurnFrequency() returns(uint256)",
+                "manualBurnFrequency() returns(uint256)",
+                "earlySellLiquidityFee() returns(uint256)",
+                "lpBurnEnabled() returns(bool)",
+                "earlySellMarketingFee() returns(uint256)"
+            ],
+            "ercs": [
+                "20",
+                "20metadata"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "UpdateUniswapV2Router",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ExcludeFromFees",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SetAutomatedMarketMakerPair",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "marketingWalletUpdated",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "devWalletUpdated",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapAndLiquify",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AutoNukeLP",
+                    "params": []
+                },
+                {
+                    "name": "ManualNukeLP",
+                    "params": []
+                },
+                {
+                    "name": "BoughtEarly",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "MemeDev"
+        }
+    ]
+}

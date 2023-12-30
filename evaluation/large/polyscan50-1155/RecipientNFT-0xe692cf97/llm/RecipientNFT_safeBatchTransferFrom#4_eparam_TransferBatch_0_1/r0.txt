@@ -1,0 +1,9 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_from` argument in the `TransferBatch` event is indeed the address of the holder whose balance is decreased. This is ensured by the following line of code within the `_safeBatchTransferFrom` function:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+Here, the `from` variable represents the address of the token holder from whom the tokens are being transferred, and it is passed as the `_from` argument in the `TransferBatch` event, satisfying the rule that "_The `_from` argument MUST be the address of the holder whose balance is decreased._"

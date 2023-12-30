@@ -1,0 +1,20 @@
+Given a solidity function balanceOf and the related parts from a smart contract and an rule for its return value.
+Whether function balanceOf returns the account balance of another account with address _owner? Reply in "YES" or "NO".
+
+<example>
+
+Function(and related parts) to audit:"""
+contract BasicToken is ERC20Basic {
+
+    mapping(address => uint) balances;
+
+    /**
+     * @dev Gets the balance of the specified address.
+     * @param _owner The address to query the the balance of.
+     * @return An uint representing the amount owned by the passed address.
+     */
+    function balanceOf(address _owner) constant returns (uint balance) {
+        return balances[_owner];
+    }
+}
+"""

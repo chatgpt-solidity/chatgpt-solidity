@@ -1,0 +1,10 @@
+YES
+
+The provided Solidity function `transfer` will not throw if transfers of 0 values are made. The function checks if the sender's balance is greater than or equal to the value to be transferred and if the recipient's balance plus the value is greater than or equal to the recipient's current balance. 
+
+When the transfer value `_value` is 0, the conditions:
+
+- `balances[msg.sender] >= _value` will be true because any balance is greater than or equal to 0.
+- `balances[_to] + _value >= balances[_to]` will also be true because adding 0 to the recipient's balance does not change it, so it is trivially greater than or equal to itself.
+
+Therefore, the function will execute the transfer, which in this case has no effect on the balances, and return true. It will not throw an exception due to the transfer of a 0 value.

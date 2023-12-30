@@ -1,0 +1,13 @@
+YES
+
+The `mintBatch` function in the provided Smartnft_Pro_ERC1155 contract correctly emits the `TransferBatch` event according to the given rule. The `_from` argument in the `TransferBatch` event is set to the zero address (`address(0)`), which is the correct value when tokens are being minted. In the context of ERC-1155, a mint operation is represented by a transfer from the zero address to the recipient's address, indicating the creation of new tokens.
+
+The relevant line in the `_mintBatch` function is:
+
+```solidity
+emit TransferBatch(operator, address(0), to, ids, amounts);
+```
+
+This line is executed after the new token IDs and amounts have been assigned to the recipient (`to`) and the `_balances` mapping has been updated. The `operator` is the address that initiated the transaction, which is typically the `msg.sender` in this context. The `to` is the recipient of the minted tokens, `ids` are the token IDs being minted, and `amounts` are the quantities of each token ID being minted.
+
+Since the `TransferBatch` event is emitted with `_from` set to the zero address, it complies with the rule that `_from` must be the address of the holder whose balance is decreased. In the case of minting, there is no holder from which the balance is decreased, so the zero address is used to represent the "creation" of tokens.

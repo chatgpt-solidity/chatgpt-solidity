@@ -1,0 +1,26 @@
+Given a solidity function allowance and the related parts from a smart contract.
+Whether the function allowance and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Organicco is
+    Token("ORC", "Organicco", 18, 120000000000000000000000000),
+    ERC20,
+    ERC223
+{
+
+    function allowance(
+        address _owner,
+        address _spender
+    ) public constant returns (uint) {
+        return _allowances[_owner][_spender];
+    }
+}
+
+contract Token {
+    mapping(address => mapping(address => uint)) internal _allowances;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

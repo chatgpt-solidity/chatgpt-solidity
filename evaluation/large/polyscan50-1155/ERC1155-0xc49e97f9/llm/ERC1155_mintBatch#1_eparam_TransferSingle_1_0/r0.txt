@@ -1,0 +1,3 @@
+YES
+
+The `mintBatch` function in the provided Solidity code emits the `TransferSingle` event for each item minted in the batch. The `_operator` argument in the `TransferSingle` event is set to `msg.sender`, which is the address of the account that called the `mintBatch` function. Since the `mintBatch` function is also guarded by the `onlyOwner` modifier, it ensures that only the owner of the contract can call this function. Therefore, `msg.sender` is indeed an approved account to make the transfer, satisfying the given rule.

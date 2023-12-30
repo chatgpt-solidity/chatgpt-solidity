@@ -1,0 +1,67 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+abstract contract Auth {
+
+    address internal owner;
+    constructor(address _owner) {
+        owner = _owner;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+
+    address private WETH;
+    address DEAD = 0x000000000000000000000000000000000000dEaD;
+    uint256 private _totalSupply = 100000000000 * (10 ** _decimals);
+
+    mapping(address => uint256) private _balances;
+    mapping(address => mapping(address => uint256)) private _allowances;
+    mapping (address => bool) public isFeeExempt;
+    mapping (address => bool) public isTxLimitExempt;
+    mapping (address => bool) public isDividendExempt;
+
+    IDEXRouter public router;
+    address public pair;
+    address public devWallet = 0x17aE675168475EFD02F8c7D6dF16eF48209d95b7;
+    MagaPrinter public magaPrinter;
+
+    constructor (
+        address _owner        
+    ) Auth(_owner) {
+        router = IDEXRouter(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+            
+        WETH = router.WETH();
+        
+        pair = IDEXFactory(router.factory()).createPair(WETH, address(this));
+        
+        _allowances[address(this)][address(router)] = type(uint256).max;
+
+        magaPrinter = new MagaPrinter();
+        
+        isFeeExempt[_owner] = true;
+        isFeeExempt[devWallet] = true;             
+
+        isDividendExempt[pair] = true;
+        isDividendExempt[address(this)] = true;
+        isDividendExempt[DEAD] = true;    
+
+        isTxLimitExempt[_owner] = true;
+        isTxLimitExempt[pair] = true;
+        isTxLimitExempt[DEAD] = true;    
+
+
+        _balances[_owner] = _totalSupply;
+    
+        emit Transfer(address(0), _owner, _totalSupply);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

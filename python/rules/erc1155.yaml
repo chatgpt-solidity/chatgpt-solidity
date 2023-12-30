@@ -1,0 +1,190 @@
+erc: 1155
+functions:
+  - name: balanceOf
+    arg_types:
+      - name: _owner
+        type: address
+      - name: _id
+        type: uint256
+    return_type: uint256
+
+  - name: balanceOfBatch
+    arg_types:
+      - name: _owners
+        type: address[]
+      - name: _ids
+        type: uint256[]
+    return_type: uint256[]
+
+  - name: setApprovalForAll
+    arg_types:
+      - name: _operator
+        type: address
+      - name: _approved
+        type: bool
+    return_type: ""
+
+  - name: isApprovedForAll
+    arg_types:
+      - name: _owner
+        type: address
+      - name: _operator
+        type: address
+    return_type: bool
+
+  - name: safeTransferFrom
+    arg_types:
+      - name: _from
+        type: address
+      - name: _to
+        type: address
+      - name: _id
+        type: uint256
+      - name: _value
+        type: uint256
+      - name: _data
+        type: bytes
+    return_type: ""
+
+  - name: safeBatchTransferFrom
+    arg_types:
+      - name: _from
+        type: address
+      - name: _to
+        type: address
+      - name: _ids
+        type: uint256[]
+      - name: _values
+        type: uint256[]
+      - name: _data
+        type: bytes
+    return_type: ""
+
+events:
+  - name: TransferSingle
+    params:
+      - name: _operator
+        type: address
+        indexed: true
+      - name: _from
+        type: address
+        indexed: true
+      - name: _to
+        type: address
+        indexed: true
+      - name: _id
+        type: uint256
+      - name: _value
+        type: uint256
+
+  - name: TransferBatch
+    params:
+      - name: _operator
+        type: address
+        indexed: true
+      - name: _from
+        type: address
+        indexed: true
+      - name: _to
+        type: address
+        indexed: true
+      - name: _ids
+        type: uint256[]
+      - name: _values
+        type: uint256[]
+
+  - name: ApprovalForAll
+    params:
+      - name: _owner
+        type: address
+        indexed: true
+      - name: _operator
+        type: address
+        indexed: true
+      - name: _approved
+        type: bool
+
+  - name: URI
+    params:
+      - name: _value
+        type: string
+      - name: _id
+        type: uint256
+        indexed: true
+
+
+
+functionRule:
+  balanceOf:
+    return:
+      - returns the _owner's balance of the token type requested
+  balanceOfBatch:
+    return:
+      - returns the _owner's balance of the token types requested (i.e. balance for each (owner, id) pair)
+  isApprovedForAll:
+    return:
+      - returns true if the operator is approved, false if not
+  safeTransferFrom:
+    throw:
+      - if: "`_to` is the zero address."
+      - if: balance of holder for token `_id` is lower than the `_value` sent.
+      - if: any other error.
+      - if: Caller is not approved to manage the tokens being transferred out of the `_from` account 
+    event:
+      TransferSingle:
+    call:
+      onERC1155Received:
+        - if: "`_to` is a smart contract (e.g. code size > 0)"
+    assign:
+      - Additional data with no specified format, MUST be sent unaltered in call to `onERC1155Received` on `_to` 
+
+  safeBatchTransferFrom:
+    throw:
+      - if: "`_to` is the zero address."
+      - if: length of `_ids` is not the same as length of `_values`.
+      - if: any of the balance(s) of the holder(s) for token(s) in `_ids` is lower than the respective amount(s) in `_values` sent to the recipient. 
+      - if: any other error.
+      - if: Caller is not approved to manage the tokens being transferred out of the `_from` account
+    call:
+      onERC1155Received:
+        - if: "`_to` is a smart contract (e.g. code size > 0)"
+    event:
+      TransferBatch:
+        or: 
+          - TransferSingle
+
+eventRule:
+  TransferSingle:
+    assign:
+    #   - The `_operator` argument MUST be the address of an account/contract that is approved to make the transfer (SHOULD be msg.sender)
+    #   - The `_from` argument MUST be the address of the holder whose balance is decreased
+    #   - The `_to` argument MUST be the address of the recipient whose balance is increased.
+    #   - The `_id` argument MUST be the token type being transferred.
+    #   - The `_value` argument MUST be the number of tokens the holder balance is decreased by and match what the recipient balance is increased by.
+      - if: minting/creating tokens
+        then: the `_from` argument MUST be set to `0x0` (i.e. zero address)
+      - if: burning/destroying tokens
+        then: the `_to` argument MUST be set to `0x0` (i.e. zero address)
+    conditions:
+      - if: tokens are transferred, including zero value transfers as well as minting or burning
+        orEvents: ["TransferBatch"]
+
+  TransferBatch:
+    assign:
+  #     - The `_operator` argument MUST be the address of an account/contract that is approved to make the transfer (SHOULD be msg.sender).
+  #     - The `_from` argument MUST be the address of the holder whose balance is decreased.
+  #     - The `_to` argument MUST be the address of the recipient whose balance is increased.
+  #     - The `_ids` argument MUST be the list of tokens being transferred.
+  #     - The `_values` argument MUST be the list of number of tokens (matching the list and order of tokens specified in _ids) the holder balance is decreased by and match what the recipient balance is increased by.
+      - if: minting/creating tokens
+        then: the `_from` argument MUST be set to `0x0` (i.e. zero address)
+      - if: burning/destroying tokens
+        then: the `_to` argument MUST be set to `0x0` (i.e. zero address)
+
+  ApprovalForAll:
+    conditions:
+      - approval for a second party/operator address to manage all tokens for an owner address is enabled or disabled (absence of an event assumes disabled).
+  
+  URI:
+    conditions:
+      - URI is updated for a token ID.

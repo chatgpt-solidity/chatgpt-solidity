@@ -1,0 +1,30 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.14;
+contract BabyShark is IERC20 {
+
+    string  public  name;
+    string  public  symbol;
+    uint8   public  decimals;
+    uint256 public  totalSupply_;
+
+    mapping(address => uint256) balances;
+
+
+    constructor()  {
+        name = "BabyShark";
+        symbol = "BBS";
+        decimals = 10;
+        totalSupply_ = 1000000000000;     // total tokens would equal (totalSupply_/10**decimals)=1000
+        balances[msg.sender] = totalSupply_;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

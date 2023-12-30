@@ -1,0 +1,13 @@
+YES
+
+The `mintBatch` function in the `Gweiders` contract calls the `_mintBatch` internal function of the `ERC1155` contract. The `_mintBatch` function is responsible for minting a batch of tokens and transferring them to the `to` address. The `to` address is the recipient whose balance is increased with the specified `ids` and `amounts`.
+
+The `TransferBatch` event is emitted within the `_mintBatch` function with the following parameters:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred, which is `address(0)` in the case of minting.
+- `_to`: The address of the recipient whose balance is increased, which is the `to` address passed to the `_mintBatch` function.
+- `_ids`: An array of token identifiers.
+- `_values`: An array of amounts of tokens being transferred.
+
+The rule states that the `_to` argument must be the address of the recipient whose balance is increased, and this is indeed the case in the provided code. The `to` address is used as the `_to` argument in the `TransferBatch` event, which complies with the rule. Therefore, the event `TransferBatch` is emitted according to the given rule.

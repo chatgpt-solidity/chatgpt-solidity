@@ -1,0 +1,334 @@
+{
+    "file": "evaluation/audited/KIMEX.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.21",
+            "func2file": {
+                "changeOwner(address) returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/changeOwner_address",
+                "KIMEX(address,address) returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/KIMEX_address_address",
+                "fallback() returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/fallback",
+                "loadFund() returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/loadFund",
+                "transfer(address,uint256) returns(bool)": "result-necessity/u-cm/KIMEX/KIMEX/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/u-cm/KIMEX/KIMEX/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/u-cm/KIMEX/KIMEX/f/approve_address_uint256",
+                "modifyWhiteList(address[],bool) returns(bool)": "result-necessity/u-cm/KIMEX/KIMEX/f/modifyWhiteList_address[]_bool",
+                "startICO() returns(bool)": "result-necessity/u-cm/KIMEX/KIMEX/f/startICO",
+                "endICO() returns(bool)": "result-necessity/u-cm/KIMEX/KIMEX/f/endICO",
+                "setICOPrice(uint256) returns(bool)": "result-necessity/u-cm/KIMEX/KIMEX/f/setICOPrice_uint256",
+                "activate() returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/activate",
+                "deActivate() returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/deActivate",
+                "enableTokenTransfer() returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/enableTokenTransfer",
+                "changeWallet(address) returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/changeWallet_address",
+                "changeAdminAddress(address) returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/changeAdminAddress_address",
+                "changeFounderAddress(address) returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/changeFounderAddress_address",
+                "changeTeamAddress(address) returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/changeTeamAddress_address",
+                "allocateTokensForFounder() returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/allocateTokensForFounder",
+                "allocateTokensForTeam() returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/allocateTokensForTeam",
+                "allocateReservedTokens(address,uint256) returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/allocateReservedTokens_address_uint256",
+                "allocateSalesTokens(address,uint256) returns()": "result-necessity/u-cm/KIMEX/KIMEX/f/allocateSalesTokens_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/u-cm/KIMEX/KIMEX/f/allowance_address_address",
+                "balanceOf(address) returns(uint256)": "result-necessity/u-cm/KIMEX/KIMEX/f/balanceOf_address",
+                "getCurrentState() returns(uint256)": "result-necessity/u-cm/KIMEX/KIMEX/f/getCurrentState",
+                "isSoftCapReached() returns(bool)": "result-necessity/u-cm/KIMEX/KIMEX/f/isSoftCapReached"
+            },
+            "func2attrs": {
+                "changeOwner(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "KIMEX(address,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "fallback() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "loadFund() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "modifyWhiteList(address[],bool) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "startICO() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "endICO() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setICOPrice(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "activate() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "deActivate() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "enableTokenTransfer() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeAdminAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeFounderAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeTeamAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allocateTokensForFounder() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allocateTokensForTeam() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allocateReservedTokens(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allocateSalesTokens(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getCurrentState() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "isSoftCapReached() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "minInvestedCap() returns(uint256)",
+                "teamAddress() returns(address)",
+                "minInvestedAmount() returns(uint256)",
+                "totalSupply() returns(uint256)",
+                "founderAllocatedTime() returns(uint256)",
+                "name() returns(string)",
+                "teamAllocation() returns(uint256)",
+                "salesAllocation() returns(uint256)",
+                "teamAllocatedTime() returns(uint256)",
+                "icoEndTime() returns(uint256)",
+                "inActive() returns(bool)",
+                "adminAddress() returns(address)",
+                "founderAllocation() returns(uint256)",
+                "totalInvestedAmountOf(address) returns(uint256)",
+                "totalLoadedRefund() returns(uint256)",
+                "whiteList(address) returns(bool)",
+                "walletAddress() returns(address)",
+                "icoStandardPrice() returns(uint256)",
+                "icoStartTime() returns(uint256)",
+                "decimals() returns(uint256)",
+                "isTransferable() returns(bool)",
+                "totalRemainingTokensForSales() returns(uint256)",
+                "isSelling() returns(bool)",
+                "reservedAllocation() returns(uint256)",
+                "totalReservedTokenAllocation() returns(uint256)",
+                "founderAddress() returns(address)",
+                "totalRefundedAmount() returns(uint256)",
+                "symbol() returns(string)",
+                "owner() returns(address)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ModifyWhiteList",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "StartICO",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "EndICO",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SetICOPrice",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "IssueTokens",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AllocateTokensForFounder",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AllocateTokensForTeam",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AllocateReservedTokens",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AllocateSalesTokens",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "KIMEX"
+        }
+    ]
+}

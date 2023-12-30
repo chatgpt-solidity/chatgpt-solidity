@@ -1,0 +1,175 @@
+{
+    "file": "evaluation/audited/silkroad.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.17",
+            "func2file": {
+                "transfer(address,uint256) returns()": "result-necessity/s-noos/silkroad/SilkToken/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-noos/silkroad/SilkToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-noos/silkroad/SilkToken/f/approve_address_uint256",
+                "approveAndCall(address,uint256,bytes) returns(bool)": "result-necessity/s-noos/silkroad/SilkToken/f/approveAndCall_address_uint256_bytes",
+                "burn(uint256) returns(bool)": "result-necessity/s-noos/silkroad/SilkToken/f/burn_uint256",
+                "burnFrom(address,uint256) returns(bool)": "result-necessity/s-noos/silkroad/SilkToken/f/burnFrom_address_uint256",
+                "transferOwnership(address) returns()": "result-necessity/s-noos/silkroad/SilkToken/f/transferOwnership_address",
+                "SilkToken(uint256,string,string) returns()": "result-necessity/s-noos/silkroad/SilkToken/f/SilkToken_uint256_string_string",
+                "mintToken(address,uint256) returns()": "result-necessity/s-noos/silkroad/SilkToken/f/mintToken_address_uint256",
+                "freezeAccount(address,bool) returns()": "result-necessity/s-noos/silkroad/SilkToken/f/freezeAccount_address_bool",
+                "setPrices(uint256,uint256) returns()": "result-necessity/s-noos/silkroad/SilkToken/f/setPrices_uint256_uint256",
+                "startPreSales(uint256) returns(uint256)": "result-necessity/s-noos/silkroad/SilkToken/f/startPreSales_uint256",
+                "stopPreSales() returns()": "result-necessity/s-noos/silkroad/SilkToken/f/stopPreSales",
+                "getTaiAMT(uint256) returns(uint256)": "result-necessity/s-noos/silkroad/SilkToken/f/getTaiAMT_uint256",
+                "getBalanceTAI() returns(uint256)": "result-necessity/s-noos/silkroad/SilkToken/f/getBalanceTAI",
+                "getSalesPrice() returns(uint256)": "result-necessity/s-noos/silkroad/SilkToken/f/getSalesPrice",
+                "getLeftPreSalesAMT() returns(uint256)": "result-necessity/s-noos/silkroad/SilkToken/f/getLeftPreSalesAMT",
+                "procPreSales() returns(uint256)": "result-necessity/s-noos/silkroad/SilkToken/f/procPreSales",
+                "procNormalSales() returns(uint256)": "result-necessity/s-noos/silkroad/SilkToken/f/procNormalSales",
+                "procNormalBuyBack(address) returns(uint256)": "result-necessity/s-noos/silkroad/SilkToken/f/procNormalBuyBack_address"
+            },
+            "func2attrs": {
+                "transfer(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approveAndCall(address,uint256,bytes) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnFrom(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SilkToken(uint256,string,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintToken(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "freezeAccount(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setPrices(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "startPreSales(uint256) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "stopPreSales() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getTaiAMT(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getBalanceTAI() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getSalesPrice() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getLeftPreSalesAMT() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "procPreSales() returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "procNormalSales() returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "procNormalBuyBack(address) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "balanceOf(address) returns(uint256)",
+                "owner() returns(address)",
+                "sellPrice() returns(uint256)",
+                "frozenAccount(address) returns(bool)",
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "limitAMT() returns(uint256)",
+                "symbol() returns(string)",
+                "allowance(address,address) returns(uint256)",
+                "decimals() returns(uint8)",
+                "buyPrice() returns(uint256)",
+                "isPreSales() returns(bool)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "FrozenFunds",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "SilkToken"
+        }
+    ]
+}

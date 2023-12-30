@@ -1,0 +1,79 @@
+Given a solidity function createTokens and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract SafeMath {
+    /* function assert(bool assertion) internal { */
+    /*   if (!assertion) { */
+    /*     throw; */
+    /*   } */
+    /* }      // assert no longer needed once solidity is on 0.4.10 */
+
+    function safeAdd(uint256 x, uint256 y) internal returns (uint256) {
+        uint256 z = x + y;
+        assert((z >= x) && (z >= y));
+        return z;
+    }
+
+    function safeMult(uint256 x, uint256 y) internal returns (uint256) {
+        uint256 z = x * y;
+        assert((x == 0) || (z / x == y));
+        return z;
+    }
+}
+
+contract BAToken is StandardToken, SafeMath {
+
+    // crowdsale parameters
+    bool public isFinalized; // switched to true in operational state
+    uint256 public fundingStartBlock;
+    uint256 public fundingEndBlock;
+    uint256 public constant tokenExchangeRate = 6400; // 6400 BAT tokens per 1 ETH
+    uint256 public constant tokenCreationCap =
+        1500 * (10 ** 6) * 10 ** decimals;
+
+    /// @dev Accepts ether and creates new BAT tokens.
+    function createTokens() external payable {
+        if (isFinalized) throw;
+        if (block.number < fundingStartBlock) throw;
+        if (block.number > fundingEndBlock) throw;
+        if (msg.value == 0) throw;
+
+        uint256 tokens = safeMult(msg.value, tokenExchangeRate); // check that we're not over totals
+        uint256 checkedSupply = safeAdd(totalSupply, tokens);
+
+        // return money if something goes wrong
+        if (tokenCreationCap < checkedSupply) throw; // odd fractions won't be found
+
+        totalSupply = checkedSupply;
+        balances[msg.sender] += tokens; // safeAdd not needed; bad semantics to use here
+        CreateBAT(msg.sender, tokens); // logs token creation
+    }
+}
+
+contract Token {
+    uint256 public totalSupply;
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

@@ -1,0 +1,29 @@
+Given a solidity function setUpgradeMaster and the related parts from a smart contract.
+Whether the function setUpgradeMaster and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.22;
+contract UpgradeableToken is StandardToken {
+
+    /** Contract / person who can set the upgrade path. This can be the same as team multisig wallet, as what it is with its default value. */
+    address public upgradeMaster;
+
+    /**
+     * Change the upgrade master.
+     *
+     * This allows us to set a new owner for the upgrade mechanism.
+     */
+    function setUpgradeMaster(address master) public {
+        require(master != address(0));
+        require(msg.sender == upgradeMaster);
+        upgradeMaster = master;
+    }
+}
+"""
+
+Rule:"""
+Emit Approval if any successful call to approve(address _spender, uint256 _value)
+"""

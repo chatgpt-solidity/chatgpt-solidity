@@ -1,0 +1,31 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function of the `ERC1155` contract, which is called by the `burn` function in the `ERC1155Burnable` contract. The `_burn` function is designed to destroy (`burn`) a certain amount (`amount`) of tokens of a specific type (`id`) from a given address (`from`).
+
+The `_burn` function checks that the `from` address is not the zero address, verifies that the `from` address has at least the `amount` of tokens to be burned, updates the balance, and then emits the `TransferSingle` event with the `_from` argument set to the `from` address, which is the address of the holder whose balance is decreased. This is in accordance with the given rule that the `_from` argument must be the address of the holder whose balance is decreased.
+
+Here is the relevant part of the `_burn` function:
+
+```solidity
+function _burn(address from, uint256 id, uint256 amount) internal virtual {
+    require(from != address(0), "ERC1155: burn from the zero address");
+
+    address operator = _msgSender();
+    uint256[] memory ids = _asSingletonArray(id);
+    uint256[] memory amounts = _asSingletonArray(amount);
+
+    _beforeTokenTransfer(operator, from, address(0), ids, amounts, "");
+
+    uint256 fromBalance = _balances[id][from];
+    require(fromBalance >= amount, "ERC1155: burn amount exceeds balance");
+    unchecked {
+        _balances[id][from] = fromBalance - amount;
+    }
+
+    emit TransferSingle(operator, from, address(0), id, amount);
+
+    _afterTokenTransfer(operator, from, address(0), ids, amounts, "");
+}
+```
+
+The `TransferSingle` event is emitted with the correct `_from` argument, satisfying the rule.

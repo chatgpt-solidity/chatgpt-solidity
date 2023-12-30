@@ -1,0 +1,4 @@
+contract ERC20Token is ERC20, Ownable {
+
+    receive() external payable {}
+}

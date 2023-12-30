@@ -1,0 +1,16 @@
+Given a solidity function checkPremissionList and the related parts from a smart contract.
+Whether the function checkPremissionList and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    mapping(address => bool) private premissionList;
+
+    function checkPremissionList(address _user) external view returns (bool) {
+        return premissionList[_user];
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

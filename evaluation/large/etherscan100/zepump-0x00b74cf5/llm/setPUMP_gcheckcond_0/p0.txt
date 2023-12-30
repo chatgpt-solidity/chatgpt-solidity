@@ -1,0 +1,23 @@
+Given a solidity function setPUMP and the related parts from a smart contract.
+Whether the function setPUMP and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract zepump is IERC20, tokenStaking, Ownable {
+    bool public PUMP = true;
+    uint256 public PUMPTrigger = 3;
+    uint256 public PUMPMinAmount = 1;
+
+    function setPUMP(bool enabled, uint256 trigger, uint256 minAmount) external onlyOwner {
+        PUMP = enabled; PUMPTrigger = trigger; PUMPMinAmount = minAmount;
+    }
+}
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

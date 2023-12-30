@@ -1,0 +1,27 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The event is emitted with the `_to` argument being the address of the recipient whose balance is increased, as required by the rule.
+
+Here is the relevant part of the code that confirms this:
+
+```solidity
+function _safeBatchTransferFrom(
+    address from,
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual {
+    // ... (other code for checks and balance updates)
+
+    address operator = _msgSender();
+
+    // ... (other code for balance transfer logic)
+
+    emit TransferBatch(operator, from, to, ids, amounts);
+
+    // ... (other code for post-transfer checks)
+}
+```
+
+The `emit TransferBatch(operator, from, to, ids, amounts);` line is where the event is emitted. The `to` variable is used as the `_to` argument in the event, which is the address of the recipient whose balance is increased by the batch transfer. This matches the rule provided.

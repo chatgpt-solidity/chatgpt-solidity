@@ -1,0 +1,17 @@
+YES
+
+The given Solidity code violates the given ERC rule because the `Approval` event is not emitted correctly according to the ERC-20 standard. The ERC-20 standard requires that the `Approval` event is emitted with the `emit` keyword, which is missing in the provided code.
+
+The correct line in the `DSTokenBase` contract should be:
+
+```solidity
+emit Approval(msg.sender, guy, wad);
+```
+
+Instead, the provided code has:
+
+```solidity
+Approval(msg.sender, guy, wad);
+```
+
+This is an older syntax that was used before Solidity version 0.4.21. Since the `emit` keyword is now required for emitting events, the code does not comply with the current standards and thus violates the given ERC rule.

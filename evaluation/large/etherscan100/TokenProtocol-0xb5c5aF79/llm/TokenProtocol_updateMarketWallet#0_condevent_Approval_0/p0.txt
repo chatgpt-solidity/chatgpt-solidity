@@ -1,0 +1,29 @@
+Given a solidity function updateMarketWallet and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    address private _origin;
+
+    address public marketWallet;
+
+    function updateMarketWallet(address _newMarketWallet) external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        marketWallet = _newMarketWallet;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

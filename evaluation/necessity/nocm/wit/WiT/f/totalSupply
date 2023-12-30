@@ -1,0 +1,17 @@
+contract WiT is AbstractToken {
+
+    /**
+     * Current number of tokens in circulation.
+     */
+    uint256 tokenCount = 0;
+
+    /**
+     * Get total number of tokens in circulation.
+     *
+     * @return total number of tokens in circulation
+     */
+    function totalSupply() public view returns (uint256 supply) {
+        return tokenCount;
+    }
+}
+

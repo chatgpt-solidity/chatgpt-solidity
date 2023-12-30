@@ -1,0 +1,7 @@
+contract poo is Context, IERC20, Ownable {
+    string private constant _symbol = unicode"똥코인2.0";
+
+    function symbol() public pure returns (string memory) {
+        return _symbol;
+    }
+}

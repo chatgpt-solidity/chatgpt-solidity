@@ -1,0 +1,7 @@
+YES
+
+The `safeMultiMintBatch` function in the `W3Tour1155` contract calls the `_safeMint` function for each id and quantity pair provided in the `_ids` and `_quantities` arrays. The `_safeMint` function, in turn, calls the `_mint` function from the `ERC1155` base contract.
+
+The `_mint` function is responsible for creating the tokens and assigning them to the `to` address. It also emits the `TransferSingle` event as required by the ERC1155 standard. The arguments passed to the `TransferSingle` event are `_operator`, `_from`, `_to`, `_id`, and `_amount`, where `_from` is the zero address (indicating minting), `_to` is the address receiving the tokens, `_id` is the token type being transferred, and `_amount` is the number of tokens being minted.
+
+The rule states that the `_id` argument must be the token type being transferred, and this is indeed the case in the `_mint` function. The `TransferSingle` event is emitted with the correct `_id` for each token type being minted, satisfying the given rule.

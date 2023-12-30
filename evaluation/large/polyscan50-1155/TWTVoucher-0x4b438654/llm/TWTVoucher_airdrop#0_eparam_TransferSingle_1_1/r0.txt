@@ -1,0 +1,7 @@
+NO
+
+The provided Solidity function `airdrop` in the `TWTVoucher` contract mints new tokens to the specified recipients. The `_mint` function within the `ERC1155` contract is called to perform the minting operation. When minting new tokens, the `_from` argument in the `TransferSingle` event is set to the zero address (address(0)), which indicates that the tokens are being created rather than transferred from an existing holder.
+
+The rule states that the `_from` argument must be the address of the holder whose balance is decreased. However, in the case of minting, there is no holder from whom the balance is decreased, as new tokens are being created. Therefore, the `TransferSingle` event emitted during the minting process does not have an existing holder's address as the `_from` argument; instead, it uses the zero address.
+
+Given this information, the `TransferSingle` event does not follow the rule as stated, because during the minting process, there is no decrease in balance from any holder's address. The `_from` argument is the zero address, not the address of a holder with a decreased balance.

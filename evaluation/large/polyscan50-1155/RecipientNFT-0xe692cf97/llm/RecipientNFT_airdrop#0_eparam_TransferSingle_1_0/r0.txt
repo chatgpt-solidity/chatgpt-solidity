@@ -1,0 +1,5 @@
+YES
+
+The `_mint` function within the `RecipientNFT` contract calls `emit TransferSingle(operator, address(0), to, id, amount);` where `operator` is set to `_msgSender()`. The `_msgSender()` function, as defined in the `Context` contract, returns the `msg.sender`, which is the address of the account that called the function.
+
+Since the `airdrop` function is only callable by the owner (due to the `onlyOwner` modifier), and within the `_mint` function, the `operator` is set to the message sender (which in this case would be the owner), the rule is satisfied. The `_operator` argument in the `TransferSingle` event is indeed the address that is approved to make the transfer, which should be `msg.sender`.

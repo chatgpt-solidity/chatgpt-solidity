@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function, which is called within the `airdrop` function. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`. The `TransferSingle` event is emitted with the `_value` argument set to the `amount` of tokens minted, which is the number of tokens the recipient balance is increased by.
+
+In the `airdrop` function, the `_mint` function is called with an `amount` of `1` for each recipient that is not a contract, as checked by the `isContract` function. Since the `_mint` function correctly emits the `TransferSingle` event with the `_value` argument matching the number of tokens the recipient balance is increased by, the rule is followed.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

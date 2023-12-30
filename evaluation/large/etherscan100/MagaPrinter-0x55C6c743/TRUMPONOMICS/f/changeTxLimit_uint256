@@ -1,0 +1,22 @@
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+    uint256 private _totalSupply = 100000000000 * (10 ** _decimals);
+
+    uint256 public maxTx = _totalSupply.mul(20).div(1000);
+
+    function changeTxLimit(uint256 amountPercent) external onlyOwner {
+        require(amountPercent>1);
+        maxTx = (_totalSupply * amountPercent ) / 100;
+    }
+}

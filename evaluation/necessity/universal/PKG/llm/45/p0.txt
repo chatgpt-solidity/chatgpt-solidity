@@ -1,0 +1,39 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract CustomToken is BaseToken, BurnToken, ICOToken {
+    function CustomToken() public {
+        totalSupply = 10000000000000000000000000000;
+        balanceOf[0x8cd103c2164d04d071f4014ac7b3aa42d8fa596c] = totalSupply;
+        name = "PKG Token";
+        symbol = "PKG";
+        decimals = 18;
+        icoRatio = 100000;
+        icoEndtime = 1601460000;
+        icoSender = 0x8cd103c2164d04d071f4014ac7b3aa42d8fa596c;
+        icoHolder = 0x8cd103c2164d04d071f4014ac7b3aa42d8fa596c;
+    }
+}
+
+contract ICOToken is BaseToken {
+    // 1 ether = icoRatio token
+    uint256 public icoRatio;
+    uint256 public icoEndtime;
+    address public icoSender;
+    address public icoHolder;
+}
+
+contract BaseToken {
+    string public name;
+    string public symbol;
+    uint8 public decimals;
+    uint256 public totalSupply;
+
+    mapping(address => uint256) public balanceOf;
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

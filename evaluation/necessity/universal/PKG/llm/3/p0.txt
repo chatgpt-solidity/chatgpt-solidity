@@ -1,0 +1,30 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract BaseToken {
+
+    mapping(address => uint256) public balanceOf;
+
+    function _transfer(address _from, address _to, uint _value) internal {
+        require(_to != 0x0);
+        require(balanceOf[_from] >= _value);
+        require(balanceOf[_to] + _value > balanceOf[_to]);
+        uint previousBalances = balanceOf[_from] + balanceOf[_to];
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+        assert(balanceOf[_from] + balanceOf[_to] == previousBalances);
+        Transfer(_from, _to, _value);
+
+    }
+    function transfer(address _to, uint256 _value) public {
+        _transfer(msg.sender, _to, _value);
+    }
+}
+
+
+"""
+
+Rule:"""
+return whether the transfer is successful
+"""

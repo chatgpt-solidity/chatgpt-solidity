@@ -1,0 +1,20 @@
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function setApprovalForAll(address operator, bool approved) public virtual override {
+        _setApprovalForAll(_msgSender(), operator, approved);
+    }
+
+    function _setApprovalForAll(address owner, address operator, bool approved) internal virtual {
+        require(owner != operator, "ERC1155: setting approval status for self");
+        _operatorApprovals[owner][operator] = approved;
+        emit ApprovalForAll(owner, operator, approved);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

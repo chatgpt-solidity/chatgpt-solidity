@@ -1,0 +1,13 @@
+YES
+
+The `_mint` function within the `airdrop` function is called with the `amount` argument set to `1`. The `_mint` function is responsible for creating tokens and assigning them to the `to` address. It emits the `TransferSingle` event with the `amount` that was minted, which in this case is `1`.
+
+The `TransferSingle` event is emitted within the `_mint` function with the following parameters:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are being transferred, which is the zero address (`address(0)`) since tokens are being minted.
+- `_to`: The address to which the tokens are being transferred, which is the recipient's address.
+- `_id`: The token type that is being transferred, which is `coinbase`.
+- `_value`: The number of tokens that are being transferred, which is `1`.
+
+The rule states that the `_value` argument must match the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by. Since the `_mint` function increases the recipient's balance by `1` and emits the `TransferSingle` event with `_value` set to `1`, the rule is followed correctly.

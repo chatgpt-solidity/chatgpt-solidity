@@ -1,0 +1,54 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Token name
+    string private _name;
+
+    // Token symbol
+    string private _symbol;
+
+    /**
+     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     */
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Internal function without access restriction.
+     */
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+contract Collection is ERC721Enumerable, Ownable {
+
+   constructor(
+        string memory _name,
+        string memory _symbol
+  
+    ) ERC721(_name, _symbol) {
+        
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

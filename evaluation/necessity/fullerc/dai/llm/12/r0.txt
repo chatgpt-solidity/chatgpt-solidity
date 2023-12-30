@@ -1,0 +1,26 @@
+To determine if the `push` function and related parts of the `DSToken` contract violate the ERC-20 standard, we need to compare the implementation with the ERC-20 specification provided.
+
+The ERC-20 standard specifies the following key functions that must be implemented:
+
+1. `transfer(address _to, uint256 _value) public returns (bool success)`
+2. `transferFrom(address _from, address _to, uint256 _value) public returns (bool success)`
+3. `approve(address _spender, uint256 _value) public returns (bool success)`
+4. `allowance(address _owner, address _spender) public view returns (uint256 remaining)`
+
+Additionally, the ERC-20 standard requires that the `Transfer` and `Approval` events are emitted appropriately.
+
+Looking at the provided `DSToken` contract code, we can see that the `transferFrom` function is implemented and it emits the `Transfer` event as required by the ERC-20 standard. The `push` function is a convenience function that calls `transferFrom` using `msg.sender` as the source address (`src`).
+
+The `push` function itself is not part of the ERC-20 standard, but it does not violate the standard as long as it correctly uses the `transferFrom` function and adheres to the ERC-20 rules. The `push` function effectively acts as a wrapper around `transferFrom`, allowing a user to transfer tokens from their own address to another address without needing to explicitly approve the transfer first.
+
+However, there are a few potential issues with the `DSToken` contract that could be considered violations or bad practices in relation to the ERC-20 standard:
+
+1. The `transferFrom` function should only subtract from the `_approvals[src][msg.sender]` if `src` is not the `msg.sender`. The code correctly checks this condition, but it does not handle the case where the `_approvals[src][msg.sender]` is less than `wad`. This could lead to underflow if not properly checked, although the `sub` function from `DSMath` seems to include a `require` statement that may prevent underflow.
+
+2. The `transferFrom` function should return `false` if the transfer is not possible (e.g., if the balance is insufficient or the allowance is too low). However, the provided code does not explicitly handle these cases and instead relies on the `require` statements in the `DSMath` contract to revert the transaction. This is not a direct violation of the ERC-20 standard, but it is a deviation from the recommended practice of returning `false` on failure.
+
+3. The `Transfer` event should be emitted with the correct parameters. The provided code does emit the `Transfer` event, but it does not show the event declaration. We must assume that the event is declared correctly elsewhere in the contract or inherited from the `ERC20` interface.
+
+4. The `DSToken` contract includes a `stoppable` modifier from the `DSStop` contract, which allows the contract to be stopped by an authorized account. This is not part of the ERC-20 standard, but it does not violate the standard as long as the stopping mechanism is used responsibly and does not prevent users from transferring their tokens when they should be able to.
+
+In conclusion, the `push` function itself does not violate the ERC-20 standard, but the implementation of `transferFrom` and the overall contract behavior should be carefully reviewed to ensure full compliance with the standard, especially regarding error handling and the return of boolean values on success or failure.

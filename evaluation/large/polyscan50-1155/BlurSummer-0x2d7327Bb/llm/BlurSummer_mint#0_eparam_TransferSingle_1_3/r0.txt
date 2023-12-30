@@ -1,0 +1,7 @@
+YES
+
+The `_mint` function within the `BlurSummer` contract calls the `_mint` function of the `ERC1155` contract with the appropriate arguments, including the `id` which represents the token type being transferred. The `ARTWORK` variable is used as the `id` argument, and it is passed to the `_mint` function of the `ERC1155` contract.
+
+The `_mint` function in the `ERC1155` contract then emits the `TransferSingle` event with the `id` argument that was passed to it, which in this case is the `ARTWORK` token type. The rule states that the `_id` argument must be the token type being transferred, and this condition is met in the provided code.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

@@ -1,0 +1,15 @@
+YES
+
+The provided Solidity function `mint` in the `NFTBigPartnerV2` contract, which inherits from `ERC1155`, calls the internal `_mint` function of the `ERC1155` contract. The `_mint` function is responsible for creating `amount` tokens of token type `id` and assigning them to the `to` address.
+
+The `_mint` function in the `ERC1155` contract performs several operations, including updating the balances mapping to reflect the minted tokens and emitting the `TransferSingle` event. The event is emitted with the following parameters:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred, which is the zero address (`address(0)`) in the case of minting.
+- `_to`: The address to which the tokens are minted.
+- `_id`: The token type being transferred, which is the `id` argument passed to the `_mint` function.
+- `_value`: The number of tokens being transferred, which is the `amount` argument passed to the `_mint` function.
+
+The rule states that the `_id` argument must be the token type being transferred, and the `TransferSingle` event must be emitted accordingly. Since the `_mint` function correctly uses the `id` argument as the token type and emits the `TransferSingle` event with the appropriate parameters, the rule is followed.
+
+Therefore, the answer is YES, the `TransferSingle` event is emitted according to the given rule.

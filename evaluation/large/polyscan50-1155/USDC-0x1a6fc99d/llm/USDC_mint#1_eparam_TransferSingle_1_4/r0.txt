@@ -1,0 +1,7 @@
+YES
+
+The `_mint` function in the `USDC` contract calls the internal `_mint` function of the `ERC1155` contract with a hardcoded `amount` of `1`. This `amount` is used as the `_value` for the `TransferSingle` event, which is emitted within the `_mint` function of the `ERC1155` contract.
+
+The `TransferSingle` event is emitted with the `_value` argument set to the `amount` of tokens minted, which is `1`. This matches the rule that the `_value` argument must be the number of tokens the holder balance is increased by, as the recipient's balance (`_balances[id][to]`) is increased by the same `amount`.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

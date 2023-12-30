@@ -1,0 +1,17 @@
+Given a solidity function deposit and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract ERC20 {
+
+    // funds goes as `msg.value`
+    function deposit() public payable {}
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

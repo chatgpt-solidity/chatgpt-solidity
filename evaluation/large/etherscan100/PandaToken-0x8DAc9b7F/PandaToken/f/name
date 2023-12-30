@@ -1,0 +1,8 @@
+contract PandaToken is Context, IERC20{
+
+    string private _name;
+
+    function name() public view override returns (string memory) {
+        return _name;
+    }
+}

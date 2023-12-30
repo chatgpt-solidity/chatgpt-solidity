@@ -1,0 +1,15 @@
+The provided Solidity code for the `allowance` function and related parts from the `Organicco` contract and the `Token` contract appear to be compliant with the ERC-20 standard as described in the provided ERC documentation.
+
+The ERC-20 standard specifies that the `allowance` function should have the following signature:
+
+```solidity
+function allowance(address _owner, address _spender) public view returns (uint256 remaining)
+```
+
+The `allowance` function in the `Organicco` contract matches this signature, with the exception of the return type being `uint` instead of `uint256`. In Solidity, `uint` is an alias for `uint256`, so this is not a violation of the standard. The function is also marked as `constant`, which is an older keyword in Solidity that is synonymous with `view` in the context of this function, indicating that it does not modify the state and can be called externally to view data.
+
+The `allowance` function correctly returns the remaining amount that `_spender` is allowed to withdraw from `_owner`'s account, which is stored in the `_allowances` mapping in the `Token` contract. This mapping is declared as `internal`, meaning it is accessible within the `Organicco` contract and any contracts that inherit from `Token`.
+
+Based on the provided code and the ERC-20 standard, there does not appear to be a violation. However, it is important to note that the full compliance of the `Organicco` contract with the ERC-20 standard cannot be determined solely from the `allowance` function and related parts. Full compliance would require reviewing the entire contract, including the implementation of other required functions and events such as `transfer`, `transferFrom`, `approve`, `Transfer`, and `Approval`.
+
+Additionally, the `Organicco` contract is also marked as implementing `ERC223`, which is a different token standard that adds functionality on top of ERC-20. The compatibility and adherence to the ERC-223 standard would need to be evaluated separately.

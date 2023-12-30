@@ -1,0 +1,5 @@
+NO
+
+The provided function `KIMEX` in the `KIMEX` contract is a constructor function for initializing the contract with certain parameters. It sets up various state variables but does not perform any token transfers. The constructor is setting initial values for `walletAddress`, `adminAddress`, `inActive`, `totalInvestedAmount`, `totalRemainingTokensForSales`, and `totalReservedTokenAllocation`. There is no `Transfer` event or token transfer logic within the provided constructor code.
+
+The rule states that a `Transfer` event should be emitted if tokens are transferred during the initial token distribution or crowdsale. Since there are no token transfers occurring in the provided code, there is no violation of the rule based on the given information.

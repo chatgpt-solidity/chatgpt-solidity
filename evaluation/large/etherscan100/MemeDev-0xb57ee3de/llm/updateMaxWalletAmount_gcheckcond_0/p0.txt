@@ -1,0 +1,43 @@
+Given a solidity function updateMaxWalletAmount and the related parts from a smart contract.
+Whether the function updateMaxWalletAmount and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable is Context {
+    address private _owner;
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    uint256 private _totalSupply;
+    /**
+     * @dev See {IERC20-totalSupply}.
+     */
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract MemeDev is ERC20, Ownable {
+    uint256 public maxWallet;
+    function updateMaxWalletAmount(uint256 newNum) external onlyOwner {
+        require(newNum >= (totalSupply() * 15 / 1000)/1e18, "Cannot set maxWallet lower than 1.5%");
+        maxWallet = newNum * (10**18);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

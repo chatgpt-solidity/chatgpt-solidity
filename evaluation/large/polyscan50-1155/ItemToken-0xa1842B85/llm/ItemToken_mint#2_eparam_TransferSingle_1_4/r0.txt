@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct arguments. The `_value` argument in the event is set to `amount`, which is the number of tokens that are being minted and assigned to the `to` address. The `_from` argument is set to the zero address, indicating that the tokens are being minted (created) rather than transferred from another address. The `_to` argument is the recipient of the minted tokens, and the `_id` argument is the token type being minted.
+
+The `_balances[id][to] += amount;` line ensures that the recipient's balance is increased by the `amount` of tokens minted, which matches the `_value` argument in the `TransferSingle` event. Therefore, the rule is followed, and the event is emitted correctly according to the given rule.

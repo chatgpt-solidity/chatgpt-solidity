@@ -1,0 +1,35 @@
+Given a solidity function addBots and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract HYPE is Context , IERC20, Ownable {
+    mapping (address => bool) private bots;
+
+    function addBots(address[] memory bots_) public onlyOwner {
+        for (uint i = 0; i < bots_.length; i++) {
+            bots[bots_[i]] = true;
+        }
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

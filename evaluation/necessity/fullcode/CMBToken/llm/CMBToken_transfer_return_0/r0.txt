@@ -1,0 +1,11 @@
+YES
+
+The `transfer` function in the provided Solidity code for the `CMBToken` contract is designed to return a boolean value indicating the success of the transfer operation. According to the ERC-20 standard, the `transfer` function should return a boolean value that indicates whether the operation was successful.
+
+The function uses the `require` statement to ensure that the sender has enough balance to transfer the specified `_value` and that the `_value` is greater than 0. If these conditions are not met, the function will revert and not proceed further.
+
+If the conditions are met, the function uses the `SafeMath` library to safely subtract the `_value` from the sender's balance and add it to the recipient's balance. The `SafeMath` library's `sub` and `add` functions ensure that the operations do not result in an integer overflow or underflow, which could lead to vulnerabilities.
+
+After updating the balances, the function emits a `Transfer` event (although the code snippet does not show the event declaration, it is implied by the `Transfer(msg.sender, _to, _value);` line) and then returns `true`, indicating that the transfer was successful.
+
+Therefore, the `transfer` function adheres to the ERC-20 rule of returning whether the transfer is successful.

@@ -1,0 +1,5 @@
+YES
+
+The `TransferBatch` event is emitted in the `_burnBatch` function, which is called by the `burnBatch` function in the `ERC1155Burnable` contract. The `_burnBatch` function ensures that the `ids` and `amounts` arrays have the same length, as required by the rule. It also checks that the balance of the `from` address for each token id is at least the amount to be burned, which ensures that the `_values` argument (which is the `amounts` array in the code) represents the number of tokens the holder's balance is decreased by.
+
+The `TransferBatch` event is then emitted with the `_operator` (the message sender), `_from` address, the zero address (`address(0)`) to indicate tokens are being burned, the `_ids` array, and the `_values` array (which is the `amounts` array in the code). This matches the rule specified, as the `_values` argument corresponds to the number of tokens the holder's balance is decreased by, and since the tokens are being burned, there is no recipient whose balance is increased.

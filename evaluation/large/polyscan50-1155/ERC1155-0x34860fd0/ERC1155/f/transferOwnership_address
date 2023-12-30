@@ -1,0 +1,15 @@
+abstract contract Ownable {
+
+    address private _owner;
+
+    modifier onlyOwner() {
+        if (_owner != msg.sender) revert NotOwner();
+        _;
+    }
+
+    function transferOwnership(address newOwner) public virtual onlyOwner {
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+}
+

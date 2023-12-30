@@ -1,0 +1,9 @@
+The function `setEZOTokenPriceUSD` in the provided Solidity code is a custom function that allows the owner of the contract to set the price of the EZO token in USD. This function is not part of the ERC20 standard, which is the Ethereum token standard described in the provided ERC (Ethereum Request for Comments) document.
+
+The ERC20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperability with other contracts, wallets, and decentralized applications. These functions include `totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, and `allowance`, as well as the events `Transfer` and `Approval`.
+
+The `setEZOTokenPriceUSD` function does not violate the ERC20 standard because the standard does not restrict the addition of custom functions to a token contract. It only requires that the specified functions and events are implemented to ensure compatibility with the ERC20 interface. As long as the EZOToken contract includes all the required functions and events, it can be considered ERC20-compliant, even with additional custom functions like `setEZOTokenPriceUSD`.
+
+However, it is important to note that adding custom functions to an ERC20 token contract can affect how the token interacts with other contracts and services that expect strict adherence to the standard. It is also crucial to ensure that any additional functions do not introduce security vulnerabilities or unexpected behavior that could affect the token's functionality or the users' assets.
+
+In summary, the `setEZOTokenPriceUSD` function does not violate the ERC20 standard, but developers should be cautious when adding custom functionality to ensure that it does not compromise the token's security or interoperability.

@@ -1,0 +1,40 @@
+contract AssetContract is ERC1155Tradable {
+
+
+    string public templateURI;
+    mapping(uint256 => string) private _tokenURI;
+
+    function uri(uint256 _id) public view override returns (string memory) {
+        string memory tokenUri = _tokenURI[_id];
+        if (bytes(tokenUri).length != 0) {
+            return tokenUri;
+        }
+        return
+            string(
+                abi.encodePacked(
+                    templateURI,
+                    Strings.toHexString(_id, 32),
+                    ".json"
+                )
+            );
+    }
+}
+
+library Strings {
+    bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
+
+    function toHexString(uint256 value, uint256 length)
+        internal
+        pure
+        returns (string memory)
+    {
+        bytes memory buffer = new bytes(2 * length + 2);
+        for (uint256 i = 2 * length + 1; i > 1; --i) {
+            buffer[i] = _HEX_SYMBOLS[value & 0xf];
+            value >>= 4;
+        }
+        require(value == 0, "Strings: hex length insufficient");
+        return string(buffer);
+    }
+}
+

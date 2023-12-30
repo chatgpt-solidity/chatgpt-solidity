@@ -1,0 +1,27 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract EBLivePremios is ERC721 {
+    address private _Admin;
+
+    function SetBaseURI(string memory uri) public onlyAdmin {
+        _setBaseURI(uri);
+    }
+
+    //Ownable
+    modifier onlyAdmin() {
+        require(_Admin == _msgSender(), "Ownable: caller is not the admin");
+        _;
+    }
+}
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+    string private _baseUri;
+
+    function _setBaseURI(string memory tokenURI_) internal virtual {
+        _baseUri = tokenURI_;
+    }
+}
+

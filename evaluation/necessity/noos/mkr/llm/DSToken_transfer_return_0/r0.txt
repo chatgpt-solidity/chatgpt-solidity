@@ -1,0 +1,7 @@
+YES
+
+The `transfer` function in the `DSTokenBase` contract calls the `transferFrom` function, passing the `msg.sender` as the source address, the destination address, and the amount to be transferred (`wad`). The `transferFrom` function in the `DSToken` contract, which inherits from `DSTokenBase`, performs the actual transfer of tokens and is decorated with the `stoppable` modifier from the `DSStop` contract to ensure that the transfer can only occur if the `stopped` boolean is `false`.
+
+The `transferFrom` function checks if the sender has enough allowance (if they are not the source of the tokens), subtracts the amount from the sender's allowance if necessary, subtracts the amount from the source's balance, adds the amount to the destination's balance, and emits a `Transfer` event. It then returns `true`, indicating that the transfer was successful.
+
+The ERC-20 standard requires that a token contract's `transfer` function returns a boolean value indicating whether the transfer was successful. In this case, since the `transfer` function in `DSTokenBase` returns the result of `transferFrom`, and `transferFrom` returns `true` upon a successful transfer (and would revert the transaction if it fails due to the `require` statements in `DSMath`), the `transfer` function complies with the ERC rule of returning whether the transfer is successful.

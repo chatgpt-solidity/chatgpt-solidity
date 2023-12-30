@@ -1,0 +1,7 @@
+YES
+
+The `burn` function in the `InVarNFT` contract calls the internal `_burn` function of the `ERC1155` contract. The `_burn` function emits the `TransferSingle` event after performing the necessary checks and reducing the balance of the `account` by `amount` for the token type `id`.
+
+The `_id` argument in the `TransferSingle` event corresponds to the `id` parameter of the `_burn` function, which is the token type being transferred (in this case, burned). The event is emitted with the correct arguments, including the `_id` representing the token type being burned, the `_from` address as the `account` from which the tokens are being burned, the `_to` address as the zero address (since it's a burn operation), and the `_value` as the `amount` of tokens being burned.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

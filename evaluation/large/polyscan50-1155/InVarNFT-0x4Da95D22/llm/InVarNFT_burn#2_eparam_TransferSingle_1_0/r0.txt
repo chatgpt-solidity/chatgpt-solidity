@@ -1,0 +1,7 @@
+YES
+
+The `_burn` function within the `ERC1155` contract correctly emits the `TransferSingle` event with the `_operator` argument set to the address returned by `_msgSender()`, which is the same as `msg.sender` in the context of the `burn` function in the `InVarNFT` contract.
+
+The `burn` function in the `InVarNFT` contract requires that `msg.sender` is the same as the `account` argument, ensuring that the caller is approved to burn the tokens (since they own them). Then, it calls the internal `_burn` function.
+
+The `_burn` function assigns `operator` to `_msgSender()`, which is the same as `msg.sender` in this context, and then emits the `TransferSingle` event with `operator` as the `_operator` argument. This satisfies the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.

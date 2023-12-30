@@ -1,0 +1,31 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract TokenERC20 {
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    /**
+     * Set allowance for other address
+     *
+     * Allows `_spender` to spend no more than `_value` tokens in your behalf
+     *
+     * @param _spender The address authorized to spend
+     * @param _value the max amount they can spend
+     */
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+        return true;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

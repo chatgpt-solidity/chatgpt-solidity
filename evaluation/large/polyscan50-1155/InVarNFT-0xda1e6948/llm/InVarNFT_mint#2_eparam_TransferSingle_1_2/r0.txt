@@ -1,0 +1,5 @@
+YES
+
+The `_mint` function in the `ERC1155` contract is designed to create `amount` tokens of token type `id`, and assign them to `account`. The function emits a `TransferSingle` event with the `_to` argument set to the `account` parameter, which is the address of the recipient whose balance is increased. This is in accordance with the given rule that the `_to` argument must be the address of the recipient whose balance is increased.
+
+The `mint` function in the `InVarNFT` contract calls the `_mint` function from the `ERC1155` contract, passing the `account` as the recipient address. Since the `ERC1155` contract's `_mint` function correctly emits the `TransferSingle` event with the `_to` argument set to the `account`, the rule is followed.

@@ -1,0 +1,3 @@
+NO
+
+The `TransferSingle` event is emitted with the `randomish` address as the `_from` argument, which is generated using a combination of `nonce` and `blockhash(block.number)`. This address is not necessarily the address of the holder whose balance is decreased, as required by the rule. The `_from` argument should be the address from which the tokens are actually being transferred, which in the context of an airdrop, would typically be the contract owner or some other specific account holding the tokens before the airdrop. The current implementation does not ensure that the `randomish` address is the actual holder of the tokens, thus violating the given rule.

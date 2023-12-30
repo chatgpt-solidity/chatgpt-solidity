@@ -1,0 +1,26 @@
+Given a solidity function activate and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Owner {
+
+    address public owner;
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract KIMEX is Owner {
+    bool public inActive;
+
+    // Activate token sale function
+    function activate() external onlyOwner {
+        inActive = false;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

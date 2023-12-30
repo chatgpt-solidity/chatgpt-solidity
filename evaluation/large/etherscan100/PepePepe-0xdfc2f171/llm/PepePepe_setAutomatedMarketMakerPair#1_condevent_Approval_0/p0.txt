@@ -1,0 +1,61 @@
+Given a solidity function setAutomatedMarketMakerPair and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.10;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract PepePepe is ERC20, Ownable {
+    address public immutable uniswapV2Pair;
+
+    // store addresses that a automatic market maker pairs. Any transfer *to* these addresses
+    // could be subject to a maximum transfer amount
+    mapping(address => bool) public automatedMarketMakerPairs;
+
+    function setAutomatedMarketMakerPair(address pair, bool value)
+        public
+        onlyOwner
+    {
+        require(
+            pair != uniswapV2Pair,
+            "The pair cannot be removed from automatedMarketMakerPairs"
+        );
+
+        _setAutomatedMarketMakerPair(pair, value);
+
+    }
+    function _setAutomatedMarketMakerPair(address pair, bool value) private {
+        automatedMarketMakerPairs[pair] = value;
+
+        emit SetAutomatedMarketMakerPair(pair, value);
+    }
+}
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

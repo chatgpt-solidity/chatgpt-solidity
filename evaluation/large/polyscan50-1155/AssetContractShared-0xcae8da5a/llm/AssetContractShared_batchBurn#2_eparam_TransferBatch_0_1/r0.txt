@@ -1,0 +1,3 @@
+YES
+
+The `batchBurn` function in the `AssetContract` contract calls the `_burnBatch` function in the `ERC1155Tradable` contract, which in turn emits the `TransferBatch` event. The `_from` argument in the `TransferBatch` event is set to the `account` parameter of the `_burnBatch` function, which is the address from which the tokens are being burned. This address is passed down from the `batchBurn` function in the `AssetContract` contract, which is the address of the holder whose balance is decreased. Therefore, the `TransferBatch` event is emitted with the `_from` argument correctly set to the address of the token holder whose balance is being decreased, in accordance with the given rule.

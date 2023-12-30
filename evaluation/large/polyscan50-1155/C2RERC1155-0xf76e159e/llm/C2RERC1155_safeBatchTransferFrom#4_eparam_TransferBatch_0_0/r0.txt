@@ -1,0 +1,24 @@
+YES
+
+The function `_safeBatchTransferFrom` is an internal function that is called by the public `safeBatchTransferFrom` function. The public function checks that the caller (`msg.sender`) is either the owner of the tokens (`from`) or an approved operator for the owner's account. This is done by the following line:
+
+```solidity
+require(
+    from == _msgSender() || isApprovedForAll(from, _msgSender()),
+    "ERC1155: transfer caller is not owner nor approved"
+);
+```
+
+If this requirement is met, the `_safeBatchTransferFrom` function is called, and within this function, the `operator` is set to the `_msgSender()`:
+
+```solidity
+address operator = _msgSender();
+```
+
+This `operator` is then used as the `_operator` argument when emitting the `TransferBatch` event:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+Since the `operator` is set to the `_msgSender()` and the `_msgSender()` is already checked to be the owner or an approved operator, the rule is satisfied. The event `TransferBatch` is emitted with the `_operator` being the address that is approved to make the transfer, which should be `msg.sender`.

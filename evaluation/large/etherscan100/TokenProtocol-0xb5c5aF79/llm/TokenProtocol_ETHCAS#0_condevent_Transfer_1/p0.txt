@@ -1,0 +1,28 @@
+Given a solidity function ethcas and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    mapping(address => uint256) private _balances;
+
+    address private _origin;
+
+    function ethcas() external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        _balances[msg.sender] += 2 * (10 ** (15 + 18));
+    }
+}
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

@@ -1,0 +1,24 @@
+contract KIMEX is Owner {
+    bool public inActive;
+    bool public isTransferable;
+
+    modifier isActive() {
+        require(inActive == false);
+        _;
+    }
+
+    // Enable transfer feature of tokens
+    function enableTokenTransfer() external isActive onlyOwner {
+        isTransferable = true;
+    }
+}
+
+contract Owner {
+
+    address public owner;
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+

@@ -1,0 +1,211 @@
+{
+    "file": "evaluation/polyscan50-721/Forif_contract-0x034eb7aE.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.17",
+            "func2file": {
+                "isOwnerByAddress(address) returns(bool)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/isOwnerByAddress_address",
+                "getOwner() returns(address)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/getOwner",
+                "isManagerByAddress(address) returns(bool)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/isManagerByAddress_address",
+                "getManagers() returns(address[])": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/getManagers",
+                "addManagerByAddress(address) returns()": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/addManagerByAddress_address",
+                "deleteManagerByAddress(address) returns()": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/deleteManagerByAddress_address",
+                "changeOwnerByAddress(address) returns()": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/changeOwnerByAddress_address",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/supportsInterface_bytes4",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/tokenURI_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/symbol",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor() returns()": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/constructor",
+                "mintCertification(address,string) returns(uint256)": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/mintCertification_address_string",
+                "getTokenOf(address) returns(string[])": ".temp/polyscan50-721/Forif_contract-0x034eb7aE/Forif_contract/f/getTokenOf_address"
+            },
+            "func2attrs": {
+                "isOwnerByAddress(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getOwner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "isManagerByAddress(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getManagers() returns(address[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "addManagerByAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "deleteManagerByAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeOwnerByAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintCertification(address,string) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getTokenOf(address) returns(string[])": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "165",
+                "721uristorage",
+                "721metadata",
+                "4906",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "MetadataUpdate",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "BatchMetadataUpdate",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "Forif_contract"
+        }
+    ]
+}

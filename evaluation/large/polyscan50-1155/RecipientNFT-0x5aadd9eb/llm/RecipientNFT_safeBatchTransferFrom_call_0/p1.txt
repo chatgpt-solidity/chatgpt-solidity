@@ -1,0 +1,1 @@
+Whether it calls the onERC1155Received after that? Reply in "YES" or "NO".

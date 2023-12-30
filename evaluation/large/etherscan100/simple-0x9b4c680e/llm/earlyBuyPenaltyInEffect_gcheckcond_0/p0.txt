@@ -1,0 +1,16 @@
+Given a solidity function earlyBuyPenaltyInEffect and the related parts from a smart contract.
+Whether the function earlyBuyPenaltyInEffect and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract simple is ERC20, Ownable {
+    uint256 public blockForPenaltyEnd;
+
+    function earlyBuyPenaltyInEffect() public view returns (bool){
+        return block.number < blockForPenaltyEnd;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,29 @@
+Given a solidity function changeRestrictWhales and the related parts from a smart contract.
+Whether the function changeRestrictWhales and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+
+    bool public restrictWhales = true;
+    address public tokenOwner;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function changeRestrictWhales(bool newValue) external onlyOwner {            
+        restrictWhales = newValue;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

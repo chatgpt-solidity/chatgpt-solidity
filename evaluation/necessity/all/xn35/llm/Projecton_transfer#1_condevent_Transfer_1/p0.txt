@@ -1,0 +1,39 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.25;
+library SafeMath {
+
+    function sub(uint256 a, uint256 b) internal constant returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    function add(uint256 a, uint256 b) internal constant returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract Projecton is owned, IERC20 {
+
+    mapping(address => uint256) public balances;
+
+    function transfer(address _to, uint256 _value) returns (bool success) {
+        require(balances[msg.sender] >= _value && _value > 0);
+
+        balances[msg.sender] = balances[msg.sender].sub(_value);
+        balances[_to] = balances[_to].add(_value);
+        Transfer(msg.sender, _to, _value);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

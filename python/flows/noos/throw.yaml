@@ -1,0 +1,13 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a solidity function <function> and the related parts from a smart contract.
+      Whether the function <function> and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+      
+      Function(and related parts) to audit:"""
+      <code>
+      """
+
+      Condition:"""
+      <condition>
+      """

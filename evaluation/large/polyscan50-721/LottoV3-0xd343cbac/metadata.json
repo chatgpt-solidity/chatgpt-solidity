@@ -1,0 +1,307 @@
+{
+    "file": "evaluation/polyscan50-721/LottoV3-0xd343cbac.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.1",
+            "func2file": {
+                "burn(uint256) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/burn_uint256",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/supportsInterface_bytes4",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/safeTransferFrom_address_address_uint256_bytes",
+                "owner() returns(address)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/transferOwnership_address",
+                "constructor(address,address,address,address,address,uint256,uint256,uint256,address) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/constructor_address_address_address_address_address_uint256_uint256_uint256_address",
+                "bet() returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/bet",
+                "claim(uint256) returns(uint256)": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/claim_uint256",
+                "resetGame(address,address,uint256,uint256) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/resetGame_address_address_uint256_uint256",
+                "resetLotto(bool,address,address,address,address,address,uint256,bool,bool) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/resetLotto_bool_address_address_address_address_address_uint256_bool_bool",
+                "setBaseUri(string) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/setBaseUri_string",
+                "setRequestParameters(address,bytes32,address) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/setRequestParameters_address_bytes32_address",
+                "fulfillUint256(bytes32,bytes) returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/fulfillUint256_bytes32_bytes",
+                "fallback() returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/fallback",
+                "receive() returns()": ".temp/polyscan50-721/LottoV3-0xd343cbac/LottoV3/f/receive"
+            },
+            "func2attrs": {
+                "burn(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(address,address,address,address,address,uint256,uint256,uint256,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "bet() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "claim(uint256) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "resetGame(address,address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "resetLotto(bool,address,address,address,address,address,uint256,bool,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseUri(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setRequestParameters(address,bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "fulfillUint256(bytes32,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "fallback() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "airnodeRrp() returns(IAirnodeRrpV0)",
+                "pastLottoAPI3CallCounter(bytes32) returns(uint256)",
+                "pastLottoRewards(uint256) returns(uint256)",
+                "baseExtension() returns(string)",
+                "baseUri() returns(string)",
+                "taxSwitch() returns(bool)",
+                "airnode() returns(address)",
+                "erc20Token() returns(address)",
+                "expectingRequestWithIdToBeFulfilled(bytes32) returns(bool)",
+                "betPrice() returns(uint256)",
+                "endpointIdUint256() returns(bytes32)",
+                "pastLottoPlayer1(uint256) returns(address)",
+                "lottoOpen() returns(bool)",
+                "betBase() returns(uint256)",
+                "pastLottoPlayer2(uint256) returns(address)",
+                "taxRate() returns(uint256)",
+                "sponsorWallet() returns(address)",
+                "player1W() returns(address)",
+                "player2W() returns(address)",
+                "restartTimer() returns(uint256)",
+                "restartDuration() returns(uint256)",
+                "counter() returns(uint256)"
+            ],
+            "ercs": [
+                "165",
+                "721burnable",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "BetDetails",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ClaimDetails",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "WinnerDetails",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "LottoV3"
+        }
+    ]
+}

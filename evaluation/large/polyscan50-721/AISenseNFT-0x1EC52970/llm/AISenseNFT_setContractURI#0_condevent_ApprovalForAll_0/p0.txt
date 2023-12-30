@@ -1,0 +1,64 @@
+Given a solidity function setContractURI and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+abstract contract ContractMetadata is IContractMetadata {
+    /// @notice Returns the contract metadata URI.
+    string public override contractURI;
+
+    /**
+     *  @notice         Lets a contract admin set the URI for contract-level metadata.
+     *  @dev            Caller should be authorized to setup contractURI, e.g. contract admin.
+     *                  See {_canSetContractURI}.
+     *                  Emits {ContractURIUpdated Event}.
+     *
+     *  @param _uri     keccak256 hash of the role. e.g. keccak256("TRANSFER_ROLE")
+     */
+    function setContractURI(string memory _uri) external override {
+        if (!_canSetContractURI()) {
+            revert("Not authorized");
+        }
+
+        _setupContractURI(_uri);
+
+    }
+    /// @dev Lets a contract admin set the URI for contract-level metadata.
+    function _setupContractURI(string memory _uri) internal {
+        string memory prevURI = contractURI;
+        contractURI = _uri;
+
+        emit ContractURIUpdated(prevURI, _uri);
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+}
+
+contract AISenseNFT is ERC721Enumerable, Ownable, ContractMetadata {
+
+    function _canSetContractURI()
+        internal
+        view
+        virtual
+        override
+        returns (bool)
+    {
+        return msg.sender == owner();
+    }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

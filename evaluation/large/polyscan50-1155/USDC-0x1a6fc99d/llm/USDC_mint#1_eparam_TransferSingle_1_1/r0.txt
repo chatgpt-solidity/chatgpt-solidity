@@ -1,0 +1,7 @@
+YES
+
+The `mint` function in the provided `USDC` contract calls the internal `_mint` function of the `ERC1155` contract. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`. When minting, the `_from` argument is set to the zero address, which is the correct behavior according to the ERC-1155 standard for minting new tokens. The zero address (`address(0)`) is used to indicate that tokens are being created rather than transferred from an existing holder.
+
+The `TransferSingle` event is emitted with the `_from` argument set to the zero address, which is the expected behavior for a mint operation. The rule states that the `_from` argument must be the address of the holder whose balance is decreased, and in the case of minting, there is no holder from which the balance is decreased, hence the zero address is used.
+
+Therefore, the `TransferSingle` event is emitted correctly according to the given rule when the `mint` function is called.

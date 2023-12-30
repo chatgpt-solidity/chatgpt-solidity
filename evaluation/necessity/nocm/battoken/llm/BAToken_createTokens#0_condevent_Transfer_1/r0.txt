@@ -1,0 +1,11 @@
+YES
+
+The function `createTokens` in the provided Solidity code is responsible for creating new tokens in exchange for the Ether sent to the contract. When new tokens are created and assigned to `msg.sender`, this represents a transfer of tokens from the contract to `msg.sender`. According to the ERC-20 standard, a `Transfer` event should be emitted whenever tokens are transferred, including when new tokens are created.
+
+However, in the provided code, there is a custom event `CreateBAT` being emitted instead of the standard `Transfer` event. The `Transfer` event is part of the ERC-20 token standard and is expected to be emitted to reflect any change in balances, which includes minting new tokens. The `Transfer` event typically has the following signature:
+
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 value);
+```
+
+For the `createTokens` function to comply with the rule stated, it should emit a `Transfer` event with the `from` address set to the zero address (to indicate token creation) and the `to` address set to `msg.sender`, with the `value` being the number of tokens created. Since the `Transfer` event is not being emitted in the `createTokens` function, the code violates the rule stated.

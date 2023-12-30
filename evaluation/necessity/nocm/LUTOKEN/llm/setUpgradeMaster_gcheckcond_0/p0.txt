@@ -1,0 +1,25 @@
+Given a solidity function setUpgradeMaster and the related parts from a smart contract and a rule.
+Whether the function setUpgradeMaster and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract UpgradeableToken is StandardToken {
+
+    /** Contract / person who can set the upgrade path. This can be the same as team multisig wallet, as what it is with its default value. */
+    address public upgradeMaster;
+
+    /**
+     * Change the upgrade master.
+     *
+     * This allows us to set a new owner for the upgrade mechanism.
+     */
+    function setUpgradeMaster(address master) public {
+        require(master != address(0));
+        require(msg.sender == upgradeMaster);
+        upgradeMaster = master;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

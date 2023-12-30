@@ -1,0 +1,7 @@
+YES
+
+The `airdrop` function in the `TWTVoucher` contract mints tokens to the provided list of recipient addresses. The `_mint` function is called with the `coinbase` variable as the token ID (`_id`), which is initialized to 0 and remains unchanged throughout the contract (the line `coinbase++;` is commented out).
+
+The `_mint` function in the `ERC1155` contract is responsible for emitting the `TransferSingle` event. It is called with the `id` argument set to the value of `coinbase`, which represents the token type being transferred. The `TransferSingle` event is emitted with the correct `_id` argument as required by the rule.
+
+Therefore, the `TransferSingle` event is emitted with the `_id` argument being the token type being transferred, which complies with the given rule.

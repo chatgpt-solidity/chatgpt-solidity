@@ -1,0 +1,39 @@
+Given a solidity function setApprovalForAll and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+    // Mapping from owner to operator approvals
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function setApprovalForAll(
+        address operator,
+        bool approved
+    ) public virtual override {
+        _setApprovalForAll(_msgSender(), operator, approved);
+    }
+
+    function _setApprovalForAll(
+        address owner,
+        address operator,
+        bool approved
+    ) internal virtual {
+        require(owner != operator, "ERC721: approve to caller");
+        _operatorApprovals[owner][operator] = approved;
+        emit ApprovalForAll(owner, operator, approved);
+    }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is changed or reaffirmed
+"""

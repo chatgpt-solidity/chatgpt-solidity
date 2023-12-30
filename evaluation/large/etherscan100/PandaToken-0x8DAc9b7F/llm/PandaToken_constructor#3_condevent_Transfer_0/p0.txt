@@ -1,0 +1,49 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract PandaToken is Context, IERC20{
+
+    string private _name;
+    string private _symbol;
+    uint256 private _decimals;
+
+    mapping(address => uint256) _balances;
+
+    uint256 private _totalSupply;
+    constructor( 
+        string[] memory stringParams,
+        address[] memory addressParams,
+        uint256[] memory numberParams,
+        bool[] memory boolParams
+    ) {
+        require(addressParams.length==0);
+        require(boolParams.length==0);
+
+        address receiveAddr = tx.origin;
+        _name = stringParams[0];
+        _symbol = stringParams[1];
+        _decimals = numberParams[0];
+        _totalSupply = numberParams[1];
+        _balances[receiveAddr] = _totalSupply;
+        emit Transfer(address(0), receiveAddr, _totalSupply);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

@@ -1,0 +1,28 @@
+abstract contract Ownable {
+
+    address private _owner;
+
+    modifier onlyOwner() {
+        if (_owner != msg.sender) revert NotOwner();
+        _;
+    }
+}
+
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    function mintBatch(
+        address[] calldata to,
+        uint32[] calldata itemsIds
+    ) external onlyOwner {
+        for (uint128 i; i < itemsIds.length; ) {
+            emit TransferSingle(msg.sender, address(0), to[i], itemsIds[i], 1);
+            unchecked {
+                _balances[itemsIds[i]][to[i]]++;
+                i++;
+            }
+        }
+    }
+}
+

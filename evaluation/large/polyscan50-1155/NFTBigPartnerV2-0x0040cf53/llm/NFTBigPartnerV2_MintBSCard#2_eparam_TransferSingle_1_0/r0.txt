@@ -1,0 +1,19 @@
+YES
+
+The `MintBSCard` function in the provided `NFTBigPartnerV2` contract calls the `_mint` function, which is defined in the `ERC1155` contract. The `_mint` function is responsible for creating new tokens and assigning them to the `to` address.
+
+Within the `_mint` function, the `TransferSingle` event is emitted with the following line:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+The `operator` variable is set to the result of `_msgSender()`, which returns `msg.sender`:
+
+```solidity
+address operator = _msgSender();
+```
+
+Since `_msgSender()` is a function that returns the `msg.sender` of the transaction, the `operator` in the `TransferSingle` event is indeed the address of an account/contract that is approved to make the transfer, which should be `msg.sender` according to the rule provided.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

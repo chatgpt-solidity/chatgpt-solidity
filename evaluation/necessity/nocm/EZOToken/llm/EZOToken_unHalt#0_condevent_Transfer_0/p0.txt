@@ -1,0 +1,50 @@
+Given a solidity function unHalt and the related parts from a smart contract.
+Whether the function unHalt and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.9;
+contract Haltable is Ownable {
+    // @dev To Halt in Emergency Condition
+    bool public halted = false;
+
+    // @dev Use this as function modifier that should execute only if contract state Halted
+    modifier runIfHalted() {
+        require(halted);
+        _;
+    }
+
+    // @dev called by only owner to stop the emergency situation
+    function unHalt() public onlyOwner runIfHalted {
+        halted = false;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred during the initial token distribution or crowdsale.
+"""

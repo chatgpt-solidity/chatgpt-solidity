@@ -1,0 +1,9 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct arguments according to the rule provided. The `_to` argument in the event is the `to` parameter of the `_mint` function, which is the address of the recipient whose balance is increased by the `amount` of tokens of token type `id`. The event is emitted after the balance update with the line:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This line correctly represents a transfer from the zero address (indicating minting) to the `to` address, which is the recipient of the newly minted tokens. The `operator` is the address performing the mint operation, which is the message sender in this context. The `id` is the token type being minted, and the `amount` is the number of tokens being minted. All these parameters align with the rule specified for the `TransferSingle` event.

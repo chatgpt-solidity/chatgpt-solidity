@@ -1,0 +1,5 @@
+NO
+
+The `TransferSingle` event is emitted with the `from` parameter provided by the caller of the `airdrop` function. However, the rule states that the `_from` argument must be the address of the holder whose balance is decreased. Since the `airdrop` function does not actually transfer any tokens or decrease any balances (there is no call to a function that would change an account's balance), it does not adhere to the rule that `_from` should be the address of the holder whose balance is decreased.
+
+Additionally, the `airdrop` function should have included logic to actually transfer the tokens from the `from` address to the `to[i]` addresses, typically by calling a function like `_safeTransferFrom` or similar, which would also correctly emit the `TransferSingle` event as part of the transfer operation. Without this logic, the event is emitted incorrectly, and no actual token transfer takes place.

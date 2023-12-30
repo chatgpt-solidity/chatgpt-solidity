@@ -1,0 +1,26 @@
+Given a solidity function renounceOwnership and the related parts from a smart contract.
+Whether the function renounceOwnership and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable is Context {
+    address internal _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+    function renounceOwnership() public virtual onlyOwner {
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

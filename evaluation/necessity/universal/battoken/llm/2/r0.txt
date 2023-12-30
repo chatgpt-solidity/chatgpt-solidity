@@ -1,0 +1,15 @@
+YES
+
+The given Solidity code for the `transfer` function in the `StandardToken` contract does not use the `emit` keyword when triggering the `Transfer` event. The correct syntax to emit an event in Solidity is to use the `emit` keyword followed by the event name and the parameters to be logged.
+
+The line in the code that violates the ERC rule is:
+```solidity
+Transfer(msg.sender, _to, _value);
+```
+
+It should be updated to:
+```solidity
+emit Transfer(msg.sender, _to, _value);
+```
+
+This change would make the code compliant with the ERC rule that requires the use of the `emit` keyword when emitting events.

@@ -1,0 +1,15 @@
+abstract contract Ownable {
+
+    address private _owner;
+
+    constructor() {
+        _owner = msg.sender;
+        emit OwnershipTransferred(address(0), msg.sender);
+    }
+}
+
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    constructor() payable {}
+}
+

@@ -1,0 +1,41 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it emits the event Approval? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.26;
+contract BifinacneToken is Pausable, StandardToken, BlackList {
+    address public upgradedAddress;
+    bool public deprecated;
+
+    // Forward ERC20 methods to upgraded contract if this one is deprecated
+    function approve(address _spender, uint _value) public  {
+        if (deprecated) {
+            return UpgradedStandardToken(upgradedAddress).approveByLegacy(msg.sender, _spender, _value);
+        } else {
+            return super.approve(_spender, _value);
+        }
+    }
+}
+contract StandardToken is BasicToken, ERC20 {
+
+    mapping (address => mapping (address => uint)) public allowed;
+
+    /**
+    * @dev Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
+    * @param _spender The address which will spend the funds.
+    * @param _value The amount of tokens to be spent.
+    */
+    function approve(address _spender, uint _value) public  {
+
+        // To change the approve amount you first have to reduce the addresses`
+        //  allowance to zero by calling `approve(_spender, 0)` if it is not
+        //  already 0 to mitigate the race condition described here:
+        require(_value != 0,"BFT20: amount is small");
+        require(_spender != address(0), "BFT20: approve to the zero address");
+
+        allowed[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+    }
+}
+"""

@@ -1,0 +1,7 @@
+YES
+
+The `approve` function in the `DSToken` contract is designed to return a boolean value indicating whether the approval is successful. It calls the `approve` function from the `DSTokenBase` contract with `uint(-1)` as the amount, which is a common pattern to set an unlimited allowance. The `DSTokenBase` contract's `approve` function sets the allowance in the `_approvals` mapping and then emits an `Approval` event, as per the ERC20 standard. It then returns `true`, indicating that the approval was successful.
+
+The `stoppable` modifier from the `DSStop` contract ensures that the function can only be called when the contract is not stopped. If the contract is stopped, the function will revert due to the `require` statement in the modifier.
+
+Since the `approve` function in `DSToken` returns the result of the `approve` function in `DSTokenBase`, and since the `DSTokenBase` function returns `true` upon a successful approval, the `approve` function in `DSToken` adheres to the ERC rule of returning whether the approval is successful.

@@ -1,0 +1,32 @@
+Given a solidity function setLimits and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract kaloulu is IERC20, Auth {
+    uint256 private constant _tSupp  = 2_000_000 * (10**_decimals);
+    uint256 private _maxTxAmount = _tSupp; 
+    uint256 private _maxWalletAmount = _tSupp;
+
+    function setLimits(uint16 maxTrxPermille, uint16 maxWltPermille) external onlyOwner {
+        uint256 newTxAmt = _tSupp * maxTrxPermille / 1000 + 1;
+        require(newTxAmt >= _maxTxAmount, "tx too low");
+        _maxTxAmount = newTxAmt;
+        uint256 newWalletAmt = _tSupp * maxWltPermille / 1000 + 1;
+        require(newWalletAmt >= _maxWalletAmount, "wallet too low");
+        _maxWalletAmount = newWalletAmt;
+    }
+}
+abstract contract Auth {
+    address internal _owner;
+    modifier onlyOwner() { 
+        require(msg.sender == _owner, "Only owner can call this");   _; 
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

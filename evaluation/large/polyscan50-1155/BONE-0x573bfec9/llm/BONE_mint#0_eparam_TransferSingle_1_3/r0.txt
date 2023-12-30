@@ -1,0 +1,16 @@
+YES
+
+The `_mint` function within the `BONE` contract calls the `_mint` function of the `ERC1155` contract, which in turn emits the `TransferSingle` event. The `_id` argument passed to the `TransferSingle` event is obtained from the `_currentTokenId` variable, which represents the token type being transferred. The `_mint` function in the `ERC1155` contract is designed to handle the creation of `amount` tokens of token type `id`, and assigns them to `to`, which is consistent with the rule provided.
+
+Here's the sequence of how the `_mint` function works and ensures the rule is followed:
+
+1. The `mint` function in the `BONE` contract is called with the `to` address as an argument.
+2. The `mint` function calls the `_mint` function of the `ERC1155` contract with the `to` address, `_currentTokenId` as the token type (`id`), `1` as the amount, and an empty `data` argument.
+3. The `_mint` function in the `ERC1155` contract creates a singleton array for `id` and `amount` using the `_asSingletonArray` function.
+4. The `_beforeTokenTransfer` hook is called (which is empty in this case, but can be overridden by derived contracts).
+5. The balance of the `to` address for the token type `id` is increased by the `amount`.
+6. The `TransferSingle` event is emitted with the `_operator` (which is the message sender), `_from` (which is the zero address for minting), `_to` (the recipient address), `_id` (the token type), and `_value` (the amount).
+7. The `_afterTokenTransfer` hook is called (which is also empty in this case).
+8. The `_doSafeTransferAcceptanceCheck` function is called to ensure that if the `to` address is a contract, it properly implements the `IERC1155Receiver` interface and accepts the tokens.
+
+Since the `TransferSingle` event is emitted with the `_id` argument being the token type (`_currentTokenId`) that is being transferred, the rule is satisfied.

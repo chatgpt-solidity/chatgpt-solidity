@@ -1,0 +1,32 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "setApprovalForAll(address,bool) returns()" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+supportsInterface(bytes4) returns(bool)
+hasRole(bytes32,address) returns(bool)
+getRoleAdmin(bytes32) returns(bytes32)
+grantRole(bytes32,address) returns()
+revokeRole(bytes32,address) returns()
+renounceRole(bytes32,address) returns()
+uri(uint256) returns(string)
+balanceOf(address,uint256) returns(uint256)
+balanceOfBatch(address[],uint256[]) returns(uint256[])
+setApprovalForAll(address,bool) returns()
+isApprovedForAll(address,address) returns(bool)
+safeTransferFrom(address,address,uint256,uint256,bytes) returns()
+safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()
+constructor(string,string) returns()
+registerItem(uint256,string) returns()
+updateItem(uint256,uint256,string) returns()
+safeMint(address,uint256,uint256) returns()
+safeSingleMintBatch(address,uint256[]) returns()
+safeMultiMintBatch(address,uint256[],uint256[]) returns()
+name() returns(string)
+symbol() returns(string)
+details(uint256) returns(W3Tour1155.Item)
+detailsOfBatch(uint256[]) returns(W3Tour1155.Item[])
+totalRegisteredItems() returns(uint256)
+DEFAULT_ADMIN_ROLE() returns(bytes32)
+MINTER_ROLE() returns(bytes32)
+"""

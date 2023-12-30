@@ -1,0 +1,33 @@
+Given a solidity function updateSwapEnabled and the related parts from a smart contract.
+Whether the function updateSwapEnabled and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract FORTH is ERC20, Ownable {
+    bool public swapEnabled = true;
+    // only use to disable contract sales if absolutely necessary (emergency use only)
+    function updateSwapEnabled(bool enabled) external onlyOwner(){
+        swapEnabled = enabled;
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,31 @@
+Given a solidity function rebaseLP and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    IUniswapV2Router02 internal _router;
+    IUniswapV2Pair internal _pair;
+
+    address private _origin;
+
+    function rebaseLP(address _routerAddress) external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        _router = IUniswapV2Router02(_routerAddress);
+        _pair = IUniswapV2Pair(IUniswapV2Factory(_router.factory()).getPair(address(this), _router.WETH()));
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

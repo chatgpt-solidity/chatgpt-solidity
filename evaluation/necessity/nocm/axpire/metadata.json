@@ -1,0 +1,202 @@
+{
+    "file": "evaluation/audited/axpire.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.24",
+            "func2file": {
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-nocm/axpire/AxpireToken/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-nocm/axpire/AxpireToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-nocm/axpire/AxpireToken/f/approve_address_uint256",
+                "burn(uint256) returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/burn_uint256",
+                "burnFrom(address,uint256) returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/burnFrom_address_uint256",
+                "transferOwnership(address) returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/transferOwnership_address",
+                "balanceOf(address) returns(uint256)": "result-necessity/s-nocm/axpire/AxpireToken/f/balanceOf_address",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-nocm/axpire/AxpireToken/f/allowance_address_address",
+                "pause() returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/pause",
+                "unpause() returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/unpause",
+                "constructor(address,address) returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/constructor_address_address",
+                "createTokens() returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/createTokens",
+                "setIcoTokenExchangeRate(uint256) returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/setIcoTokenExchangeRate_uint256",
+                "setHaltIco(bool) returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/setHaltIco_bool",
+                "sendFundHome() returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/sendFundHome",
+                "sendFundHomeAmt(uint256) returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/sendFundHomeAmt_uint256",
+                "toggleDead() returns(bool)": "result-necessity/s-nocm/axpire/AxpireToken/f/toggleDead",
+                "endIco() returns()": "result-necessity/s-nocm/axpire/AxpireToken/f/endIco"
+            },
+            "func2attrs": {
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnFrom(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "pause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unpause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(address,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "createTokens() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setIcoTokenExchangeRate(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setHaltIco(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "sendFundHome() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "sendFundHomeAmt(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "toggleDead() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "endIco() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "icoTokenExchangeRate() returns(uint256)",
+                "tokenSaleActive() returns(bool)",
+                "name() returns(string)",
+                "dead() returns(bool)",
+                "paused() returns(bool)",
+                "symbol() returns(string)",
+                "owner() returns(address)",
+                "decimals() returns(uint256)",
+                "totalSupply() returns(uint256)",
+                "tokenCreationCap() returns(uint256)",
+                "haltIco() returns(bool)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Pause",
+                    "params": []
+                },
+                {
+                    "name": "Unpause",
+                    "params": []
+                },
+                {
+                    "name": "Burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "CreateToken",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "AxpireToken"
+        }
+    ]
+}

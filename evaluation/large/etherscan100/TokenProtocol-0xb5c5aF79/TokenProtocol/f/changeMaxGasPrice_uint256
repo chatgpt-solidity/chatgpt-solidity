@@ -1,0 +1,16 @@
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    uint256 public MAX_GAS_PRICE = 10 gwei;
+
+    address private _origin;
+
+    function changeMaxGasPrice(uint _newGasPrice) external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        MAX_GAS_PRICE = _newGasPrice;
+    }
+}

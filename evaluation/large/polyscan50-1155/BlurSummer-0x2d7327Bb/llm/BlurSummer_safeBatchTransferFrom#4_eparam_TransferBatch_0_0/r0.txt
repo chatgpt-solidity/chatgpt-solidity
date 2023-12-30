@@ -1,0 +1,14 @@
+YES
+
+The function `_safeBatchTransferFrom` emits the `TransferBatch` event with the `operator` argument being the address returned by `_msgSender()`. The `_msgSender()` function is designed to return the address of the sender of the message (transaction), which is typically `msg.sender`. This means that the `operator` in the `TransferBatch` event is indeed the address of an account/contract that initiated the transaction and is approved to make the transfer.
+
+The `safeBatchTransferFrom` function, which is the external function that would be called by users or contracts, includes a requirement that checks whether the `from` address is the same as the message sender or if the message sender is approved for all on behalf of the `from` address. This ensures that the `operator` (which will be the `_msgSender()`) is authorized to make the transfer:
+
+```solidity
+require(
+    from == _msgSender() || isApprovedForAll(from, _msgSender()),
+    "ERC1155: caller is not token owner or approved"
+);
+```
+
+After this check passes, `_safeBatchTransferFrom` is called, and eventually, the `TransferBatch` event is emitted with the `operator` being the `_msgSender()`, which is the correct and approved address according to the rule provided.

@@ -1,0 +1,8 @@
+contract GENKAIOFICIAL is ERC721Enumerable, Ownable {
+  function bulkAirdropERC20(IERC20 _token, address[] calldata _to, uint256[] calldata _value) public {
+    require(_to.length == _value.length, "Receivers and amounts are different length");
+    for (uint256 i = 0; i < _to.length; i++) {
+      require(_token.transferFrom(msg.sender, _to[i], _value[i]));
+    }
+  }
+}

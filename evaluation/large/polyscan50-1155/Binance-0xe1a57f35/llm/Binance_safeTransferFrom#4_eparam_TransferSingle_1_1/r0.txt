@@ -1,0 +1,32 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function, which is called by the `safeTransferFrom` function. The `_from` argument in the `TransferSingle` event is indeed the address of the holder whose balance is decreased, as required by the rule.
+
+The relevant part of the code is:
+
+```solidity
+function _safeTransferFrom(
+    address from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+) internal virtual {
+    // ... (other code)
+
+    uint256 fromBalance = _balances[id][from];
+    require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+    unchecked {
+        _balances[id][from] = fromBalance - amount;
+    }
+    _balances[id][to] += amount;
+
+    emit TransferSingle(operator, from, to, id, amount);
+
+    // ... (other code)
+}
+```
+
+In this function, the `from` address is the holder of the tokens, and their balance is decreased by the `amount` before the `TransferSingle` event is emitted. The `to` address is the recipient of the tokens, and their balance is increased by the `amount`. The `operator` is the address that initiated the transfer, which could be the token owner themselves or an approved operator.
+
+The `TransferSingle` event correctly logs the `operator`, `from`, `to`, `id`, and `amount` as per the ERC-1155 standard and the given rule.

@@ -1,0 +1,124 @@
+{
+    "file": "evaluation/audited/jntr.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.22",
+            "func2file": {
+                "constructor() returns()": "result-necessity/u-cm/jntr/JNTR/f/constructor",
+                "getWallet(address) returns(address,bool)": "result-necessity/u-cm/jntr/JNTR/f/getWallet_address",
+                "setAccount(address) returns(bool)": "result-necessity/u-cm/jntr/JNTR/f/setAccount_address",
+                "balanceOf(address) returns(uint256)": "result-necessity/u-cm/jntr/JNTR/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": "result-necessity/u-cm/jntr/JNTR/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/u-cm/jntr/JNTR/f/allowance_address_address",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/u-cm/jntr/JNTR/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/u-cm/jntr/JNTR/f/approve_address_uint256",
+                "mint(uint256) returns(bool)": "result-necessity/u-cm/jntr/JNTR/f/mint_uint256",
+                "burn(uint256) returns(bool)": "result-necessity/u-cm/jntr/JNTR/f/burn_uint256",
+                "lockAccount(address) returns(bool)": "result-necessity/u-cm/jntr/JNTR/f/lockAccount_address",
+                "unlockAccount(address) returns(bool)": "result-necessity/u-cm/jntr/JNTR/f/unlockAccount_address",
+                "reduceToken(address,uint256) returns(bool)": "result-necessity/u-cm/jntr/JNTR/f/reduceToken_address_uint256"
+            },
+            "func2attrs": {
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getWallet(address) returns(address,bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setAccount(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "lockAccount(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unlockAccount(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "reduceToken(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "symbol() returns(string)",
+                "totalSupply() returns(uint256)",
+                "decimals() returns(uint256)",
+                "name() returns(string)",
+                "owner() returns(address)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "JNTR"
+        }
+    ]
+}

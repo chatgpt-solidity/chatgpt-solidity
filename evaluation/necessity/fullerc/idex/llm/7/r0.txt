@@ -1,0 +1,15 @@
+The Solidity event interface you provided:
+
+```solidity
+event Transfer(address indexed, address indexed, uint256);
+```
+
+This event interface is intended to represent a `Transfer` event, which is part of the ERC-20 token standard. According to the ERC-20 specification you provided, the `Transfer` event is defined as follows:
+
+```solidity
+event Transfer(address indexed _from, address indexed _to, uint256 _value);
+```
+
+The event you provided is missing the parameter names (`_from`, `_to`, and `_value`), but it has the correct number and types of parameters (two indexed `address` parameters and one `uint256` parameter). In Solidity, the names of the parameters in the event declaration are not critical for the event's ABI (Application Binary Interface) or for the functionality of the event itself. What matters are the types and order of the parameters, and whether they are indexed or not.
+
+Therefore, the event interface you provided does not violate the ERC-20 standard, as it matches the required signature for the `Transfer` event. However, it is generally good practice to include parameter names for clarity and readability of the code.

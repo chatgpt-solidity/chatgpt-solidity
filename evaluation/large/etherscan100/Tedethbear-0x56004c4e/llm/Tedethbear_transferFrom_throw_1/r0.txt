@@ -1,0 +1,9 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not explicitly check for the `amount` being zero before performing the transfer. The ERC-20 standard does not require a transfer of 0 value to fail, and the code does not contain any checks that would cause a revert or throw an exception for a 0 value transfer.
+
+The `require` statements in `_transfer` check that the sender is not the zero address, the recipient is not the zero address, and that the sender's balance is at least the `amount` to be transferred. However, if `amount` is zero, the sender's balance will always be greater than or equal to `amount`, and the transfer will be allowed to proceed.
+
+Additionally, the `require` statement in `transferFrom` checks that the current allowance is at least the `amount` to be transferred. Again, if `amount` is zero, this check will pass as long as the allowance is not negative, which is not possible with unsigned integers.
+
+Therefore, transfers of 0 values will not throw an exception and are allowed by the contract.

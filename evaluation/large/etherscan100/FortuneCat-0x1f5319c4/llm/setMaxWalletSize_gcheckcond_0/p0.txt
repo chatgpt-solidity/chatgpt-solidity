@@ -1,0 +1,28 @@
+Given a solidity function setMaxWalletSize and the related parts from a smart contract.
+Whether the function setMaxWalletSize and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract FortuneCat is Context, IERC20, Ownable {
+    uint256 public _maxWalletSize = 3 * 10 ** 7 * 10**9;
+    function setMaxWalletSize(uint256 maxWalletSize) public onlyOwner {
+        _maxWalletSize = maxWalletSize;
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

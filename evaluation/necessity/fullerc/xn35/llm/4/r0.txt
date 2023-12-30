@@ -1,0 +1,41 @@
+The provided Solidity code for the `transfer` function and related parts of the `Projecton` contract appear to be intended to implement the ERC20 token standard, which is a common standard for fungible tokens on the Ethereum blockchain.
+
+Let's compare the provided `transfer` function with the ERC20 specification:
+
+ERC20 `transfer` function specification:
+- Transfers `_value` amount of tokens to address `_to`, and MUST fire the `Transfer` event.
+- The function SHOULD throw if the message caller’s account balance does not have enough tokens to spend.
+- Note: Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+
+Provided `transfer` function:
+```solidity
+function transfer(address _to, uint256 _value) returns (bool success) {
+    require(balances[msg.sender] >= _value && _value > 0);
+
+    balances[msg.sender] = balances[msg.sender].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    Transfer(msg.sender, _to, _value);
+    return true;
+}
+```
+
+The provided `transfer` function does the following:
+- Checks if the sender (`msg.sender`) has enough balance to send `_value` tokens and that `_value` is greater than 0.
+- Subtracts `_value` tokens from the sender's balance.
+- Adds `_value` tokens to the receiver's (`_to`) balance.
+- Emits a `Transfer` event.
+- Returns `true` to indicate success.
+
+Based on the ERC20 specification, the provided `transfer` function has a couple of issues:
+
+1. The function should allow transfers of 0 values and still emit the `Transfer` event. The provided code has a requirement that `_value` must be greater than 0, which is not in line with the ERC20 standard.
+
+2. The `transfer` function should be marked as `public` and should return a `bool` according to the ERC20 standard. In the provided code, the visibility is not specified, and the `returns` statement is missing the `public` visibility modifier.
+
+3. The `SafeMath` library functions `sub` and `add` are used correctly to prevent integer underflow and overflow, which is good practice.
+
+4. The `Transfer` event should be declared in the contract with the `event` keyword and should match the ERC20 specification, including the `indexed` keyword for the `_from` and `_to` parameters. The provided code does not show the declaration of the `Transfer` event, so it's not possible to verify if it's correctly implemented.
+
+5. The `transfer` function should be marked as `constant` in the `SafeMath` library, which is outdated syntax. The `constant` keyword has been replaced by `pure` or `view` in newer versions of Solidity, depending on whether the function reads the state or not. Since `sub` and `add` do not read the contract state, they should be marked as `pure`.
+
+To conclude, the provided `transfer` function does not fully comply with the ERC20 standard due to the restriction on transferring 0 values and the lack of the `public` visibility modifier. Additionally, the `SafeMath` library uses outdated syntax with the `constant` keyword. The `Transfer` event declaration should also be verified to ensure it matches the ERC20 specification.

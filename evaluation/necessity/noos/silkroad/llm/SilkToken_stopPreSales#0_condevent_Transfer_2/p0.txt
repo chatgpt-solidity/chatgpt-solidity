@@ -1,0 +1,26 @@
+Given a solidity function stopPreSales and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract SilkToken is owned, TokenERC20 {
+    bool public isPreSales = false;
+
+    /// @notice Stop presales with setting state variable
+    function stopPreSales() public onlyOwner {
+        isPreSales = false;
+    }
+}
+
+contract owned {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

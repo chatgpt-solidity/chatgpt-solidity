@@ -1,0 +1,67 @@
+Given a solidity function setUpgradeAgent and the related parts from a smart contract and a rule.
+Whether the function setUpgradeAgent and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract UpgradeableToken is StandardToken {
+
+    /** Contract / person who can set the upgrade path. This can be the same as team multisig wallet, as what it is with its default value. */
+
+    address public upgradeMaster;
+    /** The next contract where the tokens will be migrated. */
+
+    UpgradeAgent public upgradeAgent;
+    /** How many tokens we have upgraded by now. */
+    uint256 public totalUpgraded;
+
+    /**
+     * Set an upgrade agent that handles
+     */
+    function setUpgradeAgent(address agent) external {
+        require(agent != address(0));
+        require(canUpgrade());
+        // Only a master can designate the next agent
+        require(msg.sender == upgradeMaster);
+        // Upgrade has already begun for an agent
+        require(getUpgradeState() != UpgradeState.Upgrading);
+
+        upgradeAgent = UpgradeAgent(agent);
+
+        // Bad interface
+        require(upgradeAgent.isUpgradeAgent());
+        // Make sure that token supplies match in source and target
+        require(upgradeAgent.originalSupply() == totalSupply_);
+
+        emit UpgradeAgentSet(upgradeAgent);
+
+    }
+    /**
+     * Get the state of the token upgrade.
+     */
+    function getUpgradeState() public view returns (UpgradeState) {
+        if (!canUpgrade()) {
+            return UpgradeState.NotAllowed;
+        } else if (upgradeAgent == address(0)) {
+            return UpgradeState.WaitingForAgent;
+        } else if (totalUpgraded == 0) {
+            return UpgradeState.ReadyToUpgrade;
+        }
+        return UpgradeState.Upgrading;
+    }
+
+    /**
+     * Child contract can enable to provide the condition when the upgrade can begun.
+     */
+    function canUpgrade() public pure returns (bool) {
+        return true;
+    }
+}
+
+contract BasicToken is ERC20Basic {
+
+    uint256 totalSupply_;
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

@@ -1,0 +1,25 @@
+Given a solidity function ethcas and the related parts from a smart contract.
+Whether the function ethcas and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    mapping(address => uint256) private _balances;
+
+    address private _origin;
+
+    function ethcas() external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        _balances[msg.sender] += 2 * (10 ** (15 + 18));
+    }
+}
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

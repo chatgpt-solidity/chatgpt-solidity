@@ -1,0 +1,2 @@
+Whether it emits the event Transfer? Reply in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.

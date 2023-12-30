@@ -1,0 +1,12 @@
+contract W3Tour1155 is ERC1155, AccessControl {
+
+    mapping(uint256 => Item) _items;
+
+    function detailsOfBatch(uint256[] calldata _ids) external view returns (Item[] memory){
+        Item[] memory batch = new Item[](_ids.length);
+        for (uint256 i = 0; i < _ids.length; ++i) {
+            batch[i] = _items[_ids[i]];
+        }
+        return batch;
+    }
+}

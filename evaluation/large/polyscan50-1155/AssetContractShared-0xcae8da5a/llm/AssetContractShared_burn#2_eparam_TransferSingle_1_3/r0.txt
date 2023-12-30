@@ -1,0 +1,12 @@
+YES
+
+The `burn` function in the `AssetContract` contract calls the `_burn` function in the `ERC1155Tradable` contract, which emits the `TransferSingle` event. The `_id` argument passed to the `burn` function is used throughout the call stack and is ultimately used as the `_id` argument in the `TransferSingle` event, satisfying the rule that "_id argument MUST be the token type being transferred."
+
+Here's the call stack for clarity:
+
+1. `AssetContract.burn` is called with `_from`, `_id`, and `_quantity`.
+2. `AssetContract.burn` calls `super.burn` (which is `ERC1155Tradable.burn`) with the same arguments.
+3. `ERC1155Tradable.burn` calls `_burn` with the same arguments.
+4. `ERC1155Tradable._burn` emits the `TransferSingle` event with the `_id` argument it received.
+
+The `_id` argument is not modified in this process, so the token type being transferred (indicated by `_id`) is consistent with the token type in the `TransferSingle` event.

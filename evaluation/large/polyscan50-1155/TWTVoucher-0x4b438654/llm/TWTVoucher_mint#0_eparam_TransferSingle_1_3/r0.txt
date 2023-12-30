@@ -1,0 +1,12 @@
+YES
+
+The `mint` function in the `TWTVoucher` contract calls the `_mint` function in the `ERC1155` contract. The `_mint` function is responsible for creating tokens and assigning them to the `to` address. It emits a `TransferSingle` event as part of its execution.
+
+The `TransferSingle` event is emitted with the following arguments:
+- `_operator`: The address which initiated the transfer, which in this case is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred. For minting, this is the zero address (`address(0)`), indicating token creation.
+- `_to`: The address to which the tokens are transferred, which is the `to` parameter passed to the `_mint` function.
+- `_id`: The token type being transferred, which is the `id` parameter passed to the `_mint` function.
+- `_value`: The number of tokens being transferred, which is the `amount` parameter passed to the `_mint` function.
+
+In the provided code, the `coinbase` variable is used as the token type (`_id`) when calling `_mint`. Since `coinbase` is a private variable within the `TWTVoucher` contract and is not modified elsewhere in the provided code, it represents a single token type. Therefore, the `_id` argument in the `TransferSingle` event correctly represents the token type being transferred, which complies with the given rule.

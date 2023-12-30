@@ -1,0 +1,208 @@
+{
+    "file": "evaluation/polyscan50-721/mainPaint-0x5754a723.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.4",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/transferOwnership_address",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/tokenURI_uint256",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/supportsInterface_bytes4",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/symbol",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor() returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/constructor",
+                "approveNFT(address,uint256) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/approveNFT_address_uint256",
+                "safeMint(address,string) returns(uint256)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/safeMint_address_string",
+                "safefinalMint(address) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/safefinalMint_address",
+                "setfinalTokenURI() returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/setfinalTokenURI",
+                "exchangeMint(uint256,string) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/exchangeMint_uint256_string",
+                "uploadfinaluri(string) returns()": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/uploadfinaluri_string",
+                "finalencode() returns(string)": ".temp/polyscan50-721/mainPaint-0x5754a723/NFT/f/finalencode"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approveNFT(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeMint(address,string) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safefinalMint(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setfinalTokenURI() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "exchangeMint(uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "uploadfinaluri(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "finalencode() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "tokenId() returns(uint256)"
+            ],
+            "ercs": [
+                "165",
+                "721metadata",
+                "721uristorage",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "NFT"
+        }
+    ]
+}

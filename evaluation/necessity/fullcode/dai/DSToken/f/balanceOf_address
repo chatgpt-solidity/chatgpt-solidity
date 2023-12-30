@@ -1,0 +1,8 @@
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => uint256) _balances;
+
+    function balanceOf(address src) public view returns (uint) {
+        return _balances[src];
+    }
+}
+

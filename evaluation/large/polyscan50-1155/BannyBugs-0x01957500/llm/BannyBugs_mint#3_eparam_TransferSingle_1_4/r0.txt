@@ -1,0 +1,26 @@
+YES
+
+The `_mint` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_value` argument in the `TransferSingle` event is set to `amount`, which is the number of tokens that are being minted and assigned to the `to` address. The `_balances[id][to]` mapping is increased by `amount`, which matches the increase in the recipient's balance. The `_from` address is set to the zero address, indicating that tokens are being minted rather than transferred from an existing holder.
+
+Here's the relevant part of the code:
+
+```solidity
+function _mint(address to, uint256 id, uint256 amount, bytes memory data) internal virtual {
+    require(to != address(0), "ERC1155: mint to the zero address");
+
+    address operator = _msgSender();
+    uint256[] memory ids = _asSingletonArray(id);
+    uint256[] memory amounts = _asSingletonArray(amount);
+
+    _beforeTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+    _balances[id][to] += amount;
+    emit TransferSingle(operator, address(0), to, id, amount);
+
+    _afterTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+    _doSafeTransferAcceptanceCheck(operator, address(0), to, id, amount, data);
+}
+```
+
+The `TransferSingle` event is emitted with the `_operator` as the operator who initiated the minting, `_from` as the zero address (since tokens are being minted), `_to` as the recipient address, `_id` as the token type, and `_value` as the amount of tokens minted. This complies with the rule that the `_value` must match the number of tokens the recipient's balance is increased by.

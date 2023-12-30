@@ -1,0 +1,14 @@
+contract BaoDrops is
+    ERC1155,
+    Ownable,
+    ERC1155Burnable,
+    ERC1155Supply
+{
+    mapping(uint => string) private tokenuri;
+
+    function uri(
+        uint256 _tokenID
+    ) public view override returns (string memory) {
+        return tokenuri[_tokenID];
+    }
+}

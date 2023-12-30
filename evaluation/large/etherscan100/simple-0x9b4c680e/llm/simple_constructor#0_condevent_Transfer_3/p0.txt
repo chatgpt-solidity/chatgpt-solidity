@@ -1,0 +1,159 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract simple is ERC20, Ownable {
+
+    uint256 public maxBuyAmount;
+    uint256 public maxSellAmount;
+
+    uint256 public maxWalletAmount;
+    IDexRouter public dexRouter;
+    address public lpPair;
+
+    uint256 public swapTokensAtAmount;
+    address MarketingAddress;
+    address DevCutAddress;
+
+    uint256 public buyTotalFees;
+    uint256 public buyMarketingFee;
+    uint256 public buyLiquidityFee;
+    uint256 public buyDevCutFee;
+    uint256 public buyBurnFee;
+
+    uint256 public sellTotalFees;
+    uint256 public sellMarketingFee;
+    uint256 public sellLiquidityFee;
+    uint256 public sellDevCutFee;
+    uint256 public sellBurnFee;
+
+    /******************/
+
+    // exlcude from fees and max transaction amount
+    mapping (address => bool) private _isExcludedFromFees;
+
+    mapping (address => bool) public _isExcludedMaxTransactionAmount;
+    // store addresses that a automatic market maker pairs. Any transfer *to* these addresses
+    // could be subject to a maximum transfer amount
+    mapping (address => bool) public automatedMarketMakerPairs;
+
+    constructor() ERC20("Simple", "SIMPLE") {
+
+        address newOwner = msg.sender; // can leave alone if owner is deployer.
+
+        IDexRouter _dexRouter = IDexRouter(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+        dexRouter = _dexRouter;
+
+        // create pair
+        lpPair = IDexFactory(_dexRouter.factory()).createPair(address(this), _dexRouter.WETH());
+        _excludeFromMaxTransaction(address(lpPair), true);
+        _setAutomatedMarketMakerPair(address(lpPair), true);
+
+        uint256 totalSupply = 11000000000 * 1e18;
+
+        maxBuyAmount = totalSupply * 1 / 100;
+        maxSellAmount = totalSupply * 1 / 100;
+        maxWalletAmount = totalSupply * 1 / 100;
+        swapTokensAtAmount = totalSupply * 1 / 10000;
+
+        buyMarketingFee = 10;
+        buyLiquidityFee = 0;
+        buyDevCutFee = 0;
+        buyBurnFee = 0;
+        buyTotalFees = buyMarketingFee + buyLiquidityFee + buyDevCutFee + buyBurnFee;
+
+        sellMarketingFee = 20;
+        sellLiquidityFee = 0;
+        sellDevCutFee = 0;
+        sellBurnFee = 0;
+        sellTotalFees = sellMarketingFee + sellLiquidityFee + sellDevCutFee + sellBurnFee;
+
+        _excludeFromMaxTransaction(newOwner, true);
+        _excludeFromMaxTransaction(address(this), true);
+        _excludeFromMaxTransaction(address(0xdead), true);
+
+        excludeFromFees(newOwner, true);
+        excludeFromFees(address(this), true);
+        excludeFromFees(address(0xdead), true);
+
+        MarketingAddress = address(newOwner);
+        DevCutAddress = address(newOwner);
+
+        _createInitialSupply(newOwner, totalSupply);
+        transferOwnership(newOwner);
+    }
+
+    function _excludeFromMaxTransaction(address updAds, bool isExcluded) private {
+        _isExcludedMaxTransactionAmount[updAds] = isExcluded;
+        emit MaxTransactionExclusion(updAds, isExcluded);
+    }
+
+    function _setAutomatedMarketMakerPair(address pair, bool value) private {
+        automatedMarketMakerPairs[pair] = value;
+
+        _excludeFromMaxTransaction(pair, value);
+
+        emit SetAutomatedMarketMakerPair(pair, value);
+    }
+
+    function excludeFromFees(address account, bool excluded) public onlyOwner {
+        _isExcludedFromFees[account] = excluded;
+        emit ExcludeFromFees(account, excluded);
+    }
+}
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    mapping(address => uint256) private _balances;
+
+
+    uint256 private _totalSupply;
+    string private _name;
+
+    string private _symbol;
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+
+    function _createInitialSupply(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: mint to the zero address");
+
+        _totalSupply += amount;
+        _balances[account] += amount;
+        emit Transfer(address(0), account, amount);
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    constructor () {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function transferOwnership(address newOwner) public virtual onlyOwner {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

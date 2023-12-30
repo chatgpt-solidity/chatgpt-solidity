@@ -1,0 +1,5 @@
+NO
+
+The provided `transferFrom` function in the `Projecton` contract does not violate the ERC rule that states "Transfers of 0 values MUST be treated as normal transfers." The function does not explicitly disallow transfers of 0 value. The condition `_value > 0` is not present, which means that the function should allow transfers of 0 value to proceed as normal, assuming that the allowance and balance checks pass.
+
+However, it's worth noting that the `require` statement in the `transferFrom` function does not explicitly check for `_value` being non-negative, but since `_value` is of type `uint256` (an unsigned integer), it cannot be negative by definition. Therefore, a transfer of 0 value would not be rejected by this function.

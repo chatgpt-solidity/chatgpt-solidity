@@ -1,0 +1,10 @@
+contract BlackList is Ownable, BasicToken {
+
+    /////// Getters to allow the same blacklist to be used also by other contracts (including upgraded Tether) ///////
+    function getBlackListStatus(address _maker) external view returns (bool) {
+        return isBlackListed[_maker];
+    }
+
+    mapping (address => bool) public isBlackListed;
+}
+

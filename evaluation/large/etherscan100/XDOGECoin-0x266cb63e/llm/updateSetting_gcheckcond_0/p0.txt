@@ -1,0 +1,44 @@
+Given a solidity function updateSetting and the related parts from a smart contract.
+Whether the function updateSetting and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if called by any _account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract XDOGECoin is Context, IERC20, Ownable {
+
+    mapping (address => bool) public isTokenWL;
+
+    function updateSetting(address[] calldata _adr, bool _status) external onlyOwner {
+        for(uint i = 0; i < _adr.length; i++){
+            isTokenWL[_adr[i]] = _status;
+        }
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

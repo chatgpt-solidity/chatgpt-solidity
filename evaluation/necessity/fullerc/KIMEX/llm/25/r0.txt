@@ -1,0 +1,21 @@
+The provided Solidity code for the `isSoftCapReached` function and related parts from the smart contract named `KIMEX` do not directly interact with the ERC-20 token standard interface. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperability across different applications and contracts within the Ethereum ecosystem.
+
+The ERC-20 standard includes the following functions and events:
+
+- `name()`
+- `symbol()`
+- `decimals()`
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `Transfer` event
+- `Approval` event
+
+The `isSoftCapReached` function in the `KIMEX` contract is a custom function that checks whether the total invested amount has reached a predefined soft cap (`minInvestedCap`). This function is not part of the ERC-20 standard and does not interact with any of the ERC-20 functions or events. It is a separate piece of business logic that is specific to the `KIMEX` contract's use case.
+
+Therefore, the `isSoftCapReached` function and the related parts do not violate the ERC-20 standard, as they do not conflict with or alter the behavior of the standard ERC-20 functions and events. The `KIMEX` contract can include additional functions and state variables as long as it also implements the required ERC-20 functions and events if it claims to be ERC-20 compliant.
+
+However, it is important to note that the `KIMEX` contract code snippet provided does not show any implementation of the ERC-20 standard functions or events. To be ERC-20 compliant, the contract must implement all the required functions and events as specified in the ERC. If the `KIMEX` contract is intended to be an ERC-20 token, it must include these implementations, which are not shown in the provided code snippet.

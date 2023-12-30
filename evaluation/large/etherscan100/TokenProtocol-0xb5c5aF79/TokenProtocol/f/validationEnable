@@ -1,0 +1,9 @@
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+
+    bool internal validtionState;
+
+    function validationEnable() public view returns (bool) {
+        return validtionState;
+    }
+}

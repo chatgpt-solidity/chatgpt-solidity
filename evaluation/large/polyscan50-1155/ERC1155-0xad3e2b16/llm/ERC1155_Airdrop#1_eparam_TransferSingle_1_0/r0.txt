@@ -1,0 +1,5 @@
+YES
+
+The `Airdrop` function in the provided Solidity code emits the `TransferSingle` event for each item ID in the `itemsIds` array being airdropped to the corresponding address in the `to` array. The `_operator` argument in the `TransferSingle` event is set to `msg.sender`, which is the address of the account that called the `Airdrop` function.
+
+Since the `Airdrop` function is also restricted to the contract owner by the `onlyOwner` modifier, and the `msg.sender` is the owner when the function is called, the `_operator` argument is indeed an account that is approved to make the transfer. Therefore, the event `TransferSingle` is emitted according to the given rule.

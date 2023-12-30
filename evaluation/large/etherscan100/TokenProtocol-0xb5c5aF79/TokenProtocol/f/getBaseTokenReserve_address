@@ -1,0 +1,9 @@
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    IUniswapV2Pair internal _pair;
+
+    function getBaseTokenReserve(address token) public view returns (uint256) {
+        (uint112 reserve0, uint112 reserve1,) = _pair.getReserves();
+        uint256 baseTokenReserve = (_pair.token0() == token) ? uint256(reserve0) : uint256(reserve1);
+        return baseTokenReserve;
+    } 
+}

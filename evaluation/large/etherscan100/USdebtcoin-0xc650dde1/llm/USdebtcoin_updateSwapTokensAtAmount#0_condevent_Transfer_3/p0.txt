@@ -1,0 +1,69 @@
+Given a solidity function updateSwapTokensAtAmount and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.10;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract USdebtcoin is ERC20, Ownable {
+    uint256 public swapTokensAtAmount;
+
+    // change the minimum amount of tokens to sell from fees
+    function updateSwapTokensAtAmount(uint256 newAmount)
+        external
+        onlyOwner
+        returns (bool)
+    {
+        require(
+            newAmount >= (totalSupply() * 1) / 100000,
+            "Swap amount cannot be lower than 0.001% total supply."
+        );
+        require(
+            newAmount <= (totalSupply() * 5) / 1000,
+            "Swap amount cannot be higher than 0.5% total supply."
+        );
+        swapTokensAtAmount = newAmount;
+        return true;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    uint256 private _totalSupply;
+
+    /**
+     * @dev See {IERC20-totalSupply}.
+     */
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

@@ -1,0 +1,28 @@
+Given a solidity function setExempt and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract kaloulu is IERC20, Auth {
+    mapping (address => bool) private _noFees;
+    mapping (address => bool) private _noLimits;
+    mapping (address => bool) private _isLP;
+    function setExempt(address wlt, bool noFees, bool noLimits) external onlyOwner {
+        if (noLimits || noFees) { require(!_isLP[wlt], "Cannot exempt LP"); }
+        _noFees[ wlt ] = noFees;
+        _noLimits[ wlt ] = noLimits;
+    }
+}
+abstract contract Auth {
+    address internal _owner;
+    modifier onlyOwner() { 
+        require(msg.sender == _owner, "Only owner can call this");   _; 
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

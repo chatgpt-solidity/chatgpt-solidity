@@ -1,0 +1,39 @@
+The provided Solidity function interfaces are being compared to the ERC-20 token standard, which is the most common standard for Ethereum tokens. The ERC-20 standard specifies a minimal set of functions and events that a compliant token contract must implement to enable interoperability across different applications and wallets.
+
+Here's a breakdown of the provided interfaces and whether they comply with the ERC-20 standard:
+
+- `stop() returns()` - Not part of ERC-20.
+- `start() returns()` - Not part of ERC-20.
+- `setOwner(address) returns()` - Not part of ERC-20.
+- `setAuthority(DSAuthority) returns()` - Not part of ERC-20.
+- `totalSupply() returns(uint256)` - Complies with ERC-20.
+- `balanceOf(address) returns(uint256)` - Complies with ERC-20.
+- `allowance(address,address) returns(uint256)` - Complies with ERC-20.
+- `transfer(address,uint256) returns(bool)` - Complies with ERC-20.
+- `transferFrom(address,address,uint256) returns(bool)` - Complies with ERC-20.
+- `approve(address,uint256) returns(bool)` - Complies with ERC-20.
+- `DSToken(bytes32) returns()` - Not part of ERC-20.
+- `approve(address) returns(bool)` - Does not comply with ERC-20 (missing the `_value` parameter).
+- `push(address,uint256) returns()` - Not part of ERC-20.
+- `pull(address,uint256) returns()` - Not part of ERC-20.
+- `move(address,address,uint256) returns()` - Not part of ERC-20.
+- `mint(uint256) returns()` - Not part of ERC-20.
+- `burn(uint256) returns()` - Not part of ERC-20.
+- `mint(address,uint256) returns()` - Not part of ERC-20.
+- `burn(address,uint256) returns()` - Not part of ERC-20.
+- `setName(bytes32) returns()` - Not part of ERC-20.
+- `symbol() returns(bytes32)` - Partially complies with ERC-20 (should return `string` instead of `bytes32`).
+- `decimals() returns(uint256)` - Partially complies with ERC-20 (should return `uint8` instead of `uint256`).
+- `name() returns(bytes32)` - Partially complies with ERC-20 (should return `string` instead of `bytes32`).
+- `stopped() returns(bool)` - Not part of ERC-20.
+- `owner() returns(address)` - Not part of ERC-20.
+- `authority() returns(DSAuthority)` - Not part of ERC-20.
+
+The contract includes several functions that are not part of the ERC-20 standard, which is not necessarily a violation as long as the core ERC-20 functions are implemented correctly. However, there are a few discrepancies:
+
+1. The `approve(address) returns(bool)` function is missing the `_value` parameter, which is required by the ERC-20 standard.
+2. The `symbol()`, `decimals()`, and `name()` functions have return types that do not match the ERC-20 standard. ERC-20 expects `string` for `name()` and `symbol()`, and `uint8` for `decimals()`.
+
+Additionally, the contract should include the `Transfer` and `Approval` events as specified by the ERC-20 standard. These events are not listed in the provided interfaces but are crucial for ERC-20 compliance.
+
+In conclusion, the provided Solidity function interfaces do not fully comply with the ERC-20 standard due to the discrepancies mentioned above. To be fully compliant, the contract would need to adjust the `approve`, `symbol`, `decimals`, and `name` functions to match the ERC-20 specifications and ensure that the `Transfer` and `Approval` events are implemented.

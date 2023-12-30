@@ -1,0 +1,3 @@
+YES
+
+The given Solidity interfaces contain the mapping `mapping(address => mapping(address => uint256)) public allowance;` which indicates that there is a public state variable `allowance` that takes two `address` types as parameters and returns a `uint256`. In Solidity, a public state variable automatically generates a getter function with the same name. Therefore, the interface implicitly contains a function `allowance(address,address) returns(uint256)` that matches the required signature.

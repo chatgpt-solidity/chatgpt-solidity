@@ -1,0 +1,9 @@
+The provided Solidity code defines a set of contracts (`DSNote`, `DSAuth`, `DSStop`) that are not directly related to the ERC-20 token standard. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperability with other contracts and clients. The standard includes functions for transferring tokens, querying balances, and allowing tokens to be spent by approved third parties.
+
+The `DSNote` contract appears to be a utility contract that logs a `LogNote` event whenever a function with the `note` modifier is called. The `DSAuth` contract provides an authorization mechanism for certain actions, and the `DSStop` contract extends both `DSNote` and `DSAuth` to provide a mechanism to stop certain actions from being performed if the `stopped` boolean is set to `true`.
+
+The `start` function in the `DSStop` contract is used to set the `stopped` boolean to `false`, indicating that the stopping mechanism is no longer active. This function is protected by the `auth` modifier, which requires that the caller is authorized to perform the action.
+
+The ERC-20 standard does not specify any requirements regarding contract access control, stopping mechanisms, or logging of function calls. These features are orthogonal to the ERC-20 standard and do not conflict with it. The ERC-20 standard focuses solely on the token-related functionality.
+
+Therefore, the `start` function and the related parts of the provided code do not violate the ERC-20 standard, as they do not pertain to the token-specific functions and events that the standard defines. However, it is important to note that the provided code does not include any of the ERC-20 functions or events, so it cannot be considered an ERC-20 compliant token contract on its own. It would need to implement all the required functions and events from the ERC-20 specification to be considered compliant.

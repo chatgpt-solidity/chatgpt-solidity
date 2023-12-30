@@ -1,0 +1,13 @@
+YES
+
+The `mintBatch` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_values` argument in the `TransferBatch` event is the `amounts` array, which represents the number of tokens to mint for each corresponding item ID in the `itemsIds` array. The `mintBatch` function increases the balance of the recipient (`to`) by the amounts specified in the `amounts` array for each item ID in the `itemsIds` array. This matches the rule that the `_values` argument must be the list of the number of tokens the holder balance is increased by, which in the case of minting, is from the zero address (indicating token creation).
+
+The `TransferBatch` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is `msg.sender`.
+- `_from`: The zero address, indicating that the tokens are being minted (created) rather than transferred from an existing holder.
+- `_to`: The recipient address receiving the newly minted tokens.
+- `_ids`: The list of item IDs for which tokens are being minted.
+- `_values`: The list of amounts of tokens being minted for each item ID, which matches the increase in the recipient's balance.
+
+Therefore, the `TransferBatch` event is emitted in compliance with the rule provided.

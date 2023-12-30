@@ -1,0 +1,3 @@
+NO
+
+The `TransferSingle` event is emitted in the `_burn` function with the `_to` argument set to the zero address (`address(0)`), which indicates that tokens are being burned (destroyed) rather than transferred to a recipient with a balance increase. The rule states that the `_to` argument must be the address of the recipient whose balance is increased, but in the case of burning tokens, there is no recipient whose balance is increased; instead, the tokens are being removed from circulation.

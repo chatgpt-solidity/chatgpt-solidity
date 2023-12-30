@@ -1,0 +1,25 @@
+Given a solidity function startTrading and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+contract zepump is IERC20, tokenStaking, Ownable {
+    bool private tradingAllowed = false;
+    function startTrading() external onlyOwner {
+        tradingAllowed = true;
+        emit TradingEnabled(msg.sender, block.timestamp);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

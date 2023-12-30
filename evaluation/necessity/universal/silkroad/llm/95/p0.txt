@@ -1,0 +1,30 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract owned {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract SilkToken is owned, TokenERC20 {
+
+    mapping(address => bool) public frozenAccount;
+
+    /// @notice `freeze? Prevent | Allow` `target` from sending & receiving tokens
+    /// @param target Address to be frozen
+    /// @param freeze either to freeze it or not
+    function freezeAccount(address target, bool freeze) public onlyOwner {
+        frozenAccount[target] = freeze;
+        FrozenFunds(target, freeze);
+    }
+}
+"""
+
+Condition:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

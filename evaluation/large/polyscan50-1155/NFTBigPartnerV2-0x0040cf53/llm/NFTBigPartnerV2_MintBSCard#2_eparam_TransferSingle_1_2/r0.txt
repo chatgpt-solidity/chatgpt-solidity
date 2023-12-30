@@ -1,0 +1,21 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is responsible for creating tokens and assigning them to a recipient address `to`. The function emits a `TransferSingle` event with the `_to` argument set to the address that receives the newly minted tokens, which is the intended recipient whose balance is increased.
+
+In the provided `MintBSCard` function of the `NFTBigPartnerV2` contract, the `_mint` function is called with `msg.sender` as the `to` argument:
+
+```solidity
+_mint(msg.sender, _n, _cardsNum, "0x");
+```
+
+This means that the `msg.sender` is the recipient of the minted tokens, and their balance will be increased by `_cardsNum` of token type `_n`.
+
+The `TransferSingle` event is then emitted within the `_mint` function as per the ERC1155 standard implementation:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+Here, `operator` is the address performing the mint operation (which is `_msgSender()` in this context), `address(0)` represents the address from which the tokens are minted (indicating a mint operation rather than a transfer), `to` is the recipient address (`msg.sender` in the `MintBSCard` function), `id` is the token type, and `amount` is the number of tokens minted.
+
+Since the `TransferSingle` event is emitted with the `_to` argument set to the recipient's address (`msg.sender`) whose balance is increased, the rule is followed correctly.

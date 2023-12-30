@@ -1,0 +1,9 @@
+NO
+
+The `_transfer` function within the `CHMS` contract includes a requirement that the `amount` must be greater than zero:
+
+```solidity
+require(amount > 0, "Transfer amount must be greater than zero");
+```
+
+This line will cause the function to revert if a transfer of 0 value is attempted. Therefore, the `transferFrom` function, which calls `_transfer`, will also revert if it is called with an amount of 0.

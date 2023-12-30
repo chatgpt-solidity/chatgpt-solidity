@@ -1,0 +1,3 @@
+YES
+
+The provided Solidity interfaces contain the function `approve(address _spender, uint256 _value) returns (bool success)` which matches the signature `approve(address,uint256) returns(bool)`. The parameter types (`address` and `uint256`) and the return type (`bool`) are as specified.

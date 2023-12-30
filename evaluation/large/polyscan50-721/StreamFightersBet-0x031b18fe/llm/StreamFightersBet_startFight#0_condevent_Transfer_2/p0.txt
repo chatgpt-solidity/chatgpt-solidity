@@ -1,0 +1,68 @@
+Given a solidity function startFight and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    ////////////////////////////////////////
+    //                                    //
+    //         STATE VARIABLES            //
+    //                                    //
+    ////////////////////////////////////////
+    // contract owner adress
+    address private owner;
+
+    // holds all created fights (key: idCounter)
+    mapping(uint256 => Fight) fights;
+
+    ////////////////////////////////////////
+    //                                    //
+    //              MODIFIERS             //
+    //                                    //      
+    ////////////////////////////////////////
+
+    /*
+    *  @notice  Restrict caller only owner
+    */
+    modifier onlyOwner() {
+        require(msg.sender == owner, "caller is not owner");
+        _;
+    }
+
+    /*
+    *  @notice  Ensure fight exists
+    */
+    modifier fightExists(uint256 _fightId){
+        require(fights[_fightId].exists, "on chain fight does not exist");
+        _;
+    }
+
+    /*
+    *  @notice  Ensure fight has not started
+    */
+    modifier fightNotStarted(uint256 _fightId){
+        require(fights[_fightId].state == FightState.NOT_STARTED, "fight started");
+        _;
+    }
+    /*
+    *  @notice  Changes the fight state to started
+    *  @dev     Marks a fight as started; can only be done by the contract owner
+    *  @param   _fightId The ID of the fight to start
+    */
+    function startFight(uint256 _fightId) 
+        public
+        onlyOwner
+        fightExists(_fightId) 
+        fightNotStarted(_fightId)
+    {
+        fights[_fightId].state = FightState.STARTED;
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is destroyed and removed from circulation.
+"""

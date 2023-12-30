@@ -1,0 +1,9 @@
+contract kaloulu is IERC20, Auth {
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    function approve(address spendr, uint256 amount) public override returns (bool) {
+        _allowances[msg.sender][spendr] = amount;
+        emit Approval(msg.sender, spendr, amount);
+        return true;
+    }
+}

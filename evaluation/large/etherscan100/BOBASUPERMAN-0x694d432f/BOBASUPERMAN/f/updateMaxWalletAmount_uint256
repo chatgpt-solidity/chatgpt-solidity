@@ -1,0 +1,35 @@
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract BOBASUPERMAN is ERC20, Ownable {
+    uint256 public maxWalletAmount;
+
+    function updateMaxWalletAmount(uint256 newNum) external onlyOwner {
+        require(
+            newNum >= ((totalSupply() * 3) / 1000) / 1e18,
+            "Cannot set max wallet amount lower than 0.3%"
+        );
+        maxWalletAmount = newNum * (10 ** 18);
+        emit UpdatedMaxWalletAmount(maxWalletAmount);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    uint256 private _totalSupply;
+
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}
+

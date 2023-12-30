@@ -1,0 +1,82 @@
+Given a solidity function unstake and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+abstract contract ReentrancyGuard {
+    // Booleans are more expensive than uint256 or any type that takes up a full
+    // word because each write operation emits an extra SLOAD to first read the
+    // slot's contents, replace the bits taken up by the boolean, and then write
+    // back. This is the compiler's defense against contract upgrades and
+    // pointer aliasing, and it cannot be disabled.
+
+    // The values being non-zero value makes deployment a bit more expensive,
+    // but in exchange the refund on every call to nonReentrant will be lower in
+    // amount. Since refunds are capped to a percentage of the total
+    // transaction's gas, it is best to keep them low in cases like this one, to
+    // increase the likelihood of the full refund coming into effect.
+    uint256 private constant _NOT_ENTERED = 1;
+
+    uint256 private constant _ENTERED = 2;
+    uint256 private _status;
+
+    modifier nonReentrant() {
+        // On the first call to nonReentrant, _notEntered will be true
+        require(_status != _ENTERED, "ReentrancyGuard: reentrant call");
+
+        // Any calls to nonReentrant after this point will fail
+        _status = _ENTERED;
+
+        _;
+
+        // By storing the original value once again, a refund is triggered (see
+        // https://eips.ethereum.org/EIPS/eip-2200)
+        _status = _NOT_ENTERED;
+    }
+}
+
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    address public _fomoMofo;
+
+    mapping(uint256 => StakedOwner) private _owners;
+
+    mapping(address => uint256) private _balances;
+    mapping(uint256 => uint256) private stakingStarted;
+    mapping(uint256 => uint256) private stakingTotal;
+
+    function unstake(uint256[] calldata mofoIds) external nonReentrant {
+        uint256 length = mofoIds.length;
+
+        for (uint256 i = 0; i < length; ) {
+            uint256 id = mofoIds[i];
+            require(
+                msg.sender == _owners[id].ownerAddress,
+                "Address is not owner"
+            );
+
+            unchecked {
+                stakingTotal[id] += block.timestamp - stakingStarted[id];
+                _balances[msg.sender] -= 1;
+            }
+
+            stakingStarted[id] = 0;
+            _owners[id].ownerAddress = address(0);
+
+            emit Transfer(msg.sender, address(0), id);
+
+            IERC721(_fomoMofo).transferFrom(address(this), msg.sender, id);
+
+            unchecked {
+                i++;
+            }
+        }
+    }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is cleared
+"""

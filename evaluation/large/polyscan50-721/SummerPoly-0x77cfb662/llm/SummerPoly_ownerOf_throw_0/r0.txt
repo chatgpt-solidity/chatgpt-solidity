@@ -1,0 +1,5 @@
+YES
+
+In the provided Solidity code, the `ownerOf` function calls the internal `_ownerOf` function to get the owner address of a given `tokenId`. If the `tokenId` does not exist or is owned by the zero address (which is considered an invalid owner in this context), the `_ownerOf` function will return the zero address.
+
+The `ownerOf` function then checks if the returned owner address is the zero address and, if it is, it throws an error by using the `require` statement with the message "ERC721: invalid token ID". Therefore, if the condition is to query a `tokenId` that is associated with the zero address (which implies that the token does not exist or is invalid), the `ownerOf` function will throw an error.

@@ -1,0 +1,35 @@
+The provided Solidity code for the `approve` function and related parts of the smart contract are intended to implement an ERC20 token with some additional features, such as pausability. Let's analyze the `approve` function against the ERC20 standard as described in the provided ERC documentation.
+
+The ERC20 standard specifies the following for the `approve` function:
+
+```
+approve
+Allows _spender to withdraw from your account multiple times, up to the _value amount. If this function is called again it overwrites the current allowance with _value. 
+NOTE: To prevent attack vectors like the one described here and discussed here, clients SHOULD make sure to create user interfaces in such a way that they set the allowance first to 0 before setting it to another value for the same spender. THOUGH The contract itself shouldn’t enforce it, to allow backwards compatibility with contracts deployed before.
+function approve(address _spender, uint256 _value) public returns (bool success)
+```
+
+The `approve` function in the `StandardToken` contract has an additional requirement that is not part of the ERC20 standard:
+
+```solidity
+require(_value == 0 || allowed[msg.sender][_spender] == 0);
+```
+
+This line enforces that the new allowance can only be set if the previous allowance is zero or the new allowance being set is zero. This is a security measure to prevent the known ERC20 race condition issue, where setting a new allowance can be abused by an approved spender who acts quickly before the allowance is changed. However, the ERC20 standard explicitly states that the contract itself shouldn't enforce setting the allowance to zero before setting it to a new value, to maintain backward compatibility with contracts deployed before this issue was known.
+
+Therefore, the `approve` function in the `StandardToken` contract violates the ERC20 standard by enforcing a restriction that the standard explicitly states should not be enforced by the contract.
+
+Additionally, the `AxpirePausableToken` contract introduces a `whenNotPaused` modifier to the `approve` function:
+
+```solidity
+function approve(
+    address _spender,
+    uint256 _value
+) public whenNotPaused returns (bool) {
+    return super.approve(_spender, _value);
+}
+```
+
+This modifier is not part of the ERC20 standard, but it does not violate the standard. It is an additional feature that allows the token contract to be paused, preventing approvals (and other functions) from being called when the contract is in a paused state. This is a common pattern used in many token contracts to add an emergency stop mechanism.
+
+In summary, the `approve` function in the `StandardToken` contract violates the ERC20 standard by enforcing a requirement that the standard explicitly states should not be enforced by the contract. The `AxpirePausableToken` contract's use of the `whenNotPaused` modifier does not violate the ERC20 standard, as it is an additional feature that does not conflict with the standard's requirements.

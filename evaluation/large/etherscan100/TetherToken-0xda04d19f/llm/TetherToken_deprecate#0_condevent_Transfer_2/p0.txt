@@ -1,0 +1,41 @@
+Given a solidity function deprecate and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.16;
+contract TetherToken is Pausable, StandardToken, BlackList {
+    address public upgradedAddress;
+    bool public deprecated;
+
+    // deprecate current contract in favour of a new one
+    function deprecate(address _upgradedAddress) public onlyOwner {
+        deprecated = true;
+        upgradedAddress = _upgradedAddress;
+        emit Deprecate(_upgradedAddress);
+    }
+}
+contract Ownable is Context {
+  address private _owner;
+
+  /**
+   * @dev Throws if called by any account other than the owner.
+   */
+  modifier onlyOwner() {
+    require(_owner == _msgSender(), "Ownable: caller is not the owner");
+    _;
+  }
+}
+
+contract Context {
+
+  function _msgSender() internal view returns (address payable) {
+    return msg.sender;
+  }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

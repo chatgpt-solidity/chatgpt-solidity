@@ -1,0 +1,15 @@
+YES
+
+The `mintBatch` function in the `NFTBigPartnerV2` contract calls the `_mintBatch` function in the `ERC1155` contract. The `_mintBatch` function is responsible for minting a batch of tokens and it emits the `TransferBatch` event as required by the ERC1155 standard.
+
+The `TransferBatch` event is emitted with the following parameters:
+
+- `operator`: The address which initiated the batch minting (in this case, it will be the owner of the contract since `mintBatch` is restricted to the owner by the `onlyOwner` modifier).
+- `from`: The address from which the tokens are being transferred. Since this is a minting operation, the `from` address is the zero address (`address(0)`).
+- `to`: The address to which the tokens are being minted.
+- `ids`: The list of token IDs that are being minted.
+- `amounts`: The list of corresponding amounts for each token ID.
+
+The rule states that the `_ids` argument must be the list of tokens being transferred, and in the context of the `TransferBatch` event, this is indeed the case. The `ids` parameter represents the list of token IDs being minted and transferred to the `to` address.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule.

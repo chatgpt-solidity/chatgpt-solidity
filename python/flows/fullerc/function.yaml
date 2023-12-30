@@ -1,0 +1,13 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a solidity code for function <function> and the related parts from a smart contract and a ERC.
+      Whether the function <function> and the related parts violate the given ERC? 
+
+      Function(and related parts) to audit:"""
+      <code>
+      """
+
+      ERC:"""
+      <erc>
+      """

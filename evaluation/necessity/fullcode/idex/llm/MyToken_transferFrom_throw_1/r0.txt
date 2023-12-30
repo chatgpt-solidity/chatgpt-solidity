@@ -1,0 +1,3 @@
+YES
+
+In the provided Solidity code, the `transfer` and `transferFrom` functions do not explicitly check for transfers of 0 value. However, they do check for underflows and overflows, which would not be triggered by a transfer of 0 value. Since there is no explicit check for a 0 value transfer and no other conditions in the code that would cause a throw due to a 0 value transfer, the functions would not throw in the case of transferring 0 tokens. They would execute normally and return true, assuming all other conditions (such as sufficient balance and allowance) are met.

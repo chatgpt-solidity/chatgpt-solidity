@@ -1,0 +1,42 @@
+Given a solidity function setDevWallet and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+    address public tokenOwner;
+    address payable public devWallet;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+
+    function setDevWallet(address payable newDevWallet) external onlyOwner {
+        devWallet = payable(newDevWallet);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

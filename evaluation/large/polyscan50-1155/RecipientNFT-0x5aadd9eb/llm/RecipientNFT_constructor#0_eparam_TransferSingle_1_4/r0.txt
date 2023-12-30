@@ -1,0 +1,5 @@
+YES
+
+The `_mint` function in the `RecipientNFT` contract calls the `emit TransferSingle` event with the correct arguments. The `_value` argument in the `TransferSingle` event is set to `amount`, which is the number of tokens that the recipient's balance is increased by. Since this is a mint operation, the `_from` address is the zero address (indicating token creation), and the `_to` address is the recipient of the newly minted tokens. The `_balances` mapping is updated to reflect the increase in the recipient's balance by the `amount` before the event is emitted, which ensures that the `_value` argument matches the number of tokens the recipient balance is increased by.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

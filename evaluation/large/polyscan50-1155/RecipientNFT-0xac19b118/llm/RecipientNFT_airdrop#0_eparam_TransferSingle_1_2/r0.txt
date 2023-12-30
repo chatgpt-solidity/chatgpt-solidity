@@ -1,0 +1,12 @@
+YES
+
+The `airdrop` function in the `RecipientNFT` contract calls the `_mint` function for each recipient in the provided `recipients` array, provided that the recipient is not a contract (checked by the `isContract` function). The `_mint` function, as defined in the `ERC1155` contract, emits the `TransferSingle` event with the correct arguments, including the `_to` argument which is the address of the recipient whose balance is increased. The `_mint` function is designed to comply with the ERC1155 standard, which includes the requirement that the `_to` argument must be the address of the recipient whose balance is increased.
+
+The `TransferSingle` event is emitted with the following arguments:
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred, which is the zero address (`address(0)`) in the case of minting.
+- `_to`: The address of the recipient whose balance is increased, which is the address passed to the `_mint` function.
+- `_id`: The token ID.
+- `_value`: The amount of tokens minted.
+
+Since the `TransferSingle` event is emitted within the `_mint` function with the `_to` argument being the address of the recipient, the rule is satisfied.

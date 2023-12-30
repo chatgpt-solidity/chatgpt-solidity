@@ -1,0 +1,14 @@
+Given a solidity function isApprovedForAll and the related parts from a smart contract and an rule for its return value.
+Whether function isApprovedForAll returns true if the operator is approved, false if not? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+abstract contract BasicERC1155 {
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function isApprovedForAll(address account, address operator) public view returns (bool) {
+        return _operatorApprovals[account][operator];
+    }
+}
+"""

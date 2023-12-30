@@ -1,0 +1,39 @@
+Given a solidity function withdraw and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+library SafeMath {
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {return a - b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+
+contract zepump is IERC20, tokenStaking, Ownable {
+    mapping(address => uint256) public amountStaked;
+    uint256 public totalStaked;
+    stakeIntegration internal stakingContract;
+
+    function withdraw(uint256 amount) override external {
+        require(amount <= amountStaked[msg.sender], "ERC20: Cannot unstake more than amount staked");
+        stakingContract.stakingWithdraw(msg.sender, amount);
+        amountStaked[msg.sender] = amountStaked[msg.sender].sub(amount);
+        totalStaked = totalStaked.sub(amount);
+        emit Withdraw(msg.sender, amount, block.timestamp);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

@@ -1,0 +1,3 @@
+NO
+
+The function `loadFund` does not call any callee that returns a boolean value (`bool success`). It simply adds the sent value (`msg.value`) to the `totalLoadedRefund` state variable using the `SafeMath` library's `add` function, which does not return a boolean but rather the result of the addition. The `require` statement is used to ensure that the `msg.value` is greater than 0, but it does not involve a callee returning a boolean value. Therefore, the function does not violate the given rule.

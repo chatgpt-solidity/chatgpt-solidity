@@ -1,0 +1,8 @@
+contract ChadErc is Context, Ownable, IERC20 {
+
+    string private _name;
+
+    function name() public view returns (string memory) {
+        return _name;
+    }
+}

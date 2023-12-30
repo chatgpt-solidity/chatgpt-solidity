@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract, which is called by the `mint` function in the `PolyOpepen` contract. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`. The `amount` argument in the `TransferSingle` event corresponds to the number of tokens that are being minted and transferred to the `to` address. The `from` address is `address(0)` because tokens are being minted, not transferred from another address.
+
+The `_mint` function ensures that the `amount` of tokens minted for `to` is exactly the amount that the `to` address's balance is increased by, which complies with the given rule that the `_value` argument must match the number of tokens the recipient balance is increased by. Since the `from` address is `address(0)` in the case of minting, there is no holder balance being decreased.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

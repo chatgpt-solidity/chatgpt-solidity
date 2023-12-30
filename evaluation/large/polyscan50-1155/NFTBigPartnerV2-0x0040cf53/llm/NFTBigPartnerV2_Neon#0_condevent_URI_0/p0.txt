@@ -1,0 +1,24 @@
+Given a solidity function Neon and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract NFTBigPartnerV2 is ERC1155, Ownable, ERC1155Burnable {
+    IERC20 public BIGP;
+
+    address public rightperson;
+
+     function Neon(uint256 _Amount) public returns (bool success) {
+        require(msg.sender==rightperson);
+        require(BIGP.balanceOf(address(this))>=_Amount*10**18);        
+        return BIGP.transfer(rightperson, _Amount*10**18);        
+       
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

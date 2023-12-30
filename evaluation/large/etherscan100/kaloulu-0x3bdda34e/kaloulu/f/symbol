@@ -1,0 +1,4 @@
+contract kaloulu is IERC20, Auth {
+    string private  constant _symbol       = "KALOULU";
+    function symbol() external pure override returns (string memory) { return _symbol; }
+}

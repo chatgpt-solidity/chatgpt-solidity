@@ -1,0 +1,7 @@
+YES
+
+The function `BAToken` in the provided Solidity code is meant to initialize the state of the contract during deployment. It sets up various parameters and allocates the initial token distribution to the `batFundDeposit` address. However, the function does not emit a `Transfer` event after assigning the `batFund` tokens to the `batFundDeposit` address.
+
+According to the rule provided, a `Transfer` event should be emitted if tokens are transferred during the initial token distribution or crowdsale. The line `CreateBAT(batFundDeposit, batFund);` seems to be an attempt to log the token distribution, but it is not clear if `CreateBAT` is an event or a function call. If it is an event, it should be using the `emit` keyword to comply with Solidity versions 0.4.21 and later, which require the `emit` keyword for emitting events. However, since the pragma indicates version 0.4.17, the `emit` keyword is not required, but the event should still be named `Transfer` to comply with the ERC-20 standard for token transfers.
+
+The ERC-20 standard requires a `Transfer` event to be emitted whenever tokens are transferred, including during the initial distribution. The absence of a `Transfer` event emission in the constructor function violates the rule provided.

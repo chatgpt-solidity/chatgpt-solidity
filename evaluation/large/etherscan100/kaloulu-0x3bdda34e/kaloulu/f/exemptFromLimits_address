@@ -1,0 +1,6 @@
+contract kaloulu is IERC20, Auth {
+    mapping (address => bool) private _noLimits;
+    function exemptFromLimits(address wlt) external view returns (bool) {
+        return _noLimits[wlt];
+    } 
+}

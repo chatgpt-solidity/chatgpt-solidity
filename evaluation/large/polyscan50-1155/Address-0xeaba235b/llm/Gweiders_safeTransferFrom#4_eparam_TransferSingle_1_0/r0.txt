@@ -1,0 +1,26 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code checks that the caller (`msg.sender`) is either the token owner or an approved operator for the `from` address before proceeding with the transfer. This is done by the following line of code:
+
+```solidity
+require(
+    from == _msgSender() || isApprovedForAll(from, _msgSender()),
+    "ERC1155: caller is not token owner or approved"
+);
+```
+
+If the caller is not the token owner, the `isApprovedForAll` function is used to check if the caller is an approved operator for the `from` address. If the caller is neither the token owner nor an approved operator, the function will revert.
+
+After this check, the `_safeTransferFrom` internal function is called, which eventually emits the `TransferSingle` event:
+
+```solidity
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+The `operator` variable is set to the address of the caller (which is either the token owner or an approved operator, as previously checked):
+
+```solidity
+address operator = _msgSender();
+```
+
+Therefore, the `TransferSingle` event is emitted with the `_operator` argument being the address of an account/contract that is approved to make the transfer, which complies with the given rule.

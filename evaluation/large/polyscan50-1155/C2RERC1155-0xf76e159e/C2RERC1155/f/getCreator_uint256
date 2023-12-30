@@ -1,0 +1,7 @@
+contract C2RERC1155 is ERC1155, Ownable {
+    mapping(uint256 => address) private _tokenCreators;
+
+    function getCreator(uint256 tokenId) public view returns (address) {
+        return _tokenCreators[tokenId];
+    }
+}

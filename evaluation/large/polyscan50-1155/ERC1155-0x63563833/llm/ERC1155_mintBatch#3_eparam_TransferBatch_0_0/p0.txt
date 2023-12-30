@@ -1,0 +1,84 @@
+Given a solidity function mintBatch and the related parts from a smart contract.
+Check whether the event TransferBatch is emitted according to the given rule? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI, IERC2981 {
+
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+    mapping(uint256 => Collection) private _collections;
+    mapping(uint256 => Item) private _items;
+
+    function _doSafeBatchTransferAcceptanceCheck(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) private {
+        if (to.code.length > 0) {
+            try
+                IERC1155Receiver(to).onERC1155BatchReceived(
+                    operator,
+                    from,
+                    ids,
+                    amounts,
+                    data
+                )
+            returns (bytes4 response) {
+                if (
+                    response != IERC1155Receiver.onERC1155BatchReceived.selector
+                ) {
+                    revert ERC1155ReceiverRejected();
+                }
+            } catch Error(string memory reason) {
+                revert(reason);
+            } catch {
+                revert NotERC1155Receiver();
+            }
+        }
+    }
+
+    function mintBatch(
+        address to,
+        uint256[] calldata itemsIds,
+        uint256[] calldata amounts,
+        bytes calldata data
+    ) external {
+        if (itemsIds.length != amounts.length) revert LengthMismatch();
+
+        for (uint256 i; i < itemsIds.length; i++) {
+            if (!_items[itemsIds[i]].exist) revert ItemNotExist();
+            if (
+                _collections[_items[itemsIds[i]].collection].minter !=
+                msg.sender
+            ) revert NotMinter();
+
+            _items[itemsIds[i]].supply += amounts[i];
+            if (
+                _items[itemsIds[i]].maxSupply > 0 &&
+                _items[itemsIds[i]].supply > _items[itemsIds[i]].maxSupply
+            ) revert MaxSupply();
+
+            _balances[itemsIds[i]][to] += amounts[i];
+        }
+
+        _doSafeBatchTransferAcceptanceCheck(
+            msg.sender,
+            address(0),
+            to,
+            itemsIds,
+            amounts,
+            data
+        );
+
+        emit TransferBatch(msg.sender, address(0), to, itemsIds, amounts);
+        emit MintBatch(to, itemsIds, amounts, data);
+    }
+}
+"""
+
+Rule:"""
+The `_operator` argument MUST be the address of an account/contract that is approved to make the transfer (SHOULD be msg.sender).
+event TransferBatch(address indexed _operator, address indexed _from, address indexed _to, uint256[] _ids, uint256[] _values);
+"""

@@ -1,0 +1,5 @@
+YES
+
+The `_burnBatch` function within the `ERC1155` contract is responsible for burning a batch of tokens. It emits the `TransferBatch` event after performing the necessary checks and updating the balances. The `TransferBatch` event is emitted with the correct arguments, including the `_ids` array which represents the list of token IDs being burned (transferred to the zero address, which is considered a burn operation).
+
+The `burnBatch` function in the `ERC1155Burnable` contract calls `_burnBatch`, passing the `ids` and `values` arrays to it. The `ids` array is used throughout the function and is eventually passed as the `_ids` argument in the `TransferBatch` event, satisfying the given rule.

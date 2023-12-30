@@ -1,0 +1,9 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether the function transfer and its related parts will not throw if Transfers of 0 values? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract ERC20 {
+
+    function transfer(address dst, uint amount) public returns (bool) {}
+}
+"""

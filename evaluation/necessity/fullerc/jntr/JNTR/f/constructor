@@ -1,0 +1,16 @@
+contract JNTR is IST20, ERC20, SafeMath {
+    address public owner;
+    uint256 public totalSupply = 1000000000 * 10 ** 18; // tokens per 1 ether
+    mapping(address => uint256) allowedIndex;
+    mapping(address => uint256) balances;
+
+    Account[] allowedAddress;
+
+    constructor() public {
+        owner = msg.sender;
+        balances[msg.sender] = totalSupply;
+        allowedIndex[msg.sender] = 0;
+        allowedAddress.push(Account({_address: msg.sender, _active: true}));
+    }
+}
+

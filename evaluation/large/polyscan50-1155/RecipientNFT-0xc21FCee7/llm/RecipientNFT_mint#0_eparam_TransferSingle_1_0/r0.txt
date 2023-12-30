@@ -1,0 +1,15 @@
+YES
+
+The `mint` function in the `RecipientNFT` contract calls the `_mint` function of the `ERC1155` contract. Within the `_mint` function, the `TransferSingle` event is emitted with the `operator` argument set to the result of `_msgSender()`, which is the Solidity global `msg.sender` by default.
+
+The `mint` function is also protected by the `onlyOwner` modifier, ensuring that only the owner of the contract can call it. This means that when `mint` is called, `msg.sender` must be the owner of the contract, which is an account that is approved to make the transfer.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the `msg.sender` (and in this case, the owner of the contract).
+- `_from`: The address from which the tokens are transferred, which is the zero address (`address(0)`) since tokens are being minted.
+- `_to`: The address to which the tokens are minted.
+- `_id`: The token type that is being minted.
+- `_value`: The number of tokens that are being minted.
+
+Since the `_operator` is indeed the `msg.sender` and is approved to make the transfer (as it is the owner of the contract), the rule is followed, and the `TransferSingle` event is emitted correctly according to the given rule.

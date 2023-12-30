@@ -1,0 +1,8 @@
+contract METARUFFY_ASSETS is ERC1155, ERC2981, Ownable, ERC1155Burnable, ERC1155Supply {
+    mapping(uint256 => string) private _tokenURIs;
+    mapping(uint256 => uint256) private supplies;
+    function uri(uint256 tokenID) public view override returns (string memory) {
+        require(supplies[tokenID] > 0, "ERC1155: invalid token ID");
+        return _tokenURIs[tokenID];
+    }
+}

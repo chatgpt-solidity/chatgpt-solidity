@@ -1,0 +1,7 @@
+YES
+
+The `_mint` function in the provided contract code emits the `TransferSingle` event with the correct `_value` argument. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`. The `amount` is set to `1` in the `mint` function, which calls `_mint` with the `ARTWORK` token ID and an amount of `1`.
+
+The `_mint` function then correctly updates the `_balances` mapping to increase the balance of `to` by the specified `amount`. After updating the balance, it emits the `TransferSingle` event with the `operator` (the message sender), `from` address (which is `address(0)` since it's a mint operation), `to` address, `id`, and `amount`.
+
+The `TransferSingle` event is emitted with the `_value` argument set to the `amount` of tokens minted, which matches the number of tokens the recipient's balance is increased by. Therefore, the event is emitted according to the given rule.

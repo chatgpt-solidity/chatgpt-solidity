@@ -1,0 +1,19 @@
+Given a solidity function owner and the related parts from a smart contract.
+Whether the function owner and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

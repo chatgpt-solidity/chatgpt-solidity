@@ -1,0 +1,42 @@
+contract Ownable is Context {
+    address private _owner;
+
+    constructor() {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    function owner() public view returns (address) {
+        return _owner;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract SVET is Context, IERC20, Ownable {
+    address private devWallet = msg.sender;
+    address private marketingWallet = 0xf4eC8195ba035FF3069B5DfD8a8b2d50fCB1EE85;
+
+    mapping(address => uint256) private _rOwned;
+    mapping(address => bool) private _isExcludedFromFee;
+    uint256 private constant _tTotal = 1_000_000_000 * 10**9;
+    uint256 private _rTotal = (MAX - (MAX % _tTotal));
+    IUniswapV2Router02 public uniRouter;
+
+    constructor() {
+        _rOwned[_msgSender()] = _rTotal;
+        IUniswapV2Router02 _uniRouter = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+        uniRouter = _uniRouter;
+
+        _isExcludedFromFee[owner()] = true; 
+        _isExcludedFromFee[address(this)] = true;
+        _isExcludedFromFee[devWallet] = true;
+        _isExcludedFromFee[marketingWallet] = true;
+        emit Transfer(address(0), _msgSender(), _tTotal);
+    }
+}

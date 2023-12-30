@@ -1,0 +1,3 @@
+YES
+
+The `safeTransferFrom` function calls the `_safeTransferFrom` private function, which performs the actual transfer of tokens. In the `_safeTransferFrom` function, the balance of the `from` address for the token `id` is decreased by `amount`, and the balance of the `to` address is increased by the same `amount`. After updating the balances, the `TransferSingle` event is emitted with the correct arguments, including the `_to` argument which is the address of the recipient whose balance is increased. This is in accordance with the given rule.

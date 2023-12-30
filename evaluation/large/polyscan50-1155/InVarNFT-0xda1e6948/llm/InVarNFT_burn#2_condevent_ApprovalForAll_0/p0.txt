@@ -1,0 +1,94 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract InVarNFT is ERC1155, Ownable {
+
+    function burn(address account, uint256 id, uint256 amount) public {
+        require(msg.sender == account);
+        _burn(account, id , amount);
+    }
+}
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+
+    // Mapping from token ID to account balances
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    /**
+     * @dev Destroys `amount` tokens of token type `id` from `account`
+     *
+     * Requirements:
+     *
+     * - `account` cannot be the zero address.
+     * - `account` must have at least `amount` tokens of token type `id`.
+     */
+    function _burn(
+        address account,
+        uint256 id,
+        uint256 amount
+    ) internal virtual {
+        require(account != address(0), "ERC1155: burn from the zero address");
+
+        address operator = _msgSender();
+
+        _beforeTokenTransfer(operator, account, address(0), _asSingletonArray(id), _asSingletonArray(amount), "");
+
+        uint256 accountBalance = _balances[id][account];
+        require(accountBalance >= amount, "ERC1155: burn amount exceeds balance");
+        unchecked {
+            _balances[id][account] = accountBalance - amount;
+        }
+
+        emit TransferSingle(operator, account, address(0), id, amount);
+    }
+
+    /**
+     * @dev Hook that is called before any token transfer. This includes minting
+     * and burning, as well as batched variants.
+     *
+     * The same hook is called on both single and batched variants. For single
+     * transfers, the length of the `id` and `amount` arrays will be 1.
+     *
+     * Calling conditions (for each `id` and `amount` pair):
+     *
+     * - When `from` and `to` are both non-zero, `amount` of ``from``'s tokens
+     * of token type `id` will be  transferred to `to`.
+     * - When `from` is zero, `amount` tokens of token type `id` will be minted
+     * for `to`.
+     * - when `to` is zero, `amount` of ``from``'s tokens of token type `id`
+     * will be burned.
+     * - `from` and `to` are never both zero.
+     * - `ids` and `amounts` have the same, non-zero length.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {}
+
+    function _asSingletonArray(uint256 element) private pure returns (uint256[] memory) {
+        uint256[] memory array = new uint256[](1);
+        array[0] = element;
+
+        return array;
+    }
+}
+"""
+
+Action:"""
+approval for a second party/operator address to manage all tokens for an owner address is enabled or disabled (absence of an event assumes disabled).
+"""

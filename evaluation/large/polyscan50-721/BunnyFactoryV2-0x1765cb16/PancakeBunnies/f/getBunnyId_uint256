@@ -1,0 +1,13 @@
+contract PancakeBunnies is ERC721, Ownable {
+
+    // Map the bunnyId for each tokenId
+    mapping(uint256 => uint8) private bunnyIds;
+
+    /**
+     * @dev Get bunnyId for a specific tokenId.
+     */
+    function getBunnyId(uint256 _tokenId) external view returns (uint8) {
+        return bunnyIds[_tokenId];
+    }
+}
+

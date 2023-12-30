@@ -1,0 +1,3 @@
+YES
+
+The provided `allowance` function correctly implements the ERC-20 standard rule for returning the amount that a spender is still allowed to withdraw from the owner's account. The function looks up the `_allowances` mapping using the `owner` and `spender` addresses and returns the remaining allowance amount.

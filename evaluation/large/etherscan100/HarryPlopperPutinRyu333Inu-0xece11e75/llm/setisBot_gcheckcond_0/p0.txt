@@ -1,0 +1,19 @@
+Given a solidity function setisBot and the related parts from a smart contract.
+Whether the function setisBot and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+contract HarryPlopperPutinRyu333Inu is IERC20, Ownable {
+    mapping (address => bool) private isBot;
+    function setisBot(address _address, bool _enabled) external onlyOwner {isBot[_address] = _enabled;}
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

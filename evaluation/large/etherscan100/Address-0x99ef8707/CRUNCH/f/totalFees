@@ -1,0 +1,6 @@
+contract CRUNCH is Context, IERC20, Ownable {
+    uint256 private _tFeeTotal;
+    function totalFees() public view returns (uint256) {
+        return _tFeeTotal;
+    }
+}

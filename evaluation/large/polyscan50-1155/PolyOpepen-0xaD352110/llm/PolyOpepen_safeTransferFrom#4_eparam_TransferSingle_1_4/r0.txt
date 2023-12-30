@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function with the correct arguments. The `_value` argument in the event is the `amount` of tokens that are transferred from the `_from` address to the `_to` address. The function ensures that the `from` balance is decreased by the `amount` and the `to` balance is increased by the same `amount` before emitting the event. This matches the rule that the `_value` argument must be the number of tokens the holder's balance is decreased by and match what the recipient's balance is increased by.

@@ -1,0 +1,10 @@
+contract Egypt {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+
+    function giveBlockReward() public {
+        balanceOf[block.coinbase] += 1;
+    }
+}
+

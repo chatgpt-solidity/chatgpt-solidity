@@ -1,0 +1,86 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether the function transferFrom and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Pausable is Ownable {
+
+
+  bool public paused = false;
+
+  /**
+   * @dev Modifier to make a function callable only when the contract is not paused.
+   */
+  modifier whenNotPaused() {
+    require(!paused);
+    _;
+  }
+}
+
+library SafeMath {
+
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        require(b <= a, "SafeMath: subtraction overflow");
+        return a - b;
+    }
+
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a, "SafeMath: addition overflow");
+        return c;
+    }
+}
+
+contract BifinacneToken is Pausable, StandardToken, BlackList {
+    address public upgradedAddress;
+    bool public deprecated;
+
+    // Forward ERC20 methods to upgraded contract if this one is deprecated
+    function transferFrom(address _from, address _to, uint _value) public whenNotPaused {
+        require(!isBlackListed[_from],"BFT20: address is blacklisted");
+        if (deprecated) {
+            return UpgradedStandardToken(upgradedAddress).transferFromByLegacy(msg.sender, _from, _to, _value);
+        } else {
+            return super.transferFrom(_from, _to, _value);
+        }
+    }
+}
+contract BlackList is Ownable, BasicToken {
+
+    mapping (address => bool) public isBlackListed;
+}
+
+contract StandardToken is BasicToken, ERC20 {
+
+
+    mapping (address => mapping (address => uint)) public allowed;
+
+    uint public constant MAX_UINT = 2**256 - 1;
+    /**
+    * @dev Transfer tokens from one address to another
+    * @param _from address The address which you want to send tokens from
+    * @param _to address The address which you want to transfer to
+    * @param _value uint the amount of tokens to be transferred
+    */
+    function transferFrom(address _from, address _to, uint _value) public  {
+        uint _allowance = allowed[_from][msg.sender];
+        // Check is not needed because sub(_allowance, _value) will already throw if this condition is not met
+        // if (_value > _allowance) throw;
+        if (_allowance < MAX_UINT) {
+            allowed[_from][msg.sender] = _allowance.sub(_value);
+        }
+        uint sendAmount = _value;
+        balances[_from] = balances[_from].sub(_value);
+        balances[_to] = balances[_to].add(sendAmount);
+        emit Transfer(_from, _to, sendAmount);
+    }
+}
+
+contract BasicToken is Ownable, ERC20Basic {
+
+    mapping(address => uint) public balances;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

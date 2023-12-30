@@ -1,0 +1,39 @@
+The provided Solidity function `allowance` in the `RegularToken` contract appears to be compliant with the ERC-20 token standard as described in the given ERC documentation. The ERC-20 standard specifies that the `allowance` function should have the following signature:
+
+```solidity
+function allowance(address _owner, address _spender) public view returns (uint256 remaining)
+```
+
+The function should return the amount which `_spender` is still allowed to withdraw from `_owner`.
+
+The `allowance` function in the `RegularToken` contract has the correct signature and functionality:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) constant returns (uint) {
+    return allowed[_owner][_spender];
+}
+```
+
+However, there are a couple of minor discrepancies that should be noted:
+
+1. The `constant` keyword is used in the provided function, which is an older Solidity convention for indicating that a function does not modify the state. In more recent versions of Solidity (0.4.17 and above, as mentioned in the ERC), the `view` keyword is recommended to indicate that a function does not modify the state. The `constant` keyword is still valid but is considered deprecated in favor of `view`.
+
+2. The return type in the provided function is `uint`, which is an alias for `uint256` in Solidity. While this is not incorrect, it is more explicit and consistent with the ERC-20 standard to use `uint256` as the return type.
+
+To ensure full compliance with the ERC-20 standard and modern Solidity conventions, the `allowance` function could be updated as follows:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) public view returns (uint256) {
+    return allowed[_owner][_spender];
+}
+```
+
+This change includes the use of the `view` keyword and explicitly specifies the return type as `uint256`.
+
+Aside from these minor points, the function does not violate the ERC-20 standard and correctly implements the `allowance` functionality as specified.

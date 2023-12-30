@@ -1,0 +1,33 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "transfer(address,uint256) returns(bool)" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+getBlackListStatus(address) returns(bool)
+getOwner() returns(address)
+addBlackList(address) returns()
+removeBlackList(address) returns()
+transfer(address,uint256) returns()
+balanceOf(address) returns(uint256)
+transferOwnership(address) returns()
+transferFrom(address,address,uint256) returns()
+approve(address,uint256) returns()
+allowance(address,address) returns(uint256)
+pause() returns()
+unpause() returns()
+constructor() returns()
+deprecate(address,bool) returns()
+totalSupply() returns(uint256)
+decimals() returns(uint256)
+isBlackListed(address) returns(bool)
+paused() returns(bool)
+owner() returns(address)
+name() returns(string)
+upgradedAddress() returns(address)
+allowed(address,address) returns(uint256)
+deprecated() returns(bool)
+_totalSupply() returns(uint256)
+MAX_UINT() returns(uint256)
+balances(address) returns(uint256)
+symbol() returns(string)
+"""

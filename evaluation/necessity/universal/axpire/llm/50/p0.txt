@@ -1,0 +1,31 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract AxpireToken is AxpirePausableToken {
+
+    uint256 public icoTokenExchangeRate = 715; // 715 b66 tokens per 1 ETH
+
+    function setIcoTokenExchangeRate(
+        uint _icoTokenExchangeRate
+    ) external onlyOwner {
+        icoTokenExchangeRate = _icoTokenExchangeRate;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

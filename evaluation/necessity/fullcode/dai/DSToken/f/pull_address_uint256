@@ -1,0 +1,48 @@
+contract DSStop is DSNote, DSAuth {
+
+    bool public stopped;
+    modifier stoppable() {
+        require(!stopped);
+        _;
+    }
+}
+
+contract DSToken is DSTokenBase(0), DSStop {
+
+    function transferFrom(
+        address src,
+        address dst,
+        uint wad
+    ) public stoppable returns (bool) {
+        if (src != msg.sender && _approvals[src][msg.sender] != uint(-1)) {
+            _approvals[src][msg.sender] = sub(_approvals[src][msg.sender], wad);
+        }
+
+        _balances[src] = sub(_balances[src], wad);
+        _balances[dst] = add(_balances[dst], wad);
+
+        Transfer(src, dst, wad);
+
+        return true;
+    }
+
+    function pull(address src, uint wad) public {
+        transferFrom(src, msg.sender, wad);
+    }
+}
+
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => uint256) _balances;
+    mapping(address => mapping(address => uint256)) _approvals;
+}
+
+contract DSMath {
+    function add(uint x, uint y) internal pure returns (uint z) {
+        require((z = x + y) >= x);
+
+    }
+    function sub(uint x, uint y) internal pure returns (uint z) {
+        require((z = x - y) <= x);
+    }
+}
+

@@ -1,0 +1,51 @@
+Given a solidity function finalize and the related parts from a smart contract.
+Whether the function finalize and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract BAToken is StandardToken, SafeMath {
+
+    // contracts
+    address public ethFundDeposit; // deposit address for ETH for Brave International
+
+    // crowdsale parameters
+    bool public isFinalized; // switched to true in operational state
+    uint256 public fundingEndBlock;
+    uint256 public constant tokenCreationCap =
+        1500 * (10 ** 6) * 10 ** decimals;
+    uint256 public constant tokenCreationMin = 675 * (10 ** 6) * 10 ** decimals;
+
+    /// @dev Ends the funding period and sends the ETH home
+    function finalize() external {
+        if (isFinalized) throw;
+        if (msg.sender != ethFundDeposit) throw; // locks finalize to the ultimate ETH owner
+        if (totalSupply < tokenCreationMin) throw; // have to sell minimum to move to operational
+        if (block.number <= fundingEndBlock && totalSupply != tokenCreationCap)
+            throw;
+        // move to operational
+        isFinalized = true;
+        if (!ethFundDeposit.send(this.balance)) throw; // send the eth to Brave International
+    }
+}
+
+contract Token {
+    uint256 public totalSupply;
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred during the initial token distribution or crowdsale.
+"""

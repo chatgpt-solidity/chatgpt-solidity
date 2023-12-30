@@ -1,0 +1,33 @@
+The provided Solidity function `decimals` and the related parts from the smart contract do not violate the given ERC, which in this case is the ERC-20 standard. The ERC-20 standard specifies an optional `decimals` function that should return the number of decimals the token uses. This is used to determine how the token's value can be displayed to users. For example, if a token has 18 decimals, the token's smallest unit (1 Wei) is 0.000000000000000001 tokens.
+
+The ERC-20 standard specifies the `decimals` function as follows:
+
+```solidity
+function decimals() public view returns (uint8)
+```
+
+The provided Solidity code for the `decimals` function is:
+
+```solidity
+contract Token {
+    uint8 internal _decimals;
+
+    function decimals() public constant returns (uint8) {
+        return _decimals;
+    }
+}
+```
+
+This implementation is compliant with the ERC-20 standard. The function is marked as `public`, which means it can be called by external users and contracts. It returns a `uint8` value, which is the correct return type for the `decimals` function as per the ERC-20 standard.
+
+However, there is a minor discrepancy in the use of the `constant` keyword. In the ERC-20 standard, the `view` keyword is used, which indicates that the function does not modify the state of the contract. The `constant` keyword was used in older versions of Solidity and has the same effect as `view` in this context. It is recommended to use `view` for newer Solidity versions to be consistent with the current language specification and best practices.
+
+To fully comply with the latest Solidity standards and best practices, the function should be updated to use the `view` keyword instead of `constant`:
+
+```solidity
+function decimals() public view returns (uint8) {
+    return _decimals;
+}
+```
+
+Other than this minor point about the `constant` keyword, the provided function does not violate the ERC-20 standard and correctly implements the optional `decimals` function.

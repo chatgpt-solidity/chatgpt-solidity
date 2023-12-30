@@ -1,0 +1,15 @@
+contract ChadErc is Context, Ownable, IERC20 {
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    function approve(address spender, uint256 amount) public virtual override returns (bool) {
+        _allowances[_msgSender()][spender] = amount;
+        emit Approval(_msgSender(), spender, amount);
+        return true;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+

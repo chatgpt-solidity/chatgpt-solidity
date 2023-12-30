@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_mintBatch` function according to the given rule. The `_ids` argument is indeed the list of tokens being transferred (minted in this case), and the `_values` argument is the corresponding list of amounts for each token. The event is emitted with the correct parameters, including the operator (`operator`), the sender (`address(0)` since it's a mint operation), the receiver (`to`), the list of token IDs (`ids`), and the list of amounts (`amounts`).

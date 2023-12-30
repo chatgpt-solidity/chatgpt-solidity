@@ -1,0 +1,20 @@
+contract ManagersRepo{
+    Manager[] managers = new Manager[](0);
+
+    function isManagerByAddress(address _managerAddress) view public returns(bool){
+        for(uint256 i = 0; i < managers.length; i++){
+            if(managers[i].getManagerAddress()==_managerAddress){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function addManagerByAddress(address _manager)public{
+        require(isManagerByAddress(msg.sender),"you are not manager. addManager function is allowed for manager.");
+        require(!isManagerByAddress(_manager),"He is already manager.");
+        Manager manager = new Manager(_manager);
+        managers.push(manager);
+    }
+}
+

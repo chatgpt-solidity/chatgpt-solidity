@@ -1,0 +1,21 @@
+The `allowance` function provided in the `DSTokenBase` contract appears to be compliant with the ERC-20 standard. According to the ERC-20 specification, the `allowance` function is defined as follows:
+
+```solidity
+function allowance(address _owner, address _spender) public view returns (uint256 remaining)
+```
+
+This function should return the amount which `_spender` is still allowed to withdraw from `_owner`.
+
+The `allowance` function in the `DSTokenBase` contract is implemented as:
+
+```solidity
+function allowance(address src, address guy) public view returns (uint) {
+    return _approvals[src][guy];
+}
+```
+
+Here, the function takes two addresses, `src` (which corresponds to `_owner` in the ERC-20 specification) and `guy` (which corresponds to `_spender`), and returns the remaining allowance from the `_approvals` mapping, which is the standard way of tracking allowances in ERC-20 tokens.
+
+The function signature matches the ERC-20 standard, and the functionality described in the ERC-20 standard is correctly implemented. The function is `public` and `view`, meaning it doesn't modify the state and can be called externally to check the allowance.
+
+Therefore, based on the provided information, the `allowance` function does not violate the ERC-20 standard.

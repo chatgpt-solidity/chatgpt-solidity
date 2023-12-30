@@ -1,0 +1,17 @@
+YES
+
+The `mintBatch` function in the provided Solidity code is part of a smart contract that inherits from `ERC1155`. When the `_mintBatch` function is called within `mintBatch`, it eventually triggers the `TransferBatch` event.
+
+The `TransferBatch` event is emitted in the `_mintBatch` function with the following line of code:
+
+```solidity
+emit TransferBatch(operator, address(0), to, ids, amounts);
+```
+
+The `operator` variable is set to the address returned by `_msgSender()`, which is a function from the `Context` contract that returns `msg.sender`, the address of the entity that called the function:
+
+```solidity
+address operator = _msgSender();
+```
+
+This means that the `_operator` argument in the `TransferBatch` event is indeed the address of an account/contract that is approved to make the transfer, which should be `msg.sender` according to the rule provided. Therefore, the `TransferBatch` event is emitted according to the given rule.

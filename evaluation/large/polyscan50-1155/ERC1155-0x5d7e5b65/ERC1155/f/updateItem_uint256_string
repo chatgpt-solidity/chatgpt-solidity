@@ -1,0 +1,27 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI, IERC2981 {
+    mapping(uint256 => Item) private _items;
+
+    function updateItem(uint256 id, string calldata _uri) external onlyOwner {
+        if (!_items[id].exist) revert ItemNotExist();
+        _items[id] = Item(
+            true,
+            _items[id].collection,
+            _uri,
+            _items[id].supply,
+            _items[id].maxSupply
+        );
+        emit URI(_uri, id);
+        emit UpdateItem(id);
+    }
+}
+
+abstract contract Ownable {
+
+    address private _owner;
+
+    modifier onlyOwner() {
+        if (_owner != msg.sender) revert NotOwner();
+        _;
+    }
+}
+

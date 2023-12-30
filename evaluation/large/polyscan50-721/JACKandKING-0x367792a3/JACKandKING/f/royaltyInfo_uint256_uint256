@@ -1,0 +1,30 @@
+abstract contract ERC2981 is IERC2981, ERC165 {
+
+    RoyaltyInfo private _defaultRoyaltyInfo;
+    mapping(uint256 => RoyaltyInfo) private _tokenRoyaltyInfo;
+
+    /**
+     * @inheritdoc IERC2981
+     */
+    function royaltyInfo(uint256 tokenId, uint256 salePrice) public view virtual override returns (address, uint256) {
+        RoyaltyInfo memory royalty = _tokenRoyaltyInfo[tokenId];
+
+        if (royalty.receiver == address(0)) {
+            royalty = _defaultRoyaltyInfo;
+        }
+
+        uint256 royaltyAmount = (salePrice * royalty.royaltyFraction) / _feeDenominator();
+
+        return (royalty.receiver, royaltyAmount);
+    }
+}
+
+contract JACKandKING is ERC721, ERC721Enumerable, ERC721Pausable, ERC721Burnable, ERC721URIStorage, ERC721Royalty, Ownable {
+
+
+    // ERC-2981
+    // _feeDenominator() Defaults to 10000 but may be customized by an override.
+    function _feeDenominator() internal pure virtual override returns (uint96) {
+        return 10000;
+    }
+}

@@ -1,0 +1,34 @@
+Given a solidity function approve and the related parts from a smart contract and an rule for its return value.
+Whether function approve return whether the approve is successful? Reply in "YES" or "NO".
+
+<example>
+
+Function(and related parts) to audit:"""
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => mapping(address => uint256)) _approvals;
+
+    function approve(address guy, uint wad) public returns (bool) {
+        _approvals[msg.sender][guy] = wad;
+
+        Approval(msg.sender, guy, wad);
+
+        return true;
+    }
+}
+
+contract DSToken is DSTokenBase(0), DSStop {
+
+    function approve(address guy, uint wad) public stoppable returns (bool) {
+        return super.approve(guy, wad);
+    }
+}
+
+contract DSStop is DSNote, DSAuth {
+
+    bool public stopped;
+    modifier stoppable() {
+        require(!stopped);
+        _;
+    }
+}
+"""

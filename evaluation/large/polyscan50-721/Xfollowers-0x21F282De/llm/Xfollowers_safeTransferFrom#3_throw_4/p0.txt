@@ -1,0 +1,16 @@
+Given a solidity function safeTransferFrom and the related parts from a smart contract.
+Whether the function safeTransferFrom and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Function(and related parts) to audit:"""
+contract Xfollowers is ERC721, Ownable {
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public override {
+        revert("Transfers are disabled");
+    }
+}
+"""
+
+Condition:"""
+the onERC721Received return value is not `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))
+"""

@@ -1,0 +1,8 @@
+contract Registrar is ERC721, Ownable, ReentrancyGuard {
+    mapping(address => uint256[]) public ownerDomains;
+
+    function getDomainsByOwner(address owner) external view returns (uint256[] memory) {
+        return ownerDomains[owner];
+    }
+}
+

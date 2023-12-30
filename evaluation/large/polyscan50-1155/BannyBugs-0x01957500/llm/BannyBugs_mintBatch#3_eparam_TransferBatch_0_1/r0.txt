@@ -1,0 +1,13 @@
+YES
+
+The `_mintBatch` function in the provided Solidity code is designed to mint a batch of tokens to a specified address. According to the ERC-1155 standard, minting is represented as a transfer from the zero address. In the context of the `TransferBatch` event, the `_from` argument should be the address from which the tokens are transferred. When minting, this is the zero address, as new tokens are created rather than transferred from an existing holder.
+
+The relevant part of the `_mintBatch` function that emits the `TransferBatch` event is as follows:
+
+```solidity
+emit TransferBatch(operator, address(0), to, ids, amounts);
+```
+
+Here, `address(0)` is used as the `_from` argument, which is correct for a minting operation according to the ERC-1155 standard. The `to` argument is the address of the recipient receiving the newly minted tokens, `ids` is the array of token IDs, and `amounts` is the array of quantities for each token ID being minted.
+
+Since the `_from` argument is correctly set to the zero address for the minting operation, the `TransferBatch` event is emitted according to the given rule.

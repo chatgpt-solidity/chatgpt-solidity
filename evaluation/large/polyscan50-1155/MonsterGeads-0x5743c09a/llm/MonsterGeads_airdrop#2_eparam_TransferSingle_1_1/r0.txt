@@ -1,0 +1,15 @@
+YES
+
+The provided Solidity function `airdrop` within the `MonsterGeads` contract calls the `_mint` function, which is responsible for creating (`amount`) tokens of token type (`id`), and assigning them to (`to`). The `_mint` function is defined in the `ERC1155` contract.
+
+In the `_mint` function, the `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are being transferred. In the case of minting, this is the zero address (`address(0)`), as tokens are being created rather than transferred from an existing holder.
+- `_to`: The address to which the tokens are being minted.
+- `_id`: The token type that is being minted.
+- `_value`: The amount of tokens that are being minted.
+
+The rule states that the `_from` argument must be the address of the holder whose balance is decreased. In the case of minting, there is no holder from whom the balance is decreased, as new tokens are being created. The convention for minting operations is to use the zero address to indicate that tokens are being created rather than transferred from an existing balance. This is consistent with the ERC-1155 standard and the expected behavior for minting operations.
+
+Therefore, the `TransferSingle` event is emitted correctly according to the given rule in the context of a minting operation.

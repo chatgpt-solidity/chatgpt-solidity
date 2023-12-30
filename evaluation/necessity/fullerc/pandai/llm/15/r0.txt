@@ -1,0 +1,19 @@
+The provided Solidity event interfaces are:
+
+```solidity
+event Transfer(address indexed, address indexed, uint256);
+event Approval(address indexed, address indexed, uint256);
+```
+
+These events are part of the ERC-20 token standard, which is the standard interface for tokens on the Ethereum blockchain. The ERC provided in your question is indeed the ERC-20 standard, which specifies the functions and events that an ERC-20 compliant token contract should implement.
+
+According to the ERC-20 standard, the events should be declared as follows:
+
+```solidity
+event Transfer(address indexed _from, address indexed _to, uint256 _value);
+event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+```
+
+The provided event interfaces match the ERC-20 standard exactly in terms of the event names, parameter types, and the use of the `indexed` keyword for the first two parameters of each event. This allows these parameters to be searchable and filterable in the blockchain logs.
+
+Therefore, the provided Solidity event interfaces do not violate the given ERC-20 standard. They are correctly defined according to the specification.

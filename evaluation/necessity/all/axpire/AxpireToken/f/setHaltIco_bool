@@ -1,0 +1,20 @@
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract AxpireToken is AxpirePausableToken {
+    bool public haltIco;
+
+    function setHaltIco(bool _haltIco) external onlyOwner {
+        haltIco = _haltIco;
+    }
+}
+

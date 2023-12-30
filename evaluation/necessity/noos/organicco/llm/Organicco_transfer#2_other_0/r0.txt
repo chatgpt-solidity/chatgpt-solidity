@@ -1,0 +1,9 @@
+YES
+
+The given `transfer` function does not treat transfers of 0 values as normal transfers. According to the ERC rule, transfers of 0 values must be treated as normal transfers. However, the condition in the `transfer` function:
+
+```solidity
+if (_value > 0 && _value <= _balanceOf[msg.sender] && isContract(_to)) {
+```
+
+explicitly checks for `_value > 0`, which means that if `_value` is 0, the function will return false and not proceed with the transfer. This violates the ERC rule that states transfers of 0 values must be treated as normal transfers.

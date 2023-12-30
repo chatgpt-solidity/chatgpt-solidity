@@ -1,0 +1,21 @@
+The provided Solidity code for the `totalSupply` function appears to be compliant with the ERC-20 token standard as described in the given ERC documentation. The ERC-20 standard specifies that the `totalSupply` function should return the total token supply, and the code provided does exactly that:
+
+```solidity
+function totalSupply() public view returns (uint) {
+    return _supply;
+}
+```
+
+This function is marked as `public` and `view`, meaning it doesn't modify the state and can be called externally. It returns an unsigned integer (`uint`), which is an alias for `uint256` in Solidity, representing the total supply of tokens.
+
+The ERC-20 standard does not specify the internal implementation details or variable names; it only requires that the `totalSupply` function exists and returns a `uint256`. The code provided meets this requirement, as `_supply` is a `uint256` that is returned by the `totalSupply` function.
+
+However, there are a couple of points to consider:
+
+1. The ERC-20 standard does not specify the inheritance of other contracts or interfaces, so the `DSTokenBase` contract inheriting from `ERC20` and `DSMath` is an implementation detail and does not violate the standard as long as the ERC-20 functions are correctly implemented.
+
+2. The ERC-20 standard does not enforce naming conventions for private or internal state variables. The variable `_supply` is used to hold the total supply of tokens, which is a common practice.
+
+3. The ERC-20 standard specifies that `totalSupply` should return a `uint256`. In the provided code, `uint` is used, which is equivalent to `uint256` in Solidity. Therefore, this does not violate the standard.
+
+In conclusion, based on the provided code snippet and the ERC-20 standard documentation, the `totalSupply` function does not violate the ERC-20 standard. However, to fully ensure compliance, the rest of the contract would need to be reviewed to confirm that all required functions and events are properly implemented.

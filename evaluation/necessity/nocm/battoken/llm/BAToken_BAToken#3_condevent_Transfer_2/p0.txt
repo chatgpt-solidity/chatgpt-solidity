@@ -1,0 +1,51 @@
+Given a solidity function BAToken and the related parts from a smart contract.
+Whether the function BAToken and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract BAToken is StandardToken, SafeMath {
+
+    // contracts
+    address public ethFundDeposit; // deposit address for ETH for Brave International
+    address public batFundDeposit; // deposit address for Brave International use and BAT User Fund
+
+    // crowdsale parameters
+    bool public isFinalized; // switched to true in operational state
+    uint256 public fundingStartBlock;
+    uint256 public fundingEndBlock;
+    uint256 public constant batFund = 500 * (10 ** 6) * 10 ** decimals; // 500m BAT reserved for Brave Intl use
+
+    // constructor
+    function BAToken(
+        address _ethFundDeposit,
+        address _batFundDeposit,
+        uint256 _fundingStartBlock,
+        uint256 _fundingEndBlock
+    ) {
+        isFinalized = false; //controls pre through crowdsale state
+        ethFundDeposit = _ethFundDeposit;
+        batFundDeposit = _batFundDeposit;
+        fundingStartBlock = _fundingStartBlock;
+        fundingEndBlock = _fundingEndBlock;
+        totalSupply = batFund;
+        balances[batFundDeposit] = batFund; // Deposit Brave Intl share
+        CreateBAT(batFundDeposit, batFund); // logs Brave Intl fund
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+}
+
+contract Token {
+    uint256 public totalSupply;
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are minting or allocating
+"""

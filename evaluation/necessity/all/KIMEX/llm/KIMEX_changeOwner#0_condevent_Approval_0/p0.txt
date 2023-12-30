@@ -1,0 +1,25 @@
+Given a solidity function changeOwner and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract Owner {
+
+    address public owner;
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+
+    function changeOwner(address _newOwnerAddr) public onlyOwner {
+        require(_newOwnerAddr != address(0));
+        owner = _newOwnerAddr;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

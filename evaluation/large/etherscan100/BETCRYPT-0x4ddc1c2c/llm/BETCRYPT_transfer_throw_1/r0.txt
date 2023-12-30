@@ -1,0 +1,14 @@
+NO
+
+The `_transfer` function in the `ERC20` contract checks for the sender's balance to be greater than or equal to the amount being transferred. If the amount is 0, the check will pass, but the function does not explicitly handle the case of a 0 value transfer. However, the function does not revert or throw an error for a 0 value transfer either.
+
+The `_transfer` function in the `BETCRYPT` contract, which overrides the `ERC20` `_transfer` function, includes a check for the amount being 0. If the amount is 0, it calls `super._transfer(from, to, 0)` and then returns, effectively allowing 0 value transfers without reverting:
+
+```solidity
+if (amount == 0) {
+    super._transfer(from, to, 0);
+    return;
+}
+```
+
+Therefore, the `transfer` function and its related parts will not throw or revert if transfers of 0 values are made.

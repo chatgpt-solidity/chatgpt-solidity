@@ -1,0 +1,22 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is responsible for creating tokens and assigning them to a recipient address (`to`). When a new token is minted, the `_mint` function emits a `TransferSingle` event to signal the transfer of the newly created tokens.
+
+In the provided code, the `airdrop` function in the `BONE` contract calls `_mint` for each recipient in the `recipients` array, provided that the recipient is not a contract (checked by `isContract`). The `_mint` function is called with the following arguments:
+
+- `to`: The recipient address.
+- `id`: The token ID, which is `_currentTokenId` in this case.
+- `amount`: The number of tokens to mint, which is `1`.
+- `data`: An empty byte string.
+
+The `_mint` function then performs the following steps:
+
+1. It checks that the recipient address is not the zero address.
+2. It prepares the `ids` and `amounts` arrays for the token transfer hooks.
+3. It calls `_beforeTokenTransfer` hook.
+4. It updates the recipient's balance by adding the `amount` of tokens.
+5. It emits the `TransferSingle` event with the operator (the message sender), the `from` address (zero address since it's a mint operation), the `to` address (recipient), the `id` of the token, and the `amount` of tokens transferred.
+6. It calls `_afterTokenTransfer` hook.
+7. It performs a safe transfer acceptance check if the recipient is a contract.
+
+The `TransferSingle` event is emitted with the `_value` argument set to the `amount` of tokens minted, which is `1`. This matches the number of tokens the recipient's balance is increased by, as required by the rule. Therefore, the `TransferSingle` event is emitted according to the given rule.

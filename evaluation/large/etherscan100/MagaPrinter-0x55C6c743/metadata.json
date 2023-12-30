@@ -1,0 +1,290 @@
+{
+    "file": "evaluation/etherscan100/MagaPrinter-0x55C6c743.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.21",
+            "func2file": {
+                "isOwner(address) returns(bool)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/isOwner_address",
+                "transferOwnership(address) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/transferOwnership_address",
+                "constructor(address) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/constructor_address",
+                "receive() returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/receive",
+                "setMagaCoin(address) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/setMagaCoin_address",
+                "setBots(address[]) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/setBots_address[]",
+                "openTrading() returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/openTrading",
+                "changeTotalFees(uint256,uint256) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/changeTotalFees_uint256_uint256",
+                "changeFeeAllocation(uint256,uint256,uint256) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/changeFeeAllocation_uint256_uint256_uint256",
+                "changeTxLimit(uint256) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/changeTxLimit_uint256",
+                "changeWalletLimit(uint256) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/changeWalletLimit_uint256",
+                "removeLimits() returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/removeLimits",
+                "changeIsFeeExempt(address,bool) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/changeIsFeeExempt_address_bool",
+                "changeIsTxLimitExempt(address,bool) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/changeIsTxLimitExempt_address_bool",
+                "setDevWallet(address) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/setDevWallet_address",
+                "setLpWallet(address) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/setLpWallet_address",
+                "setOwnerWallet(address) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/setOwnerWallet_address",
+                "changeSwapBackSettings(bool,uint256) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/changeSwapBackSettings_bool_uint256",
+                "setDistributionCriteria(uint256,uint256) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/setDistributionCriteria_uint256_uint256",
+                "delBot(address) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/delBot_address",
+                "setIsDividendExempt(address,bool) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/setIsDividendExempt_address_bool",
+                "changeMagaPrinterGas(uint256) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/changeMagaPrinterGas_uint256",
+                "getCirculatingSupply() returns(uint256)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/getCirculatingSupply",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/totalSupply",
+                "decimals() returns(uint8)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/decimals",
+                "symbol() returns(string)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/symbol",
+                "name() returns(string)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/name",
+                "getOwner() returns(address)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/getOwner",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/balanceOf_address",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/approve_address_uint256",
+                "approveMax(address) returns(bool)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/approveMax_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/transferFrom_address_address_uint256",
+                "manualSwapBack() returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/manualSwapBack",
+                "clearStuckEth() returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/clearStuckEth",
+                "rescueAnyERC20Tokens(address,address,uint256) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/rescueAnyERC20Tokens_address_address_uint256",
+                "manualProcessGas(uint256) returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/manualProcessGas_uint256",
+                "howMuchMAGA(address) returns(uint256)": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/howMuchMAGA_address",
+                "claimMaga() returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/claimMaga",
+                "removeStuckDividends() returns()": ".temp/etherscan100/MagaPrinter-0x55C6c743/TRUMPONOMICS/f/removeStuckDividends"
+            },
+            "func2attrs": {
+                "isOwner(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMagaCoin(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBots(address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "openTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeTotalFees(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeFeeAllocation(uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeTxLimit(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeWalletLimit(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeLimits() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeIsFeeExempt(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeIsTxLimitExempt(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setDevWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setLpWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setOwnerWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeSwapBackSettings(bool,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setDistributionCriteria(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "delBot(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setIsDividendExempt(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeMagaPrinterGas(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getCirculatingSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "getOwner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approveMax(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualSwapBack() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "clearStuckEth() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "rescueAnyERC20Tokens(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualProcessGas(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "howMuchMAGA(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "claimMaga() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeStuckDividends() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "maxWallet() returns(uint256)",
+                "magaPrinter() returns(MagaPrinter)",
+                "pair() returns(address)",
+                "toReflections() returns(uint256)",
+                "isTxLimitExempt(address) returns(bool)",
+                "buyFee() returns(uint256)",
+                "isDividendExempt(address) returns(bool)",
+                "magaPrinterGas() returns(uint256)",
+                "toLiquidity() returns(uint256)",
+                "tradingOpen() returns(bool)",
+                "swapAndLiquifyEnabled() returns(bool)",
+                "launchedAt() returns(uint256)",
+                "router() returns(IDEXRouter)",
+                "factory() returns(address)",
+                "allocationSum() returns(uint256)",
+                "isFeeExempt(address) returns(bool)",
+                "devWallet() returns(address)",
+                "MagaCoin() returns(address)",
+                "sellFee() returns(uint256)",
+                "toMarketing() returns(uint256)",
+                "swapThreshold() returns(uint256)",
+                "maxTx() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "TRUMPONOMICS"
+        }
+    ]
+}

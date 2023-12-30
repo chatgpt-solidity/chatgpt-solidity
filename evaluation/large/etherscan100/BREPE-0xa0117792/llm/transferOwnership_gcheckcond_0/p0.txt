@@ -1,0 +1,23 @@
+Given a solidity function transferOwnership and the related parts from a smart contract.
+Whether the function transferOwnership and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == msg.sender, "Ownable: caller is not the owner");
+        _;
+    }
+
+    function transferOwnership(address newOwner) public onlyOwner {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

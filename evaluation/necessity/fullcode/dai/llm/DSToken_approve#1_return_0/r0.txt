@@ -1,0 +1,7 @@
+YES
+
+The `approve` function in the `DSToken` contract calls the `approve` function from the `DSTokenBase` contract using `super.approve(guy, wad)`. The `DSTokenBase`'s `approve` function sets the allowance for the `guy` address to spend `wad` amount of tokens on behalf of `msg.sender`, and then emits an `Approval` event. After that, it returns `true`, indicating that the approval was successful.
+
+The `DSToken` contract's `approve` function also has the `stoppable` modifier from the `DSStop` contract, which checks if the `stopped` boolean is `false` before proceeding with the function call. If `stopped` is `true`, the function will revert due to the `require` statement in the `stoppable` modifier. If `stopped` is `false`, the function will proceed and return the result of the `super.approve(guy, wad)` call, which is `true` as long as the `DSTokenBase`'s `approve` function executes successfully.
+
+Therefore, the `approve` function in the `DSToken` contract adheres to the ERC rule that it should return whether the approval is successful.

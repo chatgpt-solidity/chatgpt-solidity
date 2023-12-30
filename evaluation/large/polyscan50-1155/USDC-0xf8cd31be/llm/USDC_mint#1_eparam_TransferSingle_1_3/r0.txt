@@ -1,0 +1,7 @@
+YES
+
+The `_mint` function in the provided contract code takes an `address to`, a `uint256 id`, and internally sets the `amount` to `1`. It then calls the internal `_mint` function of the `ERC1155` contract with these parameters, along with an empty `data` byte array.
+
+The internal `_mint` function of the `ERC1155` contract emits the `TransferSingle` event with the `operator` (which is the message sender), `from` address as zero (since it's a mint operation), the `to` address, the `id` of the token, and the `amount` which is `1`.
+
+The rule states that the `_id` argument must be the token type being transferred, and in this case, the `id` provided to the `_mint` function is used as the `_id` in the `TransferSingle` event. Therefore, the `TransferSingle` event is emitted according to the given rule.

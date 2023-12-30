@@ -1,0 +1,60 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract Ownable is Context {
+    address internal _owner;
+    constructor() {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+    function owner() public view returns (address) {
+        return _owner;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract work is Context, IERC20, Ownable {
+    mapping(address => uint256) private _rOwned;
+    mapping(address => bool) private _isExcludedFromFee;
+    mapping(address => bool) private _isExcludedFromMax;
+    uint256 private constant _tTotal = 1000000000 * 10**9;
+    uint256 private _rTotal = (MAX - (MAX % _tTotal));
+    address payable private _developmentAddress = payable(0xd4865F167b66CB12084aFd93825153Afc1F33f6d); 
+    address payable private _marketingAddress = payable(0xd4865F167b66CB12084aFd93825153Afc1F33f6d);
+    IUniswapV2Router02 public uniswapV2Router;
+    address public uniswapV2Pair;
+    constructor() {
+ 
+        _rOwned[_msgSender()] = _rTotal;
+ 
+        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+        uniswapV2Router = _uniswapV2Router;
+        uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory()).createPair(address(this), _uniswapV2Router.WETH());
+ 
+        _isExcludedFromFee[owner()] = true;
+        _isExcludedFromFee[address(this)] = true;
+        _isExcludedFromFee[_developmentAddress] = true;
+        _isExcludedFromFee[_marketingAddress] = true;
+        _isExcludedFromMax[owner()] = true;
+        _isExcludedFromMax[address(this)] = true;
+        _isExcludedFromMax[_developmentAddress] = true;
+        _isExcludedFromMax[_marketingAddress] = true;
+ 
+        emit Transfer(address(0), _msgSender(), _tTotal);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

@@ -1,0 +1,7 @@
+YES
+
+The `burnBatch` function in the `ERC1155Burnable` contract calls the `_burnBatch` internal function, which in turn emits the `TransferBatch` event. The `_from` argument in the `TransferBatch` event is set to the `from` parameter of the `_burnBatch` function, which is the address of the holder whose balance is being decreased (the tokens are being burned from this address).
+
+The `_burnBatch` function checks that the `from` address is not the zero address and that the `from` address has a sufficient balance of each token id before proceeding with the burn operation. After updating the balances, the `TransferBatch` event is emitted with the correct `_from` address, the zero address for `_to` (indicating a burn operation), and the corresponding `_ids` and `_values`.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule, with the `_from` argument being the address of the holder whose balance is decreased.

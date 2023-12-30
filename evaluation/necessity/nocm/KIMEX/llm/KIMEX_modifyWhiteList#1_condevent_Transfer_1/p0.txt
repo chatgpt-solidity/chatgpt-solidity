@@ -1,0 +1,46 @@
+Given a solidity function modifyWhiteList and the related parts from a smart contract.
+Whether the function modifyWhiteList and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract KIMEX is Owner {
+
+    address public adminAddress;
+
+    mapping(address => bool) public whiteList;
+    bool public inActive;
+
+    modifier isActive() {
+        require(inActive == false);
+        _;
+    }
+
+    modifier onlyOwnerOrAdminOrPortal() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Modify white list
+    function modifyWhiteList(
+        address[] _investorAddrs,
+        bool _isWhiteListed
+    ) external isActive onlyOwnerOrAdminOrPortal returns (bool) {
+        for (uint256 i = 0; i < _investorAddrs.length; i++) {
+            whiteList[_investorAddrs[i]] = _isWhiteListed;
+            emit ModifyWhiteList(_investorAddrs[i], _isWhiteListed);
+        }
+        return true;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred, including zero value transfers.
+"""

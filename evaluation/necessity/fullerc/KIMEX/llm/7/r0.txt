@@ -1,0 +1,21 @@
+The provided Solidity code for the `modifyWhiteList` function and related parts of the contract `KIMEX` do not directly relate to the ERC-20 token standard. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperable functionality with other contracts, such as wallets and decentralized exchanges.
+
+The ERC-20 standard includes the following methods and events:
+
+- `name()`
+- `symbol()`
+- `decimals()`
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `Transfer` event
+- `Approval` event
+
+The `modifyWhiteList` function in the `KIMEX` contract is not part of the ERC-20 standard. It is a custom function that allows the contract owner or an admin to add or remove addresses from a whitelist. This functionality is not covered by the ERC-20 standard, which focuses on the transfer and approval of token balances.
+
+The `modifyWhiteList` function does not violate the ERC-20 standard because it is not related to the token transfer or approval mechanisms defined by the standard. It is an additional feature that the contract developers have implemented for their specific use case, likely for access control or to restrict participation in certain contract interactions to a list of approved addresses.
+
+However, if the `KIMEX` contract is intended to be an ERC-20 compliant token, it must implement all the required functions and events listed in the ERC-20 standard. The provided code snippet does not show the implementation of these functions and events, so it is not possible to determine from the given information whether the `KIMEX` contract is fully ERC-20 compliant. The `modifyWhiteList` function is simply an extra feature and does not impact the contract's compliance with the ERC-20 standard as long as the required functions and events are correctly implemented elsewhere in the contract.

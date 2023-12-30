@@ -1,0 +1,3 @@
+YES
+
+The given `transfer` function in the smart contract violates the ERC rule that states "Transfers of 0 values MUST be treated as normal transfers." This is because the function includes the line `require(_value > 0);` which explicitly requires the `_value` to be greater than 0. This means that a transfer of 0 value would fail this requirement and revert, which is not compliant with the ERC rule that requires 0 value transfers to be treated as normal.

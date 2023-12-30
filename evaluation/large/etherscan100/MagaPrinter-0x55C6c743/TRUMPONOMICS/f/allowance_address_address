@@ -1,0 +1,4 @@
+contract TRUMPONOMICS is IERC20, Auth {
+    mapping(address => mapping(address => uint256)) private _allowances;
+    function allowance(address holder, address spender) external view override returns (uint256) { return _allowances[holder][spender]; }
+}

@@ -1,0 +1,4 @@
+contract KingBOBO is Context, IERC20, Ownable {
+
+    receive() external payable {}
+}

@@ -1,0 +1,3 @@
+NO
+
+The `transferFrom` function includes a requirement that `_value > 0`. If `_value` is 0, this requirement will not be met, and the function will throw an exception (revert the transaction). Therefore, transfers of 0 values will not succeed with this function as written.

@@ -1,0 +1,34 @@
+Given a solidity function endIco and the related parts from a smart contract and a rule.
+Whether the function endIco and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract AxpireToken is AxpirePausableToken {
+
+    //address public ;
+    // crowdsale parameters
+    bool public tokenSaleActive; // switched to true in operational state
+
+    function endIco() external onlyOwner {
+        // end ICO
+        // ensure that sale is active. is set to false at the end. can only be performed once.
+        require(tokenSaleActive == true);
+        tokenSaleActive = false;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

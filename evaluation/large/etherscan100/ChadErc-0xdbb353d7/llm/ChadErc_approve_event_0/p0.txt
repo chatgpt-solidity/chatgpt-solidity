@@ -1,0 +1,21 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it emits the event Approval? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.7;
+contract ChadErc is Context, Ownable, IERC20 {
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    function approve(address spender, uint256 amount) public virtual override returns (bool) {
+        _allowances[_msgSender()][spender] = amount;
+        emit Approval(_msgSender(), spender, amount);
+        return true;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+"""

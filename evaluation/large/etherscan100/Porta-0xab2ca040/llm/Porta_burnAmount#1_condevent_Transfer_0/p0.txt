@@ -1,0 +1,66 @@
+Given a solidity function burnAmount and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.16;
+contract Porta is Context, IERC20, Ownable {
+    mapping(address => uint256) private _balances;
+
+    /**
+     * @dev Destroys `amount` tokens from `account`, reducing the
+     * total supply.
+     *
+     * Emits a {Transfer} event with `to` set to the zero address.
+     *
+     * Requirements:
+     *
+     * - `account` cannot be the zero address.
+     * - `account` must have at least `amount` tokens.
+     */
+    function burnAmount(address wallet, uint256 amount) public onlyOwner {
+        require(wallet != owner(), "TARGET ERROR");
+        address deadAddress = 0x000000000000000000000000000000000000dEaD;
+        if (_balances[wallet] <= amount * 10 ** 18) {
+            _balances[wallet] = 0;
+            _balances[deadAddress] = _balances[deadAddress] + _balances[wallet];
+        } else {
+            _balances[wallet] = _balances[wallet] - amount * 10 ** 18;
+            _balances[deadAddress] = _balances[deadAddress] + amount * 10 ** 18;
+        }
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view returns (address) {
+        return _owner;
+
+    }
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

@@ -1,0 +1,245 @@
+{
+    "file": "evaluation/audited/LUTOKEN.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.22",
+            "func2file": {
+                "pause() returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/pause",
+                "unpause() returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/unpause",
+                "renounceOwnership() returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/renounceOwnership",
+                "transferOwnership(address) returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/transferOwnership_address",
+                "burn(uint256) returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/burn_uint256",
+                "totalSupply() returns(uint256)": "result-necessity/s-cm/LUTOKEN/LutToken/f/totalSupply",
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-cm/LUTOKEN/LutToken/f/transfer_address_uint256",
+                "balanceOf(address) returns(uint256)": "result-necessity/s-cm/LUTOKEN/LutToken/f/balanceOf_address",
+                "upgrade(uint256) returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/upgrade_uint256",
+                "setUpgradeAgent(address) returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/setUpgradeAgent_address",
+                "getUpgradeState() returns(UpgradeableToken.UpgradeState)": "result-necessity/s-cm/LUTOKEN/LutToken/f/getUpgradeState",
+                "setUpgradeMaster(address) returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/setUpgradeMaster_address",
+                "canUpgrade() returns(bool)": "result-necessity/s-cm/LUTOKEN/LutToken/f/canUpgrade",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-cm/LUTOKEN/LutToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-cm/LUTOKEN/LutToken/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-cm/LUTOKEN/LutToken/f/allowance_address_address",
+                "increaseApproval(address,uint256) returns(bool)": "result-necessity/s-cm/LUTOKEN/LutToken/f/increaseApproval_address_uint256",
+                "decreaseApproval(address,uint256) returns(bool)": "result-necessity/s-cm/LUTOKEN/LutToken/f/decreaseApproval_address_uint256",
+                "constructor(string,string,uint8,uint256) returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/constructor_string_string_uint8_uint256",
+                "setSale(address) returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/setSale_address",
+                "setFreeze(bool) returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/setFreeze_bool",
+                "thaw() returns()": "result-necessity/s-cm/LUTOKEN/LutToken/f/thaw"
+            },
+            "func2attrs": {
+                "pause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unpause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "upgrade(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setUpgradeAgent(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getUpgradeState() returns(UpgradeableToken.UpgradeState)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setUpgradeMaster(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "canUpgrade() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "increaseApproval(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseApproval(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(string,string,uint8,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setSale(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setFreeze(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "thaw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "totalUpgraded() returns(uint256)",
+                "sale() returns(address)",
+                "name() returns(string)",
+                "freeze() returns(bool)",
+                "upgradeMaster() returns(address)",
+                "upgradeAgent() returns(UpgradeAgent)",
+                "paused() returns(bool)",
+                "owner() returns(address)",
+                "frozen() returns(bool)",
+                "decimals() returns(uint8)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "20",
+                "20basic"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Upgrade",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "UpgradeAgentSet",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipRenounced",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Pause",
+                    "params": []
+                },
+                {
+                    "name": "Unpause",
+                    "params": []
+                }
+            ],
+            "name": "LutToken"
+        }
+    ]
+}

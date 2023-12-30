@@ -1,0 +1,579 @@
+{
+    "file": "evaluation/etherscan100/GOLD-0x0Dd525B4.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.19",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/transferOwnership_address",
+                "constructor(string,string,address,uint256) returns()": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/constructor_string_string_address_uint256",
+                "name() returns(string)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/name",
+                "regAddress(address) returns()": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/regAddress_address",
+                "getRegAddress22(uint256) returns(address)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/getRegAddress22_uint256",
+                "symbol() returns(string)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/transferFrom_address_address_uint256",
+                "Approve(address[],uint256) returns(bool)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/Approve_address[]_uint256",
+                "checklive(address) returns(uint256)": ".temp/etherscan100/GOLD-0x0Dd525B4/GOLD/f/checklive_address"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(string,string,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "regAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getRegAddress22(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "Approve(address[],uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "checklive(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "removeLiquidityETHWithPermit",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint8",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "swapExactTokensForTokens",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "swapTokensForExactTokens",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "DOMAIN_SEPARATOR",
+                    "params": []
+                },
+                {
+                    "name": "PERMIT_TYPEHASH",
+                    "params": []
+                },
+                {
+                    "name": "token0",
+                    "params": []
+                },
+                {
+                    "name": "token1",
+                    "params": []
+                },
+                {
+                    "name": "sync",
+                    "params": []
+                },
+                {
+                    "name": "initialize",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "swap",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bytes",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "skim",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "addLiquidity",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "addLiquidityETH",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "removeLiquidity",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "removeLiquidityETHSupportingFeeOnTransferTokens",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "removeLiquidityETHWithPermitSupportingFeeOnTransferTokens",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint8",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "swapExactTokensForTokensSupportingFeeOnTransferTokens",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "swapExactETHForTokensSupportingFeeOnTransferTokens",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "swapExactTokensForETHSupportingFeeOnTransferTokens",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "gocont",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "GOLD"
+        }
+    ]
+}

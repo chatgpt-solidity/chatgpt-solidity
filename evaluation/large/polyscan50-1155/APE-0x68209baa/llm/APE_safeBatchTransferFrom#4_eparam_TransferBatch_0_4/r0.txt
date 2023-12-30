@@ -1,0 +1,23 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The rule states that the `_values` argument must be the list of the number of tokens the holder's balance is decreased by and must match what the recipient's balance is increased by. In the code, the `amounts` array represents the `_values` argument, and it is used both to decrease the balance of the sender (`from`) and to increase the balance of the recipient (`to`) for each token ID specified in the `ids` array.
+
+The relevant part of the code that ensures this behavior is:
+
+```solidity
+for (uint256 i = 0; i < ids.length; ++i) {
+    uint256 id = ids[i];
+    uint256 amount = amounts[i];
+
+    uint256 fromBalance = _balances[id][from];
+    require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+    unchecked {
+        _balances[id][from] = fromBalance - amount;
+    }
+    _balances[id][to] += amount;
+}
+
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+In this loop, the contract checks that the sender has enough balance (`fromBalance >= amount`), then decreases the sender's balance by the specified amount and increases the recipient's balance by the same amount. After updating the balances, the `TransferBatch` event is emitted with the `operator`, `from`, `to`, `ids`, and `amounts` (which represent the `_values`), thus satisfying the rule.

@@ -1,0 +1,13 @@
+YES
+
+The `mintErc20` function in the provided Solidity code calls the `_mint` function, which is part of the `ERC1155` contract. The `_mint` function is responsible for creating `amount` tokens of token type `id` and assigning them to the `to` address, which in this case is the `msg.sender` (the caller of the `mintErc20` function).
+
+The `_mint` function includes the following line:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This line emits the `TransferSingle` event, which is required by the ERC-1155 standard when tokens are minted or transferred. According to the rule provided, the `_to` argument must be the address of the recipient whose balance is increased. In the `_mint` function, the `to` variable represents the recipient's address, and it is passed correctly to the `TransferSingle` event.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, with the `_to` argument being the address of the recipient (`msg.sender` in the context of the `mintErc20` function) whose balance is increased by the minting operation.

@@ -1,0 +1,298 @@
+{
+    "file": "evaluation/polyscan50-1155/MonsterGeads-0x5743c09a.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/supportsInterface_bytes4",
+                "hasRole(bytes32,address) returns(bool)": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/hasRole_bytes32_address",
+                "getRoleAdmin(bytes32) returns(bytes32)": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/getRoleAdmin_bytes32",
+                "grantRole(bytes32,address) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/grantRole_bytes32_address",
+                "revokeRole(bytes32,address) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/revokeRole_bytes32_address",
+                "renounceRole(bytes32,address) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/renounceRole_bytes32_address",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/balanceOf_address_uint256",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/balanceOfBatch_address[]_uint256[]",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "constructor(address) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/constructor_address",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/tokenURI_uint256",
+                "onlyOwnerCanMint(bool) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/onlyOwnerCanMint_bool",
+                "mint(address,uint256) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/mint_address_uint256",
+                "airdrop(address,uint256,uint256) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/airdrop_address_uint256_uint256",
+                "setPrice(uint256) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/setPrice_uint256",
+                "setUri(string) returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/setUri_string",
+                "withdraw() returns()": ".temp/polyscan50-1155/MonsterGeads-0x5743c09a/MonsterGeads/f/withdraw"
+            },
+            "func2attrs": {
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "hasRole(bytes32,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getRoleAdmin(bytes32) returns(bytes32)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "grantRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "revokeRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "renounceRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "onlyOwnerCanMint(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "airdrop(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setPrice(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setUri(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "ADMIN_ROLE() returns(bytes32)",
+                "symbol() returns(string)",
+                "price() returns(uint256)",
+                "baseUri() returns(string)",
+                "MAX_SUPPLY() returns(uint256)",
+                "AIRDROPPER_ROLE() returns(bytes32)",
+                "DEFAULT_ADMIN_ROLE() returns(bytes32)",
+                "name() returns(string)",
+                "Owner() returns(address)"
+            ],
+            "ercs": [
+                "165",
+                "1155metadatauri",
+                "1155"
+            ],
+            "events": [
+                {
+                    "name": "RoleAdminChanged",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleGranted",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleRevoked",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Mint",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Airdrop",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "NewURI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "string",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "MonsterGeads"
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+YES
+
+The `_mint` function within the `Binance` contract calls `emit TransferSingle(operator, address(0), to, id, amount);` after updating the balance with `_balances[id][to] += amount;`. The arguments passed to the `TransferSingle` event are in accordance with the rule specified:
+
+- `_operator` is the address performing the mint operation, obtained by `_msgSender()`.
+- `_from` is the zero address, indicating that tokens are being minted rather than transferred from another address.
+- `_to` is the address receiving the minted tokens.
+- `_id` is the token type being transferred, which in this case is `coinbase`.
+- `_value` is the amount of tokens being transferred, which is `1` in the `airdrop` function.
+
+The `airdrop` function ensures that the recipient is not a contract by checking `if(!isContract(recipients[i]))` before calling `_mint`, which is consistent with the ERC-1155 standard for minting new tokens. The `TransferSingle` event is emitted inside the `_mint` function, which is called only for non-contract addresses in the `airdrop` function. Therefore, the `TransferSingle` event is emitted according to the given rule.

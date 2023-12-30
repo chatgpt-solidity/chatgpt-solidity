@@ -1,0 +1,25 @@
+contract SilkToken is owned, TokenERC20 {
+    uint256 public sellPrice = 20180418134311; // Initialization with default value
+    uint256 public buyPrice = 1000000000000000000; // Initialization with default value
+
+    /// @notice Allow users to buy tokens for `newBuyPrice` eth and sell tokens for `newSellPrice` eth
+    /// @param newSellPrice Price the users can sell to the contract
+    /// @param newBuyPrice Price users can buy from the contract
+    function setPrices(
+        uint256 newSellPrice,
+        uint256 newBuyPrice
+    ) public onlyOwner {
+        sellPrice = newSellPrice;
+        buyPrice = newBuyPrice;
+    }
+}
+
+contract owned {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+

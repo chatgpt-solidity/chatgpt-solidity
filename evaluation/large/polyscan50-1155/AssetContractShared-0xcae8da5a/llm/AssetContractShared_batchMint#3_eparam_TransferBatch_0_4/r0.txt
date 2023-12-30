@@ -1,0 +1,27 @@
+Based on the provided Solidity code and the rule for the `TransferBatch` event, we need to verify if the `_values` argument in the `TransferBatch` event corresponds to the list of the number of tokens that the holder's balance is decreased by and matches what the recipient's balance is increased by.
+
+The relevant part of the code that emits the `TransferBatch` event is within the `_batchMint` function of the `ERC1155Tradable` contract:
+
+```solidity
+for (uint256 i = 0; i < nMint; i++) {
+    uint256 id = _ids[i];
+    uint256 amount = _amounts[i];
+    _beforeMint(id, amount);
+    require(
+        _origin(id) == origin,
+        "ERC1155Tradable#batchMint: MULTIPLE_ORIGINS_NOT_ALLOWED"
+    );
+    balances[id][_to] += amount;
+    _supply[id] += amount;
+}
+
+emit TransferBatch(operator, origin, _to, _ids, _amounts);
+```
+
+In this code snippet, the `balances` mapping is updated to increase the balance of the recipient (`_to`) by the amount specified in `_amounts[i]` for each token ID in `_ids[i]`. The `_supply` mapping is also updated to reflect the new total supply of each token ID after minting.
+
+The `TransferBatch` event is then emitted with the `_operator` as the operator who initiated the batch mint, `origin` as the address from which the tokens are considered to be transferred (in the case of minting, this is typically the zero address or the minting contract itself), `_to` as the recipient address, `_ids` as the list of token IDs, and `_amounts` as the list of amounts for each token ID.
+
+Given that the `_amounts` array is used to update the recipient's balance and is also passed as the `_values` argument in the `TransferBatch` event, the event is emitted according to the given rule. The rule states that the `_values` argument must match the list and order of tokens specified in `_ids` and reflect the change in the holder's balance, which is what the code does.
+
+Therefore, the answer is "YES", the `TransferBatch` event is emitted according to the given rule.

@@ -1,0 +1,51 @@
+To determine if the `transferFrom` function in the provided `DSToken` contract violates the ERC-20 standard, we need to compare the implementation with the ERC-20 specification.
+
+Here are the key points from the ERC-20 standard regarding the `transferFrom` function:
+
+1. Transfers `_value` amount of tokens from address `_from` to address `_to`, and MUST fire the `Transfer` event.
+2. The function SHOULD throw unless the `_from` account has deliberately authorized the sender of the message via some mechanism.
+3. Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+
+Now, let's analyze the provided `transferFrom` function:
+
+```solidity
+function transferFrom(
+    address src,
+    address dst,
+    uint wad
+) public stoppable returns (bool) {
+    if (src != msg.sender && _approvals[src][msg.sender] != uint(-1)) {
+        _approvals[src][msg.sender] = sub(_approvals[src][msg.sender], wad);
+    }
+
+    _balances[src] = sub(_balances[src], wad);
+    _balances[dst] = add(_balances[dst], wad);
+
+    Transfer(src, dst, wad);
+
+    return true;
+}
+```
+
+The function does the following:
+
+- Checks if the `src` is not the `msg.sender` and if the allowance is not set to `uint(-1)`, then it deducts the `wad` (amount to transfer) from the allowance.
+- Deducts the `wad` from the `src` balance and adds it to the `dst` balance.
+- Emits the `Transfer` event.
+- Returns `true`.
+
+Potential issues with the `transferFrom` function based on the ERC-20 standard:
+
+1. The function does not explicitly check if the `src` has enough balance to transfer the `wad`. According to the ERC-20 standard, the function SHOULD throw if the balance is insufficient. This can be a violation if the `sub` function does not ensure this check.
+2. The function does not check for the case where the transfer amount is 0. The ERC-20 standard states that transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event. However, this is not an issue in the provided code since it will still emit the `Transfer` event for a 0 value transfer.
+3. The function does not explicitly check for the allowance being sufficient before performing the transfer. This check is implied by the `sub` function, which should throw if the allowance is insufficient, but it would be clearer to have an explicit check for readability and security.
+
+The `sub` and `add` functions from the `DSMath` contract are used for safe math operations, which should prevent overflows and underflows. Assuming that these functions throw an error when an operation would result in an underflow (such as when the sender does not have enough balance or the allowance is insufficient), the `transferFrom` function would comply with the ERC-20 standard's requirement to throw in these cases.
+
+However, the `Transfer` event is not correctly implemented according to the Solidity version mentioned in the ERC-20 standard (0.4.17 or above). The event should be emitted using the `emit` keyword, which is missing in the provided code:
+
+```solidity
+emit Transfer(src, dst, wad);
+```
+
+In conclusion, the provided `transferFrom` function appears to mostly comply with the ERC-20 standard, assuming that the `sub` function correctly throws on underflows. The main issue is the missing `emit` keyword for the `Transfer` event, which is a syntax error in Solidity versions 0.4.21 and above. If the `DSMath` contract's `sub` function does not throw on underflows, then there would be a violation of the ERC-20 standard, as the contract would not correctly check for sufficient balances and allowances.

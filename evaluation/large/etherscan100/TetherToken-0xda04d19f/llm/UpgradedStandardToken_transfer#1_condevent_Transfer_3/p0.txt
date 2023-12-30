@@ -1,0 +1,88 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.16;
+contract Ownable is Context {
+  address private _owner;
+
+  /**
+   * @dev Returns the address of the current owner.
+   */
+  function owner() public view returns (address) {
+    return _owner;
+  }
+}
+
+library SafeMath {
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        if (a == 0) {
+            return 0;
+        }
+        uint256 c = a * b;
+        assert(c / a == b);
+        return c;
+
+    }
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        // assert(b > 0); // Solidity automatically throws when dividing by 0
+        uint256 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+        return c;
+
+    }
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract BasicToken is Ownable, ERC20Basic {
+
+    mapping(address => uint) public balances;
+
+    // additional variables for use if transaction fees ever became necessary
+    uint public basisPointsRate = 0;
+
+    uint public maximumFee = 0;
+    /**
+    * @dev Fix for the ERC20 short address attack.
+    */
+    modifier onlyPayloadSize(uint size) {
+        require(!(msg.data.length < size + 4));
+        _;
+    }
+
+    /**
+    * @dev transfer token for a specified address
+    * @param _to The address to transfer to.
+    * @param _value The amount to be transferred.
+    */
+    function transfer(address _to, uint _value) public onlyPayloadSize(2 * 32) {
+        uint fee = (_value.mul(basisPointsRate)).div(10000);
+        if (fee > maximumFee) {
+            fee = maximumFee;
+        }
+        uint sendAmount = _value.sub(fee);
+        balances[msg.sender] = balances[msg.sender].sub(_value);
+        balances[_to] = balances[_to].add(sendAmount);
+        if (fee > 0) {
+            balances[owner()] = balances[owner()].add(fee);
+            emit Transfer(msg.sender, owner(), fee);
+        }
+        emit Transfer(msg.sender, _to, sendAmount);
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

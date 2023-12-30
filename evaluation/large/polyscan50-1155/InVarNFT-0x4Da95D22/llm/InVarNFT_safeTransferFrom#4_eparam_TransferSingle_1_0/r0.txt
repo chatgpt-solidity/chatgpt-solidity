@@ -1,0 +1,7 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code checks whether the caller (`msg.sender`) is either the owner of the tokens (`from == _msgSender()`) or an approved operator (`isApprovedForAll(from, _msgSender())`). If this check passes, the function proceeds to call `_safeTransferFrom`.
+
+Within the `_safeTransferFrom` function, the `operator` variable is set to `_msgSender()`, which is the address of the account that initiated the transaction. This is consistent with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer.
+
+Finally, the `TransferSingle` event is emitted with the `operator` variable as the `_operator` argument, which means that the event is correctly emitted with the address of an approved account/contract as per the given rule.

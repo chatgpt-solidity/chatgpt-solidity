@@ -1,0 +1,9 @@
+The provided Solidity code defines a function `changeFounderAddress` within a contract named `KIMEX`, which is intended to change the address associated with the founder of the contract. This function is protected by a modifier `onlyOwnerOrAdmin` that restricts its execution to the owner of the contract or an admin address.
+
+The ERC (Ethereum Request for Comments) provided appears to be a description of the ERC-20 standard, which is a common standard for fungible tokens on the Ethereum blockchain. The ERC-20 standard specifies a set of functions and events that a token contract should implement to be considered compliant. These functions and events relate to the transfer of tokens, querying token balances, and allowing tokens to be spent by approved third parties.
+
+The `changeFounderAddress` function and the related parts of the `KIMEX` contract do not directly interact with the ERC-20 token standard functions or events. The function is more related to the administrative control of the contract rather than the token-specific operations defined by ERC-20.
+
+Therefore, the `changeFounderAddress` function does not violate the ERC-20 standard because it does not pertain to the token transfer mechanics or token balance inquiries that the standard defines. It is an administrative function that is outside the scope of what ERC-20 standardizes.
+
+However, it is important to note that while the function does not violate the ERC-20 standard, it is crucial to ensure that the administrative controls of a token contract are secure and do not introduce vulnerabilities that could be exploited. The ability to change the founder's address should be carefully controlled and audited to prevent unauthorized access or malicious actions.

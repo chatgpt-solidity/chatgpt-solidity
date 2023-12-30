@@ -1,0 +1,20 @@
+The provided Solidity function `allowance` within the `StandardToken` contract appears to be compliant with the ERC-20 token standard as described in the provided ERC documentation. The ERC-20 standard specifies that the `allowance` function should:
+
+> Returns the amount which _spender is still allowed to withdraw from _owner.
+
+The Solidity code for the `allowance` function is as follows:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) public view returns (uint256 remaining) {
+    return allowed[_owner][_spender];
+}
+```
+
+This function correctly takes two address parameters, `_owner` and `_spender`, and returns the remaining amount that `_spender` is allowed to withdraw from `_owner`'s balance. This is done by accessing the `allowed` mapping, which keeps track of all allowances set by token holders.
+
+The ERC-20 standard does not specify the exact implementation details of how the allowance should be stored or managed, only the interface and expected behavior. Therefore, as long as the function adheres to the interface and expected behavior, the implementation details are up to the developer.
+
+In conclusion, the `allowance` function provided in the `StandardToken` contract does not violate the ERC-20 standard based on the information given in the ERC documentation. It correctly implements the required functionality as per the ERC-20 specification.

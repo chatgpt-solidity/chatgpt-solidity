@@ -1,0 +1,19 @@
+The provided `transferFrom` function in the `DSToken` contract appears to be compliant with the ERC-20 standard, with a few observations and caveats:
+
+1. **ERC-20 Compliance**: The `transferFrom` function is designed to transfer tokens on behalf of another account, provided that the sender has been authorized to do so by the token holder. This is in line with the ERC-20 standard, which requires that the function should throw unless the `_from` account has deliberately authorized the sender of the message via some mechanism.
+
+2. **Decrementing Allowance**: The function correctly checks if the sender (`msg.sender`) is not the source account (`src`) and if the sender has not been given an unlimited allowance (indicated by `_approvals[src][msg.sender] != uint(-1)`). If these conditions are met, it decrements the allowance by the amount being transferred (`wad`).
+
+3. **Sufficient Balance and Allowance**: The function uses the `sub` function from the `DSMath` contract to safely subtract the transfer amount from the source's balance and the sender's allowance. This will revert the transaction if the source does not have enough balance or if the sender does not have enough allowance (unless it's unlimited).
+
+4. **Transfer Event**: The function emits a `Transfer` event, which is required by the ERC-20 standard for any transfer of tokens, including zero value transfers.
+
+5. **Return Value**: The function returns a boolean value (`true`), which is in line with the ERC-20 standard that requires functions to return a boolean value to indicate success.
+
+6. **Stoppable Modifier**: The `stoppable` modifier is used to prevent the function from executing if the contract is stopped. This is not part of the ERC-20 standard, but it does not violate the standard as long as the function behaves correctly when the contract is not stopped.
+
+7. **DSNote and DSAuth**: The `DSStop` contract inherits from `DSNote` and `DSAuth`, which are not part of the ERC-20 standard. These are likely to be part of the contract's design for logging and access control, and as long as they do not interfere with the ERC-20 functions, they do not violate the standard.
+
+8. **Missing Checks**: The ERC-20 standard states that the function should throw if the message caller’s account balance does not have enough tokens to spend. The provided code does this check implicitly through the `sub` function from `DSMath`, which will revert if the subtraction results in an underflow. However, the code does not explicitly check for sufficient allowance before attempting to decrement it, which could result in a revert due to underflow. This is not necessarily a violation, but it could be considered a deviation from best practices.
+
+In conclusion, the `transferFrom` function and related parts of the contract do not violate the ERC-20 standard. However, it is important to note that the actual compliance would also depend on the implementation of other functions and events in the contract, which are not provided in the excerpt. The contract should also implement the `approve`, `allowance`, `balanceOf`, and `totalSupply` functions, as well as the `Approval` event, to be fully ERC-20 compliant.

@@ -1,0 +1,7 @@
+contract EBLivePremios is ERC721 {
+    uint256 COUNTER;
+
+    function supply() public view returns (uint256) {
+        return COUNTER;
+    }
+}

@@ -1,0 +1,22 @@
+Given a solidity function setisExempt and the related parts from a smart contract.
+Whether the function setisExempt and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract zepump is IERC20, tokenStaking, Ownable {
+    mapping(address => bool) private isFeeExempt;
+
+    function setisExempt(address _address, bool _enabled) external onlyOwner {
+        isFeeExempt[_address] = _enabled;
+        emit ExcludeFromFees(_address, _enabled, block.timestamp);
+    }
+}
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,8 @@
+contract Smartnft_Pro_ERC1155 is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
+
+    mapping( uint256 => string ) private _tokenURIs;
+
+    function uri( uint256 tokenId ) public view override returns( string memory ){
+        return _tokenURIs[tokenId];
+    }
+}

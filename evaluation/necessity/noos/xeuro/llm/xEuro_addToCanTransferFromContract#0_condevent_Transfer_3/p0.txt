@@ -1,0 +1,29 @@
+Given a solidity function addToCanTransferFromContract and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    // addresses allowed to transfer tokens from contract's own address:
+    mapping(address => bool) public canTransferFromContract;
+
+    function addToCanTransferFromContract(
+        address _newAddress
+    ) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canTransferFromContract[_newAddress] = true;
+        emit AddressAddedToCanTransferFromContract(msg.sender, _newAddress);
+        return true;
+    } //
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

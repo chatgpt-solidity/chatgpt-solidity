@@ -1,0 +1,37 @@
+Given a solidity function freezeTransfers and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.3;
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * True if tokens transfers are currently frozen, false otherwise.
+     */
+    bool frozen = false;
+
+    /**
+     * Freeze ALL token transfers.
+     * May only be called by smart contract owner.
+     */
+    function freezeTransfers() public {
+        require(msg.sender == owner);
+
+        if (!frozen) {
+            frozen = true;
+            emit Freeze();
+        }
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

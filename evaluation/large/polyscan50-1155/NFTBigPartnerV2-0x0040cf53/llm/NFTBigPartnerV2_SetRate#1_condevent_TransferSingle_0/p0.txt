@@ -1,0 +1,25 @@
+Given a solidity function SetRate and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract NFTBigPartnerV2 is ERC1155, Ownable, ERC1155Burnable {
+
+    address public rightperson;
+    address public assistance;
+
+    mapping(uint256=>uint256) public rate;
+     // new** set rate of BIGP for locking without adding 10^18 Zeroes.
+    function SetRate(uint256 _n,uint256 _rate)public{
+         require(msg.sender==rightperson||msg.sender==assistance);
+          rate[_n]=_rate*10**18;
+
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers as well as minting or burning
+"""

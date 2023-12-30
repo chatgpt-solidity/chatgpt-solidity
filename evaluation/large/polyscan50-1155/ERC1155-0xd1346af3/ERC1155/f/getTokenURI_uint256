@@ -1,0 +1,12 @@
+contract ERC1155 {
+    mapping(uint256 => string) private tokenURIs;
+    mapping(uint256 => string) private updatedTokenURIs; // New mapping for updated token URIs
+
+    function getTokenURI(uint256 tokenId) public view returns (string memory) {
+        if (bytes(updatedTokenURIs[tokenId]).length > 0) {
+            return updatedTokenURIs[tokenId];
+        }
+        return tokenURIs[tokenId];
+    }
+}
+

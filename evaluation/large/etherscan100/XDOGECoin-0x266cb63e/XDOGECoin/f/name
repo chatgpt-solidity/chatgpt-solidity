@@ -1,0 +1,8 @@
+contract XDOGECoin is Context, IERC20, Ownable {
+
+    string private _name = "HarryPotterObamaSonicNaughtiusMaximus10Inu";
+
+    function name() public view returns (string memory) {
+        return _name;
+    }
+}

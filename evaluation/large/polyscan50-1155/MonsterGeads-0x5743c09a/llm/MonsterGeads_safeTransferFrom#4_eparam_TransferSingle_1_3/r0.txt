@@ -1,0 +1,9 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function with the correct arguments, including the `_id` argument which represents the token type being transferred. The event is emitted after the balance update and before the `_afterTokenTransfer` hook and the `_doSafeTransferAcceptanceCheck` function are called. The event signature matches the rule provided:
+
+```solidity
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+Here, `id` is the token type being transferred, which is required by the rule.

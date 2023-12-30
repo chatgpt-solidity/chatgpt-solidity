@@ -1,0 +1,30 @@
+The provided Solidity code defines a `burn` function within the `DSToken` contract, which is intended to reduce the token balance of a specified address (`guy`) by a certain amount (`wad`). The `burn` function also reduces the total supply of tokens accordingly.
+
+To determine if the `burn` function violates the ERC-20 standard, we need to compare its behavior with the ERC-20 specification. The ERC-20 standard does not explicitly define a `burn` function; however, it does specify the `Transfer` event, which must be triggered when tokens are transferred, including when tokens are created or destroyed (burned).
+
+The `burn` function in the provided code does trigger a `Burn` event, which is not part of the ERC-20 standard. To comply with ERC-20, the contract should trigger the `Transfer` event with the `_from` address set to the address of the token holder whose tokens are being burned and the `_to` address set to the zero address (`0x0`) to indicate that the tokens are being destroyed.
+
+Here is the relevant part of the ERC-20 specification for the `Transfer` event:
+
+```
+Transfer
+MUST trigger when tokens are transferred, including zero value transfers. A token contract which creates new tokens SHOULD trigger a Transfer event with the _from address set to 0x0 when tokens are created.
+```
+
+To comply with the ERC-20 standard, the `burn` function should be modified to trigger the `Transfer` event instead of a custom `Burn` event. The modified `burn` function might look something like this:
+
+```solidity
+function burn(address guy, uint wad) public auth stoppable {
+    if (guy != msg.sender && _approvals[guy][msg.sender] != uint(-1)) {
+        _approvals[guy][msg.sender] = sub(_approvals[guy][msg.sender], wad);
+    }
+
+    _balances[guy] = sub(_balances[guy], wad);
+    _supply = sub(_supply, wad);
+    emit Transfer(guy, address(0), wad); // Comply with ERC-20 by emitting Transfer event
+}
+```
+
+Additionally, the `burn` function should ensure that the `guy` has enough tokens to burn, and it should revert if the `guy` does not have sufficient balance. This is in line with the ERC-20 standard's requirement that functions should throw (revert) if the operation is not valid.
+
+In summary, the `burn` function as provided does not fully comply with the ERC-20 standard because it emits a custom `Burn` event instead of the standard `Transfer` event with the `_to` address set to `0x0`. To comply with ERC-20, the function should be modified to emit the `Transfer` event as described above.

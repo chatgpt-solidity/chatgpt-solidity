@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract, which is called by the `airdrop` function in the `Binance` contract. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`. The `TransferSingle` event is emitted with the `_value` argument set to the `amount` of tokens minted, which is the number of tokens the holder balance is increased by.
+
+In the `airdrop` function, the `_mint` function is called with the `amount` set to `1`, which means that one token of the `coinbase` ID is minted for each recipient. The `TransferSingle` event is then emitted with the `_value` set to `1`, which matches the number of tokens the recipient balance is increased by.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

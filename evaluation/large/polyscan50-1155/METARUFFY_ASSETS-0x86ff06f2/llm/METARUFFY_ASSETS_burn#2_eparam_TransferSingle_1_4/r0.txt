@@ -1,0 +1,9 @@
+YES
+
+The `_burn` function in the `ERC1155` contract correctly emits the `TransferSingle` event after validating the conditions for burning tokens. The `_value` argument in the `TransferSingle` event is set to the `amount` parameter of the `_burn` function, which is the number of tokens to be burned from the `from` address. The `from` balance is decreased by this `amount`, and since burning is equivalent to sending the tokens to the zero address (`address(0)`), the `to` parameter in the `TransferSingle` event is set to the zero address.
+
+The `_beforeTokenTransfer` hook is also correctly implemented in both `ERC1155` and `ERC1155Supply` contracts to handle the case when tokens are burned (when `to` is the zero address). The `ERC1155Supply` contract adjusts the `_totalSupply` mapping accordingly, decreasing the total supply of the token by the `amount` being burned.
+
+The `burn` function in the `ERC1155Burnable` contract checks that the caller is either the token owner or is approved to burn tokens on their behalf, and then calls the internal `_burn` function.
+
+The rule stated is satisfied because the `_value` in the `TransferSingle` event represents the number of tokens that the holder's balance is decreased by, and it matches what would be the increase in the recipient's balance if it were a transfer to a non-zero address. However, since this is a burn operation, the recipient is the zero address, and there is no actual increase in balance for any recipient.

@@ -1,0 +1,29 @@
+Given a solidity function toggleSwap and the related parts from a smart contract.
+Whether the function toggleSwap and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable is Context {
+    address internal _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract work is Context, IERC20, Ownable {
+    bool private swapEnabled = true;
+    function toggleSwap(bool _swapEnabled) public onlyOwner {
+        swapEnabled = _swapEnabled;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

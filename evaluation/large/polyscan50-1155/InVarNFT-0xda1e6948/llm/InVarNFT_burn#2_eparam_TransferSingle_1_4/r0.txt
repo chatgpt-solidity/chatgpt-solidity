@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function with the correct arguments according to the given rule. The `_value` argument in the event is the `amount` of tokens that are being burned, which is the same number by which the holder's balance is decreased. The `_from` argument is the address of the holder whose tokens are being burned, and the `_to` argument is the zero address, indicating a burn operation. The `_id` argument is the ID of the token type being burned. The rule is satisfied as the `_value` matches the decrease in the holder's balance.

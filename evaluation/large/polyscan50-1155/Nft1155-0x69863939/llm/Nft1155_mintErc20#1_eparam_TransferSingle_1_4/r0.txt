@@ -1,0 +1,15 @@
+YES
+
+The `mintErc20` function in the provided Solidity code is part of a contract that inherits from `ERC1155Supply`. When the `_mint` function is called within `mintErc20`, it internally calls the `_mint` function defined in the `ERC1155` contract.
+
+The `_mint` function in `ERC1155` is responsible for creating `amount` tokens of token type `id` and assigning them to the address `to`. As part of its execution, it emits the `TransferSingle` event with the following parameters:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are being transferred, which is `address(0)` in the case of minting new tokens.
+- `_to`: The address to which the tokens are being minted.
+- `_id`: The token type identifier.
+- `_value`: The number of tokens being minted.
+
+The rule specified requires that the `_value` argument in the `TransferSingle` event must match the number of tokens the holder's balance is increased by. In the `_mint` function, the `_balances[id][to]` mapping is increased by `amount`, and the `TransferSingle` event is emitted with `_value` set to the same `amount`. This ensures that the `_value` argument in the event matches the number of tokens the recipient's balance is increased by.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule when the `mintErc20` function is called.

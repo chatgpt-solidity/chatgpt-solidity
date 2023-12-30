@@ -1,0 +1,34 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it emits the event Approval? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract DSToken is DSTokenBase(0), DSStop {
+
+    function approve(address guy) public stoppable returns (bool) {
+        return super.approve(guy, uint(-1));
+    }
+}
+
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => mapping(address => uint256)) _approvals;
+
+    function approve(address guy, uint wad) public returns (bool) {
+        _approvals[msg.sender][guy] = wad;
+
+        Approval(msg.sender, guy, wad);
+
+        return true;
+    }
+}
+
+contract DSStop is DSNote, DSAuth {
+
+    bool public stopped;
+    modifier stoppable() {
+        require(!stopped);
+        _;
+    }
+}
+"""

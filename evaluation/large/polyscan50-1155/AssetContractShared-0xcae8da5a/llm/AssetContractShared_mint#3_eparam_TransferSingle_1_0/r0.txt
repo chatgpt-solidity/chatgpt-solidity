@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155Tradable` contract. The `_operator` argument for the event is set to the result of the `_msgSender()` function, which is designed to return the original sender of the transaction. This is consistent with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+The `_msgSender()` function is overridden in the `ContextMixin` contract to account for meta-transactions, ensuring that even if the contract is called through a relayer, the original sender is correctly identified.
+
+Therefore, the `TransferSingle` event is emitted with the correct `_operator` argument according to the given rule.

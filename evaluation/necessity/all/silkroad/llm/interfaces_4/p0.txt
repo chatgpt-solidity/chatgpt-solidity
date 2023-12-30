@@ -1,0 +1,38 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "allowance(address,address) returns(uint256)" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+transfer(address,uint256) returns()
+transferFrom(address,address,uint256) returns(bool)
+approve(address,uint256) returns(bool)
+approveAndCall(address,uint256,bytes) returns(bool)
+burn(uint256) returns(bool)
+burnFrom(address,uint256) returns(bool)
+transferOwnership(address) returns()
+SilkToken(uint256,string,string) returns()
+mintToken(address,uint256) returns()
+freezeAccount(address,bool) returns()
+setPrices(uint256,uint256) returns()
+startPreSales(uint256) returns(uint256)
+stopPreSales() returns()
+getTaiAMT(uint256) returns(uint256)
+getBalanceTAI() returns(uint256)
+getSalesPrice() returns(uint256)
+getLeftPreSalesAMT() returns(uint256)
+procPreSales() returns(uint256)
+procNormalSales() returns(uint256)
+procNormalBuyBack(address) returns(uint256)
+totalSupply() returns(uint256)
+name() returns(string)
+frozenAccount(address) returns(bool)
+balanceOf(address) returns(uint256)
+sellPrice() returns(uint256)
+owner() returns(address)
+decimals() returns(uint8)
+isPreSales() returns(bool)
+buyPrice() returns(uint256)
+allowance(address,address) returns(uint256)
+symbol() returns(string)
+limitAMT() returns(uint256)
+"""

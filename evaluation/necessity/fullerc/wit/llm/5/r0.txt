@@ -1,0 +1,23 @@
+The provided Solidity code snippets define two contracts: `AbstractToken` and `WiT`. The `AbstractToken` contract is intended to be a base contract for a token, and it inherits from another contract called `Token` and a library called `SafeMath`. The `WiT` contract inherits from `AbstractToken` and sets an `owner` to the address that deploys the contract.
+
+The ERC (Ethereum Request for Comments) in question appears to be ERC-20, which is a standard interface for fungible tokens on the Ethereum blockchain. ERC-20 defines a set of rules that a token contract must follow to be considered compliant.
+
+To determine if the provided code violates the ERC-20 standard, we need to check if the contract implements the following methods and events as specified by the ERC-20 standard:
+
+- `name()`
+- `symbol()`
+- `decimals()`
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `Transfer` event
+- `Approval` event
+
+The provided code snippets do not include the implementation of these methods and events. However, since `AbstractToken` inherits from a contract named `Token`, it is possible that the `Token` contract contains the necessary ERC-20 methods and events. Without the implementation of the `Token` contract, we cannot definitively say whether the `AbstractToken` and `WiT` contracts are ERC-20 compliant.
+
+Additionally, the `WiT` contract's constructor sets the `owner` variable to the address that deploys the contract. This behavior is not part of the ERC-20 standard, but it does not violate the standard either, as the standard does not restrict the addition of non-standard features or internal management mechanisms such as ownership.
+
+In conclusion, based on the provided code snippets alone, we cannot determine if the `AbstractToken` and `WiT` contracts violate the ERC-20 standard. We would need the full implementation of the `Token` contract and any other related code to make a complete assessment. If the `Token` contract implements all the required methods and events according to the ERC-20 standard, and the `AbstractToken` and `WiT` contracts do not interfere with those implementations, then the contracts would likely be compliant with ERC-20.

@@ -1,0 +1,10 @@
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    function isApprovedForAll(
+        address,
+        address
+    ) external pure override returns (bool) {
+        return false;
+    }
+}
+

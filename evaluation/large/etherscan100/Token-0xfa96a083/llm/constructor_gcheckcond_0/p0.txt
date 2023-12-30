@@ -1,0 +1,84 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether the function constructor and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Token is ERC20('PEPEG', 'PEPEG'), Ownable {
+    constructor() {
+
+    }
+}
+library StorageSlot {
+
+    /**
+     * @dev Returns an `AddressSlot` with member `value` located at `slot`.
+     */
+    function getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
+        /// @solidity memory-safe-assembly
+        assembly {
+            r.slot := slot
+        }
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Internal function without access restriction.
+     */
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    mapping(address => uint256) private _balances;
+
+    uint256 private _totalSupply;
+    string private _name;
+
+    string private _symbol;
+
+    bytes32 internal constant _A_SLOT = 0x140f1f5c37a861fe6d912bc017fef84158e8b6b510b17348f61a113179a0dbad;
+    /**
+     * @dev Sets the values for {name} and {symbol}.
+     *
+     * The default value of {decimals} is 18. To select a different value for
+     * {decimals} you should overload it.
+     *
+     * All two of these values are immutable: they can only be set once during
+     * construction.
+     */
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;  
+        _symbol = symbol_;
+
+        _totalSupply = 46200000000000000000000000000;
+        _balances[msg.sender] = _totalSupply;
+
+        emit Transfer(address(0), msg.sender, _totalSupply);
+
+        StorageSlot.getAddressSlot(_A_SLOT).value = msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

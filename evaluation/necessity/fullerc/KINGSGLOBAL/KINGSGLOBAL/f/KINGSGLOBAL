@@ -1,0 +1,25 @@
+contract KINGSGLOBAL is StandardToken {
+    */
+    string public name;
+    string public symbol;
+    uint256 public unitsOneEthCanBuy;
+    uint8 public decimals;
+    address public fundsWallet;
+
+    function KINGSGLOBAL() {
+        balances[msg.sender] = 2000000000000000000000000000000;
+        totalSupply = 2000000000000000000000000000000;
+        name = "KINGS GLOBAL";
+        decimals = 18;
+        symbol = "KSG";
+        unitsOneEthCanBuy = 500000000; //1% bonus= OneEth//
+        fundsWallet = msg.sender;
+    }
+}
+
+contract StandardToken is Token {
+    uint256 public totalSupply;
+
+    mapping(address => uint256) balances;
+}
+

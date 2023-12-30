@@ -1,0 +1,21 @@
+contract EBLivePremios is ERC721 {
+    bool private _paused = true;
+    address private _Admin;
+
+    function SetUnpause() public onlyAdmin {
+        require(_paused, "Pausable: Already Unpaused");
+        _paused = false;
+    }
+
+    //Ownable
+    modifier onlyAdmin() {
+        require(_Admin == _msgSender(), "Ownable: caller is not the admin");
+        _;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

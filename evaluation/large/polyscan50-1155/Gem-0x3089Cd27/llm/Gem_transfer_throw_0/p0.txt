@@ -1,0 +1,84 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether the function transfer and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Function(and related parts) to audit:"""
+contract ERC20 is Context, IERC20 {
+    mapping(address => uint256) internal _balances;
+
+    function transfer(address to, uint256 amount)
+        public
+        virtual
+        override
+        returns (bool)
+    {
+        address owner = _msgSender();
+        _transfer(owner, to, amount);
+        return true;
+    }
+
+    function _transfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {
+        require(from != address(0), 'ERC20: transfer from the zero address');
+        require(to != address(0), 'ERC20: transfer to the zero address');
+
+        _beforeTokenTransfer(from, to, amount);
+
+        uint256 fromBalance = _balances[from];
+        require(
+            fromBalance >= amount,
+            'ERC20: transfer amount exceeds balance'
+        );
+        unchecked {
+            _balances[from] = fromBalance - amount;
+        }
+        _balances[to] += amount;
+
+        emit Transfer(from, to, amount);
+
+        _afterTokenTransfer(from, to, amount);
+    }
+
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+
+    ) internal virtual {}
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Gem is
+    Ownable,
+    ERC20
+    
+    
+    
+      
+{
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual override(ERC20)   {
+        super._beforeTokenTransfer(from, to, amount);
+    }
+}
+"""
+
+Condition:"""
+the message caller's account balance does not have enough tokens to spend
+"""

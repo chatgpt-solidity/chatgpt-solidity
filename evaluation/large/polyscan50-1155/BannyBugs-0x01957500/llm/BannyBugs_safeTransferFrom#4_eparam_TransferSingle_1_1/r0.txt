@@ -1,0 +1,16 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_from` argument in the `TransferSingle` event is indeed the address of the holder whose balance is decreased. This is evident from the following lines in the `_safeTransferFrom` function:
+
+```solidity
+uint256 fromBalance = _balances[id][from];
+require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+unchecked {
+    _balances[id][from] = fromBalance - amount;
+}
+_balances[id][to] += amount;
+
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+Before the `TransferSingle` event is emitted, the function checks that the `from` address has a sufficient balance of the token type `id` and then decreases the balance of the `from` address by the `amount` being transferred. The `to` address's balance is increased by the same `amount`. The `TransferSingle` event is then emitted with the `from` address as the second argument, which is the address of the holder whose balance was decreased.

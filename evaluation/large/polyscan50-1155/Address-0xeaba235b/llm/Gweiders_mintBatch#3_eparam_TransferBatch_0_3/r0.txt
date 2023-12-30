@@ -1,0 +1,15 @@
+YES
+
+The `_mintBatch` function within the `ERC1155` contract is responsible for minting a batch of tokens. It takes an address `to`, an array of token IDs `ids`, and an array of corresponding amounts `amounts`, along with additional `data`. The function checks that the `to` address is not the zero address and that the lengths of `ids` and `amounts` match, as required by the ERC1155 standard.
+
+The `TransferBatch` event is emitted within the `_mintBatch` function with the following parameters:
+
+- `_operator`: The address performing the mint operation, obtained by calling `_msgSender()`.
+- `_from`: The address from which the tokens are being transferred, which is the zero address in the case of minting.
+- `_to`: The address to which the tokens are being minted, which is the `to` parameter passed to the function.
+- `_ids`: The list of token IDs being minted, which is the `ids` parameter passed to the function.
+- `_values`: The list of amounts for each token ID being minted, which is the `amounts` parameter passed to the function.
+
+The `mintBatch` function in the `Gweiders` contract calls `_mintBatch` and is restricted to the contract owner by the `onlyOwner` modifier.
+
+The rule states that the `_ids` argument must be the list of tokens being transferred, and in this case, the `_ids` argument passed to the `TransferBatch` event is indeed the list of tokens being minted. Therefore, the `TransferBatch` event is emitted according to the given rule.

@@ -1,0 +1,23 @@
+Given a solidity function balanceOf and the related parts from a smart contract.
+Whether the function balanceOf and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Function(and related parts) to audit:"""
+contract ERC721A is Context, ERC165, IERC721A {
+
+    // Mapping owner address to address data
+    mapping(address => AddressData) private _addressData;
+
+    /**
+     * @dev See {IERC721-balanceOf}.
+     */
+    function balanceOf(address owner) public view override returns (uint256) {
+        if (owner == address(0)) revert BalanceQueryForZeroAddress();
+        return uint256(_addressData[owner].balance);
+    }
+}
+"""
+
+Condition:"""
+Query zero address
+"""

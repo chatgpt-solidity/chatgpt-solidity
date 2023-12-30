@@ -1,0 +1,15 @@
+Given a solidity function name and the related parts from a smart contract and an rule for its return value.
+Whether function name returns the name of the token? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract POV is IERC20, Context, Ownable  {
+
+    string private constant _name = "POV CHAIN";
+
+    function name() public pure returns (string memory) {
+        return _name;
+    }
+}
+"""

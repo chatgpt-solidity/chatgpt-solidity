@@ -1,0 +1,38 @@
+YES
+
+The `mintBatch` function in the provided Smartnft_Pro_ERC1155 contract correctly emits the `TransferBatch` event according to the given rule. The `_operator` argument in the `TransferBatch` event is set to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`. This is the correct and expected behavior, as `msg.sender` is the address of the account that is making the transaction and is therefore approved to make the transfer.
+
+Here is the relevant part of the code:
+
+```solidity
+function _mintBatch(
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual {
+    // ... (omitted code for brevity)
+
+    address operator = _msgSender(); // This gets the msg.sender
+
+    // ... (omitted code for brevity)
+
+    emit TransferBatch(operator, address(0), to, ids, amounts); // Correctly emits the event with the operator
+
+    // ... (omitted code for brevity)
+}
+```
+
+And in the `mintBatch` function, `_mintBatch` is called with `msg.sender` implicitly being the operator:
+
+```solidity
+function mintBatch( uint256[] memory amounts, string[] memory _uris )
+    public payable
+{
+    // ... (omitted code for brevity)
+
+    _mintBatch( msg.sender, ids, amounts, "0x0" ); // msg.sender is the operator
+}
+```
+
+Therefore, the `TransferBatch` event is emitted with the `_operator` argument being the address that initiated the transaction, which is in compliance with the given rule.

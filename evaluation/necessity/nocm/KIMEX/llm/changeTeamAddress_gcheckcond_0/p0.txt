@@ -1,0 +1,30 @@
+Given a solidity function changeTeamAddress and the related parts from a smart contract and a rule.
+Whether the function changeTeamAddress and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    address public teamAddress;
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Modify team address to receive team tokens allocation
+    function changeTeamAddress(address _newAddress) external onlyOwnerOrAdmin {
+        require(_newAddress != address(0));
+        require(teamAddress != _newAddress);
+        teamAddress = _newAddress;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

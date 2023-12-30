@@ -1,0 +1,21 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+
+contract ChadErc is Context, Ownable, IERC20 {
+    mapping (address => uint256) private _balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    function transferFrom(address sender, address recipient, uint256 amount) public virtual override returns (bool) {
+    require(_allowances[sender][_msgSender()] >= amount, "TT: transfer amount exceeds allowance");
+
+    _balances[sender] -= amount;
+    _balances[recipient] += amount;
+    _allowances[sender][_msgSender()] -= amount;
+
+    emit Transfer(sender, recipient, amount);
+    return true;
+    }
+}

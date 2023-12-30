@@ -1,0 +1,14 @@
+Given a solidity function totalSupply and the related parts from a smart contract and an rule for its return value.
+Whether function totalSupply returns the total token supply? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract ChadErc is Context, Ownable, IERC20 {
+    uint256 private _totalSupply;
+
+    function totalSupply() external view override returns (uint256) {
+    return _totalSupply;
+    }
+}
+"""

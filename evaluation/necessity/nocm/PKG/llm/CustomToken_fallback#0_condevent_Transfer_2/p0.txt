@@ -1,0 +1,53 @@
+Given a solidity function fallback and the related parts from a smart contract.
+Whether the function fallback and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.23;
+contract ICOToken is BaseToken {
+    // 1 ether = icoRatio token
+    uint256 public icoRatio;
+    uint256 public icoEndtime;
+    address public icoSender;
+
+    modifier onlyBefore() {
+        if (now > icoEndtime) {
+            revert();
+        }
+        _;
+    }
+
+    function() public payable onlyBefore {
+        uint256 tokenValue = (msg.value * icoRatio * 10 ** uint256(decimals)) /
+            (1 ether / 1 wei);
+        if (tokenValue == 0 || balanceOf[icoSender] < tokenValue) {
+            revert();
+        }
+        _transfer(icoSender, msg.sender, tokenValue);
+        ICO(msg.sender, msg.value, tokenValue);
+    }
+}
+
+contract BaseToken {
+    uint8 public decimals;
+
+    mapping(address => uint256) public balanceOf;
+
+    function _transfer(address _from, address _to, uint _value) internal {
+        require(_to != 0x0);
+        require(balanceOf[_from] >= _value);
+        require(balanceOf[_to] + _value > balanceOf[_to]);
+        uint previousBalances = balanceOf[_from] + balanceOf[_to];
+        balanceOf[_from] -= _value;
+        balanceOf[_to] += _value;
+        assert(balanceOf[_from] + balanceOf[_to] == previousBalances);
+        Transfer(_from, _to, _value);
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are minting or allocating
+"""

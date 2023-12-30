@@ -1,0 +1,9 @@
+The provided Solidity code defines a contract `Owner` with a function `changeOwner` that allows the current owner of the contract to transfer ownership to a new address. The function is protected by a `onlyOwner` modifier, which restricts the execution of the function to the current owner of the contract.
+
+The provided ERC (Ethereum Request for Comments) appears to be describing the ERC-20 standard, which is a standard interface for fungible tokens on the Ethereum blockchain. The ERC-20 standard specifies a set of functions and events that a token contract should implement to be considered ERC-20 compliant. These functions and events relate to the transfer of tokens, querying token balances, and allowing tokens to be spent by approved third parties.
+
+The `changeOwner` function and the `Owner` contract are not part of the ERC-20 standard. The ERC-20 standard does not define ownership or ownership transfer functionality for token contracts. Instead, it focuses on the token-related functionalities such as transferring tokens, approving tokens for third-party transfers, and querying balances and allowances.
+
+Therefore, the `changeOwner` function and the related parts do not violate the ERC-20 standard because they are not related to the token functionalities that the standard defines. The `changeOwner` function is a common pattern used in many smart contracts to manage contract ownership, which is separate from the token-specific logic that ERC-20 standardizes.
+
+In conclusion, the `changeOwner` function does not pertain to the ERC-20 token standard and thus does not violate it. It is a separate concern related to contract administration and not to the token interface and behavior that ERC-20 describes.

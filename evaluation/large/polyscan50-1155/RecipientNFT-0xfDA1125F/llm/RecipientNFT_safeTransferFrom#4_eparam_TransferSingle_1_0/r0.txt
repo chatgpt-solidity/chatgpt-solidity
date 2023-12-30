@@ -1,0 +1,27 @@
+YES
+
+The function `_safeTransferFrom` within the `ERC1155` contract emits the `TransferSingle` event as required by the rule. The `_operator` argument in the `TransferSingle` event is set to the result of `_msgSender()`, which returns the `msg.sender` of the transaction. This is consistent with the rule that the `_operator` must be the address of an account/contract that is approved to make the transfer, and it should be `msg.sender`.
+
+Here is the relevant part of the code:
+
+```solidity
+function _safeTransferFrom(
+    address from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+) internal virtual {
+    // ... (other code)
+
+    address operator = _msgSender();
+
+    // ... (other code)
+
+    emit TransferSingle(operator, from, to, id, amount);
+
+    // ... (other code)
+}
+```
+
+The `safeTransferFrom` public function calls `_safeTransferFrom`, which in turn emits the `TransferSingle` event with the `operator` set to the address returned by `_msgSender()`. This satisfies the rule provided.

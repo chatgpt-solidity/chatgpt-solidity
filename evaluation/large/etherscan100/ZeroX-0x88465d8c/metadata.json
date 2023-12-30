@@ -1,0 +1,180 @@
+{
+    "file": "evaluation/etherscan100/ZeroX-0x88465d8c.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.21",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/renounceOwnership",
+                "constructor() returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/transferFrom_address_address_uint256",
+                "ClearStuckTokens() returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/ClearStuckTokens",
+                "setsFeesWalletAddress(address) returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/setsFeesWalletAddress_address",
+                "setMaxLimitAmounts(uint256) returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/setMaxLimitAmounts_uint256",
+                "updateFeeBuy(uint256) returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/updateFeeBuy_uint256",
+                "updateFeeSells(uint256) returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/updateFeeSells_uint256",
+                "openTrading() returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/openTrading",
+                "receive() returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/receive",
+                "manualSwap() returns()": ".temp/etherscan100/ZeroX-0x88465d8c/ZeroX/f/manualSwap"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "ClearStuckTokens() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setsFeesWalletAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMaxLimitAmounts(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateFeeBuy(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateFeeSells(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "openTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualSwap() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_maxWalletSize() returns(uint256)",
+                "_maxTxAmount() returns(uint256)",
+                "_maxTaxSwap() returns(uint256)",
+                "_taxSwapThreshold() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MaxTxAmountUpdated",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "ZeroX"
+        }
+    ]
+}

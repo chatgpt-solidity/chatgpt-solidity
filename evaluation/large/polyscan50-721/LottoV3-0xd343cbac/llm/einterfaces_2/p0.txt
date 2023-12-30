@@ -1,0 +1,13 @@
+Given only the Solidity event interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "event ApprovalForAll(address indexed, address indexed, bool);" and parameter types and index attributes are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+event OwnershipTransferred(address indexed, address indexed);
+event Transfer(address indexed, address indexed, uint256 indexed);
+event Approval(address indexed, address indexed, uint256 indexed);
+event ApprovalForAll(address indexed, address indexed, bool);
+event BetDetails(uint256, address, uint256);
+event ClaimDetails(uint256, address, uint256);
+event WinnerDetails(uint256, address, address, address, uint256, uint256);
+"""

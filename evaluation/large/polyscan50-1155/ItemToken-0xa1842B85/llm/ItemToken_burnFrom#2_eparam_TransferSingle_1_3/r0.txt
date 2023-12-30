@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function with the correct arguments according to the rule provided. The `_id` argument is indeed the token type being transferred (burned in this case), as it is passed directly from the `burnFrom` function to the `_burn` function without modification. The `TransferSingle` event is then emitted with the `id` argument representing the token type.

@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the `operator` variable as the `_operator` argument. The `operator` variable is assigned the value of `_msgSender()` which is the Solidity global `msg.sender` representing the address that is currently calling the contract function. This is in line with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`. 
+
+Therefore, the `TransferSingle` event is correctly emitted according to the given rule.

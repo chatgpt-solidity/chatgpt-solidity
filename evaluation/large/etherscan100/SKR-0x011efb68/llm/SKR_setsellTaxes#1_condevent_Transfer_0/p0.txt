@@ -1,0 +1,59 @@
+Given a solidity function setsellTaxes and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract Ownable is Context {
+    address private _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+
+contract SKR is Context, IERC20, Ownable {
+
+    uint256 public _sellMarketingFee = 10;
+    uint256 public _sellLpFee = 0;
+    uint256 public _totalTaxIfSelling = _sellMarketingFee + _sellLpFee;
+
+    function setsellTaxes(uint256 sellMarketingFeeNew, uint256 sellLpFeeNew) external onlyOwner(){
+        _sellMarketingFee = sellMarketingFeeNew;
+        _sellLpFee = sellLpFeeNew;
+        _totalTaxIfSelling = _sellMarketingFee.add(_sellLpFee);
+        // require(_totalTaxIfSelling <= 10 , "Max sell fee under 10%");
+    }
+}
+library SafeMath {
+
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a, "SafeMath: addition overflow");
+
+        return c;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

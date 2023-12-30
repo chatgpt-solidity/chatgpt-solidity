@@ -1,0 +1,57 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+
+    }
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     * and stop existing when they are burned (`_burn`).
+     */
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _ownerOf(tokenId) != address(0);
+    }
+}
+
+contract AISenseNFT is ERC721Enumerable, Ownable, ContractMetadata {
+
+    NftData[] public nftTypes;
+    mapping(uint256 => uint8) public NFTTYPE;
+
+    function tokenURI(
+        uint256 _tokenId
+    ) public view virtual override returns (string memory) {
+        require(
+            _exists(_tokenId),
+            "ERC721Metadata: URI query for nonexistent token"
+        );
+        uint8 duration = NFTTYPE[_tokenId];
+
+        // string memory folder;
+
+        // if (duration == 0) {
+        //     folder = "/1-month-metadata";
+        // } else if (duration == 1) {
+        //     folder = "/3-month-metadata";
+        // } else if (duration == 2) {
+        //     folder = "/6-month-metadata";
+        // } else if (duration == 3) {
+        //     folder = "/12-month-metadata";
+        // } else {
+        //     revert("Invalid duration");
+        // }
+
+        string memory _tokenUri = nftTypes[duration].uri;
+        return _tokenUri;
+    }
+}

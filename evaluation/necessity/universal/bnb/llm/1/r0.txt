@@ -1,0 +1,15 @@
+YES
+
+The given Solidity code for the contract `BNB` includes a `transfer` function that is intended to emit a `Transfer` event to notify listeners of the transfer action. However, the code provided does not define the `Transfer` event, nor does it use the `emit` keyword to emit the event, which is required by the ERC-20 standard for token transfer events.
+
+The correct implementation should include the event definition and use the `emit` keyword to emit the event when a transfer occurs, like so:
+
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 value);
+
+...
+
+emit Transfer(msg.sender, _to, _value);
+```
+
+Since the provided code does not follow this pattern, it violates the given ERC rule.

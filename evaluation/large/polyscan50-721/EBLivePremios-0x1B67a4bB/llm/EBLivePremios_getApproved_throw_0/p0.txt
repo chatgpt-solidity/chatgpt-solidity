@@ -1,0 +1,31 @@
+Given a solidity function getApproved and the related parts from a smart contract.
+Whether the function getApproved and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Function(and related parts) to audit:"""
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+    // Mapping from token ID to approved address
+    mapping(uint256 => address) private _tokenApprovals;
+
+    function getApproved(
+        uint256 tokenId
+    ) public view virtual override returns (address) {
+        require(
+            _exists(tokenId),
+            "ERC721: approved query for nonexistent token"
+        );
+        return _tokenApprovals[tokenId];
+    }
+
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _owners[tokenId] != address(0);
+    }
+}
+"""
+
+Condition:"""
+`_tokenId` is not a valid NFT.
+"""

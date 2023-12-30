@@ -1,0 +1,13 @@
+YES
+
+The `transferFrom` function in the provided `DSToken` contract is designed to return a boolean value indicating whether the transfer is successful. The function ends with `return true;`, which means that if the function execution reaches that point without reverting due to a failed `require` statement or any other exception, it will return `true`.
+
+The ERC-20 standard requires that functions like `transferFrom` return a boolean value to indicate success. In this case, the function adheres to the standard by returning `true` upon successful completion of the transfer, which includes:
+
+- Checking if the contract is not stopped (`stoppable` modifier).
+- Adjusting the allowance if the sender is not the source (`src != msg.sender`).
+- Subtracting the amount (`wad`) from the sender's balance.
+- Adding the amount (`wad`) to the recipient's balance.
+- Emitting a `Transfer` event.
+
+If any of these operations fail, the transaction will revert, and no return value will be provided. If all operations succeed, the function will return `true`, indicating a successful transfer, as required by the ERC rule.

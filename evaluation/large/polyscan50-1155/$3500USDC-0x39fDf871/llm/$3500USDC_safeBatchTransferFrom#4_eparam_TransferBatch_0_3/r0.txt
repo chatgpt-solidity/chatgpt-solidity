@@ -1,0 +1,9 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_ids` argument is indeed the list of tokens being transferred, and the event is emitted with the correct parameters:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+Here, `ids` represents the list of token IDs (`_ids`) being transferred, and `amounts` represents the corresponding list of amounts (`_values`) for each token ID. The event is emitted after the balances have been updated and before the safe transfer acceptance check is performed, which is the appropriate place to emit such an event.

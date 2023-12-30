@@ -1,0 +1,49 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    constructor() {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    function owner() public view returns (address) {
+        return _owner;
+    }
+}
+
+contract WashingtonJeffersonLincolnHamiltonJacksonGrantFranklin is Context, IERC20, Ownable {
+
+    mapping(address => uint256) private _rOwned;
+    mapping(address => bool) private _isExcludedFromFee;
+    uint256 private constant _tTotal = 1000000000 * 10**9;
+    uint256 private _rTotal = (MAX - (MAX % _tTotal));
+    address payable private _developmentAddress = payable(0x91a8Aa697D6fAc965C69a5FA7dc5Dc9C23b3521D);
+    address payable private _marketingAddress = payable(0x91a8Aa697D6fAc965C69a5FA7dc5Dc9C23b3521D);
+
+    IUniswapV2Router02 public uniswapV2Router;
+    address public uniswapV2Pair;
+
+    constructor() {
+
+        _rOwned[_msgSender()] = _rTotal;
+
+        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);//
+        uniswapV2Router = _uniswapV2Router;
+        uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
+            .createPair(address(this), _uniswapV2Router.WETH());
+
+        _isExcludedFromFee[owner()] = true;
+        _isExcludedFromFee[address(this)] = true;
+        _isExcludedFromFee[_developmentAddress] = true;
+        _isExcludedFromFee[_marketingAddress] = true;
+
+        emit Transfer(address(0), _msgSender(), _tTotal);
+    }
+}

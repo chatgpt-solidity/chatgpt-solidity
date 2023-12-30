@@ -1,0 +1,17 @@
+Given a solidity function setApprovalForAll and the related parts from a smart contract.
+Whether it emits the event ApprovalForAll? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    function setApprovalForAll(address, bool) external pure override {
+        _transferRevert();
+    }
+
+    function _transferRevert() private pure {
+        revert("Cannot perform transfers on a non-transferable token");
+    }
+}
+"""

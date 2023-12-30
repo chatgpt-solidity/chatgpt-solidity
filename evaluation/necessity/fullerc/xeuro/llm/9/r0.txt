@@ -1,0 +1,23 @@
+The provided Solidity code for the `removeFromCanMint` function and related parts from the `xEuro` smart contract do not directly violate the ERC-20 standard as described in the provided ERC documentation. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable token transfers, approvals, and other related functionalities.
+
+The `removeFromCanMint` function is an administrative function that is not part of the ERC-20 standard. It is used to manage the permissions of which addresses are allowed to mint new tokens. This kind of administrative control is outside the scope of the ERC-20 standard, which focuses on token transfer and approval mechanisms.
+
+The ERC-20 standard includes the following functions and events:
+
+- `name()`
+- `symbol()`
+- `decimals()`
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `Transfer` event
+- `Approval` event
+
+The `removeFromCanMint` function does not interfere with any of these functions or events. It is an additional feature that the contract developers have included for their own purposes, likely to control the token's monetary policy by restricting who can mint new tokens.
+
+However, it is important to note that while the `removeFromCanMint` function does not violate the ERC-20 standard, it does introduce additional centralization into the token contract, as it allows certain addresses (admins) to control the minting process. This kind of centralization might not be expected by users or may not align with the decentralized ethos of some projects or communities.
+
+In conclusion, the `removeFromCanMint` function does not violate the ERC-20 standard, but it does add an administrative layer that is not covered by the standard. Token contracts that include such administrative functions should clearly document their behavior and ensure that users are aware of these additional controls.

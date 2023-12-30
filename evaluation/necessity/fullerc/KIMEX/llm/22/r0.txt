@@ -1,0 +1,30 @@
+The `allowance` function provided in the KIMEX contract code snippet appears to be compliant with the ERC-20 token standard as described in the given ERC documentation. The ERC-20 standard specifies that the `allowance` function should have the following signature:
+
+```solidity
+function allowance(address _owner, address _spender) public view returns (uint256 remaining)
+```
+
+The function should return the amount which `_spender` is still allowed to withdraw from `_owner`.
+
+The code snippet provided for the KIMEX contract has the `allowance` function implemented as follows:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) external constant returns (uint256) {
+    return allowed[_owner][_spender];
+}
+```
+
+Here are the key points to consider:
+
+1. The function signature in the KIMEX contract matches the ERC-20 standard, taking an `_owner` and a `_spender` address as arguments and returning a `uint256` value.
+
+2. The function is marked as `external`, which is acceptable because `external` functions can be called from outside the contract (similar to `public` functions). The `external` keyword is more gas-efficient when the function is called externally.
+
+3. The `constant` keyword is used in the KIMEX contract, which is an older way to indicate that the function does not modify the state and can be executed as a view function. In newer versions of Solidity, the `view` keyword is preferred. However, using `constant` is still compliant with the ERC-20 standard, as it achieves the same effect as `view`.
+
+4. The function correctly returns the remaining allowance for the `_spender` to withdraw from the `_owner`'s account, which is stored in the `allowed` mapping.
+
+Based on the provided information, the `allowance` function in the KIMEX contract does not violate the ERC-20 standard. However, it is important to note that the rest of the contract would also need to be reviewed to ensure full compliance with the ERC-20 standard, including the implementation of other required functions and events such as `transfer`, `transferFrom`, `approve`, `Transfer`, and `Approval`. Additionally, the contract should be tested and audited for security and correctness in its entirety.

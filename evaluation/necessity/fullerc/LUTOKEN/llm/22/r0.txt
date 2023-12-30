@@ -1,0 +1,58 @@
+The provided Solidity function interfaces are being compared to the ERC-20 token standard, which is the most common standard for Ethereum tokens. The ERC-20 standard specifies a minimal set of functions and events that a compliant token contract must implement to enable interoperability with other contracts, wallets, and marketplaces.
+
+Here are the ERC-20 standard functions and events:
+
+- `function name() public view returns (string)`
+- `function symbol() public view returns (string)`
+- `function decimals() public view returns (uint8)`
+- `function totalSupply() public view returns (uint256)`
+- `function balanceOf(address _owner) public view returns (uint256 balance)`
+- `function transfer(address _to, uint256 _value) public returns (bool success)`
+- `function transferFrom(address _from, address _to, uint256 _value) public returns (bool success)`
+- `function approve(address _spender, uint256 _value) public returns (bool success)`
+- `function allowance(address _owner, address _spender) public view returns (uint256 remaining)`
+- `event Transfer(address indexed _from, address indexed _to, uint256 _value)`
+- `event Approval(address indexed _owner, address indexed _spender, uint256 _value)`
+
+Now, let's compare the provided function interfaces with the ERC-20 standard:
+
+- `name() returns(string)` - Compliant
+- `symbol() returns(string)` - Compliant
+- `decimals() returns(uint8)` - Compliant
+- `totalSupply() returns(uint256)` - Compliant
+- `balanceOf(address) returns(uint256)` - Compliant
+- `transfer(address,uint256) returns(bool)` - Compliant
+- `transferFrom(address,address,uint256) returns(bool)` - Compliant
+- `approve(address,uint256) returns(bool)` - Compliant
+- `allowance(address,address) returns(uint256)` - Compliant
+
+The following functions are not part of the ERC-20 standard but are commonly found in token contracts for additional functionality:
+
+- `pause() returns()`
+- `unpause() returns()`
+- `renounceOwnership() returns()`
+- `transferOwnership(address) returns()`
+- `burn(uint256) returns()`
+- `upgrade(uint256) returns()`
+- `setUpgradeAgent(address) returns()`
+- `getUpgradeState() returns(UpgradeableToken.UpgradeState)`
+- `setUpgradeMaster(address) returns()`
+- `canUpgrade() returns(bool)`
+- `increaseApproval(address,uint256) returns(bool)`
+- `decreaseApproval(address,uint256) returns(bool)`
+- `constructor(string,string,uint8,uint256) returns()`
+- `setSale(address) returns()`
+- `setFreeze(bool) returns()`
+- `thaw() returns()`
+- `upgradeMaster() returns(address)`
+- `paused() returns(bool)`
+- `sale() returns(address)`
+- `freeze() returns(bool)`
+- `owner() returns(address)`
+- `frozen() returns(bool)`
+- `upgradeAgent() returns(UpgradeAgent)`
+- `totalUpgraded() returns(uint256)`
+
+These additional functions do not violate the ERC-20 standard, as the standard does not prohibit the inclusion of extra functions. However, they do extend beyond the minimal interface required by ERC-20. It's important to note that the presence of these additional functions could affect the token's interaction with contracts expecting strict adherence to the ERC-20 standard.
+
+In conclusion, the provided function interfaces include all the necessary functions to be ERC-20 compliant, along with additional functions that extend the functionality of the token contract. These additional functions do not violate the ERC-20 standard, but developers should be aware of them when integrating the token with other applications.

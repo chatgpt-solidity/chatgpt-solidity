@@ -1,0 +1,34 @@
+Given a solidity function setMaxWalletSize and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract work is Context, IERC20, Ownable {
+    uint256 private constant _tTotal = 1000000000 * 10**9;
+    uint256 public _maxWalletSize = _tTotal.mul(3).div(100); 
+
+    function setMaxWalletSize(uint256 amountPercent) public onlyOwner {
+        require(amountPercent>0);
+        _maxWalletSize = (_tTotal * amountPercent ) / 100;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address internal _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

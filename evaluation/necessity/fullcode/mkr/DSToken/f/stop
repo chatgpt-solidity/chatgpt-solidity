@@ -1,0 +1,50 @@
+contract DSAuth is DSAuthEvents {
+    DSAuthority public authority;
+    address public owner;
+
+    modifier auth() {
+        require(isAuthorized(msg.sender, msg.sig));
+        _;
+    }
+
+    function isAuthorized(
+        address src,
+        bytes4 sig
+    ) internal view returns (bool) {
+        if (src == address(this)) {
+            return true;
+        } else if (src == owner) {
+            return true;
+        } else if (authority == DSAuthority(0)) {
+            return false;
+        } else {
+            return authority.canCall(src, this, sig);
+        }
+    }
+}
+
+contract DSStop is DSNote, DSAuth {
+    bool public stopped;
+
+    function stop() public auth note {
+        stopped = true;
+    }
+}
+
+contract DSNote {
+
+    modifier note() {
+        bytes32 foo;
+        bytes32 bar;
+
+        assembly {
+            foo := calldataload(4)
+            bar := calldataload(36)
+        }
+
+        LogNote(msg.sig, msg.sender, foo, bar, msg.value, msg.data);
+
+        _;
+    }
+}
+

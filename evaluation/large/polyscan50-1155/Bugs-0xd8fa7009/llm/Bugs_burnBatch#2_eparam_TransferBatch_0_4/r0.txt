@@ -1,0 +1,17 @@
+YES
+
+The provided Solidity code includes the `_burnBatch` function within the `ERC1155` contract, which is responsible for burning a batch of tokens. The function checks that the `from` address is not the zero address and that the lengths of the `ids` and `amounts` arrays match, as required by the ERC1155 standard.
+
+The `_burnBatch` function then iterates over the `ids` and `amounts` arrays, ensuring that the `from` address has a sufficient balance of each token to be burned. It then decreases the balance of the `from` address by the specified `amounts`.
+
+After updating the balances, the function emits the `TransferBatch` event, which is the focus of the rule you've provided. The event is emitted with the following arguments:
+
+- `operator`: The address which initiated the burn operation (typically the message sender).
+- `from`: The address from which the tokens are being burned.
+- `to`: The zero address, since the tokens are being burned and not transferred to another address.
+- `ids`: The list of token IDs that are being burned.
+- `amounts`: The list of amounts for each token ID that is being burned.
+
+The rule states that the `_values` argument in the `TransferBatch` event must match the list and order of tokens specified in `_ids` and reflect the decrease in the holder's balance. In the code, the `amounts` array represents the number of tokens being burned for each corresponding token ID in the `ids` array. Since the `amounts` array is used to decrease the balance of the `from` address and is also passed as the `_values` argument in the `TransferBatch` event, the rule is satisfied.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule, and the answer is "YES".

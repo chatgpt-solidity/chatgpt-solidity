@@ -1,0 +1,19 @@
+contract xEuro {
+
+    // addresses allowed to mint tokens:
+    mapping(address => bool) public canMint;
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    function removeFromCanMint(address _addressToRemove) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canMint[_addressToRemove] = false;
+        emit AddressRemovedFromCanMint(msg.sender, _addressToRemove);
+        return true;
+    }
+}
+

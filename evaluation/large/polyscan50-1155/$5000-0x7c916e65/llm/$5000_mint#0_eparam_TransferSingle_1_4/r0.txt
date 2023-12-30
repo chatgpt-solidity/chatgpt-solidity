@@ -1,0 +1,15 @@
+YES
+
+The provided Solidity function `_mint` within the `ERC1155` contract correctly emits the `TransferSingle` event according to the given rule. The `_value` argument in the `TransferSingle` event is set to `amount`, which is the number of tokens that are being minted and assigned to the `to` address. The `_balances` mapping is updated to increase the balance of the `to` address by `amount`, which is consistent with the `_value` provided in the event.
+
+The rule states that the `_value` argument must be the number of tokens the holder balance is decreased by and match what the recipient balance is increased by. In the case of minting, the `_from` address is the zero address (indicating token creation), and the `_to` address is the recipient of the newly minted tokens. The `amount` represents the number of tokens created and assigned to the `to` address, which is consistent with the rule.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address which initiated the minting (typically the contract owner in this case).
+- `_from`: The zero address, indicating that tokens are being minted.
+- `_to`: The recipient address receiving the newly minted tokens.
+- `_id`: The token type being minted.
+- `_value`: The number of tokens being minted, which is the same as the amount by which the recipient's balance is increased.
+
+Therefore, the `TransferSingle` event is emitted in compliance with the rule provided.

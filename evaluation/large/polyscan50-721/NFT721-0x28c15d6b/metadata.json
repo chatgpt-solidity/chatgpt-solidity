@@ -1,0 +1,292 @@
+{
+    "file": "evaluation/polyscan50-721/NFT721-0x28c15d6b.sol",
+    "contracts": [
+        {
+            "solc_version": "0.7.6",
+            "func2file": {
+                "isAdmin(address) returns(bool)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/isAdmin_address",
+                "isOperator(address) returns(bool)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/isOperator_address",
+                "addAdmin(address) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/addAdmin_address",
+                "addOperator(address) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/addOperator_address",
+                "renounceAdmin() returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/renounceAdmin",
+                "removeOperator(address) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/removeOperator_address",
+                "hasRole(bytes32,address) returns(bool)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/hasRole_bytes32_address",
+                "getRoleMemberCount(bytes32) returns(uint256)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/getRoleMemberCount_bytes32",
+                "getRoleMember(bytes32,uint256) returns(address)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/getRoleMember_bytes32_uint256",
+                "getRoleAdmin(bytes32) returns(bytes32)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/getRoleAdmin_bytes32",
+                "grantRole(bytes32,address) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/grantRole_bytes32_address",
+                "revokeRole(bytes32,address) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/revokeRole_bytes32_address",
+                "renounceRole(bytes32,address) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/renounceRole_bytes32_address",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/tokenURI_uint256",
+                "baseURI() returns(string)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/baseURI",
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/tokenOfOwnerByIndex_address_uint256",
+                "totalSupply() returns(uint256)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/totalSupply",
+                "tokenByIndex(uint256) returns(uint256)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/tokenByIndex_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/safeTransferFrom_address_address_uint256_bytes",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/supportsInterface_bytes4",
+                "constructor(string,string,address) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/constructor_string_string_address",
+                "mint(address,uint256,string) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/mint_address_uint256_string",
+                "updateTokenURI(uint256,string) returns()": ".temp/polyscan50-721/NFT721-0x28c15d6b/NFT721/f/updateTokenURI_uint256_string"
+            },
+            "func2attrs": {
+                "isAdmin(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "isOperator(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "addAdmin(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addOperator(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "renounceAdmin() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeOperator(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "hasRole(bytes32,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getRoleMemberCount(bytes32) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getRoleMember(bytes32,uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getRoleAdmin(bytes32) returns(bytes32)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "grantRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "revokeRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "renounceRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "baseURI() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenByIndex(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "constructor(string,string,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateTokenURI(uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "OPERATOR_ROLE() returns(bytes32)",
+                "DEFAULT_ADMIN_ROLE() returns(bytes32)"
+            ],
+            "ercs": [
+                "165",
+                "721enumerable",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleAdminChanged",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleGranted",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleRevoked",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "NFT721"
+        }
+    ]
+}

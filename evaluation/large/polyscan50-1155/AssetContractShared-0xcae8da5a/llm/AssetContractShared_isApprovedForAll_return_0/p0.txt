@@ -1,0 +1,88 @@
+Given a solidity function isApprovedForAll and the related parts from a smart contract and an rule for its return value.
+Whether function isApprovedForAll returns true if the operator is approved, false if not? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract ERC1155Tradable is
+    ContextMixin,
+    ERC1155,
+    NativeMetaTransaction,
+    Ownable,
+    Pausable
+{
+
+    address public proxyRegistryAddress;
+    function isApprovedForAll(address _owner, address _operator)
+        public
+        view
+        override
+        returns (bool isOperator)
+    {
+        if (_isProxyForUser(_owner, _operator)) {
+            return true;
+        }
+
+        return super.isApprovedForAll(_owner, _operator);
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        virtual
+        returns (bool)
+    {
+        if (!proxyRegistryAddress.isContract()) {
+            return false;
+        }
+        ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
+        return address(proxyRegistry.proxies(_user)) == _address;
+    }
+}
+
+contract AssetContractShared is AssetContract, ReentrancyGuard {
+
+    mapping(address => bool) public sharedProxyAddresses;
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        if (sharedProxyAddresses[_address]) {
+            return true;
+        }
+        return super._isProxyForUser(_user, _address);
+    }
+}
+
+library Address {
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize, which returns 0 for contracts in
+        // construction, since the code is only stored at the end of the
+        // constructor execution.
+
+        uint256 size;
+        assembly {
+            size := extcodesize(account)
+        }
+        return size > 0;
+    }
+}
+
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function isApprovedForAll(address account, address operator)
+        public
+        view
+        virtual
+        override
+        returns (bool)
+    {
+        return _operatorApprovals[account][operator];
+    }
+}
+"""

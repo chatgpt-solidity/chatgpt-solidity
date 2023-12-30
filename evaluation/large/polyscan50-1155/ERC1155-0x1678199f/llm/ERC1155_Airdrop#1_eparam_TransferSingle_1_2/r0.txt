@@ -1,0 +1,7 @@
+NO
+
+The `Airdrop` function does not check if the lengths of the `to` and `itemsIds` arrays are equal. If the `to` array is shorter than the `itemsIds` array, the function will revert due to an out-of-bounds access when trying to index beyond the end of the `to` array. This means that the `TransferSingle` event may not be emitted for all `itemsIds` if the `to` array is not of the same length.
+
+Additionally, the function does not validate that the `to[i]` address is not a zero address, which is typically a requirement for a valid recipient address. If `to[i]` is a zero address, the `TransferSingle` event would still be emitted, which would not comply with the rule that "_to argument MUST be the address of the recipient whose balance is increased," as the zero address cannot be a recipient of a balance increase in a meaningful way.
+
+Therefore, the function does not guarantee that the `TransferSingle` event is emitted according to the given rule for every iteration of the loop.

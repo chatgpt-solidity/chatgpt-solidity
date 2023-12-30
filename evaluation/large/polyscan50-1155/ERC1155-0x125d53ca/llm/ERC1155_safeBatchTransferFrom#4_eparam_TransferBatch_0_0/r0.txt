@@ -1,0 +1,5 @@
+YES
+
+The function `_safeBatchTransferFrom` emits the `TransferBatch` event with `msg.sender` as the `_operator` argument. This is in accordance with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+The `safeBatchTransferFrom` function checks if `msg.sender` is either the `from` address or an approved operator before calling `_safeBatchTransferFrom`. Therefore, when the `TransferBatch` event is emitted within `_safeBatchTransferFrom`, it uses `msg.sender` as the `_operator`, which is the correct and approved address to make the transfer.

@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the `_from` argument set to the zero address, which is the correct behavior for minting new tokens. In the context of minting, the zero address (`address(0)`) is considered the address from which the tokens are minted, indicating that they are created rather than transferred from an existing holder. This is consistent with the ERC-1155 standard for minting new tokens.
+
+The `_mint` function is called within the `airdrop` function for each recipient that is not a contract, and the `TransferSingle` event is emitted accordingly with the `_from` address set to `address(0)`. The rule that the `_from` argument must be the address of the holder whose balance is decreased is satisfied in this context because when minting, the balance is increased from zero, and the zero address is used to represent the "holder" of the newly minted tokens.

@@ -1,0 +1,54 @@
+Given a solidity function setIsDividendExempt and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+contract TRUMPONOMICS is IERC20, Auth {
+
+    mapping(address => uint256) private _balances;
+    mapping (address => bool) public isDividendExempt;
+    address public pair;
+    MagaPrinter public magaPrinter;
+
+    function _setIsDividendExempt(address holder, bool exempt) internal {
+        require(holder != address(this) && holder != pair);
+        isDividendExempt[holder] = exempt;
+        if(exempt){
+            magaPrinter.setShare(holder, 0);
+        }else{
+            magaPrinter.setShare(holder, _balances[holder]);
+        }
+
+    }
+    function setIsDividendExempt(address holder, bool exempt) external onlyOwner {
+        _setIsDividendExempt(holder, exempt);
+    }
+}
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

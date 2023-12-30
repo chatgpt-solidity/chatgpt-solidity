@@ -1,0 +1,18 @@
+abstract contract ERC1155Supply is ERC1155 {
+
+    mapping(uint256 => uint256) private _totalSupply;
+    /**
+     * @dev Total amount of tokens in with a given id.
+     */
+    function totalSupply(uint256 id) public view virtual returns (uint256) {
+        return _totalSupply[id];
+    }
+}
+
+contract METARUFFY_ASSETS is ERC1155, ERC2981, Ownable, ERC1155Burnable, ERC1155Supply {
+    mapping(uint256 => string) private _tokenURIs;
+    mapping(uint256 => uint256) private supplies;
+    function tokenInfo(uint256 tokenID) public view returns (uint256 , uint256 , string memory) {
+        return (supplies[tokenID],totalSupply(tokenID),_tokenURIs[tokenID]);
+    }
+}

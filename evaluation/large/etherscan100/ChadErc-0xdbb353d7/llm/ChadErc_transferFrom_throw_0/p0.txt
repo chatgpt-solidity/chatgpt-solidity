@@ -1,0 +1,40 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether the function transferFrom throws unless the _from account has deliberately authorized the sender of the message via some mechanism? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Example of authorization mechanism:
+Example:"""
+contract {
+    function transferFrom(address sender, address recipient, uint256 amount) {
+        transfer(...);
+        _allowances[sender][msg.sender] -= amount;
+        // omit other codes
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+
+contract ChadErc is Context, Ownable, IERC20 {
+    mapping (address => uint256) private _balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    function transferFrom(address sender, address recipient, uint256 amount) public virtual override returns (bool) {
+    require(_allowances[sender][_msgSender()] >= amount, "TT: transfer amount exceeds allowance");
+
+    _balances[sender] -= amount;
+    _balances[recipient] += amount;
+    _allowances[sender][_msgSender()] -= amount;
+
+    emit Transfer(sender, recipient, amount);
+    return true;
+    }
+}
+"""

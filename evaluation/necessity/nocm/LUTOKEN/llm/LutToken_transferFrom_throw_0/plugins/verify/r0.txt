@@ -1,0 +1,23 @@
+Let's analyze the provided Solidity code step by step to determine if the `transferFrom` function throws unless the `_from` account has deliberately authorized the sender of the message via some mechanism:
+
+1. **Authorization Check:**
+   The `StandardToken` contract's `transferFrom` function includes the following line:
+   ```solidity
+   require(_value <= allowed[_from][msg.sender]);
+   ```
+   This line checks whether the `msg.sender` (the entity trying to initiate the transfer) has been authorized by the `_from` account to spend at least `_value` amount of tokens. The `allowed` mapping stores the allowances that token holders have given to others to transfer tokens on their behalf.
+
+2. **Subtraction Using SafeMath:**
+   If the `msg.sender` has sufficient allowance, the `transferFrom` function proceeds to subtract the `_value` from the `allowed[_from][msg.sender]` using the `SafeMath` library's `sub` function:
+   ```solidity
+   allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+   ```
+   The `sub` function in the `SafeMath` library includes an `assert` statement that will throw if the subtraction would result in a negative number (which would indicate an underflow in the allowance).
+
+3. **Additional Checks:**
+   The `LutToken` contract's `transferFrom` function is decorated with the `whenNotPaused` and `saleOrUnfrozen` modifiers. These modifiers include `require` statements that could also throw if their conditions are not met. However, these checks are not directly related to the authorization mechanism between the `_from` account and the `msg.sender`.
+
+4. **Conclusion:**
+   The `transferFrom` function in the `StandardToken` contract will throw if the `msg.sender` has not been authorized by the `_from` account to spend at least `_value` amount of tokens. This is because the `require` statement will fail if the allowance is insufficient, and the `SafeMath` library's `sub` function will throw if an underflow is detected.
+
+Therefore, the final answer is YES, the `transferFrom` function throws unless the `_from` account has deliberately authorized the sender of the message via some mechanism.

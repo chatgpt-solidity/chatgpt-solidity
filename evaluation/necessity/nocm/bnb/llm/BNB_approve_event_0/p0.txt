@@ -1,0 +1,17 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it emits the event Approval? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract BNB is SafeMath {
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    /* Allow another contract to spend some tokens in your behalf */
+    function approve(address _spender, uint256 _value) returns (bool success) {
+        if (_value <= 0) throw;
+        allowance[msg.sender][_spender] = _value;
+        return true;
+    }
+}
+"""

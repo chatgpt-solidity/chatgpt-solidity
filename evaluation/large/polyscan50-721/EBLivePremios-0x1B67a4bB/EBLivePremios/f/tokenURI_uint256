@@ -1,0 +1,32 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+    string private _baseUri;
+
+    // Mapping from token ID to Uri
+    mapping(uint256 => string) private _tokenURIs;
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    function tokenURI(
+        uint256 tokenId
+    ) public view virtual override returns (string memory) {
+        require(
+            _exists(tokenId),
+            "ERC721Metadata: URI query for nonexistent token"
+        );
+        // Si tiene Uri el Token, lo devuelvo
+        if (bytes(_tokenURIs[tokenId]).length > 0) {
+            return _tokenURIs[tokenId];
+        }
+        return _baseURI();
+    }
+
+    function _baseURI() internal view virtual returns (string memory) {
+        return _baseUri;
+    }
+
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _owners[tokenId] != address(0);
+    }
+}
+

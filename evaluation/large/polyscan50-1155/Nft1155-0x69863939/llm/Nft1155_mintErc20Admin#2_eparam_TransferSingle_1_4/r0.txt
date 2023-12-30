@@ -1,0 +1,16 @@
+YES
+
+The `mintErc20Admin` function in the provided Solidity code is responsible for minting new tokens of a specific `tokenId` and amount to the caller's address. The `_mint` function, which is called within `mintErc20Admin`, is part of the `ERC1155` contract and is responsible for the actual minting process.
+
+The `_mint` function does the following:
+1. Checks that the `to` address is not the zero address.
+2. Sets up the `operator`, `ids`, and `amounts` for the token transfer.
+3. Calls `_beforeTokenTransfer` hook.
+4. Increases the balance of the `to` address by the `amount` of tokens with `id`.
+5. Emits the `TransferSingle` event with the correct parameters, including the `operator`, `from` address (which is zero in the case of minting), `to` address, `id`, and `amount`.
+6. Calls `_afterTokenTransfer` hook.
+7. Performs a safe transfer acceptance check if the `to` address is a contract.
+
+The `TransferSingle` event is emitted with the `_value` argument set to the `amount` of tokens minted, which matches the increase in the recipient's balance. This is in accordance with the rule that the `_value` argument must be the number of tokens the holder's balance is decreased by (which is zero in the case of minting, as tokens are being created) and match what the recipient's balance is increased by.
+
+Therefore, the `TransferSingle` event is emitted correctly according to the given rule when the `mintErc20Admin` function is called.

@@ -1,0 +1,21 @@
+The provided function `name` within the `SiberianHusky` contract is compliant with the ERC-20 token standard as described in the ERC documentation you provided. According to the ERC-20 standard, the `name` function is an optional method that returns the name of the token, and it is implemented as a view function that returns a string.
+
+Here is the relevant part of the ERC-20 standard for the `name` function:
+
+```
+name
+Returns the name of the token - e.g. "MyToken". OPTIONAL - This method can be used to improve usability, but interfaces and other contracts MUST NOT expect these values to be present.
+function name() public view returns (string)
+```
+
+The `SiberianHusky` contract's `name` function matches this specification:
+
+```solidity
+function name() public view returns (string memory) {
+    return _name;
+}
+```
+
+It is a public view function that returns a string, which is the name of the token. Since the ERC-20 standard specifies that this function is optional and does not enforce a specific implementation beyond returning a string, the `SiberianHusky` contract's `name` function does not violate the ERC-20 standard.
+
+However, it is important to note that the ERC-20 standard requires other functions and events to be implemented for full compliance, such as `totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, `allowance`, and the `Transfer` and `Approval` events. To fully assess the compliance of the `SiberianHusky` contract with the ERC-20 standard, you would need to review the entire contract code to ensure that all required functions and events are correctly implemented.

@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct arguments according to the given rule. The `_from` argument is set to `address(0)` which is appropriate for minting operations, as minting can be considered as transferring tokens from the zero address to the `to` address. The `to` argument is the address of the recipient whose balance is increased, and the `id` and `amount` arguments represent the token type and the amount of tokens being minted, respectively.
+
+The rule states that the `_from` argument must be the address of the holder whose balance is decreased. In the case of minting, there is no holder from whom the tokens are taken; instead, they are created and assigned to the `to` address. Therefore, using the zero address (`address(0)`) is the standard way to represent the source of the minted tokens in the ERC-1155 token standard.
+
+The `TransferSingle` event is correctly emitted after updating the balance with `_balances[id][to] += amount;` and before any potential reentrancy that could be caused by the `_doSafeTransferAcceptanceCheck` function. This ensures that the event is emitted whenever tokens are minted to a non-zero address, which complies with the ERC-1155 standard and the given rule.

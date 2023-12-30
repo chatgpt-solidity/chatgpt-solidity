@@ -1,0 +1,20 @@
+contract SilkToken is owned, TokenERC20 {
+    uint256 public limitAMT = 0;
+
+    function getLeftPreSalesAMT() public constant returns (uint256) {
+        uint256 leftPSAMT;
+        leftPSAMT = balanceOf[owner] - limitAMT;
+        return leftPSAMT;
+    }
+}
+
+contract TokenERC20 {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+}
+
+contract owned {
+    address public owner;
+}
+

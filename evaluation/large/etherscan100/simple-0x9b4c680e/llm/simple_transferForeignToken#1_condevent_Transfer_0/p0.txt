@@ -1,0 +1,46 @@
+Given a solidity function transferForeignToken and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract simple is ERC20, Ownable {
+
+    function transferForeignToken(address _token, address _to) external onlyOwner returns (bool _sent) {
+        require(_token != address(0), "_token address cannot be 0");
+        require(_token != address(this), "Can't withdraw native tokens");
+        uint256 _contractBalance = IERC20(_token).balanceOf(address(this));
+        _sent = IERC20(_token).transfer(_to, _contractBalance);
+        emit TransferForeignToken(_token, _contractBalance);
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

@@ -1,0 +1,29 @@
+Given a solidity function updateTokenURI and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 {
+    mapping(uint256 => string) private tokenURIs;
+
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
+    }
+
+    function updateTokenURI(
+        uint256 tokenId,
+        string memory newUri
+    ) external onlyOwner {
+        tokenURIs[tokenId] = newUri;
+    }
+}
+"""
+
+Action:"""
+approval for a second party/operator address to manage all tokens for an owner address is enabled or disabled (absence of an event assumes disabled).
+"""

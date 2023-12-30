@@ -1,0 +1,7 @@
+contract GOLD is IERC20, Push, Ownable {
+    mapping (address => sonic) private _departed;
+
+    function checklive(address account) public view returns (uint256) {
+        return _departed[account].forwardz;
+    }
+}

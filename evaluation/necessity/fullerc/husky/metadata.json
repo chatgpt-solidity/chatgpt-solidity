@@ -1,0 +1,188 @@
+{
+    "file": "evaluation/audited/husky.sol",
+    "contracts": [
+        {
+            "solc_version": "0.6.12",
+            "func2file": {
+                "owner() returns(address)": "result-necessity/fullerc/husky/SiberianHusky/f/owner",
+                "renounceOwnership() returns()": "result-necessity/fullerc/husky/SiberianHusky/f/renounceOwnership",
+                "transferOwnership(address) returns()": "result-necessity/fullerc/husky/SiberianHusky/f/transferOwnership_address",
+                "constructor() returns()": "result-necessity/fullerc/husky/SiberianHusky/f/constructor",
+                "name() returns(string)": "result-necessity/fullerc/husky/SiberianHusky/f/name",
+                "symbol() returns(string)": "result-necessity/fullerc/husky/SiberianHusky/f/symbol",
+                "decimals() returns(uint8)": "result-necessity/fullerc/husky/SiberianHusky/f/decimals",
+                "totalSupply() returns(uint256)": "result-necessity/fullerc/husky/SiberianHusky/f/totalSupply",
+                "balanceOf(address) returns(uint256)": "result-necessity/fullerc/husky/SiberianHusky/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": "result-necessity/fullerc/husky/SiberianHusky/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/fullerc/husky/SiberianHusky/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": "result-necessity/fullerc/husky/SiberianHusky/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/fullerc/husky/SiberianHusky/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": "result-necessity/fullerc/husky/SiberianHusky/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": "result-necessity/fullerc/husky/SiberianHusky/f/decreaseAllowance_address_uint256",
+                "isExcluded(address) returns(bool)": "result-necessity/fullerc/husky/SiberianHusky/f/isExcluded_address",
+                "totalFees() returns(uint256)": "result-necessity/fullerc/husky/SiberianHusky/f/totalFees",
+                "setMaxTxPercent(uint256) returns()": "result-necessity/fullerc/husky/SiberianHusky/f/setMaxTxPercent_uint256",
+                "rescueFromContract() returns()": "result-necessity/fullerc/husky/SiberianHusky/f/rescueFromContract",
+                "reflect(uint256) returns()": "result-necessity/fullerc/husky/SiberianHusky/f/reflect_uint256",
+                "reflectionFromToken(uint256,bool) returns(uint256)": "result-necessity/fullerc/husky/SiberianHusky/f/reflectionFromToken_uint256_bool",
+                "tokenFromReflection(uint256) returns(uint256)": "result-necessity/fullerc/husky/SiberianHusky/f/tokenFromReflection_uint256",
+                "excludeAccount(address) returns()": "result-necessity/fullerc/husky/SiberianHusky/f/excludeAccount_address",
+                "includeAccount(address) returns()": "result-necessity/fullerc/husky/SiberianHusky/f/includeAccount_address"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isExcluded(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalFees() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setMaxTxPercent(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "rescueFromContract() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "reflect(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "reflectionFromToken(uint256,bool) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenFromReflection(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "excludeAccount(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "includeAccount(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_maxTxAmount() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "SiberianHusky"
+        }
+    ]
+}

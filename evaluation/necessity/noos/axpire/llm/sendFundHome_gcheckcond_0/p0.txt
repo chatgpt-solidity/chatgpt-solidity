@@ -1,0 +1,31 @@
+Given a solidity function sendFundHome and the related parts from a smart contract.
+Whether the function sendFundHome and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract AxpireToken is AxpirePausableToken {
+
+    address private ethFundDeposit;
+
+    /// @dev Ends the funding period and sends the ETH home
+    function sendFundHome() external onlyOwner {
+        // move to operational
+        if (!ethFundDeposit.send(address(this).balance)) revert(); // send the eth to tge International
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,16 @@
+YES
+
+The `_mint` function in the `ERC1155` contract is designed to create `amount` tokens of token type `id`, and assign them to the `to` address. The `mint` function in the `BONE` contract calls `_mint` with the `to` address provided as an argument, the current token ID, an amount of `1`, and an empty data payload.
+
+The `_mint` function in `ERC1155` performs several checks and operations:
+
+1. It checks that the `to` address is not the zero address.
+2. It sets the `operator` to the message sender (`_msgSender()`).
+3. It creates singleton arrays for `id` and `amount`.
+4. It calls `_beforeTokenTransfer`.
+5. It increases the balance of `to` for the token `id` by `amount`.
+6. It emits the `TransferSingle` event with the `operator`, `from` address (which is zero in the case of minting), `to` address, `id`, and `amount`.
+7. It calls `_afterTokenTransfer`.
+8. It performs a safe transfer acceptance check if `to` is a contract.
+
+The `TransferSingle` event is emitted with the correct `_to` argument, which is the address of the recipient whose balance is increased. The rule is satisfied as the event `TransferSingle` is emitted with the `_to` parameter being the address that receives the newly minted tokens.

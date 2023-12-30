@@ -1,0 +1,21 @@
+contract kaloulu is IERC20, Auth {
+    uint256 private constant _tSupp  = 2_000_000 * (10**_decimals);
+    uint256 private _maxTxAmount = _tSupp; 
+    uint256 private _maxWalletAmount = _tSupp;
+
+    function setLimits(uint16 maxTrxPermille, uint16 maxWltPermille) external onlyOwner {
+        uint256 newTxAmt = _tSupp * maxTrxPermille / 1000 + 1;
+        require(newTxAmt >= _maxTxAmount, "tx too low");
+        _maxTxAmount = newTxAmt;
+        uint256 newWalletAmt = _tSupp * maxWltPermille / 1000 + 1;
+        require(newWalletAmt >= _maxWalletAmount, "wallet too low");
+        _maxWalletAmount = newWalletAmt;
+    }
+}
+abstract contract Auth {
+    address internal _owner;
+    modifier onlyOwner() { 
+        require(msg.sender == _owner, "Only owner can call this");   _; 
+    }
+}
+

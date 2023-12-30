@@ -1,0 +1,9 @@
+YES
+
+The provided Solidity function `airdrop` in the `TWTVoucher` contract mints tokens to a list of recipient addresses. The `_mint` function in the `ERC1155` contract is called to mint exactly 1 token (as indicated by the hardcoded value `1` in the `_mint` call) to each recipient address that is not a contract.
+
+The `_mint` function in the `ERC1155` contract is responsible for increasing the recipient's balance by the specified amount and emitting the `TransferSingle` event. The `_mint` function emits the `TransferSingle` event with the `_value` argument set to the `amount` of tokens minted, which in this case is `1`.
+
+The rule states that the `_value` argument must match the number of tokens the holder's balance is decreased by (which is 0 since it's a mint operation and there is no "from" address) and what the recipient's balance is increased by. Since the `_mint` function correctly increases the recipient's balance by the amount of tokens minted and emits the `TransferSingle` event with the `_value` set to this amount, the rule is followed.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

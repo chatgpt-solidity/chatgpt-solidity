@@ -1,0 +1,20 @@
+Given a solidity function bulkAirdropERC20 and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+contract GENKAIOFICIAL is ERC721Enumerable, Ownable {
+  function bulkAirdropERC20(IERC20 _token, address[] calldata _to, uint256[] calldata _value) public {
+    require(_to.length == _value.length, "Receivers and amounts are different length");
+    for (uint256 i = 0; i < _to.length; i++) {
+      require(_token.transferFrom(msg.sender, _to[i], _value[i]));
+    }
+  }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is changed or reaffirmed
+"""

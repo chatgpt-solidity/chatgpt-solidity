@@ -1,0 +1,95 @@
+Given a solidity function createFight and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    ////////////////////////////////////////
+    //                                    //
+    //         STATE VARIABLES            //
+    //                                    //
+    ////////////////////////////////////////
+    // contract owner adress
+    address private owner;
+
+    // incremented for fight id generation
+    Counters.Counter private fightIds;
+
+    // holds all created fights (key: idCounter)
+    mapping(uint256 => Fight) fights;
+    // holds all apiFightId -> onChainFightId to prevent duplicate entries
+    mapping(uint256 => uint256) apiFights;
+
+    ////////////////////////////////////////
+    //                                    //
+    //              MODIFIERS             //
+    //                                    //      
+    ////////////////////////////////////////
+
+    /*
+    *  @notice  Restrict caller only owner
+    */
+    modifier onlyOwner() {
+        require(msg.sender == owner, "caller is not owner");
+        _;
+    }
+
+    /*
+    *  @notice  Ensure api fight does not previously exist
+    */
+    modifier isNewAPIFight(uint256 _api_fightId) {
+        require(apiFights[_api_fightId] == 0, "api fight ID exists");
+        _;
+    }
+
+    ////////////////////////////////////////
+    //                                    //
+    //              FUNCTIONS             //
+    //                                    //      
+    ////////////////////////////////////////
+
+    /*
+    *  @notice  Creates a new fight
+    *  @dev     Initializes a new fight with details and metadata URIs for each boxer
+    *  @param   _apiFightId The API identifier for the fight
+    *  @param   fightName The name of the fight
+    *  @param   _uriBoxerA Metadata URI for Boxer A
+    *  @param   _uriBoxerB Metadata URI for Boxer B
+    *  @param   _startAt The start time of the fight
+    *  @return  The ID of the created fight
+    */
+    function createFight(uint256 _apiFightId, string calldata fightName, string calldata _uriBoxerA, string calldata _uriBoxerB, uint256 _startAt)
+        public 
+        isNewAPIFight(_apiFightId)
+        onlyOwner
+        returns(uint)
+    {
+        fightIds.increment();
+        uint256 fightId = fightIds.current();
+        fights[fightId] = Fight(msg.sender, fightName, _uriBoxerA, _uriBoxerB, 0, 0, 0, FightResult.NOT_DETERMINED, FightState.NOT_STARTED, _startAt, true); 
+        apiFights[_apiFightId] = fightId;
+        uint256 createdOnDay = block.timestamp - (block.timestamp % 86400);
+        emit FightCreatedEvent(msg.sender, fightId, _apiFightId, _startAt, createdOnDay);
+
+        return fightId;
+    }
+}
+library Counters {
+
+    function current(Counter storage counter) internal view returns (uint256) {
+        return counter._value;
+    }
+
+    function increment(Counter storage counter) internal {
+        // The {SafeMath} overflow check can be skipped here, see the comment at the top
+        counter._value += 1;
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

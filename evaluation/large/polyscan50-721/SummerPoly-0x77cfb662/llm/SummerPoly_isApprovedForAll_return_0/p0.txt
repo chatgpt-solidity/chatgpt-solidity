@@ -1,0 +1,30 @@
+Given a solidity function isApprovedForAll and the related parts from a smart contract and an rule for its return value.
+Whether function isApprovedForAll True if `_operator` is an approved operator for `_owner`, false otherwise? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract SummerPoly is ERC721, ERC721URIStorage, ERC721Royalty, Ownable, ContextMixin {
+    address private constant POLYGON_PROXY_ADDRESS = 0x58807baD0B376efc12F5AD86aAc70E78ed67deaE;
+
+    function isApprovedForAll(address owner, address operator) public view override(ERC721, IERC721) returns (bool) {
+      if (operator == POLYGON_PROXY_ADDRESS) {
+          return true;
+      }
+
+      return super.isApprovedForAll(owner, operator);
+  }
+}
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Mapping from owner to operator approvals
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    /**
+     * @dev See {IERC721-isApprovedForAll}.
+     */
+    function isApprovedForAll(address owner, address operator) public view virtual override returns (bool) {
+        return _operatorApprovals[owner][operator];
+    }
+}
+"""

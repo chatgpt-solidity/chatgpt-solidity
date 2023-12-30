@@ -1,0 +1,11 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is designed to create `amount` tokens of token type `id` and assign them to the `to` address. The `TransferSingle` event is emitted within this function, and the `_to` argument in the event is indeed the address of the recipient whose balance is increased, as per the rule provided.
+
+The relevant line in the `_mint` function is:
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+Here, `to` is the recipient's address, `id` is the token type, and `amount` is the number of tokens to mint. The `_from` argument is `address(0)` because minting is considered a transfer from the zero address, indicating the creation of new tokens. The `_operator` is the address that initiated the operation, which is typically the contract owner or another authorized entity in the context of minting new tokens.
+
+Therefore, the `TransferSingle` event is correctly emitted according to the given rule.

@@ -1,0 +1,16 @@
+Given a solidity function isBot and the related parts from a smart contract.
+Whether the function isBot and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract KERMIT is Context, IERC20, Ownable {
+    mapping (address => bool) private bots;
+
+    function isBot(address a) public view returns (bool){
+      return bots[a];
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

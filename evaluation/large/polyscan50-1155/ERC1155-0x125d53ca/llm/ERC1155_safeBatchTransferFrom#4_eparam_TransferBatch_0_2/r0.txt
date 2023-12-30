@@ -1,0 +1,3 @@
+YES
+
+The provided Solidity function `_safeBatchTransferFrom` emits the `TransferBatch` event according to the given rule. The event is emitted with the correct order of arguments, where `_to` is the address of the recipient whose balance is increased. The balances are updated correctly before the event is emitted, ensuring that the state changes are reflected when the event is logged.

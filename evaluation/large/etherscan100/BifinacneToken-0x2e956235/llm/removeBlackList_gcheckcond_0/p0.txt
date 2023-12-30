@@ -1,0 +1,27 @@
+Given a solidity function removeBlackList and the related parts from a smart contract.
+Whether the function removeBlackList and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract BlackList is Ownable, BasicToken {
+
+    mapping (address => bool) public isBlackListed;
+
+    function removeBlackList (address _clearedUser) public onlyOwner {
+        isBlackListed[_clearedUser] = false;
+        emit RemovedBlackList(_clearedUser);
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

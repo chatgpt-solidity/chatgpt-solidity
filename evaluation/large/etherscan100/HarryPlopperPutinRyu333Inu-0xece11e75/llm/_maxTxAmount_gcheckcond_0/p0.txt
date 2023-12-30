@@ -1,0 +1,23 @@
+Given a solidity function _maxTxAmount and the related parts from a smart contract.
+Whether the function _maxTxAmount and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract HarryPlopperPutinRyu333Inu is IERC20, Ownable {
+    uint256 private _totalSupply = 1000000000 * (10 ** _decimals);
+    uint256 private _maxTxAmountPercent = 200; // 10000;
+    mapping (address => uint256) _balances;
+    uint256 private denominator = 10000;
+
+    address internal constant DEAD = 0x000000000000000000000000000000000000dEaD;
+    function balanceOf(address account) public view override returns (uint256) {return _balances[account];}
+    function totalSupply() public view override returns (uint256) {return _totalSupply.sub(balanceOf(DEAD)).sub(balanceOf(address(0)));}
+    function _maxTxAmount() public view returns (uint256) {return totalSupply() * _maxTxAmountPercent / denominator;}
+}
+library SafeMath {
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {return a - b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

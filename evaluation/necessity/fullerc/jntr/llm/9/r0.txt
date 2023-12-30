@@ -1,0 +1,15 @@
+The provided Solidity code for the `burn` function and related parts of the `JNTR` contract do not fully comply with the ERC-20 standard as described in the provided ERC documentation. Here are the issues:
+
+1. **Restricted Access to Burn Function**: The `burn` function requires that the caller must be the owner of the contract (`require(msg.sender == owner);`). This is not a requirement of the ERC-20 standard and restricts the ability of other users to burn their own tokens. In a typical ERC-20 token, any holder should be able to burn their tokens.
+
+2. **Missing Transfer Event**: The ERC-20 standard requires that a `Transfer` event must be emitted when tokens are transferred, including when they are burned (transferred to the address `0x0`). The provided `burn` function does not emit any event. To comply with the ERC-20 standard, it should emit a `Transfer` event with the `_from` address set to the `msg.sender` and the `_to` address set to `0x0`.
+
+3. **Incorrect Balance Check**: The `burn` function checks if the `_value` to be burned is less than the balance of the `msg.sender` (`require(_value < balances[msg.sender]);`). This should be `require(_value <= balances[msg.sender]);` to allow burning the entire balance.
+
+4. **Lack of Return Value Handling**: The ERC-20 standard notes that callers must handle `false` from returns (`bool success`). However, the `burn` function always returns `true` and does not have a failure case that returns `false`. While this is not a direct violation, it is a deviation from the standard's recommendation for handling return values.
+
+5. **SafeMath Usage**: The contract uses a `SafeMath` contract for safe subtraction. This is good practice to prevent underflows, but it is not directly related to ERC-20 compliance.
+
+6. **Missing Burn Function in ERC-20**: The ERC-20 standard does not define a `burn` function. However, it is a common extension to the standard. If a token contract includes a burn function, it should still adhere to the ERC-20 standard's requirements for transferring tokens, such as emitting the `Transfer` event.
+
+To summarize, the `burn` function in the `JNTR` contract does not comply with the ERC-20 standard due to restricted access, missing `Transfer` event emission, incorrect balance check, and lack of return value handling for failure cases. To comply with the ERC-20 standard, these issues would need to be addressed.

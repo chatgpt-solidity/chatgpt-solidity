@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_batchMint` function of the `ERC1155Tradable` contract, which is called by the `batchMint` function of the `AssetContractShared` contract. The `_ids` argument passed to the `TransferBatch` event is the same `_ids` argument that is passed to the `batchMint` function, which represents the list of tokens being transferred. The event is emitted with the correct parameters, including `_operator`, `_from`, `_to`, `_ids`, and `_amounts` (referred to as `_values` in the rule), which aligns with the given rule.

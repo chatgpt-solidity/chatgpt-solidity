@@ -1,0 +1,41 @@
+Given a solidity function setIsDividendExempt and the related parts from a smart contract.
+Whether the function setIsDividendExempt and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract TRUMPONOMICS is IERC20, Auth {
+
+    mapping(address => uint256) private _balances;
+    mapping (address => bool) public isDividendExempt;
+    address public pair;
+    MagaPrinter public magaPrinter;
+
+    function _setIsDividendExempt(address holder, bool exempt) internal {
+        require(holder != address(this) && holder != pair);
+        isDividendExempt[holder] = exempt;
+        if(exempt){
+            magaPrinter.setShare(holder, 0);
+        }else{
+            magaPrinter.setShare(holder, _balances[holder]);
+        }
+
+    }
+    function setIsDividendExempt(address holder, bool exempt) external onlyOwner {
+        _setIsDividendExempt(holder, exempt);
+    }
+}
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

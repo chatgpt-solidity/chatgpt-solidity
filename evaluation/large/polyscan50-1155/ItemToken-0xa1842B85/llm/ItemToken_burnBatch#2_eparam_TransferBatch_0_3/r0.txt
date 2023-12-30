@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_burnBatch` function with the correct arguments according to the given rule. The `_ids` argument is indeed the list of tokens being transferred (in this case, burned), and the event is emitted with the `_operator`, `_from`, and `_to` addresses, as well as the `_ids` and `_values` (amounts) arrays as required. The `_to` address is set to the zero address (`address(0)`) to indicate that the tokens are being burned.

@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function, which is called by the `safeTransferFrom` function. The `_from` argument in the `TransferSingle` event is indeed the address of the holder whose balance is decreased, as required by the rule. The `_safeTransferFrom` function checks that the `from` address has a sufficient balance of the token type `id` before performing the transfer, and then decreases the balance of the `from` address by the `amount` specified. After updating the balances, the `TransferSingle` event is emitted with the correct `_from` argument, satisfying the rule.

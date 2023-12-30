@@ -1,0 +1,22 @@
+Given a solidity function startTrading and the related parts from a smart contract.
+Whether the function startTrading and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+contract zepump is IERC20, tokenStaking, Ownable {
+    bool private tradingAllowed = false;
+    function startTrading() external onlyOwner {
+        tradingAllowed = true;
+        emit TradingEnabled(msg.sender, block.timestamp);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

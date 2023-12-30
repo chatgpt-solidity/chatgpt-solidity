@@ -1,0 +1,17 @@
+The provided Solidity code for the `procNormalSales` function and related parts of the `SilkToken` contract appear to be implementing a token sale mechanism where users can send Ether to the contract and receive tokens in return at a specified `buyPrice`. The `SilkToken` contract is inheriting from `TokenERC20`, which seems to be a simplified version of an ERC20 token contract, and `owned`, which defines an `owner` address.
+
+To determine if the `procNormalSales` function violates the ERC20 standard, we need to compare its behavior with the ERC20 specification provided. Here are some key points to consider:
+
+1. **Transfer Event**: The ERC20 standard requires that a `Transfer` event must be triggered when tokens are transferred. The `_transfer` function in the `SilkToken` contract does emit the `Transfer` event, which is compliant with the ERC20 standard.
+
+2. **Return Value**: The ERC20 standard specifies that the `transfer` function must return a boolean value indicating success or failure. However, the `_transfer` function used in `procNormalSales` is an internal function and does not return a value. This is not directly a violation of the ERC20 standard since the standard applies to the public `transfer` function, not internal functions. However, it is a good practice to handle potential transfer failures even within internal functions.
+
+3. **Decimals**: The ERC20 standard mentions that the `decimals` function is optional and is used to improve usability. The `TokenERC20` contract defines `decimals` as a public variable with a value of 18, which is a common practice.
+
+4. **Transfer Checks**: The ERC20 standard states that the `transfer` function should throw if the sender does not have enough balance. The `_transfer` function in the `SilkToken` contract checks for the sender's balance and throws an error if the balance is insufficient, which is compliant with the standard.
+
+5. **Frozen Accounts**: The `SilkToken` contract introduces the concept of "frozen accounts," which is not part of the ERC20 standard. While this does not directly violate the standard, it adds additional functionality that is not covered by ERC20. This could potentially lead to unexpected behavior for users or contracts interacting with the token assuming standard ERC20 behavior.
+
+6. **Direct Ether Transfers**: The `procNormalSales` function allows for direct Ether transfers to the contract in exchange for tokens. This is not covered by the ERC20 standard, which only specifies token transfer mechanisms. However, this does not violate the ERC20 standard as it is additional functionality outside the scope of token transfers.
+
+In conclusion, the `procNormalSales` function and related parts of the `SilkToken` contract do not appear to violate the ERC20 standard. However, the introduction of frozen accounts and the direct sale of tokens for Ether are additional functionalities that extend beyond the ERC20 standard. It is important to ensure that users and interacting contracts are aware of these extensions to avoid any unexpected behavior.

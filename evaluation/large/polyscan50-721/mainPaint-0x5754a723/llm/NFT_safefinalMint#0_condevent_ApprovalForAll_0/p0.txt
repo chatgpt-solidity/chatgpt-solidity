@@ -1,0 +1,400 @@
+Given a solidity function safefinalMint and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.4;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+    }
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if the sender is not the owner.
+     */
+    function _checkOwner() internal view virtual {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    }
+}
+
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Token name
+    string private _name;
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    // Mapping owner address to token count
+    mapping(address => uint256) private _balances;
+
+    /**
+     * @dev See {IERC721Metadata-name}.
+     */
+    function name() public view virtual override returns (string memory) {
+        return _name;
+    }
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+    }
+
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     * and stop existing when they are burned (`_burn`).
+     */
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _ownerOf(tokenId) != address(0);
+    }
+
+    /**
+     * @dev Safely mints `tokenId` and transfers it to `to`.
+     *
+     * Requirements:
+     *
+     * - `tokenId` must not exist.
+     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     *
+     * Emits a {Transfer} event.
+     */
+    function _safeMint(address to, uint256 tokenId) internal virtual {
+        _safeMint(to, tokenId, "");
+
+    }
+    /**
+     * @dev Same as {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], with an additional `data` parameter which is
+     * forwarded in {IERC721Receiver-onERC721Received} to contract recipients.
+     */
+    function _safeMint(
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) internal virtual {
+        _mint(to, tokenId);
+        require(
+            _checkOnERC721Received(address(0), to, tokenId, data),
+            "ERC721: transfer to non ERC721Receiver implementer"
+        );
+
+    }
+    /**
+     * @dev Mints `tokenId` and transfers it to `to`.
+     *
+     * WARNING: Usage of this method is discouraged, use {_safeMint} whenever possible
+     *
+     * Requirements:
+     *
+     * - `tokenId` must not exist.
+     * - `to` cannot be the zero address.
+     *
+     * Emits a {Transfer} event.
+     */
+    function _mint(address to, uint256 tokenId) internal virtual {
+        require(to != address(0), "ERC721: mint to the zero address");
+        require(!_exists(tokenId), "ERC721: token already minted");
+
+        _beforeTokenTransfer(address(0), to, tokenId, 1);
+
+        // Check that tokenId was not minted by `_beforeTokenTransfer` hook
+        require(!_exists(tokenId), "ERC721: token already minted");
+
+        unchecked {
+            // Will not overflow unless all 2**256 token ids are minted to the same owner.
+            // Given that tokens are minted one by one, it is impossible in practice that
+            // this ever happens. Might change if we allow batch minting.
+            // The ERC fails to describe this case.
+            _balances[to] += 1;
+        }
+
+        _owners[tokenId] = to;
+
+        emit Transfer(address(0), to, tokenId);
+
+        _afterTokenTransfer(address(0), to, tokenId, 1);
+    }
+
+    /**
+     * @dev Internal function to invoke {IERC721Receiver-onERC721Received} on a target address.
+     * The call is not executed if the target address is not a contract.
+     *
+     * @param from address representing the previous owner of the given token ID
+     * @param to target address that will receive the tokens
+     * @param tokenId uint256 ID of the token to be transferred
+     * @param data bytes optional data to send along with the call
+     * @return bool whether the call correctly returned the expected magic value
+     */
+    function _checkOnERC721Received(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) private returns (bool) {
+        if (to.isContract()) {
+            try IERC721Receiver(to).onERC721Received(_msgSender(), from, tokenId, data) returns (bytes4 retval) {
+                return retval == IERC721Receiver.onERC721Received.selector;
+            } catch (bytes memory reason) {
+                if (reason.length == 0) {
+                    revert("ERC721: transfer to non ERC721Receiver implementer");
+                } else {
+                    /// @solidity memory-safe-assembly
+                    assembly {
+                        revert(add(32, reason), mload(reason))
+                    }
+                }
+            }
+        } else {
+            return true;
+        }
+
+    }
+    /**
+     * @dev Hook that is called before any token transfer. This includes minting and burning. If {ERC721Consecutive} is
+     * used, the hook may be called as part of a consecutive (batch) mint, as indicated by `batchSize` greater than 1.
+     *
+     * Calling conditions:
+     *
+     * - When `from` and `to` are both non-zero, ``from``'s tokens will be transferred to `to`.
+     * - When `from` is zero, the tokens will be minted for `to`.
+     * - When `to` is zero, ``from``'s tokens will be burned.
+     * - `from` and `to` are never both zero.
+     * - `batchSize` is non-zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256, /* firstTokenId */
+        uint256 batchSize
+    ) internal virtual {
+        if (batchSize > 1) {
+            if (from != address(0)) {
+                _balances[from] -= batchSize;
+            }
+            if (to != address(0)) {
+                _balances[to] += batchSize;
+            }
+        }
+    }
+
+    /**
+     * @dev Hook that is called after any token transfer. This includes minting and burning. If {ERC721Consecutive} is
+     * used, the hook may be called as part of a consecutive (batch) mint, as indicated by `batchSize` greater than 1.
+     *
+     * Calling conditions:
+     *
+     * - When `from` and `to` are both non-zero, ``from``'s tokens were transferred to `to`.
+     * - When `from` is zero, the tokens were minted for `to`.
+     * - When `to` is zero, ``from``'s tokens were burned.
+     * - `from` and `to` are never both zero.
+     * - `batchSize` is non-zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 firstTokenId,
+        uint256 batchSize
+    ) internal virtual {}
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+abstract contract ERC721URIStorage is ERC721 {
+
+    // Optional mapping for token URIs
+    mapping(uint256 => string) private _tokenURIs;
+
+    /**
+     * @dev Sets `_tokenURI` as the tokenURI of `tokenId`.
+     *
+     * Requirements:
+     *
+     * - `tokenId` must exist.
+     */
+    function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
+        require(_exists(tokenId), "ERC721URIStorage: URI set of nonexistent token");
+        _tokenURIs[tokenId] = _tokenURI;
+    }
+}
+
+library Base64 {
+    /**
+     * @dev Base64 Encoding/Decoding Table
+     */
+
+    string internal constant _TABLE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    /**
+     * @dev Converts a `bytes` to its Bytes64 `string` representation.
+     */
+    function encode(bytes memory data) internal pure returns (string memory) {
+        /**
+         * Inspired by Brecht Devos (Brechtpd) implementation - MIT licence
+         * https://github.com/Brechtpd/base64/blob/e78d9fd951e7b0977ddca77d92dc85183770daf4/base64.sol
+         */
+        if (data.length == 0) return "";
+
+        // Loads the table into memory
+        string memory table = _TABLE;
+
+        // Encoding takes 3 bytes chunks of binary data from `bytes` data parameter
+        // and split into 4 numbers of 6 bits.
+        // The final Base64 length should be `bytes` data length multiplied by 4/3 rounded up
+        // - `data.length + 2`  -> Round up
+        // - `/ 3`              -> Number of 3-bytes chunks
+        // - `4 *`              -> 4 characters for each chunk
+        string memory result = new string(4 * ((data.length + 2) / 3));
+
+        /// @solidity memory-safe-assembly
+        assembly {
+            // Prepare the lookup table (skip the first "length" byte)
+            let tablePtr := add(table, 1)
+
+            // Prepare result pointer, jump over length
+            let resultPtr := add(result, 32)
+
+            // Run over the input, 3 bytes at a time
+            for {
+                let dataPtr := data
+                let endPtr := add(data, mload(data))
+            } lt(dataPtr, endPtr) {
+
+            } {
+                // Advance 3 bytes
+                dataPtr := add(dataPtr, 3)
+                let input := mload(dataPtr)
+
+                // To write each character, shift the 3 bytes (18 bits) chunk
+                // 4 times in blocks of 6 bits for each character (18, 12, 6, 0)
+                // and apply logical AND with 0x3F which is the number of
+                // the previous character in the ASCII table prior to the Base64 Table
+                // The result is then added to the table to get the character to write,
+                // and finally write it in the result pointer but with a left shift
+                // of 256 (1 byte) - 8 (1 ASCII char) = 248 bits
+
+                mstore8(resultPtr, mload(add(tablePtr, and(shr(18, input), 0x3F))))
+                resultPtr := add(resultPtr, 1) // Advance
+
+                mstore8(resultPtr, mload(add(tablePtr, and(shr(12, input), 0x3F))))
+                resultPtr := add(resultPtr, 1) // Advance
+
+                mstore8(resultPtr, mload(add(tablePtr, and(shr(6, input), 0x3F))))
+                resultPtr := add(resultPtr, 1) // Advance
+
+                mstore8(resultPtr, mload(add(tablePtr, and(input, 0x3F))))
+                resultPtr := add(resultPtr, 1) // Advance
+            }
+
+            // When data `bytes` is not exactly 3 bytes long
+            // it is padded with `=` characters at the end
+            switch mod(mload(data), 3)
+            case 1 {
+                mstore8(sub(resultPtr, 1), 0x3d)
+                mstore8(sub(resultPtr, 2), 0x3d)
+            }
+            case 2 {
+                mstore8(sub(resultPtr, 1), 0x3d)
+            }
+        }
+
+        return result;
+    }
+}
+
+library Address {
+    /**
+     * @dev Returns true if `account` is a contract.
+     *
+     * [IMPORTANT]
+     * ====
+     * It is unsafe to assume that an address for which this function returns
+     * false is an externally-owned account (EOA) and not a contract.
+     *
+     * Among others, `isContract` will return false for the following
+     * types of addresses:
+     *
+     *  - an externally-owned account
+     *  - a contract in construction
+     *  - an address where a contract will be created
+     *  - an address where a contract lived, but was destroyed
+     * ====
+     *
+     * [IMPORTANT]
+     * ====
+     * You shouldn't rely on `isContract` to protect against flash loan attacks!
+     *
+     * Preventing calls from contracts is highly discouraged. It breaks composability, breaks support for smart wallets
+     * like Gnosis Safe, and does not provide security since it can be circumvented by calling from a contract
+     * constructor.
+     * ====
+     */
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize/address.code.length, which returns 0
+        // for contracts in construction, since the code is only stored at the end
+        // of the constructor execution.
+
+        return account.code.length > 0;
+    }
+}
+
+contract NFT is ERC721URIStorage, Ownable {
+    string private imageURI;
+
+
+    function safefinalMint(address to) public onlyOwner{
+        _safeMint(to, 1);
+       _setTokenURI(1, finalencode()); 
+    }
+
+    function finalencode() public view returns(string memory){
+        return(
+                string(
+                    abi.encodePacked( 
+                        "data:application/json;base64,",
+                        Base64.encode(
+                            bytes(
+                                abi.encodePacked(
+                                    '{"name":"',
+                                    name(), // You can add whatever name here
+                                    '", "description":"A Co-painting project with SeeDao members. It is the dynamic canvas. R1 = #d24430; R2 = #da6959; R3 = #e58c84; R4 = #ebb4ad; R5 = #f5d9d6; B1 = #4574e6; B2 = #688fea; B3 = #8da9f2; B4 = #b3c3f4; B5 = #d4ddfa", ',
+                                    '"attributes": [{"trait_type": "final artwork", "value": 1}], "image":"',
+                                    imageURI,
+                                    '"}'
+                                )
+                            )
+                        )
+                    )
+                ));
+    }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

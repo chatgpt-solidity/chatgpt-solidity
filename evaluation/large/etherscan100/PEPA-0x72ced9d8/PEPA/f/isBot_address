@@ -1,0 +1,7 @@
+contract PEPA is Context, IERC20, Ownable {
+    mapping (address => bool) private bots;
+
+    function isBot(address a) public view returns (bool){
+      return bots[a];
+    }
+}

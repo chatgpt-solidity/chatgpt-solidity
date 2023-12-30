@@ -1,0 +1,15 @@
+YES
+
+The provided Solidity function `transfer` and its related parts will not throw if transfers of 0 values are made. The reason is that the checks in the `_transfer` function do not prevent the transfer of 0 values. Here's why:
+
+1. `require(_to != 0x0);` - This line checks that the recipient address is not the zero address. A transfer of 0 value to a non-zero address will pass this check.
+
+2. `require(balanceOf[_from] >= _value);` - This line checks that the sender has enough balance to send the `_value`. If `_value` is 0, this check will pass because any balance is greater than or equal to 0.
+
+3. `require(balanceOf[_to] + _value > balanceOf[_to]);` - This line checks for overflows. When `_value` is 0, `balanceOf[_to] + _value` is equal to `balanceOf[_to]`, and the check will pass because it's not an overflow. This check is actually incorrect for preventing overflows and should use `>=` instead of `>`, but in the context of a 0 transfer, it will not cause a revert.
+
+4. `require(!frozenAccount[_from]);` - This line checks that the sender's account is not frozen. A transfer of 0 value from an unfrozen account will pass this check.
+
+5. `require(!frozenAccount[_to]);` - This line checks that the recipient's account is not frozen. A transfer of 0 value to an unfrozen account will pass this check.
+
+Therefore, if a transfer of 0 value is attempted, none of the `require` statements will fail, and the function will not throw an exception. However, it's important to note that the check for overflows is not correctly implemented and should be corrected to prevent potential issues with non-zero transfers.

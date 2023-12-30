@@ -1,0 +1,37 @@
+Given a solidity function setFreeze and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract LutToken is
+    LutTokenInterface,
+    UpgradeableToken,
+    DetailedERC20,
+    BurnableToken,
+    Pausable
+{
+
+    function setFreeze(bool newFreeze) public onlyOwner {
+        freeze = newFreeze;
+    }
+}
+
+contract LutTokenInterface is ERC20 {
+    bool public freeze;
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

@@ -1,0 +1,12 @@
+contract ManagersRepo{
+    Manager[] managers = new Manager[](0);
+
+    function getManagers()view public returns(address[] memory){
+        address[] memory addresses = new address[](managers.length);
+        for(uint256 i = 0; i < managers.length;i++){
+            addresses[i] = managers[i].getManagerAddress();
+        }
+        return addresses;
+    }
+}
+

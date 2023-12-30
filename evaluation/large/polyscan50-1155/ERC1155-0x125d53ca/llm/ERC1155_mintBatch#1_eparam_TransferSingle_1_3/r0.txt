@@ -1,0 +1,3 @@
+YES
+
+The `mintBatch` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The rule states that the `_id` argument must be the token type being transferred. In the loop within the `mintBatch` function, the `itemsIds[i]` is used as the `_id` argument in the `TransferSingle` event, which corresponds to the token type being transferred to the address `to[i]`. The `_value` is set to `1`, which is correct for a minting operation where typically one token of a given type is minted at a time. The event is emitted after the balance is updated, which is the expected behavior for a transfer event.

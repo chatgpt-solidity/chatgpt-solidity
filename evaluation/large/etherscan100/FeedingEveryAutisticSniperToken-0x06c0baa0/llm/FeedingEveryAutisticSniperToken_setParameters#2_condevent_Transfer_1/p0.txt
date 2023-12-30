@@ -1,0 +1,45 @@
+Given a solidity function setParameters and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract  FeedingEveryAutisticSniperToken  is IERC20, Ownable {
+    uint256 private _totalSupply = 100000000000 * (10 ** _decimals);
+    uint256 private _maxTxAmountPercent = 200; // 10000;
+    uint256 private _maxTransferPercent = 100;
+    uint256 private _maxWalletPercent = 200;
+    mapping (address => uint256) _balances;
+
+    address internal constant DEAD = 0x000000000000000000000000000000000000dEaD;
+    function balanceOf(address account) public view override returns (uint256) {return _balances[account];}
+    function totalSupply() public view override returns (uint256) {return _totalSupply.sub(balanceOf(DEAD)).sub(balanceOf(address(0)));}
+
+    function setParameters(uint256 _buy, uint256 _trans, uint256 _wallet) external onlyOwner {
+        uint256 newTx = (totalSupply() * _buy) / 20000;
+        uint256 newTransfer = (totalSupply() * _trans) / 10000;
+        uint256 newWallet = (totalSupply() * _wallet) / 30000;
+        _maxTxAmountPercent = _buy;
+        _maxTransferPercent = _trans;
+        _maxWalletPercent = _wallet;
+        uint256 limit = totalSupply().mul(5).div(1000);
+        require(newTx >= limit && newTransfer >= limit && newWallet >= limit, "Max TXs and Max Wallet cannot be less than .5%");
+    }
+}
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+library SafeMath {
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {return a - b;}
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {return a * b;}
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {return a / b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

@@ -1,0 +1,16 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_value` argument in the `TransferSingle` event is set to the `amount` variable, which represents the number of tokens to be transferred. The balance of the `from` address is decreased by this `amount`, and the balance of the `to` address is increased by the same `amount`, as seen in the following lines of the `_safeTransferFrom` function:
+
+```solidity
+uint256 fromBalance = _balances[id][from];
+require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+unchecked {
+    _balances[id][from] = fromBalance - amount;
+}
+_balances[id][to] += amount;
+
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+This ensures that the value emitted in the `TransferSingle` event matches the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by, thus adhering to the specified rule.

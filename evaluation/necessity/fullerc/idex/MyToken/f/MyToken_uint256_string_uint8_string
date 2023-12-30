@@ -1,0 +1,24 @@
+contract MyToken {
+    string public name;
+
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+    uint8 public decimals;
+    string public symbol;
+    uint256 public totalSupply;
+
+    /* Initializes contract with initial supply tokens to the creator of the contract */
+    function MyToken(
+        uint256 initialSupply,
+        string tokenName,
+        uint8 decimalUnits,
+        string tokenSymbol
+    ) {
+        balanceOf[msg.sender] = initialSupply; // Give the creator all initial tokens
+        totalSupply = initialSupply; // Update total supply
+        name = tokenName; // Set the name for display purposes
+        symbol = tokenSymbol; // Set the symbol for display purposes
+        decimals = decimalUnits; // Amount of decimals for display purposes
+    }
+}
+

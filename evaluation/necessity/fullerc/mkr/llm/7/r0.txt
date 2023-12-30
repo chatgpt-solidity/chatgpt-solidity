@@ -1,0 +1,21 @@
+The provided Solidity code for the `transfer` and `transferFrom` functions, as well as the related parts of the smart contract, should be evaluated against the ERC-20 token standard to determine if they comply with the standard's requirements.
+
+Let's examine the key points of the ERC-20 standard and how the provided code matches up:
+
+1. **transfer function**: The ERC-20 standard specifies that the `transfer` function should transfer tokens and fire the `Transfer` event. It should throw an error if the sender does not have enough balance.
+
+    In the provided code, the `transfer` function in `DSTokenBase` calls `transferFrom` to perform the actual transfer. This is not a direct violation of the standard, but it is unconventional. The `transferFrom` function does check the sender's balance and throws an error if the balance is insufficient, which is compliant with the standard.
+
+2. **transferFrom function**: The ERC-20 standard requires that `transferFrom` should transfer tokens on behalf of another address, provided that the sender is authorized to do so, and it should fire the `Transfer` event.
+
+    The provided `transferFrom` function in `DSToken` checks if the sender is authorized to spend tokens from the `src` address. If the sender is not the `src` and does not have an unlimited allowance (indicated by `uint(-1)`), it deducts the `wad` (amount to transfer) from the sender's allowance. This is compliant with the standard.
+
+3. **Events**: The ERC-20 standard requires a `Transfer` event to be fired whenever tokens are transferred. The provided code does include a `Transfer` event call within the `transferFrom` function, which is correct.
+
+4. **Approvals**: The ERC-20 standard specifies an `approve` function and an `Approval` event. The provided code does not include these, but they might be implemented elsewhere in the contract not shown in the provided snippet.
+
+5. **Return values**: The ERC-20 standard states that `transfer` and `transferFrom` functions must return a boolean value indicating success. The provided code correctly returns `true` upon successful completion of these functions.
+
+6. **Stoppable modifier**: The `stoppable` modifier is not part of the ERC-20 standard, but it does not inherently violate the standard. It is used to add the ability to stop transfers, which could be a feature of this particular token implementation.
+
+Based on the provided code and the ERC-20 standard, the `transfer` and `transferFrom` functions appear to be compliant with the ERC-20 token standard. However, it is important to note that the full compliance of the contract cannot be determined without reviewing the entire contract, including the implementation of `approve`, `allowance`, and other required functions and events. Additionally, the unconventional use of `transferFrom` within the `transfer` function could lead to unexpected behavior if not properly managed, but it does not necessarily mean a violation of the standard.

@@ -1,0 +1,399 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.11;
+contract NFTs_Latam_Slot is
+    Initializable,
+    INFTlatamContract,
+    IOwnable,
+    IRoyalty,
+    IPrimarySale,
+    IPlatformFee,
+    ReentrancyGuardUpgradeable,
+    EIP712Upgradeable,
+    MulticallUpgradeable,
+    AccessControlEnumerableUpgradeable,
+    ERC721EnumerableUpgradeable,
+    ITokenERC721
+{
+
+    /// @dev Only TRANSFER_ROLE holders can have tokens transferred from or to them, during restricted transfers.
+    /// @dev Only MINTER_ROLE holders can sign off on `MintRequest`s.
+    bytes32 private constant TRANSFER_ROLE = keccak256("TRANSFER_ROLE");
+    bytes32 private constant MINTER_ROLE = keccak256("MINTER_ROLE");
+
+    /// @dev The NFTs Latam contract with fee related information.
+
+    INLFee public immutable nftslatamFee;
+    /// @dev Owner of the contract (purpose: OpenSea compatibility, etc.)
+    address private _owner;
+
+    /// @dev The adress that receives all primary sales value.
+
+    address public primarySaleRecipient;
+    /// @dev The adress that receives all primary sales value.
+    address public platformFeeRecipient;
+
+    /// @dev The recipient of who gets the royalty.
+    address private royaltyRecipient;
+
+    /// @dev The percentage of royalty how much royalty in basis points.
+    uint128 private royaltyBps;
+
+    /// @dev The % of primary sales collected by the contract as fees.
+
+    uint128 public platformFeeBps;
+    /// @dev Contract level metadata.
+    string public contractURI;
+
+    constructor() initializer {
+        address _defaultAdmin = msg.sender;
+        string memory _name = "Dual NFT";
+        string memory _symbol = "DNFT";
+        string memory _contractURI = "default";
+        address _saleRecipient = msg.sender;
+        address _nftslatamFee = msg.sender;
+        address _royaltyRecipient = msg.sender;
+        uint128 _royaltyBps = 500;
+        uint128 _platformFeeBps = 500;
+        address _platformFeeRecipient = msg.sender;
+
+        nftslatamFee = INLFee(_nftslatamFee);
+        // Initialize inherited contracts, most base-like -> most derived.
+        __ReentrancyGuard_init();
+        __EIP712_init("NFTs_Latam_Slot", "4");
+        __ERC721_init(_name, _symbol);
+
+        // Initialize this contract's state.
+        royaltyRecipient = _royaltyRecipient;
+        royaltyBps = _royaltyBps;
+        platformFeeRecipient = _platformFeeRecipient;
+        primarySaleRecipient = _saleRecipient;
+        contractURI = _contractURI;
+        platformFeeBps = _platformFeeBps;
+
+        _owner = _defaultAdmin;
+        _setupRole(DEFAULT_ADMIN_ROLE, _defaultAdmin);
+        _setupRole(MINTER_ROLE, _defaultAdmin);
+        _setupRole(TRANSFER_ROLE, _defaultAdmin);
+        _setupRole(TRANSFER_ROLE, address(0));
+    }
+}
+
+abstract contract AccessControlUpgradeable is
+    Initializable,
+    ContextUpgradeable,
+    IAccessControlUpgradeable,
+    ERC165Upgradeable
+{
+
+
+    mapping(bytes32 => RoleData) private _roles;
+    bytes32 public constant DEFAULT_ADMIN_ROLE = 0x00;
+
+    /**
+     * @dev Returns `true` if `account` has been granted `role`.
+     */
+    function hasRole(bytes32 role, address account)
+        public
+        view
+        virtual
+        override
+        returns (bool)
+    {
+        return _roles[role].members[account];
+    }
+
+    /**
+     * @dev Grants `role` to `account`.
+     *
+     * If `account` had not been already granted `role`, emits a {RoleGranted}
+     * event. Note that unlike {grantRole}, this function doesn't perform any
+     * checks on the calling account.
+     *
+     * May emit a {RoleGranted} event.
+     *
+     * [WARNING]
+     * ====
+     * This function should only be called from the constructor when setting
+     * up the initial roles for the system.
+     *
+     * Using this function in any other way is effectively circumventing the admin
+     * system imposed by {AccessControl}.
+     * ====
+     *
+     * NOTE: This function is deprecated in favor of {_grantRole}.
+     */
+    function _setupRole(bytes32 role, address account) internal virtual {
+        _grantRole(role, account);
+    }
+
+    /**
+     * @dev Grants `role` to `account`.
+     *
+     * Internal function without access restriction.
+     *
+     * May emit a {RoleGranted} event.
+     */
+    function _grantRole(bytes32 role, address account) internal virtual {
+        if (!hasRole(role, account)) {
+            _roles[role].members[account] = true;
+            emit RoleGranted(role, account, _msgSender());
+        }
+    }
+}
+
+contract ERC721Upgradeable is
+    Initializable,
+    ContextUpgradeable,
+    ERC165Upgradeable,
+    IERC721Upgradeable,
+    IERC721MetadataUpgradeable
+{
+
+    // Token name
+
+    string private _name;
+    // Token symbol
+    string private _symbol;
+
+    /**
+     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     */
+    function __ERC721_init(string memory name_, string memory symbol_)
+        internal
+        onlyInitializing
+    {
+        __ERC721_init_unchained(name_, symbol_);
+    }
+
+    function __ERC721_init_unchained(string memory name_, string memory symbol_)
+        internal
+        onlyInitializing
+    {
+        _name = name_;
+        _symbol = symbol_;
+    }
+}
+
+abstract contract AccessControlEnumerableUpgradeable is
+    Initializable,
+    IAccessControlEnumerableUpgradeable,
+    AccessControlUpgradeable
+{
+
+    mapping(bytes32 => EnumerableSetUpgradeable.AddressSet)
+        private _roleMembers;
+
+    /**
+     * @dev Overload {_grantRole} to track enumerable memberships
+     */
+    function _grantRole(bytes32 role, address account)
+        internal
+        virtual
+        override
+    {
+        super._grantRole(role, account);
+        _roleMembers[role].add(account);
+    }
+}
+
+library AddressUpgradeable {
+    /**
+     * @dev Returns true if `account` is a contract.
+     *
+     * [IMPORTANT]
+     * ====
+     * It is unsafe to assume that an address for which this function returns
+     * false is an externally-owned account (EOA) and not a contract.
+     *
+     * Among others, `isContract` will return false for the following
+     * types of addresses:
+     *
+     *  - an externally-owned account
+     *  - a contract in construction
+     *  - an address where a contract will be created
+     *  - an address where a contract lived, but was destroyed
+     * ====
+     *
+     * [IMPORTANT]
+     * ====
+     * You shouldn't rely on `isContract` to protect against flash loan attacks!
+     *
+     * Preventing calls from contracts is highly discouraged. It breaks composability, breaks support for smart wallets
+     * like Gnosis Safe, and does not provide security since it can be circumvented by calling from a contract
+     * constructor.
+     * ====
+     */
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize/address.code.length, which returns 0
+        // for contracts in construction, since the code is only stored at the end
+        // of the constructor execution.
+
+        return account.code.length > 0;
+    }
+}
+
+abstract contract ReentrancyGuardUpgradeable is Initializable {
+    // Booleans are more expensive than uint256 or any type that takes up a full
+    // word because each write operation emits an extra SLOAD to first read the
+    // slot's contents, replace the bits taken up by the boolean, and then write
+    // back. This is the compiler's defense against contract upgrades and
+    // pointer aliasing, and it cannot be disabled.
+
+    // The values being non-zero value makes deployment a bit more expensive,
+    // but in exchange the refund on every call to nonReentrant will be lower in
+    // amount. Since refunds are capped to a percentage of the total
+    // transaction's gas, it is best to keep them low in cases like this one, to
+    // increase the likelihood of the full refund coming into effect.
+    uint256 private constant _NOT_ENTERED = 1;
+
+
+    uint256 private _status;
+    function __ReentrancyGuard_init() internal onlyInitializing {
+        __ReentrancyGuard_init_unchained();
+    }
+
+    function __ReentrancyGuard_init_unchained() internal onlyInitializing {
+        _status = _NOT_ENTERED;
+    }
+}
+
+abstract contract EIP712Upgradeable is Initializable {
+    /* solhint-disable var-name-mixedcase */
+    bytes32 private _HASHED_NAME;
+    bytes32 private _HASHED_VERSION;
+
+    /* solhint-enable var-name-mixedcase */
+
+    /**
+     * @dev Initializes the domain separator and parameter caches.
+     *
+     * The meaning of `name` and `version` is specified in
+     * https://eips.ethereum.org/EIPS/eip-712#definition-of-domainseparator[EIP 712]:
+     *
+     * - `name`: the user readable name of the signing domain, i.e. the name of the DApp or the protocol.
+     * - `version`: the current major version of the signing domain.
+     *
+     * NOTE: These parameters cannot be changed except through a xref:learn::upgrading-smart-contracts.adoc[smart
+     * contract upgrade].
+     */
+    function __EIP712_init(string memory name, string memory version)
+        internal
+        onlyInitializing
+    {
+        __EIP712_init_unchained(name, version);
+
+    }
+    function __EIP712_init_unchained(string memory name, string memory version)
+        internal
+        onlyInitializing
+    {
+        bytes32 hashedName = keccak256(bytes(name));
+        bytes32 hashedVersion = keccak256(bytes(version));
+        _HASHED_NAME = hashedName;
+        _HASHED_VERSION = hashedVersion;
+    }
+}
+
+abstract contract Initializable {
+    /**
+     * @dev Indicates that the contract has been initialized.
+     * @custom:oz-retyped-from bool
+     */
+    uint8 private _initialized;
+
+    /**
+     * @dev Indicates that the contract is in the process of being initialized.
+     */
+    bool private _initializing;
+
+    /**
+     * @dev A modifier that defines a protected initializer function that can be invoked at most once. In its scope,
+     * `onlyInitializing` functions can be used to initialize parent contracts.
+     *
+     * Similar to `reinitializer(1)`, except that functions marked with `initializer` can be nested in the context of a
+     * constructor.
+     *
+     * Emits an {Initialized} event.
+     */
+    modifier initializer() {
+        bool isTopLevelCall = !_initializing;
+        require(
+            (isTopLevelCall && _initialized < 1) ||
+                (!AddressUpgradeable.isContract(address(this)) &&
+                    _initialized == 1),
+            "Initializable: contract is already initialized"
+        );
+        _initialized = 1;
+        if (isTopLevelCall) {
+            _initializing = true;
+        }
+        _;
+        if (isTopLevelCall) {
+            _initializing = false;
+            emit Initialized(1);
+        }
+    }
+
+    /**
+     * @dev Modifier to protect an initialization function so that it can only be invoked by functions with the
+     * {initializer} and {reinitializer} modifiers, directly or indirectly.
+     */
+    modifier onlyInitializing() {
+        require(_initializing, "Initializable: contract is not initializing");
+        _;
+    }
+}
+
+library EnumerableSetUpgradeable {
+
+    function _add(Set storage set, bytes32 value) private returns (bool) {
+        if (!_contains(set, value)) {
+            set._values.push(value);
+            set._indexes[value] = set._values.length;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @dev Returns true if the value is in the set. O(1).
+     */
+    function _contains(Set storage set, bytes32 value)
+        private
+        view
+        returns (bool)
+    {
+        return set._indexes[value] != 0;
+    }
+
+    /**
+     * @dev Add a value to a set. O(1).
+     *
+     * Returns true if the value was added to the set, that is if it was not
+     * already present.
+     */
+    function add(AddressSet storage set, address value)
+        internal
+        returns (bool)
+    {
+        return _add(set._inner, bytes32(uint256(uint160(value))));
+    }
+}
+
+abstract contract ContextUpgradeable is Initializable {
+
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

@@ -1,0 +1,17 @@
+Based on the provided Solidity code and the ERC (which appears to be a description of the ERC-20 token standard), we can perform a basic audit to check for compliance with the ERC-20 standard. Here are some key points to consider:
+
+1. **Total Supply Initialization**: The constructor in the `Projecton` contract correctly initializes the total supply of tokens and assigns them to the creator of the contract. This is in line with the ERC-20 standard, which requires that the total supply be set upon contract creation.
+
+2. **Transfer Event**: The ERC-20 standard requires that a `Transfer` event be emitted when tokens are transferred, including when tokens are created (with the `_from` address set to `0x0`). However, the provided code does not include the `Transfer` event or any function that emits it. This is a violation of the ERC-20 standard.
+
+3. **Standard Functions**: The ERC-20 standard specifies a set of functions (`totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, `allowance`) that must be implemented. The provided code snippet does not include these functions, which means it does not comply with the ERC-20 standard as it stands. It's possible that these functions are implemented elsewhere in the contract, but based on the provided code, we cannot confirm compliance.
+
+4. **Optional Functions**: The ERC-20 standard mentions optional functions (`name`, `symbol`, `decimals`) that can be included to provide additional information about the token. These functions are not present in the provided code, but their absence does not constitute a violation of the standard as they are optional.
+
+5. **Return Values**: The ERC-20 standard specifies that certain functions must return a boolean value to indicate success or failure. The provided code does not include any of these functions, so we cannot verify if they correctly return boolean values.
+
+6. **Approval Mechanism**: The ERC-20 standard includes an approval mechanism that allows token holders to approve other addresses to transfer tokens on their behalf. The provided code does not include the `approve` and `allowance` functions, which are necessary for this mechanism.
+
+7. **Inheritance and Ownership**: The `Projecton` contract inherits from an `owned` contract, which sets an `owner` address. This is not part of the ERC-20 standard, but it does not conflict with it either. It is a common pattern used to restrict access to certain administrative functions.
+
+In conclusion, the provided code snippet does not include the necessary functions and events to be considered ERC-20 compliant. To be compliant with the ERC-20 standard, the `Projecton` contract must implement all the required functions and events as specified in the ERC. Additionally, the contract should be tested to ensure that it handles all specified behaviors correctly, including returning boolean values for success/failure and emitting events where required.

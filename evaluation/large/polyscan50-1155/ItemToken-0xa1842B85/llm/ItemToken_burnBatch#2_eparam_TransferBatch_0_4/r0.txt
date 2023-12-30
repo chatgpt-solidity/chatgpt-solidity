@@ -1,0 +1,9 @@
+YES
+
+The `TransferBatch` event is emitted in the `_burnBatch` function according to the given rule. The `_burnBatch` function takes `from`, `ids`, and `amounts` as arguments, where `ids` is the list of token IDs and `amounts` is the corresponding list of quantities to burn from the `from` address's balance.
+
+The function checks that the `from` address is not the zero address, that the lengths of `ids` and `amounts` are equal, and that the `from` address has enough balance of each token to burn the specified amounts. It then proceeds to decrease the balance of the `from` address by the specified amounts for each token ID.
+
+After updating the balances, the `TransferBatch` event is emitted with the `_operator` (the message sender), `_from` address, the zero address (`_to`, since tokens are being burned), `_ids`, and `_values` (which is the `amounts` array representing the number of tokens burned).
+
+The rule states that the `_values` argument must match the list and order of tokens specified in `_ids` and reflect the decrease in the holder's balance, which is exactly what happens in the `_burnBatch` function. Therefore, the `TransferBatch` event is correctly emitted according to the rule.

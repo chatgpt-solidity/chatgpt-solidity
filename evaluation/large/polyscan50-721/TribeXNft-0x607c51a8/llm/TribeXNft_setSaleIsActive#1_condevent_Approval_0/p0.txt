@@ -1,0 +1,38 @@
+Given a solidity function setSaleIsActive and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract TribeXNft is ERC721, ReentrancyGuard {
+    ITournamentHub public tournamentHub;
+
+    uint256 public price = 0 ether;
+    bool public saleIsActive = false;
+
+    /**
+     * @dev Throws if called by any account other than the administrator.
+     */
+    modifier onlyAdministrator() {
+        // Check Permissions
+        require(tournamentHub.checkAdmin(msg.sender), "Sender is not admin");
+        _;
+    }
+
+    /** ACTIVATION **/
+
+    function setSaleIsActive(
+        bool saleIsActive_,
+        uint256 _price
+    ) external onlyAdministrator {
+        saleIsActive = saleIsActive_;
+        if (saleIsActive) price = _price;
+        else price = 0 ether;
+    }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is changed or reaffirmed
+"""

@@ -1,0 +1,15 @@
+YES
+
+The `mint` function in the `RecipientNFT` contract calls the `_mint` function from the `ERC1155` contract. The `_mint` function emits the `TransferSingle` event with the `operator` argument set to the address returned by `_msgSender()`, which is the `msg.sender` of the transaction.
+
+The `mint` function is also protected by the `onlyOwner` modifier, ensuring that only the owner of the contract can call it. Therefore, the `msg.sender` (which is the `_operator` in the context of the `TransferSingle` event) is indeed an account that is approved to make the transfer, as it must be the owner of the contract.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the `msg.sender` and is the owner due to the `onlyOwner` modifier.
+- `_from`: The address from which the tokens are transferred, which is `address(0)` because tokens are being minted.
+- `_to`: The address to which the tokens are minted.
+- `_id`: The token type that is being minted.
+- `_value`: The number of tokens that are being minted.
+
+Since the `_operator` is indeed the `msg.sender` and is approved to make the transfer (as it is the owner of the contract), the rule is followed, and the `TransferSingle` event is emitted correctly according to the given rule.

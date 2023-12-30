@@ -1,0 +1,20 @@
+The provided Solidity code snippet defines a function `enable` within a contract `TokenERC20` that allows an admin to remove an address from a blacklist. This function is not part of the ERC-20 token standard, which is focused on the creation of a standard API for tokens within smart contracts, including methods for transferring tokens, approving tokens to be spent by third parties, and querying token balances and allowances.
+
+The ERC-20 standard specifies the following methods and events that must be implemented:
+
+- `totalSupply`
+- `balanceOf`
+- `transfer`
+- `transferFrom`
+- `approve`
+- `allowance`
+- `Transfer` event
+- `Approval` event
+
+The `enable` function and the `blacklist` mapping are additional features that are not part of the ERC-20 standard. However, adding extra functionality to an ERC-20 token contract does not necessarily violate the standard, as long as the contract also implements all the required methods and events of the ERC-20 standard.
+
+It is important to note that the ERC-20 standard does not restrict the addition of extra functionality beyond what is specified. Therefore, the `enable` function and the related `blacklist` mapping do not violate the ERC-20 standard as long as the rest of the contract correctly implements the standard's required functionality.
+
+However, it is crucial to ensure that the additional features do not interfere with the standard operations of the token. For example, if the `blacklist` were to prevent blacklisted addresses from receiving tokens via the `transfer` or `transferFrom` functions, it would be important to ensure that this behavior is clearly documented and understood by users, as it could affect the token's interoperability with other contracts and services expecting standard ERC-20 behavior.
+
+In summary, the `enable` function and the `blacklist` mapping do not violate the ERC-20 standard as long as the contract also includes the required ERC-20 methods and events and the additional features do not interfere with the standard token operations.

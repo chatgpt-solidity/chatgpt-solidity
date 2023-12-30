@@ -1,0 +1,5 @@
+YES
+
+The `transfer` function in the provided Solidity code uses the SafeMath library for subtraction and addition to prevent overflow and underflow. If the transfer amount `_value` is 0, the SafeMath `sub` function will not throw an error because subtracting 0 from any balance will not cause an underflow, and the `add` function will not throw an error because adding 0 to any balance will not cause an overflow.
+
+Therefore, transfers of 0 values will not throw an error in this contract.

@@ -1,0 +1,10 @@
+contract ICOToken is BaseToken {
+    address public icoHolder;
+
+    function withdraw() {
+        uint256 balance = this.balance;
+        icoHolder.transfer(balance);
+        Withdraw(msg.sender, icoHolder, balance);
+    }
+}
+

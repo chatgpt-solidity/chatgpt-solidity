@@ -1,0 +1,41 @@
+Given a solidity function setTokenURI and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+contract C2RERC1155 is ERC1155, Ownable {
+
+    mapping(uint256 => string) private _tokenURIs;
+    mapping(uint256 => address) private _tokenCreators;
+
+    function setTokenURI(uint256 tokenId, string memory tokenURI) public {
+        require(
+            _msgSender() == _tokenCreators[tokenId] || _msgSender() == owner(),
+            "Only the creator or owner can set URI"
+        );
+        _tokenURIs[tokenId] = tokenURI;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers as well as minting or burning
+"""

@@ -1,0 +1,5 @@
+contract kaloulu is IERC20, Auth {
+    uint256 private _maxWalletAmount = _tSupp;
+
+    function maxWallet() external view returns (uint256) {        return _maxWalletAmount;    }
+}

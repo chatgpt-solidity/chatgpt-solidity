@@ -1,0 +1,35 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "safeTransferFrom(address,address,uint256,bytes) returns()" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+supportsInterface(bytes4) returns(bool)
+balanceOf(address) returns(uint256)
+ownerOf(uint256) returns(address)
+name() returns(string)
+symbol() returns(string)
+tokenURI(uint256) returns(string)
+approve(address,uint256) returns()
+getApproved(uint256) returns(address)
+setApprovalForAll(address,bool) returns()
+isApprovedForAll(address,address) returns(bool)
+transferFrom(address,address,uint256) returns()
+safeTransferFrom(address,address,uint256) returns()
+safeTransferFrom(address,address,uint256,bytes) returns()
+constructor() returns()
+createFight(uint256,string,string,string,uint256) returns(uint256)
+placeBetCRT(uint256,uint8,uint256) returns(uint256)
+startFight(uint256) returns()
+closeFight(uint256,uint8) returns()
+liquidateAssetCRT(uint256) returns(bool)
+toggleCircuitBreaker() returns()
+getFight(uint256) returns(StreamFightersBet.Fight)
+getSmartAsset(uint256) returns(StreamFightersBet.SmartAsset)
+getTotalBettors() returns(uint256)
+getPoolCRT() returns(uint256)
+isAdmin() returns(bool)
+changeOwner(address) returns()
+receive() returns()
+CRT() returns(address)
+hasBet(address) returns(bool)
+"""

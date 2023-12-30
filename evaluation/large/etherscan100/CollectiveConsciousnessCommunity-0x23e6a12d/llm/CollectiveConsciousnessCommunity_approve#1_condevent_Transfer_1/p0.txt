@@ -1,0 +1,24 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.12;
+contract CollectiveConsciousnessCommunity is IERC20 {
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    function approve(
+        address spender,
+        uint256 amount
+    ) public override returns (bool) {
+        allowance[msg.sender][spender] = amount;
+        emit Approval(msg.sender, spender, amount);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

@@ -1,0 +1,11 @@
+contract Concord is Context, IERC20, Ownable {
+
+    string private _name;
+
+    /**
+     * @dev Returns the name of the token.
+     */
+    function name() public view virtual override returns (string memory) {
+        return _name;
+    }
+}

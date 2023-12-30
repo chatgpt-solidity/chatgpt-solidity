@@ -1,0 +1,33 @@
+The provided Solidity code for the `mint` function and related parts of the `DSToken` contract do not fully comply with the ERC-20 standard as described in the provided ERC excerpt. Here are the reasons:
+
+1. **Mint Event**: The ERC-20 standard specifies that a `Transfer` event must be triggered when tokens are transferred, including when new tokens are created (minted). The `Transfer` event should have the `_from` address set to `0x0` when tokens are created. In the provided code, a `Mint` event is triggered instead of a `Transfer` event. This is a deviation from the standard.
+
+2. **Return Values**: The ERC-20 standard requires functions like `transfer` and `approve` to return a boolean value indicating success or failure. The provided `mint` function does not return any value, which is a deviation from the standard's requirement for functions that change balances or allowances to return a success indicator.
+
+3. **Access Control**: The `mint` function in the provided code is protected by an `auth` modifier, which restricts the function to authorized users. While this is not a direct violation of the ERC-20 standard, it is important to note that the standard does not specify access control mechanisms for minting. This means that the implementation of access control should be carefully considered to ensure that it does not conflict with the expectations of ERC-20 token holders and integrators.
+
+4. **Stopping Mechanism**: The `stoppable` modifier is used to prevent the `mint` function from being called when the contract is stopped. This is an additional feature that is not part of the ERC-20 standard. While it does not violate the standard, it is an extra feature that should be documented and understood by users of the token.
+
+To align with the ERC-20 standard, the `mint` function should be modified to trigger a `Transfer` event with the `_from` address set to `0x0` and should return a boolean value indicating success. Additionally, the contract should ensure that the `mint` function's behavior is clearly documented, especially regarding access control and the stopping mechanism, so that it does not surprise users or integrators of the token.
+
+Here is a revised version of the `mint` function that would be more compliant with the ERC-20 standard:
+
+```solidity
+contract DSToken is DSTokenBase(0), DSStop {
+
+    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+    function mint(uint wad) public returns (bool) {
+        return mint(msg.sender, wad);
+    }
+
+    function mint(address guy, uint wad) public auth stoppable returns (bool) {
+        _balances[guy] = add(_balances[guy], wad);
+        _supply = add(_supply, wad);
+        emit Transfer(address(0), guy, wad);
+        return true;
+    }
+}
+```
+
+In this revised version, the `mint` function emits the `Transfer` event with the `_from` address set to `0x0` and returns a boolean value. This aligns with the ERC-20 standard's requirements for token transfer events and function return values.

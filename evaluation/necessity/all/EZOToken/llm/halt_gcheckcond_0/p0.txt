@@ -1,0 +1,36 @@
+Given a solidity function halt and the related parts from a smart contract.
+Whether the function halt and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract Haltable is Ownable {
+    // @dev To Halt in Emergency Condition
+    bool public halted = false;
+
+    // @dev Use this as function modifier that should not execute if contract state Halted
+    modifier stopIfHalted() {
+        require(!halted);
+        _;
+    }
+
+    // @dev called by only owner in case of any emergecy situation
+    function halt() public onlyOwner stopIfHalted {
+        halted = true;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

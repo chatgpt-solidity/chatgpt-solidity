@@ -1,0 +1,25 @@
+The function `symbol` in the provided Solidity code is intended to return the symbol of the token. According to the ERC (which appears to be ERC-20 based on the provided methods and events), the `symbol` function is specified as follows:
+
+```solidity
+function symbol() public view returns (string)
+```
+
+The provided `symbol` function in the contract is:
+
+```solidity
+function symbol() public constant returns (string) {
+    return _symbol;
+}
+```
+
+There are a couple of points to consider:
+
+1. **Visibility and Mutability**: The ERC-20 standard specifies that the `symbol` function should be `public` and `view`. In the provided code, the function is marked as `constant`, which is an alias for `view` in older versions of Solidity. This means that the function does not modify the state and can be called externally. This is consistent with the ERC-20 standard.
+
+2. **Return Type**: The return type in both the ERC-20 standard and the provided code is `string`, which is also consistent.
+
+3. **Solidity Version**: The ERC mentions that the specifications use syntax from Solidity 0.4.17 (or above). The provided code does not specify the Solidity version, but the use of `constant` instead of `view` suggests it may be written in an older version of Solidity. While this is not a direct violation of the ERC-20 standard, it is recommended to use the latest Solidity version and syntax for better compatibility and security.
+
+Based on the information provided, the `symbol` function does not violate the ERC-20 standard. However, it is important to note that the ERC-20 standard also requires certain events and other functions to be implemented for full compliance. The provided code snippet only includes the `symbol` function, so we cannot determine if the entire contract is ERC-20 compliant without the rest of the code.
+
+Additionally, it is worth mentioning that the ERC-20 standard has evolved, and there are newer recommendations for token standards (such as ERC-777 and ERC-1155) that provide more advanced features and improved security. It is always a good practice to consider the latest standards and best practices when developing a new token contract.

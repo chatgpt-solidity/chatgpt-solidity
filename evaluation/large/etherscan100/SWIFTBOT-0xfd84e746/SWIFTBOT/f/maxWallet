@@ -1,0 +1,26 @@
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    uint256 private _totalSupply;
+
+    /**
+     * @dev See {IERC20-totalSupply}.
+     */
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}
+
+contract SWIFTBOT                  is ERC20, Ownable {
+    uint256 constant maxWalletStart = 2e16;
+    uint256 constant addMaxWalletPerMinute = 1e16;
+    uint256 tradingStartTime;
+
+    function maxWallet() public view returns (uint256) {
+        if (tradingStartTime == 0) return totalSupply();
+        uint256 res = maxWalletStart +
+            ((block.timestamp - tradingStartTime) * addMaxWalletPerMinute) /
+            (1 minutes);
+        if (res > totalSupply()) return totalSupply();
+        return res;
+    }
+}

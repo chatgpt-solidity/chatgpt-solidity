@@ -1,0 +1,17 @@
+The provided `transferFrom` function in the `KIMEX` contract appears to be an implementation of the ERC20 `transferFrom` function, with some additional logic. Let's analyze the function against the ERC20 specification provided:
+
+1. **Zero Address Check**: The function correctly checks that neither the `_from` nor the `_to` addresses are the zero address (`address(0)`), which is a requirement to prevent burning tokens or transferring from an uninitialized address.
+
+2. **Value Check**: The function requires that the `_value` to be transferred is greater than 0. However, according to the ERC20 specification, transfers of 0 values MUST be treated as normal transfers and fire the Transfer event. This implementation would revert in case of a 0 value transfer, which is a violation of the ERC20 standard.
+
+3. **Sufficient Balance and Allowance Check**: The function does not explicitly check if `_from` has enough balance or if `msg.sender` has enough allowance to transfer `_value` tokens. However, it uses the `SafeMath` library's `sub` function, which will throw an error if the subtraction would result in a negative number, effectively ensuring that the balance and allowance are sufficient. This is compliant with the ERC20 standard.
+
+4. **Transfer Event**: The function correctly emits the `Transfer` event after transferring the tokens, which is compliant with the ERC20 standard.
+
+5. **Return Value**: The function returns a boolean value indicating success, which is compliant with the ERC20 standard.
+
+6. **Modifier `transferable`**: The function includes a `transferable` modifier that requires the `isTransferable` boolean to be true. This is not part of the ERC20 standard and adds additional logic that restricts token transfers. While this does not violate the ERC20 standard, it is an extension of the standard functionality and should be documented and communicated to users of the token.
+
+7. **SafeMath Library**: The `SafeMath` library is used for arithmetic operations to prevent overflow and underflow, which is a good security practice and does not violate the ERC20 standard.
+
+In summary, the `transferFrom` function in the `KIMEX` contract is mostly compliant with the ERC20 standard, except for the requirement to allow transfers of 0 values. The additional `transferable` modifier is an extension and not a violation, but it should be clearly documented as it restricts when transfers can occur.

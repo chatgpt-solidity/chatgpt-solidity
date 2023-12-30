@@ -1,0 +1,20 @@
+Based on the provided Solidity code and the ERC-20 token standard, the `ArthurStandardToken` contract appears to be an implementation of an ERC-20 token with some additional features such as setting the token name, symbol, and decimals during contract deployment.
+
+To determine if the `ArthurStandardToken` contract violates the ERC-20 standard, we need to check if it implements all the required functions and events specified by the ERC-20 standard and adheres to the behavior described in the standard.
+
+The ERC-20 standard requires the following functions and events:
+
+- `totalSupply() public view returns (uint256)`
+- `balanceOf(address _owner) public view returns (uint256 balance)`
+- `transfer(address _to, uint256 _value) public returns (bool success)`
+- `transferFrom(address _from, address _to, uint256 _value) public returns (bool success)`
+- `approve(address _spender, uint256 _value) public returns (bool success)`
+- `allowance(address _owner, address _spender) public view returns (uint256 remaining)`
+- `event Transfer(address indexed _from, address indexed _to, uint256 _value)`
+- `event Approval(address indexed _owner, address indexed _spender, uint256 _value)`
+
+The provided code snippet does not include the implementation of the `transfer`, `transferFrom`, `approve`, and `allowance` functions, nor does it show the `Transfer` and `Approval` events. However, it is common for these to be implemented in the `StandardToken` contract, which `ArthurStandardToken` inherits from. Since the `StandardToken` contract is not fully provided, we cannot definitively say whether the `ArthurStandardToken` contract violates the ERC-20 standard.
+
+The `ArthurStandardToken` constructor sets the initial token balance, total supply, name, symbol, and decimals. These actions are not in violation of the ERC-20 standard. The ERC-20 standard specifies that the `name`, `symbol`, and `decimals` functions are optional and can be used to improve usability. The `ArthurStandardToken` contract includes these as public state variables, which is a common practice and does not violate the standard.
+
+In conclusion, based on the provided code snippet, there is no evidence that the `ArthurStandardToken` contract violates the ERC-20 standard. However, to fully assess compliance, the implementation of the `StandardToken` contract would need to be reviewed to ensure that all required functions and events are correctly implemented and that they adhere to the specified behavior of the ERC-20 standard.

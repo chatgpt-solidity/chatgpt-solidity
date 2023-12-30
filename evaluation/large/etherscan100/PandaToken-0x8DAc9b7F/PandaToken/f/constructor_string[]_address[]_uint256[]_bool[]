@@ -1,0 +1,27 @@
+contract PandaToken is Context, IERC20{
+
+    string private _name;
+    string private _symbol;
+    uint256 private _decimals;
+
+    mapping(address => uint256) _balances;
+
+    uint256 private _totalSupply;
+    constructor( 
+        string[] memory stringParams,
+        address[] memory addressParams,
+        uint256[] memory numberParams,
+        bool[] memory boolParams
+    ) {
+        require(addressParams.length==0);
+        require(boolParams.length==0);
+
+        address receiveAddr = tx.origin;
+        _name = stringParams[0];
+        _symbol = stringParams[1];
+        _decimals = numberParams[0];
+        _totalSupply = numberParams[1];
+        _balances[receiveAddr] = _totalSupply;
+        emit Transfer(address(0), receiveAddr, _totalSupply);
+    }
+}

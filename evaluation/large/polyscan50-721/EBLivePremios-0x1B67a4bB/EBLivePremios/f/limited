@@ -1,0 +1,14 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+    bool private _limited = false;
+
+    function _getLimited() internal view virtual returns (bool) {
+        return _limited;
+    }
+}
+
+contract EBLivePremios is ERC721 {
+
+    function limited() public view returns (bool) {
+        return _getLimited();
+    }
+}

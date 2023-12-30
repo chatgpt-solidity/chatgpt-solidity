@@ -1,0 +1,7 @@
+YES
+
+The `airdrop` function in the `BlurSummer` contract is designed to mint a new token (with the ID stored in `ARTWORK`) to each address in the `recipients` array, provided that the address is not a contract (checked by the `isContract` function). The `_mint` function in the `ERC1155` contract is called to perform the actual minting operation.
+
+The `_mint` function requires that the `to` argument (recipient's address) is not the zero address. It then emits the `TransferSingle` event with the `_operator` as the message sender, `_from` as the zero address (indicating minting), `_to` as the recipient's address, `_id` as the token ID, and `_value` as the amount of tokens minted.
+
+The `TransferSingle` event is emitted with the correct `_to` argument, which is the address of the recipient whose balance is increased by the minting operation. Therefore, the event `TransferSingle` is emitted according to the given rule.

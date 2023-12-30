@@ -1,0 +1,14 @@
+YES
+
+The function `_safeBatchTransferFrom` within the `ERC1155` contract correctly emits the `TransferBatch` event according to the given rule. The `_operator` argument in the `TransferBatch` event is set to the result of the `_msgSender()` function, which returns `msg.sender`. This is consistent with the rule that the `_operator` must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+The `safeBatchTransferFrom` public function ensures that the caller (`msg.sender`) is either the token owner or an approved operator for the `from` address before calling `_safeBatchTransferFrom`. This is checked with the following require statement:
+
+```solidity
+require(
+    from == _msgSender() || isApprovedForAll(from, _msgSender()),
+    "ERC1155: caller is not token owner or approved"
+);
+```
+
+This ensures that the `_operator` (which will be `msg.sender` in the context of the `_safeBatchTransferFrom` function) is indeed authorized to make the transfer, satisfying the rule provided.

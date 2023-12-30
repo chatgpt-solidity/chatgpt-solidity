@@ -1,0 +1,51 @@
+Given a solidity function updateSellFees and the related parts from a smart contract.
+Whether the function updateSellFees and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract PepePepe is ERC20, Ownable {
+
+    uint256 public sellTotalFees;
+    uint256 public sellMarketingFee;
+    uint256 public sellLiquidityFee;
+    uint256 public sellDevFee;
+
+    function updateSellFees(
+        uint256 _marketingFee,
+        uint256 _liquidityFee,
+        uint256 _devFee
+    ) external onlyOwner {
+        sellMarketingFee = _marketingFee;
+        sellLiquidityFee = _liquidityFee;
+        sellDevFee = _devFee;
+        sellTotalFees = sellMarketingFee + sellLiquidityFee + sellDevFee;
+    }
+}
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

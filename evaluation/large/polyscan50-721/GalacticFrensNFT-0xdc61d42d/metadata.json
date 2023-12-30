@@ -1,0 +1,233 @@
+{
+    "file": "evaluation/polyscan50-721/GalacticFrensNFT-0xdc61d42d.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.19",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/transferOwnership_address",
+                "totalSupply() returns(uint256)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/totalSupply",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/supportsInterface_bytes4",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor() returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/constructor",
+                "mint(uint256) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/mint_uint256",
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/tokenOfOwnerByIndex_address_uint256",
+                "claim() returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/claim",
+                "_getFirstUnclaimedToken(address) returns(uint256)": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/_getFirstUnclaimedToken_address",
+                "pause(bool) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/pause_bool",
+                "withdraw() returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/withdraw",
+                "setBaseURI(string) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/setBaseURI_string",
+                "setMax_supply(uint256) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/setMax_supply_uint256",
+                "setMax_Mints(uint256) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/setMax_Mints_uint256",
+                "setPrice(uint256) returns()": ".temp/polyscan50-721/GalacticFrensNFT-0xdc61d42d/GalacticFrensNFT/f/setPrice_uint256"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "claim() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "_getFirstUnclaimedToken(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "pause(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMax_supply(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMax_Mints(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setPrice(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "paused() returns(bool)",
+                "price() returns(uint256)",
+                "max_mints() returns(uint256)",
+                "max_supply() returns(uint256)",
+                "baseURI() returns(string)",
+                "OPERATOR_FILTER_REGISTRY() returns(IOperatorFilterRegistry)"
+            ],
+            "ercs": [
+                "721a",
+                "165",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "GalacticFrensNFT"
+        }
+    ]
+}

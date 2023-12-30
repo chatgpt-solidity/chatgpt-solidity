@@ -1,0 +1,7 @@
+contract VARK is IERC20 {
+    uint256 private _totalSupply = 1800000000 * (10 ** uint256(decimals));
+
+    function totalSupply() public view override returns (uint256) {
+        return _totalSupply;
+    }
+}

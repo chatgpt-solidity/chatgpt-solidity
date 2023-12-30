@@ -1,0 +1,15 @@
+YES
+
+The `TransferSingle` event is emitted within the `_mint` function of the `ERC1155` contract, which is called by the `airdrop` function in the `RecipientNFT` contract. The `_mint` function is designed to increase the balance of the recipient (`to`) by the `amount` specified, which is `1` in the case of the `airdrop` function.
+
+The `_mint` function constructs the `ids` and `amounts` arrays with a single element each, corresponding to the `ARTWORK` token ID and the `amount` of `1`, respectively. It then updates the recipient's balance by adding the `amount` to their current balance for the given token ID.
+
+After updating the balance, the `_mint` function emits the `TransferSingle` event with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are being transferred, which is the zero address (`address(0)`) since tokens are being minted.
+- `_to`: The recipient's address.
+- `_id`: The token ID, which is `ARTWORK`.
+- `_value`: The number of tokens minted, which is `amount`.
+
+The `_value` argument in the `TransferSingle` event matches the number of tokens the recipient's balance is increased by, which is consistent with the given rule. Therefore, the `TransferSingle` event is emitted correctly according to the rule provided.

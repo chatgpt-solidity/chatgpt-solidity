@@ -1,0 +1,7 @@
+contract myToken is Context, IERC20, Ownable {
+    string private constant _symbol = unicode"$SHIBPEPE";
+
+    function symbol() public pure returns (string memory) {
+        return _symbol;
+    }
+}

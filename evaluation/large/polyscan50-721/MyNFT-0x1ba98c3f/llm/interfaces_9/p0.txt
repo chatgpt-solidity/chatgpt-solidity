@@ -1,0 +1,29 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "supportsInterface(bytes4) returns(bool)" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+owner() returns(address)
+renounceOwnership() returns()
+transferOwnership(address) returns()
+supportsInterface(bytes4) returns(bool)
+balanceOf(address) returns(uint256)
+ownerOf(uint256) returns(address)
+name() returns(string)
+symbol() returns(string)
+tokenURI(uint256) returns(string)
+approve(address,uint256) returns()
+getApproved(uint256) returns(address)
+setApprovalForAll(address,bool) returns()
+isApprovedForAll(address,address) returns(bool)
+transferFrom(address,address,uint256) returns()
+safeTransferFrom(address,address,uint256) returns()
+safeTransferFrom(address,address,uint256,bytes) returns()
+constructor(address) returns()
+mintNFT() returns()
+sellNFT(uint256,address,uint256) returns()
+listNFT(uint256) returns()
+cost() returns(uint256)
+maticToken() returns(IERC20)
+MAX_SUPPLY() returns(uint256)
+"""

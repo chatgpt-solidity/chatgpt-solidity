@@ -1,0 +1,9 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function of the `ERC1155Tradable` contract. The `_operator` argument for the event is set to the result of the `_msgSender()` function, which is designed to return the original sender of the transaction. This is consistent with the rule that the `_operator` must be an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+The `_burn` function is called by the `burn` function in the `AssetContract` contract, which has an `onlyTokenAmountOwned` modifier. This modifier ensures that the caller (`_from`) owns at least the amount of tokens (`_quantity`) they are trying to burn. The `burn` function in `AssetContract` is an override of the `burn` function in `ERC1155Tradable`, and it adds the ownership check.
+
+The `onlyApproved` modifier in `ERC1155Tradable` ensures that the caller is either the owner of the tokens or an approved operator. This is consistent with the rule that the `_operator` must be approved to make the transfer.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

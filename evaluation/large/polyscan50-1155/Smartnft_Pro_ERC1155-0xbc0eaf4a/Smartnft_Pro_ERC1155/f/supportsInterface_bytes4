@@ -1,0 +1,6 @@
+contract Smartnft_Pro_ERC1155 is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
+
+    function supportsInterface( bytes4 interfaceId ) public pure override returns(bool){
+        return interfaceId == 0xd9b67a26 || interfaceId == 0x0e89341c;
+    }
+}

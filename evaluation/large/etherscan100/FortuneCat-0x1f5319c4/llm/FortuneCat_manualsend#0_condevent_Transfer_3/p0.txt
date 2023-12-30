@@ -1,0 +1,30 @@
+Given a solidity function manualsend and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract FortuneCat is Context, IERC20, Ownable {
+    address payable private _developmentAddres = payable(msg.sender); 
+    address payable private _marketingAddres = payable(msg.sender);
+    function manualsend() external {
+        require(_msgSender() == _developmentAddres || _msgSender() == _marketingAddres);
+        uint256 contractETHBalance = address(this).balance;
+        sendETHToFee(contractETHBalance);
+    }
+function sendETHToFee(uint256 amount) private {
+        _developmentAddres.transfer(amount);
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

@@ -1,0 +1,524 @@
+{
+    "file": "evaluation/polyscan50-721/NFTs_Latam_Slot-0x970424d7.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.11",
+            "func2file": {
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/supportsInterface_bytes4",
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/tokenOfOwnerByIndex_address_uint256",
+                "totalSupply() returns(uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/totalSupply",
+                "tokenByIndex(uint256) returns(uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/tokenByIndex_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/safeTransferFrom_address_address_uint256_bytes",
+                "getRoleMember(bytes32,uint256) returns(address)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/getRoleMember_bytes32_uint256",
+                "getRoleMemberCount(bytes32) returns(uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/getRoleMemberCount_bytes32",
+                "hasRole(bytes32,address) returns(bool)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/hasRole_bytes32_address",
+                "getRoleAdmin(bytes32) returns(bytes32)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/getRoleAdmin_bytes32",
+                "grantRole(bytes32,address) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/grantRole_bytes32_address",
+                "revokeRole(bytes32,address) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/revokeRole_bytes32_address",
+                "renounceRole(bytes32,address) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/renounceRole_bytes32_address",
+                "multicall(bytes[]) returns(bytes[])": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/multicall_bytes[]",
+                "constructor() returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/constructor",
+                "contractType() returns(bytes32)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/contractType",
+                "contractVersion() returns(uint8)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/contractVersion",
+                "owner() returns(address)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/owner",
+                "verify(ITokenERC721.MintRequest,bytes) returns(bool,address)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/verify_ITokenERC721.MintRequest_bytes",
+                "changeUseState(uint256,uint16[]) returns(string)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/changeUseState_uint256_uint16[]",
+                "getUseState(uint256) returns(bool,uint16[])": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/getUseState_uint256",
+                "claimPrize(uint256) returns(string)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/claimPrize_uint256",
+                "getClaimState(uint256) returns(bool)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/getClaimState_uint256",
+                "mintTo(address,string) returns(uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/mintTo_address_string",
+                "buyTicket(string) returns(uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/buyTicket_string",
+                "withdraw() returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/withdraw",
+                "addItem(string) returns(uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/addItem_string",
+                "royaltyInfo(uint256,uint256) returns(address,uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/royaltyInfo_uint256_uint256",
+                "mintWithSignature(ITokenERC721.MintRequest,bytes) returns(uint256)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/mintWithSignature_ITokenERC721.MintRequest_bytes",
+                "setPrimarySaleRecipient(address) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/setPrimarySaleRecipient_address",
+                "setDefaultRoyaltyInfo(address,uint256) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/setDefaultRoyaltyInfo_address_uint256",
+                "setRoyaltyInfoForToken(uint256,address,uint256) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/setRoyaltyInfoForToken_uint256_address_uint256",
+                "setPlatformFeeInfo(address,uint256) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/setPlatformFeeInfo_address_uint256",
+                "setOwner(address) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/setOwner_address",
+                "setContractURI(string) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/setContractURI_string",
+                "getPlatformFeeInfo() returns(address,uint16)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/getPlatformFeeInfo",
+                "getDefaultRoyaltyInfo() returns(address,uint16)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/getDefaultRoyaltyInfo",
+                "getRoyaltyInfoForToken(uint256) returns(address,uint16)": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/getRoyaltyInfoForToken_uint256",
+                "burn(uint256) returns()": ".temp/polyscan50-721/NFTs_Latam_Slot-0x970424d7/NFTs_Latam_Slot/f/burn_uint256"
+            },
+            "func2attrs": {
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenByIndex(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getRoleMember(bytes32,uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getRoleMemberCount(bytes32) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "hasRole(bytes32,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getRoleAdmin(bytes32) returns(bytes32)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "grantRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "revokeRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "renounceRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "multicall(bytes[]) returns(bytes[])": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "contractType() returns(bytes32)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "contractVersion() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "verify(ITokenERC721.MintRequest,bytes) returns(bool,address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "changeUseState(uint256,uint16[]) returns(string)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getUseState(uint256) returns(bool,uint16[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "claimPrize(uint256) returns(string)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getClaimState(uint256) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "mintTo(address,string) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "buyTicket(string) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addItem(string) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "royaltyInfo(uint256,uint256) returns(address,uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "mintWithSignature(ITokenERC721.MintRequest,bytes) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setPrimarySaleRecipient(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setDefaultRoyaltyInfo(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setRoyaltyInfoForToken(uint256,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setPlatformFeeInfo(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setOwner(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setContractURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getPlatformFeeInfo() returns(address,uint16)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getDefaultRoyaltyInfo() returns(address,uint16)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getRoyaltyInfoForToken(uint256) returns(address,uint16)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "burn(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "DEFAULT_ADMIN_ROLE() returns(bytes32)",
+                "nftslatamFee() returns(INLFee)",
+                "primarySaleRecipient() returns(address)",
+                "nextItemIdToMint() returns(uint256)",
+                "platformFeeRecipient() returns(address)",
+                "contractURI() returns(string)",
+                "nextTokenIdToMint() returns(uint256)",
+                "platformFeeBps() returns(uint128)"
+            ],
+            "ercs": [
+                "165",
+                "721upgradeable",
+                "165upgradeable",
+                "721enumerableupgradeable",
+                "721metadataupgradeable",
+                "2981",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Initialized",
+                    "params": [
+                        {
+                            "type": "uint8",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnerUpdated",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "DefaultRoyalty",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "RoyaltyForToken",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "PrimarySaleRecipientUpdated",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "PlatformFeeInfoUpdated",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleAdminChanged",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleGranted",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleRevoked",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TokensMinted",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "string",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TokensMintedWithSignature",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "ITokenERC721.MintRequest",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ItemsMinted",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "tokenClaimed",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "tokenUseState",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "NFTs_Latam_Slot"
+        }
+    ]
+}

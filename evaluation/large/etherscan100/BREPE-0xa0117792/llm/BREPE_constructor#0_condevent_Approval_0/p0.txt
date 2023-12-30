@@ -1,0 +1,30 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+contract Ownable {
+    address private _owner;
+
+    constructor() {
+        _owner = msg.sender;
+        emit OwnershipTransferred(address(0), _owner);
+    }
+}
+
+contract BREPE is IERC20, Ownable {
+    uint256 private _totalSupply = 420690000000000 * 10 ** uint256(_decimals);
+
+    mapping(address => uint256) private _balances;
+
+    constructor() {
+        _balances[msg.sender] = _totalSupply;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

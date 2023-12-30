@@ -1,0 +1,9 @@
+YES
+
+The function `_safeTransferFrom` within the `ERC1155` contract includes a `require` statement that explicitly checks if the `to` address is the zero address:
+
+```solidity
+require(to != address(0), "ERC1155: transfer to the zero address");
+```
+
+If the `to` address (`_to` in the condition) is the zero address, this `require` statement will fail, causing the function to revert with the message "ERC1155: transfer to the zero address."

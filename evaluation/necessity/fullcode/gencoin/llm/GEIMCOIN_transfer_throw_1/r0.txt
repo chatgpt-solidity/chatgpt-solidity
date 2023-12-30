@@ -1,0 +1,20 @@
+NO
+
+The `transfer` function in the `StandardToken` contract does not explicitly throw an error if the `_value` to be transferred is 0. Instead, it checks if the sender's balance is greater than or equal to the `_value` and if `_value` is greater than 0. If both conditions are true, the transfer proceeds, and the function returns `true`. If either condition is false, the function simply returns `false` without throwing an error.
+
+Here is the relevant part of the `transfer` function:
+
+```solidity
+function transfer(address _to, uint256 _value) returns (bool success) {
+    if (balances[msg.sender] >= _value && _value > 0) {
+        balances[msg.sender] -= _value;
+        balances[_to] += _value;
+        Transfer(msg.sender, _to, _value);
+        return true;
+    } else {
+        return false;
+    }
+}
+```
+
+In the case of a transfer of 0 value, the condition `_value > 0` will be false, and the function will return `false` without throwing an error.

@@ -1,0 +1,6 @@
+contract CHATAI is ERC20, Ownable {
+    mapping(address => bool) blacklisted;
+    function isBlacklisted(address account) public view returns (bool) {
+        return blacklisted[account];
+    }
+}

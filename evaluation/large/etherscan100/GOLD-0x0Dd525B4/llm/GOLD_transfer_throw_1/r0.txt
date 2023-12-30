@@ -1,0 +1,5 @@
+NO
+
+The `_transfer` function includes a check that requires the `amount` to be greater than the value returned by `checklive(sender)`. If the `amount` is 0, this check will fail because the subtraction `amount - checklive(sender)` will not be greater than 0, leading to the "checklive" error being thrown.
+
+Therefore, the transfer function and its related parts will throw an error if a transfer of 0 value is attempted, assuming that `checklive(sender)` returns a value greater than or equal to 0.

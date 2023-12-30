@@ -1,0 +1,14 @@
+Given a solidity function balanceOf and the related parts from a smart contract and an rule for its return value.
+Whether function balanceOf returns the account balance of another account with address _owner? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract ChadErc is Context, Ownable, IERC20 {
+    mapping (address => uint256) private _balances;
+
+    function balanceOf(address account) public view override returns (uint256) {
+        return _balances[account];
+    }
+}
+"""

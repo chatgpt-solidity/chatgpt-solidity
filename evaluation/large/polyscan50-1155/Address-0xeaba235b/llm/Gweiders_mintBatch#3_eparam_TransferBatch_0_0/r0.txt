@@ -1,0 +1,15 @@
+YES
+
+The `mintBatch` function in the `Gweiders` contract calls the `_mintBatch` internal function from the `ERC1155` contract. The `_mintBatch` function emits the `TransferBatch` event with the `operator` argument set to the address returned by `_msgSender()`, which is the `msg.sender` of the transaction.
+
+The `mintBatch` function is also protected by the `onlyOwner` modifier, ensuring that only the owner of the contract can call this function. Therefore, the `msg.sender` (which is the `_operator` in this context) is indeed an account that is approved to make the transfer, as it must be the owner of the contract.
+
+The `TransferBatch` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the `msg.sender` and is the owner due to the `onlyOwner` modifier.
+- `_from`: The address which previously owned the token, which is `address(0)` since minting creates new tokens.
+- `_to`: The address that will receive the minted tokens.
+- `_ids`: An array of token identifiers.
+- `_values`: An array of amounts of tokens being minted.
+
+Since the `_operator` is the `msg.sender` and is approved to make the transfer (as it is the owner of the contract), the rule is followed, and the `TransferBatch` event is emitted correctly according to the given rule.

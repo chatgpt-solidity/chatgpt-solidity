@@ -1,0 +1,5 @@
+NO
+
+The `transferFrom` function in the provided Solidity code does not explicitly check for transfers of 0 values. It only checks that the `_value` is less than or equal to the `allowance[_from][msg.sender]` and that the sender is not blacklisted. If the `_value` is 0, these checks will pass, and the function will proceed to call `_transfer`, which also does not have a check for a transfer value of 0.
+
+Therefore, the function will not throw an exception if a transfer of 0 value is attempted; it will execute and return true, indicating success.

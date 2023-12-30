@@ -1,0 +1,9 @@
+YES
+
+The function `preTxCheck` within the `_transfer` function checks if the sender has enough balance to send the amount of tokens they want to transfer. If the sender's balance is less than the amount they want to transfer, the function will throw an error due to the `require` statement:
+
+```solidity
+require(amount <= balanceOf(sender),"ERC20: below available balance threshold");
+```
+
+This line ensures that the sender cannot transfer more tokens than they have in their balance. If the sender's balance is insufficient, the transaction will revert and throw an error.

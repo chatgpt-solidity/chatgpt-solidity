@@ -1,0 +1,3 @@
+YES
+
+The `transferFrom` function and its related parts will not throw if transfers of 0 values are made. The `SafeMath` library's `sub` function will not revert when subtracting 0 from any value, and the `add` function will not revert when adding 0 to any value. There are no explicit checks in the `_transfer` or `_approve` functions that would cause a revert when the amount is 0. Therefore, the contract should handle transfers of 0 values without throwing an error.

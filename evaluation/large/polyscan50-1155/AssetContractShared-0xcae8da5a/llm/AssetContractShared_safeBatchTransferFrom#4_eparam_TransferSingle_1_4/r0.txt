@@ -1,0 +1,19 @@
+YES
+
+The `safeTransferFrom` function in the `ERC1155Tradable` contract correctly emits the `TransferSingle` event with the `_value` argument representing the number of tokens transferred from the `_from` address to the `_to` address. The balances are updated accordingly before the event is emitted, ensuring that the `_value` matches the change in the holder's balance and the recipient's balance increase.
+
+Here's the relevant part of the `safeTransferFrom` function:
+
+```solidity
+uint256 fromBalance = balances[id][from];
+require(
+    fromBalance >= amount,
+    "ERC1155: insufficient balance for transfer"
+);
+balances[id][from] = fromBalance - amount;
+balances[id][to] += amount;
+
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+The `amount` variable is used to decrease the balance of the `_from` address and increase the balance of the `_to` address, and the same `amount` is passed as the `_value` argument to the `TransferSingle` event, which complies with the given rule.

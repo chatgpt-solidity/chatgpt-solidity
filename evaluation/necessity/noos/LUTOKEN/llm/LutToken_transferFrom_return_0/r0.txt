@@ -1,0 +1,17 @@
+NO
+
+The `transferFrom` function in the `LutToken` contract does not explicitly return a boolean value indicating the success of the transfer. Instead, it calls `super.transferFrom(_from, _to, _value);` without returning the result of this call.
+
+According to the ERC20 standard, the `transferFrom` function should return a boolean value indicating whether the transfer was successful. The `transferFrom` function in the `StandardToken` contract, which is likely the parent contract based on the `super` call, does return a boolean value. However, the `transferFrom` function in the `LutToken` contract should also return this value to comply with the ERC rule.
+
+To comply with the ERC rule, the `transferFrom` function in the `LutToken` contract should be modified to return the result of the `super.transferFrom` call, like so:
+
+```solidity
+function transferFrom(
+    address _from,
+    address _to,
+    uint256 _value
+) public whenNotPaused saleOrUnfrozen returns (bool) {
+    return super.transferFrom(_from, _to, _value);
+}
+```

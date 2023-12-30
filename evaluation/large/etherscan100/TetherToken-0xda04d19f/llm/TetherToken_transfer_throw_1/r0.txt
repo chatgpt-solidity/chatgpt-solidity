@@ -1,0 +1,5 @@
+YES
+
+The `transfer` function in the provided Solidity code does not throw an error when transfers of 0 values are made. The `SafeMath` library's `sub` and `add` functions are designed to handle edge cases, including when the value is 0. The `sub` function will not assert (and thus not throw) as long as the sender has a balance equal to or greater than the value being transferred (which is true for a transfer of 0), and the `add` function will not assert as long as the result of the addition does not overflow (which adding 0 will not cause).
+
+Additionally, the `transfer` function does not have any explicit checks that would cause it to throw if the `_value` is 0. It calculates the fee, subtracts the value from the sender's balance, and adds the sendAmount to the recipient's balance. If the value is 0, the sendAmount will also be 0, and the balances will remain effectively unchanged after the operation. The `emit Transfer` event will still be triggered, but with a value of 0 for the transfer amount.

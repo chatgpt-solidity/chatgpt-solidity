@@ -1,0 +1,249 @@
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    // flag to determine if contracts core functionalities can be performed
+    bool circuitBreaker = false;
+
+    // holds all NFTs issued to winners
+
+    mapping(uint256 => SmartAsset) smartAssets;
+    // holds all created fights (key: idCounter)
+    mapping(uint256 => Fight) fights;
+    IERC20 crtToken;
+
+    /*
+    *  @notice Checks if core functionalities can be performed
+    *  @dev Checks if the circuitBreaker state variable is false
+    */
+    modifier isCircuitBreakOff() {
+        require(!circuitBreaker, "Circuit breaker is on");
+        _;
+
+    }
+    /*
+    *  @notice Checks if the NFT is valid
+    *  @dev Validates NFT
+    */
+    modifier validateToken(uint256 _tokenId) {
+        require(_exists(_tokenId), "Invalid token");
+        _;
+    }
+    /*
+    *  @notice  Ensure token belongs to the caller
+    */
+    modifier isTokenOwner(uint256 _tokenId) {
+        require(ownerOf(_tokenId) == msg.sender , "caller is not token owner");
+        _;
+    }
+
+    /*
+    *  @notice  Invalidates a single smart asset (NFT)
+    *  @dev     Burns the NFT token with the given ID
+    *  @param   _smartAssetId The ID of the NFT to invalidate
+    */
+    function invalidateAsset(uint256 _smartAssetId) internal {
+        _burn(_smartAssetId);
+    }
+
+    /*
+    *  @notice  Calculates the payout for a bet
+    *  @dev     Calculates the amount to be paid out to the bettor based on the parimutuel betting system
+    *  @param   _fightId The ID of the fight
+    *  @param   initialValue The initial bet amount
+    *  @param   fightResult The result of the fight
+    *  @return  The amount to be paid out to the bettor
+    */
+    function calculatePayout(uint256 _fightId, uint256 initialValue, FightResult fightResult) internal view returns (uint256) {
+        uint256 winningTotal;
+        if (fightResult == FightResult.BOXER_A_WON) {
+            winningTotal = fights[_fightId].totalPayoutBoxerA;
+        } else if (fightResult == FightResult.BOXER_B_WON) {
+            winningTotal = fights[_fightId].totalPayoutBoxerB;
+        }
+
+        // Calculating payout based on the parimutuel betting system
+        uint256 payout = (initialValue * fights[_fightId].totalCollected) / winningTotal;
+        return payout;
+    }
+
+    /*
+    *  @notice  Liquidate smart asset's value
+    *  @dev     validated   NFT is burned and caller gets value funds in account
+    *  @param   _smartAssetId smart asset id
+    *  @return  success status
+    */
+    function liquidateAssetCRT(uint256 _smartAssetId)
+        public 
+        isCircuitBreakOff
+        validateToken(_smartAssetId)
+        isTokenOwner(_smartAssetId)
+        nonReentrant 
+        returns(bool)
+    {
+        SmartAsset memory smartAsset = smartAssets[_smartAssetId];
+        
+        require(fights[smartAsset.fightId].state == FightState.FINISHED, "Cannot liquidate asset until fight is finished");
+        
+        uint256 payoutAmount = calculatePayout(smartAsset.fightId, smartAsset.initialValue, smartAsset.fightResult);
+        require (crtToken.balanceOf(address(this)) >= payoutAmount, "Contract has insufficient CRT funds");
+        
+        invalidateAsset(_smartAssetId);
+        crtToken.transfer(msg.sender, payoutAmount);
+
+        emit AssetLiquidatedEvent(msg.sender, smartAsset.fightId, payoutAmount, block.timestamp);
+        return true;
+    }
+}
+abstract contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Errors {
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    // Mapping owner address to token count
+
+    mapping(address => uint256) private _balances;
+    // Mapping from token ID to approved address
+    mapping(uint256 => address) private _tokenApprovals;
+
+    /**
+     * @dev See {IERC721-ownerOf}.
+     */
+    function ownerOf(uint256 tokenId) public view virtual returns (address) {
+        address owner = _ownerOf(tokenId);
+        if (owner == address(0)) {
+            revert ERC721NonexistentToken(tokenId);
+        }
+        return owner;
+    }
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+    }
+
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     * and stop existing when they are burned (`_burn`).
+     */
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _ownerOf(tokenId) != address(0);
+    }
+
+    /**
+     * @dev Destroys `tokenId`.
+     * The approval is cleared when the token is burned.
+     * This is an internal function that does not check if the sender is authorized to operate on the token.
+     *
+     * Requirements:
+     *
+     * - `tokenId` must exist.
+     *
+     * Emits a {Transfer} event.
+     */
+    function _burn(uint256 tokenId) internal virtual {
+        address owner = ownerOf(tokenId);
+
+        _beforeTokenTransfer(owner, address(0), tokenId, 1);
+
+        // Update ownership in case tokenId was transferred by `_beforeTokenTransfer` hook
+        owner = ownerOf(tokenId);
+
+        // Clear approvals
+        delete _tokenApprovals[tokenId];
+
+        // Decrease balance with checked arithmetic, because an `ownerOf` override may
+        // invalidate the assumption that `_balances[from] >= 1`.
+        _balances[owner] -= 1;
+
+        delete _owners[tokenId];
+
+        emit Transfer(owner, address(0), tokenId);
+
+        _afterTokenTransfer(owner, address(0), tokenId, 1);
+    }
+
+    /**
+     * @dev Hook that is called before any token transfer. This includes minting and burning. If {ERC721Consecutive} is
+     * used, the hook may be called as part of a consecutive (batch) mint, as indicated by `batchSize` greater than 1.
+     *
+     * Calling conditions:
+     *
+     * - When `from` and `to` are both non-zero, ``from``'s tokens will be transferred to `to`.
+     * - When `from` is zero, the tokens will be minted for `to`.
+     * - When `to` is zero, ``from``'s tokens will be burned.
+     * - `from` and `to` are never both zero.
+     * - `batchSize` is non-zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+
+    function _beforeTokenTransfer(address from, address to, uint256 firstTokenId, uint256 batchSize) internal virtual {}
+    /**
+     * @dev Hook that is called after any token transfer. This includes minting and burning. If {ERC721Consecutive} is
+     * used, the hook may be called as part of a consecutive (batch) mint, as indicated by `batchSize` greater than 1.
+     *
+     * Calling conditions:
+     *
+     * - When `from` and `to` are both non-zero, ``from``'s tokens were transferred to `to`.
+     * - When `from` is zero, the tokens were minted for `to`.
+     * - When `to` is zero, ``from``'s tokens were burned.
+     * - `from` and `to` are never both zero.
+     * - `batchSize` is non-zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+    function _afterTokenTransfer(address from, address to, uint256 firstTokenId, uint256 batchSize) internal virtual {}
+}
+
+abstract contract ReentrancyGuard {
+    // Booleans are more expensive than uint256 or any type that takes up a full
+    // word because each write operation emits an extra SLOAD to first read the
+    // slot's contents, replace the bits taken up by the boolean, and then write
+    // back. This is the compiler's defense against contract upgrades and
+    // pointer aliasing, and it cannot be disabled.
+
+    // The values being non-zero value makes deployment a bit more expensive,
+    // but in exchange the refund on every call to nonReentrant will be lower in
+    // amount. Since refunds are capped to a percentage of the total
+    // transaction's gas, it is best to keep them low in cases like this one, to
+    // increase the likelihood of the full refund coming into effect.
+    uint256 private constant NOT_ENTERED = 1;
+    uint256 private constant ENTERED = 2;
+
+    uint256 private _status;
+
+    /**
+     * @dev Prevents a contract from calling itself, directly or indirectly.
+     * Calling a `nonReentrant` function from another `nonReentrant`
+     * function is not supported. It is possible to prevent this from happening
+     * by making the `nonReentrant` function external, and making it call a
+     * `private` function that does the actual work.
+     */
+    modifier nonReentrant() {
+        _nonReentrantBefore();
+        _;
+        _nonReentrantAfter();
+
+    }
+    function _nonReentrantBefore() private {
+        // On the first call to nonReentrant, _status will be NOT_ENTERED
+        if (_status == ENTERED) {
+            revert ReentrancyGuardReentrantCall();
+        }
+
+        // Any calls to nonReentrant after this point will fail
+        _status = ENTERED;
+    }
+
+    function _nonReentrantAfter() private {
+        // By storing the original value once again, a refund is triggered (see
+        // https://eips.ethereum.org/EIPS/eip-2200)
+        _status = NOT_ENTERED;
+    }
+}
+

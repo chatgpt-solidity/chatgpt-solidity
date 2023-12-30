@@ -1,0 +1,17 @@
+The provided Solidity code for the `Organicco` contract and the `Token` contract appears to be an attempt to create an ERC20 and ERC223 compliant token. However, there are several issues and potential violations of the ERC20 standard based on the provided code and the ERC20 specification:
+
+1. **Missing ERC20 Functions**: The ERC20 standard requires specific functions such as `transfer`, `transferFrom`, `approve`, and `allowance`. These functions are not present in the provided code snippet. Without these functions, the contract does not comply with the ERC20 standard.
+
+2. **Missing ERC20 Events**: The ERC20 standard requires two events: `Transfer` and `Approval`. These events are not present in the provided code snippet. Without these events, the contract does not comply with the ERC20 standard.
+
+3. **Constructor Issue**: The `Organicco` contract's constructor is named `Organicco`, which is the old way of defining constructors in Solidity. As of Solidity 0.4.22, constructors should be defined using the `constructor` keyword. This is not a direct violation of the ERC20 standard but is a best practice in Solidity development.
+
+4. **Token Allocation in Constructor**: The constructor of the `Organicco` contract allocates a percentage of the total supply to predefined addresses. This is not a violation of the ERC20 standard, but it should be noted that the actual allocation should be carefully reviewed to ensure it aligns with the intended token distribution plan.
+
+5. **Visibility of State Variables**: The ERC20 standard does not specify the visibility of state variables like `_name`, `_symbol`, `_decimals`, and `_totalSupply`. However, it is common practice to make these variables public to allow for better transparency and usability. The provided code does not specify the visibility, which could lead to issues with transparency.
+
+6. **ERC223 Compatibility**: The `Organicco` contract also claims to be ERC223 compliant. ERC223 is a proposed standard that adds functionality to prevent tokens from being lost when sent to contracts that do not support token handling. However, the provided code does not include any ERC223-specific functions or checks, such as the token fallback function that is a key part of the ERC223 standard.
+
+7. **Syntax Errors**: The provided code has syntax errors, such as the incomplete line `address public constant PARTNER_SALES =`. This would prevent the contract from compiling.
+
+In conclusion, the provided `Organicco` contract code does not comply with the ERC20 standard due to missing functions, events, and potential issues with best practices and syntax. To be compliant, the contract would need to implement all the required functions and events as specified by the ERC20 standard. Additionally, if the contract aims to be ERC223 compliant, it would need to implement the token fallback mechanism and other ERC223-specific features.

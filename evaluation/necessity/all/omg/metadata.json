@@ -1,0 +1,142 @@
+{
+    "file": "evaluation/audited/omg.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.17",
+            "func2file": {
+                "mint(address,uint256) returns(bool)": "result-necessity/s-cm/omg/OMGToken/f/mint_address_uint256",
+                "finishMinting() returns(bool)": "result-necessity/s-cm/omg/OMGToken/f/finishMinting",
+                "transferOwnership(address) returns()": "result-necessity/s-cm/omg/OMGToken/f/transferOwnership_address",
+                "transferFrom(address,address,uint256) returns()": "result-necessity/s-cm/omg/OMGToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns()": "result-necessity/s-cm/omg/OMGToken/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-cm/omg/OMGToken/f/allowance_address_address",
+                "transfer(address,uint256) returns()": "result-necessity/s-cm/omg/OMGToken/f/transfer_address_uint256",
+                "balanceOf(address) returns(uint256)": "result-necessity/s-cm/omg/OMGToken/f/balanceOf_address",
+                "pause() returns(bool)": "result-necessity/s-cm/omg/OMGToken/f/pause",
+                "unpause() returns(bool)": "result-necessity/s-cm/omg/OMGToken/f/unpause",
+                "mintTimelocked(address,uint256,uint256) returns(TokenTimelock)": "result-necessity/s-cm/omg/OMGToken/f/mintTimelocked_address_uint256_uint256"
+            },
+            "func2attrs": {
+                "mint(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "finishMinting() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "pause() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unpause() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintTimelocked(address,uint256,uint256) returns(TokenTimelock)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "mintingFinished() returns(bool)",
+                "paused() returns(bool)",
+                "owner() returns(address)",
+                "decimals() returns(uint256)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "20",
+                "20basic"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Pause",
+                    "params": []
+                },
+                {
+                    "name": "Unpause",
+                    "params": []
+                },
+                {
+                    "name": "Mint",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "MintFinished",
+                    "params": []
+                }
+            ],
+            "name": "OMGToken"
+        }
+    ]
+}

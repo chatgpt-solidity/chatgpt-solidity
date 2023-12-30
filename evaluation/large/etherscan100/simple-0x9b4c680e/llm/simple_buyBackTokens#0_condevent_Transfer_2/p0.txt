@@ -1,0 +1,48 @@
+Given a solidity function buyBackTokens and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract simple is ERC20, Ownable {
+
+    IDexRouter public dexRouter;
+
+    // useful for buybacks or to reclaim any ETH on the contract in a way that helps holders.
+    function buyBackTokens(uint256 amountInWei) external onlyOwner {
+        require(amountInWei <= 10 ether, "May not buy more than 10 ETH in a single buy to reduce sandwich attacks");
+
+        address[] memory path = new address[](2);
+        path[0] = dexRouter.WETH();
+        path[1] = address(this);
+
+        // make the swap
+        dexRouter.swapExactETHForTokensSupportingFeeOnTransferTokens{value: amountInWei}(
+            0, // accept any amount of Ethereum
+            path,
+            address(0xdead),
+            block.timestamp
+        );
+        emit BuyBackTriggered(amountInWei);
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

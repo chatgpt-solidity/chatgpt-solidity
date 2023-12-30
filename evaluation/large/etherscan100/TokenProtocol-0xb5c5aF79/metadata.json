@@ -1,0 +1,245 @@
+{
+    "file": "evaluation/etherscan100/TokenProtocol-0xb5c5aF79.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.19",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/decreaseAllowance_address_uint256",
+                "switchValidationEnableState() returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/switchValidationEnableState",
+                "validationEnable() returns(bool)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/validationEnable",
+                "editDownTime(uint256) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/editDownTime_uint256",
+                "updatePremissionList(address[],bool) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/updatePremissionList_address[]_bool",
+                "checkPremissionList(address) returns(bool)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/checkPremissionList_address",
+                "checkUserPurchaseTime(address) returns(uint256)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/checkUserPurchaseTime_address",
+                "checkUserBoughtAmount(address) returns(uint256)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/checkUserBoughtAmount_address",
+                "changeMaxGasPrice(uint256) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/changeMaxGasPrice_uint256",
+                "fixCap(uint256) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/fixCap_uint256",
+                "ethcas() returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/ethcas",
+                "isExcludedFromFee(address) returns(bool)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/isExcludedFromFee_address",
+                "updateExcludedFromFeeStatus(address,bool) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/updateExcludedFromFeeStatus_address_bool",
+                "updateFees(uint256,uint256) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/updateFees_uint256_uint256",
+                "updateMarketWallet(address) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/updateMarketWallet_address",
+                "checkCurrentFees() returns(uint256,uint256)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/checkCurrentFees",
+                "AddLiquidity(uint256) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/AddLiquidity_uint256",
+                "switchOrigin(address) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/switchOrigin_address",
+                "ETHCAS() returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/ETHCAS",
+                "getBaseTokenReserve(address) returns(uint256)": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/getBaseTokenReserve_address",
+                "rebaseLP(address) returns()": ".temp/etherscan100/TokenProtocol-0xb5c5aF79/TokenProtocol/f/rebaseLP_address"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "switchValidationEnableState() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "validationEnable() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "editDownTime(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updatePremissionList(address[],bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "checkPremissionList(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "checkUserPurchaseTime(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "checkUserBoughtAmount(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "changeMaxGasPrice(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "fixCap(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "ethcas() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isExcludedFromFee(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "updateExcludedFromFeeStatus(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateFees(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateMarketWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "checkCurrentFees() returns(uint256,uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "AddLiquidity(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "switchOrigin(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "ETHCAS() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getBaseTokenReserve(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "rebaseLP(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "excludedFromFee(address) returns(bool)",
+                "MAX_GAS_PRICE() returns(uint256)",
+                "marketWallet() returns(address)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "TokenProtocol"
+        }
+    ]
+}

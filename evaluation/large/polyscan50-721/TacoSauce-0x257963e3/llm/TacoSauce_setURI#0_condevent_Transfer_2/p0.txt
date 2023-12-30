@@ -1,0 +1,52 @@
+Given a solidity function setURI and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+    }
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if the sender is not the owner.
+     */
+    function _checkOwner() internal view virtual {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    }
+}
+
+contract TacoSauce is ERC721, Pausable, Ownable, DefaultOperatorFilterer, ReentrancyGuard {
+    string baseURI;
+
+    //**Owners Only**//
+
+    function setURI(string calldata newURI) external onlyOwner{
+        baseURI = newURI;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is destroyed and removed from circulation.
+"""

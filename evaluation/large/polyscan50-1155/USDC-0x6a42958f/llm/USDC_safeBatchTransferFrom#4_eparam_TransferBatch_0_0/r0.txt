@@ -1,0 +1,7 @@
+YES
+
+The function `_safeBatchTransferFrom` is an internal function that is called by the public function `safeBatchTransferFrom`. The public function `safeBatchTransferFrom` checks that the caller (`msg.sender`) is either the token owner or an approved operator for the owner before calling `_safeBatchTransferFrom`.
+
+Within `_safeBatchTransferFrom`, the `operator` variable is assigned the value of `_msgSender()`, which is a function from the `Context` contract that returns `msg.sender`. This means that the `operator` is indeed the address of an account/contract that is approved to make the transfer, as it is either the token owner or an approved operator (as checked in the `safeBatchTransferFrom` function).
+
+The `TransferBatch` event is then emitted with the `operator` as the `_operator` argument, which satisfies the given rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer and should be `msg.sender`.

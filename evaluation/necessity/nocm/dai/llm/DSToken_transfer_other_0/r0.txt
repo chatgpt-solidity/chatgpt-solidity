@@ -1,0 +1,3 @@
+NO
+
+The provided Solidity code does not explicitly check for a transfer of 0 value. The ERC-20 rule states that transfers of 0 values must be treated as normal transfers. Since the code does not contain any condition that would prevent or treat a transfer of 0 differently, it complies with the ERC rule. The `transfer` and `transferFrom` functions will execute normally even if the `wad` (amount to transfer) is 0, updating the balances and emitting a Transfer event as per a normal transfer.

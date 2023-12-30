@@ -1,0 +1,51 @@
+contract Ownable is Context {
+  address private _owner;
+
+  /**
+   * @dev Returns the address of the current owner.
+   */
+  function owner() public view returns (address) {
+    return _owner;
+
+  }
+  /**
+   * @dev Throws if called by any account other than the owner.
+   */
+  modifier onlyOwner() {
+    require(_owner == _msgSender(), "Ownable: caller is not the owner");
+    _;
+  }
+}
+
+contract Context {
+
+  function _msgSender() internal view returns (address payable) {
+    return msg.sender;
+  }
+}
+
+contract TetherToken is Pausable, StandardToken, BlackList {
+
+    // Redeem tokens.
+    // These tokens are withdrawn from the owner address
+    // if the balance must be enough to cover the redeem
+    // or the call will fail.
+    // @param _amount Number of tokens to be issued
+    function redeem(uint amount) public onlyOwner {
+        require(_totalSupply >= amount);
+        require(balances[owner()] >= amount);
+
+        _totalSupply -= amount;
+        balances[owner()] -= amount;
+        emit Redeem(amount);
+    }
+}
+contract BasicToken is Ownable, ERC20Basic {
+
+    mapping(address => uint) public balances;
+}
+
+contract ERC20Basic {
+    uint public _totalSupply;
+}
+

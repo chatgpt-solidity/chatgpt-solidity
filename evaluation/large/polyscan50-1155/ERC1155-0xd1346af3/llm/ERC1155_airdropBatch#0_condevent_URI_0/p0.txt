@@ -1,0 +1,29 @@
+Given a solidity function airdropBatch and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 {
+    mapping(address => mapping(uint256 => uint256)) private balances;
+
+    address public owner;
+    uint256 public constant TOKEN_ID = 0;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
+    }
+
+    function airdropBatch(address[] memory recipients) external onlyOwner {
+        for (uint256 i = 0; i < recipients.length; i++) {
+            balances[recipients[i]][TOKEN_ID]++;
+        }
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

@@ -1,0 +1,21 @@
+The function `symbol` in the provided Solidity code is intended to return the symbol of the token, which is a common feature of ERC-20 tokens. According to the ERC-20 standard provided, the `symbol` function is specified as follows:
+
+```
+symbol
+Returns the symbol of the token. E.g. "HIX". OPTIONAL - This method can be used to improve usability, but interfaces and other contracts MUST NOT expect these values to be present.
+function symbol() public view returns (string)
+```
+
+The provided Solidity code for the `symbol` function is:
+
+```solidity
+function symbol() public view virtual override returns (string memory) {
+    return _symbol;
+}
+```
+
+This implementation of the `symbol` function is compliant with the ERC-20 standard. It is a public view function that returns a string, which is the expected return type for the `symbol` function as per the ERC-20 specification. The function is marked as `virtual` and `override`, which means it can be overridden by a derived contract if needed, but this does not affect its compliance with the standard.
+
+The ERC-20 standard also states that the `symbol` function is OPTIONAL, meaning that a token contract does not need to have this function to be ERC-20 compliant. However, if it is included, it should conform to the specified interface, which in this case, it does.
+
+Therefore, the provided `symbol` function and related parts do not violate the given ERC-20 standard.

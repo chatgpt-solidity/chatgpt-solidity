@@ -1,0 +1,3 @@
+NO
+
+The function `setSale` does not call any callee that returns a boolean value (`bool success`). It simply assigns the `_sale` address to the `sale` state variable and sets the `frozen` state variable to `true`. There are no external calls or internal function calls that return a boolean value that would need to be handled or directly returned according to the rule provided.

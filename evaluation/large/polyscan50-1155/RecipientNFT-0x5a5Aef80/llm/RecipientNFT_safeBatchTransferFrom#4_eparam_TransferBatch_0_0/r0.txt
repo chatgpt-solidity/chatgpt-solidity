@@ -1,0 +1,7 @@
+YES
+
+The function `_safeBatchTransferFrom` correctly emits the `TransferBatch` event with the `_operator` argument being the address that is approved to make the transfer. The `_operator` is set to the result of `_msgSender()`, which returns the `msg.sender` (the caller of the function). This is consistent with the rule that the `_operator` must be the address of an account/contract that is approved to make the transfer.
+
+The `safeBatchTransferFrom` function, which is the public function that external callers would use, includes a `require` statement to ensure that the caller (`msg.sender`) is either the token owner or an approved operator for the `from` address. This is done by checking `from == _msgSender() || isApprovedForAll(from, _msgSender())`.
+
+Therefore, when `_safeBatchTransferFrom` is called from `safeBatchTransferFrom`, the `_operator` is guaranteed to be an approved address, and the `TransferBatch` event is emitted with the correct `_operator` argument as per the given rule.

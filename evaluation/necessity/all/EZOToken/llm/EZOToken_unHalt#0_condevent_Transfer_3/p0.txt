@@ -1,0 +1,39 @@
+Given a solidity function unHalt and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.9;
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract Haltable is Ownable {
+    // @dev To Halt in Emergency Condition
+    bool public halted = false;
+
+    // @dev Use this as function modifier that should execute only if contract state Halted
+    modifier runIfHalted() {
+        require(halted);
+        _;
+    }
+
+    // @dev called by only owner to stop the emergency situation
+    function unHalt() public onlyOwner runIfHalted {
+        halted = false;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

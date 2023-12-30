@@ -1,0 +1,33 @@
+YES
+
+The `TransferBatch` event is emitted in the `_mintBatch` function within the `ERC1155` contract. The `_mintBatch` function is called by the `mintBatch` function in the `PolyOpepen` contract. The `TransferBatch` event is emitted with the `_ids` argument being the list of tokens being transferred, as required by the rule. The `_values` argument corresponds to the `amounts` of each token being transferred, which is also in accordance with the rule. The event is emitted after the `_beforeTokenTransfer` hook is called and before the `_doSafeBatchTransferAcceptanceCheck` function is called, which ensures that the `to` address is capable of receiving the tokens (if it is a contract).
+
+Here is the relevant part of the code that confirms the `TransferBatch` event is emitted correctly:
+
+```solidity
+function _mintBatch(
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual {
+    require(to != address(0), "ERC1155: mint to the zero address");
+    require(ids.length == amounts.length, "ERC1155: ids and amounts length mismatch");
+
+    address operator = _msgSender();
+
+    _beforeTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+    for (uint256 i = 0; i < ids.length; i++) {
+        _balances[ids[i]][to] += amounts[i];
+    }
+
+    emit TransferBatch(operator, address(0), to, ids, amounts);
+
+    _afterTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+    _doSafeBatchTransferAcceptanceCheck(operator, address(0), to, ids, amounts, data);
+}
+```
+
+The `TransferBatch` event is emitted with the correct parameters, including the `_ids` list of tokens being transferred.

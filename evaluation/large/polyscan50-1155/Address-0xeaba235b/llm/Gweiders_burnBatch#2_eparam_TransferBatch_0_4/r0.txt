@@ -1,0 +1,9 @@
+YES
+
+The `_burnBatch` function within the `ERC1155` contract is designed to burn a batch of tokens. The function checks that the `from` address is not the zero address and that the lengths of the `ids` and `amounts` arrays match, as required by the ERC1155 standard.
+
+The function then proceeds to loop through each `id` and `amount` pair, ensuring that the `from` address has a sufficient balance of each token to be burned (`require(fromBalance >= amount, "ERC1155: burn amount exceeds balance")`). It then subtracts the `amount` from the `from` address's balance for each token `id`.
+
+After updating the balances, the function emits the `TransferBatch` event with the `operator` (the message sender), the `from` address, the zero address (indicating that tokens are being burned), the `ids` array, and the `amounts` array. This event matches the rule specified, as the `_values` argument (which is the `amounts` array in the code) represents the number of tokens the holder's balance is decreased by, and since the tokens are being burned, the recipient's address is the zero address, which means no balance is increased.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule.

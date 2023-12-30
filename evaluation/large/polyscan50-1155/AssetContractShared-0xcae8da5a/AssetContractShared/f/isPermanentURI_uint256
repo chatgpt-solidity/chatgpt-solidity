@@ -1,0 +1,9 @@
+contract AssetContract is ERC1155Tradable {
+
+    mapping(uint256 => bool) private _isPermanentURI;
+
+    function isPermanentURI(uint256 _id) public view returns (bool) {
+        return _isPermanentURI[_id];
+    }
+}
+

@@ -1,0 +1,70 @@
+contract ERC721 is
+    Context,
+    ERC165,
+    IERC721,
+    IERC721Metadata,
+    IERC721Enumerable
+{
+
+    // Enumerable mapping from token ids to their owners
+    EnumerableMap.UintToAddressMap private _tokenOwners;
+
+    /**
+     * @dev See {IERC721Enumerable-tokenByIndex}.
+     */
+    function tokenByIndex(uint256 index)
+        public
+        view
+        override
+        returns (uint256)
+    {
+        (uint256 tokenId, ) = _tokenOwners.at(index);
+        return tokenId;
+    }
+}
+
+library EnumerableMap {
+
+    /**
+     * @dev Returns the key-value pair stored at position `index` in the map. O(1).
+     *
+     * Note that there are no guarantees on the ordering of entries inside the
+     * array, and it may change when more entries are added or removed.
+     *
+     * Requirements:
+     *
+     * - `index` must be strictly less than {length}.
+     */
+    function _at(Map storage map, uint256 index)
+        private
+        view
+        returns (bytes32, bytes32)
+    {
+        require(
+            map._entries.length > index,
+            "EnumerableMap: index out of bounds"
+        );
+
+        MapEntry storage entry = map._entries[index];
+        return (entry._key, entry._value);
+    }
+
+    /**
+     * @dev Returns the element stored at position `index` in the set. O(1).
+     * Note that there are no guarantees on the ordering of values inside the
+     * array, and it may change when more values are added or removed.
+     *
+     * Requirements:
+     *
+     * - `index` must be strictly less than {length}.
+     */
+    function at(UintToAddressMap storage map, uint256 index)
+        internal
+        view
+        returns (uint256, address)
+    {
+        (bytes32 key, bytes32 value) = _at(map._inner, index);
+        return (uint256(key), address(uint256(value)));
+    }
+}
+

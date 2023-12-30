@@ -1,0 +1,9 @@
+The provided Solidity code for the `setICOPrice` function and related parts of the `KIMEX` contract do not directly interact with the ERC-20 token standard interface. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable token transfers, allowances, and other related functionalities.
+
+The `setICOPrice` function in the `KIMEX` contract appears to be part of an Initial Coin Offering (ICO) mechanism, where `icoStandardPrice` is likely used to determine the rate at which tokens are sold or distributed in exchange for Ether during the ICO. This function is an administrative function that allows the owner or admin of the contract to set the price for the ICO.
+
+The ERC-20 standard does not dictate how tokens should be priced or distributed in an ICO. It only provides a standard interface for the transfer of tokens once they are already in circulation. Therefore, the `setICOPrice` function does not violate the ERC-20 standard, as it is not related to the core functionalities that the ERC-20 standard defines.
+
+However, it is important to note that the `KIMEX` contract should also implement the ERC-20 standard functions (`name`, `symbol`, `decimals`, `totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, `allowance`) and events (`Transfer`, `Approval`) if it intends to issue an ERC-20 compliant token. The provided code snippet does not show these implementations, so it is not possible to determine from the given information whether the `KIMEX` contract is fully ERC-20 compliant.
+
+In summary, the `setICOPrice` function does not violate the ERC-20 standard, but the contract must implement all the required ERC-20 functions and events to be considered compliant with the standard.

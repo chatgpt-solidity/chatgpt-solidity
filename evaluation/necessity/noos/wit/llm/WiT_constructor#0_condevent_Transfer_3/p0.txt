@@ -1,0 +1,33 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract AbstractToken is Token, SafeMath {
+    /**
+     * Create new Abstract Token contract.
+     */
+    constructor() public {
+        // Do nothing
+    }
+}
+
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * Create new token smart contract and make msg.sender the
+     * owner of this smart contract.
+     */
+    constructor() public {
+        owner = msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

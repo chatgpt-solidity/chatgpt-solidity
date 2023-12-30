@@ -1,0 +1,18 @@
+Given a solidity function owner and the related parts from a smart contract.
+Whether the function owner and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract PandaToken is Context, IERC20{
+
+    address public immutable deadAddress =
+        0x000000000000000000000000000000000000dEaD;
+
+    function owner() public view returns (address) {
+        return deadAddress;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

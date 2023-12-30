@@ -1,0 +1,3 @@
+NO
+
+The function `allowance` does not call any callee that returns a boolean value (`bool success`). It simply returns the amount of tokens allowed by one address to another from the `allowed` mapping. There is no rule violation in the provided function and its related parts.

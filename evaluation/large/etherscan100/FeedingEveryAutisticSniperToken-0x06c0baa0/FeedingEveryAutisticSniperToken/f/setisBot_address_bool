@@ -1,0 +1,10 @@
+contract  FeedingEveryAutisticSniperToken  is IERC20, Ownable {
+    mapping (address => bool) private isBot;
+    function setisBot(address _address, bool _enabled) external onlyOwner {isBot[_address] = _enabled;}
+}
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+

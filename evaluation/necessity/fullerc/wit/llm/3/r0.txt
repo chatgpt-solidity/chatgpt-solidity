@@ -1,0 +1,22 @@
+The provided Solidity code for the `approve` function and related parts of the smart contract are intended to be compliant with the ERC-20 token standard. Let's analyze the code against the ERC-20 specification provided:
+
+The ERC-20 standard specifies the following for the `approve` function:
+
+> Allows `_spender` to withdraw from your account multiple times, up to the `_value` amount. If this function is called again it overwrites the current allowance with `_value`.
+> NOTE: To prevent attack vectors like the one described here and discussed here, clients SHOULD make sure to create user interfaces in such a way that they set the allowance first to 0 before setting it to another value for the same spender. THOUGH The contract itself shouldn’t enforce it, to allow backwards compatibility with contracts deployed before.
+
+The `approve` function in the `WiT` contract enforces that the allowance must be set to 0 before it can be changed to a new non-zero value:
+
+```solidity
+function approve(
+    address _spender,
+    uint256 _value
+) public returns (bool success) {
+    require(allowance(msg.sender, _spender) == 0 || _value == 0);
+    return AbstractToken.approve(_spender, _value);
+}
+```
+
+This implementation deviates from the ERC-20 standard's recommendation. The standard suggests that clients (user interfaces) should ensure that allowances are set to 0 before setting a new value, but it explicitly states that the contract itself should not enforce this to maintain backward compatibility with contracts deployed before this best practice was understood.
+
+Therefore, the `approve` function in the `WiT` contract violates the ERC-20 standard by enforcing a requirement that the standard explicitly recommends against for the sake of backward compatibility. The correct approach, according to the standard, would be to allow the `approve` function to overwrite the current allowance with `_value` without the precondition check, and to handle the potential race condition at the user interface level or through other off-chain mechanisms.

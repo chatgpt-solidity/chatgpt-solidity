@@ -1,0 +1,7 @@
+contract  FeedingEveryAutisticSniperToken  is IERC20, Ownable {
+    function getOwner() external view override returns (address) { return owner; }
+}
+abstract contract Ownable {
+    address internal owner;
+}
+

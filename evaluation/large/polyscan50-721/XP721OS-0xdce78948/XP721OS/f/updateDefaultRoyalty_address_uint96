@@ -1,0 +1,82 @@
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+    }
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if the sender is not the owner.
+     */
+    function _checkOwner() internal view virtual {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    }
+}
+
+abstract contract ERC2981 is IERC2981, ERC165 {
+
+    RoyaltyInfo private _defaultRoyaltyInfo;
+
+    /**
+     * @dev The denominator with which to interpret the fee set in {_setTokenRoyalty} and {_setDefaultRoyalty} as a
+     * fraction of the sale price. Defaults to 10000 so fees are expressed in basis points, but may be customized by an
+     * override.
+     */
+    function _feeDenominator() internal pure virtual returns (uint96) {
+        return 10000;
+
+    }
+    /**
+     * @dev Sets the royalty information that all ids in this contract will default to.
+     *
+     * Requirements:
+     *
+     * - `receiver` cannot be the zero address.
+     * - `feeNumerator` cannot be greater than the fee denominator.
+     */
+    function _setDefaultRoyalty(address receiver, uint96 feeNumerator)
+        internal
+        virtual
+    {
+        require(
+            feeNumerator <= _feeDenominator(),
+            "ERC2981: royalty fee will exceed salePrice"
+        );
+        require(receiver != address(0), "ERC2981: invalid receiver");
+
+        _defaultRoyaltyInfo = RoyaltyInfo(receiver, feeNumerator);
+    }
+}
+
+contract XP721OS is
+    Ownable,
+    ERC721Enumerable,
+    BridgeNFT,
+    ERC2981,
+    DefaultOperatorFilterer
+{
+
+    function updateDefaultRoyalty(address receiver_, uint96 feeNumerator_)
+        external
+        onlyOwner
+    {
+        _setDefaultRoyalty(receiver_, feeNumerator_);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

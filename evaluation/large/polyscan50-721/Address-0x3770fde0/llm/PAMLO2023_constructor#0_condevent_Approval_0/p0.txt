@@ -1,0 +1,81 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Internal function without access restriction.
+     */
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+contract PAMLO2023 is ERC721, Ownable {
+  string public hiddenMetadataUri;
+
+  constructor() ERC721("PAMLO 2023", "PAMLO") {
+    setHiddenMetadataUri("ipfs://QmWmUYXF9T5R3Rq2WmZY9jHnQ8obvWWcQdmJ2ZtA668xcR/hidden.json");
+  }
+
+  function setHiddenMetadataUri(string memory _hiddenMetadataUri) public onlyOwner {
+    hiddenMetadataUri = _hiddenMetadataUri;
+  }
+}
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Token name
+    string private _name;
+
+    // Token symbol
+    string private _symbol;
+
+    /**
+     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     */
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is changed or reaffirmed
+"""

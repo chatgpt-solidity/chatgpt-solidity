@@ -1,0 +1,5 @@
+YES
+
+The `approve` function in the provided Solidity code returns a boolean value indicating whether the approval was successful. The ERC-20 standard requires that the `approve` function should return a boolean value to indicate success. The `StandardToken` contract's `approve` function returns `true` upon successful execution, which is in line with the ERC rule.
+
+Additionally, the `AxpirePausableToken` contract's `approve` function calls the `approve` function of the `StandardToken` using `super.approve(_spender, _value)` and returns its result. Since the `StandardToken`'s `approve` function returns `true` on success, the `AxpirePausableToken`'s `approve` function also returns `true` when not paused, thus complying with the ERC rule.

@@ -1,0 +1,27 @@
+contract BasicToken is Ownable, ERC20Basic {
+
+    mapping(address => uint) public balances;
+
+    /**
+    * @dev Gets the balance of the specified address.
+    * @param _owner The address to query the the balance of.
+    * @return An uint representing the amount owned by the passed address.
+    */
+    function balanceOf(address _owner) public view returns (uint balance) {
+        return balances[_owner];
+    }
+}
+
+contract BifinacneToken is Pausable, StandardToken, BlackList {
+    address public upgradedAddress;
+    bool public deprecated;
+
+    // Forward ERC20 methods to upgraded contract if this one is deprecated
+    function balanceOf(address who) public view returns (uint) {
+        if (deprecated) {
+            return UpgradedStandardToken(upgradedAddress).balanceOf(who);
+        } else {
+            return super.balanceOf(who);
+        }
+    }
+}

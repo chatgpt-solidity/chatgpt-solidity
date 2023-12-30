@@ -1,0 +1,91 @@
+Given a solidity function mintTokens and the related parts from a smart contract and a rule.
+Whether the function mintTokens and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract xEuro {
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#totalsupply
+    // function totalSupply() constant returns (uint256 totalSupply)
+    // we start with zero
+    uint256 public totalSupply = 0;
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#balanceof
+    // function balanceOf(address _owner) constant returns (uint256 balance)
+    mapping(address => uint256) public balanceOf;
+
+    // addresses allowed to mint tokens:
+    mapping(address => bool) public canMint;
+
+    /* ---------- Create and burn tokens  */
+
+    /* -- Accounting: exchange fiat to tokens (fiat sent to our bank acc with eth acc in reference > tokens ) */
+    uint public mintTokensEventsCounter = 0; //
+    //  keep all fiat tx ids, to prevent minting tokens twice (or more times) for the same fiat tx
+    mapping(uint256 => bool) public fiatInPaymentIds;
+
+    // here we can find a MintTokensEvent by fiatInPaymentId,
+    // so we now if tokens were minted for given incoming fiat payment
+    mapping(uint256 => MintTokensEvent) public fiatInPaymentsToMintTokensEvent;
+
+    // here we store MintTokensEvent with its ordinal numbers
+    mapping(uint256 => MintTokensEvent) public mintTokensEvent; //
+
+    // tokens should be minted to contracts own address, (!) after that tokens should be transferred using transferFrom
+    function mintTokens(
+        uint256 value,
+        uint256 fiatInPaymentId
+    ) public returns (bool) {
+        require(canMint[msg.sender]);
+
+        // require that this fiatInPaymentId was not used before:
+        require(!fiatInPaymentIds[fiatInPaymentId]);
+
+        require(value >= 0);
+        // <<< this is the moment when new tokens appear in the system
+        totalSupply = totalSupply.add(value);
+        // first token holder of fresh minted tokens is the contract itself
+        balanceOf[address(this)] = balanceOf[address(this)].add(value);
+
+        mintTokensEventsCounter++;
+        mintTokensEvent[mintTokensEventsCounter].mintedBy = msg.sender;
+        mintTokensEvent[mintTokensEventsCounter]
+            .fiatInPaymentId = fiatInPaymentId;
+        mintTokensEvent[mintTokensEventsCounter].value = value;
+        mintTokensEvent[mintTokensEventsCounter].on = block.timestamp;
+        mintTokensEvent[mintTokensEventsCounter]
+            .currentTotalSupply = totalSupply;
+        //
+        fiatInPaymentsToMintTokensEvent[fiatInPaymentId] = mintTokensEvent[
+            mintTokensEventsCounter
+        ];
+
+        emit TokensMinted(
+            msg.sender,
+            fiatInPaymentId,
+            value,
+            totalSupply,
+            mintTokensEventsCounter
+        );
+
+        fiatInPaymentIds[fiatInPaymentId] = true;
+
+        return true;
+    }
+}
+
+library SafeMath {
+
+    /**
+     * @dev Adds two unsigned integers, reverts on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a);
+        return c;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

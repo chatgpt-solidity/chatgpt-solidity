@@ -1,0 +1,37 @@
+YES
+
+The `mintBatch` function in the provided Smartnft_Pro_ERC1155 contract correctly emits the `TransferBatch` event according to the given rule. The `_ids` argument is indeed the list of tokens being transferred (minted in this case), and the `_values` argument is the corresponding list of amounts for each token.
+
+Here's the relevant part of the code that shows the `TransferBatch` event being emitted with the correct arguments:
+
+```solidity
+function mintBatch( uint256[] memory amounts, string[] memory _uris )
+    public payable
+{
+    uint256[] memory ids = new uint256[](amounts.length);
+    for( uint256 i= 0; i < amounts.length; i++ ) {
+        tokenCounts += 1;
+       ids[i] = tokenCounts; 
+       _tokenURIs[tokenCounts] = _uris[i];
+    }
+
+    _mintBatch( msg.sender, ids, amounts, "0x0" );
+}
+
+// ...
+
+function _mintBatch(
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual {
+    // ...
+    emit TransferBatch(operator, address(0), to, ids, amounts);
+    // ...
+}
+```
+
+In the `mintBatch` function, a new array `ids` is created to store the token IDs for each new token being minted. The `tokenCounts` variable is incremented to generate a new token ID for each token. The `_mintBatch` internal function is then called with the `msg.sender` as the `to` address, the `ids` array as the list of new token IDs, and the `amounts` array as the list of amounts for each token.
+
+Inside the `_mintBatch` function, the `TransferBatch` event is emitted with the `operator` (which is the message sender), `address(0)` as the `_from` address (indicating minting), `to` as the recipient address, `ids` as the list of token IDs, and `amounts` as the corresponding list of amounts. This matches the rule provided for the `TransferBatch` event.

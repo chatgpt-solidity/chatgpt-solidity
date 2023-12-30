@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct arguments. The `_value` argument in the `TransferSingle` event is set to `amount`, which is the number of tokens that are being minted and assigned to the `to` address. The `_balances[id][to]` mapping is increased by `amount`, which matches the `_value` argument in the event, thus adhering to the rule that the `_value` argument must be the number of tokens the holder balance is increased by.
+
+The `_mint` function is called within the `airdrop` function for each recipient that is not a contract, and since the `airdrop` function does not modify the `amount` being minted (which is hardcoded as `1`), the `TransferSingle` event will reflect the correct transfer value for each airdrop.

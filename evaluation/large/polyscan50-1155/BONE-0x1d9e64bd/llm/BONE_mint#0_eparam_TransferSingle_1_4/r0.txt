@@ -1,0 +1,15 @@
+YES
+
+The provided Solidity function `mint` in the `BONE` contract, which inherits from `ERC1155`, calls the `_mint` function in the `ERC1155` contract. The `_mint` function is designed to create `amount` tokens of token type `id` and assign them to the address `to`.
+
+In the `_mint` function, the `TransferSingle` event is emitted with the following arguments:
+
+- `operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `from`: The address from which the tokens are being transferred, which is set to the zero address (`address(0)`) to indicate minting.
+- `to`: The address to which the tokens are being minted.
+- `id`: The token type that is being minted.
+- `amount`: The number of tokens that are being minted.
+
+The rule states that the `_value` argument in the `TransferSingle` event must match the number of tokens the holder's balance is increased by, which is the same as the number of tokens being minted. In the `_mint` function, the `amount` variable represents the number of tokens being minted and is used as the `_value` argument in the `TransferSingle` event. The balance of the `to` address is increased by `amount` in the `_balances` mapping, which ensures that the rule is followed.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, and the answer is "YES".

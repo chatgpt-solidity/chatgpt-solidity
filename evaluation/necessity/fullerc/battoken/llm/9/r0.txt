@@ -1,0 +1,37 @@
+The provided Solidity function interfaces are meant to be compared against the ERC-20 token standard, which is the most common standard for Ethereum tokens. The ERC-20 standard specifies a minimal set of functionality that a token contract must implement to be considered ERC-20 compliant.
+
+Let's compare the provided interfaces with the ERC-20 standard:
+
+1. `transfer(address,uint256) returns(bool)` - **Compliant**
+2. `transferFrom(address,address,uint256) returns(bool)` - **Compliant**
+3. `balanceOf(address) returns(uint256)` - **Compliant**
+4. `approve(address,uint256) returns(bool)` - **Compliant**
+5. `allowance(address,address) returns(uint256)` - **Compliant**
+6. `BAToken(address,address,uint256,uint256) returns()` - **Not part of ERC-20**
+7. `createTokens() returns()` - **Not part of ERC-20**
+8. `finalize() returns()` - **Not part of ERC-20**
+9. `refund() returns()` - **Not part of ERC-20**
+10. `isFinalized() returns(bool)` - **Not part of ERC-20**
+11. `tokenCreationCap() returns(uint256)` - **Not part of ERC-20**
+12. `name() returns(string)` - **Compliant (Optional)**
+13. `symbol() returns(string)` - **Compliant (Optional)**
+14. `decimals() returns(uint256)` - **Compliant (Optional)**
+15. `tokenCreationMin() returns(uint256)` - **Not part of ERC-20**
+16. `batFund() returns(uint256)` - **Not part of ERC-20**
+17. `tokenExchangeRate() returns(uint256)` - **Not part of ERC-20**
+18. `version() returns(string)` - **Not part of ERC-20**
+19. `fundingStartBlock() returns(uint256)` - **Not part of ERC-20**
+20. `batFundDeposit() returns(address)` - **Not part of ERC-20**
+21. `ethFundDeposit() returns(address)` - **Not part of ERC-20**
+22. `fundingEndBlock() returns(uint256)` - **Not part of ERC-20**
+23. `totalSupply() returns(uint256)` - **Compliant**
+
+The ERC-20 standard also requires two events to be emitted:
+- `event Transfer(address indexed _from, address indexed _to, uint256 _value)`
+- `event Approval(address indexed _owner, address indexed _spender, uint256 _value)`
+
+These events are not listed in the provided interfaces, but they are a crucial part of the ERC-20 standard. The contract must emit these events for it to be fully compliant.
+
+From the provided interfaces, items 1-5, 12-14, and 23 are compliant with the ERC-20 standard, with 12-14 being optional. However, the additional functions (6-11, 15-22) are not part of the ERC-20 standard. These additional functions do not necessarily make the contract non-compliant, as the ERC-20 standard allows for additional functionality beyond the required methods and events. However, the contract must implement the required methods and events to be considered ERC-20 compliant.
+
+In conclusion, based on the provided interfaces, the contract appears to implement the core ERC-20 functionality but also includes additional functions that are not part of the standard. To fully assess compliance, one would need to ensure that the required `Transfer` and `Approval` events are properly implemented and emitted by the contract. If these events are missing, the contract would not be ERC-20 compliant.

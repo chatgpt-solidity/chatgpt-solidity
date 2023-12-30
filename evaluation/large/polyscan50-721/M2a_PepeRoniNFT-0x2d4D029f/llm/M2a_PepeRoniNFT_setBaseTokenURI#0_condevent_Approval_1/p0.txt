@@ -1,0 +1,23 @@
+Given a solidity function setBaseTokenURI and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+contract M2a_PepeRoniNFT is ERC721
+{
+    string baseTokenURI = "ipfs://bafybeicdktvgz2soqvfqfn7jc53gqfn6ifxkxqb2rdbwrc4dpflm6huyya/";
+    address payable private owner;
+
+    function setBaseTokenURI(string memory _baseTokenURI) external 
+    {
+        require(msg.sender == owner, "Error, only the contract owner can set base URI");
+        baseTokenURI = _baseTokenURI;
+    }    
+}
+"""
+
+Action:"""
+when the approved address for an NFT is cleared
+"""

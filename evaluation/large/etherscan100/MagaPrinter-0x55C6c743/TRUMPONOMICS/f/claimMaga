@@ -1,0 +1,7 @@
+contract TRUMPONOMICS is IERC20, Auth {
+    MagaPrinter public magaPrinter;
+
+    function claimMaga() external {
+        magaPrinter.goMAGA(msg.sender);
+    }
+}

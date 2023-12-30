@@ -1,0 +1,252 @@
+{
+    "file": "evaluation/polyscan50-721/EBLivePremios-0x1B67a4bB.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/supportsInterface_bytes4",
+                "name() returns(string)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/symbol",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/balanceOf_address",
+                "ownerOfWallet(uint256) returns(address)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/ownerOfWallet_uint256",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/ownerOf_uint256",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor() returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/constructor",
+                "SetInfo(string,string) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SetInfo_string_string",
+                "SetMaxSupply(uint256) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SetMaxSupply_uint256",
+                "SetBaseURI(string) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SetBaseURI_string",
+                "SetTokenURI(uint256,string) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SetTokenURI_uint256_string",
+                "SetCreator(address) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SetCreator_address",
+                "SetPause() returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SetPause",
+                "SetUnpause() returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SetUnpause",
+                "SetLimited() returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SetLimited",
+                "SetUnLimited() returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SetUnLimited",
+                "getCreator() returns(address)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/getCreator",
+                "baseURI() returns(string)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/baseURI",
+                "supply() returns(uint256)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/supply",
+                "paused() returns(bool)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/paused",
+                "limited() returns(bool)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/limited",
+                "maxSupply() returns(uint256)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/maxSupply",
+                "walletOfOwner(address) returns(uint256[])": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/walletOfOwner_address",
+                "Mint() returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/Mint",
+                "MintUrl(string) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/MintUrl_string",
+                "SafeMint(address) returns(uint256)": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/SafeMint_address",
+                "Recovery() returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/Recovery",
+                "Burn(uint256) returns()": ".temp/polyscan50-721/EBLivePremios-0x1B67a4bB/EBLivePremios/f/Burn_uint256"
+            },
+            "func2attrs": {
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOfWallet(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetInfo(string,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetMaxSupply(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetBaseURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetTokenURI(uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetCreator(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetPause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetUnpause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetLimited() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetUnLimited() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getCreator() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "baseURI() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "supply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "paused() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "limited() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "maxSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "walletOfOwner(address) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "Mint() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "MintUrl(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SafeMint(address) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "Recovery() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "Burn(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "165",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "EBLivePremios"
+        }
+    ]
+}

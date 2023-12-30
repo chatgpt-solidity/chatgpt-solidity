@@ -1,0 +1,23 @@
+The `procNormalBuyBack` function in the provided Solidity code is intended to allow the owner of the contract to buy back tokens from a seller. The function calculates the amount of tokens to buy based on the `msg.value` (the amount of Ether sent to the function) and the `buyPrice`. It then transfers the calculated token amount from the seller to the owner and sends the Ether to the seller.
+
+To determine if the `procNormalBuyBack` function violates the ERC-20 standard, we need to review the ERC-20 specification and compare it with the implementation details of the function.
+
+Here are some key points from the ERC-20 standard that are relevant to the `procNormalBuyBack` function:
+
+1. The `transfer` function should return a boolean value indicating success or failure.
+2. The `Transfer` event must be emitted when tokens are transferred, including zero value transfers.
+3. The `transfer` function should throw if the sender does not have enough tokens to spend.
+
+Now, let's analyze the `procNormalBuyBack` function and related parts:
+
+- The `_transfer` internal function is used to transfer tokens from the seller to the owner. This function does not return a boolean value, but it does throw if certain conditions are not met (e.g., insufficient balance, frozen accounts, etc.). This is consistent with the ERC-20 standard, which requires the function to throw if the sender does not have enough tokens.
+- The `_transfer` function emits the `Transfer` event, which is in line with the ERC-20 standard.
+- The `procNormalBuyBack` function itself does not directly interact with the ERC-20 `transfer` function, but it uses the internal `_transfer` function to perform the token transfer. This is acceptable as long as the internal function adheres to the ERC-20 requirements when transferring tokens.
+
+Based on the provided code and the ERC-20 standard, the `procNormalBuyBack` function does not appear to violate the ERC-20 standard. However, there are a few points to consider:
+
+- The `procNormalBuyBack` function does not check if the `amount` of tokens calculated is actually available in the seller's balance before attempting the transfer. This could lead to a failed transaction if the seller does not have enough tokens.
+- The function sends Ether to the seller using `seller.transfer(msg.value)`. This could potentially cause issues if the seller is a contract that does not handle incoming Ether correctly or runs out of gas. A safer approach would be to use `call.value(msg.value)("")` with proper gas stipend handling.
+- The function assumes that the `buyPrice` is correctly set and that the owner has enough tokens to perform the buyback. There should be checks in place to ensure that these assumptions hold true.
+
+It is important to note that while the function may not violate the ERC-20 standard, it could still have other security or logical issues that are not covered by the standard. A thorough audit by a professional auditor is recommended to ensure the contract's security and correctness.

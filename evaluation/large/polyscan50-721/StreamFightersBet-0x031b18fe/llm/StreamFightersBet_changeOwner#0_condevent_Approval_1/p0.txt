@@ -1,0 +1,46 @@
+Given a solidity function changeOwner and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    ////////////////////////////////////////
+    //                                    //
+    //         STATE VARIABLES            //
+    //                                    //
+    ////////////////////////////////////////
+    // contract owner adress
+    address private owner;
+
+    ////////////////////////////////////////
+    //                                    //
+    //              MODIFIERS             //
+    //                                    //      
+    ////////////////////////////////////////
+
+    /*
+    *  @notice  Restrict caller only owner
+    */
+    modifier onlyOwner() {
+        require(msg.sender == owner, "caller is not owner");
+        _;
+    }
+
+    /*
+    *  @notice  Allows the current owner pass ownership to another address
+    *  @dev
+    */
+    function changeOwner(address newOwner) 
+    external 
+    onlyOwner {
+        owner = newOwner;
+    }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is cleared
+"""

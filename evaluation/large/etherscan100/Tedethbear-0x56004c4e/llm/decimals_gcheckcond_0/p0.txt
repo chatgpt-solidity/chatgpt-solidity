@@ -1,0 +1,15 @@
+Given a solidity function decimals and the related parts from a smart contract.
+Whether the function decimals and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Tedethbear                    is ERC20, Ownable {
+
+    function decimals() public pure override returns (uint8) {
+        return 9;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

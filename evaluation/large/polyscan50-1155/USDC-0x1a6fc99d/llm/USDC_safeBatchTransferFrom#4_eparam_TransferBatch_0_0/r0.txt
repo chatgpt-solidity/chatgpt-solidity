@@ -1,0 +1,27 @@
+YES
+
+The `_safeBatchTransferFrom` function, which is called within the `safeBatchTransferFrom` function, emits the `TransferBatch` event with the `operator` argument set to `_msgSender()`. The `_msgSender()` function returns the `msg.sender`, which is the address of the account/contract that initiated the transaction. This is in line with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer and should be `msg.sender`.
+
+Here is the relevant part of the code that confirms this:
+
+```solidity
+function _safeBatchTransferFrom(
+    address from,
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual {
+    // ... (omitted code for brevity)
+
+    address operator = _msgSender();
+
+    // ... (omitted code for brevity)
+
+    emit TransferBatch(operator, from, to, ids, amounts);
+
+    // ... (omitted code for brevity)
+}
+```
+
+The `operator` variable is set to the result of `_msgSender()`, which is `msg.sender`, and this `operator` is used as the `_operator` argument in the `TransferBatch` event. Therefore, the event is emitted according to the given rule.

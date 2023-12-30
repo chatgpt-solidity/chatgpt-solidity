@@ -1,0 +1,19 @@
+contract Projecton is owned, IERC20 {
+
+    mapping(address => uint256) public balances;
+
+    uint256 public constant _totalSupply = 100000000000000000000000000;
+
+    constructor() public {
+        balances[msg.sender] = _totalSupply;
+    }
+}
+
+contract owned {
+    address public owner;
+
+    constructor() public {
+        owner = msg.sender;
+    }
+}
+

@@ -1,0 +1,8 @@
+contract NFTBigPartnerV2 is ERC1155, Ownable, ERC1155Burnable {
+
+    mapping(uint256=>uint256) public CardSupplies;
+
+    function viewCardSupply(uint _cardID)public view returns(uint){
+        return CardSupplies[_cardID];
+    }
+}

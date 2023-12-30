@@ -1,0 +1,15 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The event is emitted with the `_to` argument being the address of the recipient whose balance is increased, as required. This is evident from the following line in the `_safeBatchTransferFrom` function:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+The `to` variable is used as the `_to` argument in the `TransferBatch` event, and it is the address to which the token amounts are being transferred, as indicated by the following lines in the same function:
+
+```solidity
+_balances[id][to] += amount;
+```
+
+This line increases the balance of the `to` address by the `amount` of the token with ID `id`. Therefore, the event is emitted according to the rule that the `_to` argument must be the address of the recipient whose balance is increased.

@@ -1,0 +1,41 @@
+Given a solidity function manualsend and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract WashingtonJeffersonLincolnHamiltonJacksonGrantFranklin is Context, IERC20, Ownable {
+    address payable private _developmentAddress = payable(0x91a8Aa697D6fAc965C69a5FA7dc5Dc9C23b3521D);
+    address payable private _marketingAddress = payable(0x91a8Aa697D6fAc965C69a5FA7dc5Dc9C23b3521D);
+
+    function sendETHToFee(uint256 amount) private {
+        _marketingAddress.transfer(amount);
+    }
+
+    function manualsend() external {
+        require(_msgSender() == _developmentAddress || _msgSender() == _marketingAddress);
+        uint256 contractETHBalance = address(this).balance;
+        sendETHToFee(contractETHBalance);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

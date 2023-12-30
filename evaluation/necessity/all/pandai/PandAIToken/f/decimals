@@ -1,0 +1,7 @@
+contract PandAIToken is ERC20, ERC20Burnable {
+
+    function decimals() public view virtual override returns (uint8) {
+        return 6;
+    }
+}
+

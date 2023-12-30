@@ -1,0 +1,26 @@
+The provided Solidity code defines a token contract `DSToken` which appears to be an implementation of an ERC20 token, given the context and the mention of ERC20 in the `DSTokenBase` contract. The ERC20 standard specifies a set of rules and functions that a token contract must implement to be considered compliant.
+
+Let's analyze the `pull` function and related parts of the contract to see if they violate the ERC20 standard:
+
+1. `transferFrom` Function:
+   - The `transferFrom` function is part of the ERC20 standard and is implemented correctly in the `DSToken` contract. It allows tokens to be transferred from one address to another, provided that the sender has been authorized to spend the tokens from the `src` address.
+   - The function checks if the sender (`msg.sender`) is not the source (`src`) and if there is an allowance set (not equal to `uint(-1)`), it then deducts the `wad` (amount) from the allowance.
+   - The function updates the balances and emits a `Transfer` event, as required by the ERC20 standard.
+
+2. `pull` Function:
+   - The `pull` function is not part of the ERC20 standard. However, it is a convenience function that wraps around the `transferFrom` function to allow a user to pull tokens from another address to their own address (`msg.sender`).
+   - The `pull` function itself does not violate the ERC20 standard, as it is essentially a helper function that uses `transferFrom` internally. It does not introduce any new state changes or behaviors that would conflict with the standard.
+
+3. `DSTokenBase` Contract:
+   - The `DSTokenBase` contract includes mappings for `_balances` and `_approvals`, which are standard for ERC20 tokens to track balances and allowances.
+
+4. `DSMath` Contract:
+   - The `DSMath` contract provides `add` and `sub` functions with overflow checks, which is a good practice for arithmetic operations in Solidity to prevent overflow and underflow vulnerabilities.
+
+5. `DSStop` Contract:
+   - The `DSStop` contract introduces a `stopped` state variable and a `stoppable` modifier, which can be used to halt the token transfers in case of an emergency. This is not part of the ERC20 standard, but it does not inherently violate the standard as long as the ability to stop the contract is used responsibly and does not prevent users from transferring their tokens indefinitely.
+
+6. Events:
+   - The `Transfer` event is correctly implemented and used in the `transferFrom` function, as required by the ERC20 standard.
+
+In conclusion, the `pull` function and the related parts of the provided Solidity code do not violate the ERC20 standard. The `pull` function is a convenience function that relies on the standard `transferFrom` function, and the rest of the contract adheres to the ERC20 specifications. However, it is important to note that the `pull` function assumes that the allowance has been set properly before it is called, and it does not check for the return value of `transferFrom`, which according to the ERC20 standard, should be checked by callers.

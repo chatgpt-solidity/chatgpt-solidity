@@ -1,0 +1,180 @@
+{
+    "file": "evaluation/etherscan100/MakeItOut-0x68904cbF.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.21",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/renounceOwnership",
+                "constructor() returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/transferFrom_address_address_uint256",
+                "newValueSwapIn() returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/newValueSwapIn",
+                "setFeeWalletAddress(address) returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/setFeeWalletAddress_address",
+                "setsMaxTransactAmount(uint256) returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/setsMaxTransactAmount_uint256",
+                "updateFeesBuys(uint256) returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/updateFeesBuys_uint256",
+                "updateFeesSells(uint256) returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/updateFeesSells_uint256",
+                "openTrading() returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/openTrading",
+                "receive() returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/receive",
+                "manualSwap() returns()": ".temp/etherscan100/MakeItOut-0x68904cbF/MakeItOut/f/manualSwap"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "newValueSwapIn() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setFeeWalletAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setsMaxTransactAmount(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateFeesBuys(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateFeesSells(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "openTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualSwap() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_maxWalletSize() returns(uint256)",
+                "_maxTxAmount() returns(uint256)",
+                "_maxTaxSwap() returns(uint256)",
+                "_taxSwapThreshold() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MaxTxAmountUpdated",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "MakeItOut"
+        }
+    ]
+}

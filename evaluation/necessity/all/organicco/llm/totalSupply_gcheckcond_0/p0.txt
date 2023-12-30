@@ -1,0 +1,23 @@
+Given a solidity function totalSupply and the related parts from a smart contract.
+Whether the function totalSupply and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Organicco is
+    Token("ORC", "Organicco", 18, 120000000000000000000000000),
+    ERC20,
+    ERC223
+{
+
+    function totalSupply() public constant returns (uint) {
+        return _totalSupply;
+    }
+}
+
+contract Token {
+    uint internal _totalSupply = 1000;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

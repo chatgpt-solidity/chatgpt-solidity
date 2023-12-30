@@ -1,0 +1,39 @@
+Given a solidity function transfer and the related parts from a smart contract and an rule for its return value.
+Whether function transfer return whether the transfer is successful? Reply in "YES" or "NO".
+
+Notes: In case of failure, it is allowed to revert the transaction instead of returning false.
+
+
+
+Function(and related parts) to audit:"""
+library SafeMath {
+
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        require(b <= a, "SafeMath: subtraction overflow");
+        return a - b;
+
+    }
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a, "SafeMath: addition overflow");
+        return c;
+    }
+}
+
+contract BasicToken is Ownable, ERC20Basic {
+
+
+    mapping(address => uint) public balances;
+    /**
+    * @dev transfer token for a specified address
+    * @param _to The address to transfer to.
+    * @param _value The amount to be transferred.
+    */
+    function transfer(address _to, uint _value) public  {
+        uint sendAmount = _value;
+        balances[msg.sender] = balances[msg.sender].sub(_value);
+        balances[_to] = balances[_to].add(sendAmount);
+        emit Transfer(msg.sender, _to, sendAmount);
+    }
+}
+"""

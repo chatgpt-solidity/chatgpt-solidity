@@ -1,0 +1,13 @@
+YES
+
+The `_mint` function in the `ERC1155` contract is designed to create (`mint`) new tokens. When minting new tokens, the `_from` argument in the `TransferSingle` event should be the zero address, which represents the creation of new tokens rather than a transfer from an existing holder.
+
+In the provided `_mint` function, the `TransferSingle` event is emitted with `address(0)` as the `_from` argument:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This is the correct behavior according to the rule that the `_from` argument must be the address of the holder whose balance is decreased. In the case of minting, there is no holder from whom the tokens are being transferred, so the zero address is used to indicate that new tokens are being created and added to the `to` address's balance.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule when new tokens are minted.

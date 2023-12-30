@@ -1,0 +1,332 @@
+Given a solidity function placeBetCRT and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    // incremented id for NFT minting
+
+    Counters.Counter private tokenIds;
+    // flag to determine if contracts core functionalities can be performed
+    bool circuitBreaker = false;
+
+    uint256 poolCRT;
+    uint256 totalBettors;
+    mapping(address => bool) public hasBet;
+
+    // holds all NFTs issued to winners
+
+    mapping(uint256 => SmartAsset) smartAssets;
+    // holds all created fights (key: idCounter)
+    mapping(uint256 => Fight) fights;
+
+    // holds all bets on a fight
+    // mapping(fightId => mapping(gameResult => smartAssetId[])) fightBets;
+    mapping(uint256 => mapping(FightResult => uint256[])) fightBets;
+    mapping (uint256 => string) private _tokenURIs;
+    IERC20 crtToken;
+
+    /*
+    *  @notice  Ensure fight exists
+    */
+    modifier fightExists(uint256 _fightId){
+        require(fights[_fightId].exists, "on chain fight does not exist");
+        _;
+
+    }
+    /*
+    *  @notice  Ensure fight has not started
+    */
+    modifier fightNotStarted(uint256 _fightId){
+        require(fights[_fightId].state == FightState.NOT_STARTED, "fight started");
+        _;
+    }
+
+    /*
+    *  @notice Checks if core functionalities can be performed
+    *  @dev Checks if the circuitBreaker state variable is false
+    */
+    modifier isCircuitBreakOff() {
+        require(!circuitBreaker, "Circuit breaker is on");
+        _;
+    }
+
+    /*
+    *  @notice  Ensures bets are allowed on the fight
+    *  @dev     The totalCollected on the fight must be greater than the total payout on the Boxer the bettor wants to bet on. The incoming bet is inclusive in the calculation
+    */
+    modifier isBetAllowed(uint256 _fightId) {
+        require(true, "Bet is not allowed");
+        _;
+    }
+    modifier validateFightResult(uint8 _fightResult) {
+        require(FightResult(_fightResult) == FightResult.BOXER_A_WON || FightResult(_fightResult) == FightResult.BOXER_B_WON, "Invalid fight result");
+        _;
+    }
+
+    /*
+    *  @notice  New bet creation and mint NFT (for CRT Token bets)
+    *  @dev     Places a bet using CRT Tokens and mints an NFT to the bettor
+    *  @param   _fightId The ID of the fight on which the bet is placed
+    *  @param   _resultBetOn The expected result of the fight (Boxer A or B)
+    *  @param   amountBet The amount of bet in CRT tokens
+    *  @return  The ID of the minted NFT token
+    */
+    function placeBetCRT(uint256 _fightId, uint8 _resultBetOn, uint256 amountBet)
+        public 
+        isCircuitBreakOff
+        fightExists(_fightId) 
+        fightNotStarted(_fightId) 
+        isBetAllowed(_fightId)
+        validateFightResult(_resultBetOn)
+        nonReentrant
+        returns(uint256)
+    {
+        require(amountBet != 0, "Invalid amount bet");
+        require(fights[_fightId].startsAt < block.timestamp, "Time is up");
+
+        address bettor = msg.sender;
+
+        if (!hasBet[msg.sender]) {
+            hasBet[msg.sender] = true;
+            totalBettors++;
+        }
+
+        FightResult fightResultBetOn = FightResult(_resultBetOn);
+        
+        //update Boxer's total payout
+        if (fightResultBetOn == FightResult.BOXER_A_WON) {
+            fights[_fightId].totalPayoutBoxerA = fights[_fightId].totalPayoutBoxerA + amountBet;
+        } else if(fightResultBetOn == FightResult.BOXER_B_WON) {
+            fights[_fightId].totalPayoutBoxerB = fights[_fightId].totalPayoutBoxerB + amountBet;
+        }
+
+        //increase totalCollected on the fight
+        fights[_fightId].totalCollected = fights[_fightId].totalCollected + amountBet;
+        poolCRT += amountBet;
+
+        require(crtToken.transferFrom(msg.sender, address(this), amountBet), "Transfer CRT failed");
+        uint256 smartAssetId = awardSmartAsset(bettor, amountBet, _fightId, fightResultBetOn);
+        
+        //Save bettor's bet
+        fightBets[_fightId][fightResultBetOn].push(smartAssetId);
+        
+        emit BetPlacedEvent(bettor, _fightId, amountBet, block.timestamp);
+
+        return smartAssetId;
+    }
+    /*
+    *  @notice  Awards a new Smart Asset (NFT) to the bettor.
+    *  @dev     Increments the token ID counter and mints a new NFT with a URI based on the chosen fighter.
+    *  @param   bettor The address of the individual placing the bet.
+    *  @param   betAmount The amount bet by the individual.
+    *  @param   _fightId The ID of the fight on which the bet is placed.
+    *  @param   _fightResultBetOn The outcome the bet is placed on (e.g., Boxer A won, Boxer B won).
+    *  @return  Returns the ID of the newly minted NFT.
+    */
+    function awardSmartAsset(address bettor, uint256 betAmount, uint256 _fightId, FightResult _fightResultBetOn) 
+        internal returns (uint256) 
+    {
+        tokenIds.increment();
+
+        uint256 smartAssetId = tokenIds.current();
+
+
+        // Decide which URI to use based on the fighter chosen for the bet
+        string memory boxerUri;
+        if (_fightResultBetOn == FightResult.BOXER_A_WON) {
+            boxerUri = fights[_fightId].uriBoxerA;
+        } else if (_fightResultBetOn == FightResult.BOXER_B_WON) {
+            boxerUri = fights[_fightId].uriBoxerB;
+        }
+
+        _mint(bettor, smartAssetId);
+        _setTokenURI(smartAssetId, boxerUri);
+        
+        smartAssets[smartAssetId] = SmartAsset(msg.sender, _fightId, _fightResultBetOn, betAmount, 0);
+
+        emit SmartAssetAwardedEvent(bettor, _fightId, smartAssetId, block.timestamp);
+
+        return smartAssetId;
+    }
+
+    /*
+    *  @notice  Sets the URI for a token
+    *  @dev     Sets the metadata URI for a given NFT token
+    *  @param   tokenId The ID of the token
+    *  @param   _tokenURI The URI to set for the token
+    */
+    function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
+        require(_exists(tokenId), "ERC721Metadata: URI set of nonexistent token");
+        _tokenURIs[tokenId] = _tokenURI;
+        emit TokenURISet(tokenId, _tokenURI);
+    }
+}
+abstract contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Errors {
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    // Mapping owner address to token count
+    mapping(address => uint256) private _balances;
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+    }
+
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     * and stop existing when they are burned (`_burn`).
+     */
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _ownerOf(tokenId) != address(0);
+    }
+
+    /**
+     * @dev Mints `tokenId` and transfers it to `to`.
+     *
+     * WARNING: Usage of this method is discouraged, use {_safeMint} whenever possible
+     *
+     * Requirements:
+     *
+     * - `tokenId` must not exist.
+     * - `to` cannot be the zero address.
+     *
+     * Emits a {Transfer} event.
+     */
+    function _mint(address to, uint256 tokenId) internal virtual {
+        if (to == address(0)) {
+            revert ERC721InvalidReceiver(address(0));
+        }
+        if (_exists(tokenId)) {
+            revert ERC721InvalidSender(address(0));
+        }
+
+        _beforeTokenTransfer(address(0), to, tokenId, 1);
+
+        // Check that tokenId was not minted by `_beforeTokenTransfer` hook
+        if (_exists(tokenId)) {
+            revert ERC721InvalidSender(address(0));
+        }
+
+        unchecked {
+            // Will not overflow unless all 2**256 token ids are minted to the same owner.
+            // Given that tokens are minted one by one, it is impossible in practice that
+            // this ever happens. Might change if we allow batch minting.
+            // The ERC fails to describe this case.
+            _balances[to] += 1;
+        }
+
+        _owners[tokenId] = to;
+
+        emit Transfer(address(0), to, tokenId);
+
+        _afterTokenTransfer(address(0), to, tokenId, 1);
+    }
+
+    /**
+     * @dev Hook that is called before any token transfer. This includes minting and burning. If {ERC721Consecutive} is
+     * used, the hook may be called as part of a consecutive (batch) mint, as indicated by `batchSize` greater than 1.
+     *
+     * Calling conditions:
+     *
+     * - When `from` and `to` are both non-zero, ``from``'s tokens will be transferred to `to`.
+     * - When `from` is zero, the tokens will be minted for `to`.
+     * - When `to` is zero, ``from``'s tokens will be burned.
+     * - `from` and `to` are never both zero.
+     * - `batchSize` is non-zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+
+    function _beforeTokenTransfer(address from, address to, uint256 firstTokenId, uint256 batchSize) internal virtual {}
+    /**
+     * @dev Hook that is called after any token transfer. This includes minting and burning. If {ERC721Consecutive} is
+     * used, the hook may be called as part of a consecutive (batch) mint, as indicated by `batchSize` greater than 1.
+     *
+     * Calling conditions:
+     *
+     * - When `from` and `to` are both non-zero, ``from``'s tokens were transferred to `to`.
+     * - When `from` is zero, the tokens were minted for `to`.
+     * - When `to` is zero, ``from``'s tokens were burned.
+     * - `from` and `to` are never both zero.
+     * - `batchSize` is non-zero.
+     *
+     * To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
+     */
+    function _afterTokenTransfer(address from, address to, uint256 firstTokenId, uint256 batchSize) internal virtual {}
+}
+
+abstract contract ReentrancyGuard {
+    // Booleans are more expensive than uint256 or any type that takes up a full
+    // word because each write operation emits an extra SLOAD to first read the
+    // slot's contents, replace the bits taken up by the boolean, and then write
+    // back. This is the compiler's defense against contract upgrades and
+    // pointer aliasing, and it cannot be disabled.
+
+    // The values being non-zero value makes deployment a bit more expensive,
+    // but in exchange the refund on every call to nonReentrant will be lower in
+    // amount. Since refunds are capped to a percentage of the total
+    // transaction's gas, it is best to keep them low in cases like this one, to
+    // increase the likelihood of the full refund coming into effect.
+    uint256 private constant NOT_ENTERED = 1;
+    uint256 private constant ENTERED = 2;
+
+    uint256 private _status;
+
+    /**
+     * @dev Prevents a contract from calling itself, directly or indirectly.
+     * Calling a `nonReentrant` function from another `nonReentrant`
+     * function is not supported. It is possible to prevent this from happening
+     * by making the `nonReentrant` function external, and making it call a
+     * `private` function that does the actual work.
+     */
+    modifier nonReentrant() {
+        _nonReentrantBefore();
+        _;
+        _nonReentrantAfter();
+
+    }
+    function _nonReentrantBefore() private {
+        // On the first call to nonReentrant, _status will be NOT_ENTERED
+        if (_status == ENTERED) {
+            revert ReentrancyGuardReentrantCall();
+        }
+
+        // Any calls to nonReentrant after this point will fail
+        _status = ENTERED;
+    }
+
+    function _nonReentrantAfter() private {
+        // By storing the original value once again, a refund is triggered (see
+        // https://eips.ethereum.org/EIPS/eip-2200)
+        _status = NOT_ENTERED;
+    }
+}
+
+library Counters {
+
+    function current(Counter storage counter) internal view returns (uint256) {
+        return counter._value;
+
+    }
+    function increment(Counter storage counter) internal {
+        // The {SafeMath} overflow check can be skipped here, see the comment at the top
+        counter._value += 1;
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

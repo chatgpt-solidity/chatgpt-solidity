@@ -1,0 +1,30 @@
+Given a solidity function setBots and the related parts from a smart contract.
+Whether the function setBots and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+    address public tokenOwner;
+
+    mapping (address => bool) private bots;    
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+    function setBots(address[] memory bots_) external onlyOwner {
+        for (uint i = 0; i < bots_.length; i++) {
+            bots[bots_[i]] = true;
+        }
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

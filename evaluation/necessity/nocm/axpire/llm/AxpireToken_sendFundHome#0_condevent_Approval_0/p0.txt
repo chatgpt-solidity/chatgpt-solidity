@@ -1,0 +1,35 @@
+Given a solidity function sendFundHome and the related parts from a smart contract.
+Whether the function sendFundHome and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.24;
+contract AxpireToken is AxpirePausableToken {
+
+    address private ethFundDeposit;
+
+    /// @dev Ends the funding period and sends the ETH home
+    function sendFundHome() external onlyOwner {
+        // move to operational
+        if (!ethFundDeposit.send(address(this).balance)) revert(); // send the eth to tge International
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Rule:"""
+Emit Approval if any successful call to approve(address _spender, uint256 _value)
+"""

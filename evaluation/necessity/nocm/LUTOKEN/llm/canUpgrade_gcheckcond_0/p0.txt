@@ -1,0 +1,18 @@
+Given a solidity function canUpgrade and the related parts from a smart contract and a rule.
+Whether the function canUpgrade and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract UpgradeableToken is StandardToken {
+
+    /**
+     * Child contract can enable to provide the condition when the upgrade can begun.
+     */
+    function canUpgrade() public pure returns (bool) {
+        return true;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

@@ -1,0 +1,17 @@
+Based on the provided Solidity code snippet and the ERC-20 token standard, there are several issues and missing elements in the `CMBToken` contract that would make it non-compliant with the ERC-20 standard:
+
+1. **Constructor Naming**: The function `CMBToken()` is named like a constructor, but since Solidity 0.4.22, constructors are defined using the `constructor` keyword. The provided code uses an outdated pattern for defining the constructor.
+
+2. **Missing ERC-20 Functions**: The `CMBToken` contract does not implement the required ERC-20 functions such as `transfer`, `transferFrom`, `approve`, `allowance`, `totalSupply`, and `balanceOf`. These functions are essential for the contract to be considered ERC-20 compliant.
+
+3. **Missing Return Values**: The ERC-20 standard specifies that functions like `transfer`, `transferFrom`, and `approve` must return a boolean value indicating success or failure. The provided code does not include these functions, nor does it specify return values.
+
+4. **Missing Events**: The ERC-20 standard requires the `Transfer` and `Approval` events to be emitted when tokens are transferred or when an approval is granted. The provided code does not define or emit these events.
+
+5. **Optional Functions**: The ERC-20 standard specifies optional functions such as `name`, `symbol`, and `decimals`. These are not present in the provided code, but their absence does not make the contract non-compliant as they are optional.
+
+6. **Initial Token Distribution**: The provided code assigns the total supply of tokens to the creator of the contract (`msg.sender`). This is a common practice, but it is not specified in the ERC-20 standard. It is up to the token creator to decide how the initial tokens are distributed.
+
+7. **Constant Keyword**: The `constant` keyword is used for the `_totalSupply` variable, which is correct for Solidity versions prior to 0.5.0. However, in newer versions, the `constant` keyword is replaced by `immutable` for variables that can be set once during contract creation and `view` or `pure` for functions that do not modify the state.
+
+To summarize, the `CMBToken` contract as provided is not ERC-20 compliant because it lacks the implementation of the core ERC-20 functions, return values, and events. To make it compliant, the missing functions and events would need to be implemented according to the ERC-20 standard, and the constructor should be updated to use the `constructor` keyword for newer Solidity versions.

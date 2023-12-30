@@ -1,0 +1,3 @@
+YES
+
+The `_mint` function within the `airdrop` function emits the `TransferSingle` event. The `_mint` function is called with the `recipients[i]` as the `to` address, `coinbase` as the `id`, and `1` as the `amount`. The `_mint` function internally calls `emit TransferSingle(operator, address(0), to, id, amount);` where `operator` is set to `_msgSender()` which is the `msg.sender` of the transaction. Since the `airdrop` function is only callable by the owner due to the `onlyOwner` modifier, and `_msgSender()` within the `_mint` function will return the `msg.sender` which is the owner, the `_operator` argument in the `TransferSingle` event will be the address that is approved to make the transfer, satisfying the given rule.

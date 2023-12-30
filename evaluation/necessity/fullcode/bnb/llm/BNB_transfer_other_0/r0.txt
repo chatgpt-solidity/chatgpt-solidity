@@ -1,0 +1,9 @@
+YES
+
+The given `transfer` function in the `BNB` contract violates the ERC rule that states "Transfers of 0 values MUST be treated as normal transfers." This is because the function includes the following check:
+
+```solidity
+if (_value <= 0) throw;
+```
+
+This line of code will cause the function to revert if the `_value` is 0 or less, which is not in compliance with the ERC rule that requires 0-value transfers to be treated as normal transfers.

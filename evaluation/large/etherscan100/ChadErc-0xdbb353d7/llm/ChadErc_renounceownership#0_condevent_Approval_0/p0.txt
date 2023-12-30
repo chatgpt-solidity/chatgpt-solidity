@@ -1,0 +1,32 @@
+Given a solidity function renounceownership and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.7;
+contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyowner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+    function renounceownership() public virtual onlyowner {
+        emit ownershipTransferred(_owner, address(0x000000000000000000000000000000000000dEaD));
+        _owner = address(0x000000000000000000000000000000000000dEaD);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

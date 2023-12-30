@@ -1,0 +1,33 @@
+The `approve` function in the provided Solidity code for the `Organicco` contract does not fully comply with the ERC-20 standard as described in the given ERC documentation. According to the ERC-20 standard, the `approve` function should set the allowance for a spender to a certain value, overwriting the current allowance with the new value.
+
+Here is the relevant part of the ERC-20 standard for the `approve` function:
+
+> Allows `_spender` to withdraw from your account multiple times, up to the `_value` amount. If this function is called again it overwrites the current allowance with `_value`.
+
+However, the `approve` function in the `Organicco` contract is implemented as follows:
+
+```solidity
+function approve(address _spender, uint _value) public returns (bool) {
+    _allowances[msg.sender][_spender] = _allowances[msg.sender][_spender].add(_value);
+    Approval(msg.sender, _spender, _value);
+    return true;
+}
+```
+
+This implementation incorrectly adds the new value (`_value`) to the current allowance instead of setting the allowance to `_value`. This means that if a user calls `approve` multiple times, it will keep increasing the allowance rather than setting it to the specific value provided in the latest call.
+
+To comply with the ERC-20 standard, the `approve` function should be modified to set the allowance to `_value` directly, like this:
+
+```solidity
+function approve(address _spender, uint _value) public returns (bool) {
+    _allowances[msg.sender][_spender] = _value;
+    emit Approval(msg.sender, _spender, _value);
+    return true;
+}
+```
+
+Additionally, the `Approval` event should be emitted using the `emit` keyword, which is the current best practice in Solidity (though the code provided may be using an older version of Solidity where `emit` was not required).
+
+It's also worth noting that the ERC-20 standard mentions a known issue with the `approve` function that can lead to race conditions. It suggests that user interfaces should set the allowance to 0 before setting it to a new value for the same spender. However, this is not enforced in the contract code itself to maintain backward compatibility with contracts deployed before this issue was known.
+
+In summary, the `approve` function in the provided `Organicco` contract code does not comply with the ERC-20 standard and should be corrected to overwrite the current allowance with the new value provided in the function call.

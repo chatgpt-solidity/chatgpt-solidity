@@ -1,0 +1,7 @@
+YES
+
+The `safeBatchTransferFrom` function and the internal `_safeBatchTransferFrom` function it calls are designed to transfer multiple token types at once from a single `_from` address to a single `_to` address. The `_from` argument is indeed the address of the holder whose balance is decreased, as required by the rule.
+
+The `TransferBatch` event is emitted within the `_safeBatchTransferFrom` function after the balances have been updated and just before the `_afterTokenTransfer` hook is called. The event includes the `_operator` (the address that initiated the transfer), `_from` (the address from which the tokens are transferred), `_to` (the address to which the tokens are transferred), `_ids` (the array of token IDs), and `_values` (the array of transfer amounts for each token ID).
+
+The event is emitted with the correct arguments, and the `_from` address is used as the indexed parameter for the holder whose balance is decreased, in compliance with the given rule.

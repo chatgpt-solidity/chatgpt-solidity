@@ -1,0 +1,151 @@
+{
+    "file": "evaluation/audited/PKG.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.23",
+            "func2file": {
+                "fallback() returns()": "result-necessity/s-noos/PKG/CustomToken/f/fallback",
+                "withdraw() returns()": "result-necessity/s-noos/PKG/CustomToken/f/withdraw",
+                "transfer(address,uint256) returns()": "result-necessity/s-noos/PKG/CustomToken/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-noos/PKG/CustomToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-noos/PKG/CustomToken/f/approve_address_uint256",
+                "burn(uint256) returns(bool)": "result-necessity/s-noos/PKG/CustomToken/f/burn_uint256",
+                "burnFrom(address,uint256) returns(bool)": "result-necessity/s-noos/PKG/CustomToken/f/burnFrom_address_uint256",
+                "CustomToken() returns()": "result-necessity/s-noos/PKG/CustomToken/f/CustomToken"
+            },
+            "func2attrs": {
+                "fallback() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnFrom(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "CustomToken() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "icoSender() returns(address)",
+                "icoEndtime() returns(uint256)",
+                "icoRatio() returns(uint256)",
+                "balanceOf(address) returns(uint256)",
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "symbol() returns(string)",
+                "allowance(address,address) returns(uint256)",
+                "icoHolder() returns(address)",
+                "decimals() returns(uint8)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ICO",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Withdraw",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "CustomToken"
+        }
+    ]
+}

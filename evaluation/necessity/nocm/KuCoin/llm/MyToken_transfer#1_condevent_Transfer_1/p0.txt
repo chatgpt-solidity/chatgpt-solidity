@@ -1,0 +1,35 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether the function transfer and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract MyToken {
+
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+
+    /* Internal transfer, only can be called by this contract */
+    function _transfer(address _from, address _to, uint _value) internal {
+        require(_to != 0x0); // Prevent transfer to 0x0 address. Use burn() instead
+        require(balanceOf[_from] > _value); // Check if the sender has enough
+        require(balanceOf[_to] + _value > balanceOf[_to]); // Check for overflows
+        balanceOf[_from] -= _value; // Subtract from the sender
+        balanceOf[_to] += _value; // Add the same to the recipient
+        Transfer(_from, _to, _value);
+    }
+
+    /// @notice Send `_value` tokens to `_to` from your account
+    /// @param _to The address of the recipient
+    /// @param _value the amount to send
+    function transfer(address _to, uint256 _value) {
+        _transfer(msg.sender, _to, _value);
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred, including zero value transfers.
+"""

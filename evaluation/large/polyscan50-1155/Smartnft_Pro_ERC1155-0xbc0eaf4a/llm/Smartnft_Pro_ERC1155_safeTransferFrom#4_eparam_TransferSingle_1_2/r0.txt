@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function with the correct arguments, including the `_to` argument which is the address of the recipient whose balance is increased. The event is emitted after the balance update logic, which ensures that the recipient's balance is indeed increased by the specified amount before the event is emitted.

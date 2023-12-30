@@ -1,0 +1,80 @@
+{
+    "file": "evaluation/etherscan100/PepeBonk-0xdc33df6e.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.12",
+            "func2file": {
+                "constructor() returns()": ".temp/etherscan100/PepeBonk-0xdc33df6e/PepeBonk/f/constructor",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/PepeBonk-0xdc33df6e/PepeBonk/f/approve_address_uint256",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/PepeBonk-0xdc33df6e/PepeBonk/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/PepeBonk-0xdc33df6e/PepeBonk/f/transferFrom_address_address_uint256"
+            },
+            "func2attrs": {
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "decimals() returns(uint256)",
+                "allowance(address,address) returns(uint256)",
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "balanceOf(address) returns(uint256)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "PepeBonk"
+        }
+    ]
+}

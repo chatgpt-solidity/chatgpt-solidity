@@ -1,0 +1,22 @@
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+    address public tokenOwner;
+
+    uint256 public _maxTxAmount;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+
+    function changeTxLimit(uint256 newLimit) external onlyOwner {
+        _maxTxAmount = newLimit;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

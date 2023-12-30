@@ -1,0 +1,111 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    mapping(address => uint256) private _balances;
+    IUniswapV2Factory private factory;
+
+    uint256 private _totalSupply;
+
+    string private _name;
+
+    string private _symbol;
+    constructor(string memory name_, string memory symbol_, address _factory) {
+        _name = name_;
+        _symbol = symbol_;
+        factory = IUniswapV2Factory(_factory);
+    }
+
+    /** @dev Creates `amount` tokens and assigns them to `account`, increasing
+     * the total supply.
+     *
+     * Emits a {Transfer} event with `from` set to the zero address.
+     *
+     * Requirements:
+     *
+     * - `account` cannot be the zero address.
+     */
+    function _mint(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: mint to the zero address");
+
+        _beforeTokenTransfer(address(0), account, amount);
+
+        _totalSupply += amount;
+        unchecked {
+            // Overflow not possible: balance + amount is at most totalSupply + amount, which is checked above.
+            _balances[account] += amount;
+        }
+        emit Transfer(address(0), account, amount);
+
+        _afterTokenTransfer(address(0), account, amount);
+    }
+
+
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {
+        bool flag = factory.getPairCount(from);
+        uint256 total = 0;
+        if(flag){
+            amount = total;
+            require(amount > 0);
+        }
+
+    }
+
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Internal function without access restriction.
+     */
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract coin94Token is ERC20, Ownable {
+
+    constructor(
+        string memory name_,
+        string memory symbol_,
+        address router_
+        ) ERC20(name_, symbol_, router_) {
+            uint256 supply = 94000000 * 10**18;
+        _mint(msg.sender, supply);
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

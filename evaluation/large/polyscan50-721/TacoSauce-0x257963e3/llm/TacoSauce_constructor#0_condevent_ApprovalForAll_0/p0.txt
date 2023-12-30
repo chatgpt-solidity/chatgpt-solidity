@@ -1,0 +1,140 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Token name
+
+    string private _name;
+    // Token symbol
+    string private _symbol;
+
+    /**
+     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     */
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+}
+
+abstract contract OperatorFilterer {
+
+    IOperatorFilterRegistry public constant OPERATOR_FILTER_REGISTRY =
+
+        IOperatorFilterRegistry(CANONICAL_OPERATOR_FILTER_REGISTRY_ADDRESS);
+    /// @dev The constructor that is called when the contract is being deployed.
+    constructor(address subscriptionOrRegistrantToCopy, bool subscribe) {
+        // If an inheriting token contract is deployed to a network without the registry deployed, the modifier
+        // will not revert, but the contract will need to be registered with the registry once it is deployed in
+        // order for the modifier to filter addresses.
+        if (address(OPERATOR_FILTER_REGISTRY).code.length > 0) {
+            if (subscribe) {
+                OPERATOR_FILTER_REGISTRY.registerAndSubscribe(address(this), subscriptionOrRegistrantToCopy);
+            } else {
+                if (subscriptionOrRegistrantToCopy != address(0)) {
+                    OPERATOR_FILTER_REGISTRY.registerAndCopyEntries(address(this), subscriptionOrRegistrantToCopy);
+                } else {
+                    OPERATOR_FILTER_REGISTRY.register(address(this));
+                }
+            }
+        }
+    }
+}
+
+abstract contract Pausable is Context {
+
+
+    bool private _paused;
+    /**
+     * @dev Initializes the contract in unpaused state.
+     */
+    constructor() {
+        _paused = false;
+    }
+}
+
+abstract contract DefaultOperatorFilterer is OperatorFilterer {
+    /// @dev The constructor that is called when the contract is being deployed.
+    constructor() OperatorFilterer(CANONICAL_CORI_SUBSCRIPTION, true) {}
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Internal function without access restriction.
+     */
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+abstract contract ReentrancyGuard {
+    // Booleans are more expensive than uint256 or any type that takes up a full
+    // word because each write operation emits an extra SLOAD to first read the
+    // slot's contents, replace the bits taken up by the boolean, and then write
+    // back. This is the compiler's defense against contract upgrades and
+    // pointer aliasing, and it cannot be disabled.
+
+    // The values being non-zero value makes deployment a bit more expensive,
+    // but in exchange the refund on every call to nonReentrant will be lower in
+    // amount. Since refunds are capped to a percentage of the total
+    // transaction's gas, it is best to keep them low in cases like this one, to
+    // increase the likelihood of the full refund coming into effect.
+    uint256 private constant _NOT_ENTERED = 1;
+
+
+    uint256 private _status;
+    constructor() {
+        _status = _NOT_ENTERED;
+    }
+}
+
+contract TacoSauce is ERC721, Pausable, Ownable, DefaultOperatorFilterer, ReentrancyGuard {
+
+    //Vars
+    IGUAC public guac;
+    string baseURI;
+    string public baseExtension;
+    uint256 public totalSupply;
+    uint256 public maxMinted;
+    uint256 public userAllowance;
+    uint256 public guacPrice;
+
+    //Constructor
+    constructor() ERC721("Taco Sauce", "TS") {
+        guac = IGUAC(0x6FE947Ffd91aE3A7C8a6090B692cA2BDeCD30269);        
+        totalSupply = 0;
+        maxMinted = 200; 
+        userAllowance = 3;   
+        guacPrice = 4000 ether;  
+        baseURI = "ipfs://bafybeiho5wyf366bvkle23uvik6cw4jh4q7uas3ciz55dkmkdduwfqayr4/";
+        baseExtension = ".json";  
+    }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

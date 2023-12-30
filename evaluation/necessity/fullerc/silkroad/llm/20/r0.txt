@@ -1,0 +1,40 @@
+The provided Solidity function interfaces are being compared to the ERC-20 token standard, which is the most common standard for Ethereum tokens. The ERC-20 standard specifies a minimal set of functions and events that a compliant token contract must implement to enable interoperability across different applications and platforms.
+
+Here's a breakdown of the provided interfaces and whether they comply with the ERC-20 standard:
+
+1. `transfer(address,uint256) returns()` - **Compliant** with ERC-20, but the return type should be `bool` to indicate success or failure.
+2. `transferFrom(address,address,uint256) returns(bool)` - **Compliant** with ERC-20.
+3. `approve(address,uint256) returns(bool)` - **Compliant** with ERC-20.
+4. `approveAndCall(address,uint256,bytes) returns(bool)` - **Not part of ERC-20**. This is an extended functionality that some tokens implement for convenience.
+5. `burn(uint256) returns(bool)` - **Not part of ERC-20**. This is a token burn function that some tokens implement to reduce supply.
+6. `burnFrom(address,uint256) returns(bool)` - **Not part of ERC-20**. This is an extension to allow burning tokens from another account with approval.
+7. `transferOwnership(address) returns()` - **Not part of ERC-20**. This is typically an administrative function for contract ownership management.
+8. `SilkToken(uint256,string,string) returns()` - **Not part of ERC-20**. This looks like a constructor for the token contract.
+9. `mintToken(address,uint256) returns()` - **Not part of ERC-20**. This is a token minting function.
+10. `freezeAccount(address,bool) returns()` - **Not part of ERC-20**. This is an administrative function to freeze accounts.
+11. `setPrices(uint256,uint256) returns()` - **Not part of ERC-20**. This is likely related to some pricing mechanism in the contract.
+12. `startPreSales(uint256) returns(uint256)` - **Not part of ERC-20**. This is related to a presale mechanism.
+13. `stopPreSales() returns()` - **Not part of ERC-20**. This is related to stopping a presale mechanism.
+14. `getTaiAMT(uint256) returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+15. `getBalanceTAI() returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+16. `getSalesPrice() returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+17. `getLeftPreSalesAMT() returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+18. `procPreSales() returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+19. `procNormalSales() returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+20. `procNormalBuyBack(address) returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+21. `frozenAccount(address) returns(bool)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+22. `name() returns(string)` - **Compliant** with ERC-20, but optional.
+23. `decimals() returns(uint8)` - **Compliant** with ERC-20, but optional.
+24. `balanceOf(address) returns(uint256)` - **Compliant** with ERC-20.
+25. `symbol() returns(string)` - **Compliant** with ERC-20, but optional.
+26. `limitAMT() returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+27. `isPreSales() returns(bool)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+28. `sellPrice() returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+29. `owner() returns(address)` - **Not part of ERC-20**. This is typically an administrative function for contract ownership management.
+30. `allowance(address,address) returns(uint256)` - **Compliant** with ERC-20.
+31. `buyPrice() returns(uint256)` - **Not part of ERC-20**. This is a custom function not specified in the standard.
+32. `totalSupply() returns(uint256)` - **Compliant** with ERC-20.
+
+The contract includes several functions that are not part of the ERC-20 standard, which means it extends beyond the standard functionality. However, as long as the contract implements the core ERC-20 functions (`totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, and `allowance`) correctly and emits the required events (`Transfer` and `Approval`), it can still be considered ERC-20 compliant, albeit with additional features.
+
+The `transfer` function should be modified to return a `bool` to fully comply with the ERC-20 standard. The additional functions do not necessarily violate the ERC-20 standard but are extensions that provide additional functionality not covered by the standard.

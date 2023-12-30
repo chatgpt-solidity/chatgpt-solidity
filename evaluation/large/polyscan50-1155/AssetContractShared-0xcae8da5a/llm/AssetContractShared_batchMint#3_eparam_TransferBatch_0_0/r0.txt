@@ -1,0 +1,19 @@
+Based on the provided Solidity code and the rule for emitting the `TransferBatch` event, we need to check if the `_operator` argument in the `emit TransferBatch` line is indeed the address that is approved to make the transfer, which should be `msg.sender`.
+
+In the `_batchMint` function within the `ERC1155Tradable` contract, we can see the following line:
+
+```solidity
+address operator = _msgSender();
+```
+
+This line assigns the result of `_msgSender()` to the `operator` variable. The `_msgSender()` function is overridden in the `ERC1155Tradable` contract to use `ContextMixin.msgSender()`, which correctly handles the case where `msg.sender` might be a contract (in the case of meta-transactions).
+
+Later in the `_batchMint` function, the `TransferBatch` event is emitted with the `operator` variable as the `_operator` argument:
+
+```solidity
+emit TransferBatch(operator, origin, _to, _ids, _amounts);
+```
+
+Given that the `operator` variable is set to the result of `_msgSender()`, which is intended to return the original sender of the transaction (account/contract approved to make the transfer), the `TransferBatch` event is emitted according to the given rule.
+
+Therefore, the answer is **YES**, the `TransferBatch` event is emitted according to the given rule.

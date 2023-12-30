@@ -1,0 +1,19 @@
+The provided Solidity code for the `SilkToken` contract and the `procPreSales` function does not fully comply with the ERC-20 token standard as described in the provided ERC documentation. Here are some points of non-compliance and issues:
+
+1. **Return Value for Transfer Functions**: The ERC-20 standard specifies that the `transfer` and `transferFrom` functions must return a boolean value indicating success or failure. However, the `_transfer` function in the provided code does not return any value. While `_transfer` is an internal function and not directly part of the ERC-20 interface, it is used by the `procPreSales` function, which should also adhere to the standard and return a boolean value indicating the success of the transfer.
+
+2. **Transfer Event**: The ERC-20 standard requires that a `Transfer` event must be emitted when tokens are transferred. The provided code does emit the `Transfer` event in the `_transfer` function, which is correct. However, it is important to ensure that the `Transfer` event is emitted in all cases where tokens are transferred, including zero-value transfers.
+
+3. **Decimals**: The `decimals` function is specified as optional in the ERC-20 standard, but it is commonly implemented to allow applications to know how to display the token amount correctly. The provided code includes a `decimals` property, which is good practice.
+
+4. **Handling of Received Ether**: The `procPreSales` function accepts Ether and calculates the amount of tokens to transfer based on the `buyPrice`. This is not part of the ERC-20 standard, which does not specify how to handle direct Ether transfers or token sales. This functionality is specific to the `SilkToken` contract and its presale mechanism.
+
+5. **Frozen Accounts**: The concept of freezing accounts is not part of the ERC-20 standard. While it is not prohibited to extend the standard with additional features, it is important to ensure that these extensions do not conflict with the standard's core functionality.
+
+6. **Preventing Transfers to 0x0 Address**: The `_transfer` function prevents transfers to the `0x0` address, which is a good security practice to prevent accidental loss of tokens. However, the ERC-20 standard does not explicitly require this check.
+
+7. **Error Handling**: The ERC-20 standard suggests that functions should throw an error if certain conditions are not met (e.g., insufficient balance for a transfer). The provided code uses `require` statements for these checks, which is appropriate and in line with the standard.
+
+8. **Approval Mechanism**: The provided code does not include the `approve`, `allowance`, and `transferFrom` functions, which are part of the ERC-20 standard. These functions are necessary for allowing third parties to transfer tokens on behalf of token holders.
+
+In summary, while the `SilkToken` contract includes some elements of the ERC-20 standard, it does not fully implement the standard, particularly with respect to the approval mechanism and return values for transfer functions. Additionally, the `procPreSales` function introduces functionality that is not covered by the ERC-20 standard, which is acceptable as long as it does not interfere with the standard's required behavior. To be fully ERC-20 compliant, the contract would need to implement all the required functions and events as specified in the standard, including `approve`, `allowance`, and `transferFrom`, and ensure that all transfer-related functions return a boolean success value.

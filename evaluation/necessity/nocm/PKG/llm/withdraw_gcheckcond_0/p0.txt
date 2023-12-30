@@ -1,0 +1,18 @@
+Given a solidity function withdraw and the related parts from a smart contract and a rule.
+Whether the function withdraw and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract ICOToken is BaseToken {
+    address public icoHolder;
+
+    function withdraw() {
+        uint256 balance = this.balance;
+        icoHolder.transfer(balance);
+        Withdraw(msg.sender, icoHolder, balance);
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

@@ -1,0 +1,36 @@
+The provided Solidity function `allowance` within the `CMBToken` contract appears to be an implementation of the ERC-20 token standard's `allowance` function. The ERC-20 standard specifies that the `allowance` function should return the amount which `_spender` is still allowed to withdraw from `_owner`.
+
+Here is the relevant part of the ERC-20 specification for the `allowance` function:
+
+```
+function allowance(address _owner, address _spender) public view returns (uint256 remaining)
+```
+
+Now let's examine the provided `allowance` function:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) constant returns (uint256 remaining) {
+    return allowed[_owner][_spender];
+}
+```
+
+The function correctly returns the remaining amount that `_spender` is allowed to withdraw from `_owner`'s account, which is stored in the `allowed` mapping. However, there are a couple of issues with the provided function:
+
+1. The `constant` keyword is used in the function declaration. In Solidity 0.4.17 and later, the `constant` keyword is deprecated in favor of `view` and `pure` for functions that do not modify the state. The correct keyword to use in this context would be `view`, as the function does not modify the state but reads from it.
+
+2. The function does not have the `public` visibility specifier. In Solidity, functions are `public` by default, but it is considered good practice to explicitly state the visibility of functions. The ERC-20 standard specifies that the `allowance` function should be `public`.
+
+3. The function does not have the `view` keyword (or `constant` in older versions of Solidity), which indicates that the function does not modify the state. While `constant` is used here, it is outdated and should be replaced with `view` for clarity and to adhere to modern Solidity conventions.
+
+To comply with the ERC-20 standard and modern Solidity best practices, the function should be written as follows:
+
+```solidity
+function allowance(address _owner, address _spender) public view returns (uint256 remaining) {
+    return allowed[_owner][_spender];
+}
+```
+
+In conclusion, while the logic of the `allowance` function does not violate the ERC-20 standard, the use of the `constant` keyword instead of `view` and the absence of the `public` visibility specifier are not in line with the current best practices and the latest Solidity syntax. These should be updated to ensure full compliance with the ERC-20 standard and modern Solidity conventions.

@@ -1,0 +1,18 @@
+Given a solidity function approve and the related parts from a smart contract and an rule for its return value.
+Whether function approve return whether the approve is successful? Reply in "YES" or "NO".
+
+Notes: In case of failure, it is allowed to revert the transaction instead of returning false.
+
+
+
+Function(and related parts) to audit:"""
+contract MyToken {
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    /* Allow another contract to spend some tokens in your behalf */
+    function approve(address _spender, uint256 _value) returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+        return true;
+    }
+}
+"""

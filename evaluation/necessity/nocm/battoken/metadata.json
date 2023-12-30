@@ -1,0 +1,139 @@
+{
+    "file": "evaluation/audited/battoken.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.17",
+            "func2file": {
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-nocm/battoken/BAToken/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-nocm/battoken/BAToken/f/transferFrom_address_address_uint256",
+                "balanceOf(address) returns(uint256)": "result-necessity/s-nocm/battoken/BAToken/f/balanceOf_address",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-nocm/battoken/BAToken/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-nocm/battoken/BAToken/f/allowance_address_address",
+                "BAToken(address,address,uint256,uint256) returns()": "result-necessity/s-nocm/battoken/BAToken/f/BAToken_address_address_uint256_uint256",
+                "createTokens() returns()": "result-necessity/s-nocm/battoken/BAToken/f/createTokens",
+                "finalize() returns()": "result-necessity/s-nocm/battoken/BAToken/f/finalize",
+                "refund() returns()": "result-necessity/s-nocm/battoken/BAToken/f/refund"
+            },
+            "func2attrs": {
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "BAToken(address,address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "createTokens() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "finalize() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "refund() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "version() returns(string)",
+                "fundingEndBlock() returns(uint256)",
+                "tokenCreationCap() returns(uint256)",
+                "tokenCreationMin() returns(uint256)",
+                "name() returns(string)",
+                "symbol() returns(string)",
+                "decimals() returns(uint256)",
+                "isFinalized() returns(bool)",
+                "totalSupply() returns(uint256)",
+                "ethFundDeposit() returns(address)",
+                "fundingStartBlock() returns(uint256)",
+                "tokenExchangeRate() returns(uint256)",
+                "batFundDeposit() returns(address)",
+                "batFund() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "LogRefund",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "CreateBAT",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "BAToken"
+        }
+    ]
+}

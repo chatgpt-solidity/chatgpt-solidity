@@ -1,0 +1,275 @@
+{
+    "file": "evaluation/polyscan50-1155/NFTBigPartnerV2-0x0040cf53.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "burn(address,uint256,uint256) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/burn_address_uint256_uint256",
+                "burnBatch(address,uint256[],uint256[]) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/burnBatch_address_uint256[]_uint256[]",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/supportsInterface_bytes4",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/balanceOf_address_uint256",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/balanceOfBatch_address[]_uint256[]",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "owner() returns(address)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/transferOwnership_address",
+                "constructor() returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/constructor",
+                "SetRightPerson(address) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/SetRightPerson_address",
+                "SetBIGP(address) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/SetBIGP_address",
+                "SetAssistance(address) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/SetAssistance_address",
+                "SetPeriod(uint256) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/SetPeriod_uint256",
+                "setURI(string) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/setURI_string",
+                "mint(address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/mint_address_uint256_uint256_bytes",
+                "SetRate(uint256,uint256) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/SetRate_uint256_uint256",
+                "ReadRate(uint256) returns(uint256)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/ReadRate_uint256",
+                "MintBSCard(uint256,uint256,uint256) returns(bool)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/MintBSCard_uint256_uint256_uint256",
+                "HelpMembertoMintCard(address,uint256,uint256,uint256) returns(bool)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/HelpMembertoMintCard_address_uint256_uint256_uint256",
+                "viewCardSupply(uint256) returns(uint256)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/viewCardSupply_uint256",
+                "viewBatchData(uint256) returns(address,uint256,uint256,uint256,uint256)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/viewBatchData_uint256",
+                "Neon(uint256) returns(bool)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/Neon_uint256",
+                "RedempBIGP(uint256) returns(bool)": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/RedempBIGP_uint256",
+                "mintBatch(address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/NFTBigPartnerV2-0x0040cf53/NFTBigPartnerV2/f/mintBatch_address_uint256[]_uint256[]_bytes"
+            },
+            "func2attrs": {
+                "burn(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnBatch(address,uint256[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetRightPerson(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetBIGP(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetAssistance(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetPeriod(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "SetRate(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "ReadRate(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "MintBSCard(uint256,uint256,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "HelpMembertoMintCard(address,uint256,uint256,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "viewCardSupply(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "viewBatchData(uint256) returns(address,uint256,uint256,uint256,uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "Neon(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "RedempBIGP(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintBatch(address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "BIGP() returns(IERC20)",
+                "YearInSec() returns(uint256)",
+                "Deposited(uint256) returns(uint256)",
+                "Batch_id() returns(uint256)",
+                "assistance() returns(address)",
+                "CardSupplies(uint256) returns(uint256)",
+                "ReleasedTime(uint256) returns(uint256)",
+                "CardAmount(uint256) returns(uint256)",
+                "CardType(uint256) returns(uint256)",
+                "MintAddr(uint256) returns(address)",
+                "rate(uint256) returns(uint256)",
+                "BigPAmount() returns(uint256)",
+                "creator() returns(address)",
+                "rightperson() returns(address)"
+            ],
+            "ercs": [
+                "165",
+                "1155metadatauri",
+                "1155burnable",
+                "1155"
+            ],
+            "events": [
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "NFTBigPartnerV2"
+        }
+    ]
+}

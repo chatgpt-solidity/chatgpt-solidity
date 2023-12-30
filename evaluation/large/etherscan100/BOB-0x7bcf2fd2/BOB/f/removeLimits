@@ -1,0 +1,28 @@
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract BOB is Context, IERC20, Ownable {
+    bool public transferDelayEnabled = true;
+    uint256 private constant _tTotal = 100000 * 10**_decimals;
+    uint256 public _maxTxAmount = 1000 * 10**_decimals;
+    uint256 public _maxWalletSize = 1000 * 10**_decimals;
+
+    function removeLimits() external onlyOwner{
+        _maxTxAmount = _tTotal;
+        _maxWalletSize=_tTotal;
+        transferDelayEnabled=false;
+        emit MaxTxAmountUpdated(_tTotal);
+    }
+}

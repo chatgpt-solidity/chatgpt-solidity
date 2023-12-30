@@ -1,0 +1,12 @@
+contract CCB23NFT is ERC721Enumerable, AccessControl, Ownable {
+    uint256 public numberEditions = 10; // number of editions
+    mapping(uint256 => string) public editionURI; // URI for each edition
+
+    // Function to get the editionURI
+    function getEditionURI(
+        uint256 edition
+    ) public view returns (string memory) {
+        require(edition > 0 && edition <= numberEditions, "Invalid edition");
+        return editionURI[edition];
+    }
+}

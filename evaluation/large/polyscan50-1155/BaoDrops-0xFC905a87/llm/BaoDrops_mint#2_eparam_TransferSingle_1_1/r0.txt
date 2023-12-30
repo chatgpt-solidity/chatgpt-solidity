@@ -1,0 +1,9 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the `_from` argument set to the zero address, which is the correct behavior according to the ERC-1155 standard for minting new tokens. The zero address (`address(0)`) is used to indicate that tokens are being created (minted) rather than transferred from an existing holder. The `_mint` function is called by the `mint` function in the `BaoDrops` contract, which is restricted to the contract owner by the `onlyOwner` modifier.
+
+The relevant line in the `_mint` function is:
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+This line correctly emits the `TransferSingle` event with the `_from` argument as the zero address, indicating that tokens are being minted to the `to` address.

@@ -1,0 +1,239 @@
+{
+    "file": "evaluation/polyscan50-721/Art_Architect-0xf954f878.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.1",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/transferOwnership_address",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/supportsInterface_bytes4",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor() returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/constructor",
+                "totalSupply() returns(uint256)": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/totalSupply",
+                "mint(uint256) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/mint_uint256",
+                "mintForAddress(uint256,address) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/mintForAddress_uint256_address",
+                "walletOfOwner(address) returns(uint256[])": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/walletOfOwner_address",
+                "setRevealed(bool) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/setRevealed_bool",
+                "setCost(uint256) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/setCost_uint256",
+                "setMaxMintAmountPerTx(uint256) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/setMaxMintAmountPerTx_uint256",
+                "setHiddenMetadataUri(string) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/setHiddenMetadataUri_string",
+                "setUriPrefix(string) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/setUriPrefix_string",
+                "setUriSuffix(string) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/setUriSuffix_string",
+                "setPaused(bool) returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/setPaused_bool",
+                "withdraw() returns()": ".temp/polyscan50-721/Art_Architect-0xf954f878/Art_Architect/f/withdraw"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "mint(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintForAddress(uint256,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "walletOfOwner(address) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setRevealed(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setCost(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMaxMintAmountPerTx(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setHiddenMetadataUri(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setUriPrefix(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setUriSuffix(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setPaused(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "maxMintAmountPerTx() returns(uint256)",
+                "paused() returns(bool)",
+                "uriSuffix() returns(string)",
+                "revealed() returns(bool)",
+                "hiddenMetadataUri() returns(string)",
+                "cost() returns(uint256)",
+                "uriPrefix() returns(string)",
+                "maxSupply() returns(uint256)"
+            ],
+            "ercs": [
+                "165",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "Art_Architect"
+        }
+    ]
+}

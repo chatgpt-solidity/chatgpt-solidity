@@ -1,0 +1,9 @@
+contract GOLD is IERC20, Push, Ownable {
+    address[] private regAddresses;
+
+        // Unnecessary function
+    function getRegAddress22(uint index) public view returns (address) {
+        require(index < regAddresses.length, "Index out of bounds");
+        return regAddresses[index];
+    }
+}

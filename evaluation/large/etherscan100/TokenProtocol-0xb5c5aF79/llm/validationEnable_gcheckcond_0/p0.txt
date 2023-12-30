@@ -1,0 +1,18 @@
+Given a solidity function validationEnable and the related parts from a smart contract.
+Whether the function validationEnable and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+
+    bool internal validtionState;
+
+    function validationEnable() public view returns (bool) {
+        return validtionState;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

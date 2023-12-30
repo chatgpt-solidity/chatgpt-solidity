@@ -1,0 +1,11 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not contain any explicit checks that would cause it to throw an error when transferring a value of 0. The `SafeMath` library functions used in `transferFrom` (`sub` and `add`) have checks to prevent underflow and overflow, but these checks will not fail for a transfer value of 0.
+
+Here's why:
+- `sub`: When subtracting 0, the `assert(b <= a);` check will pass because 0 is always less than or equal to any uint value.
+- `add`: When adding 0, the `assert(c >= a);` check will pass because the sum will be equal to the original value `a`.
+
+Additionally, the `transferFrom` function calculates a fee based on the `_value` being transferred. If `_value` is 0, the fee will also be 0, and the subsequent checks and operations related to the fee will not cause any issues.
+
+Therefore, the function will not throw an error when transferring a value of 0.

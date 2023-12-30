@@ -1,0 +1,3 @@
+NO
+
+The `TransferBatch` event is emitted with `address(0)` as the `_from` argument, which is correct when minting new tokens because they are being created and not transferred from an existing holder. The `_from` argument is not the address of a holder whose balance is decreased, as there is no decrease in balance; instead, new tokens are being generated. Therefore, the event is emitted according to the rule for minting operations, where the `_from` address is conventionally the zero address to indicate token creation.

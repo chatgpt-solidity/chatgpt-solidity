@@ -1,0 +1,58 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract BurnableToken is StandardToken, Ownable {
+
+    /**
+     * @dev Owner can burn a specific amount of tokens of other token holders.
+     * @param _from The address of token holder whose tokens to be burned.
+     * @param _amount The amount of token to be burned.
+     */
+    function burnFrom(address _from, uint256 _amount) public onlyOwner {
+        require(_from != address(0));
+        require(_amount > 0);
+        require(_amount <= balances[_from]);
+        balances[_from] = SafeMath.sub(balances[_from], _amount);
+        totalSupply = SafeMath.sub(totalSupply, _amount);
+        emit Transfer(_from, address(0), _amount);
+        emit Burn(_from, _amount);
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+}
+
+contract Token {
+    uint256 public totalSupply;
+}
+
+library SafeMath {
+
+    /**
+     * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

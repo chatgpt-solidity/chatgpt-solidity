@@ -1,0 +1,26 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "balanceOfBatch(address[],uint256[]) returns(uint256[])" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+supportsInterface(bytes4) returns(bool)
+hasRole(bytes32,address) returns(bool)
+getRoleAdmin(bytes32) returns(bytes32)
+grantRole(bytes32,address) returns()
+revokeRole(bytes32,address) returns()
+renounceRole(bytes32,address) returns()
+burn(address,uint256,uint256) returns()
+burnBatch(address,uint256[],uint256[]) returns()
+uri(uint256) returns(string)
+balanceOf(address,uint256) returns(uint256)
+balanceOfBatch(address[],uint256[]) returns(uint256[])
+setApprovalForAll(address,bool) returns()
+isApprovedForAll(address,address) returns(bool)
+safeTransferFrom(address,address,uint256,uint256,bytes) returns()
+safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()
+constructor() returns()
+mint(address,uint256,uint256) returns()
+burnFrom(address,uint256,uint256) returns()
+DEFAULT_ADMIN_ROLE() returns(bytes32)
+MINTER_ROLE() returns(bytes32)
+"""

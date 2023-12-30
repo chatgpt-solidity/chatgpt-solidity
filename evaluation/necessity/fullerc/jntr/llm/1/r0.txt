@@ -1,0 +1,17 @@
+The provided Solidity function `getWallet` and the related parts from the smart contract do not directly violate the ERC-20 standard as described in the provided ERC documentation. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable token transfers and allow tokens to be approved for use by other addresses.
+
+The `getWallet` function appears to be a custom function that is not part of the ERC-20 standard. It is designed to return information about an address from a custom data structure `Account[] allowedAddress` and a mapping `mapping(address => uint256) allowedIndex`. This function does not interfere with the ERC-20 required functions such as `transfer`, `approve`, `allowance`, `balanceOf`, and `totalSupply`, nor does it emit any events that are part of the ERC-20 standard.
+
+However, there are a few points to consider:
+
+1. The `getWallet` function assumes that the index in `allowedIndex` correctly corresponds to the position of the `_owner`'s account information in the `allowedAddress` array. If the indices are not managed correctly, this could lead to incorrect data being returned or even potential out-of-bounds errors.
+
+2. The contract inherits from `IST20` and `ERC20`, but the ERC provided does not mention `IST20`. If `IST20` introduces functions or behaviors that conflict with ERC-20, then there could be a violation of the standard. Without the definition of `IST20`, it is not possible to determine if there is a conflict.
+
+3. The contract uses `SafeMath`, which is a library for safe mathematical operations to prevent overflows and underflows. This is a good practice and does not violate the ERC-20 standard.
+
+4. The ERC-20 standard requires certain functions and events to be present and behave in a specific way. As long as the contract correctly implements these and the `getWallet` function does not interfere with the standard behavior, the contract can be considered ERC-20 compliant.
+
+5. The `getWallet` function is marked as `public` and `view`, which means it does not modify the state and can be freely called by anyone. This does not affect ERC-20 compliance, but it is important to consider the privacy implications of exposing this data.
+
+In conclusion, the `getWallet` function itself does not violate the ERC-20 standard, but it is essential to ensure that the rest of the contract correctly implements the required ERC-20 functions and events. Additionally, the contract should be carefully reviewed to ensure that the custom functionality does not introduce any security issues or unexpected behaviors that could affect the ERC-20 compliance of the token.

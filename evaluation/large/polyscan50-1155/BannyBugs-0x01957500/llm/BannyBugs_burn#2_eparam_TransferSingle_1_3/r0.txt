@@ -1,0 +1,13 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function of the `ERC1155` contract, which is the correct behavior according to the ERC-1155 standard when a single token type is burned (transferred from a user address to the zero address).
+
+The `_burn` function takes `from`, `id`, and `amount` as arguments, and these are used to emit the `TransferSingle` event with `_operator`, `_from`, `_to`, `_id`, and `_value` parameters. The `_id` argument is indeed the token type being transferred (burned in this case), and `_to` is the zero address, indicating a burn operation. The `_operator` is the address that initiated the burn operation, `_from` is the address from which the tokens are burned, `_id` is the token type identifier, and `_value` is the amount of tokens being burned.
+
+The event is emitted with the following line in the `_burn` function:
+
+```solidity
+emit TransferSingle(operator, from, address(0), id, amount);
+```
+
+This line correctly uses the `id` as the token type being transferred, and `amount` as the value, which complies with the given rule.

@@ -1,0 +1,319 @@
+{
+    "file": "evaluation/audited/EZOToken.sol",
+    "contracts": [
+        {
+            "solc_version": "0.5.9",
+            "func2file": {
+                "halt() returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/halt",
+                "unHalt() returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/unHalt",
+                "transferOwnership(address) returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/transferOwnership_address",
+                "constructor() returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/constructor",
+                "addAllowedAddress(address,bool) returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/addAllowedAddress_address_bool",
+                "setCurrencyPricesContractAddress(address) returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/setCurrencyPricesContractAddress_address",
+                "fallback() returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/fallback",
+                "sendToken(address,uint256) returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/sendToken_address_uint256",
+                "cancelOrder(address) returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/cancelOrder_address",
+                "updateTxStatus(address,uint256) returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/updateTxStatus_address_uint256",
+                "transfer(address,uint256) returns(bool)": "result-necessity/fullcode/EZOToken/EZOToken/f/transfer_address_uint256",
+                "mint(address,uint256) returns(bool)": "result-necessity/fullcode/EZOToken/EZOToken/f/mint_address_uint256",
+                "burn(address,uint256) returns(bool)": "result-necessity/fullcode/EZOToken/EZOToken/f/burn_address_uint256",
+                "getPurchaseRecord(address) returns(address,uint256,address)": "result-necessity/fullcode/EZOToken/EZOToken/f/getPurchaseRecord_address",
+                "getTxStatus(address) returns(uint256)": "result-necessity/fullcode/EZOToken/EZOToken/f/getTxStatus_address",
+                "getCurrencyPrice(address) returns(uint256)": "result-necessity/fullcode/EZOToken/EZOToken/f/getCurrencyPrice_address",
+                "setEZOTokenPriceUSD(uint256) returns()": "result-necessity/fullcode/EZOToken/EZOToken/f/setEZOTokenPriceUSD_uint256",
+                "balanceOf(address) returns(uint256)": "result-necessity/fullcode/EZOToken/EZOToken/f/balanceOf_address"
+            },
+            "func2attrs": {
+                "halt() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unHalt() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addAllowedAddress(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setCurrencyPricesContractAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "fallback() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "sendToken(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "cancelOrder(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateTxStatus(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getPurchaseRecord(address) returns(address,uint256,address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getTxStatus(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getCurrencyPrice(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setEZOTokenPriceUSD(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "allowedAddresses(address) returns(bool)",
+                "decimals() returns(uint256)",
+                "currencyPricesContract() returns(address)",
+                "halted() returns(bool)",
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "isEZOToken() returns(bool)",
+                "owner() returns(address)",
+                "ezoTokenPriceUSD() returns(uint256)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Sell",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "sendETHForEZO",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferUnknown",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "redemForEZOToken",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "string",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "sendTokenForEZO",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Mint",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "systemAssign",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "orderCanceled",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "EZOToken"
+        }
+    ]
+}

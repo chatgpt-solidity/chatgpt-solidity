@@ -1,0 +1,242 @@
+Given a solidity function setPermanentURI and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.4;
+contract ERC1155Tradable is
+    ContextMixin,
+    ERC1155,
+    NativeMetaTransaction,
+    Ownable,
+    Pausable
+{
+
+    address public proxyRegistryAddress;
+
+
+    mapping(uint256 => mapping(address => uint256)) private balances;
+    mapping(uint256 => uint256) private _supply;
+
+    function balanceOf(address account, uint256 id)
+        public
+        view
+        virtual
+        override
+        returns (uint256)
+    {
+        require(
+            account != address(0),
+            "ERC1155: balance query for the zero address"
+        );
+        return balances[id][account];
+    }
+
+    function totalSupply(uint256 _id) public view returns (uint256) {
+        return _supply[_id];
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        virtual
+        returns (bool)
+    {
+        if (!proxyRegistryAddress.isContract()) {
+            return false;
+        }
+        ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
+        return address(proxyRegistry.proxies(_user)) == _address;
+    }
+
+    function _msgSender() internal view override returns (address sender) {
+        return ContextMixin.msgSender();
+    }
+}
+
+contract AssetContract is ERC1155Tradable {
+
+
+    mapping(uint256 => string) private _tokenURI;
+    mapping(uint256 => bool) private _isPermanentURI;
+
+    modifier onlyImpermanentURI(uint256 id) {
+        require(
+            !isPermanentURI(id),
+            "AssetContract#onlyImpermanentURI: URI_CANNOT_BE_CHANGED"
+        );
+        _;
+    }
+
+    function _ownsTokenAmount(
+        address _from,
+        uint256 _id,
+        uint256 _quantity
+    ) internal view returns (bool) {
+        return balanceOf(_from, _id) >= _quantity;
+    }
+
+    function isPermanentURI(uint256 _id) public view returns (bool) {
+        return _isPermanentURI[_id];
+    }
+
+    function balanceOf(address _owner, uint256 _id)
+        public
+        view
+        virtual
+        override
+        returns (uint256)
+    {
+        uint256 balance = super.balanceOf(_owner, _id);
+        return
+            _isCreatorOrProxy(_id, _owner)
+                ? balance + _remainingSupply(_id)
+                : balance;
+    }
+
+    function _setURI(uint256 _id, string memory _uri) internal {
+        _tokenURI[_id] = _uri;
+        emit URI(_uri, _id);
+
+    }
+    function _setPermanentURI(uint256 _id, string memory _uri)
+        internal
+        virtual
+    {
+        require(
+            bytes(_uri).length > 0,
+            "AssetContract#setPermanentURI: ONLY_VALID_URI"
+        );
+        _isPermanentURI[_id] = true;
+        _setURI(_id, _uri);
+        emit PermanentURI(_uri, _id);
+    }
+}
+
+contract AssetContractShared is AssetContract, ReentrancyGuard {
+
+    mapping(address => bool) public sharedProxyAddresses;
+
+
+    mapping(uint256 => address) internal _creatorOverride;
+    modifier creatorOnly(uint256 _id) {
+        require(
+            _isCreatorOrProxy(_id, _msgSender()),
+            "AssetContractShared#creatorOnly: ONLY_CREATOR_ALLOWED"
+        );
+        _;
+    }
+
+    modifier onlyFullTokenOwner(uint256 _id) {
+        require(
+            _ownsTokenAmount(_msgSender(), _id, _id.tokenMaxSupply()),
+            "AssetContractShared#onlyFullTokenOwner: ONLY_FULL_TOKEN_OWNER_ALLOWED"
+        );
+        _;
+    }
+
+    function setPermanentURI(uint256 _id, string memory _uri)
+        public
+        override
+        creatorOnly(_id)
+        onlyImpermanentURI(_id)
+        onlyFullTokenOwner(_id)
+    {
+        _setPermanentURI(_id, _uri);
+    }
+
+    function creator(uint256 _id) public view returns (address) {
+        if (_creatorOverride[_id] != address(0)) {
+            return _creatorOverride[_id];
+        } else {
+            return _id.tokenCreator();
+        }
+    }
+
+    function maxSupply(uint256 _id) public pure returns (uint256) {
+        return _id.tokenMaxSupply();
+    }
+
+    function _remainingSupply(uint256 _id)
+        internal
+        view
+        override
+        returns (uint256)
+    {
+        return maxSupply(_id) - totalSupply(_id);
+
+    }
+    function _isCreatorOrProxy(uint256 _id, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        address creator_ = creator(_id);
+        return creator_ == _address || _isProxyForUser(creator_, _address);
+
+    }
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        if (sharedProxyAddresses[_address]) {
+            return true;
+        }
+        return super._isProxyForUser(_user, _address);
+    }
+}
+
+library TokenIdentifiers {
+    uint8 constant INDEX_BITS = 56;
+    uint8 constant SUPPLY_BITS = 40;
+
+    uint256 constant SUPPLY_MASK = (uint256(1) << SUPPLY_BITS) - 1;
+
+    function tokenMaxSupply(uint256 _id) internal pure returns (uint256) {
+        return _id & SUPPLY_MASK;
+    }
+
+    function tokenCreator(uint256 _id) internal pure returns (address) {
+        return address(uint160(_id >> (INDEX_BITS + SUPPLY_BITS)));
+    }
+}
+library Address {
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize, which returns 0 for contracts in
+        // construction, since the code is only stored at the end of the
+        // constructor execution.
+
+        uint256 size;
+        assembly {
+            size := extcodesize(account)
+        }
+        return size > 0;
+    }
+}
+
+abstract contract ContextMixin {
+    function msgSender() internal view returns (address payable sender) {
+        if (msg.sender == address(this)) {
+            bytes memory array = msg.data;
+            uint256 index = msg.data.length;
+            assembly {
+                sender := and(
+                    mload(add(array, index)),
+                    0xffffffffffffffffffffffffffffffffffffffff
+                )
+            }
+        } else {
+            sender = payable(msg.sender);
+        }
+        return sender;
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

@@ -1,0 +1,22 @@
+Given a solidity function SetBIGP and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract NFTBigPartnerV2 is ERC1155, Ownable, ERC1155Burnable {
+    IERC20 public BIGP;
+    address public creator;
+
+    address public rightperson;
+    function SetBIGP(address _bigp)public{
+      require(msg.sender==creator||msg.sender==rightperson);  
+      BIGP = IERC20(_bigp);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers as well as minting or burning
+"""

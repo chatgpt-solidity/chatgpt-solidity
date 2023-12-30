@@ -1,0 +1,5 @@
+YES
+
+The `transferFrom` function in the provided Solidity code will not throw if transfers of 0 values are made. The function checks for the sender's balance and the allowance for the caller to be greater than or equal to the amount being transferred. If the amount is 0, these checks will pass because 0 is always less than or equal to any given balance and allowance.
+
+Additionally, the `_transfer` internal function, which is called by `transferFrom`, has a condition that if the amount is 0, it simply calls `super._transfer` with the amount of 0 and then returns, effectively performing no state changes but emitting a Transfer event with a value of 0. This is compliant with the ERC-20 standard, which allows for transfer events with a value of 0 to signify an approval or a no-op transfer.

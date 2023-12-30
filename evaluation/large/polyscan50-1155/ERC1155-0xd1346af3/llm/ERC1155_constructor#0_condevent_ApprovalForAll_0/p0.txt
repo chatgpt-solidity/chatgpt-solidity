@@ -1,0 +1,24 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 {
+    mapping(address => mapping(uint256 => uint256)) private balances;
+
+    address public owner;
+    uint256 public constant TOKEN_ID = 0;
+    uint256 public constant INITIAL_SUPPLY = 100000;
+
+    constructor() {
+        owner = msg.sender;
+        balances[msg.sender][TOKEN_ID] = INITIAL_SUPPLY;
+    }
+}
+"""
+
+Action:"""
+approval for a second party/operator address to manage all tokens for an owner address is enabled or disabled (absence of an event assumes disabled).
+"""

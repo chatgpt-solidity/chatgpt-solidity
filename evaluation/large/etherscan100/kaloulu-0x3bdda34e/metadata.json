@@ -1,0 +1,205 @@
+{
+    "file": "evaluation/etherscan100/kaloulu-0x3bdda34e.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.19",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/owner",
+                "transferOwnership(address) returns()": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/transferOwnership_address",
+                "renounceOwnership() returns()": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/renounceOwnership",
+                "constructor() returns()": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/constructor",
+                "receive() returns()": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/receive",
+                "tSupp() returns(uint256)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/tSupp",
+                "decimals() returns(uint8)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/decimals",
+                "symbol() returns(string)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/symbol",
+                "name() returns(string)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/name",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/balanceOf_address",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/approve_address_uint256",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/transferFrom_address_address_uint256",
+                "launchTrading() returns()": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/launchTrading",
+                "exemptFromFees(address) returns(bool)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/exemptFromFees_address",
+                "exemptFromLimits(address) returns(bool)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/exemptFromLimits_address",
+                "setExempt(address,bool,bool) returns()": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/setExempt_address_bool_bool",
+                "buyFee() returns(uint8)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/buyFee",
+                "sellFee() returns(uint8)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/sellFee",
+                "marketingWallet() returns(address)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/marketingWallet",
+                "maxWallet() returns(uint256)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/maxWallet",
+                "maxTransaction() returns(uint256)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/maxTransaction",
+                "swapAtMin() returns(uint256)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/swapAtMin",
+                "swapAtMax() returns(uint256)": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/swapAtMax",
+                "setLimits(uint16,uint16) returns()": ".temp/etherscan100/kaloulu-0x3bdda34e/kaloulu/f/setLimits_uint16_uint16"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "tSupp() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "launchTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "exemptFromFees(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "exemptFromLimits(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setExempt(address,bool,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "buyFee() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "sellFee() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "marketingWallet() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "maxWallet() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "maxTransaction() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "swapAtMin() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "swapAtMax() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setLimits(uint16,uint16) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TokensBurned",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "kaloulu"
+        }
+    ]
+}

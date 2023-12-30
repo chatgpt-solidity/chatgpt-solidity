@@ -1,0 +1,17 @@
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    mapping(uint256 => uint256) private stakingStarted;
+    mapping(uint256 => uint256) private stakingTotal;
+
+    function stakingPeriod(
+        uint256 tokenId
+    ) external view returns (bool staking, uint256 current, uint256 total) {
+        uint256 start = stakingStarted[tokenId];
+        if (start != 0) {
+            staking = true;
+            current = block.timestamp - start;
+        }
+        total = current + stakingTotal[tokenId];
+    }
+}
+

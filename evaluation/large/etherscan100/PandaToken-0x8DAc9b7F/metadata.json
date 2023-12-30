@@ -1,0 +1,130 @@
+{
+    "file": "evaluation/etherscan100/PandaToken-0x8DAc9b7F.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.18",
+            "func2file": {
+                "constructor(string[],address[],uint256[],bool[]) returns()": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/constructor_string[]_address[]_uint256[]_bool[]",
+                "name() returns(string)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/symbol",
+                "decimals() returns(uint256)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/totalSupply",
+                "owner() returns(address)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/owner",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/balanceOf_address",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/allowance_address_address",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/decreaseAllowance_address_uint256",
+                "approve(address,uint256) returns()": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/approve_address_uint256",
+                "getCirculatingSupply() returns(uint256)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/getCirculatingSupply",
+                "receive() returns()": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/receive",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns()": ".temp/etherscan100/PandaToken-0x8DAc9b7F/PandaToken/f/transferFrom_address_address_uint256"
+            },
+            "func2attrs": {
+                "constructor(string[],address[],uint256[],bool[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getCirculatingSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "deadAddress() returns(address)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "PandaToken"
+        }
+    ]
+}

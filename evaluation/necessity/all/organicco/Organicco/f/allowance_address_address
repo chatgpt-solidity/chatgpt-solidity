@@ -1,0 +1,18 @@
+contract Organicco is
+    Token("ORC", "Organicco", 18, 120000000000000000000000000),
+    ERC20,
+    ERC223
+{
+
+    function allowance(
+        address _owner,
+        address _spender
+    ) public constant returns (uint) {
+        return _allowances[_owner][_spender];
+    }
+}
+
+contract Token {
+    mapping(address => mapping(address => uint)) internal _allowances;
+}
+

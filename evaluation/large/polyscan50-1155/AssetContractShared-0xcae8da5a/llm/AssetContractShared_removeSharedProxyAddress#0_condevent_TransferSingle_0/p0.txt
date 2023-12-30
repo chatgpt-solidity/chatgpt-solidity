@@ -1,0 +1,115 @@
+Given a solidity function removeSharedProxyAddress and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.4;
+contract AssetContractShared is AssetContract, ReentrancyGuard {
+
+    mapping(address => bool) public sharedProxyAddresses;
+
+    function removeSharedProxyAddress(address _address)
+        public
+        onlyOwnerOrProxy
+    {
+        delete sharedProxyAddresses[_address];
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        if (sharedProxyAddresses[_address]) {
+            return true;
+        }
+        return super._isProxyForUser(_user, _address);
+    }
+}
+
+abstract contract ContextMixin {
+    function msgSender() internal view returns (address payable sender) {
+        if (msg.sender == address(this)) {
+            bytes memory array = msg.data;
+            uint256 index = msg.data.length;
+            assembly {
+                sender := and(
+                    mload(add(array, index)),
+                    0xffffffffffffffffffffffffffffffffffffffff
+                )
+            }
+        } else {
+            sender = payable(msg.sender);
+        }
+        return sender;
+    }
+}
+
+contract ERC1155Tradable is
+    ContextMixin,
+    ERC1155,
+    NativeMetaTransaction,
+    Ownable,
+    Pausable
+{
+
+    address public proxyRegistryAddress;
+
+    modifier onlyOwnerOrProxy() {
+        require(
+            _isOwnerOrProxy(_msgSender()),
+            "ERC1155Tradable#onlyOwner: CALLER_IS_NOT_OWNER"
+        );
+        _;
+    }
+
+    function _isOwnerOrProxy(address _address) internal view returns (bool) {
+        return owner() == _address || _isProxyForUser(owner(), _address);
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        virtual
+        returns (bool)
+    {
+        if (!proxyRegistryAddress.isContract()) {
+            return false;
+        }
+        ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
+        return address(proxyRegistry.proxies(_user)) == _address;
+    }
+
+    function _msgSender() internal view override returns (address sender) {
+        return ContextMixin.msgSender();
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+}
+
+library Address {
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize, which returns 0 for contracts in
+        // construction, since the code is only stored at the end of the
+        // constructor execution.
+
+        uint256 size;
+        assembly {
+            size := extcodesize(account)
+        }
+        return size > 0;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers as well as minting or burning
+"""

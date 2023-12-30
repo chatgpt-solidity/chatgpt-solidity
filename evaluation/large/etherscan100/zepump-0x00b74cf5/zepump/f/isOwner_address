@@ -1,0 +1,5 @@
+abstract contract Ownable {
+    address internal owner;
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+

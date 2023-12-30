@@ -1,0 +1,7 @@
+YES
+
+The `transfer` function in the provided Solidity code uses the `SafeMath` library for arithmetic operations, which includes safety checks to prevent overflow and underflow. When transferring a value of 0, the `sub` function in `SafeMath` will not throw because the assertion `assert(b <= a);` will pass (assuming the sender has a balance of at least 0, which should always be true). Similarly, the `add` function will not throw because adding 0 to any uint value will not cause an overflow.
+
+The `onlyPayloadSize` modifier is designed to prevent the ERC20 short address attack by ensuring that the payload is of the expected size. A transfer of 0 value would still have the correct payload size, so this check would also pass.
+
+Therefore, the `transfer` function and its related parts will not throw if transfers of 0 values are made.

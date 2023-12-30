@@ -1,0 +1,6 @@
+contract Degen is ERC721, Ownable {
+
+    function safeTransferFrom(address from, address to, uint256 tokenId) public override {
+        revert("Transfers are disabled");
+    }
+}

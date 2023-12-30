@@ -1,0 +1,12 @@
+YES
+
+The function `_safeTransferFrom` includes a check to ensure that the balance of the token holder (the `from` address) for the token `id` is at least as much as the `amount` being transferred. If the balance is lower than the `amount`, the function will revert with the message "ERC1155: insufficient balance for transfer".
+
+Here is the relevant code snippet:
+
+```solidity
+uint256 fromBalance = _balances[id][from];
+require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+```
+
+If the condition you provided is met, where the balance of the holder for token `id` is lower than the `amount` sent, this `require` statement will fail, causing the transaction to revert.

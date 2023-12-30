@@ -1,0 +1,15 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called within the `airdrop` function of the `TWTVoucher` contract, which is derived from `ERC1155`.
+
+The `_mint` function includes the following line:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This line emits the `TransferSingle` event with the `_to` argument set to the `to` parameter of the `_mint` function. In the context of the `airdrop` function, `to` is the address of a recipient from the `recipients` array, and the `coinbase` variable (which is set to `0`) is used as the `_id` argument. The `_value` argument is set to `1`, which is the amount of tokens being minted for the recipient.
+
+The rule states that the `_to` argument must be the address of the recipient whose balance is increased, which is indeed the case here. The `airdrop` function iterates over the `recipients` array and calls `_mint` for each recipient who is not a contract (checked by `isContract` function), thereby increasing their balance by 1 of the token with ID `coinbase`.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

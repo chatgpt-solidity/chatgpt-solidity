@@ -1,0 +1,17 @@
+The provided `transferFrom` function in the `UnboundedRegularToken` contract does not appear to violate the ERC-20 standard as described in the provided ERC documentation. However, there are a few points to consider:
+
+1. **Unlimited Allowance Handling**: The function implements a special case where an allowance of `MAX_UINT` (2^256 - 1) is treated as an unlimited allowance. This is not part of the ERC-20 standard, but it is also not in violation of it. It is a design choice that must be clearly documented and understood by users of the token contract.
+
+2. **Return Value**: The ERC-20 standard specifies that functions should return a boolean value indicating success. The `transferFrom` function in the provided code does return a boolean value, which is in line with the standard.
+
+3. **Transfer Event**: The ERC-20 standard requires that a `Transfer` event is fired whenever tokens are transferred, including zero value transfers. The provided function does fire the `Transfer` event when a transfer occurs, which complies with the standard.
+
+4. **Checking for Overflows**: The function checks for overflows by ensuring that `balances[_to] + _value` is greater than or equal to `balances[_to]`. This is a good practice to prevent overflow attacks.
+
+5. **Throwing on Failure**: The ERC-20 standard states that functions should throw if certain conditions are not met. In Solidity, this is typically done using `require` statements. The provided function does not use `require` but instead returns `false` if the conditions are not met. This is a deviation from the standard's recommendation, but the ERC also notes that callers must handle `false` returns, so this implementation is acceptable as long as it is properly documented and users of the contract handle the `false` return value correctly.
+
+6. **Approval Mechanism**: The ERC-20 standard mentions that the `approve` function should be used to set allowances, and the `transferFrom` function checks against this allowance. The provided code does check the allowance and updates it correctly unless it is `MAX_UINT`.
+
+7. **Event Naming**: The provided code uses `Transfer` instead of `event Transfer`, which seems to be a typo or an omission. In Solidity, events are declared with the `event` keyword, and they are emitted using the `emit` keyword (introduced in Solidity 0.4.21). The code should be updated to use the correct syntax for emitting events, which would be `emit Transfer(_from, _to, _value);`.
+
+In conclusion, the `transferFrom` function in the `UnboundedRegularToken` contract does not violate the ERC-20 standard, but it does implement an additional feature (unlimited allowances) that is not specified in the standard. It is important that this feature is well-documented and understood by users. Additionally, the code should be updated to use the correct event syntax if it is not already using Solidity 0.4.21 or later.

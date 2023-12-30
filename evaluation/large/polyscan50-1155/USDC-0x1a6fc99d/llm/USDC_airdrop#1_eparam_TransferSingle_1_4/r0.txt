@@ -1,0 +1,7 @@
+NO
+
+The given Solidity function `airdrop` emits the `TransferSingle` event with a hardcoded value of `1` for the `_value` argument. However, the rule states that the `_value` argument must be the number of tokens the holder's balance is decreased by and match what the recipient's balance is increased by.
+
+The function does not show any actual transfer of tokens or balance updates. It only emits an event with a value of `1`, which does not necessarily reflect any change in balances. Without the actual transfer logic that updates the balances of the `_from` and `_to` addresses, we cannot confirm that the `_value` of `1` corresponds to the actual number of tokens transferred.
+
+Therefore, based on the provided code and the rule, the event `TransferSingle` is not emitted according to the given rule.

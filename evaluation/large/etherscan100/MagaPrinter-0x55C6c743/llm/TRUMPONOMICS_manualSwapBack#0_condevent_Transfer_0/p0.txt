@@ -1,0 +1,148 @@
+Given a solidity function manualSwapBack and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+library SafeMath {
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        return sub(a, b, "SafeMath: subtraction overflow");
+    }
+    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        require(b <= a, errorMessage);
+        uint256 c = a - b;
+
+        return c;
+    }
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        if (a == 0) {
+            return 0;
+        }
+
+        uint256 c = a * b;
+        require(c / a == b, "SafeMath: multiplication overflow");
+
+        return c;
+    }
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        return div(a, b, "SafeMath: division by zero");
+    }
+    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        // Solidity only automatically asserts when dividing by 0
+        require(b > 0, errorMessage);
+        uint256 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+
+        return c;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+
+    mapping(address => uint256) private _balances;
+    mapping(address => mapping(address => uint256)) private _allowances;
+
+    uint256 public toReflections = 30;
+    uint256 public toLiquidity = 10;
+    uint256 public toMarketing = 60;
+
+    IDEXRouter public router;
+    address public devWallet = 0x17aE675168475EFD02F8c7D6dF16eF48209d95b7;
+
+    address private lpWallet = 0x17aE675168475EFD02F8c7D6dF16eF48209d95b7;
+    bool inSwapAndLiquify;
+    MagaPrinter public magaPrinter;
+
+    modifier lockTheSwap {
+        inSwapAndLiquify = true;
+        _;
+        inSwapAndLiquify = false;
+    }
+    function approve(address spender, uint256 amount) public override returns (bool) {
+        _allowances[msg.sender][spender] = amount;
+        emit Approval(msg.sender, spender, amount);
+        return true;
+    }
+    function swapTokensForEth(uint256 tokenAmount) private {
+
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = router.WETH();
+
+        approve(address(this), tokenAmount);
+
+        router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0, // accept any amount of ETH
+            path,
+            address(this),
+            block.timestamp
+        );
+    }
+
+    function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
+        router.addLiquidityETH{value: ethAmount}(
+            address(this),
+            tokenAmount,
+            0,
+            0,
+            lpWallet,
+            block.timestamp
+        );
+
+    }
+    function swapBack() internal lockTheSwap {
+    
+        uint256 tokenBalance = _balances[address(this)]; 
+        uint256 tokensForLiquidity = tokenBalance.mul(toLiquidity).div(100).div(2);     
+        uint256 amountToSwap = tokenBalance.sub(tokensForLiquidity);
+
+        swapTokensForEth(amountToSwap);
+
+        uint256 totalEthBalance = address(this).balance;
+        uint256 ethForMagaCoin = totalEthBalance.mul(toReflections).div(100);
+        uint256 ethForMarketing = totalEthBalance.mul(toMarketing).div(100);
+        uint256 ethForLiquidity = totalEthBalance.mul(toLiquidity).div(100).div(2);
+      
+        if (totalEthBalance > 0){
+            payable(devWallet).transfer(ethForMarketing);
+        }
+        
+        try magaPrinter.deposit{value: ethForMagaCoin}() {} catch {}
+        
+        if (tokensForLiquidity > 0){
+            addLiquidity(tokensForLiquidity, ethForLiquidity);
+        }
+
+    }
+    function manualSwapBack() external onlyOwner {
+        swapBack();
+    }
+}
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

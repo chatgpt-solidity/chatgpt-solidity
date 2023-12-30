@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function with the correct arguments according to the rule provided. The `_ids` argument is passed as the list of tokens being transferred, and the event is emitted before the `_doSafeBatchTransferAcceptanceCheck` function is called, which is the correct order of operations according to the ERC-1155 standard.

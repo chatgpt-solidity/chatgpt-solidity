@@ -1,0 +1,21 @@
+library TokenIdentifiers {
+    uint8 constant INDEX_BITS = 56;
+    uint8 constant SUPPLY_BITS = 40;
+
+    function tokenCreator(uint256 _id) internal pure returns (address) {
+        return address(uint160(_id >> (INDEX_BITS + SUPPLY_BITS)));
+    }
+}
+contract AssetContractShared is AssetContract, ReentrancyGuard {
+
+    mapping(uint256 => address) internal _creatorOverride;
+
+    function creator(uint256 _id) public view returns (address) {
+        if (_creatorOverride[_id] != address(0)) {
+            return _creatorOverride[_id];
+        } else {
+            return _id.tokenCreator();
+        }
+    }
+}
+

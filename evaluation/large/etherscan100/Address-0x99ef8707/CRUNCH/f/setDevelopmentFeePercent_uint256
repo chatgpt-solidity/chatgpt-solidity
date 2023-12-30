@@ -1,0 +1,23 @@
+contract CRUNCH is Context, IERC20, Ownable {
+    uint256 public _developmentFee = 10;
+    function setDevelopmentFeePercent(uint256 developmentFee) external onlyOwner() {
+        _developmentFee = developmentFee;
+    }
+}
+abstract contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

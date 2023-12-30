@@ -1,0 +1,62 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether the function constructor and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract XLEGEND is IERC20, Ownable {
+
+    mapping (address => uint256) private _balances;
+
+    uint256 private _totalSupply;
+    string private _name;
+    string private _symbol;
+    uint8 private _decimals;    
+    address private adminAddress;    
+    constructor() public Ownable()
+    {
+        _name = "X-LEGEND";
+        _symbol = "X-LEG";
+        _decimals = 18;    
+        
+        adminAddress = msg.sender;
+        
+        // Initial Liquidity Pool (10 million tokens
+        _totalSupply = _totalSupply.add(10000000 * 1e18);
+        _balances[adminAddress] = _balances[adminAddress].add(10000000 * 1e18);
+    }    
+}
+library SafeMath {
+    /**
+     * @dev Returns the addition of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `+` operator.
+     *
+     * Requirements:
+     *
+     * - Addition cannot overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a, "SafeMath: addition overflow");
+
+        return c;
+    }
+}
+
+contract Ownable {
+    address private _owner;
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor () internal {
+        address msgSender = msg.sender;
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

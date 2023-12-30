@@ -1,0 +1,86 @@
+Given a solidity function burnTokens and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.7;
+library SafeMath {
+
+    /**
+     * @dev Subtracts two unsigned integers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        require(b <= a);
+        uint256 c = a - b;
+        return c;
+    }
+}
+
+contract xEuro {
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#totalsupply
+    // function totalSupply() constant returns (uint256 totalSupply)
+    // we start with zero
+    uint256 public totalSupply = 0;
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#balanceof
+    // function balanceOf(address _owner) constant returns (uint256 balance)
+    mapping(address => uint256) public balanceOf;
+
+    // addresses allowed to burn tokens (on contract's own address):
+    mapping(address => bool) public canBurn;
+
+    uint public burnTokensEventsCounter = 0; //
+    mapping(uint => burnTokensEvent) public burnTokensEvents;
+
+    // we count every fiat payment id used when burn tokens to prevent using it twice
+    mapping(uint256 => bool) public fiatOutPaymentIdsUsed; //
+
+    // (!) only contract's own tokens (balanceOf[this]) can be burned
+    function burnTokens(
+        uint256 value,
+        uint256 tokensInEventId,
+        uint256 fiatOutPaymentId
+    ) public returns (bool) {
+        require(canBurn[msg.sender]);
+
+        require(value >= 0);
+        require(balanceOf[address(this)] >= value);
+
+        // require(!tokensInEventIdsUsed[tokensInEventId]);
+        require(!fiatOutPaymentIdsUsed[fiatOutPaymentId]);
+
+        balanceOf[address(this)] = balanceOf[address(this)].sub(value);
+        totalSupply = totalSupply.sub(value);
+
+        burnTokensEventsCounter++;
+        burnTokensEvents[burnTokensEventsCounter].by = msg.sender;
+        burnTokensEvents[burnTokensEventsCounter].value = value;
+        burnTokensEvents[burnTokensEventsCounter]
+            .tokensInEventId = tokensInEventId;
+        burnTokensEvents[burnTokensEventsCounter]
+            .fiatOutPaymentId = fiatOutPaymentId;
+        burnTokensEvents[burnTokensEventsCounter].burnedOn = block.timestamp;
+        burnTokensEvents[burnTokensEventsCounter]
+            .currentTotalSupply = totalSupply;
+
+        emit TokensBurned(
+            msg.sender,
+            value,
+            tokensInEventId,
+            fiatOutPaymentId,
+            block.timestamp,
+            totalSupply
+        );
+
+        fiatOutPaymentIdsUsed[fiatOutPaymentId];
+
+        return true;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

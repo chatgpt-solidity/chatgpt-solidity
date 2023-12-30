@@ -1,0 +1,17 @@
+The provided Solidity code defines a contract `OMGToken` which inherits from `MintableToken` and `PausableToken`. The `mintTimelocked` function is designed to mint tokens that are locked until a certain time (`_releaseTime`) and then send them to a `TokenTimelock` contract, which will hold the tokens until they can be released to the `_to` address.
+
+The ERC-20 standard, as described in the provided ERC text, specifies a set of functions and events that a compliant token should implement. The standard focuses on the transfer of tokens, the approval mechanism for third-party transfers, and the querying of token balances and total supply.
+
+The `mintTimelocked` function itself does not directly violate the ERC-20 standard, as the standard does not explicitly forbid the creation of new tokens or the use of time-locked mechanisms. However, there are a few points to consider:
+
+1. The ERC-20 standard requires that the `Transfer` event is emitted when tokens are transferred, including when new tokens are created (with the `_from` address set to `0x0`). The `mint` function within `MintableToken` should emit the `Transfer` event to comply with this requirement.
+
+2. The `mint` function increases the `totalSupply` and the balance of the `_to` address. This is consistent with the ERC-20 standard, which requires that the `totalSupply` reflects the total number of tokens in circulation.
+
+3. The `mint` function uses a `canMint` modifier and an `onlyOwner` modifier to restrict who can mint new tokens. This is a common practice for mintable tokens and does not violate the ERC-20 standard, as the standard does not specify who is allowed to create new tokens or under what conditions.
+
+4. The `throw` statement is used for error handling in the `onlyOwner` and `canMint` modifiers. It is worth noting that the `throw` statement has been deprecated in favor of `require`, `assert`, and `revert` in newer versions of Solidity. Using `throw` is not a violation of the ERC-20 standard, but it is recommended to update the code to use the newer error handling patterns for better gas efficiency and clarity.
+
+5. The `TokenTimelock` contract is not shown in the provided code, but it is important that it correctly handles the locked tokens and complies with the ERC-20 standard when releasing them. The `TokenTimelock` contract should not allow the tokens to be transferred before the `_releaseTime`.
+
+In conclusion, the `mintTimelocked` function and related parts of the code do not inherently violate the ERC-20 standard, but the code should be reviewed to ensure that the `Transfer` event is emitted when tokens are minted, and that the `TokenTimelock` contract complies with the standard. Additionally, updating the error handling to use the newer Solidity patterns is recommended.

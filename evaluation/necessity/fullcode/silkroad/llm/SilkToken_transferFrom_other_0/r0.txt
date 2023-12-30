@@ -1,0 +1,5 @@
+NO
+
+The provided `transferFrom` function and the `_transfer` internal function do not explicitly check for a transfer value of 0. According to the ERC-20 standard, transfers of 0 values must be treated as normal transfers, which means they should go through the same validation checks as any other transfer amount.
+
+Since the code does not reject transfers of 0 value and processes them with the same checks as any other amount (such as checking for enough balance, checking for overflows, and checking if accounts are frozen), it complies with the ERC rule that states transfers of 0 values must be treated as normal transfers.

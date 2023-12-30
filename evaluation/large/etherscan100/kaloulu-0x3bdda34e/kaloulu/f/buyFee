@@ -1,0 +1,5 @@
+contract kaloulu is IERC20, Auth {
+    uint8 private _finalBuyTax  = 0;
+
+    function buyFee() external view returns(uint8) {        return _finalBuyTax;    }
+}

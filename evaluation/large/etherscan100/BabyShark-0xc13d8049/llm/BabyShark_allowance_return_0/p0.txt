@@ -1,0 +1,14 @@
+Given a solidity function allowance and the related parts from a smart contract and an rule for its return value.
+Whether function allowance returns the amount which _spender is still allowed to withdraw from _owner? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract BabyShark is IERC20 {
+    mapping(address => mapping (address => uint256)) allowed;
+
+    function allowance(address owner, address delegate) public override view returns (uint) {
+        return allowed[owner][delegate];
+    }
+}
+"""

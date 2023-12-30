@@ -1,0 +1,4 @@
+contract LottoV3 is Ownable, RrpRequesterV0, ERC721, ERC721Burnable {
+    receive() external payable{
+    }
+}

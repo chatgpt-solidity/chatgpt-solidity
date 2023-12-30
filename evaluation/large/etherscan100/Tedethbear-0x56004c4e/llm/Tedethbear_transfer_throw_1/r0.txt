@@ -1,0 +1,7 @@
+YES
+
+The provided Solidity code for the `Tedethbear` contract, which inherits from `ERC20` and `Ownable`, does not contain any explicit checks that would cause a transfer of 0 value to throw an exception. The `_beforeTokenTransfer` function in the `Tedethbear` contract does not have any conditions that would fail for a transfer of 0 value. It only checks if the trading has started and if the recipient's balance after the transfer would exceed the maximum wallet size. However, these checks would not fail for a transfer of 0 value.
+
+In the `ERC20` contract, the `_transfer` function contains a check to ensure that the sender's balance is greater than or equal to the amount being transferred (`require(senderBalance >= amount, "ERC20: transfer amount exceeds balance");`). A transfer of 0 value would not fail this check because 0 is always less than or equal to any non-negative balance.
+
+Therefore, a transfer of 0 value would not throw an exception based on the provided code.

@@ -1,0 +1,37 @@
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract USdebtcoin is ERC20, Ownable {
+    uint256 public lastLpBurnTime;
+    bool public tradingActive = false;
+    bool public swapEnabled = false;
+
+    // once enabled, can never be turned off
+    function enableTrading() external onlyOwner {
+        tradingActive = true;
+        swapEnabled = true;
+        lastLpBurnTime = block.timestamp;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

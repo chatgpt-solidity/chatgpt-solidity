@@ -1,0 +1,38 @@
+The provided Solidity code for the `transfer` function and related parts of the `Organicco` contract appears to be an implementation of an ERC20 token with some additional functionality from ERC223. Let's analyze the `transfer` function against the ERC20 standard as described in the provided ERC documentation.
+
+According to the ERC20 standard, the `transfer` function should:
+
+1. Transfer `_value` amount of tokens to address `_to`.
+2. Fire the `Transfer` event.
+3. Throw if the sender's account balance does not have enough tokens to spend.
+4. Treat transfers of 0 values as normal transfers and fire the `Transfer` event.
+
+Now, let's look at the `transfer` function in the provided code:
+
+```solidity
+function transfer(address _to, uint _value) public returns (bool) {
+    if (
+        _value > 0 && _value <= _balanceOf[msg.sender] && !isContract(_to)
+    ) {
+        _balanceOf[msg.sender] = _balanceOf[msg.sender].sub(_value);
+        _balanceOf[_to] = _balanceOf[_to].add(_value);
+        Transfer(msg.sender, _to, _value);
+        return true;
+    }
+    return false;
+}
+```
+
+Here are the potential issues and deviations from the ERC20 standard:
+
+1. The function checks if `_value > 0`, which is not in line with the ERC20 standard. The standard states that transfers of 0 values must be treated as normal transfers and fire the `Transfer` event. This implementation would not allow a transfer of 0 value and would not fire the `Transfer` event in such a case.
+
+2. The function uses `!isContract(_to)` to determine if the `_to` address is a contract. This is an additional check that is not part of the ERC20 standard. While this check is related to ERC223 functionality (which aims to prevent tokens from being accidentally sent to contract addresses that cannot handle them), it is not required by ERC20 and could potentially restrict ERC20-compliant transfers to contract addresses.
+
+3. The `Transfer` event is not correctly emitted according to the Solidity version mentioned in the ERC (0.4.17 or above). The correct syntax for emitting events in newer versions of Solidity is `emit Transfer(msg.sender, _to, _value);`.
+
+4. The function should throw (revert the transaction) if the sender does not have enough balance. However, the provided code returns `false` instead of throwing. This is a deviation from the standard, which requires the function to throw in such cases. The use of `assert`, `require`, or `revert` statements would be more appropriate to cause the transaction to fail.
+
+5. The ERC20 standard does not specify the `isContract` function, and its presence is specific to the ERC223 functionality. This is not a violation of ERC20, but it is an additional feature not required by ERC20.
+
+In conclusion, the `transfer` function in the provided `Organicco` contract code does not fully comply with the ERC20 standard due to the issues mentioned above. It is important to adhere to the standard to ensure compatibility with other contracts and services expecting ERC20 behavior.

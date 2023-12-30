@@ -1,0 +1,32 @@
+Given a solidity function freezeAccount and the related parts from a smart contract.
+Whether the function freezeAccount and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * Frozen account list holder
+     */
+    mapping(address => bool) private frozenAccount;
+
+    /**
+     * Freeze specific account
+     * May only be called by smart contract owner.
+     */
+    function freezeAccount(address _target, bool freeze) public {
+        require(msg.sender == owner);
+        require(msg.sender != _target);
+        frozenAccount[_target] = freeze;
+        emit FrozenFunds(_target, freeze);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

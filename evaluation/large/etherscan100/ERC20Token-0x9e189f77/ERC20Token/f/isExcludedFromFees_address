@@ -1,0 +1,8 @@
+contract ERC20Token is ERC20, Ownable {
+
+    mapping(address => bool) private _isExcludedFromFees;
+
+    function isExcludedFromFees(address account) public view returns (bool) {
+        return _isExcludedFromFees[account];
+    }
+}

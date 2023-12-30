@@ -1,0 +1,17 @@
+YES
+
+The provided Solidity interfaces contain the function `transfer(address,uint256) returns(bool)`. The `Token` contract interface declares the function as follows:
+
+```solidity
+function transfer(address _to, uint256 _value) returns (bool success) {}
+```
+
+And the `StandardToken` contract, which inherits from `Token`, implements the function with the same signature:
+
+```solidity
+function transfer(address _to, uint256 _value) returns (bool success) {
+    // ... implementation details ...
+}
+```
+
+The parameter types (`address` and `uint256`) and the return type (`bool`) match the requested interface signature.

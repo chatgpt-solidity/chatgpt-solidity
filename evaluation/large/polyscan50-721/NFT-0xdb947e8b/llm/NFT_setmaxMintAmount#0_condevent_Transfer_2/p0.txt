@@ -1,0 +1,36 @@
+Given a solidity function setmaxMintAmount and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract NFT is ERC721Enumerable, Ownable {
+  uint256 public maxMintAmount = 15300;
+
+  function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner {
+    maxMintAmount = _newmaxMintAmount;
+  }
+}
+"""
+
+Action:"""
+When `tokenId` is destroyed and removed from circulation.
+"""

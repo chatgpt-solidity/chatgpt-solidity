@@ -1,0 +1,18 @@
+The `balanceOf` function in the provided `DSTokenBase` contract appears to be compliant with the ERC20 standard as described in the given ERC documentation. The ERC20 standard specifies that the `balanceOf` function should:
+
+- Accept an address `_owner` as a parameter.
+- Return the account balance of the `_owner`.
+
+The provided `balanceOf` function in the `DSTokenBase` contract does exactly that:
+
+```solidity
+function balanceOf(address src) public view returns (uint) {
+    return _balances[src];
+}
+```
+
+It takes an address `src` as an input parameter and returns the balance of that address from the `_balances` mapping, which is the standard behavior expected for an ERC20 token's `balanceOf` function.
+
+The ERC20 standard does not specify the exact name of the parameter; it uses `_owner` in the documentation, but using `src` as the parameter name in the actual implementation does not violate the standard as long as the function behaves as expected.
+
+Therefore, based on the information provided, the `balanceOf` function does not violate the ERC20 standard. However, to fully ensure compliance, the rest of the contract would also need to implement the other required functions and events as specified by the ERC20 standard, such as `transfer`, `transferFrom`, `approve`, `allowance`, and the `Transfer` and `Approval` events. Additionally, the contract should follow the standard's guidelines for error handling and returning boolean values for functions that can fail.

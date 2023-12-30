@@ -1,0 +1,28 @@
+contract ERC1155 {
+    mapping(uint256 => mapping(address => uint256)) private balances;
+
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
+    }
+
+    // New function for batch transferring NFTs to multiple addresses
+    function batchTransfer(
+        address[] memory recipients,
+        uint256 tokenId,
+        uint256 amount
+    ) external onlyOwner {
+        for (uint256 i = 0; i < recipients.length; i++) {
+            address recipient = recipients[i];
+            require(
+                balances[tokenId][msg.sender] >= amount,
+                "Insufficient balance"
+            );
+            balances[tokenId][msg.sender] -= amount;
+            balances[tokenId][recipient] += amount;
+        }
+    }
+}
+

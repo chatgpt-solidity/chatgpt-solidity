@@ -1,0 +1,7 @@
+YES
+
+The provided Solidity function `airdrop` within the `MonsterGeads` contract calls the `_mint` function, which is defined in the `ERC1155` contract. The `_mint` function is responsible for creating (`amount`) tokens of token type (`id`), and assigning them to (`to`).
+
+The `_mint` function performs several operations, including updating the balance of the recipient (`_balances[id][to] += amount;`) and emitting the `TransferSingle` event. The event is emitted with the following parameters: `operator`, `address(0)` (indicating minting), `to`, `id`, and `amount`.
+
+The rule states that the `_id` argument must be the token type being transferred. In the `_mint` function, the `id` parameter is used as the token type, and it is passed correctly to the `TransferSingle` event. Therefore, the `TransferSingle` event is emitted according to the given rule, with `_id` being the token type transferred.

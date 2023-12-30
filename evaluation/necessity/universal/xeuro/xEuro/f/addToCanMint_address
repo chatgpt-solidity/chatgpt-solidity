@@ -1,0 +1,19 @@
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+
+    mapping(address => bool) public isAdmin;
+    // addresses allowed to mint tokens:
+    mapping(address => bool) public canMint;
+
+    function addToCanMint(address _newAddress) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canMint[_newAddress] = true;
+        emit AddressAddedToCanMint(msg.sender, _newAddress);
+        return true;
+    } //
+}
+

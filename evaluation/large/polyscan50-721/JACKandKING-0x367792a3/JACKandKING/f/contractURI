@@ -1,0 +1,7 @@
+contract JACKandKING is ERC721, ERC721Enumerable, ERC721Pausable, ERC721Burnable, ERC721URIStorage, ERC721Royalty, Ownable {
+    */
+
+    function contractURI() public pure returns (string memory) {
+        return ""; 
+    }
+}

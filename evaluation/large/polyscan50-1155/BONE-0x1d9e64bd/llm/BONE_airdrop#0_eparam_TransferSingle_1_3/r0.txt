@@ -1,0 +1,15 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function within the `ERC1155` contract. The `_mint` function is called by the `airdrop` function in the `BONE` contract, which inherits from `ERC1155`.
+
+The `_mint` function takes the following parameters: `address to, uint256 id, uint256 amount, bytes memory data`. It then creates a singleton array for the `id` and `amount` using the `_asSingletonArray` helper function, which is used to call the `_beforeTokenTransfer` and `_afterTokenTransfer` hooks.
+
+After performing the minting operation by increasing the balance of the `to` address for the token `id` by the `amount`, the `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred, which is `address(0)` since minting creates new tokens.
+- `_to`: The address to which the tokens are minted, which is the `to` parameter of the `_mint` function.
+- `_id`: The token type being transferred, which is the `id` parameter of the `_mint` function.
+- `_value`: The number of tokens being transferred, which is the `amount` parameter of the `_mint` function.
+
+The `_id` argument in the `TransferSingle` event corresponds to the token type being transferred, as required by the given rule. Therefore, the `TransferSingle` event is emitted according to the rule.

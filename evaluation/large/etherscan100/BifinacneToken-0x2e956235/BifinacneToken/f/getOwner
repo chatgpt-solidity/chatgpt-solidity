@@ -1,0 +1,11 @@
+contract BlackList is Ownable, BasicToken {
+
+    function getOwner() external view returns (address) {
+        return owner;
+    }
+}
+
+contract Ownable {
+    address public owner;
+}
+

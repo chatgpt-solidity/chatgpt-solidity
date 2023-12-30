@@ -1,0 +1,3 @@
+YES
+
+The function `Airdrop` emits the `TransferSingle` event within the loop that iterates over the `itemsIds` array. The `_operator` argument in the `TransferSingle` event is set to `msg.sender`, which is the address of the account that called the `Airdrop` function. Since the `Airdrop` function is guarded by the `onlyOwner` modifier, `msg.sender` must be the owner of the contract, and thus is approved to make the transfer. Therefore, the event `TransferSingle` is emitted according to the given rule.

@@ -1,0 +1,308 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.4;
+contract ERC1155Tradable is
+    ContextMixin,
+    ERC1155,
+    NativeMetaTransaction,
+    Ownable,
+    Pausable
+{
+
+    address public proxyRegistryAddress;
+
+
+    mapping(uint256 => mapping(address => uint256)) private balances;
+    mapping(uint256 => uint256) private _supply;
+
+    modifier onlyApproved(address _from) {
+        require(
+            _from == _msgSender() || isApprovedForAll(_from, _msgSender()),
+            "ERC1155Tradable#onlyApproved: CALLER_NOT_ALLOWED"
+        );
+        _;
+    }
+
+    function balanceOf(address account, uint256 id)
+        public
+        view
+        virtual
+        override
+        returns (uint256)
+    {
+        require(
+            account != address(0),
+            "ERC1155: balance query for the zero address"
+        );
+        return balances[id][account];
+    }
+
+    function totalSupply(uint256 _id) public view returns (uint256) {
+        return _supply[_id];
+    }
+    function isApprovedForAll(address _owner, address _operator)
+        public
+        view
+        override
+        returns (bool isOperator)
+    {
+        if (_isProxyForUser(_owner, _operator)) {
+            return true;
+        }
+
+        return super.isApprovedForAll(_owner, _operator);
+    }
+
+    function burn(
+        address _from,
+        uint256 _id,
+        uint256 _quantity
+    ) public virtual onlyApproved(_from) {
+        _burn(_from, _id, _quantity);
+    }
+
+    function _burn(
+        address account,
+        uint256 id,
+        uint256 amount
+    ) internal override whenNotPaused {
+        require(account != address(0), "ERC1155#_burn: BURN_FROM_ZERO_ADDRESS");
+        require(amount > 0, "ERC1155#_burn: AMOUNT_LESS_THAN_ONE");
+
+        address operator = _msgSender();
+
+        _beforeTokenTransfer(
+            operator,
+            account,
+            address(0),
+            asSingletonArray(id),
+            asSingletonArray(amount),
+            ""
+        );
+
+        uint256 accountBalance = balances[id][account];
+        require(
+            accountBalance >= amount,
+            "ERC1155#_burn: AMOUNT_EXCEEDS_BALANCE"
+        );
+        balances[id][account] = accountBalance - amount;
+        _supply[id] -= amount;
+
+        emit TransferSingle(operator, account, address(0), id, amount);
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        virtual
+        returns (bool)
+    {
+        if (!proxyRegistryAddress.isContract()) {
+            return false;
+        }
+        ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
+        return address(proxyRegistry.proxies(_user)) == _address;
+    }
+
+    function asSingletonArray(uint256 element)
+        private
+        pure
+        returns (uint256[] memory)
+    {
+        uint256[] memory array = new uint256[](1);
+        array[0] = element;
+
+        return array;
+
+    }
+    function _msgSender() internal view override returns (address sender) {
+        return ContextMixin.msgSender();
+    }
+}
+
+contract AssetContract is ERC1155Tradable {
+    modifier onlyTokenAmountOwned(
+        address _from,
+        uint256 _id,
+        uint256 _quantity
+    ) {
+        require(
+            _ownsTokenAmount(_from, _id, _quantity),
+            "AssetContract#onlyTokenAmountOwned: ONLY_TOKEN_AMOUNT_OWNED_ALLOWED"
+        );
+        _;
+    }
+
+    function _ownsTokenAmount(
+        address _from,
+        uint256 _id,
+        uint256 _quantity
+    ) internal view returns (bool) {
+        return balanceOf(_from, _id) >= _quantity;
+    }
+
+    function balanceOf(address _owner, uint256 _id)
+        public
+        view
+        virtual
+        override
+        returns (uint256)
+    {
+        uint256 balance = super.balanceOf(_owner, _id);
+        return
+            _isCreatorOrProxy(_id, _owner)
+                ? balance + _remainingSupply(_id)
+                : balance;
+    }
+
+    function burn(
+        address _from,
+        uint256 _id,
+        uint256 _quantity
+    ) public override onlyTokenAmountOwned(_from, _id, _quantity) {
+        super.burn(_from, _id, _quantity);
+    }
+}
+
+contract AssetContractShared is AssetContract, ReentrancyGuard {
+
+    mapping(address => bool) public sharedProxyAddresses;
+
+    mapping(uint256 => address) internal _creatorOverride;
+
+    function creator(uint256 _id) public view returns (address) {
+        if (_creatorOverride[_id] != address(0)) {
+            return _creatorOverride[_id];
+        } else {
+            return _id.tokenCreator();
+        }
+    }
+
+    function maxSupply(uint256 _id) public pure returns (uint256) {
+        return _id.tokenMaxSupply();
+    }
+
+    function _remainingSupply(uint256 _id)
+        internal
+        view
+        override
+        returns (uint256)
+    {
+        return maxSupply(_id) - totalSupply(_id);
+
+    }
+    function _isCreatorOrProxy(uint256 _id, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        address creator_ = creator(_id);
+        return creator_ == _address || _isProxyForUser(creator_, _address);
+
+    }
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        if (sharedProxyAddresses[_address]) {
+            return true;
+        }
+        return super._isProxyForUser(_user, _address);
+    }
+}
+
+library TokenIdentifiers {
+    uint8 constant INDEX_BITS = 56;
+    uint8 constant SUPPLY_BITS = 40;
+
+    uint256 constant SUPPLY_MASK = (uint256(1) << SUPPLY_BITS) - 1;
+
+    function tokenMaxSupply(uint256 _id) internal pure returns (uint256) {
+        return _id & SUPPLY_MASK;
+    }
+
+    function tokenCreator(uint256 _id) internal pure returns (address) {
+        return address(uint160(_id >> (INDEX_BITS + SUPPLY_BITS)));
+    }
+}
+abstract contract Pausable is Context {
+
+    bool private _paused;
+
+    function paused() public view virtual returns (bool) {
+        return _paused;
+
+    }
+    modifier whenNotPaused() {
+        require(!paused(), "Pausable: paused");
+        _;
+    }
+}
+
+library Address {
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize, which returns 0 for contracts in
+        // construction, since the code is only stored at the end of the
+        // constructor execution.
+
+        uint256 size;
+        assembly {
+            size := extcodesize(account)
+        }
+        return size > 0;
+    }
+}
+
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function isApprovedForAll(address account, address operator)
+        public
+        view
+        virtual
+        override
+        returns (bool)
+    {
+        return _operatorApprovals[account][operator];
+    }
+
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {}
+}
+
+abstract contract ContextMixin {
+    function msgSender() internal view returns (address payable sender) {
+        if (msg.sender == address(this)) {
+            bytes memory array = msg.data;
+            uint256 index = msg.data.length;
+            assembly {
+                sender := and(
+                    mload(add(array, index)),
+                    0xffffffffffffffffffffffffffffffffffffffff
+                )
+            }
+        } else {
+            sender = payable(msg.sender);
+        }
+        return sender;
+    }
+}
+"""
+
+Action:"""
+approval for a second party/operator address to manage all tokens for an owner address is enabled or disabled (absence of an event assumes disabled).
+"""

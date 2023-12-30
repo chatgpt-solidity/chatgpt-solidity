@@ -1,0 +1,29 @@
+contract NFTs_Latam_Slot is
+    Initializable,
+    INFTlatamContract,
+    IOwnable,
+    IRoyalty,
+    IPrimarySale,
+    IPlatformFee,
+    ReentrancyGuardUpgradeable,
+    EIP712Upgradeable,
+    MulticallUpgradeable,
+    AccessControlEnumerableUpgradeable,
+    ERC721EnumerableUpgradeable,
+    ITokenERC721
+{
+
+    /// @dev The adress that receives all primary sales value.
+    address public platformFeeRecipient;
+
+    /// @dev The % of primary sales collected by the contract as fees.
+    uint128 public platformFeeBps;
+
+    ///     =====   Getter functions    =====
+
+    /// @dev Returns the platform fee bps and recipient.
+    function getPlatformFeeInfo() external view returns (address, uint16) {
+        return (platformFeeRecipient, uint16(platformFeeBps));
+    }
+}
+

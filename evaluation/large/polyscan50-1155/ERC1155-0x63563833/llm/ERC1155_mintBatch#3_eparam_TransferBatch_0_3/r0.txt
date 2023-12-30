@@ -1,0 +1,3 @@
+YES
+
+The `mintBatch` function in the provided Solidity code emits the `TransferBatch` event according to the given rule. The `_ids` argument passed to the `TransferBatch` event is `itemsIds`, which is the list of tokens being transferred. The `amounts` argument passed as `_values` represents the number of tokens for each corresponding token ID in `itemsIds` that are being transferred to the `to` address. The event is emitted after the tokens have been minted and the balances updated, which is consistent with the rule that `_ids` must be the list of tokens being transferred.

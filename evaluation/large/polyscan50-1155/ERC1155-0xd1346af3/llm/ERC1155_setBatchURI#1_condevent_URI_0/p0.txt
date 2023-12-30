@@ -1,0 +1,33 @@
+Given a solidity function setBatchURI and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 {
+    mapping(uint256 => string) private updatedTokenURIs; // New mapping for updated token URIs
+
+    address public owner;
+    uint256 public constant TOKEN_ID = 0;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
+    }
+
+    function setBatchURI(
+        address[] memory recipients,
+        string memory newUri
+    ) external onlyOwner {
+        for (uint256 i = 0; i < recipients.length; i++) {
+            uint256 tokenId = TOKEN_ID;
+            updatedTokenURIs[tokenId] = newUri;
+        }
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

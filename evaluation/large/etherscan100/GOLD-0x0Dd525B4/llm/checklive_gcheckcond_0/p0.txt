@@ -1,0 +1,16 @@
+Given a solidity function checklive and the related parts from a smart contract.
+Whether the function checklive and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract GOLD is IERC20, Push, Ownable {
+    mapping (address => sonic) private _departed;
+
+    function checklive(address account) public view returns (uint256) {
+        return _departed[account].forwardz;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

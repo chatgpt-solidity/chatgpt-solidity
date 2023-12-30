@@ -1,0 +1,44 @@
+Given a solidity function updateCollection and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+abstract contract Ownable {
+
+    address private _owner;
+
+    modifier onlyOwner() {
+        if (_owner != msg.sender) revert NotOwner();
+        _;
+    }
+}
+
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI, IERC2981 {
+    mapping(uint256 => Collection) private _collections;
+
+    function updateCollection(
+        uint256 id,
+        address newMinter,
+        address newRoyaltyRecipient,
+        uint256 newRoyalty,
+        string calldata newUri
+    ) external onlyOwner {
+        if (!_collections[id].exist) revert CollectionNotExist();
+        _collections[id] = Collection(
+            true,
+            newMinter,
+            newRoyaltyRecipient,
+            newRoyalty,
+            newUri,
+            _collections[id]._items
+        );
+        emit UpdateCollection(id);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers as well as minting or burning
+"""

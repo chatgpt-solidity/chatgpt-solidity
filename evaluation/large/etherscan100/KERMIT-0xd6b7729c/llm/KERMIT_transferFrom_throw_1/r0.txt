@@ -1,0 +1,13 @@
+YES
+
+The `transferFrom` function in the provided Solidity code uses the SafeMath library for arithmetic operations, which includes checks for overflows and underflows. When transferring a value of 0, the SafeMath `sub` function will not throw an error because subtracting 0 from any allowance will not cause an underflow. Additionally, the `transferFrom` function does not have any explicit checks that would cause it to revert when the transfer amount is 0.
+
+However, it's important to note that the `_transfer` function, which is called by `transferFrom`, has a `require` statement that checks if the `amount` is greater than 0:
+
+```solidity
+require(amount > 0, "Transfer amount must be greater than zero");
+```
+
+This check will cause the function to revert if the transfer amount is 0. Therefore, while the SafeMath operations themselves will not throw an error for a transfer of 0, the `require` statement in the `_transfer` function will prevent transfers of 0 values from succeeding. 
+
+Given this, the correct answer to whether the `transferFrom` function and its related parts will not throw if transfers of 0 values is actually NO, because of the `require` statement in the `_transfer` function.

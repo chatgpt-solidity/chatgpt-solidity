@@ -1,0 +1,24 @@
+The provided Solidity code for the `getCurrentState` function and the related parts from the smart contract named `KIMEX` does not directly violate the ERC-20 standard because the ERC-20 standard does not specify anything about a `saleState` or a function to retrieve it. The ERC-20 standard is specifically a token standard that outlines a common list of rules for Ethereum tokens to follow within the larger Ethereum ecosystem, including how they can be transferred, how transactions are approved, how users can access token data, and how events are emitted.
+
+The ERC-20 standard specifies the following methods and events that a compliant token must implement:
+
+- `totalSupply`
+- `balanceOf`
+- `transfer`
+- `transferFrom`
+- `approve`
+- `allowance`
+- `Transfer` event
+- `Approval` event
+
+Additionally, it suggests (but does not require) the implementation of the following optional methods:
+
+- `name`
+- `symbol`
+- `decimals`
+
+The `getCurrentState` function in the `KIMEX` contract is not part of the ERC-20 standard. It seems to be a custom function that is likely used to manage the state of a token sale or similar mechanism within the `KIMEX` contract. As long as the contract also implements all the required functions and events of the ERC-20 standard, having additional functions like `getCurrentState` does not violate the standard.
+
+However, if the `KIMEX` contract is intended to be an ERC-20 compliant token, it must implement all the required functions and events listed in the ERC-20 standard. The provided code snippet does not show the implementation of these required functions and events, so it is not possible to determine from the given information alone whether the `KIMEX` contract is fully ERC-20 compliant.
+
+In summary, the `getCurrentState` function does not violate the ERC-20 standard, but to be compliant with ERC-20, the `KIMEX` contract must also implement all the required functions and events specified in the standard.

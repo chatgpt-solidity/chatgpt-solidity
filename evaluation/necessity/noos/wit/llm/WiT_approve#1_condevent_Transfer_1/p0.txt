@@ -1,0 +1,73 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract AbstractToken is Token, SafeMath {
+
+    /**
+     * Allow given spender to transfer given number of tokens from message sender.
+     * @param _spender address to allow the owner of to transfer tokens from message sender
+     * @param _value number of tokens to allow to transfer
+     * @return true if token transfer was successfully approved, false otherwise
+     */
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        allowances[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+
+    }
+    /**
+     * Tell how many tokens given spender is currently allowed to transfer from
+     * given owner.
+     *
+     * @param _owner address to get number of tokens allowed to be transferred
+     *        from the owner of
+     * @param _spender address to get number of tokens allowed to be transferred
+     *        by the owner of
+     * @return number of tokens given spender is currently allowed to transfer
+     *         from given owner
+     */
+    function allowance(
+        address _owner,
+        address _spender
+    ) public view returns (uint256 remaining) {
+        return allowances[_owner][_spender];
+    }
+
+    /**
+     * Mapping from addresses of token holders to the mapping of addresses of
+     * spenders to the allowances set by these token holders to these spenders.
+     */
+    mapping(address => mapping(address => uint256)) private allowances;
+}
+
+contract WiT is AbstractToken {
+
+    /**
+     * Change how many tokens given spender is allowed to transfer from message
+     * spender.  In order to prevent double spending of allowance,
+     * To change the approve amount you first have to reduce the addresses`
+     * allowance to zero by calling `approve(_spender, 0)` if it is not
+     * already 0 to mitigate the race condition described here:
+     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
+     * @param _spender address to allow the owner of to transfer tokens from
+     *        message sender
+     * @param _value number of tokens to allow to transfer
+     * @return true if token transfer was successfully approved, false otherwise
+     */
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        require(allowance(msg.sender, _spender) == 0 || _value == 0);
+        return AbstractToken.approve(_spender, _value);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

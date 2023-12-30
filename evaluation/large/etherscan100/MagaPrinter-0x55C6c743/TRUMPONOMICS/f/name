@@ -1,0 +1,5 @@
+contract TRUMPONOMICS is IERC20, Auth {
+
+    string private constant _name = "FuckJoeBidenFuckFaniWillisFuckBidenomicsFuckWeHadEnoughFuckTheDemocratsMagaWewantTrumpInTheOfficeWeWantTRUMPONOMICSxINU";
+    function name() external pure override returns (string memory) { return _name; }
+}

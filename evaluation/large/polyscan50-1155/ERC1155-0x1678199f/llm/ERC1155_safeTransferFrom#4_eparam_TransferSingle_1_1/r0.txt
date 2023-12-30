@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` private function with the correct arguments according to the given rule. The `_from` argument in the event is indeed the address of the holder whose balance is decreased, as required by the rule. The `TransferSingle` event is emitted after the balance of the `_from` address is decreased and before the `_doSafeTransferAcceptanceCheck` function is called.

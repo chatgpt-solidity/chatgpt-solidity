@@ -1,0 +1,9 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function isApprovedForAll(address owner, address operator) public view virtual override returns (bool) {
+        return _operatorApprovals[owner][operator];
+    }
+}
+

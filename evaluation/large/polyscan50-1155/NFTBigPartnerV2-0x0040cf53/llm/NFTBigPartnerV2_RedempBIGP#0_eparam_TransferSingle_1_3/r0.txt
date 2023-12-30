@@ -1,0 +1,15 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function of the `ERC1155` contract. The `_burn` function is called within the `burn` function of the `ERC1155Burnable` contract, which is in turn called by the `RedempBIGP` function in the `NFTBigPartnerV2` contract.
+
+The `_burn` function takes three arguments: `address from`, `uint256 id`, and `uint256 amount`. These arguments represent the address from which tokens are being burned, the token type (`id`), and the amount of tokens to burn, respectively.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the burn operation, obtained by calling `_msgSender()`.
+- `_from`: The address from which the tokens are being burned.
+- `_to`: The zero address, since tokens are being burned and not transferred to another account.
+- `_id`: The token type being burned.
+- `_value`: The amount of tokens being burned.
+
+The rule states that the `_id` argument must be the token type being transferred (or in this case, burned), which is indeed the case here. The `id` passed to the `_burn` function is used as the `_id` argument in the `TransferSingle` event, satisfying the given rule.

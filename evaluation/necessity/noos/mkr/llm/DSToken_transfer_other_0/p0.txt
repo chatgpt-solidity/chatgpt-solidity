@@ -1,0 +1,56 @@
+Given a solidity function transfer and the related parts from a smart contract and an ERC rule for it.
+Whether the function transfer and its related parts violate the rule? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => mapping(address => uint256)) _approvals;
+    mapping(address => uint256) _balances;
+
+    function transfer(address dst, uint wad) public returns (bool) {
+        return transferFrom(msg.sender, dst, wad);
+    }
+}
+
+contract DSStop is DSNote, DSAuth {
+    bool public stopped;
+
+    modifier stoppable() {
+        require(!stopped);
+        _;
+    }
+}
+
+contract DSToken is DSTokenBase(0), DSStop {
+
+    function transferFrom(
+        address src,
+        address dst,
+        uint wad
+    ) public stoppable returns (bool) {
+        if (src != msg.sender && _approvals[src][msg.sender] != uint(-1)) {
+            _approvals[src][msg.sender] = sub(_approvals[src][msg.sender], wad);
+        }
+
+        _balances[src] = sub(_balances[src], wad);
+        _balances[dst] = add(_balances[dst], wad);
+
+        Transfer(src, dst, wad);
+
+        return true;
+    }
+}
+
+contract DSMath {
+    function add(uint x, uint y) internal pure returns (uint z) {
+        require((z = x + y) >= x);
+    }
+
+    function sub(uint x, uint y) internal pure returns (uint z) {
+        require((z = x - y) <= x);
+    }
+}
+"""
+
+ERC Rule:"""
+Transfers of 0 values MUST be treated as normal transfers
+"""

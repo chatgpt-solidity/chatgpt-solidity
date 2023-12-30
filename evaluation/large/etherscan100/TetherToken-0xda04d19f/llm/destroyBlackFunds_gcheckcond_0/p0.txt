@@ -1,0 +1,72 @@
+Given a solidity function destroyBlackFunds and the related parts from a smart contract.
+Whether the function destroyBlackFunds and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable is Context {
+  address private _owner;
+
+  /**
+   * @dev Throws if called by any account other than the owner.
+   */
+  modifier onlyOwner() {
+    require(_owner == _msgSender(), "Ownable: caller is not the owner");
+    _;
+  }
+}
+
+contract Context {
+
+  function _msgSender() internal view returns (address payable) {
+    return msg.sender;
+  }
+}
+
+contract BasicToken is Ownable, ERC20Basic {
+
+    mapping(address => uint) public balances;
+
+    /**
+    * @dev Gets the balance of the specified address.
+    * @param _owner The address to query the the balance of.
+    * @return An uint representing the amount owned by the passed address.
+    */
+    function balanceOf(address _owner) public view returns (uint balance) {
+        return balances[_owner];
+    }
+}
+
+contract BlackList is Ownable, BasicToken {
+
+    mapping (address => bool) public isBlackListed;
+
+    function destroyBlackFunds (address _blackListedUser) public onlyOwner {
+        require(isBlackListed[_blackListedUser]);
+        uint dirtyFunds = balanceOf(_blackListedUser);
+        balances[_blackListedUser] = 0;
+        _totalSupply -= dirtyFunds;
+        emit DestroyedBlackFunds(_blackListedUser, dirtyFunds);
+    }
+}
+
+contract ERC20Basic {
+    uint public _totalSupply;
+}
+
+contract TetherToken is Pausable, StandardToken, BlackList {
+    address public upgradedAddress;
+    bool public deprecated;
+
+    // Forward ERC20 methods to upgraded contract if this one is deprecated
+    function balanceOf(address who) public view returns (uint) {
+        if (deprecated) {
+            return UpgradedStandardToken(upgradedAddress).balanceOf(who);
+        } else {
+            return super.balanceOf(who);
+        }
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

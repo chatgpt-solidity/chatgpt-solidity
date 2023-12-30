@@ -1,0 +1,3 @@
+YES
+
+The provided Solidity interfaces contain the event interface `event Transfer(address indexed _from, address indexed _to, uint256 _value);` with the correct parameter types and index attributes as specified in the question.

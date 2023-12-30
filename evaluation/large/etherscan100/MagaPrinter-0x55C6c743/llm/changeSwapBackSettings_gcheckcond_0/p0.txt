@@ -1,0 +1,30 @@
+Given a solidity function changeSwapBackSettings and the related parts from a smart contract.
+Whether the function changeSwapBackSettings and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+    bool public swapAndLiquifyEnabled = true;
+    uint256 public swapThreshold = _totalSupply.mul(5).div(10000);
+
+    function changeSwapBackSettings(bool enableSwapBack, uint256 newSwapBackLimit) external onlyOwner {
+        swapAndLiquifyEnabled  = enableSwapBack;
+        swapThreshold = newSwapBackLimit;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

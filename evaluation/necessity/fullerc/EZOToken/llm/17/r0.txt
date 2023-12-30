@@ -1,0 +1,19 @@
+The `balanceOf` function in the provided Solidity code for the `EZOToken` contract is intended to return the token balance of a given address. According to the ERC-20 standard, the `balanceOf` function is specified as follows:
+
+```solidity
+function balanceOf(address _owner) public view returns (uint256 balance);
+```
+
+The `balanceOf` function in the `EZOToken` contract is implemented as:
+
+```solidity
+function balanceOf(address _who) public view returns (uint) {
+    return balances[_who];
+}
+```
+
+The implementation in `EZOToken` is consistent with the ERC-20 standard's specification for the `balanceOf` function. It correctly takes an address as an argument and returns the balance of that address as a `uint256`. The only minor difference is the use of `uint` instead of `uint256` in the return type, but in Solidity, `uint` is an alias for `uint256`, so this does not constitute a violation of the standard.
+
+The ERC-20 standard also requires that the `balanceOf` function be a view function, which does not modify the state and can return data. The `balanceOf` function in `EZOToken` is correctly marked as `view`.
+
+Therefore, the `balanceOf` function and the related parts provided in the `EZOToken` contract do not violate the ERC-20 standard. The contract appears to be compliant with the ERC-20 `balanceOf` function specification.

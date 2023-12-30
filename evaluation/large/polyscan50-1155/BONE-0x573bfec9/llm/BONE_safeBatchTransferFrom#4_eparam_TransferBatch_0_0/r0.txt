@@ -1,0 +1,45 @@
+YES
+
+The function `_safeBatchTransferFrom` emits the `TransferBatch` event with the `operator` argument set to the result of `_msgSender()`, which returns `msg.sender`. This is consistent with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+Here is the relevant part of the code:
+
+```solidity
+function _safeBatchTransferFrom(
+    address from,
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual {
+    // ... (omitted code for brevity)
+
+    address operator = _msgSender();
+
+    // ... (omitted code for brevity)
+
+    emit TransferBatch(operator, from, to, ids, amounts);
+
+    // ... (omitted code for brevity)
+}
+```
+
+The `safeBatchTransferFrom` public function, which is the external interface that calls `_safeBatchTransferFrom`, requires that the caller (`msg.sender`) is either the token owner or an approved operator:
+
+```solidity
+function safeBatchTransferFrom(
+    address from,
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) public virtual override {
+    require(
+        from == _msgSender() || isApprovedForAll(from, _msgSender()),
+        "ERC1155: caller is not token owner or approved"
+    );
+    _safeBatchTransferFrom(from, to, ids, amounts, data);
+}
+```
+
+This ensures that the `_operator` argument in the `TransferBatch` event is indeed an approved entity to make the transfer, as per the given rule.

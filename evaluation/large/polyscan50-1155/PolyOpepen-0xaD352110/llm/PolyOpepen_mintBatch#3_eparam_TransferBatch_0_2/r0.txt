@@ -1,0 +1,7 @@
+YES
+
+The `mintBatch` function in the provided Solidity code calls the `_mintBatch` internal function, which is responsible for minting a batch of tokens. The `_mintBatch` function ensures that the `to` address is not the zero address, checks that the `ids` and `amounts` arrays have the same length, and then proceeds to mint the tokens by increasing the balance of the `to` address for each token id in the `ids` array by the corresponding amount in the `amounts` array.
+
+After updating the balances, the `_mintBatch` function emits the `TransferBatch` event with the `_operator` set to the message sender (which is the owner in the case of `mintBatch`), `_from` set to the zero address (indicating minting), `_to` set to the recipient's address, `_ids` set to the array of token ids, and `_values` set to the array of amounts.
+
+The rule specified is that the `_to` argument must be the address of the recipient whose balance is increased, and this is indeed the case in the provided code. The `TransferBatch` event is emitted with the `_to` argument correctly set to the address of the recipient, as required by the rule.

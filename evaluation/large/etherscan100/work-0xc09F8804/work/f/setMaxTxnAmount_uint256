@@ -1,0 +1,22 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract work is Context, IERC20, Ownable {
+    uint256 private constant _tTotal = 1000000000 * 10**9;
+    uint256 public _maxTxAmount = _tTotal.mul(3).div(100);
+    function setMaxTxnAmount(uint256 amountPercent) public onlyOwner {
+        require(amountPercent>0);
+        _maxTxAmount = (_tTotal * amountPercent ) / 100;
+    }
+}
+contract Ownable is Context {
+    address internal _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+

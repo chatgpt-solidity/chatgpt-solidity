@@ -1,0 +1,3 @@
+YES
+
+The `_mint` function in the `USDC` contract calls the internal `_mint` function of the `ERC1155` contract, which emits the `TransferSingle` event. The `_id` argument passed to the `_mint` function in the `USDC` contract is used as the token type (`id`) in the `TransferSingle` event within the internal `_mint` function of the `ERC1155` contract. Therefore, the rule is followed, and the `TransferSingle` event is emitted with the `_id` argument being the token type transferred.

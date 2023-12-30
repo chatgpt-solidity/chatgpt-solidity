@@ -1,0 +1,306 @@
+{
+    "file": "evaluation/etherscan100/XDOGECoin-0x266cb63e.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.10",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/balanceOf_address",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/allowance_address_address",
+                "getCirculatingSupply() returns(uint256)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/getCirculatingSupply",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/decreaseAllowance_address_uint256",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/approve_address_uint256",
+                "receive() returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/receive",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/transferFrom_address_address_uint256",
+                "startTrading() returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/startTrading",
+                "rescueFunds() returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/rescueFunds",
+                "rescueTokens(IERC20,address,uint256) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/rescueTokens_IERC20_address_uint256",
+                "updateSetting(address[],bool) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/updateSetting_address[]_bool",
+                "addOrRemoveBots(address[],bool) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/addOrRemoveBots_address[]_bool",
+                "setBuyFee(uint256,uint256) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/setBuyFee_uint256_uint256",
+                "enableTxLimit(bool) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/enableTxLimit_bool",
+                "enableWalletLimit(bool) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/enableWalletLimit_bool",
+                "excludeFromFee(address,bool) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/excludeFromFee_address_bool",
+                "excludeWalletLimit(address,bool) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/excludeWalletLimit_address_bool",
+                "excludeTxLimit(address,bool) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/excludeTxLimit_address_bool",
+                "setMaxWalletLimit(uint256) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/setMaxWalletLimit_uint256",
+                "setTxLimit(uint256) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/setTxLimit_uint256",
+                "setMarketingWallet(address) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/setMarketingWallet_address",
+                "setMarketPair(address,bool) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/setMarketPair_address_bool",
+                "setSwapBackSettings(bool,uint256,bool) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/setSwapBackSettings_bool_uint256_bool",
+                "setManualRouter(address) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/setManualRouter_address",
+                "setManualPair(address) returns()": ".temp/etherscan100/XDOGECoin-0x266cb63e/XDOGECoin/f/setManualPair_address"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getCirculatingSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "startTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "rescueFunds() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "rescueTokens(IERC20,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSetting(address[],bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addOrRemoveBots(address[],bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBuyFee(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "enableTxLimit(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "enableWalletLimit(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeFromFee(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeWalletLimit(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeTxLimit(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMaxWalletLimit(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setTxLimit(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMarketingWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMarketPair(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setSwapBackSettings(bool,uint256,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setManualRouter(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setManualPair(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "EnableTxLimit() returns(bool)",
+                "DexRouter() returns(IDexSwapRouter)",
+                "trading() returns(bool)",
+                "DexPair() returns(address)",
+                "_walletMax() returns(uint256)",
+                "isTokenWL(address) returns(bool)",
+                "swapEnabled() returns(bool)",
+                "deadAddress() returns(address)",
+                "isBot(address) returns(bool)",
+                "isTxLimitExempt(address) returns(bool)",
+                "zeroAddress() returns(address)",
+                "swapByLimit() returns(bool)",
+                "checkWalletLimit() returns(bool)",
+                "isMarketPair(address) returns(bool)",
+                "totalSellFee() returns(uint256)",
+                "isExcludedFromFee(address) returns(bool)",
+                "_maxTxAmount() returns(uint256)",
+                "totalBuyFee() returns(uint256)",
+                "swapThreshold() returns(uint256)",
+                "MarketingWallet() returns(address)",
+                "isWalletLimitExempt(address) returns(bool)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapAndLiquify",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapETHForTokens",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapTokensForETH",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address[]",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "XDOGECoin"
+        }
+    ]
+}

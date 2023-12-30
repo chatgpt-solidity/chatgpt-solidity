@@ -1,0 +1,8 @@
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    uint256 private _totalSupply = 4200000000000000000000000000;
+
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}

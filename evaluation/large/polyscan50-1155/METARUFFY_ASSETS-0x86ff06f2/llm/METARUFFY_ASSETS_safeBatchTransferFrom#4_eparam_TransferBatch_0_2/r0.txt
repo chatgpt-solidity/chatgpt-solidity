@@ -1,0 +1,9 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function within the `ERC1155` contract after the balances have been updated and before the `_doSafeBatchTransferAcceptanceCheck` function is called. The event is emitted with the correct arguments, including the `_to` argument which represents the address of the recipient whose balance is increased. The event signature matches the given rule:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+This line is in compliance with the rule that the `_to` argument must be the address of the recipient whose balance is increased. The `to` variable in the function corresponds to the `_to` argument in the event, and it is used throughout the function to correctly update the recipient's balance before the event is emitted.

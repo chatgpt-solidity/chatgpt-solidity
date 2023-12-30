@@ -1,0 +1,10 @@
+contract SummerPoly is ERC721, ERC721URIStorage, ERC721Royalty, Ownable, ContextMixin {
+
+    uint256 private _RoyaltyBasisPoints = 500; // 5%
+    address private _royaltyRecipient;
+
+    function royaltyInfo(uint256 /*tokenId*/, uint256 salePrice) public view override returns (address receiver, uint256 royaltyAmount) {
+        receiver = _royaltyRecipient;
+        royaltyAmount = (salePrice * _RoyaltyBasisPoints) / 10000;
+    }
+}

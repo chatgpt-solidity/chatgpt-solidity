@@ -1,0 +1,18 @@
+abstract contract ERC1155Supply is ERC1155 {
+
+    mapping(uint256 => uint256) private _totalSupply;
+    /**
+     * @dev Total amount of tokens in with a given id.
+     */
+    function totalSupply(uint256 id) public view virtual returns (uint256) {
+        return _totalSupply[id];
+
+    }
+    /**
+     * @dev Indicates whether any token exist with a given id, or not.
+     */
+    function exists(uint256 id) public view virtual returns (bool) {
+        return ERC1155Supply.totalSupply(id) > 0;
+    }
+}
+

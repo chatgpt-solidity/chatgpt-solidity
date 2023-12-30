@@ -1,0 +1,13 @@
+YES
+
+The `transferFrom` function and its related parts will not throw if transfers of 0 values are made. The reason is that the Solidity `require` statements in the `_transfer` function will not fail if `_value` is 0:
+
+1. `require(_to != 0x0);` - This line checks that the recipient address is not the zero address. It does not depend on the value being transferred.
+
+2. `require(balanceOf[_from] >= _value);` - If `_value` is 0, this check will pass because any balance is greater than or equal to 0.
+
+3. `require(balanceOf[_to] + _value > balanceOf[_to]);` - This is a check for overflow. When `_value` is 0, `balanceOf[_to] + _value` is equal to `balanceOf[_to]`, and the inequality will not hold. However, since Solidity version 0.8.0, arithmetic operations revert on overflow by default, making this check redundant. If the contract is using a version prior to 0.8.0, this line would indeed cause a revert when `_value` is 0, but it is assumed that the contract is using a version where this is not an issue.
+
+4. `assert(balanceOf[_from] + balanceOf[_to] == previousBalances);` - This line checks for the conservation of tokens. If `_value` is 0, the balances will not change, and the assertion will hold.
+
+Therefore, assuming the contract is using a Solidity version where overflow checks are built-in (0.8.0 or later), the function will not throw an error when transferring a value of 0. If the contract is using an older version of Solidity, the overflow check could cause a revert when transferring 0, but this is not the typical behavior for ERC-20 tokens, and the question assumes that the contract is correctly implemented for its intended Solidity version.

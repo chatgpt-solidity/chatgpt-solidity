@@ -1,0 +1,15 @@
+abstract contract AccessControl is Context {
+
+    mapping (bytes32 => RoleData) private _roles;
+
+    /**
+     * @dev Returns the admin role that controls `role`. See {grantRole} and
+     * {revokeRole}.
+     *
+     * To change a role's admin, use {_setRoleAdmin}.
+     */
+    function getRoleAdmin(bytes32 role) public view returns (bytes32) {
+        return _roles[role].adminRole;
+    }
+}
+

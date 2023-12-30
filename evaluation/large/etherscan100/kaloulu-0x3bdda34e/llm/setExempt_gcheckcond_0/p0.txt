@@ -1,0 +1,25 @@
+Given a solidity function setExempt and the related parts from a smart contract.
+Whether the function setExempt and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract kaloulu is IERC20, Auth {
+    mapping (address => bool) private _noFees;
+    mapping (address => bool) private _noLimits;
+    mapping (address => bool) private _isLP;
+    function setExempt(address wlt, bool noFees, bool noLimits) external onlyOwner {
+        if (noLimits || noFees) { require(!_isLP[wlt], "Cannot exempt LP"); }
+        _noFees[ wlt ] = noFees;
+        _noLimits[ wlt ] = noLimits;
+    }
+}
+abstract contract Auth {
+    address internal _owner;
+    modifier onlyOwner() { 
+        require(msg.sender == _owner, "Only owner can call this");   _; 
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

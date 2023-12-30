@@ -1,0 +1,10 @@
+contract UpgradeableToken is StandardToken {
+
+    /**
+     * Child contract can enable to provide the condition when the upgrade can begun.
+     */
+    function canUpgrade() public pure returns (bool) {
+        return true;
+    }
+}
+

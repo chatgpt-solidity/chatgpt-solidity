@@ -1,0 +1,13 @@
+contract NFTBigPartnerV2 is ERC1155, Ownable, ERC1155Burnable {
+
+    address public rightperson;
+    address public assistance;
+
+    mapping(uint256=>uint256) public rate;
+     // new** set rate of BIGP for locking without adding 10^18 Zeroes.
+    function SetRate(uint256 _n,uint256 _rate)public{
+         require(msg.sender==rightperson||msg.sender==assistance);
+          rate[_n]=_rate*10**18;
+
+    }
+}

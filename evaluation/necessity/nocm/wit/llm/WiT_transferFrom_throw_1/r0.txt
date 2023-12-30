@@ -1,0 +1,7 @@
+NO
+
+The given `transferFrom` function in the `AbstractToken` contract does not throw an error when the transfer amount `_value` is 0. It checks if the value is greater than 0 and if the sender `_from` is not the same as the recipient `_to` before performing the subtraction and addition of balances. If `_value` is 0, the function will skip the balance update logic and simply emit the `Transfer` event, then return `true`.
+
+The `transferFrom` function in the `WiT` contract, which overrides the one in `AbstractToken`, adds additional checks for frozen accounts and a global `frozen` state. However, it does not introduce any conditions that would cause the function to throw an error when the transfer amount `_value` is 0. It will return `false` if the account is frozen or if the global `frozen` state is `true`, but it will not throw an error.
+
+Therefore, the function will not throw an error when transfers of 0 values are attempted; it will either return `true` or `false` depending on the conditions.

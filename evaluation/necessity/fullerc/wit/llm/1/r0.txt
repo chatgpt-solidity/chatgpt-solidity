@@ -1,0 +1,45 @@
+The provided Solidity code for the `WiT` contract and its `transfer` function, along with the related `AbstractToken` and `SafeMath` contracts, must be evaluated against the ERC-20 token standard as described in the provided ERC specification.
+
+The ERC-20 standard specifies that the `transfer` function should:
+
+1. Transfer `_value` amount of tokens to address `_to`.
+2. Fire the `Transfer` event.
+3. Throw if the sender's account balance does not have enough tokens to spend.
+4. Treat transfers of 0 values as normal transfers and fire the `Transfer` event.
+
+Now, let's analyze the provided `transfer` function in the `WiT` contract:
+
+```solidity
+function transfer(
+    address _to,
+    uint256 _value
+) public returns (bool success) {
+    require(!frozenAccount[msg.sender]);
+    if (frozen) return false;
+    else return AbstractToken.transfer(_to, _value);
+}
+```
+
+The `transfer` function in the `WiT` contract has additional logic that is not part of the ERC-20 standard:
+
+- It checks if the account of the message sender is frozen (`require(!frozenAccount[msg.sender]);`).
+- It checks if all token transfers are currently frozen (`if (frozen) return false;`).
+
+According to the ERC-20 standard, the `transfer` function should throw an error if the transfer cannot be performed. However, in the `WiT` contract, if the account is frozen or if all transfers are frozen, the function simply returns `false` instead of throwing an error. This is a deviation from the standard, which requires the function to throw an error if the sender does not have enough balance. The same principle should apply to any other condition that prevents the transfer, such as account-specific freezes.
+
+Additionally, the `AbstractToken` contract's `transfer` function has the following logic:
+
+```solidity
+function transfer(
+    address _to,
+    uint256 _value
+) public returns (bool success) {
+    require(_to != address(0));
+    if (accounts[msg.sender] < _value) return false;
+    ...
+}
+```
+
+This function also returns `false` instead of throwing an error when the sender does not have enough balance, which is another deviation from the ERC-20 standard.
+
+In conclusion, the `transfer` function in the `WiT` contract, as well as the `AbstractToken` contract, violates the ERC-20 standard by not throwing an error when the transfer cannot be performed due to frozen accounts or insufficient balance. Instead, they return `false`, which is against the standard's requirement to throw an error in such cases. Callers of the `transfer` function must handle `false` returns, but the standard expects an error to be thrown, not just a `false` return value.

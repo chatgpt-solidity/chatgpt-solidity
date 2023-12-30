@@ -1,0 +1,26 @@
+contract JNTR is IST20, ERC20, SafeMath {
+    mapping(address => mapping(address => uint256)) allowed;
+    mapping(address => uint256) allowedIndex;
+
+    Account[] allowedAddress;
+
+    function verifyTransaction(
+        address _sender,
+        address _reciver
+    ) internal returns (bool) {
+        require(allowedAddress[allowedIndex[_sender]]._address == _sender);
+        require(allowedAddress[allowedIndex[_reciver]]._address == _reciver);
+        require(allowedAddress[allowedIndex[_sender]]._active == true);
+        require(allowedAddress[allowedIndex[_reciver]]._active == true);
+        return true;
+    }
+
+    function approve(address _spender, uint _value) public returns (bool) {
+        require(verifyTransaction(msg.sender, _spender));
+        require(_value > 0);
+        allowed[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+    }
+}
+

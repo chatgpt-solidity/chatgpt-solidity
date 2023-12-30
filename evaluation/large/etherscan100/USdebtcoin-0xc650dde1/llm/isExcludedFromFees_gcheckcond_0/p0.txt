@@ -1,0 +1,20 @@
+Given a solidity function isExcludedFromFees and the related parts from a smart contract.
+Whether the function isExcludedFromFees and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract USdebtcoin is ERC20, Ownable {
+
+    /******************/
+
+    // exlcude from fees and max transaction amount
+    mapping(address => bool) private _isExcludedFromFees;
+
+    function isExcludedFromFees(address account) public view returns (bool) {
+        return _isExcludedFromFees[account];
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

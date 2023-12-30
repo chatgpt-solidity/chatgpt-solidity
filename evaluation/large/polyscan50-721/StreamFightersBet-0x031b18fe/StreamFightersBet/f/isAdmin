@@ -1,0 +1,19 @@
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    ////////////////////////////////////////
+    //                                    //
+    //         STATE VARIABLES            //
+    //                                    //
+    ////////////////////////////////////////
+    // contract owner adress
+    address private owner;
+
+    /*
+    *  @notice  Tells of the msg.sender is the admin
+    *  @dev
+    *  @return  true if msg.sender is admin else false
+    */
+    function isAdmin() public view returns(bool) {
+        return msg.sender == owner;
+    }
+}

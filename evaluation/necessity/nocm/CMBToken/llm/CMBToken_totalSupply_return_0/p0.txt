@@ -1,0 +1,14 @@
+Given a solidity function totalSupply and the related parts from a smart contract and an rule for its return value.
+Whether function totalSupply returns the total token supply? Reply in "YES" or "NO".
+
+<example>
+
+Function(and related parts) to audit:"""
+contract CMBToken is IERC20 {
+    uint public constant _totalSupply = 6500000000000000;
+
+    function totalSupply() constant returns (uint256 totalSupply) {
+        return _totalSupply;
+    }
+}
+"""

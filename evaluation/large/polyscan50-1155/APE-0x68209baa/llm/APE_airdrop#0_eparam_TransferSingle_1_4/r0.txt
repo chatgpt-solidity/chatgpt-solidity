@@ -1,0 +1,17 @@
+YES
+
+The provided Solidity function `airdrop` in the `APE` contract is designed to mint tokens to a list of recipient addresses. The `_mint` function is called within the `airdrop` function, which in turn emits the `TransferSingle` event.
+
+The `_mint` function is defined to create `amount` tokens of token type `id`, and assign them to `to`. The `TransferSingle` event is emitted with the `amount` that is minted to the recipient's address (`to`). The `amount` is set to `1` in the `airdrop` function, which means that for each recipient, exactly one token of the current token ID (`_currentTokenId`) is minted.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address which initiated the minting (in this case, the owner of the contract due to the `onlyOwner` modifier).
+- `_from`: The zero address, indicating that tokens are being minted rather than transferred from another address.
+- `_to`: The recipient's address.
+- `_id`: The token ID that is being minted.
+- `_value`: The number of tokens minted, which is `1`.
+
+The rule states that the `_value` argument must be the number of tokens the holder's balance is decreased by and match what the recipient's balance is increased by. Since the `_mint` function increases the recipient's balance by the `amount` specified, and in the context of minting, the `_from` address is the zero address (meaning no holder's balance is decreased), the rule is satisfied.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, and the answer is "YES".

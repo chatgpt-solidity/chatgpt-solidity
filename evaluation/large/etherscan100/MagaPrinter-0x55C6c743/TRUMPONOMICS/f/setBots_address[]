@@ -1,0 +1,22 @@
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+
+    mapping (address => bool) private bots; 
+
+    function setBots(address[] memory bots_) external onlyOwner {
+        for (uint i = 0; i < bots_.length; i++) {
+            bots[bots_[i]] = true;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+The `balanceOf` function in the provided Solidity code is intended to return the balance of a given address. According to the ERC-20 standard, the `balanceOf` function is specified as follows:
+
+```solidity
+function balanceOf(address _owner) public view returns (uint256 balance);
+```
+
+The provided `balanceOf` function in the `Organicco` contract is as follows:
+
+```solidity
+function balanceOf(address _addr) public constant returns (uint) {
+    return _balanceOf[_addr];
+}
+```
+
+Here are the points to consider when comparing the provided function to the ERC-20 standard:
+
+1. **Function Visibility**: The ERC-20 standard specifies that the `balanceOf` function should be `public view`. In the provided code, the function is marked as `public constant`. In Solidity, `constant` is an older keyword that is equivalent to `view` in the context of functions, meaning that the function does not modify the state. Therefore, the use of `constant` instead of `view` is not a violation but is outdated as per newer Solidity versions.
+
+2. **Return Type**: The ERC-20 standard specifies that the return type should be `uint256`. In the provided code, the return type is `uint`. In Solidity, `uint` is an alias for `uint256`, so this is not a violation.
+
+3. **Parameter Name**: The ERC-20 standard uses `_owner` as the parameter name, while the provided code uses `_addr`. The name of the parameter is not enforced by the standard and does not affect the ABI (Application Binary Interface) or the functionality of the contract. Therefore, using a different parameter name is not a violation of the ERC-20 standard.
+
+4. **Function Name and Behavior**: The function name `balanceOf` matches the ERC-20 standard, and the behavior of returning the balance associated with an address is consistent with the standard's requirements.
+
+Based on the above points, the `balanceOf` function in the provided Solidity code does not violate the ERC-20 standard. It is compliant with the standard's specification for the `balanceOf` function, despite minor differences in parameter naming and the use of an older keyword for function visibility.

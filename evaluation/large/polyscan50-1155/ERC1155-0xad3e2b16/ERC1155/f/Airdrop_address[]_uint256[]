@@ -1,0 +1,25 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    function Airdrop(
+        address[] calldata to,
+        uint256[] calldata itemsIds
+    ) external onlyOwner {
+        for (uint128 i; i < itemsIds.length; i++) {
+            _balances[itemsIds[i]][to[i]]++;
+            emit TransferSingle(msg.sender, address(0), to[i], itemsIds[i], 1);
+        }
+    }
+}
+
+abstract contract Ownable {
+
+    address private _owner;
+
+    modifier onlyOwner() {
+        if (_owner != msg.sender) revert NotOwner();
+        _;
+    }
+}
+

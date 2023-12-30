@@ -1,0 +1,15 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is responsible for emitting the `TransferSingle` event. The `_mint` function is called by the `airdrop` function in the `BONE` contract, which is derived from `ERC1155` and includes the `Ownable` contract to restrict access to the `onlyOwner` modifier.
+
+The `_mint` function emits the `TransferSingle` event with the following arguments:
+
+- `_operator`: This is set to the address returned by `_msgSender()`, which is an internal function from the `Context` contract. In the context of the `airdrop` function, `_msgSender()` will return the address of the sender of the transaction, which should be the owner of the contract due to the `onlyOwner` modifier.
+- `_from`: This is set to the zero address (`address(0)`) because tokens are being minted, not transferred from another address.
+- `_to`: This is the recipient of the minted tokens.
+- `_id`: This is the token ID of the minted tokens.
+- `_value`: This is the amount of tokens being minted.
+
+The rule states that the `_operator` argument must be the address of an account/contract that is approved to make the transfer and should be `msg.sender`. In this case, the `_operator` is indeed the `msg.sender` because the `airdrop` function can only be called by the owner of the contract, and the `_mint` function uses `_msgSender()` to set the `_operator`.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

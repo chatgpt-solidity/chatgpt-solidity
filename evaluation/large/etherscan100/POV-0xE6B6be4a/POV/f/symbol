@@ -1,0 +1,7 @@
+contract POV is IERC20, Context, Ownable  {
+    string private constant _symbol = "POVCHAIN";    
+
+    function symbol() public pure returns (string memory) {
+        return _symbol;
+    }
+}

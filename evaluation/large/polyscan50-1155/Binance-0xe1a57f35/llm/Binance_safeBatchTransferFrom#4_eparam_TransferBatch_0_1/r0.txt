@@ -1,0 +1,21 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_from` argument in the event is indeed the address of the holder whose balance is decreased. This is ensured by the following lines of code:
+
+```solidity
+for (uint256 i = 0; i < ids.length; ++i) {
+    uint256 id = ids[i];
+    uint256 amount = amounts[i];
+
+    uint256 fromBalance = _balances[id][from];
+    require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+    unchecked {
+        _balances[id][from] = fromBalance - amount;
+    }
+    _balances[id][to] += amount;
+}
+
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+The loop iterates over each `id` and `amount` pair, checks that the `from` address has enough balance (`fromBalance >= amount`), decreases the balance of the `from` address by the `amount`, and increases the balance of the `to` address by the same `amount`. After updating the balances, the `TransferBatch` event is emitted with the `from` address as the holder whose balance was decreased, which complies with the rule.

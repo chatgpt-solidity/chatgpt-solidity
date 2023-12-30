@@ -1,0 +1,12 @@
+YES
+
+The `_mint` function in the `ERC1155` contract correctly emits the `TransferSingle` event with the `to` argument being the address of the recipient whose balance is increased. The `TransferSingle` event is emitted after the recipient's balance is updated with the new amount of tokens:
+
+```solidity
+_balances[id][to] += amount;
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+The `to` parameter in the `TransferSingle` event corresponds to the `to` argument of the `_mint` function, which is the recipient's address. The `from` parameter in the event is set to the zero address (`address(0)`) to indicate that tokens are being minted, not transferred from another address. The `id` and `amount` parameters correspond to the token type and the amount of tokens minted, respectively.
+
+The rule is satisfied as the `to` argument in the `TransferSingle` event is indeed the address of the recipient whose balance is increased by the minting operation.

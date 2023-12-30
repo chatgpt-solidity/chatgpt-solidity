@@ -1,0 +1,7 @@
+YES
+
+The `_mintBatch` function in the `ERC1155` contract correctly emits the `TransferBatch` event according to the given rule. The `_values` argument in the event is represented by the `amounts` array, which is the list of numbers of tokens that are being minted to the `to` address. The `ids` array represents the token types being transferred.
+
+The `mintBatch` function in the `Gweiders` contract calls `_mintBatch`, passing the `to` address, `ids`, `amounts`, and `data` as arguments. The `_mintBatch` function performs the minting operation by increasing the balance of the `to` address for each token ID in the `ids` array by the corresponding amount in the `amounts` array. After updating the balances, it emits the `TransferBatch` event with the operator (the message sender), the `from` address (which is zero since it's a mint operation), the `to` address, the `ids` array, and the `amounts` array.
+
+The `TransferBatch` event is emitted with the `_operator` as the message sender, `_from` as the zero address (indicating minting), `_to` as the recipient address, `_ids` as the list of token IDs, and `_values` as the corresponding list of amounts by which the recipient's balance is increased, which complies with the rule provided.

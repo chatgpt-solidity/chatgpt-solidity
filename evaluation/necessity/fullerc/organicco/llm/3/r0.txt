@@ -1,0 +1,15 @@
+The provided Solidity code for the `totalSupply` function and the related parts from the smart contract do not appear to violate the ERC-20 standard as described in the given ERC documentation.
+
+Here's why:
+
+1. The ERC-20 standard specifies that the `totalSupply` function should return the total token supply. The provided Solidity code does exactly that by returning the `_totalSupply` variable.
+
+2. The `totalSupply` function is marked as `public` and `constant` (which is equivalent to `view` in newer versions of Solidity), which is in line with the ERC-20 standard that requires the function to be publicly viewable.
+
+3. The ERC-20 standard does not specify the initial value of the total supply; it only requires that the `totalSupply` function returns the current total supply. The initial value of `_totalSupply` is set to 1000 in the `Token` contract, which is an internal detail of the specific token implementation and does not conflict with the ERC-20 standard.
+
+4. The ERC-20 standard does not enforce any specific inheritance structure for contracts implementing the standard. The `Organicco` contract inherits from `Token`, `ERC20`, and `ERC223`. While `ERC223` is a different standard that adds functionality on top of ERC-20, including it does not inherently violate ERC-20. However, it is important to ensure that the additional functionality of ERC-223 does not conflict with ERC-20 when interacting with ERC-20 only services.
+
+5. The ERC-20 standard does not specify the constructor arguments or the way the token is initialized. The `Organicco` contract appears to be passing some parameters to the `Token` constructor, which is an implementation detail and does not violate the ERC-20 standard.
+
+In conclusion, based on the provided code and ERC documentation, the `totalSupply` function and related parts of the `Organicco` contract do not violate the ERC-20 standard. However, it is important to note that the full compliance with ERC-20 would require the implementation of all the specified functions and events, including `balanceOf`, `transfer`, `transferFrom`, `approve`, `allowance`, and the `Transfer` and `Approval` events, which are not shown in the provided code snippet. Additionally, the contract should correctly handle the specified behaviors, such as throwing (or reverting in newer Solidity versions) on failed transfers or approvals.

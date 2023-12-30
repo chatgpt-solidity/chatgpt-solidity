@@ -1,0 +1,32 @@
+Given a solidity function enableTokenTransfer and the related parts from a smart contract and a rule.
+Whether the function enableTokenTransfer and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract Owner {
+
+    address public owner;
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract KIMEX is Owner {
+    bool public inActive;
+    bool public isTransferable;
+
+    modifier isActive() {
+        require(inActive == false);
+        _;
+    }
+
+    // Enable transfer feature of tokens
+    function enableTokenTransfer() external isActive onlyOwner {
+        isTransferable = true;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

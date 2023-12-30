@@ -1,0 +1,9 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is designed to create (`mint`) new tokens and assign them to a recipient (`to`). When minting new tokens, the `_from` argument in the `TransferSingle` event is set to the zero address (address(0)), which is the conventional representation for token creation in the ERC-1155 standard.
+
+In the provided `airdrop` function of the `BONE` contract, the `_mint` function is called with the recipient's address, the current token ID (`_currentTokenId`), an amount of 1, and an empty data payload. The `_mint` function, in turn, emits the `TransferSingle` event with the zero address as the `_from` argument, the recipient's address as the `_to` argument, the token ID, and the amount of tokens minted.
+
+Since the `TransferSingle` event is emitted with the zero address as the `_from` argument when tokens are minted, it adheres to the rule that the `_from` argument must be the address of the holder whose balance is decreased. In the case of minting, the "holder" is conceptually the zero address, as new tokens are being created rather than transferred from an existing holder.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule when the `airdrop` function is called.

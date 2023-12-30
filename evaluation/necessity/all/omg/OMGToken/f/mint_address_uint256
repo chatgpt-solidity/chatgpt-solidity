@@ -1,0 +1,58 @@
+library SafeMath {
+
+    function add(uint a, uint b) internal returns (uint) {
+        uint c = a + b;
+        assert(c >= a);
+        return c;
+    }
+
+    function assert(bool assertion) internal {
+        if (!assertion) {
+            throw;
+        }
+    }
+}
+
+contract MintableToken is StandardToken, Ownable {
+
+    bool public mintingFinished = false;
+
+    uint public totalSupply = 0;
+    modifier canMint() {
+        if (mintingFinished) throw;
+        _;
+    }
+
+    /**
+     * @dev Function to mint tokens
+     * @param _to The address that will recieve the minted tokens.
+     * @param _amount The amount of tokens to mint.
+     * @return A boolean that indicates if the operation was successful.
+     */
+    function mint(address _to, uint _amount) onlyOwner canMint returns (bool) {
+        totalSupply = totalSupply.add(_amount);
+        balances[_to] = balances[_to].add(_amount);
+        Mint(_to, _amount);
+        return true;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        if (msg.sender != owner) {
+            throw;
+        }
+        _;
+    }
+}
+
+contract BasicToken is ERC20Basic {
+
+    mapping(address => uint) balances;
+}
+

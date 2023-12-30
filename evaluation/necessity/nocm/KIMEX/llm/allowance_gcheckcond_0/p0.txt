@@ -1,0 +1,20 @@
+Given a solidity function allowance and the related parts from a smart contract and a rule.
+Whether the function allowance and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract KIMEX is Owner {
+    mapping(address => mapping(address => uint256)) internal allowed;
+
+    // ERC20 standard function
+    function allowance(
+        address _owner,
+        address _spender
+    ) external constant returns (uint256) {
+        return allowed[_owner][_spender];
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

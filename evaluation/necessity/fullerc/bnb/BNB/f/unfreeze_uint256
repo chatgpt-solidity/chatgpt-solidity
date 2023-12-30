@@ -1,0 +1,36 @@
+contract BNB is SafeMath {
+    mapping(address => uint256) public freezeOf;
+
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+
+    function unfreeze(uint256 _value) returns (bool success) {
+        if (freezeOf[msg.sender] < _value) throw; // Check if the sender has enough
+        if (_value <= 0) throw;
+        freezeOf[msg.sender] = SafeMath.safeSub(freezeOf[msg.sender], _value); // Subtract from the sender
+        balanceOf[msg.sender] = SafeMath.safeAdd(balanceOf[msg.sender], _value);
+        Unfreeze(msg.sender, _value);
+        return true;
+    }
+}
+
+contract SafeMath {
+
+    function safeAdd(uint256 a, uint256 b) internal returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a && c >= b);
+        return c;
+    }
+
+    function safeSub(uint256 a, uint256 b) internal returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    function assert(bool assertion) internal {
+        if (!assertion) {
+            throw;
+        }
+    }
+}
+

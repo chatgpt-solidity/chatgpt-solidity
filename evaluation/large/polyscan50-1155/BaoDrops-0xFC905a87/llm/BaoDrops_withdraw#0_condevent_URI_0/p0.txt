@@ -1,0 +1,56 @@
+Given a solidity function withdraw and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract BaoDrops is
+    ERC1155,
+    Ownable,
+    ERC1155Burnable,
+    ERC1155Supply
+{
+
+    //withdraw for any matic sent to the contract
+    function withdraw() public payable onlyOwner {
+        // =============================================================================
+        // This will payout the owner the contract balance.
+        // Do not remove this otherwise you will not be able to withdraw the funds.
+        // =============================================================================
+
+        (bool os, ) = payable(owner()).call{value: address(this).balance}("");
+        require(os);
+        // =============================================================================
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

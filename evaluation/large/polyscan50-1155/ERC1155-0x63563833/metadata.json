@@ -1,0 +1,282 @@
+{
+    "file": "evaluation/polyscan50-1155/ERC1155-0x63563833.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.8",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/owner",
+                "transferOwnership(address) returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/transferOwnership_address",
+                "constructor() returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/constructor",
+                "name() returns(string)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/symbol",
+                "royaltyInfo(uint256,uint256) returns(address,uint256)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/royaltyInfo_uint256_uint256",
+                "lengths() returns(uint256,uint256)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/lengths",
+                "collection(uint256) returns(ERC1155.Collection)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/collection_uint256",
+                "item(uint256) returns(ERC1155.Item)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/item_uint256",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/supportsInterface_bytes4",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/balanceOf_address_uint256",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/balanceOfBatch_address[]_uint256[]",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "createCollection(address,address,uint256,string) returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/createCollection_address_address_uint256_string",
+                "updateCollection(uint256,address,address,uint256,string) returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/updateCollection_uint256_address_address_uint256_string",
+                "createItem(uint256,string,uint256) returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/createItem_uint256_string_uint256",
+                "updateItem(uint256,string) returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/updateItem_uint256_string",
+                "mintBatch(address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/ERC1155-0x63563833/ERC1155/f/mintBatch_address_uint256[]_uint256[]_bytes"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "royaltyInfo(uint256,uint256) returns(address,uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "lengths() returns(uint256,uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "collection(uint256) returns(ERC1155.Collection)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "item(uint256) returns(ERC1155.Item)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "createCollection(address,address,uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateCollection(uint256,address,address,uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "createItem(uint256,string,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateItem(uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintBatch(address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "165",
+                "1155metadatauri",
+                "2981",
+                "1155"
+            ],
+            "events": [
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MintBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bytes",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "CreateCollection",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "UpdateCollection",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "CreateItem",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "UpdateItem",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "ERC1155"
+        }
+    ]
+}

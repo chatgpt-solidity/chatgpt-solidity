@@ -1,0 +1,60 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+contract NFT is ERC721Enumerable, Ownable {
+
+  string public baseURI;
+
+  constructor() ERC721("$MAV NFT REWARDS", "MAV") {
+    setBaseURI("https://bafybeicpr5gl3ocktxulqxlq6ht7adak4fdi7fxfltpknlgpeh2st6bmoe.ipfs.w3s.link/");
+  }
+
+  function setBaseURI(string memory _newBaseURI) public onlyOwner {
+    baseURI = _newBaseURI;
+  }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    string private _name;
+
+    string private _symbol;
+
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is cleared
+"""

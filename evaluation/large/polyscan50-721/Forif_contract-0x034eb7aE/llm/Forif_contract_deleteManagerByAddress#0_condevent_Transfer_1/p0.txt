@@ -1,0 +1,53 @@
+Given a solidity function deleteManagerByAddress and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract ManagersRepo{
+    Manager[] managers = new Manager[](0);
+    function isOwnerByAddress(address _ownerAddress)view public returns(bool){
+        if(getOwner()==_ownerAddress){
+            return true;
+        }
+        return false;
+    }
+
+    function getOwner()public view returns(address){
+        for(uint256 i = 0; i < managers.length; i++){
+            if(managers[i].isOwner()){
+                return managers[i].getManagerAddress();
+            }
+        }
+        return address(0);
+    }
+
+    function isManagerByAddress(address _managerAddress) view public returns(bool){
+        for(uint256 i = 0; i < managers.length; i++){
+            if(managers[i].getManagerAddress()==_managerAddress){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function deleteManagerByAddress(address _manager)public{
+        require(isManagerByAddress(msg.sender),"You are not manager. deleteManager function is allowed for manager.");
+        require(!isOwnerByAddress(_manager),"Owner can not be deleted. use changeOwner function to delete original owner and generate new one.");
+        uint256 i = 0;
+        for(; i < managers.length; i++){
+            if(managers[i].getManagerAddress()==_manager){
+                managers[i] = managers[managers.length-1];
+                managers.pop();
+                return;
+            }
+        }
+        require(false,"not found him in manager list");
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is created with `owner` address as the owner.
+"""

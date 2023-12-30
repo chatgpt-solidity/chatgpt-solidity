@@ -1,0 +1,20 @@
+contract EBLivePremios is ERC721 {
+    address private _Admin;
+    address private _Creator;
+
+    function SetCreator(address NewCreator) public onlyAdmin {
+        _Creator = NewCreator;
+    }
+
+    //Ownable
+    modifier onlyAdmin() {
+        require(_Admin == _msgSender(), "Ownable: caller is not the admin");
+        _;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

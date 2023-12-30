@@ -1,0 +1,14 @@
+The `decreaseAllowance` function in the provided Solidity code is designed to decrease the allowance that an owner has given to a spender. This is a common function that is often included in ERC-20 token contracts, although it is not part of the original ERC-20 standard as described in the provided ERC excerpt.
+
+The ERC-20 standard specifies the following methods related to allowances:
+
+- `approve(address _spender, uint256 _value) public returns (bool success)`
+- `allowance(address _owner, address _spender) public view returns (uint256 remaining)`
+
+The `approve` function is used to set the allowance, and the `allowance` function is used to query the remaining allowance. The standard does not explicitly define a `decreaseAllowance` function. However, the inclusion of such a function does not violate the ERC-20 standard as long as it adheres to the expected behavior of allowances within the ERC-20 framework.
+
+The provided `decreaseAllowance` function uses the `SafeMath` library to safely subtract the `subtractedValue` from the current allowance and then calls the `_approve` function to update the allowance mapping. This is a common pattern to prevent underflows and to ensure that the allowance cannot be decreased below zero.
+
+The function also correctly emits the `Approval` event after successfully updating the allowance, which is in line with the ERC-20 standard requirement that this event must trigger on any successful call to `approve`.
+
+In conclusion, the `decreaseAllowance` function and the related parts of the provided Solidity code do not violate the ERC-20 standard. The function is a practical addition to the standard methods, providing a safer way to decrease allowances without the need to set them to zero first, which is a known best practice to prevent certain attack vectors.

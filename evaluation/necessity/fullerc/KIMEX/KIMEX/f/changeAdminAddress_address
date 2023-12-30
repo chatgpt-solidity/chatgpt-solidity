@@ -1,0 +1,21 @@
+contract KIMEX is Owner {
+
+    address public adminAddress;
+
+    // Modify admin
+    function changeAdminAddress(address _newAddress) external onlyOwner {
+        require(_newAddress != address(0));
+        require(adminAddress != _newAddress);
+        adminAddress = _newAddress;
+    }
+}
+
+contract Owner {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+

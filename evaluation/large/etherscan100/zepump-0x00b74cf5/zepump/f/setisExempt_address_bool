@@ -1,0 +1,14 @@
+contract zepump is IERC20, tokenStaking, Ownable {
+    mapping(address => bool) private isFeeExempt;
+
+    function setisExempt(address _address, bool _enabled) external onlyOwner {
+        isFeeExempt[_address] = _enabled;
+        emit ExcludeFromFees(_address, _enabled, block.timestamp);
+    }
+}
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+

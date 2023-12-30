@@ -1,0 +1,37 @@
+contract Ownable is Context {
+    address private _owner;
+
+    constructor () {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+
+    }
+    function owner() public view returns (address) {
+        return _owner;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract poo is Context, IERC20, Ownable {
+    mapping (address => uint256) private _balances;
+    mapping (address => bool) private _isExcludedFromFee;
+    address payable private _taxWallet;
+    uint256 private constant _tTotal = 100000000000 * 10**_decimals;
+
+    constructor () {
+
+        _taxWallet = payable(_msgSender());
+        _balances[_msgSender()] = _tTotal;
+        _isExcludedFromFee[owner()] = true;
+        _isExcludedFromFee[address(this)] = true;
+        _isExcludedFromFee[_taxWallet] = true;
+
+        emit Transfer(address(0), _msgSender(), _tTotal);
+    }
+}

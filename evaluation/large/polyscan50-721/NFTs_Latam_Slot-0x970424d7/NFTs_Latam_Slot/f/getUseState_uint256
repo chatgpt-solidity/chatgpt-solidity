@@ -1,0 +1,50 @@
+contract NFTs_Latam_Slot is
+    Initializable,
+    INFTlatamContract,
+    IOwnable,
+    IRoyalty,
+    IPrimarySale,
+    IPlatformFee,
+    ReentrancyGuardUpgradeable,
+    EIP712Upgradeable,
+    MulticallUpgradeable,
+    AccessControlEnumerableUpgradeable,
+    ERC721EnumerableUpgradeable,
+    ITokenERC721
+{
+
+    /// @dev Mapping from tokenId => claim state
+    mapping(uint256 => bool) private useState;
+
+    /// @dev Mapping from tokenId => onchain
+    mapping(uint256 => uint16[]) private prizesRegister;
+
+    function getUseState(uint256 _tokenId)
+        public
+        view
+        returns (bool, uint16[] memory)
+    {
+        require(_ownerOf(_tokenId) != address(0), "Not bought yet");
+        return (useState[_tokenId], prizesRegister[_tokenId]);
+    }
+}
+
+contract ERC721Upgradeable is
+    Initializable,
+    ContextUpgradeable,
+    ERC165Upgradeable,
+    IERC721Upgradeable,
+    IERC721MetadataUpgradeable
+{
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+    }
+}
+

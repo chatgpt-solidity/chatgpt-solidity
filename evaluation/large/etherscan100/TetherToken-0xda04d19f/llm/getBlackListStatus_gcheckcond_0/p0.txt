@@ -1,0 +1,18 @@
+Given a solidity function getBlackListStatus and the related parts from a smart contract.
+Whether the function getBlackListStatus and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract BlackList is Ownable, BasicToken {
+
+    /////// Getters to allow the same blacklist to be used also by other contracts (including upgraded Tether) ///////
+    function getBlackListStatus(address _maker) external view returns (bool) {
+        return isBlackListed[_maker];
+    }
+
+    mapping (address => bool) public isBlackListed;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

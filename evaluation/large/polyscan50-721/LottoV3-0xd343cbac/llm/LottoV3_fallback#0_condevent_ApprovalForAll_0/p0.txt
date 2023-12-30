@@ -1,0 +1,17 @@
+Given a solidity function fallback and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+contract LottoV3 is Ownable, RrpRequesterV0, ERC721, ERC721Burnable {
+    // --- OTHER ---
+    fallback() external payable{
+    }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

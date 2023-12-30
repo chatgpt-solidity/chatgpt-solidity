@@ -1,0 +1,3 @@
+YES
+
+The provided Solidity function `_transfer` and its related parts will not throw if transfers of 0 values are made. The function checks for the `from` and `to` addresses to not be the zero address and for the `from` address to have a balance greater than or equal to the `amount` being transferred. If the `amount` is 0, the condition `fromBalance >= amount` will still hold true because `fromBalance` is always greater than or equal to 0. Therefore, the function will complete without reverting when transferring an amount of 0.

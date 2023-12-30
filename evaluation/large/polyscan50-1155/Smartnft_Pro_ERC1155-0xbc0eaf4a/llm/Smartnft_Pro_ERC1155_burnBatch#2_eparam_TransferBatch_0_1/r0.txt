@@ -1,0 +1,24 @@
+YES
+
+The `TransferBatch` event is emitted in the `_burnBatch` function according to the given rule. The `_from` argument is indeed the address of the holder whose balance is decreased. This is ensured by the following lines in the `_burnBatch` function:
+
+```solidity
+require(from != address(0), "ERC1155: burn from the zero address");
+```
+
+This line ensures that the `_from` address is not the zero address, which is a requirement for a valid holder address.
+
+```solidity
+uint256 fromBalance = _balances[id][from];
+require(fromBalance >= amount, "ERC1155: burn amount exceeds balance");
+```
+
+These lines ensure that the holder (`_from`) has a sufficient balance of the token (`id`) before burning the specified `amount`.
+
+Finally, the `TransferBatch` event is emitted with the correct arguments:
+
+```solidity
+emit TransferBatch(operator, from, address(0), ids, amounts);
+```
+
+Here, `operator` is the address performing the operation, `from` is the address of the token holder whose balance is being decreased, `address(0)` is the recipient address which, in the case of a burn operation, is the zero address, `ids` is the array of token IDs, and `amounts` is the array of amounts of tokens being burned. This matches the rule that the `_from` argument must be the address of the holder whose balance is decreased.

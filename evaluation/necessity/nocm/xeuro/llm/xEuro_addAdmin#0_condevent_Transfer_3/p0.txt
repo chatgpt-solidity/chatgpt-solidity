@@ -1,0 +1,28 @@
+Given a solidity function addAdmin and the related parts from a smart contract.
+Whether the function addAdmin and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.7;
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    function addAdmin(address _newAdmin) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        isAdmin[_newAdmin] = true;
+        emit AdminAdded(msg.sender, _newAdmin);
+        return true;
+    } //
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are burning or deallocating
+"""

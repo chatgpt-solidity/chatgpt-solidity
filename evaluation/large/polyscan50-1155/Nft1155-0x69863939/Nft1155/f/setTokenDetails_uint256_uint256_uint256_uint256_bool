@@ -1,0 +1,70 @@
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+
+    }
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if the sender is not the owner.
+     */
+    function _checkOwner() internal view virtual {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    }
+}
+
+contract Nft1155 is ERC1155Supply, Ownable, ReentrancyGuard {
+
+    mapping(uint256 => TokenDetails) public tokenDetails;
+
+    function setTokenDetails(
+        uint256 tokenId,
+        uint256 maxSupply,
+        uint256 priceErc20,
+        uint256 maxMint,
+        bool isLive
+    ) public onlyOwner {
+        TokenDetails memory details = TokenDetails({
+            maxSupply: maxSupply,
+            priceErc20: priceErc20,
+            maxMint: maxMint,
+            isLive: isLive
+        });
+        uint256 currentSupply = totalSupply(tokenId);
+        if (currentSupply > 0) {
+            require(
+                currentSupply <= maxSupply,
+                "Cannot set max supply less than existing supply"
+            );
+        }
+        tokenDetails[tokenId] = details;
+    }
+}
+abstract contract ERC1155Supply is ERC1155 {
+
+    mapping(uint256 => uint256) private _totalSupply;
+    /**
+     * @dev Total amount of tokens in with a given id.
+     */
+    function totalSupply(uint256 id) public view virtual returns (uint256) {
+        return _totalSupply[id];
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

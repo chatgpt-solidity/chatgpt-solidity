@@ -1,0 +1,26 @@
+The provided Solidity function `allowance` within the `StandardToken` contract appears to be compliant with the ERC20 standard as described in the given ERC documentation. The ERC20 standard specifies that the `allowance` function should:
+
+1. Return the amount which `_spender` is still allowed to withdraw from `_owner`.
+2. Be a public view function.
+3. Return a `uint256` representing the remaining allowance.
+
+The Solidity code for the `allowance` function matches these requirements:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) constant returns (uint remaining) {
+    return allowed[_owner][_spender];
+}
+```
+
+Here's a breakdown of the compliance:
+
+- The function takes two parameters, `_owner` and `_spender`, which are the addresses involved in the allowance query.
+- It is marked as `constant` (which is synonymous with `view` in newer versions of Solidity), meaning it does not modify the state and can be called externally to view data without incurring gas costs.
+- It returns a `uint` (which is an alias for `uint256` in Solidity), representing the remaining number of tokens that `_spender` is allowed to transfer from `_owner`'s balance.
+
+The only minor discrepancy is the use of the keyword `constant` instead of `view`, which is due to the syntax from an older version of Solidity (prior to 0.4.17). However, this does not affect the compliance with the ERC20 standard, as both `constant` and `view` indicate that the function does not alter the contract's state.
+
+Therefore, based on the provided information, the `allowance` function does not violate the ERC20 standard.

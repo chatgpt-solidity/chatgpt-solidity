@@ -1,0 +1,7 @@
+contract METARUFFY_ASSETS is ERC1155, ERC2981, Ownable, ERC1155Burnable, ERC1155Supply {
+    string private _symbol;
+
+    function symbol() public view returns (string memory) {
+        return _symbol;
+    }
+}

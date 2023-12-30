@@ -1,0 +1,19 @@
+abstract contract Ownable {
+
+    address private _owner;
+
+    modifier onlyOwner() {
+        if (_owner != msg.sender) revert NotOwner();
+        _;
+    }
+}
+
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    string private _URI;
+
+    function updateUri(string calldata _uri) external onlyOwner {
+        _URI = _uri;
+    }
+}
+

@@ -1,0 +1,28 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "safeTransferFrom(address,address,uint256,uint256,bytes) returns()" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+owner() returns(address)
+transferOwnership(address) returns()
+constructor() returns()
+name() returns(string)
+symbol() returns(string)
+royaltyInfo(uint256,uint256) returns(address,uint256)
+lengths() returns(uint256,uint256)
+collection(uint256) returns(ERC1155.Collection)
+item(uint256) returns(ERC1155.Item)
+supportsInterface(bytes4) returns(bool)
+uri(uint256) returns(string)
+balanceOf(address,uint256) returns(uint256)
+balanceOfBatch(address[],uint256[]) returns(uint256[])
+setApprovalForAll(address,bool) returns()
+isApprovedForAll(address,address) returns(bool)
+safeTransferFrom(address,address,uint256,uint256,bytes) returns()
+safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()
+createCollection(address,address,uint256,string) returns()
+updateCollection(uint256,address,address,uint256,string) returns()
+createItem(uint256,string,uint256) returns()
+updateItem(uint256,string) returns()
+mintBatch(address,uint256[],uint256[],bytes) returns()
+"""

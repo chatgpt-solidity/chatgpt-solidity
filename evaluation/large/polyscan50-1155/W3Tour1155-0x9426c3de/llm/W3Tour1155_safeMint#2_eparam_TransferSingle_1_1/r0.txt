@@ -1,0 +1,15 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function within the `ERC1155` contract. The `_mint` function is called by the `_safeMint` function in the `W3Tour1155` contract, which is in turn called by the `safeMint` function.
+
+The `_mint` function is designed to handle the minting of tokens, which means creating new tokens and assigning them to a recipient (`_to`). In the context of minting, the `_from` address is the zero address (0x0), because the tokens are being created rather than transferred from an existing holder. This is the standard behavior for minting operations in ERC-1155 token contracts.
+
+The `TransferSingle` event is emitted with the following parameters:
+
+- `_operator`: The address which initiated the minting (usually the minter).
+- `_from`: The address from which the tokens are considered to have been transferred, which is the zero address in the case of minting.
+- `_to`: The address to which the tokens are minted.
+- `_id`: The token type that is being minted.
+- `_value`: The number of tokens that are being minted.
+
+Since the `_from` argument is the zero address when minting, and the zero address is considered the address of the holder whose balance is increased (from nothing), the rule is satisfied. The `TransferSingle` event correctly represents the minting action according to the ERC-1155 standard.

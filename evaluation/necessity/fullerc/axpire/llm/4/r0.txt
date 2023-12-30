@@ -1,0 +1,25 @@
+The `burnFrom` function in the provided Solidity code allows the owner of the contract to burn tokens from another user's balance. This is not a standard function defined in the ERC-20 token standard. The ERC-20 standard specifies a set of functions and events that a compliant token should implement, and `burnFrom` is not one of them.
+
+However, the existence of additional functions beyond the ERC-20 standard does not necessarily mean that the contract is not compliant with the standard. A token contract can be ERC-20 compliant and still include additional functions that are not part of the standard, as long as the standard functions and events are correctly implemented.
+
+The ERC-20 standard functions and events that must be implemented are:
+
+- `totalSupply`
+- `balanceOf`
+- `transfer`
+- `transferFrom`
+- `approve`
+- `allowance`
+- `Transfer` event
+- `Approval` event
+
+The `burnFrom` function does not interfere with these standard functions and events. However, it is important to note that the `burnFrom` function does not check for allowances. In a typical ERC-20 token, the `transferFrom` function allows a third party to transfer tokens on behalf of the token holder, but only up to the amount that the token holder has approved for that third party. The `burnFrom` function in this contract bypasses this allowance mechanism, which could be seen as a violation of the expected behavior of an ERC-20 token when it comes to transferring tokens on behalf of another account.
+
+To make the `burnFrom` function compliant with the ERC-20 standard's expected behavior regarding allowances, it should also check that the owner has enough allowance to burn the specified amount of tokens from the `_from` address, and it should decrease the allowance accordingly. This would typically involve adding code similar to the following:
+
+```solidity
+require(_amount <= allowed[_from][msg.sender]);
+allowed[_from][msg.sender] = SafeMath.sub(allowed[_from][msg.sender], _amount);
+```
+
+In conclusion, while the `burnFrom` function does not make the contract non-compliant with the ERC-20 standard, it introduces functionality that is not part of the standard and could potentially violate the expected behavior regarding allowances. It is important for the contract to handle allowances correctly if it wants to adhere strictly to the ERC-20 standard's principles.

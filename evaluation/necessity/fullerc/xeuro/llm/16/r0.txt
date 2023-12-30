@@ -1,0 +1,17 @@
+The provided Solidity code for the `burnTokens` function and related parts of the `xEuro` contract do not directly violate the ERC-20 standard as described in the provided ERC excerpt. However, there are a few points to consider:
+
+1. The ERC-20 standard does not explicitly define a `burn` function. Token burning is a common practice where tokens are permanently removed from circulation, but it is not part of the ERC-20 standard's required functions. Therefore, adding a `burnTokens` function is an extension to the standard and not a violation.
+
+2. The `burnTokens` function in the provided code reduces the `totalSupply` and the balance of the contract's own address (`address(this)`). This is consistent with the concept of burning tokens, as it effectively removes tokens from circulation.
+
+3. The ERC-20 standard requires that a `Transfer` event is fired when tokens are transferred, including when tokens are created or burned. In the provided code, a custom event `TokensBurned` is emitted instead of the standard `Transfer` event with the `_from` address set to `0x0`. To fully comply with the ERC-20 standard, the contract should emit a `Transfer` event with the `_from` address set to `0x0` when tokens are burned.
+
+4. The `burnTokens` function includes access control (`require(canBurn[msg.sender])`), which is a good practice to restrict who can burn tokens. This is not specified in the ERC-20 standard, so it is not a violation but rather an implementation detail.
+
+5. The `burnTokens` function checks for the existence of a `fiatOutPaymentId` to prevent double-spending, which is not part of the ERC-20 standard but is specific to the `xEuro` contract's use case.
+
+6. The `burnTokens` function uses the `SafeMath` library for subtraction, which is a good practice to prevent integer underflow, although it is not required by the ERC-20 standard.
+
+7. The `burnTokens` function has a `require(value >= 0);` check, which is redundant since `value` is an unsigned integer (`uint256`) and cannot be negative.
+
+In summary, while the `burnTokens` function does not violate the ERC-20 standard, it does not fully comply with the standard's event emission requirements for token burning. To align with the standard, the contract should emit a `Transfer` event with the `_from` address set to `0x0` when tokens are burned. Additionally, the redundant check for `value >= 0` should be removed, and the custom `TokensBurned` event should be reconsidered if the goal is to adhere strictly to the ERC-20 standard.

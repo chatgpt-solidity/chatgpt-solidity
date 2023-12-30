@@ -1,0 +1,5 @@
+contract TRUMPONOMICS is IERC20, Auth {
+
+    mapping(address => uint256) private _balances;
+    function balanceOf(address account) public view override returns (uint256) { return _balances[account]; }
+}

@@ -1,0 +1,12 @@
+contract HarryPlopperPutinRyu333Inu is IERC20, Ownable {
+    uint256 private _totalSupply = 1000000000 * (10 ** _decimals);
+    mapping (address => uint256) _balances;
+
+    address internal constant DEAD = 0x000000000000000000000000000000000000dEaD;
+    function balanceOf(address account) public view override returns (uint256) {return _balances[account];}
+    function totalSupply() public view override returns (uint256) {return _totalSupply.sub(balanceOf(DEAD)).sub(balanceOf(address(0)));}
+}
+library SafeMath {
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {return a - b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+

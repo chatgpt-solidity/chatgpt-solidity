@@ -1,0 +1,136 @@
+{
+    "file": "evaluation/etherscan100/XLEGEND-0xcD6Bc75e.sol",
+    "contracts": [
+        {
+            "solc_version": "0.6.6",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/owner",
+                "constructor() returns()": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/decreaseAllowance_address_uint256",
+                "receive() returns()": ".temp/etherscan100/XLEGEND-0xcD6Bc75e/XLEGEND/f/receive"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "XLEGEND"
+        }
+    ]
+}

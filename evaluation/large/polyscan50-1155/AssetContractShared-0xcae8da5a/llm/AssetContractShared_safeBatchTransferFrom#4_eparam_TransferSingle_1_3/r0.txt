@@ -1,0 +1,21 @@
+YES
+
+The `safeTransferFrom` function in the `ERC1155Tradable` contract emits the `TransferSingle` event with the `_id` argument being the token type that is transferred. The function signature for `safeTransferFrom` is as follows:
+
+```solidity
+function safeTransferFrom(
+    address from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+)
+```
+
+Within this function, the `TransferSingle` event is emitted with the `id` parameter being passed directly from the function arguments:
+
+```solidity
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+This ensures that the `_id` in the `TransferSingle` event corresponds to the token type (`id`) being transferred, which complies with the given rule.

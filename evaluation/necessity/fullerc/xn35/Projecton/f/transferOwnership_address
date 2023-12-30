@@ -1,0 +1,13 @@
+contract owned {
+    address public owner;
+
+    function transferOwnership(address newOwner) onlyOwner {
+        owner = newOwner;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+

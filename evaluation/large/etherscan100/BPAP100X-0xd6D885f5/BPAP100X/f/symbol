@@ -1,0 +1,7 @@
+contract BPAP100X is Context, IERC20, Ownable {
+    string private constant _symbol = unicode"BPAP100X";
+
+    function symbol() public pure returns (string memory) {
+        return _symbol;
+    }
+}

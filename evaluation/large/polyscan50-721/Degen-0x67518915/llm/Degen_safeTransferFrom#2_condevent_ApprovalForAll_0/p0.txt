@@ -1,0 +1,18 @@
+Given a solidity function safeTransferFrom and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.10;
+contract Degen is ERC721, Ownable {
+
+    function safeTransferFrom(address from, address to, uint256 tokenId) public override {
+        revert("Transfers are disabled");
+    }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

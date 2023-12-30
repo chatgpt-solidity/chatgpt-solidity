@@ -1,0 +1,9 @@
+YES
+
+The `safeSingleMintBatch` function in the `W3Tour1155` contract calls the `_safeMint` function for each token ID in the `_ids` array, minting exactly one token (`_quantity` is set to 1) for each ID to the `_account` address.
+
+The `_safeMint` function, in turn, calls the `_mint` function from the `ERC1155` contract. The `_mint` function is responsible for increasing the balance of the `_account` by the specified `amount` (which is 1 in this case), and it emits the `TransferSingle` event with the `_value` argument set to the `amount` of tokens minted.
+
+The `TransferSingle` event is emitted with the `_value` argument matching the number of tokens the holder balance is increased by, which is 1 for each call to `_mint`. Since the `_from` address is zero (indicating a mint operation), the `_value` argument represents the number of tokens created and assigned to the `_to` address, which is the `_account` in the `safeSingleMintBatch` function.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, with the `_value` argument being the number of tokens the recipient balance is increased by, which is 1 for each token ID in the batch mint operation.

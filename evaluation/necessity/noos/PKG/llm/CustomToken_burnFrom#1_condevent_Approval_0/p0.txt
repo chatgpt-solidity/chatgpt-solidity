@@ -1,0 +1,31 @@
+Given a solidity function burnFrom and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract BurnToken is BaseToken {
+
+    function burnFrom(
+        address _from,
+        uint256 _value
+    ) public returns (bool success) {
+        require(balanceOf[_from] >= _value);
+        require(_value <= allowance[_from][msg.sender]);
+        balanceOf[_from] -= _value;
+        allowance[_from][msg.sender] -= _value;
+        totalSupply -= _value;
+        Burn(_from, _value);
+        return true;
+    }
+}
+
+contract BaseToken {
+    uint256 public totalSupply;
+
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

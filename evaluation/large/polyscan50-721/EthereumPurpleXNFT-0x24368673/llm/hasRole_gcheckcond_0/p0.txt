@@ -1,0 +1,20 @@
+Given a solidity function hasRole and the related parts from a smart contract.
+Whether the function hasRole and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract AccessControl is Context, IAccessControl, ERC165 {
+
+    mapping(bytes32 => RoleData) private _roles;
+
+    /**
+     * @dev Returns `true` if `account` has been granted `role`.
+     */
+    function hasRole(bytes32 role, address account) public view virtual override returns (bool) {
+        return _roles[role].members[account];
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,23 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is responsible for minting new tokens. It takes an address `to`, a token ID `id`, and an amount `amount`, along with some additional `data`. The function emits the `TransferSingle` event after updating the recipient's balance with the new tokens.
+
+In the provided code, the `_mint` function is called within the constructor of the `RecipientNFT` contract with the following parameters:
+
+```solidity
+_mint(msg.sender, ARTWORK, 2**255 - 1, "");
+```
+
+Here, `msg.sender` is the address of the entity deploying the contract, `ARTWORK` is the token ID (with a constant value of 0), and `2**255 - 1` is the amount of tokens to mint. The `data` parameter is an empty string.
+
+The `TransferSingle` event is emitted within the `_mint` function as follows:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+In this context, `operator` is the address that initiated the minting process (which is `_msgSender()`), `address(0)` represents the "from" address (since minting is akin to creating tokens out of thin air, the "from" address is the zero address), `to` is the recipient's address, `id` is the token ID, and `amount` is the number of tokens minted.
+
+The rule states that the `_to` argument must be the address of the recipient whose balance is increased. In the `TransferSingle` event emitted by the `_mint` function, the `_to` argument is indeed the address passed to the `_mint` function (`to`), which is the recipient whose balance is increased by the `amount` of tokens minted.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

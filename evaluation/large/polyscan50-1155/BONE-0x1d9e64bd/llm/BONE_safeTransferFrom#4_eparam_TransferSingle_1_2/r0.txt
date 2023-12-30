@@ -1,0 +1,7 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code calls the internal `_safeTransferFrom` function, which performs the actual transfer of tokens. The `_safeTransferFrom` function checks that the `to` address is not the zero address, verifies that the `from` address has a sufficient balance of the token type `id`, updates the balances accordingly, and then emits the `TransferSingle` event.
+
+The `TransferSingle` event is emitted with the correct arguments, including the `_to` argument, which is the address of the recipient whose balance is increased. The event is emitted after the balance update, ensuring that the `_to` address reflects the recipient of the transferred tokens.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

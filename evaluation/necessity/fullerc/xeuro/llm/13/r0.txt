@@ -1,0 +1,9 @@
+The provided Solidity function `removeFromCanBurn` and the related parts of the contract `xEuro` do not directly violate the ERC-20 standard as described in the provided ERC documentation. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable token transfers, approvals, and other related functionalities.
+
+The `removeFromCanBurn` function appears to be an administrative function that is not part of the ERC-20 standard. It is used to manage a list of addresses that are allowed to burn tokens. The ERC-20 standard does not define token burning; therefore, the presence of this function does not conflict with the standard's requirements.
+
+However, it is important to note that while the function itself does not violate the ERC-20 standard, the overall behavior of the contract could potentially be non-compliant if the token burning mechanism affects the total supply of tokens without properly emitting a `Transfer` event with the `_from` address set to `0x0` (as per the ERC-20 specification for token creation). The ERC-20 standard requires that a `Transfer` event be emitted whenever the balance of tokens changes, including when tokens are burned (effectively transferring them to an address that is considered out of circulation).
+
+To ensure full compliance with the ERC-20 standard, any function that alters the balance of tokens, including burning, should emit the appropriate `Transfer` event. If the `xEuro` contract includes a token burning mechanism, it should be reviewed to ensure that it adheres to this aspect of the standard.
+
+In summary, the `removeFromCanBurn` function itself does not violate the ERC-20 standard, but the contract's compliance depends on the implementation of the token burning mechanism and whether it correctly emits `Transfer` events as required by the standard.

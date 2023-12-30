@@ -1,0 +1,8 @@
+contract ERC20 is Context, IERC20 {
+    uint8 internal _decimals;
+
+    function decimals() public view virtual override returns (uint8) {
+        return _decimals;
+    }
+}
+

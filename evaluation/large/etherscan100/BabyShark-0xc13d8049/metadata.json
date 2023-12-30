@@ -1,0 +1,93 @@
+{
+    "file": "evaluation/etherscan100/BabyShark-0xc13d8049.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.14",
+            "func2file": {
+                "constructor() returns()": ".temp/etherscan100/BabyShark-0xc13d8049/BabyShark/f/constructor",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/BabyShark-0xc13d8049/BabyShark/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/BabyShark-0xc13d8049/BabyShark/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/BabyShark-0xc13d8049/BabyShark/f/transfer_address_uint256",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/BabyShark-0xc13d8049/BabyShark/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/BabyShark-0xc13d8049/BabyShark/f/allowance_address_address",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/BabyShark-0xc13d8049/BabyShark/f/transferFrom_address_address_uint256"
+            },
+            "func2attrs": {
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "totalSupply_() returns(uint256)",
+                "decimals() returns(uint8)",
+                "symbol() returns(string)",
+                "name() returns(string)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "BabyShark"
+        }
+    ]
+}

@@ -1,0 +1,3 @@
+NO
+
+The provided Solidity function `owner()` does not call any callee that returns a `(bool success)`. It simply returns the value of the private variable `_owner`, which is an address. There is no boolean value or external call involved in this function. Therefore, it does not violate the given rule.

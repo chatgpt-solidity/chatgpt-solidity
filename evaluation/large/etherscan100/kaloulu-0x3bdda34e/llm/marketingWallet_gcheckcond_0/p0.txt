@@ -1,0 +1,16 @@
+Given a solidity function marketingWallet and the related parts from a smart contract.
+Whether the function marketingWallet and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract kaloulu is IERC20, Auth {
+    address payable private _walletMarketing = payable(0xE7721Ce47beFB821Bf11Fb04f8F86b2F898D0A3a); 
+
+
+
+    function marketingWallet() external view returns (address) {        return _walletMarketing;    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

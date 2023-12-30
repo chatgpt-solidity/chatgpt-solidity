@@ -1,0 +1,9 @@
+contract CollectiveConsciousnessCommunity is IERC20 {
+    uint256 public constant totalSupply = 420690000 * 10 ** decimals;
+
+    mapping(address => uint256) public balanceOf;
+
+    constructor() {
+        balanceOf[msg.sender] = totalSupply;
+    }
+}

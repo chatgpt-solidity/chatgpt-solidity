@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted correctly according to the given rule. The `_safeBatchTransferFrom` function, which is called by `safeBatchTransferFrom`, performs the necessary checks and balance updates before emitting the `TransferBatch` event. The event is emitted with the correct parameters, including the `_to` argument, which is the address of the recipient whose balance is increased. The parameters passed to the event are the `operator` (the address performing the transfer), `from` (the address of the sender), `to` (the address of the recipient), `ids` (the array of token IDs), and `amounts` (the array of transfer amounts corresponding to the token IDs). These parameters match the rule specified for the `TransferBatch` event.

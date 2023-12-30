@@ -1,0 +1,66 @@
+Given a solidity function createTokens and the related parts from a smart contract and a rule.
+Whether the function createTokens and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract BAToken is StandardToken, SafeMath {
+
+    // crowdsale parameters
+    bool public isFinalized; // switched to true in operational state
+    uint256 public fundingStartBlock;
+    uint256 public fundingEndBlock;
+    uint256 public constant tokenExchangeRate = 6400; // 6400 BAT tokens per 1 ETH
+    uint256 public constant tokenCreationCap =
+        1500 * (10 ** 6) * 10 ** decimals;
+
+    /// @dev Accepts ether and creates new BAT tokens.
+    function createTokens() external payable {
+        if (isFinalized) throw;
+        if (block.number < fundingStartBlock) throw;
+        if (block.number > fundingEndBlock) throw;
+        if (msg.value == 0) throw;
+
+        uint256 tokens = safeMult(msg.value, tokenExchangeRate); // check that we're not over totals
+        uint256 checkedSupply = safeAdd(totalSupply, tokens);
+
+        // return money if something goes wrong
+        if (tokenCreationCap < checkedSupply) throw; // odd fractions won't be found
+
+        totalSupply = checkedSupply;
+        balances[msg.sender] += tokens; // safeAdd not needed; bad semantics to use here
+        CreateBAT(msg.sender, tokens); // logs token creation
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+}
+
+contract Token {
+    uint256 public totalSupply;
+}
+
+contract SafeMath {
+    /* function assert(bool assertion) internal { */
+    /*   if (!assertion) { */
+    /*     throw; */
+    /*   } */
+    /* }      // assert no longer needed once solidity is on 0.4.10 */
+
+    function safeAdd(uint256 x, uint256 y) internal returns (uint256) {
+        uint256 z = x + y;
+        assert((z >= x) && (z >= y));
+        return z;
+    }
+
+    function safeMult(uint256 x, uint256 y) internal returns (uint256) {
+        uint256 z = x * y;
+        assert((x == 0) || (z / x == y));
+        return z;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

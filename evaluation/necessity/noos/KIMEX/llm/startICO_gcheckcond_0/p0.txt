@@ -1,0 +1,44 @@
+Given a solidity function startICO and the related parts from a smart contract.
+Whether the function startICO and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    uint constant IN_SALE = 1; // In sales
+
+    uint saleState;
+    uint public icoStartTime;
+    bool public inActive;
+    bool public isSelling;
+    uint256 public icoStandardPrice;
+
+    modifier isActive() {
+        require(inActive == false);
+        _;
+    }
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Start ICO
+    function startICO() external isActive onlyOwnerOrAdmin returns (bool) {
+        require(icoStandardPrice > 0);
+        saleState = IN_SALE;
+        icoStartTime = now;
+        isSelling = true;
+        emit StartICO(saleState);
+        return true;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

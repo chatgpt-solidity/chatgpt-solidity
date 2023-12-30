@@ -1,0 +1,5 @@
+YES
+
+The `approve` function in the `DSToken` contract calls the `approve` function in the `DSTokenBase` contract with `uint(-1)` as the amount to approve, which is a common pattern to set the maximum possible allowance. The `DSTokenBase` contract's `approve` function sets the allowance in the `_approvals` mapping and emits an `Approval` event, then returns `true` to indicate that the approval was successful.
+
+Since the `DSToken` contract's `approve` function returns the result of the `DSTokenBase` contract's `approve` function, and the `DSTokenBase` contract's `approve` function returns `true` upon success, the `DSToken` contract's `approve` function also returns `true` when successful, in compliance with the ERC rule that states the function should return whether the approval is successful.

@@ -1,0 +1,10 @@
+type: llm-flow
+flows:
+  - template: |
+      Given only the Solidity interfaces of a smart contract. 
+      Check whether the given interfaces contain the interface: "<interface>" and parameter types and return types are matched?
+      Reply in "YES" or "NO".
+
+      Solidity interfaces:"""
+      <interfaces>
+      """

@@ -1,0 +1,50 @@
+The provided Solidity code for the `freeze` function and related parts of the `BNB` contract do not directly correspond to any of the methods specified in the ERC-20 token standard. The ERC-20 standard defines a set of methods and events that a compliant token contract should implement to ensure interoperability with other contracts and clients, such as wallets and exchanges.
+
+The `freeze` function in the `BNB` contract appears to be a custom function that is not part of the ERC-20 standard. It allows a user to "freeze" a certain amount of their tokens, which presumably means these tokens cannot be transferred until they are "unfrozen." This functionality is not covered by the ERC-20 standard, which only specifies methods for transferring tokens (`transfer` and `transferFrom`), checking balances (`balanceOf`), managing allowances (`approve` and `allowance`), and the associated events (`Transfer` and `Approval`).
+
+However, the `freeze` function does not violate the ERC-20 standard; it simply adds additional functionality that is not specified by the standard. As long as the contract still implements all the required ERC-20 methods and events correctly, it can be considered ERC-20 compliant, even with additional functions like `freeze`.
+
+That being said, there are a few issues with the `freeze` function and the `SafeMath` contract that should be addressed:
+
+1. The use of `throw` is deprecated in Solidity and should be replaced with `require` statements for input validation and `revert` for error handling. The `throw` keyword was removed in Solidity version 0.5.0.
+
+2. The `freeze` function does not specify a visibility modifier (e.g., `public` or `external`). It is important to explicitly state the visibility of functions in Solidity.
+
+3. The `freeze` function should return a boolean value (`bool success`) to indicate whether the operation was successful, as per the ERC-20 standard's convention for functions that can fail.
+
+4. The `Freeze` event is not part of the ERC-20 standard, but it is a good practice to emit events for state changes. However, the event is not defined in the provided code snippet, so it should be declared similarly to the `Transfer` and `Approval` events.
+
+5. The `SafeMath` contract's `assert` function shadows the built-in `assert` function in Solidity, which could lead to confusion. It is better to use the built-in `require` and `assert` functions for input validation and invariant checking, respectively.
+
+To improve the `freeze` function and make it compliant with the latest Solidity practices, you could rewrite it as follows:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract BNB {
+    using SafeMath for uint256;
+
+    mapping(address => uint256) public freezeOf;
+    mapping(address => uint256) public balanceOf;
+
+    event Freeze(address indexed from, uint256 value);
+
+    function freeze(uint256 _value) public returns (bool success) {
+        require(balanceOf[msg.sender] >= _value, "Insufficient balance");
+        require(_value > 0, "Value must be greater than 0");
+
+        balanceOf[msg.sender] = balanceOf[msg.sender].sub(_value);
+        freezeOf[msg.sender] = freezeOf[msg.sender].add(_value);
+
+        emit Freeze(msg.sender, _value);
+        return true;
+    }
+}
+
+library SafeMath {
+    // SafeMath library implementation...
+}
+```
+
+Note that in Solidity version 0.8.0 and above, the SafeMath library is no longer necessary for basic arithmetic operations because the language now has built-in overflow checks. However, if you are using an older version of Solidity, you should include the SafeMath library for safe arithmetic operations.

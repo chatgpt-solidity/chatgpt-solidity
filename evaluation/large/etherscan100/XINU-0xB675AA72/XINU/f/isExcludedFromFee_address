@@ -1,0 +1,8 @@
+contract XINU is Context, IERC20, Ownable {
+    mapping (address => bool) private _isExcludedFromFee;
+
+
+    function isExcludedFromFee(address account) public view returns(bool) {
+        return _isExcludedFromFee[account];
+    }
+}

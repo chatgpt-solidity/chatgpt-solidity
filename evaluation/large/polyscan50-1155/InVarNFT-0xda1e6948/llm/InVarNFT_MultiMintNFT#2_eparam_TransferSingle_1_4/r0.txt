@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct `_value` argument. The `_mint` function is called within the `MultiMintNFT` function in a loop from `startId` to `endId`. Each iteration of the loop mints a single token (`amount` is 1) of token type `i` to the `account`. The `_mint` function emits the `TransferSingle` event with the `amount` that is minted, which is `1` in this case.
+
+The `_mint` function ensures that the `_value` in the `TransferSingle` event matches the number of tokens the holder's balance is increased by, which is also the number of tokens minted for the recipient. Since the `amount` is `1` for each mint operation, and the `TransferSingle` event is emitted with this same value, the rule is followed correctly.

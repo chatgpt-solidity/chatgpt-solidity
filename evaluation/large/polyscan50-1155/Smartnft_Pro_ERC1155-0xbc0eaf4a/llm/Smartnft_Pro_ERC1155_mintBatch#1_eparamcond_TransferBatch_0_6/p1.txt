@@ -1,0 +1,6 @@
+Whether the event TransferBatch is emitted according to the given rule? Reply in "YES" or "NO".
+
+Rule:"""
+the `_to` argument MUST be set to `0x0` (i.e. zero address)
+event TransferBatch(address indexed _operator, address indexed _from, address indexed _to, uint256[] _ids, uint256[] _values);
+"""

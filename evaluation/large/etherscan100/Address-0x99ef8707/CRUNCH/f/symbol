@@ -1,0 +1,6 @@
+contract CRUNCH is Context, IERC20, Ownable {
+    string private _symbol = "CRUNCH";
+    function symbol() public view returns (string memory) {
+        return _symbol;
+    }
+}

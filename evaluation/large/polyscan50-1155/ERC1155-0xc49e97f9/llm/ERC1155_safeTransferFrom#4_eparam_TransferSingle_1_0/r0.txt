@@ -1,0 +1,5 @@
+YES
+
+The function `_safeTransferFrom` emits the `TransferSingle` event with `msg.sender` as the `_operator` argument. This is in accordance with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+In the `safeTransferFrom` function, there is a check to ensure that the `from` address is the same as `msg.sender` or that `msg.sender` is approved by the `from` address to make the transfer. If this check passes, the `_safeTransferFrom` function is called, which then emits the `TransferSingle` event with `msg.sender` as the `_operator`. This means that the event is emitted with the correct `_operator` as per the given rule.

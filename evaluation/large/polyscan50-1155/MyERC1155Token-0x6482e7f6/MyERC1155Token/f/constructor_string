@@ -1,0 +1,11 @@
+contract MyERC1155Token is BasicERC1155 {
+    constructor(string memory uri) BasicERC1155(uri) {}
+}
+abstract contract BasicERC1155 {
+
+    string private _uri;
+    constructor(string memory uri_) {
+        _uri = uri_;
+    }
+}
+

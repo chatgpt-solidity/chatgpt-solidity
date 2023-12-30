@@ -1,0 +1,14 @@
+Given a solidity function decimals and the related parts from a smart contract and an rule for its return value.
+Whether function decimals returns the number of decimals the token uses? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract PandaToken is Context, IERC20{
+    uint256 private _decimals;
+
+    function decimals() public view override returns (uint256) {
+        return _decimals;
+    }
+}
+"""

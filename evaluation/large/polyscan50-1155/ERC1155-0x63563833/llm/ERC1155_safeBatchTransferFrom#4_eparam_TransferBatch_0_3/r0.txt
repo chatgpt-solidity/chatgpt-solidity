@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function with the correct arguments as specified by the rule. The `_ids` argument is indeed the list of tokens being transferred, and the event is emitted with the `_operator`, `_from`, `_to`, `_ids`, and `_values` (amounts) parameters as required.

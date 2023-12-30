@@ -1,0 +1,19 @@
+contract ERC1155 {
+    mapping(uint256 => mapping(address => uint256)) private balances;
+
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only the owner can call this function");
+        _;
+    }
+
+    function mint(
+        address account,
+        uint256 tokenId,
+        uint256 amount
+    ) external onlyOwner {
+        balances[tokenId][account] += amount;
+    }
+}
+

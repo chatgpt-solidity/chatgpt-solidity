@@ -1,0 +1,49 @@
+Given a solidity function pause and the related parts from a smart contract.
+Whether the function pause and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable is Context {
+  address private _owner;
+
+  /**
+   * @dev Throws if called by any account other than the owner.
+   */
+  modifier onlyOwner() {
+    require(_owner == _msgSender(), "Ownable: caller is not the owner");
+    _;
+  }
+}
+
+contract Pausable is Ownable {
+
+
+  bool public paused = false;
+
+  /**
+   * @dev Modifier to make a function callable only when the contract is not paused.
+   */
+  modifier whenNotPaused() {
+    require(!paused);
+    _;
+  }
+
+  /**
+   * @dev called by the owner to pause, triggers stopped state
+   */
+  function pause() onlyOwner whenNotPaused public {
+    paused = true;
+    emit Pause();
+  }
+}
+
+contract Context {
+
+  function _msgSender() internal view returns (address payable) {
+    return msg.sender;
+  }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

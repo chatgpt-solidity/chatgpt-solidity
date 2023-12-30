@@ -1,0 +1,5 @@
+NO
+
+The provided code snippet does not include the `approve` function or the `Approval` event, which are typically part of an ERC-20 token contract. The rule states that the `Approval` event should be emitted upon a successful call to the `approve` function. Since the `approve` function and the related `Approval` event are not part of the provided code, we cannot determine whether the rule is violated based on the given information.
+
+To fully audit the contract for compliance with the rule, the complete implementation of the `approve` function and the `Approval` event declaration would need to be reviewed.

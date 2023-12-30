@@ -1,0 +1,4 @@
+contract CHMS is Context, IERC20, Ownable {
+
+	receive() external payable {}
+}

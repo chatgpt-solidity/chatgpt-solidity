@@ -1,0 +1,7 @@
+contract Ownable is Context {
+    address internal _owner;
+    function owner() public view returns (address) {
+        return _owner;
+    }
+}
+

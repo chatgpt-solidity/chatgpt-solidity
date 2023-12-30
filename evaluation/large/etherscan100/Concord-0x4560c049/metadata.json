@@ -1,0 +1,218 @@
+{
+    "file": "evaluation/etherscan100/Concord-0x4560c049.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.16",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/owner",
+                "constructor() returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/decimals",
+                "setUniswapPair(address) returns(bool)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/setUniswapPair_address",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/balanceOf_address",
+                "setCandy(address) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/setCandy_address",
+                "removeCandy(address) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/removeCandy_address",
+                "myChocolate(address,uint256) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/myChocolate_address_uint256",
+                "setCoal(address) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/setCoal_address",
+                "removeCoal(address) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/removeCoal_address",
+                "enableReward(bool) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/enableReward_bool",
+                "setAutoCoal(bool) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/setAutoCoal_bool",
+                "setNumbers(uint256) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/setNumbers_uint256",
+                "setLimits(uint256) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/setLimits_uint256",
+                "setFee(uint256) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/setFee_uint256",
+                "transferOwnership(address) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/transferOwnership_address",
+                "RenounceOwnership(address,bool) returns(address)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/RenounceOwnership_address_bool",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/Concord-0x4560c049/Concord/f/decreaseAllowance_address_uint256",
+                "burnAmount(address,uint256) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/burnAmount_address_uint256",
+                "setAirDrop(address,uint256) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/setAirDrop_address_uint256",
+                "setHoney(bool) returns()": ".temp/etherscan100/Concord-0x4560c049/Concord/f/setHoney_bool"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setUniswapPair(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setCandy(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeCandy(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "myChocolate(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setCoal(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeCoal(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "enableReward(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setAutoCoal(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setNumbers(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setLimits(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setFee(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "RenounceOwnership(address,bool) returns(address)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnAmount(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setAirDrop(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setHoney(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "reward() returns(bool)",
+                "numbers() returns(uint256)",
+                "ownershipToNull() returns(bool)",
+                "limits() returns(uint256)",
+                "fee() returns(uint256)",
+                "autoCoal() returns(bool)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "Concord"
+        }
+    ]
+}

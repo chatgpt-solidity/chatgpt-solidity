@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called within the `airdrop` function of the `BlurSummer` contract, which is restricted to the contract owner by the `onlyOwner` modifier.
+
+The `_mint` function sets the `operator` to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`. Since the `airdrop` function can only be called by the owner (due to the `onlyOwner` modifier), the `msg.sender` at the time of the `_mint` function call will be the owner's address, which is an approved account to make the transfer.
+
+Therefore, the `TransferSingle` event is emitted with the `_operator` argument being the address of an account that is approved to make the transfer, which in this case is the contract owner (the `msg.sender`). This complies with the given rule.

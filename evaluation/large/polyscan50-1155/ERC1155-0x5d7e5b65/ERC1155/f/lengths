@@ -1,0 +1,14 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI, IERC2981 {
+
+    uint256 private collectionsLength;
+    uint256 private itemsLength;
+
+    function lengths()
+        external
+        view
+        returns (uint256 collections, uint256 items)
+    {
+        return (collectionsLength, itemsLength);
+    }
+}
+

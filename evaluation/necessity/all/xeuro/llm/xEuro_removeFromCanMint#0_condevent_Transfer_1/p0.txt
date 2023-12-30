@@ -1,0 +1,30 @@
+Given a solidity function removeFromCanMint and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.7;
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+
+    mapping(address => bool) public isAdmin;
+    // addresses allowed to mint tokens:
+    mapping(address => bool) public canMint;
+
+    function removeFromCanMint(address _addressToRemove) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canMint[_addressToRemove] = false;
+        emit AddressRemovedFromCanMint(msg.sender, _addressToRemove);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

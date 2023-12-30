@@ -1,0 +1,51 @@
+Given a solidity function setBuyTaxes and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract Ownable is Context {
+    address private _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+
+contract SKR is Context, IERC20, Ownable {
+
+    uint256 public _buyMarketingFee = 10;
+    uint256 public _buyLpFee = 0;
+
+    uint256 public _totalTaxIfBuying = _buyMarketingFee + _buyLpFee;
+
+
+    function setBuyTaxes(uint256 buyMarketingFeeNew, uint256 buyLpFeeNew) external onlyOwner(){
+        _buyMarketingFee = buyMarketingFeeNew;
+        _buyLpFee = buyLpFeeNew;
+        _totalTaxIfBuying = _buyMarketingFee.add(_buyLpFee);
+        // require(_totalTaxIfBuying <= 5 , "Max buy fee under 5%");
+    }
+}
+library SafeMath {
+
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a, "SafeMath: addition overflow");
+
+        return c;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

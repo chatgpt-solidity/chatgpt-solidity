@@ -1,0 +1,4 @@
+contract MakeItOut is Context, IERC20, Ownable {
+
+    receive() external payable {}
+}

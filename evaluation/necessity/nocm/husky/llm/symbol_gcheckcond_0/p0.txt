@@ -1,0 +1,16 @@
+Given a solidity function symbol and the related parts from a smart contract and a rule.
+Whether the function symbol and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract SiberianHusky is Context, IERC20, Ownable {
+    string private _symbol = "SHUSKY";
+
+    function symbol() public view returns (string memory) {
+        return _symbol;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

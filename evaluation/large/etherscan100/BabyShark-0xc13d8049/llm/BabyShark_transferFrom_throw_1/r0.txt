@@ -1,0 +1,7 @@
+YES
+
+The `transferFrom` function in the provided Solidity code uses the SafeMath library for subtraction and addition to prevent overflow and underflow. If `numTokens` is 0, the `sub` and `add` functions from SafeMath will not throw an error because subtracting or adding 0 to any number will not cause an underflow or overflow.
+
+The `require` statements in `transferFrom` will also pass if `numTokens` is 0, assuming that the `owner` has a balance of at least 0 (which is always true) and that the `msg.sender` is allowed to transfer at least 0 tokens on behalf of the `owner` (which should also be true by default).
+
+Therefore, transfers of 0 values will not throw an error in this function.

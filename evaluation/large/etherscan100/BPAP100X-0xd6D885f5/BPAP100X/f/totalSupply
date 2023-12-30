@@ -1,0 +1,7 @@
+contract BPAP100X is Context, IERC20, Ownable {
+    uint256 private constant _tTotal = 10000000 * 10**_decimals;
+
+    function totalSupply() public pure override returns (uint256) {
+        return _tTotal;
+    }
+}

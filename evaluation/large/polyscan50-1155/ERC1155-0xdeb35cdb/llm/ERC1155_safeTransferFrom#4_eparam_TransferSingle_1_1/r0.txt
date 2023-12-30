@@ -1,0 +1,9 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_from` argument in the `TransferSingle` event is indeed the address of the holder whose balance is decreased, as required by the rule. This is evident from the following line in the `_safeTransferFrom` private function:
+
+```solidity
+emit TransferSingle(msg.sender, from, to, id, amount);
+```
+
+Here, `from` is the address of the token holder from whom the tokens are being transferred, and this address is passed as the `_from` argument in the `TransferSingle` event. The balance of the `from` address is decreased by the `amount` before the event is emitted, which complies with the rule.

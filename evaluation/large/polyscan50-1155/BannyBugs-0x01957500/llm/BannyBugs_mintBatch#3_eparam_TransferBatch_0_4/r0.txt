@@ -1,0 +1,5 @@
+YES
+
+The `TransferBatch` event is emitted in the `_mintBatch` function according to the given rule. The `_mintBatch` function ensures that the `ids` and `amounts` arrays have the same length, which corresponds to the `_ids` and `_values` in the `TransferBatch` event. When minting, the `from` address is the zero address, and the `to` address is the recipient of the newly minted tokens. The `amounts` array represents the number of tokens minted for each token type specified in the `ids` array.
+
+The `TransferBatch` event is emitted with the `_operator` as the message sender, `_from` as the zero address (indicating minting), `_to` as the recipient address, `_ids` as the list of token types, and `_values` as the corresponding list of token amounts minted. This matches the rule that the `_values` argument must be the list of the number of tokens the holder balance is increased by, which is exactly what happens during the minting process.

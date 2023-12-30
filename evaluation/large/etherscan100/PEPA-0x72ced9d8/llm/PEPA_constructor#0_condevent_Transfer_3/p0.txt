@@ -1,0 +1,47 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.20;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract PEPA is Context, IERC20, Ownable {
+    mapping (address => uint256) private _balances;
+    mapping (address => bool) private _isExcludedFromFee;
+    address payable private _taxWallet;
+    uint256 private constant _tTotal = 420690000000 * 10**_decimals;
+
+    constructor () {
+        _taxWallet = payable(_msgSender());
+        _balances[_msgSender()] = _tTotal;
+        _isExcludedFromFee[owner()] = true;
+        _isExcludedFromFee[address(this)] = true;
+        _isExcludedFromFee[_taxWallet] = true;
+
+        emit Transfer(address(0), _msgSender(), _tTotal);
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    constructor () {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    function owner() public view returns (address) {
+        return _owner;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

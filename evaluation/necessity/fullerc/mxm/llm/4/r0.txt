@@ -1,0 +1,38 @@
+The provided Solidity code for the `transferFrom` function and related parts of the `TokenERC20` contract need to be compared against the ERC-20 token standard to determine if there are any violations.
+
+Here are the key points from the ERC-20 standard that are relevant to the `transferFrom` function:
+
+1. The `transferFrom` function should transfer `_value` amount of tokens from address `_from` to address `_to`, and MUST fire the `Transfer` event.
+2. The function SHOULD throw unless the `_from` account has deliberately authorized the sender of the message via some mechanism.
+3. Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+
+Now, let's analyze the provided `transferFrom` function:
+
+```solidity
+function transferFrom(
+    address _from,
+    address _to,
+    uint256 _value
+) public returns (bool success) {
+    require(!blacklist[msg.sender]);
+    require(_value <= allowance[_from][msg.sender]); // Check allowance
+    allowance[_from][msg.sender] -= _value;
+    _transfer(_from, _to, _value);
+    return true;
+}
+```
+
+The function checks that the `msg.sender` is not blacklisted and that they have enough allowance to transfer the `_value` amount of tokens from `_from` to `_to`. It then deducts the `_value` from the allowance and calls the internal `_transfer` function to perform the actual token transfer.
+
+The internal `_transfer` function performs the necessary checks and balance updates, and it also fires the `Transfer` event as required by the ERC-20 standard.
+
+Based on the provided code and the ERC-20 standard, the `transferFrom` function appears to comply with the ERC-20 requirements. It checks for sufficient allowance, updates the allowance, performs the transfer, and fires the `Transfer` event.
+
+However, there are a few points to consider:
+
+- The `require(_to != 0x0);` check in the `_transfer` function should be updated to `require(_to != address(0));` to be more explicit and align with current Solidity standards.
+- The `Transfer` event should be declared in the contract with the `event` keyword, and it should be emitted with the `emit` keyword for Solidity versions 0.4.21 and above. The provided code does not show the declaration of the `Transfer` event, so it's assumed to be declared elsewhere in the contract.
+- The `blacklist` functionality is not part of the ERC-20 standard, so while it doesn't violate the standard, it is an additional feature that is not required by ERC-20.
+- The code does not show the `approve` function or the `Approval` event, which are also part of the ERC-20 standard. These would need to be implemented correctly for full compliance.
+
+In conclusion, the provided `transferFrom` function and related parts do not appear to violate the ERC-20 standard, assuming that the `Transfer` event is correctly declared and emitted elsewhere in the contract, and that the `approve` function and `Approval` event are also correctly implemented.

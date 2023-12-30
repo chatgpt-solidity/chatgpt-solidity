@@ -1,0 +1,31 @@
+Given a solidity function transfer and the related parts from a smart contract and an rule for its return value.
+Whether function transfer return whether the transfer is successful? Reply in "YES" or "NO".
+
+Notes: In case of failure, it is allowed to revert the transaction instead of returning false.
+
+
+
+Function(and related parts) to audit:"""
+contract CollectiveConsciousnessCommunity is IERC20 {
+
+    mapping(address => uint256) public balanceOf;
+
+    function transfer(
+        address to,
+        uint256 amount
+    ) external override returns (bool) {
+        return _transfer(msg.sender, to, amount);
+    }
+
+    function _transfer(
+        address from,
+        address to,
+        uint256 amount
+    ) private returns (bool) {
+        balanceOf[from] -= amount;
+        balanceOf[to] += amount;
+        emit Transfer(from, to, amount);
+        return true;
+    }
+}
+"""

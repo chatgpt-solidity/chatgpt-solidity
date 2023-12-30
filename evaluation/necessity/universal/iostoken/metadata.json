@@ -1,0 +1,88 @@
+{
+    "file": "evaluation/audited/iostoken.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.19",
+            "func2file": {
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/u-cm/iostoken/IOSToken/f/transferFrom_address_address_uint256",
+                "transfer(address,uint256) returns(bool)": "result-necessity/u-cm/iostoken/IOSToken/f/transfer_address_uint256",
+                "balanceOf(address) returns(uint256)": "result-necessity/u-cm/iostoken/IOSToken/f/balanceOf_address",
+                "approve(address,uint256) returns(bool)": "result-necessity/u-cm/iostoken/IOSToken/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/u-cm/iostoken/IOSToken/f/allowance_address_address",
+                "IOSToken() returns()": "result-necessity/u-cm/iostoken/IOSToken/f/IOSToken"
+            },
+            "func2attrs": {
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "IOSToken() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "totalSupply() returns(uint256)",
+                "decimals() returns(uint8)",
+                "symbol() returns(string)",
+                "name() returns(string)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "IOSToken"
+        }
+    ]
+}

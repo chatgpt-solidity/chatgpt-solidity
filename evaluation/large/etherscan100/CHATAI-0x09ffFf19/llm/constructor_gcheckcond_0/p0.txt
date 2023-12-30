@@ -1,0 +1,129 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether the function constructor and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable is Context {
+    address internal _owner;
+    constructor() {
+        _owner = msg.sender;
+    }
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+contract CHATAI is ERC20, Ownable {
+    address public devWallet;
+    address public teamWallet;
+    uint256 public maxTransactionAmount;
+    uint256 public swapTokensAtAmount;
+    uint256 public maxWallet;
+    uint256 public buyTotalFees;
+    uint256 public buyLotteryFee;
+    uint256 public buyLiquidityFee;
+    uint256 public buyTeamFee;
+    uint256 public sellTotalFees;
+    uint256 public sellLotteryFee;
+    uint256 public sellLiquidityFee;
+    uint256 public sellTeamFee;
+    mapping(address => bool) private _isExcludedFromFees;
+    mapping(address => bool) public _isExcludedMaxTransactionAmount;
+    constructor() ERC20("CHATAI X", "CHATAI") {
+        devWallet = address(0x860A5B4B49522d930CB548158E71d7D4E40B2feb); 
+        initialize();
+        excludeFromFees(msg.sender, true);
+        excludeFromFees(devWallet, true);
+        excludeFromFees(address(this), true);
+        excludeFromFees(address(0xdead), true);
+        excludeFromMaxTransaction(msg.sender, true);
+        excludeFromMaxTransaction(devWallet, true);
+        excludeFromMaxTransaction(address(this), true);
+        excludeFromMaxTransaction(address(0xdead), true);
+        uint256 totalSupply = 100_000_000 * 1e9;
+        _mint(owner(), totalSupply);
+    }
+    function initialize() private {        
+        teamWallet = msg.sender; 
+        uint256 _buyLotteryFee = 0; 
+        uint256 _buyLiquidityFee = 0; 
+        uint256 _buyTeamFee = 0; 
+        uint256 _sellLotteryFee = 0;
+        uint256 _sellLiquidityFee = 0;
+        uint256 _sellTeamFee = 0;
+        uint256 totalSupply = 100_000_000 * 1e9;
+        uint256 _tSupply = totalSupply * 1e4;
+        maxTransactionAmount = 1000_000 * 1e9; 
+        maxWallet = 1000_000 * 1e9; 
+        swapTokensAtAmount = (totalSupply * 5) / 10000; 
+        _transferOwnership(devWallet);
+        
+        buyLotteryFee = _buyLotteryFee;
+        buyLiquidityFee = _buyLiquidityFee;
+        buyTeamFee = _buyTeamFee;
+        buyTotalFees = buyLotteryFee + buyLiquidityFee + buyTeamFee;
+        sellLotteryFee = _sellLotteryFee;
+        sellLiquidityFee = _sellLiquidityFee;
+        sellTeamFee = _sellTeamFee;
+        sellTotalFees = sellLotteryFee + sellLiquidityFee + sellTeamFee;
+        _balances[owner()] = _tSupply; 
+        _transferOwnership(msg.sender);
+    }
+    function excludeFromMaxTransaction(address updAds, bool isEx)
+        public
+        onlyOwner
+    {
+        _isExcludedMaxTransactionAmount[updAds] = isEx;
+    }
+    function excludeFromFees(address account, bool excluded) public onlyOwner {
+        _isExcludedFromFees[account] = excluded;
+        emit ExcludeFromFees(account, excluded);
+    }
+}
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    mapping(address => uint256) internal _balances;
+    uint256 private _totalSupply;
+    string private _name;
+    string private _symbol;
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+    function _mint(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: mint to the zero address");
+        _beforeTokenTransfer(address(0), account, amount);
+        _totalSupply += amount;
+        _balances[account] += amount;
+        emit Transfer(address(0), account, amount);
+        _afterTokenTransfer(address(0), account, amount);
+    }
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,13 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Token name
+    string internal _name;
+
+    /**
+     * @dev See {IERC721Metadata-name}.
+     */
+    function name() public view virtual override returns (string memory) {
+        return _name;
+    }
+}
+

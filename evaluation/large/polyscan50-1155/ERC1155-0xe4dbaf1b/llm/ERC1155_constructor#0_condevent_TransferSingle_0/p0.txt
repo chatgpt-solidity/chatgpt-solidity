@@ -1,0 +1,24 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 {
+    mapping(uint256 => mapping(address => uint256)) private balances;
+
+    address public owner;
+    uint256 public constant TOKEN_ID = 0;
+    uint256 public constant INITIAL_SUPPLY = 100000;
+
+    constructor() {
+        owner = msg.sender;
+        balances[TOKEN_ID][msg.sender] = INITIAL_SUPPLY;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers as well as minting or burning
+"""

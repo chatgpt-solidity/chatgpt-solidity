@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function with the `amount` argument, which represents the number of tokens to be transferred. The function ensures that the `amount` is subtracted from the balance of the `from` address and added to the balance of the `to` address. The event is emitted after the balances have been updated, and the `amount` used in the event matches the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by, which complies with the given rule.

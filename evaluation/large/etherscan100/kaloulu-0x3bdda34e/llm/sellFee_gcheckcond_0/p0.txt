@@ -1,0 +1,13 @@
+Given a solidity function sellFee and the related parts from a smart contract.
+Whether the function sellFee and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract kaloulu is IERC20, Auth {
+    uint8 private _finalSellTax = 0;
+    function sellFee() external view returns(uint8) {        return _finalSellTax;    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,311 @@
+{
+    "file": "evaluation/polyscan50-721/AISenseNFT-0x1EC52970.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "setContractURI(string) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/setContractURI_string",
+                "owner() returns(address)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/transferOwnership_address",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/supportsInterface_bytes4",
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/tokenOfOwnerByIndex_address_uint256",
+                "totalSupply() returns(uint256)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/totalSupply",
+                "tokenByIndex(uint256) returns(uint256)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/tokenByIndex_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor(address,string) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/constructor_address_string",
+                "claimNFT(address,uint8) returns(uint256)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/claimNFT_address_uint8",
+                "mintWithUsdt(uint8) returns(uint256)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/mintWithUsdt_uint8",
+                "setNFTPrice(uint256,uint256) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/setNFTPrice_uint256_uint256",
+                "getNFTPrice(uint256) returns(uint256)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/getNFTPrice_uint256",
+                "getNFTPriceInUsdt(uint256) returns(uint256)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/getNFTPriceInUsdt_uint256",
+                "addNewNFTType(uint256,uint256,string) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/addNewNFTType_uint256_uint256_string",
+                "setBaseURI(string) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/setBaseURI_string",
+                "pauseMinting() returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/pauseMinting",
+                "resumeMinting() returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/resumeMinting",
+                "withdrawAll() returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/withdrawAll",
+                "setUsdtAddress(address) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/setUsdtAddress_address",
+                "withdrawUSDT() returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/withdrawUSDT",
+                "setUsdtDecimals(uint8) returns()": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/setUsdtDecimals_uint8",
+                "isValid(uint256) returns(bool)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/isValid_uint256",
+                "exists(uint256) returns(bool)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/exists_uint256",
+                "getFunds() returns(uint256)": ".temp/polyscan50-721/AISenseNFT-0x1EC52970/AISenseNFT/f/getFunds"
+            },
+            "func2attrs": {
+                "setContractURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenByIndex(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(address,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "claimNFT(address,uint8) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintWithUsdt(uint8) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setNFTPrice(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getNFTPrice(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getNFTPriceInUsdt(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "addNewNFTType(uint256,uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "pauseMinting() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "resumeMinting() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdrawAll() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setUsdtAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdrawUSDT() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setUsdtDecimals(uint8) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isValid(uint256) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "exists(uint256) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getFunds() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "nftPrice(uint256) returns(uint256)",
+                "baseURI() returns(string)",
+                "usdtDecimals() returns(uint8)",
+                "nftValidUntil(uint256) returns(uint256)",
+                "isPaused() returns(bool)",
+                "nftTypes(uint256) returns(uint256,uint256,string)",
+                "NFTTYPE(uint256) returns(uint8)",
+                "usdt() returns(address)",
+                "contractURI() returns(string)"
+            ],
+            "ercs": [
+                "165",
+                "721enumerable",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ContractURIUpdated",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "string",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "CreateAISenseNFT",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "AISenseNFT"
+        }
+    ]
+}

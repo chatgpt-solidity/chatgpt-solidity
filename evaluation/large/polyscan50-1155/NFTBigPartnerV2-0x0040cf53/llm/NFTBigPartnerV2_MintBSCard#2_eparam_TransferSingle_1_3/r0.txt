@@ -1,0 +1,17 @@
+YES
+
+The `MintBSCard` function in the `NFTBigPartnerV2` contract calls the `_mint` function from the `ERC1155` contract. The `_mint` function is designed to create `_amount` tokens of token type `_id`, and assign them to the address `to`. It also emits a `TransferSingle` event as required by the ERC1155 standard.
+
+In the provided code, the `_mint` function is called with the following arguments:
+
+```solidity
+_mint(msg.sender, _n, _cardsNum, "0x");
+```
+
+Here, `_n` is the token type ID (`_id`) and `_cardsNum` is the number of tokens to mint (`_value`). The `TransferSingle` event is emitted within the `_mint` function with the correct arguments, including the token type ID (`_id`) and the value (`_value`):
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This matches the rule that the `_id` argument must be the token type being transferred. Therefore, the `TransferSingle` event is emitted according to the given rule.

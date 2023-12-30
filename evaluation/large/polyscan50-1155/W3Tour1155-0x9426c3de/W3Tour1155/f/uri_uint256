@@ -1,0 +1,8 @@
+contract W3Tour1155 is ERC1155, AccessControl {
+
+    mapping(uint256 => Item) _items;
+
+    function uri(uint256 _tokenId) public view override returns (string memory) {
+        return _items[_tokenId].metadata;
+    }
+}

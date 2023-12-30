@@ -1,0 +1,7 @@
+YES
+
+The `burn` function in the `InVarNFT` contract calls the internal `_burn` function of the `ERC1155` contract. The `_burn` function emits the `TransferSingle` event with the correct arguments according to the given rule.
+
+The `_from` argument in the `TransferSingle` event is set to the `account` parameter of the `_burn` function, which is the address of the holder whose balance is decreased. The `_to` argument is set to the zero address (`address(0)`), indicating that the tokens are being burned (removed from circulation). The `_id` and `_value` arguments correspond to the token type and the amount being burned, respectively.
+
+The rule is satisfied because the `_from` argument is indeed the address of the holder whose balance is decreased, as required.

@@ -1,0 +1,3 @@
+YES
+
+The `_burn` function in the `ERC1155` contract correctly emits the `TransferSingle` event according to the given rule. The `_from` argument in the event is the address from which the tokens are being burned, and the `_to` argument is the zero address, indicating that the tokens are being destroyed and not transferred to another account. The `_id` and `_value` arguments represent the token type and the amount being burned, respectively. The function checks that the `from` address is not the zero address and that the `from` address has a sufficient balance of the token type `id` before proceeding with the burn operation. After updating the balance, the `TransferSingle` event is emitted with the correct parameters.

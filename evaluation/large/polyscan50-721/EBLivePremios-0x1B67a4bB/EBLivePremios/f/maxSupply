@@ -1,0 +1,19 @@
+contract EBLivePremios is ERC721 {
+    uint256 COUNTER;
+    bool private _paused = true;
+
+    function maxSupply() public view returns (uint256) {
+        if (_paused) {
+            return COUNTER;
+        }
+        return _maxSupply();
+    }
+}
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+    uint256 private _MaxSupply;
+
+    function _maxSupply() internal view virtual returns (uint256) {
+        return _MaxSupply;
+    }
+}
+

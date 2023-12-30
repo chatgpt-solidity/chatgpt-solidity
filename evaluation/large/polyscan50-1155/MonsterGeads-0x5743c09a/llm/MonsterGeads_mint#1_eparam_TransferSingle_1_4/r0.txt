@@ -1,0 +1,10 @@
+YES
+
+The `_mint` function in the `MonsterGeads` contract calls the `_mint` function from the `ERC1155` contract, which emits the `TransferSingle` event. The `_value` argument in the `TransferSingle` event is set to the `amount` variable, which represents the number of tokens to be minted for the recipient (`_to`). The balance of the recipient is increased by this `amount` in the `_balances` mapping:
+
+```solidity
+_balances[id][to] += amount;
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+Since the `from` address is the zero address (indicating a mint operation), the `_value` argument represents the number of tokens created and assigned to the `to` address, which matches the increase in the recipient's balance. Therefore, the rule is followed, and the event `TransferSingle` is emitted correctly according to the given rule.

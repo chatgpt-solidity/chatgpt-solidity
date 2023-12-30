@@ -1,0 +1,61 @@
+Given a solidity function issue and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.16;
+contract Ownable is Context {
+  address private _owner;
+
+  /**
+   * @dev Returns the address of the current owner.
+   */
+  function owner() public view returns (address) {
+    return _owner;
+
+  }
+  /**
+   * @dev Throws if called by any account other than the owner.
+   */
+  modifier onlyOwner() {
+    require(_owner == _msgSender(), "Ownable: caller is not the owner");
+    _;
+  }
+}
+
+contract Context {
+
+  function _msgSender() internal view returns (address payable) {
+    return msg.sender;
+  }
+}
+
+contract TetherToken is Pausable, StandardToken, BlackList {
+
+    // Issue a new amount of tokens
+    // these tokens are deposited into the owner address
+    //
+    // @param _amount Number of tokens to be issued
+    function issue(uint amount) public onlyOwner {
+        require(_totalSupply + amount > _totalSupply);
+        require(balances[owner()] + amount > balances[owner()]);
+
+        balances[owner()] += amount;
+        _totalSupply += amount;
+        emit Issue(amount);
+    }
+}
+contract BasicToken is Ownable, ERC20Basic {
+
+    mapping(address => uint) public balances;
+}
+
+contract ERC20Basic {
+    uint public _totalSupply;
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

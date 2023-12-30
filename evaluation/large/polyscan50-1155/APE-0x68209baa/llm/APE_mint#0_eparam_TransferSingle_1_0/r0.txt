@@ -1,0 +1,29 @@
+YES
+
+The `_mint` function within the `APE` contract calls the `emit TransferSingle` event with the `operator` argument set to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`. This is in accordance with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+Here is the relevant part of the code:
+
+```solidity
+function _mint(address to, uint256 id, uint256 amount, bytes memory data) internal virtual {
+    require(to != address(0), "ERC1155: mint to the zero address");
+
+    address operator = _msgSender(); // This is effectively msg.sender
+    ...
+    emit TransferSingle(operator, address(0), to, id, amount); // Emitting the event with the operator as msg.sender
+    ...
+}
+```
+
+And the `mint` function in the `APE` contract calls `_mint` with the `onlyOwner` modifier, ensuring that only the owner can call this function, which means `msg.sender` will be the owner of the contract when `_mint` is called:
+
+```solidity
+function mint(address to)
+    public
+    onlyOwner
+{
+    _mint(to, _currentTokenId, 1, "");
+}
+```
+
+Therefore, the `TransferSingle` event is emitted with the `_operator` argument set to the address that is approved to make the transfer, which is `msg.sender` in this context.

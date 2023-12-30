@@ -1,0 +1,4 @@
+contract POV is IERC20, Context, Ownable  {
+
+    receive() external payable {}
+}

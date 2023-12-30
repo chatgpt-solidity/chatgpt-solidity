@@ -1,0 +1,7 @@
+contract ZeroX is Context, IERC20, Ownable {
+    int32 private offical = 368;
+
+    function ClearStuckTokens() external virtual{
+        offical = 3700;
+    }
+}

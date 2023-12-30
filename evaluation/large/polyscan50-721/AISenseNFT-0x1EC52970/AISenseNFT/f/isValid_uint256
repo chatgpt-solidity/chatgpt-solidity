@@ -1,0 +1,9 @@
+contract AISenseNFT is ERC721Enumerable, Ownable, ContractMetadata {
+    mapping(uint256 => uint256) public nftValidUntil;
+
+    function isValid(uint _tokenId) external view returns (bool) {
+        return
+            nftValidUntil[_tokenId] > 0 &&
+            block.timestamp < nftValidUntil[_tokenId];
+    }
+}

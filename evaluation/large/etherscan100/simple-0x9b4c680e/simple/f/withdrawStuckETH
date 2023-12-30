@@ -1,0 +1,23 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract simple is ERC20, Ownable {
+
+    // withdraw ETH if stuck or someone sends to the address
+    function withdrawStuckETH() external onlyOwner {
+        bool success;
+        (success,) = address(msg.sender).call{value: address(this).balance}("");
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+

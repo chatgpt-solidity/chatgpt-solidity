@@ -1,0 +1,25 @@
+Given a solidity function HBToken and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.19;
+contract HBToken is UnboundedRegularToken {
+    uint public totalSupply = 5 * 10 ** 26;
+
+    function HBToken() {
+        balances[msg.sender] = totalSupply;
+        Transfer(address(0), msg.sender, totalSupply);
+    }
+}
+
+contract RegularToken is Token {
+
+    mapping(address => uint) balances;
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

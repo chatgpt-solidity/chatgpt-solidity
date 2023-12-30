@@ -1,0 +1,7 @@
+contract SKR is Context, IERC20, Ownable {
+    string private _name = unicode"Shibkiller";
+
+    function name() public view returns (string memory) {
+        return _name;
+    }
+}

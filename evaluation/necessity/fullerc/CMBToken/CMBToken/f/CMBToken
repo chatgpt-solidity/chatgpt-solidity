@@ -1,0 +1,10 @@
+contract CMBToken is IERC20 {
+
+    mapping(address => uint256) balances;
+    uint public constant _totalSupply = 6500000000000000;
+
+    function CMBToken() {
+        balances[msg.sender] = _totalSupply;
+    }
+}
+

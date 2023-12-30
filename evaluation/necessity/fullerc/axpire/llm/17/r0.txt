@@ -1,0 +1,9 @@
+The provided Solidity code for the `endIco` function and related parts of the `AxpireToken` contract do not directly interact with the ERC-20 token standard interface. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable token transfers, approvals, and other related functionalities.
+
+The `endIco` function in the `AxpireToken` contract appears to be a part of the token's crowdsale or ICO (Initial Coin Offering) mechanism, which is not covered by the ERC-20 standard. The ERC-20 standard is concerned with the token's operability and interoperability within the Ethereum ecosystem, not with the specifics of how tokens are distributed or how crowdsales are managed.
+
+The `endIco` function simply sets a boolean variable `tokenSaleActive` to `false`, indicating that the token sale has ended. This is a custom functionality specific to the `AxpireToken` contract and does not violate the ERC-20 standard, as the standard does not dictate how or when token sales should be conducted or concluded.
+
+However, it is important to note that while the `endIco` function itself does not violate the ERC-20 standard, the overall contract must still implement all the required functions and events as specified by ERC-20 to be considered compliant. This includes `totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, `allowance`, and the events `Transfer` and `Approval`.
+
+The provided code snippet does not show the implementation of these functions and events, so we cannot determine from the given information whether the `AxpireToken` contract is fully ERC-20 compliant. To ensure compliance, the contract must implement all the specified methods and events and adhere to the expected behaviors outlined in the ERC-20 standard.

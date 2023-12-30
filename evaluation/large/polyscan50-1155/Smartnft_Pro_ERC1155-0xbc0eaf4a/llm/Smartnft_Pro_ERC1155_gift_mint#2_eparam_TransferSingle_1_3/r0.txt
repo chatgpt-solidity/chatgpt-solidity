@@ -1,0 +1,15 @@
+YES
+
+The `gift_mint` function in the provided Smartnft_Pro_ERC1155 contract calls the `_mint` function, which in turn emits the `TransferSingle` event. The `_mint` function is designed to create `amount` tokens of token type `id` and assign them to the `to` address. The `TransferSingle` event is emitted with the correct arguments, including the `id` of the token type being transferred, which is in compliance with the given rule that the `_id` argument must be the token type being transferred.
+
+The `TransferSingle` event is emitted with the following parameters:
+
+- `_operator`: The address performing the mint operation, obtained by `_msgSender()`.
+- `_from`: The address from which the tokens are transferred, which is `address(0)` in the case of minting.
+- `_to`: The address to which the tokens are transferred, which is the `to` parameter of the `_mint` function.
+- `_id`: The token type being transferred, which is the `id` parameter of the `_mint` function.
+- `_value`: The number of tokens being transferred, which is the `amount` parameter of the `_mint` function.
+
+The `TransferSingle` event is emitted after the token balance is updated with `_balances[id][to] += amount;` and before the `_doSafeTransferAcceptanceCheck` function is called, which ensures that the `to` address is capable of receiving the tokens if it is a contract.
+
+Therefore, the `TransferSingle` event is correctly emitted according to the given rule.

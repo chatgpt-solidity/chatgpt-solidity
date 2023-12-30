@@ -1,0 +1,3 @@
+YES
+
+The `safeBatchTransferFrom` function checks if `msg.sender` is either the owner of the tokens or an approved operator before proceeding with the transfer by calling `_safeBatchTransferFrom`. Within `_safeBatchTransferFrom`, the `TransferBatch` event is emitted with `msg.sender` as the `_operator` argument, which is consistent with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer. Since the check for approval is done before the event is emitted, the rule is followed correctly.

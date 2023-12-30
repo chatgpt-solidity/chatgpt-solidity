@@ -1,0 +1,37 @@
+Given a solidity function KINGSGLOBAL and the related parts from a smart contract.
+Whether the function KINGSGLOBAL and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.25;
+contract KINGSGLOBAL is StandardToken {
+    */
+    string public name;
+    uint8 public decimals;
+    string public symbol;
+    uint256 public unitsOneEthCanBuy;
+
+    address public fundsWallet;
+    function KINGSGLOBAL() {
+        balances[msg.sender] = 2000000000000000000000000000000;
+        totalSupply = 2000000000000000000000000000000;
+        name = "KINGS GLOBAL";
+        decimals = 18;
+        symbol = "KSG";
+        unitsOneEthCanBuy = 500000000; //1% bonus= OneEth//
+        fundsWallet = msg.sender;
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+    uint256 public totalSupply;
+}
+"""
+
+Rule:"""
+Emit Approval if any successful call to approve(address _spender, uint256 _value)
+"""

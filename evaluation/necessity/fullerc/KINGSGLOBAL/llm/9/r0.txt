@@ -1,0 +1,31 @@
+The provided Solidity function interfaces are meant to be compared against the ERC-20 token standard, which is the most common standard for Ethereum tokens. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement.
+
+Let's compare the provided interfaces with the ERC-20 standard:
+
+1. `transfer(address,uint256) returns(bool)` - **Compliant**
+2. `transferFrom(address,address,uint256) returns(bool)` - **Compliant**
+3. `balanceOf(address) returns(uint256)` - **Compliant**
+4. `approve(address,uint256) returns(bool)` - **Compliant**
+5. `allowance(address,address) returns(uint256)` - **Compliant**
+6. `totalSupply() returns(uint256)` - **Compliant**
+7. `KINGSGLOBAL() returns()` - **Not part of ERC-20**
+8. `fallback() returns()` - **Not part of ERC-20**, and the fallback function should not have a return type since Solidity 0.6.0.
+9. `approveAndCall(address,uint256,bytes) returns(bool)` - **Not part of ERC-20**
+10. `name() returns(string)` - **Compliant** (Optional)
+11. `decimals() returns(uint8)` - **Compliant** (Optional)
+12. `fundsWallet() returns(address)` - **Not part of ERC-20**
+13. `symbol() returns(string)` - **Compliant** (Optional)
+14. `unitsOneEthCanBuy() returns(uint256)` - **Not part of ERC-20**
+15. `version() returns(string)` - **Not part of ERC-20**
+16. `totalEthInWei() returns(uint256)` - **Not part of ERC-20**
+17. `totalSupply() returns(uint256)` - **Duplicate** and **Compliant**
+
+The functions `KINGSGLOBAL()`, `fallback()`, `approveAndCall(address,uint256,bytes)`, `fundsWallet()`, `unitsOneEthCanBuy()`, `version()`, and `totalEthInWei()` are not part of the ERC-20 standard. Additionally, `totalSupply()` is listed twice, which is likely a mistake.
+
+The `fallback()` function is a special function in Solidity that does not take any arguments and does not return anything. It is executed when a contract receives plain Ether without any data. Since Solidity 0.6.0, the fallback function is defined without the `function` keyword and without a return type.
+
+The `approveAndCall` function is an extension and not part of the standard ERC-20 interface. It is used in some contracts to allow for more complex interactions in a single transaction.
+
+The presence of non-standard functions does not necessarily mean the contract violates the ERC-20 standard, as long as the standard functions are implemented correctly. However, the contract should not have functions with the same name as ERC-20 functions but with different behavior, as this could lead to confusion and potential security issues.
+
+In conclusion, the provided list of functions includes all the necessary ERC-20 functions, some optional ones, and additional non-standard functions. The contract would be considered ERC-20 compliant if it correctly implements the required functions and events. However, the additional non-standard functions and the duplicate `totalSupply()` function are not part of the ERC-20 standard and should be reviewed to ensure they do not interfere with the standard behavior expected by ERC-20 compliant interfaces.

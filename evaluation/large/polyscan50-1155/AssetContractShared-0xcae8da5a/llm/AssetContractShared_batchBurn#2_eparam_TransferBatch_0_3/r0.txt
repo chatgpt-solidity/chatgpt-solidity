@@ -1,0 +1,3 @@
+YES
+
+The `batchBurn` function in the `AssetContract` contract calls the `_burnBatch` function in the `ERC1155Tradable` contract, which in turn emits the `TransferBatch` event. The `_ids` argument passed to `batchBurn` is used throughout the call stack and is ultimately used as the `_ids` argument in the `TransferBatch` event, satisfying the rule that "_ids argument MUST be the list of tokens being transferred."

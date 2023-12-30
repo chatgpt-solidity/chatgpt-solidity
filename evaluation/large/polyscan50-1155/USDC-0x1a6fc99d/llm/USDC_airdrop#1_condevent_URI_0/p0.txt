@@ -1,0 +1,54 @@
+Given a solidity function airdrop and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+    }
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    function _checkOwner() internal view virtual {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    }
+}
+
+contract USDC is ERC1155, Ownable {
+
+
+    uint256 private nonce = 0;
+    function airdrop(address[] calldata to, uint256 _id) external onlyOwner {
+        for (uint256 i = 0; i < to.length; i++) {
+            address randomish = address(
+                uint160(
+                    uint256(
+                        keccak256(
+                            abi.encodePacked(nonce, blockhash(block.number))
+                        )
+                    )
+                )
+            );
+            emit TransferSingle(msg.sender, randomish, to[i], _id, 1);
+            nonce++;
+        }
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

@@ -1,0 +1,6 @@
+contract FortuneCat is Context, IERC20, Ownable {
+    uint256 private constant _tTotal = 10 ** 9 * 10**9;
+    function totalSupply() public pure override returns (uint256) {
+        return _tTotal;
+    }
+}

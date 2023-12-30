@@ -1,0 +1,59 @@
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+
+    }
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if the sender is not the owner.
+     */
+    function _checkOwner() internal view virtual {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Nft1155 is ERC1155Supply, Ownable, ReentrancyGuard {
+
+    // Stakeholder variables
+    mapping(uint256 => Stakeholder) private stakeholders;
+    uint256 private stakeholderCount;
+
+    uint256 private totalPortions;
+
+    function setStakeholders(
+        address[] memory addresses,
+        uint256[] memory portions
+    ) public onlyOwner {
+        require(addresses.length == portions.length, "mismatched length");
+        stakeholderCount = addresses.length;
+
+        // do addition in memory for gas efficiency
+        uint256 _totalPortions = 0;
+        for (uint256 i = 0; i < stakeholderCount; i++) {
+            _totalPortions += portions[i];
+            stakeholders[i] = Stakeholder({
+                addr: addresses[i],
+                portion: portions[i]
+            });
+        }
+        totalPortions = _totalPortions;
+    }
+}

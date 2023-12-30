@@ -1,0 +1,224 @@
+{
+    "file": "evaluation/polyscan50-1155/BaoDrops-0xFC905a87.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.1",
+            "func2file": {
+                "totalSupply(uint256) returns(uint256)": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/totalSupply_uint256",
+                "exists(uint256) returns(bool)": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/exists_uint256",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/supportsInterface_bytes4",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/balanceOf_address_uint256",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/balanceOfBatch_address[]_uint256[]",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "burn(address,uint256,uint256) returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/burn_address_uint256_uint256",
+                "burnBatch(address,uint256[],uint256[]) returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/burnBatch_address_uint256[]_uint256[]",
+                "owner() returns(address)": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/transferOwnership_address",
+                "constructor() returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/constructor",
+                "setURI(uint256,string) returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/setURI_uint256_string",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/tokenURI_uint256",
+                "mint(address,uint256,uint256) returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/mint_address_uint256_uint256",
+                "mintDrop(uint256,address[]) returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/mintDrop_uint256_address[]",
+                "withdraw() returns()": ".temp/polyscan50-1155/BaoDrops-0xFC905a87/BaoDrops/f/withdraw"
+            },
+            "func2attrs": {
+                "totalSupply(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "exists(uint256) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnBatch(address,uint256[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setURI(uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "mint(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintDrop(uint256,address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "name() returns(string)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "165",
+                "1155",
+                "1155metadatauri",
+                "1155supply",
+                "1155burnable"
+            ],
+            "events": [
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "BaoDrops"
+        }
+    ]
+}

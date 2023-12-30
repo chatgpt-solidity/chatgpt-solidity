@@ -1,0 +1,13 @@
+YES
+
+The `_burnBatch` function within the `ERC1155` contract emits the `TransferBatch` event after performing the necessary checks and balance updates. The event is emitted with the correct arguments, including `_operator`, `_from`, `_to`, `_ids`, and `_values`, where `_ids` is the list of token IDs being burned (transferred to the zero address), and `_values` is the list of corresponding amounts for each token ID.
+
+The `TransferBatch` event is emitted with the following parameters:
+
+- `_operator`: The address which initiated the burn operation (typically the message sender).
+- `_from`: The address from which the tokens are being burned.
+- `_to`: The zero address, since the tokens are being burned.
+- `_ids`: The list of token IDs that are being burned.
+- `_values`: The list of amounts for each token ID that is being burned.
+
+The rule is satisfied because the `_ids` argument represents the list of tokens being transferred (in this case, burned), and the `TransferBatch` event is emitted accordingly.

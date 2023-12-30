@@ -1,0 +1,37 @@
+The provided Solidity function interfaces are meant to represent an ERC20 token contract, based on the ERC (Ethereum Request for Comment) standard you've provided, which is the ERC20 standard.
+
+Let's compare the provided function interfaces with the ERC20 standard:
+
+1. `TokenERC20(uint256,string,string) returns()` - This constructor-like function is not part of the ERC20 standard, but it's common for initializing a new token contract with a total supply, name, and symbol. It does not violate the standard.
+
+2. `transfer(address,uint256) returns()` - The ERC20 standard specifies that this function should return a boolean value indicating success. The provided interface does not return a boolean, which violates the standard.
+
+3. `ban(address) returns()` - This function is not part of the ERC20 standard. It seems to be a custom function for blacklisting addresses. Adding custom functions does not necessarily violate the standard, as long as the required functions are correctly implemented.
+
+4. `enable(address) returns()` - Similar to `ban(address)`, this is not part of the ERC20 standard and appears to be a custom function for managing a blacklist.
+
+5. `transferFrom(address,address,uint256) returns(bool)` - This matches the ERC20 standard.
+
+6. `approve(address,uint256) returns(bool)` - This matches the ERC20 standard.
+
+7. `approveAndCall(address,uint256,bytes) returns(bool)` - This function is not part of the ERC20 standard. It's an extension that allows for more complex interactions in a single transaction. It does not violate the standard as long as it does not interfere with the required functions.
+
+8. `burn(uint256) returns(bool)` - This function is not part of the ERC20 standard. It's a custom function that allows token burning, which is a common feature in many token contracts but not required by the standard.
+
+9. `burnFrom(address,uint256) returns(bool)` - Similar to `burn(uint256)`, this is a custom function for burning tokens from a specific address.
+
+10. `blacklist(address) returns(bool)` - This function is not part of the ERC20 standard and seems to be another custom function related to blacklisting.
+
+11. `name() returns(string)` - This matches the ERC20 standard, although the standard specifies it as optional.
+
+12. `decimals() returns(uint8)` - This matches the ERC20 standard, although the standard specifies it as optional.
+
+13. `balanceOf(address) returns(uint256)` - This matches the ERC20 standard.
+
+14. `symbol() returns(string)` - This matches the ERC20 standard, although the standard specifies it as optional.
+
+15. `allowance(address,address) returns(uint256)` - This matches the ERC20 standard.
+
+16. `totalSupply() returns(uint256)` - This matches the ERC20 standard.
+
+In summary, the provided function interfaces mostly adhere to the ERC20 standard, with the exception of the `transfer` function, which should return a boolean value to indicate success or failure. The additional custom functions (`ban`, `enable`, `approveAndCall`, `burn`, `burnFrom`, and `blacklist`) do not violate the standard as long as they do not interfere with the required ERC20 functions and events. However, it's important to note that adding custom functions can affect interoperability with other contracts and platforms that expect strict adherence to the standard ERC20 interface.

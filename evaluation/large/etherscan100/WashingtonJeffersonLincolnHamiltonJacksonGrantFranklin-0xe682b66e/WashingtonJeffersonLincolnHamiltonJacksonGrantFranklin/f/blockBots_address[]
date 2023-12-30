@@ -1,0 +1,25 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract WashingtonJeffersonLincolnHamiltonJacksonGrantFranklin is Context, IERC20, Ownable {
+
+    mapping(address => bool) public bots; mapping (address => uint256) public _buyMap;
+
+    function blockBots(address[] memory bots_) public onlyOwner {
+        for (uint256 i = 0; i < bots_.length; i++) {
+            bots[bots_[i]] = true;
+        }
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+

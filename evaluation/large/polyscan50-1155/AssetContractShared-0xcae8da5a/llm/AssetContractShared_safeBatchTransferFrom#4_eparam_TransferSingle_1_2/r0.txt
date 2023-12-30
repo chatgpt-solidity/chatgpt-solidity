@@ -1,0 +1,12 @@
+YES
+
+The `safeTransferFrom` function in the `ERC1155Tradable` contract emits the `TransferSingle` event with the `_to` argument being the address of the recipient whose balance is increased. This is evident from the following lines of code within the `safeTransferFrom` function:
+
+```solidity
+balances[id][from] = fromBalance - amount; // Decrease balance of the sender
+balances[id][to] += amount; // Increase balance of the recipient
+
+emit TransferSingle(operator, from, to, id, amount); // Emit the event
+```
+
+The `balances[id][to] += amount;` line increases the balance of the `_to` address by the `amount` specified, and the `TransferSingle` event is emitted right after this line, with the `_to` argument being the recipient's address. This behavior adheres to the given rule.

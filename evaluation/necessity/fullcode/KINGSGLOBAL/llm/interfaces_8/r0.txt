@@ -1,0 +1,3 @@
+YES
+
+The given Solidity interfaces contain the interface `decimals() returns(uint8)` within the `KINGSGLOBAL` contract. The `decimals` variable is declared as `uint8 public decimals;` which means there is an implicitly created getter function with the signature `decimals() returns(uint8)` that matches the required interface.

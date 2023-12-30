@@ -1,0 +1,23 @@
+Given only the Solidity event interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "event ApprovalForAll(address indexed, address indexed, bool);" and parameter types and index attributes are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+event Initialized(uint8);
+event OwnerUpdated(address indexed, address indexed);
+event DefaultRoyalty(address indexed, uint256);
+event RoyaltyForToken(uint256 indexed, address indexed, uint256);
+event PrimarySaleRecipientUpdated(address indexed);
+event PlatformFeeInfoUpdated(address indexed, uint256);
+event RoleAdminChanged(bytes32 indexed, bytes32 indexed, bytes32 indexed);
+event RoleGranted(bytes32 indexed, address indexed, address indexed);
+event RoleRevoked(bytes32 indexed, address indexed, address indexed);
+event Transfer(address indexed, address indexed, uint256 indexed);
+event Approval(address indexed, address indexed, uint256 indexed);
+event ApprovalForAll(address indexed, address indexed, bool);
+event TokensMinted(address indexed, uint256 indexed, string);
+event TokensMintedWithSignature(address indexed, address indexed, uint256 indexed, ITokenERC721.MintRequest);
+event ItemsMinted(uint256 indexed, bytes);
+event tokenClaimed(uint256 indexed);
+event tokenUseState(uint256 indexed);
+"""

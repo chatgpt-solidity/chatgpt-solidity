@@ -1,0 +1,32 @@
+Given a solidity function setInternalAddresses and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+contract zepump is IERC20, tokenStaking, Ownable {
+    mapping(address => bool) private isFeeExempt;
+    address internal development_receiver = 0x13aCbde269f2CEDBaAFFd18321d0AAA223947a00; 
+    address internal marketing_receiver = 0x13aCbde269f2CEDBaAFFd18321d0AAA223947a00;
+    address internal liquidity_receiver = 0x13aCbde269f2CEDBaAFFd18321d0AAA223947a00;
+    address internal staking_receiver = 0x13aCbde269f2CEDBaAFFd18321d0AAA223947a00;
+    address internal token_receiver = 0x000000000000000000000000000000000000dEaD;
+
+    function setInternalAddresses(address _marketing, address _liquidity, address _development, address _staking, address _token) external onlyOwner {
+        marketing_receiver = _marketing; liquidity_receiver = _liquidity; development_receiver = _development; staking_receiver = _staking; token_receiver = _token;
+        isFeeExempt[_marketing] = true; isFeeExempt[_liquidity] = true; isFeeExempt[_staking] = true; isFeeExempt[_token] = true;
+        emit SetInternalAddresses(_marketing, _liquidity, _development, block.timestamp);
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

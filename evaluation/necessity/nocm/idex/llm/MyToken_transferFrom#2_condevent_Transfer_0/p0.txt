@@ -1,0 +1,45 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether the function transferFrom and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract MyToken {
+
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    /* A contract attempts to get the coins */
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) returns (bool success) {
+        if (balanceOf[_from] < _value) throw; // Check if the sender has enough
+        if (balanceOf[_to] + _value < balanceOf[_to]) throw; // Check for overflows
+        if (_value > allowance[_from][msg.sender]) throw; // Check allowance
+        balanceOf[_from] -= _value; // Subtract from the sender
+        balanceOf[_to] += _value; // Add the same to the recipient
+        allowance[_from][msg.sender] -= _value;
+        Transfer(_from, _to, _value);
+        return true;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred during the initial token distribution or crowdsale.
+"""

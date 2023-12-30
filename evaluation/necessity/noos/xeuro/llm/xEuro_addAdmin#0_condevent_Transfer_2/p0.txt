@@ -1,0 +1,24 @@
+Given a solidity function addAdmin and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    function addAdmin(address _newAdmin) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        isAdmin[_newAdmin] = true;
+        emit AdminAdded(msg.sender, _newAdmin);
+        return true;
+    } //
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

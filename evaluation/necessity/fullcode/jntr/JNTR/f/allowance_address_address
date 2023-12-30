@@ -1,0 +1,11 @@
+contract JNTR is IST20, ERC20, SafeMath {
+    mapping(address => mapping(address => uint256)) allowed;
+
+    function allowance(
+        address _owner,
+        address _spender
+    ) public view returns (uint) {
+        return allowed[_owner][_spender];
+    }
+}
+

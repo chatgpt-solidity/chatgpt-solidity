@@ -1,0 +1,7 @@
+YES
+
+The `safeBatchTransferFrom` function checks if the `msg.sender` is the owner of the tokens or is approved to operate on behalf of the owner. If the check passes, it calls the `_safeBatchTransferFrom` private function.
+
+Within the `_safeBatchTransferFrom` function, the balances of the tokens are updated, decreasing the balance from the `from` address and increasing the balance at the `to` address for each token id in the `ids` array. After updating the balances, the `TransferBatch` event is emitted with the correct arguments, including the `_from` argument which is the address of the holder whose balance is decreased.
+
+The event `TransferBatch` is emitted with the `msg.sender` as the `_operator`, the `from` address as the `_from`, the `to` address as the `_to`, the `ids` array as the `_ids`, and the `amounts` array as the `_values`, which aligns with the given rule.

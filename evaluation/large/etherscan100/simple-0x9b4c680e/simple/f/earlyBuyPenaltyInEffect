@@ -1,0 +1,7 @@
+contract simple is ERC20, Ownable {
+    uint256 public blockForPenaltyEnd;
+
+    function earlyBuyPenaltyInEffect() public view returns (bool){
+        return block.number < blockForPenaltyEnd;
+    }
+}

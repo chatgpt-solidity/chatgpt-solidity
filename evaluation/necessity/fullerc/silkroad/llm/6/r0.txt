@@ -1,0 +1,20 @@
+The provided Solidity code for the `transferOwnership` function and the related `owned` contract parts do not directly relate to the ERC-20 token standard. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperable functionality with other contracts and clients, such as wallets and exchanges.
+
+The ERC-20 standard includes the following key methods and events:
+
+- `totalSupply`
+- `balanceOf`
+- `transfer`
+- `transferFrom`
+- `approve`
+- `allowance`
+- `Transfer` event
+- `Approval` event
+
+The `transferOwnership` function in the provided code is a common pattern used in many smart contracts to allow the current owner of the contract to transfer control to a new owner. This is a separate concern from the ERC-20 token standard, which deals with the transfer of tokens rather than the transfer of contract ownership.
+
+The `owned` contract establishes an `owner` state variable and a `transferOwnership` function that allows the current owner to change the owner address. It also defines a `onlyOwner` modifier to restrict certain functions to be callable only by the current owner.
+
+This pattern is not part of the ERC-20 standard and does not violate it, as the ERC-20 standard does not dictate how the contract's ownership should be managed or whether such a feature should exist at all. The `transferOwnership` function is orthogonal to the ERC-20 token functionality and is typically part of the administrative control of the contract rather than its user-facing token interface.
+
+In conclusion, the `transferOwnership` function and the related parts of the `owned` contract do not violate the ERC-20 standard, as they address a different aspect of contract behavior that is not covered by the standard.

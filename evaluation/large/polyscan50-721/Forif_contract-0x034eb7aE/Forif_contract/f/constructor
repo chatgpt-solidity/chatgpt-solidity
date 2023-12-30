@@ -1,0 +1,30 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Token name
+
+    string private _name;
+    // Token symbol
+    string private _symbol;
+
+    /**
+     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     */
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+}
+
+contract ManagersRepo{
+    Manager[] managers = new Manager[](0);
+    constructor(){
+        Owner owner = new Owner(msg.sender);
+        managers.push(owner);
+    }
+}
+
+contract Forif_contract is ERC721URIStorage,ManagersRepo {
+
+    constructor() ERC721("ForifCertification", "FORIF") ManagersRepo() {
+    }
+}

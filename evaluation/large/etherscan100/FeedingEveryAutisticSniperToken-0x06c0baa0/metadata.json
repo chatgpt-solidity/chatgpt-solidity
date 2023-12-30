@@ -1,0 +1,175 @@
+{
+    "file": "evaluation/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.19",
+            "func2file": {
+                "isOwner(address) returns(bool)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/isOwner_address",
+                "transferOwnership(address) returns()": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/constructor",
+                "receive() returns()": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/receive",
+                "name() returns(string)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/decimals",
+                "startTrading() returns()": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/startTrading",
+                "getOwner() returns(address)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/getOwner",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/allowance_address_address",
+                "setisBot(address,bool) returns()": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/setisBot_address_bool",
+                "setisExempt(address,bool) returns()": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/setisExempt_address_bool",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/approve_address_uint256",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/totalSupply",
+                "_maxWalletToken() returns(uint256)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/_maxWalletToken",
+                "_maxTxAmount() returns(uint256)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/_maxTxAmount",
+                "_maxTransferAmount() returns(uint256)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/_maxTransferAmount",
+                "setStructure(uint256,uint256,uint256,uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/setStructure_uint256_uint256_uint256_uint256_uint256_uint256_uint256",
+                "setParameters(uint256,uint256,uint256) returns()": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/setParameters_uint256_uint256_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/FeedingEveryAutisticSniperToken-0x06c0baa0/FeedingEveryAutisticSniperToken/f/transferFrom_address_address_uint256"
+            },
+            "func2attrs": {
+                "isOwner(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "startTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getOwner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setisBot(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setisExempt(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "_maxWalletToken() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "_maxTxAmount() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "_maxTransferAmount() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setStructure(uint256,uint256,uint256,uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setParameters(uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "pair() returns(address)",
+                "isFeeExempt(address) returns(bool)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "FeedingEveryAutisticSniperToken"
+        }
+    ]
+}

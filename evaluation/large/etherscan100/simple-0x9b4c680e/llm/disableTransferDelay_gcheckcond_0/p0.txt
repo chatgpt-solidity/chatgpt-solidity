@@ -1,0 +1,31 @@
+Given a solidity function disableTransferDelay and the related parts from a smart contract.
+Whether the function disableTransferDelay and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract simple is ERC20, Ownable {
+    bool public transferDelayEnabled = true;
+
+    // disable Transfer delay - cannot be reenabled
+    function disableTransferDelay() external onlyOwner {
+        transferDelayEnabled = false;
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,11 @@
+YES
+
+The `burnBatch` function in the `ERC1155Burnable` contract calls the `_burnBatch` internal function, which in turn calls the `_beforeTokenTransfer` hook and then proceeds to burn the tokens by reducing the balances and emitting the `TransferBatch` event.
+
+The `TransferBatch` event is emitted with the correct arguments, including the `_ids` parameter which represents the list of token IDs being burned (transferred from the `_from` address to the zero address, which signifies a burn operation). The `_values` parameter represents the corresponding amounts of each token ID being burned.
+
+The event signature matches the rule provided:
+```solidity
+emit TransferBatch(operator, from, address(0), ids, amounts);
+```
+Here, `ids` is the list of tokens being transferred (burned), and `amounts` is the list of quantities for each token ID, which aligns with the rule that `_ids` must be the list of tokens being transferred.

@@ -1,0 +1,7 @@
+contract EthereumPurpleXNFT is ERC721, Ownable {
+    address tokenAddress = 0x129d9E5a74C2dD427b5C326406039976FE963a90;
+
+    function GetAllowance() public view returns (uint256) {
+        return IERC20(tokenAddress).allowance(msg.sender, address(this));
+    }
+}

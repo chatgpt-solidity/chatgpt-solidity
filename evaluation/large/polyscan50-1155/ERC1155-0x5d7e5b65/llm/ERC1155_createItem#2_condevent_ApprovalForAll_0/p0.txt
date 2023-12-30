@@ -1,0 +1,39 @@
+Given a solidity function createItem and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+abstract contract Ownable {
+
+    address private _owner;
+
+    modifier onlyOwner() {
+        if (_owner != msg.sender) revert NotOwner();
+        _;
+    }
+}
+
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI, IERC2981 {
+    mapping(uint256 => Collection) private _collections;
+    mapping(uint256 => Item) private _items;
+    uint256 private itemsLength;
+
+    function createItem(
+        uint256 collectionId,
+        string calldata _uri,
+        uint256 maxSupply
+    ) external onlyOwner {
+        _items[itemsLength] = Item(true, collectionId, _uri, 0, maxSupply);
+        _collections[collectionId]._items.push(itemsLength);
+        emit URI(_uri, itemsLength);
+        emit CreateItem(itemsLength);
+        itemsLength++;
+    }
+}
+"""
+
+Action:"""
+approval for a second party/operator address to manage all tokens for an owner address is enabled or disabled (absence of an event assumes disabled).
+"""

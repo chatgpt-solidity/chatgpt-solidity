@@ -1,0 +1,9 @@
+YES
+
+The `mint` function in the `TWTVoucher` contract calls the `_mint` function in the `ERC1155` contract. The `_mint` function is responsible for creating tokens and assigning them to the `to` address. It emits the `TransferSingle` event as part of its execution.
+
+The `_mint` function sets the `operator` to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`. This means that the `_operator` argument in the `TransferSingle` event will be the `msg.sender`, which is the address of the account that called the `mint` function.
+
+Since the `mint` function in `TWTVoucher` has the `onlyOwner` modifier, only the owner of the contract can call it, and thus `msg.sender` will be the owner's address when `mint` is called. This satisfies the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+Therefore, the `TransferSingle` event is emitted with the `_operator` argument set to the address that is approved to make the transfer, which is the `msg.sender` in this context.

@@ -1,0 +1,26 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether the function approve and the related parts overwrites the current allowance with _value? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract KingBOBO is Context, IERC20, Ownable {
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    function approve(address spender, uint256 amount) public override returns (bool) {
+        _approve(_msgSender(), spender, amount);
+        return true;
+    }
+
+    function _approve(address owner, address spender, uint256 amount) private {
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+        _allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
+    }
+}
+"""

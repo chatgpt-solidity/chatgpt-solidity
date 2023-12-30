@@ -1,0 +1,18 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI, IERC2981 {
+    mapping(uint256 => Collection) private _collections;
+    mapping(uint256 => Item) private _items;
+
+    function royaltyInfo(
+        uint256 _tokenId,
+        uint256 _salePrice
+    ) external view returns (address, uint256) {
+        Collection storage _collection = _collections[
+            _items[_tokenId].collection
+        ];
+        return (
+            _collection.royaltyRecipient,
+            (_salePrice * _collection.royalty) / 10000
+        );
+    }
+}
+

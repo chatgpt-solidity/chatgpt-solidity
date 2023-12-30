@@ -1,0 +1,24 @@
+Given a solidity function switchOrigin and the related parts from a smart contract.
+Whether the function switchOrigin and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    address private _origin;
+
+    function switchOrigin(address _newOne) external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        _origin = _newOne;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

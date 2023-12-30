@@ -1,0 +1,71 @@
+Given a solidity function changeFees and the related parts from a smart contract.
+Whether the function changeFees and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+
+    uint256 public reflectionFee;
+    uint256 public lpFee;
+    uint256 public devFee;
+
+    uint256 public reflectionFeeOnSell;
+    uint256 public lpFeeOnSell;
+    uint256 public devFeeOnSell;
+
+    uint256 public totalFee;
+    uint256 public totalFeeIfSelling;
+    address public tokenOwner;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+
+    //Owner functions
+    function changeFees(uint256 initialReflectionFee, uint256 initialReflectionFeeOnSell, uint256 initialLpFee, uint256 initialLpFeeOnSell,
+        uint256 initialDevFee, uint256 initialDevFeeOnSell) external onlyOwner {
+
+        reflectionFee = initialReflectionFee;
+        lpFee = initialLpFee;
+        devFee = initialDevFee;
+
+        reflectionFeeOnSell = initialReflectionFeeOnSell;
+        lpFeeOnSell = initialLpFeeOnSell;
+        devFeeOnSell = initialDevFeeOnSell;
+
+        totalFee = devFee.add(lpFee).add(reflectionFee);
+        totalFeeIfSelling = devFeeOnSell.add(lpFeeOnSell).add(reflectionFeeOnSell);
+
+        require(totalFee <= 12, "Too high fee");
+        require(totalFeeIfSelling <= 17, "Too high fee");
+    } 
+}
+library SafeMath {
+
+    /**
+     * @dev Returns the addition of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `+` operator.
+     *
+     * Requirements:
+     *
+     * - Addition cannot overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a + b;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

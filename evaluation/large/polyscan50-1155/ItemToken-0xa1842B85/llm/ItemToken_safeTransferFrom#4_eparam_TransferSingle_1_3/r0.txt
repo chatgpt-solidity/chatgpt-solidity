@@ -1,0 +1,11 @@
+YES
+
+The provided Solidity function `_safeTransferFrom` within the `ERC1155` contract correctly emits the `TransferSingle` event according to the given rule. The `_id` argument in the event is indeed the token type being transferred, as required by the rule.
+
+Here's the relevant part of the code that confirms this:
+
+```solidity
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+In this line, the `id` variable represents the token type being transferred, which is passed to the `_safeTransferFrom` function as an argument and then used in the `TransferSingle` event without any modification. Therefore, the event correctly reflects the token type (`_id`) being transferred, along with the other required information such as the operator (`_operator`), the sender (`_from`), the recipient (`_to`), and the amount of tokens transferred (`_value`).

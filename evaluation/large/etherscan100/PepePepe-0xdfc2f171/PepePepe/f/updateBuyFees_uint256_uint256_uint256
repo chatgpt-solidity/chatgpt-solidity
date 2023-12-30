@@ -1,0 +1,43 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract PepePepe is ERC20, Ownable {
+
+    uint256 public buyTotalFees;
+    uint256 public buyMarketingFee;
+    uint256 public buyLiquidityFee;
+    uint256 public buyDevFee;
+
+    function updateBuyFees(
+        uint256 _marketingFee,
+        uint256 _liquidityFee,
+        uint256 _devFee
+    ) external onlyOwner {
+        buyMarketingFee = _marketingFee;
+        buyLiquidityFee = _liquidityFee;
+        buyDevFee = _devFee;
+        buyTotalFees = buyMarketingFee + buyLiquidityFee + buyDevFee;
+    }
+}
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+

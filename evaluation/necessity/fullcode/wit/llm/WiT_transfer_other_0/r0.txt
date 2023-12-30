@@ -1,0 +1,5 @@
+NO
+
+The provided Solidity function `transfer` in the `WiT` contract does not violate the ERC rule that states "Transfers of 0 values MUST be treated as normal transfers." The function does not have any condition that would prevent the transfer of 0 values. It checks for frozen accounts and the global `frozen` state, but if the transfer is allowed, it calls `AbstractToken.transfer(_to, _value)`, which handles the actual transfer logic.
+
+The `AbstractToken.transfer` function does not have any special handling for the case when `_value` is 0; it performs the transfer as it would for any other value, including emitting the `Transfer` event. Therefore, the function complies with the ERC rule regarding 0 value transfers.

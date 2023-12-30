@@ -1,0 +1,24 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether the function constructor and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract VARK is IERC20 {
+    uint256 private _totalSupply = 1800000000 * (10 ** uint256(decimals));
+
+    uint256 public buyTaxPercent = 1;
+    uint256 public sellTaxPercent = 1;
+
+    mapping(address => uint256) private _balances;
+
+    constructor() {
+        require(buyTaxPercent <= 100 && sellTaxPercent <= 100, "Tax percentage too high.");
+        
+        _balances[msg.sender] = _totalSupply;
+        emit Transfer(address(0), msg.sender, _totalSupply);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

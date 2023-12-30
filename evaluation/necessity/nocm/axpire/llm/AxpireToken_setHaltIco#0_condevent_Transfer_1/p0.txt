@@ -1,0 +1,32 @@
+Given a solidity function setHaltIco and the related parts from a smart contract.
+Whether the function setHaltIco and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.24;
+contract AxpireToken is AxpirePausableToken {
+    bool public haltIco;
+
+    function setHaltIco(bool _haltIco) external onlyOwner {
+        haltIco = _haltIco;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred, including zero value transfers.
+"""

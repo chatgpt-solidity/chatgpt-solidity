@@ -1,0 +1,11 @@
+contract BETCRYPT is ERC20, Ownable {
+
+    /******************/
+
+    // exlcude from fees and max transaction amount
+    mapping(address => bool) private _isExcludedFromFees;
+
+    function isExcludedFromFees(address account) public view returns (bool) {
+        return _isExcludedFromFees[account];
+    }
+}

@@ -1,0 +1,22 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function of the `ERC1155` contract. The `_burn` function is called by the `burn` function in the `ERC1155Burnable` contract, which is in turn called by the `RedempBIGP` function in the `NFTBigPartnerV2` contract.
+
+The `burn` function in `ERC1155Burnable` checks that the caller (`msg.sender`) is either the account that owns the tokens or is approved to act on behalf of the owner:
+
+```solidity
+require(
+    account == _msgSender() || isApprovedForAll(account, _msgSender()),
+    "ERC1155: caller is not token owner or approved"
+);
+```
+
+This ensures that the `_operator` argument in the `TransferSingle` event is indeed an account that is approved to make the transfer, which is either the token owner or an approved operator. Since the `_burn` function uses `_msgSender()` as the operator when emitting the `TransferSingle` event, and `_msgSender()` is the caller of the `burn` function, the rule is satisfied:
+
+```solidity
+address operator = _msgSender();
+...
+emit TransferSingle(operator, from, address(0), id, amount);
+```
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

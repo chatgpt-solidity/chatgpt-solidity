@@ -1,0 +1,3 @@
+NO
+
+The rule states that the `_from` argument in the `TransferSingle` event must be the address of the holder whose balance is decreased. However, in the `mintBatch` function, the `TransferSingle` event is emitted with `address(0)` as the `_from` argument, which is a convention used to indicate that tokens are being minted (created) rather than transferred from an existing holder. Since minting increases the balance of the recipient without decreasing the balance of any existing holder, using `address(0)` is appropriate and does not violate the given rule in the context of minting new tokens.

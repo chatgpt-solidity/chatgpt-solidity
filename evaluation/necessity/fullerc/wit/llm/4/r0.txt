@@ -1,0 +1,22 @@
+The provided Solidity function `allowance` within the `AbstractToken` contract appears to be compliant with the ERC-20 token standard as described in the provided ERC documentation. The ERC-20 standard specifies that the `allowance` function should:
+
+1. Return the amount which `_spender` is still allowed to withdraw from `_owner`.
+2. Be a public view function.
+3. Return a `uint256` representing the remaining number of tokens that the spender is allowed to transfer on behalf of the owner.
+
+The `allowance` function in the provided code does exactly that:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) public view returns (uint256 remaining) {
+    return allowances[_owner][_spender];
+}
+```
+
+It takes two addresses as parameters (`_owner` and `_spender`), is marked as `public view` (meaning it doesn't alter the state and can be called externally), and returns a `uint256` that represents the number of tokens `_spender` is allowed to transfer from `_owner`'s account.
+
+The `allowances` mapping is used to keep track of how much each spender is allowed to transfer from each owner's balance, which is also in line with the ERC-20 standard.
+
+Therefore, based on the information provided, the `allowance` function does not violate the ERC-20 standard. However, it is important to note that a full audit would require reviewing the entire contract, including how allowances are set (typically via the `approve` function) and how they are used in the `transferFrom` function, to ensure full compliance with the standard and to check for any security issues.

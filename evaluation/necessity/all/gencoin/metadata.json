@@ -1,0 +1,102 @@
+{
+    "file": "evaluation/audited/gencoin.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.25",
+            "func2file": {
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-cm/gencoin/GEIMCOIN/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-cm/gencoin/GEIMCOIN/f/transferFrom_address_address_uint256",
+                "balanceOf(address) returns(uint256)": "result-necessity/s-cm/gencoin/GEIMCOIN/f/balanceOf_address",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-cm/gencoin/GEIMCOIN/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-cm/gencoin/GEIMCOIN/f/allowance_address_address",
+                "GEIMCOIN() returns()": "result-necessity/s-cm/gencoin/GEIMCOIN/f/GEIMCOIN",
+                "fallback() returns()": "result-necessity/s-cm/gencoin/GEIMCOIN/f/fallback",
+                "approveAndCall(address,uint256,bytes) returns(bool)": "result-necessity/s-cm/gencoin/GEIMCOIN/f/approveAndCall_address_uint256_bytes"
+            },
+            "func2attrs": {
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "GEIMCOIN() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "fallback() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approveAndCall(address,uint256,bytes) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "unitsOneEthCanBuy() returns(uint256)",
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "totalEthInWei() returns(uint256)",
+                "version() returns(string)",
+                "decimals() returns(uint8)",
+                "symbol() returns(string)",
+                "fundsWallet() returns(address)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "GEIMCOIN"
+        }
+    ]
+}

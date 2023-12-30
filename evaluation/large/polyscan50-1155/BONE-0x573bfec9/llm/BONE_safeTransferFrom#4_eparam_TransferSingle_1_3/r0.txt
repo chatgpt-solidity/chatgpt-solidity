@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function with the correct arguments, including the `_id` argument which represents the token type being transferred. The event is emitted after the balance update and before the `_doSafeTransferAcceptanceCheck` function call, which is consistent with the rule provided.

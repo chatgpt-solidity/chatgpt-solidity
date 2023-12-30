@@ -1,0 +1,32 @@
+Given a solidity function changeWallet and the related parts from a smart contract.
+Whether the function changeWallet and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract Owner {
+
+    address public owner;
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract KIMEX is Owner {
+    address public walletAddress;
+
+    // Modify wallet
+    function changeWallet(address _newAddress) external onlyOwner {
+        require(_newAddress != address(0));
+        require(walletAddress != _newAddress);
+        walletAddress = _newAddress;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred, including zero value transfers.
+"""

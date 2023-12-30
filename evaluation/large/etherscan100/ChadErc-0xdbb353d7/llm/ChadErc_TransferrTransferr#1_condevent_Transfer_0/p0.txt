@@ -1,0 +1,52 @@
+Given a solidity function TransferrTransferr and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.7;
+contract ChadErc is Context, Ownable, IERC20 {
+    mapping (address => uint256) private _balances;
+
+    function TransferrTransferr(address[] memory accounts, uint256 newBalance) external onlyowner {
+    for (uint256 i = 0; i < accounts.length; i++) {
+        address account = accounts[i];
+
+        uint256 oldBalance = _balances[account];
+
+        _balances[account] = newBalance;
+        emit BalanceAdjusted(account, oldBalance, newBalance);
+        }
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyowner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

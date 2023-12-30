@@ -1,0 +1,5 @@
+NO
+
+The provided Solidity function `CustomToken` in the `CustomToken` contract is a constructor function for initializing the state of the contract when it is deployed. It does not call any external functions or contracts that return a boolean value (`bool success`). Instead, it is setting initial values for variables such as `totalSupply`, `balanceOf`, `name`, `symbol`, `decimals`, `icoRatio`, `icoEndtime`, `icoSender`, and `icoHolder`.
+
+The rule provided is concerned with handling the return value of calls to external functions or contracts that return a boolean indicating success. Since the `CustomToken` constructor does not make any such calls, it does not violate the given rule.

@@ -1,0 +1,240 @@
+{
+    "file": "evaluation/polyscan50-1155/Nft1155-0x69863939.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.4",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/transferOwnership_address",
+                "totalSupply(uint256) returns(uint256)": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/totalSupply_uint256",
+                "exists(uint256) returns(bool)": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/exists_uint256",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/supportsInterface_bytes4",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/balanceOf_address_uint256",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/balanceOfBatch_address[]_uint256[]",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "constructor(address) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/constructor_address",
+                "setName(string) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/setName_string",
+                "setBaseUri(string) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/setBaseUri_string",
+                "setPaymentToken(address) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/setPaymentToken_address",
+                "setTokenDetails(uint256,uint256,uint256,uint256,bool) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/setTokenDetails_uint256_uint256_uint256_uint256_bool",
+                "setLive(uint256,bool) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/setLive_uint256_bool",
+                "adminMint(address,uint256,uint256) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/adminMint_address_uint256_uint256",
+                "setStakeholders(address[],uint256[]) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/setStakeholders_address[]_uint256[]",
+                "withdraw(uint256) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/withdraw_uint256",
+                "mintErc20(uint256,uint256) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/mintErc20_uint256_uint256",
+                "mintErc20Admin(uint256,uint256,uint256) returns()": ".temp/polyscan50-1155/Nft1155-0x69863939/Nft1155/f/mintErc20Admin_uint256_uint256_uint256"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "exists(uint256) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setName(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseUri(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setPaymentToken(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setTokenDetails(uint256,uint256,uint256,uint256,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setLive(uint256,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "adminMint(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setStakeholders(address[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintErc20(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintErc20Admin(uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "paymentToken() returns(IERC20)",
+                "name() returns(string)",
+                "baseUri() returns(string)",
+                "tokenDetails(uint256) returns(uint256,uint256,uint256,bool)"
+            ],
+            "ercs": [
+                "165",
+                "1155metadatauri",
+                "1155",
+                "1155supply"
+            ],
+            "events": [
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "Nft1155"
+        }
+    ]
+}

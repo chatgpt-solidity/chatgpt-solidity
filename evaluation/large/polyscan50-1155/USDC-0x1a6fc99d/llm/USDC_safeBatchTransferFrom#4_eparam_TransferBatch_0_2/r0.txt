@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function with the correct arguments according to the rule provided. The `_to` argument in the event is indeed the address of the recipient whose balance is increased, as required by the rule. The event is emitted after the balances have been updated and before the `_doSafeBatchTransferAcceptanceCheck` function is called, which ensures that the balances are updated before the event is emitted.

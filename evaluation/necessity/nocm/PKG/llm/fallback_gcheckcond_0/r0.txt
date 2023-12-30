@@ -1,0 +1,7 @@
+NO
+
+The provided Solidity code does not show any direct calls to external contracts or functions that return a boolean value indicating success. The fallback function in the `ICOToken` contract is handling Ether transfers and token issuance within the contract itself, and it uses `revert()` to handle failure conditions, which is an appropriate way to handle errors in Solidity.
+
+The `_transfer` function in the `BaseToken` contract is an internal function, and it uses `require` statements to ensure conditions are met before proceeding with the transfer. If any of the `require` conditions fail, the transaction will revert. The `assert` statement is used to ensure that the total balance remains the same before and after the transfer, which is a form of invariant checking rather than a call to an external contract that returns a boolean.
+
+Therefore, the code does not violate the given rule, as there are no calls to external contracts or functions that return a boolean success value that would need to be handled or directly returned by the caller.

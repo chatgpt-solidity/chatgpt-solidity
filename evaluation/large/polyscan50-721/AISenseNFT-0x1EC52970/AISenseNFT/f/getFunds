@@ -1,0 +1,6 @@
+contract AISenseNFT is ERC721Enumerable, Ownable, ContractMetadata {
+
+    function getFunds() public view returns (uint) {
+        return address(this).balance;
+    }
+}

@@ -1,0 +1,15 @@
+YES
+
+The `mintDrop` function in the `BaoDrops` contract calls the `_mint` function, which is defined in the `ERC1155` contract. The `_mint` function is responsible for creating tokens and assigning them to a recipient address (`to`). As part of the minting process, the `_mint` function emits a `TransferSingle` event.
+
+The `_mint` function sets the `operator` to the address returned by `_msgSender()`, which is the same as `msg.sender` in the context of the transaction. This means that the `operator` in the `TransferSingle` event is indeed the account that is approved to make the transfer, which is the requirement stated in the rule.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is set to `msg.sender` (the caller of the `mintDrop` function, which must be the contract owner due to the `onlyOwner` modifier).
+- `_from`: The address from which the tokens are transferred, which is set to the zero address (`address(0)`) since tokens are being minted.
+- `_to`: The recipient address to which the tokens are minted.
+- `_id`: The token ID of the tokens being minted.
+- `_value`: The amount of tokens being minted, which is `1` in the `mintDrop` function.
+
+Since the `mintDrop` function is only callable by the owner of the contract (due to the `onlyOwner` modifier), and the `TransferSingle` event is emitted with the `operator` set to the caller of the function (`msg.sender`), the event is emitted according to the given rule.

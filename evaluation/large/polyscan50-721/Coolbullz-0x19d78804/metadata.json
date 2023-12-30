@@ -1,0 +1,383 @@
+{
+    "file": "evaluation/polyscan50-721/Coolbullz-0x19d78804.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/supportsInterface_bytes4",
+                "hasRole(bytes32,address) returns(bool)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/hasRole_bytes32_address",
+                "getRoleAdmin(bytes32) returns(bytes32)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/getRoleAdmin_bytes32",
+                "grantRole(bytes32,address) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/grantRole_bytes32_address",
+                "revokeRole(bytes32,address) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/revokeRole_bytes32_address",
+                "renounceRole(bytes32,address) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/renounceRole_bytes32_address",
+                "paused() returns(bool)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/paused",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/tokenURI_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/symbol",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor(address) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/constructor_address",
+                "receive() returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/receive",
+                "presaleMint(Coolbullz.automint[]) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/presaleMint_Coolbullz.automint[]",
+                "setMintLimit(uint256) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/setMintLimit_uint256",
+                "OGMint(uint256,address) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/OGMint_uint256_address",
+                "wlMint(uint256,address) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/wlMint_uint256_address",
+                "publicMint(uint256,address) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/publicMint_uint256_address",
+                "treasuryMint(uint256) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/treasuryMint_uint256",
+                "setOgWhiteList(address[]) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/setOgWhiteList_address[]",
+                "setWLWhiteList(address[]) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/setWLWhiteList_address[]",
+                "setTreasuryWallet(address) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/setTreasuryWallet_address",
+                "setSequence(uint256[]) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/setSequence_uint256[]",
+                "setOldSequence(uint256[]) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/setOldSequence_uint256[]",
+                "resetNoOfEntry(uint256) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/resetNoOfEntry_uint256",
+                "setMintType(uint256,uint256,bool,bool,bool) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/setMintType_uint256_uint256_bool_bool_bool",
+                "setBaseUrl(string) returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/setBaseUrl_string",
+                "withdraw() returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/withdraw",
+                "withdrawAdmin() returns()": ".temp/polyscan50-721/Coolbullz-0x19d78804/Coolbullz/f/withdrawAdmin"
+            },
+            "func2attrs": {
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "hasRole(bytes32,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getRoleAdmin(bytes32) returns(bytes32)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "grantRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "revokeRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "renounceRole(bytes32,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "paused() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "presaleMint(Coolbullz.automint[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMintLimit(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "OGMint(uint256,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "wlMint(uint256,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "publicMint(uint256,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "treasuryMint(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setOgWhiteList(address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setWLWhiteList(address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setTreasuryWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setSequence(uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setOldSequence(uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "resetNoOfEntry(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMintType(uint256,uint256,bool,bool,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseUrl(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdrawAdmin() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "sequence(uint256) returns(uint256)",
+                "DEFAULT_ADMIN_ROLE() returns(bytes32)",
+                "amount_paid(address) returns(uint256)",
+                "public_minted_address(address) returns(uint256)",
+                "WL_user_addresses(address) returns(bool)",
+                "has_paid(address) returns(bool)",
+                "PAUSER_ROLE() returns(bytes32)",
+                "supply() returns(uint256)",
+                "noOfEntry() returns(uint256)",
+                "sequence_tokenId(uint256) returns(bool)",
+                "totalSupply() returns(uint256)",
+                "Og_minted_address(address) returns(uint256)",
+                "base_url() returns(string)",
+                "OG_user_addresses(address) returns(bool)",
+                "treasury() returns(address)",
+                "wl_minted_address(address) returns(uint256)",
+                "mint_Limit() returns(uint256)",
+                "MINTER_ROLE() returns(bytes32)",
+                "mint_price() returns(uint256)"
+            ],
+            "ercs": [
+                "165",
+                "721uristorage",
+                "721metadata",
+                "4906",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "RoleAdminChanged",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleGranted",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "RoleRevoked",
+                    "params": [
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "MetadataUpdate",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "BatchMetadataUpdate",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Paused",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Unpaused",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "UserPaid",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "Coolbullz"
+        }
+    ]
+}

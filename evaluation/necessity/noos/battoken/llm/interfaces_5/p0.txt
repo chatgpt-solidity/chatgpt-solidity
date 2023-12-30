@@ -1,0 +1,29 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "transferFrom(address,address,uint256) returns(bool)" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+transfer(address,uint256) returns(bool)
+transferFrom(address,address,uint256) returns(bool)
+balanceOf(address) returns(uint256)
+approve(address,uint256) returns(bool)
+allowance(address,address) returns(uint256)
+BAToken(address,address,uint256,uint256) returns()
+createTokens() returns()
+finalize() returns()
+refund() returns()
+tokenCreationMin() returns(uint256)
+ethFundDeposit() returns(address)
+tokenExchangeRate() returns(uint256)
+tokenCreationCap() returns(uint256)
+batFund() returns(uint256)
+fundingEndBlock() returns(uint256)
+totalSupply() returns(uint256)
+fundingStartBlock() returns(uint256)
+name() returns(string)
+decimals() returns(uint256)
+batFundDeposit() returns(address)
+isFinalized() returns(bool)
+version() returns(string)
+symbol() returns(string)
+"""

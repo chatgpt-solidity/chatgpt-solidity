@@ -1,0 +1,220 @@
+contract NFTs_Latam_Slot is
+    Initializable,
+    INFTlatamContract,
+    IOwnable,
+    IRoyalty,
+    IPrimarySale,
+    IPlatformFee,
+    ReentrancyGuardUpgradeable,
+    EIP712Upgradeable,
+    MulticallUpgradeable,
+    AccessControlEnumerableUpgradeable,
+    ERC721EnumerableUpgradeable,
+    ITokenERC721
+{
+
+    /// @dev Mapping from tokenId => URI
+
+    mapping(uint256 => string) private uri;
+    /// @dev Mapping from tokenId => claim state
+
+    mapping(uint256 => bool) private useState;
+    /// @dev Mapping from tokenId => onchain
+    mapping(uint256 => bytes) private onchainItems;
+
+    /// @dev Mapping from tokenId => onchain
+    mapping(uint256 => uint16[]) private prizesRegister;
+
+    mapping(uint256 => bool) private claimNFT;
+
+    /// @dev Returns the URI for a tokenId
+    function tokenURI(uint256 _tokenId)
+        public
+        view
+        override
+        returns (string memory)
+    {
+        require(
+            _exists(_tokenId),
+            "ERC721Metadata: URI query for nonexistent token"
+        );
+
+        bool nftstate = useState[_tokenId];
+
+        if (!nftstate) {
+            return uri[_tokenId];
+        }
+
+        string memory claimstate = claimNFT[_tokenId]? "Claimed" : "Claimable";
+
+        uint16[] memory slotsPrize = prizesRegister[_tokenId];
+
+        return
+            string(
+                abi.encodePacked(
+                    "data:application/json;base64,",
+                    Base64.encode(
+                        bytes(
+                            abi.encodePacked(
+                                '{"name": "',
+                                "Slot Machine",
+                                '", "description":',
+                                '"This interesting approach of having a two-in-one NFT (both On-Chain and Off-chain art under the same contract & with the same token ID) was developed for the EtherTulip V2 concept bid by Tulip30 and Ecuadorian developers NFTsLATAM. You will be able use a slotmachine offchain iteractive NFT. After interacting with the nft on the website by proving your luck, you will be able to claim a prize if you are lucky. We have created an NFT that contains the best of the two worlds."',
+                                ', "image": "',
+                                buildNFT(
+                                    slotsPrize[0],
+                                    slotsPrize[1],
+                                    slotsPrize[2]
+                                ),
+                                '", "attributes": [',
+                                '{ "trait_type": "Author",                  "value": "BSNM" },',
+                                '{ "trait_type": "Company",              "value": "NFTsLatam" },',
+                                '{ "trait_type": "Partners",     "value": "EtherTulip" },',
+                                '{ "trait_type": "Use State",     "value":"Used" },',
+                                '{ "trait_type": "Claim State",     "value":"', claimstate  , '" },',
+                                '{ "trait_type": "Iterative",     "value": "yes" }',
+                                "]}"
+                            )
+                        )
+                    )
+                )
+            );
+
+    }
+    /// @dev
+    function buildNFT(
+        uint16 _slotId1,
+        uint16 _slotId2,
+        uint16 _slotId3
+    ) private view returns (bytes memory) {
+        require(
+            _slotId1 != 0 && _slotId2 != 0 && _slotId3 != 0,
+            "Slot id can not be 0."
+        );
+
+        string[9] memory parts;
+
+        parts[
+            0
+        ] = "<svg xmlns='http://www.w3.org/2000/svg' width='250' height='250' style='display: flex; align-content: center; justify-content: center;' > <image x='53' y='88' href= '";
+        parts[1] = string(onchainItems[_slotId1]);
+        parts[2] = "'/><image x='101' y='88' href='";
+        parts[3] = string(onchainItems[_slotId2]);
+        parts[4] = "'/><image x='150' y='88' href='";
+        parts[5] = string(onchainItems[_slotId3]);
+        parts[6] = "' /> <image href='";
+        parts[7] = string(onchainItems[0]);
+        parts[8] = "' /> </svg>";
+
+        bytes memory encoded;
+
+        for (uint256 i = 0; i < parts.length; i++) {
+            encoded = abi.encodePacked(encoded, parts[i]);
+        }
+
+        return
+            abi.encodePacked(
+                "data:image/svg+xml;base64,",
+                Base64.encode(bytes(encoded))
+            );
+    }
+}
+
+contract ERC721Upgradeable is
+    Initializable,
+    ContextUpgradeable,
+    ERC165Upgradeable,
+    IERC721Upgradeable,
+    IERC721MetadataUpgradeable
+{
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+    }
+
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     * and stop existing when they are burned (`_burn`).
+     */
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _ownerOf(tokenId) != address(0);
+    }
+}
+
+library Base64 {
+    bytes internal constant TABLE =
+
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    /// @notice Encodes some bytes to the base64 representation
+    function encode(bytes memory data) internal pure returns (string memory) {
+        uint256 len = data.length;
+        if (len == 0) return "";
+
+        // multiply by 4/3 rounded up
+        uint256 encodedLen = 4 * ((len + 2) / 3);
+
+        // Add some extra buffer at the end
+        bytes memory result = new bytes(encodedLen + 32);
+
+        bytes memory table = TABLE;
+
+        assembly {
+            let tablePtr := add(table, 1)
+            let resultPtr := add(result, 32)
+
+            for {
+                let i := 0
+            } lt(i, len) {
+
+            } {
+                i := add(i, 3)
+                let input := and(mload(add(data, i)), 0xffffff)
+
+                let out := mload(add(tablePtr, and(shr(18, input), 0x3F)))
+                out := shl(8, out)
+                out := add(
+                    out,
+                    and(mload(add(tablePtr, and(shr(12, input), 0x3F))), 0xFF)
+                )
+                out := shl(8, out)
+                out := add(
+                    out,
+                    and(mload(add(tablePtr, and(shr(6, input), 0x3F))), 0xFF)
+                )
+                out := shl(8, out)
+                out := add(
+                    out,
+                    and(mload(add(tablePtr, and(input, 0x3F))), 0xFF)
+                )
+                out := shl(224, out)
+
+                mstore(resultPtr, out)
+
+                resultPtr := add(resultPtr, 4)
+            }
+
+            switch mod(len, 3)
+            case 1 {
+                mstore(sub(resultPtr, 2), shl(240, 0x3d3d))
+            }
+            case 2 {
+                mstore(sub(resultPtr, 1), shl(248, 0x3d))
+            }
+
+            mstore(result, encodedLen)
+        }
+
+        return string(result);
+    }
+}
+

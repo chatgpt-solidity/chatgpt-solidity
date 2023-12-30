@@ -1,0 +1,71 @@
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Mapping from token ID to Uri
+
+    mapping(uint256 => string) private _tokenURIs;
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+    // Mapping owner address to token count
+    // Mapping from token ID to approved address
+    mapping(address => uint256) private _balances;
+    mapping(uint256 => address) private _tokenApprovals;
+
+    function ownerOf(
+        uint256 tokenId
+    ) public view virtual override returns (address) {
+        address owner = _owners[tokenId];
+        require(
+            owner != address(0),
+            "ERC721: owner query for nonexistent token"
+        );
+        return owner;
+    }
+
+    function _burn(uint256 tokenId) internal virtual {
+        address owner = ERC721.ownerOf(tokenId);
+        _beforeTokenTransfer(owner, address(0), tokenId);
+        _approve(address(0), tokenId);
+        _balances[owner] -= 1;
+        delete _owners[tokenId];
+        if (bytes(_tokenURIs[tokenId]).length != 0) {
+            delete _tokenURIs[tokenId];
+        }
+        emit Transfer(owner, address(0), tokenId);
+        _afterTokenTransfer(owner, address(0), tokenId);
+    }
+
+    function _approve(address to, uint256 tokenId) internal virtual {
+        _tokenApprovals[tokenId] = to;
+        emit Approval(ERC721.ownerOf(tokenId), to, tokenId);
+    }
+
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+
+    ) internal virtual {}
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual {}
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract EBLivePremios is ERC721 {
+
+    //Funciones Burn
+    function Burn(uint256 tokenId) public {
+        require(
+            ownerOf(tokenId) == _msgSender(),
+            "Burn: caller is not Owner of Token"
+        );
+        _burn(tokenId);
+    }
+}

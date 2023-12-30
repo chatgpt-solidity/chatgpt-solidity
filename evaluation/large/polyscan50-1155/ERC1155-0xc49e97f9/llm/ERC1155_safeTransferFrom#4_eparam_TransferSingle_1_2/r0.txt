@@ -1,0 +1,7 @@
+YES
+
+The `safeTransferFrom` function calls the `_safeTransferFrom` private function, which performs the actual transfer of tokens. The `_balances[id][to]` is increased by the `amount`, which means that the balance of the recipient (`to`) is increased as required by the rule.
+
+After updating the balances, the `TransferSingle` event is emitted with the correct arguments, including the `_to` argument which is the address of the recipient whose balance was increased. The event is emitted before any additional checks or external calls, ensuring that it reflects the state change of the balance increase.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

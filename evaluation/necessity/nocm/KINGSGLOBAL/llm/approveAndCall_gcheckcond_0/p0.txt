@@ -1,0 +1,42 @@
+Given a solidity function approveAndCall and the related parts from a smart contract and a rule.
+Whether the function approveAndCall and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract KINGSGLOBAL is StandardToken {
+
+    /* Approves and then calls the receiving contract */
+    function approveAndCall(
+        address _spender,
+        uint256 _value,
+        bytes _extraData
+    ) returns (bool success) {
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+
+        if (
+            !_spender.call(
+                bytes4(
+                    bytes32(
+                        sha3("receiveApproval(address,uint256,address,bytes)")
+                    )
+                ),
+                msg.sender,
+                _value,
+                this,
+                _extraData
+            )
+        ) {
+            throw;
+        }
+        return true;
+    }
+}
+
+contract StandardToken is Token {
+    mapping(address => mapping(address => uint256)) allowed;
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

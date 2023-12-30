@@ -1,0 +1,49 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether the function transfer and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Function(and related parts) to audit:"""
+contract Pausable is Ownable {
+
+
+    bool public paused = false;
+    /**
+     * @dev Modifier to make a function callable only when the contract is not paused.
+     */
+    modifier whenNotPaused() {
+        require(!paused);
+        _;
+    }
+}
+
+contract StandardToken is Token {
+    function transfer(
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        if (balances[msg.sender] >= _value && _value > 0) {
+            balances[msg.sender] -= _value;
+            balances[_to] += _value;
+            emit Transfer(msg.sender, _to, _value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    mapping(address => uint256) balances;
+}
+
+contract AxpirePausableToken is StandardToken, Pausable, BurnableToken {
+    function transfer(
+        address _to,
+        uint256 _value
+    ) public whenNotPaused returns (bool) {
+        return super.transfer(_to, _value);
+    }
+}
+"""
+
+Condition:"""
+the message caller's account balance does not have enough tokens to spend
+"""

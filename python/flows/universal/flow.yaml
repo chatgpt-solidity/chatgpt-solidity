@@ -1,0 +1,13 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a solidity code from a smart contract and a ERC rule.
+      Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+      Code:"""
+      <code>
+      """
+
+      Rule:"""
+      <rule>
+      """

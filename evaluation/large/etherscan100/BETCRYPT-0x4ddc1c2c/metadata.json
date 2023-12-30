@@ -1,0 +1,298 @@
+{
+    "file": "evaluation/etherscan100/BETCRYPT-0x4ddc1c2c.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.10",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/transferOwnership_address",
+                "name() returns(string)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/decreaseAllowance_address_uint256",
+                "constructor() returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/constructor",
+                "receive() returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/receive",
+                "enableTrading() returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/enableTrading",
+                "removeLimits() returns(bool)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/removeLimits",
+                "disableTransferDelay() returns(bool)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/disableTransferDelay",
+                "updateSwapTokensAtAmount(uint256) returns(bool)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/updateSwapTokensAtAmount_uint256",
+                "updateMaxTxnAmount(uint256) returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/updateMaxTxnAmount_uint256",
+                "updateMaxWalletAmount(uint256) returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/updateMaxWalletAmount_uint256",
+                "excludeFromMaxTransaction(address,bool) returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/excludeFromMaxTransaction_address_bool",
+                "updateSwapEnabled(bool) returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/updateSwapEnabled_bool",
+                "updateBuyFees(uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/updateBuyFees_uint256_uint256_uint256_uint256",
+                "updateSellFees(uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/updateSellFees_uint256_uint256_uint256_uint256",
+                "excludeFromFees(address,bool) returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/excludeFromFees_address_bool",
+                "setAutomatedMarketMakerPair(address,bool) returns()": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/setAutomatedMarketMakerPair_address_bool",
+                "isExcludedFromFees(address) returns(bool)": ".temp/etherscan100/BETCRYPT-0x4ddc1c2c/BETCRYPT/f/isExcludedFromFees_address"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "enableTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeLimits() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "disableTransferDelay() returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSwapTokensAtAmount(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateMaxTxnAmount(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateMaxWalletAmount(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeFromMaxTransaction(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSwapEnabled(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateBuyFees(uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSellFees(uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeFromFees(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setAutomatedMarketMakerPair(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isExcludedFromFees(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "maxWallet() returns(uint256)",
+                "buyDevelopmentFee() returns(uint256)",
+                "limitsInEffect() returns(bool)",
+                "sellTotalFees() returns(uint256)",
+                "transferDelayEnabled() returns(bool)",
+                "swapEnabled() returns(bool)",
+                "deadAddress() returns(address)",
+                "_isExcludedMaxTransactionAmount(address) returns(bool)",
+                "tokensForLiquidity() returns(uint256)",
+                "uniswapV2Pair() returns(address)",
+                "tokensForDevelopment() returns(uint256)",
+                "buyMarketingFee() returns(uint256)",
+                "marketingWallet() returns(address)",
+                "buyDevFee() returns(uint256)",
+                "buyLiquidityFee() returns(uint256)",
+                "swapTokensAtAmount() returns(uint256)",
+                "tradingActive() returns(bool)",
+                "developmentWallet() returns(address)",
+                "maxTransactionAmount() returns(uint256)",
+                "tokensForDev() returns(uint256)",
+                "uniswapV2Router() returns(IUniswapV2Router02)",
+                "automatedMarketMakerPairs(address) returns(bool)",
+                "devWallet() returns(address)",
+                "buyTotalFees() returns(uint256)",
+                "tokensForMarketing() returns(uint256)",
+                "sellDevFee() returns(uint256)",
+                "sellLiquidityFee() returns(uint256)",
+                "sellDevelopmentFee() returns(uint256)",
+                "sellMarketingFee() returns(uint256)"
+            ],
+            "ercs": [
+                "20",
+                "20metadata"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "UpdateUniswapV2Router",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ExcludeFromFees",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SetAutomatedMarketMakerPair",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapAndLiquify",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "BETCRYPT"
+        }
+    ]
+}

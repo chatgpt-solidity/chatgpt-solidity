@@ -1,0 +1,8 @@
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+    string private _name;
+
+    function name() external view returns (string memory) {
+        return _name;
+    }
+}
+

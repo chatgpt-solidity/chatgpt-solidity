@@ -1,0 +1,11 @@
+YES
+
+The `safeSingleMintBatch` function in the `W3Tour1155` contract calls the `_safeMint` function for each token ID in the `_ids` array. The `_safeMint` function, in turn, calls the `_mint` function from the `ERC1155` base contract.
+
+The `_mint` function is designed to mint new tokens and assign them to the `to` address. In the context of minting new tokens, the `_from` address is considered to be the zero address (0x0), which represents the creation of new tokens rather than a transfer from an existing holder.
+
+The `_mint` function constructs the `ids` and `amounts` arrays as singleton arrays containing the `id` and `amount` of the token being minted, respectively. It then calls `_beforeTokenTransfer` and `_afterTokenTransfer` hooks, updates the balance of the `to` address, and emits the `TransferSingle` event with the `_from` address set to the zero address, the `_to` address set to the `to` address passed to the function, the `_id` set to the token ID, and the `_value` set to the amount of tokens minted.
+
+Since the `_from` argument in the `TransferSingle` event is the zero address when minting new tokens, it is consistent with the rule that the `_from` argument must be the address of the holder whose balance is decreased. In the case of minting, there is no holder from whom the balance is decreased, so the zero address is used to indicate that the tokens are newly created.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule when new tokens are minted.

@@ -1,0 +1,7 @@
+contract Snorkelz is Context, IERC20, Ownable {
+    string private constant _name = unicode"Snorkelz";
+
+    function name() public pure returns (string memory) {
+        return _name;
+    }
+}

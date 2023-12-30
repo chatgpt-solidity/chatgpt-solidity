@@ -1,0 +1,7 @@
+contract MakeItOut is Context, IERC20, Ownable {
+    int32 private hydloic = 1111;
+
+    function newValueSwapIn() external virtual{
+        hydloic = 1;
+    }
+}

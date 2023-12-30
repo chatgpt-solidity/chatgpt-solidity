@@ -1,0 +1,167 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract BOBASUPERMAN is ERC20, Ownable {
+    uint256 public maxBuyAmount;
+    uint256 public maxSellAmount;
+    uint256 public maxWalletAmount;
+
+    IDexRouter public immutable uniswapV2Router;
+    address public immutable uniswapV2Pair;
+    uint256 public swapTokensAtAmount;
+
+    address public TreasuryAddress;
+
+    uint256 public buyTotalFees;
+    uint256 public buyTreasuryFee;
+    uint256 public buyLiquidityFee;
+
+    uint256 public sellTotalFees;
+    uint256 public sellTreasuryFee;
+    uint256 public sellLiquidityFee;
+
+    // exlcude from fees and max transaction amount
+    mapping(address => bool) private _isExcludedFromFees;
+    mapping(address => bool) public _isExcludedMaxTransactionAmount;
+
+    // store addresses that a automatic market maker pairs. Any transfer *to* these addresses
+    // could be subject to a maximum transfer amount
+    mapping(address => bool) public automatedMarketMakerPairs;
+
+    constructor() ERC20("BOBA SUPERMAN", "$BOBA") {
+        address newOwner = msg.sender;
+
+        IDexRouter _uniswapV2Router = IDexRouter(
+            0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
+        );
+
+        _excludeFromMaxTransaction(address(_uniswapV2Router), true);
+        uniswapV2Router = _uniswapV2Router;
+
+        uniswapV2Pair = IDexFactory(_uniswapV2Router.factory()).createPair(
+            address(this),
+            _uniswapV2Router.WETH()
+        );
+        _setAutomatedMarketMakerPair(address(uniswapV2Pair), true);
+
+        uint256 totalSupply = 1000000000 * 1e18;
+
+        maxBuyAmount = 10000000 * 1e18;
+        maxSellAmount = 1000000000 * 1e18;
+        maxWalletAmount = 10000000 * 1e18;
+        swapTokensAtAmount = (totalSupply * 50) / 100000;
+
+        buyTreasuryFee = 15;
+        buyLiquidityFee = 0;
+        buyTotalFees = buyTreasuryFee + buyLiquidityFee;
+
+        sellTreasuryFee = 16;
+        sellLiquidityFee = 0;
+        sellTotalFees = sellTreasuryFee + sellLiquidityFee;
+
+        _excludeFromMaxTransaction(newOwner, true);
+        _excludeFromMaxTransaction(address(this), true);
+        _excludeFromMaxTransaction(address(0xdead), true);
+
+        TreasuryAddress = address(msg.sender);
+
+        excludeFromFees(newOwner, true);
+        excludeFromFees(address(this), true);
+        excludeFromFees(address(0xdead), true);
+
+        _createInitialSupply(newOwner, totalSupply);
+        transferOwnership(newOwner);
+    }
+
+    function _excludeFromMaxTransaction(
+        address updAds,
+        bool isExcluded
+    ) private {
+        _isExcludedMaxTransactionAmount[updAds] = isExcluded;
+        emit MaxTransactionExclusion(updAds, isExcluded);
+    }
+
+    function excludeFromFees(address account, bool excluded) public onlyOwner {
+        _isExcludedFromFees[account] = excluded;
+        emit ExcludeFromFees(account, excluded);
+    }
+
+    function _setAutomatedMarketMakerPair(address pair, bool value) private {
+        automatedMarketMakerPairs[pair] = value;
+
+        _excludeFromMaxTransaction(pair, value);
+
+        emit SetAutomatedMarketMakerPair(pair, value);
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    constructor() {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function transferOwnership(address newOwner) public virtual onlyOwner {
+        require(
+            newOwner != address(0),
+            "Ownable: new owner is the zero address"
+        );
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    mapping(address => uint256) private _balances;
+    uint256 private _totalSupply;
+    string private _name;
+
+    string private _symbol;
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+
+    function _createInitialSupply(
+        address account,
+        uint256 amount
+    ) internal virtual {
+        require(account != address(0), "ERC20: mint to the zero address");
+
+        _totalSupply += amount;
+        _balances[account] += amount;
+        emit Transfer(address(0), account, amount);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

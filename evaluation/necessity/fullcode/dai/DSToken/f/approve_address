@@ -1,0 +1,28 @@
+contract DSStop is DSNote, DSAuth {
+
+    bool public stopped;
+    modifier stoppable() {
+        require(!stopped);
+        _;
+    }
+}
+
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => mapping(address => uint256)) _approvals;
+
+    function approve(address guy, uint wad) public returns (bool) {
+        _approvals[msg.sender][guy] = wad;
+
+        Approval(msg.sender, guy, wad);
+
+        return true;
+    }
+}
+
+contract DSToken is DSTokenBase(0), DSStop {
+
+    function approve(address guy) public stoppable returns (bool) {
+        return super.approve(guy, uint(-1));
+    }
+}
+

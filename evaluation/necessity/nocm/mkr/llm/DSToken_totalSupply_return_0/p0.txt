@@ -1,0 +1,14 @@
+Given a solidity function totalSupply and the related parts from a smart contract and an rule for its return value.
+Whether function totalSupply returns the total token supply? Reply in "YES" or "NO".
+
+<example>
+
+Function(and related parts) to audit:"""
+contract DSTokenBase is ERC20, DSMath {
+    uint256 _supply;
+
+    function totalSupply() public view returns (uint) {
+        return _supply;
+    }
+}
+"""

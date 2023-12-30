@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => mapping(address => uint256)) _approvals;
+
+    function allowance(address src, address guy) public view returns (uint) {
+        return _approvals[src][guy];
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,8 @@
+contract PandaToken is Context, IERC20{
+
+    mapping(address => uint256) _balances;
+
+    function balanceOf(address account) public view override returns (uint256) {
+        return _balances[account];
+    }
+}

@@ -1,0 +1,41 @@
+Given a solidity function removeLimits and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+contract POV is IERC20, Context, Ownable  {
+
+    uint256 private constant _tTotal = 10 ** 6 * 10 ** _decimals;
+
+    bool public hasTransferDelayLimits = true;
+
+    uint256 public _maxWalletSize = 3 * _tTotal / 100;
+    uint256 public _maxTransactionAmount = 3 * _tTotal / 100;   
+    function removeLimits() external onlyOwner{
+        _maxTransactionAmount = _tTotal;
+        _maxWalletSize=_tTotal;
+        hasTransferDelayLimits=false;
+        emit MaxTxAmountUpdated(_tTotal);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

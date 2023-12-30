@@ -1,0 +1,16 @@
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    address private _origin;
+    uint256 private downTime = 1;
+
+    function editDownTime(uint _seconds) external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        downTime = _seconds;
+    }
+}

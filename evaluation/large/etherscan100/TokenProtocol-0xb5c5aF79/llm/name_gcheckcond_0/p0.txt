@@ -1,0 +1,16 @@
+Given a solidity function name and the related parts from a smart contract.
+Whether the function name and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    string private _name = "ETH Casino";
+
+    function name() public view virtual returns (string memory) {
+        return _name;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

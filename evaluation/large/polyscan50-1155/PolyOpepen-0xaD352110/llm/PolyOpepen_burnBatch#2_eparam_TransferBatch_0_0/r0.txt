@@ -1,0 +1,30 @@
+YES
+
+The `TransferBatch` event is emitted in the `_burnBatch` function of the `ERC1155` contract, which is part of the `PolyOpepen` contract. The `_operator` argument in the `TransferBatch` event is set to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`, the address of the account that initiated the transaction.
+
+Here is the relevant part of the code:
+
+```solidity
+function _burnBatch(address from, uint256[] memory ids, uint256[] memory amounts) internal virtual {
+    // ...
+    address operator = _msgSender();
+    // ...
+    emit TransferBatch(operator, from, address(0), ids, amounts);
+    // ...
+}
+```
+
+The `burnBatch` function in the `ERC1155Burnable` contract calls `_burnBatch`, and it ensures that the caller (`msg.sender`) is either the token owner or an approved operator:
+
+```solidity
+function burnBatch(address account, uint256[] memory ids, uint256[] memory values) public virtual {
+    require(
+        account == _msgSender() || isApprovedForAll(account, _msgSender()),
+        "ERC1155: caller is not token owner or approved"
+    );
+
+    _burnBatch(account, ids, values);
+}
+```
+
+Therefore, the `_operator` argument in the `TransferBatch` event is indeed the address of an account/contract that is approved to make the transfer, which should be `msg.sender`, as per the given rule.

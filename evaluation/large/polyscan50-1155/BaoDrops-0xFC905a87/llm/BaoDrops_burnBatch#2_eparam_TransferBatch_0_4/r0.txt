@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted correctly according to the given rule. The `_burnBatch` function decreases the balance of the `from` address by the amounts specified in the `amounts` array for each token ID in the `ids` array. The `TransferBatch` event is then emitted with the operator's address, the `from` address, the zero address (indicating a burn operation), the `ids` array, and the `amounts` array. The `amounts` array represents the number of tokens the holder's balance is decreased by, which matches the rule specified.

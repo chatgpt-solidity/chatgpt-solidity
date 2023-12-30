@@ -1,0 +1,17 @@
+The provided Solidity code for the `transferFrom` function and related parts of the smart contract are intended to implement an ERC20 token, which is a standard interface for Ethereum tokens. The ERC20 standard specifies a set of rules and functions that a token contract must implement to be considered ERC20-compliant.
+
+Let's analyze the provided `transferFrom` function against the ERC20 standard:
+
+1. **transferFrom Functionality**: The ERC20 standard states that the `transferFrom` function should transfer `_value` amount of tokens from address `_from` to address `_to`, and it must fire the `Transfer` event. The function should throw an error unless the `_from` account has deliberately authorized the sender of the message via some mechanism (usually via the `approve` function).
+
+2. **Error Handling**: The ERC20 standard specifies that callers must handle false from returns (`bool success`). However, it also states that the function should throw if certain conditions are not met. In the provided code, the `transferFrom` function returns `false` instead of throwing an error when the allowance is insufficient or the `_from` account does not have enough tokens. This is a deviation from the standard, which could lead to unexpected behavior in contracts or services that interact with this token and expect an error to be thrown.
+
+3. **Frozen Accounts and Transfers**: The provided `WiT` contract introduces additional functionality not specified in the ERC20 standard, such as freezing accounts and transfers. While this does not directly violate the ERC20 standard, it adds extra behavior that must be documented and understood by users and integrators of the token.
+
+4. **SafeMath Library**: The contract uses a `SafeMath` library for safe arithmetic operations, which is a good practice to prevent overflow and underflow issues.
+
+5. **Events**: The `transferFrom` function correctly emits the `Transfer` event, which is in line with the ERC20 standard.
+
+6. **Zero Value Transfers**: The ERC20 standard states that transfers of 0 values must be treated as normal transfers and fire the `Transfer` event. The provided code does not explicitly check for a zero value before proceeding with the transfer, which is compliant with the standard.
+
+In summary, the main issue with the provided `transferFrom` function is that it returns `false` instead of throwing an error when the allowance is insufficient or the balance is too low. This behavior is not compliant with the ERC20 standard, which could lead to compatibility issues with other contracts or services expecting an error to be thrown. The additional functionality of freezing accounts and transfers should be clearly documented, as it extends beyond the ERC20 standard.

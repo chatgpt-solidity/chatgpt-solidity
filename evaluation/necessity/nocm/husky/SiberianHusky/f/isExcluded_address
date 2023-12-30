@@ -1,0 +1,9 @@
+contract SiberianHusky is Context, IERC20, Ownable {
+
+    mapping(address => bool) private _isExcluded;
+
+    function isExcluded(address account) public view returns (bool) {
+        return _isExcluded[account];
+    }
+}
+

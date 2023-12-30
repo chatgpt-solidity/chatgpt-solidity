@@ -1,0 +1,45 @@
+Given a solidity function updateSwapTokensAtAmount and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract simple is ERC20, Ownable {
+    uint256 public swapTokensAtAmount;
+
+    // change the minimum amount of tokens to sell from fees
+    function updateSwapTokensAtAmount(uint256 newAmount) external onlyOwner {
+  	    require(newAmount >= totalSupply() * 1 / 100000, "Swap amount cannot be lower than 0.001% total supply.");
+  	    require(newAmount <= totalSupply() * 1 / 1000, "Swap amount cannot be higher than 0.1% total supply.");
+  	    swapTokensAtAmount = newAmount;
+  	}
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    uint256 private _totalSupply;
+
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

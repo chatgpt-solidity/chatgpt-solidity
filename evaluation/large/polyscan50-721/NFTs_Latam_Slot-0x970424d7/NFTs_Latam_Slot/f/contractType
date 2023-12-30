@@ -1,0 +1,25 @@
+contract NFTs_Latam_Slot is
+    Initializable,
+    INFTlatamContract,
+    IOwnable,
+    IRoyalty,
+    IPrimarySale,
+    IPlatformFee,
+    ReentrancyGuardUpgradeable,
+    EIP712Upgradeable,
+    MulticallUpgradeable,
+    AccessControlEnumerableUpgradeable,
+    ERC721EnumerableUpgradeable,
+    ITokenERC721
+{
+
+    bytes32 private constant MODULE_TYPE = bytes32("NFTs_Latam_Slot");
+
+    ///     =====   Public functions  =====
+
+    /// @dev Returns the module type of the contract.
+    function contractType() external pure returns (bytes32) {
+        return MODULE_TYPE;
+    }
+}
+

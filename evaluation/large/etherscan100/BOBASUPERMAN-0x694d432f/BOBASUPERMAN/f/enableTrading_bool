@@ -1,0 +1,27 @@
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract BOBASUPERMAN is ERC20, Ownable {
+    bool public tradingActive = false;
+    bool public swapEnabled = false;
+
+    // once enabled, can never be turned off
+    function enableTrading(bool _status) external onlyOwner {
+        require(!tradingActive, "Cannot re enable trading");
+        tradingActive = _status;
+        swapEnabled = true;
+        emit EnabledTrading(tradingActive);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

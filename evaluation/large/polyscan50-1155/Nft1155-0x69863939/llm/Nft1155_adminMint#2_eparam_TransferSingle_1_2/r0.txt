@@ -1,0 +1,5 @@
+YES
+
+The `adminMint` function in the `Nft1155` contract calls the `_mint` function from the `ERC1155` contract. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`, which is the recipient's address. The `_mint` function emits a `TransferSingle` event with the following parameters: `operator`, `from`, `to`, `id`, and `amount`.
+
+In the context of the `adminMint` function, `_address` is the recipient's address, `_tokenId` is the token ID, and `_amount` is the number of tokens to mint. The `_mint` function is called with these parameters, and the `TransferSingle` event is emitted with `_address` as the `_to` argument, which is the address of the recipient whose balance is increased. This is in accordance with the given rule.

@@ -1,0 +1,13 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` internal function, which is called by the `safeBatchTransferFrom` public function. The event is emitted after the balances have been updated and before the `_doSafeBatchTransferAcceptanceCheck` function is called.
+
+The event is emitted with the following arguments:
+
+- `_operator`: The address performing the transfer, which is the message sender (`_msgSender()`).
+- `_from`: The address of the holder whose balance is decreased.
+- `_to`: The address of the recipient whose balance is increased.
+- `_ids`: An array of token IDs.
+- `_values`: An array of transfer amounts.
+
+The rule states that the `_to` argument must be the address of the recipient whose balance is increased, and this is indeed the case in the provided code. The balances are updated correctly before the event is emitted, ensuring that the `_to` address in the event is the recipient of the tokens.

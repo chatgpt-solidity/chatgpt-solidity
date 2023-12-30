@@ -1,0 +1,42 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether the function burn and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract BNB is SafeMath {
+    uint256 public totalSupply;
+
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+
+    function burn(uint256 _value) returns (bool success) {
+        if (balanceOf[msg.sender] < _value) throw; // Check if the sender has enough
+        if (_value <= 0) throw;
+        balanceOf[msg.sender] = SafeMath.safeSub(balanceOf[msg.sender], _value); // Subtract from the sender
+        totalSupply = SafeMath.safeSub(totalSupply, _value); // Updates totalSupply
+        Burn(msg.sender, _value);
+        return true;
+    }
+}
+
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    function assert(bool assertion) internal {
+        if (!assertion) {
+            throw;
+        }
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are minting or allocating
+"""

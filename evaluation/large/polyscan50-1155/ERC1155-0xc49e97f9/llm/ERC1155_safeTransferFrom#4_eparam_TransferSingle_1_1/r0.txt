@@ -1,0 +1,5 @@
+YES
+
+The function `_safeTransferFrom` is called by `safeTransferFrom`, which checks that the `from` address is either the message sender or has given approval to the message sender to operate on their behalf. This ensures that the `_from` argument in the `TransferSingle` event represents the address of the holder whose balance is decreased.
+
+The `TransferSingle` event is emitted with the correct arguments, including the `_from` parameter that represents the address from which the tokens are being transferred. This complies with the given rule that the `_from` argument must be the address of the holder whose balance is decreased.

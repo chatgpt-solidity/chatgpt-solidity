@@ -1,0 +1,24 @@
+Given a solidity function setStakingAddress and the related parts from a smart contract.
+Whether the function setStakingAddress and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+contract zepump is IERC20, tokenStaking, Ownable {
+    mapping(address => bool) private isFeeExempt;
+    stakeIntegration internal stakingContract;
+
+    function setStakingAddress(address _staking) external onlyOwner {
+        stakingContract = stakeIntegration(_staking); isFeeExempt[_staking] = true;
+        emit SetStakingAddress(_staking, block.timestamp);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

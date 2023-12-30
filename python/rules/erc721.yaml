@@ -1,0 +1,181 @@
+erc: 721
+functions:
+  - name: balanceOf
+    arg_types:
+      - name: _owner
+        type: address
+    return_type: uint256
+
+  - name: ownerOf
+    arg_types:
+      - name: _tokenId
+        type: uint256
+    return_type: address
+
+  - name: safeTransferFrom
+    arg_types:
+      - name: _from
+        type: address
+      - name: _to
+        type: address
+      - name: _tokenId 
+        type: uint256
+    return_type: ""
+
+  - name: transferFrom
+    arg_types:
+      - name: _from
+        type: address
+      - name: _to
+        type: address
+      - name: _tokenId 
+        type: uint256
+    return_type: ""
+
+  - name: approve
+    arg_types:
+      - name: _approved
+        type: address
+      - name: _tokenId
+        type: uint256
+    return_type: ""
+
+  - name: getApproved
+    arg_types:
+      - name: _tokenId
+        type: uint256
+    return_type: address
+
+  - name: setApprovalForAll
+    arg_types:
+      - name: _operator
+        type: address
+      - name: _approved
+        type: bool
+    return_type: ""
+
+  - name: isApprovedForAll
+    arg_types:
+      - name: _owner
+        type: address
+      - name: _operator
+        type: address
+    return_type: bool
+
+  - name: safeTransferFrom
+    arg_types:
+      - name: _from
+        type: address
+      - name: _to
+        type: address
+      - name: _tokenId 
+        type: uint256
+      - name: data
+        type: bytes
+    return_type: ""
+
+  - name: supportsInterface
+    arg_types:
+      - name: interfaceID
+        type: bytes4
+    return_type: bool
+events:
+  - name: Transfer
+    params:
+    - name: _from
+      type: address
+      indexed: true
+    - name: _to
+      type: address
+      indexed: true
+    - name: _tokenId
+      type: uint256
+      indexed: true
+
+  - name: Approval
+    params:
+    - name: _owner
+      type: address
+      indexed: true
+    - name: _approved
+      type: address
+      indexed: true
+    - name: _tokenId
+      type: uint256
+      indexed: true
+
+  - name: ApprovalForAll
+    params:
+    - name: _owner
+      type: address
+      indexed: true
+    - name: _operator
+      type: address
+      indexed: true
+    - name: _approved
+      type: bool
+
+
+eventRule:
+  Transfer:
+    conditions:
+    - "When ownership of any NFT changes by any mechanism"
+    - "When `tokenId` is created with `owner` address as the owner."
+    - "When `tokenId` is destroyed and removed from circulation."
+  Approval:
+    conditions:
+      - when the approved address for an NFT is changed or reaffirmed 
+      - when the approved address for an NFT is cleared
+  ApprovalForAll:
+    conditions:
+      - when an operator is enabled or disabled for an owner
+functionRule:
+  balanceOf:
+    throw:
+      - if: Query zero address 
+    return:
+      - The number of NFTs owned by `_owner`, possibly zero
+  ownerOf:
+    throw:
+      -  if: Query zero address 
+    return:
+      - The address of the owner of the NFT
+  safeTransferFrom:
+    throw:
+      - if: "`msg.sender` is not the current owner, not an authorized operator, and not the approved address for this NFT"
+      - if: "`_from` is not the current owner"
+      - if: "`_to` is the zero address"
+      - if: "`_tokenId` is not a valid NFT"
+      - if: the onERC721Received return value is not `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))
+    call:
+      onERC721Received:
+        - if: checks if `_to` is a smart contract (code size > 0)
+  transferFrom:
+    throw:
+      - if: "`msg.sender` is not the current owner, not an authorized operator, and not the approved address for this NFT"
+      - if: "`_from` is not the current owner"
+      - if: "`_to` is the zero address"
+      - if: "`_tokenId` is not a valid NFT"
+  approve:
+    throw:
+      - if: "`msg.sender` is not the current owner and not an authorized operator"
+  setApprovalForAll:
+    event:
+      ApprovalForAll:
+    assign:
+      - allow multiple operators per owner.
+  
+  getApproved:
+    throw:
+      - if: "`_tokenId` is not a valid NFT."
+    return:
+      - The approved address for this NFT, or the zero address if there is none 
+
+  isApprovedForAll:
+    return:
+      - True if `_operator` is an approved operator for `_owner`, false otherwise 
+
+
+
+
+

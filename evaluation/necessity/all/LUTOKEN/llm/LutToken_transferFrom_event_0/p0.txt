@@ -1,0 +1,119 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether it emits the event Transfer? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.22;
+contract Pausable is Ownable {
+
+
+    bool public paused = false;
+    /**
+     * @dev Modifier to make a function callable only when the contract is not paused.
+     */
+    modifier whenNotPaused() {
+        require(!paused);
+        _;
+    }
+}
+
+library SafeMath {
+
+    /**
+     * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256 c) {
+        c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract LutToken is
+    LutTokenInterface,
+    UpgradeableToken,
+    DetailedERC20,
+    BurnableToken,
+    Pausable
+{
+
+    /// @notice set of sale account which can freeze tokens
+
+    address public sale;
+    /// @notice when true - all tokens are frozen and only sales or contract owner can move their tokens
+    ///         when false - all tokens are unfrozen and can be moved by their owners
+
+    bool public frozen = true;
+    /// @dev makes transfer possible if tokens are unfrozen OR if the caller is a sale account
+    modifier saleOrUnfrozen() {
+        require(
+            (frozen == false) ||
+                msg.sender == sale ||
+                msg.sender == owner ||
+                !freeze
+        );
+        _;
+    }
+
+    /**
+     * @dev Transfer tokens from one address to another
+     * @param _from address The address which you want to send tokens from
+     * @param _to address The address which you want to transfer to
+     * @param _value uint256 the amount of tokens to be transferred
+     */
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public whenNotPaused saleOrUnfrozen returns (bool) {
+        super.transferFrom(_from, _to, _value);
+    }
+}
+
+contract Ownable {
+    address public owner;
+}
+
+contract LutTokenInterface is ERC20 {
+    bool public freeze;
+}
+
+contract StandardToken is ERC20, BasicToken {
+
+    mapping(address => mapping(address => uint256)) internal allowed;
+    /**
+     * @dev Transfer tokens from one address to another
+     * @param _from address The address which you want to send tokens from
+     * @param _to address The address which you want to transfer to
+     * @param _value uint256 the amount of tokens to be transferred
+     */
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool) {
+        require(_to != address(0));
+        require(_value <= balances[_from]);
+        require(_value <= allowed[_from][msg.sender]);
+
+        balances[_from] = balances[_from].sub(_value);
+        balances[_to] = balances[_to].add(_value);
+        allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+        emit Transfer(_from, _to, _value);
+        return true;
+    }
+}
+
+contract BasicToken is ERC20Basic {
+
+    mapping(address => uint256) balances;
+}
+"""

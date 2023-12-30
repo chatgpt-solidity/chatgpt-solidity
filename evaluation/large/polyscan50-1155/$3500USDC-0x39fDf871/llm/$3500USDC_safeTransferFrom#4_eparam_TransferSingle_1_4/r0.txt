@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function with the `amount` parameter being passed as the `_value` argument in the event. The `amount` represents the number of tokens to be transferred from `from` to `to`. The function checks that the `from` address has a sufficient balance of the token type `id` before the transfer occurs, and the balance of `from` is decreased by `amount` while the balance of `to` is increased by the same `amount`. This ensures that the `_value` argument in the `TransferSingle` event matches the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by, which complies with the given rule.

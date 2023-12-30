@@ -1,0 +1,18 @@
+The provided Solidity code snippet defines a contract named `BNB` with a fallback function that allows it to accept Ether (native cryptocurrency of the Ethereum network):
+
+```solidity
+contract BNB is SafeMath {
+    // can accept ether
+    function() payable {}
+}
+```
+
+The ERC (Ethereum Request for Comments) in question appears to be describing the ERC-20 standard, which is a standard interface for fungible tokens on the Ethereum blockchain. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperability with wallets, exchanges, and other smart contracts.
+
+The ERC-20 standard does not explicitly mention the handling of native Ether (or any other cryptocurrency) by the token contract. ERC-20 is focused on the token-specific functions such as `transfer`, `balanceOf`, `approve`, and `allowance`, as well as the events `Transfer` and `Approval`.
+
+The fallback function in the `BNB` contract does not violate the ERC-20 standard because the standard does not govern how a contract should handle Ether. However, it is important to note that the presence of a payable fallback function means that the contract can receive Ether, which is not a behavior typically associated with ERC-20 tokens. ERC-20 tokens are meant to represent their own unit of value and are not supposed to hold or manage Ether directly.
+
+In practice, if the `BNB` contract is intended to be an ERC-20 token, it should focus on implementing the token-related functions and events as specified by the standard. The contract should also ensure that it correctly handles the token logic, including transfers, approvals, and allowances, and that it emits the appropriate events as required.
+
+If the `BNB` contract is meant to accept Ether for some reason (e.g., for a crowdsale or to provide some kind of exchange functionality), it should be clearly documented, and the contract should include additional logic to handle the received Ether appropriately. This functionality would be separate from the ERC-20 token standard and should be treated as an extension or additional feature of the contract.

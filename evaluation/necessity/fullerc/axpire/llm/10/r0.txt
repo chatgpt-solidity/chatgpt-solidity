@@ -1,0 +1,25 @@
+The provided Solidity code for the `AxpireToken` contract does not fully comply with the ERC-20 token standard as described in the provided ERC documentation. The ERC-20 standard specifies a set of methods and events that a compliant token contract must implement. Let's go through the requirements and see what is missing or incorrectly implemented in the provided `AxpireToken` contract:
+
+1. **name**: The ERC-20 standard specifies an optional `name` function that returns the name of the token. This function is not present in the provided code.
+
+2. **symbol**: The ERC-20 standard specifies an optional `symbol` function that returns the token symbol. This function is not present in the provided code.
+
+3. **decimals**: The ERC-20 standard specifies an optional `decimals` function that returns the number of decimals the token uses. This function is not present in the provided code.
+
+4. **totalSupply**: The ERC-20 standard requires a `totalSupply` function that returns the total token supply. This function is correctly implemented in the `Token` contract, which `AxpireToken` indirectly inherits from.
+
+5. **balanceOf**: The ERC-20 standard requires a `balanceOf` function that returns the account balance of another account with address `_owner`. This function is not explicitly present in the provided code, but it seems that the `balances` mapping in the `StandardToken` contract is intended to be used for this purpose. However, the actual `balanceOf` function implementation is missing.
+
+6. **transfer**: The ERC-20 standard requires a `transfer` function that transfers `_value` amount of tokens to address `_to`. This function is not present in the provided code.
+
+7. **transferFrom**: The ERC-20 standard requires a `transferFrom` function that transfers `_value` amount of tokens from address `_from` to address `_to`. This function is not present in the provided code.
+
+8. **approve**: The ERC-20 standard requires an `approve` function that allows `_spender` to withdraw from your account multiple times, up to the `_value` amount. This function is not present in the provided code.
+
+9. **allowance**: The ERC-20 standard requires an `allowance` function that returns the amount which `_spender` is still allowed to withdraw from `_owner`. This function is not present in the provided code.
+
+10. **Transfer event**: The ERC-20 standard requires a `Transfer` event that must be triggered when tokens are transferred, including zero value transfers. This event is not present in the provided code.
+
+11. **Approval event**: The ERC-20 standard requires an `Approval` event that must be triggered on any successful call to `approve`. This event is not present in the provided code.
+
+In summary, the `AxpireToken` contract is missing several key functions and events required by the ERC-20 standard. To be compliant, the contract needs to implement all the required functions and events. It is also worth noting that the contract includes additional functionality not specified in the ERC-20 standard, such as pausing and ICO-related features, which are not an issue for compliance as long as the required ERC-20 functions and events are correctly implemented.

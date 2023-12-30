@@ -1,0 +1,47 @@
+Given a solidity function setMaxWallet and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.10;
+abstract contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract ERC20Token is ERC20, Ownable {
+    uint256 public maxWallet;
+
+    function setMaxWallet(uint256 newNum) external onlyOwner {
+        require(
+            newNum >= ((totalSupply() * 5) / 1000) / 1e18,
+            "Cannot change maxWallet lower than 1%"
+        );
+        maxWallet = newNum * (10**18);
+    }
+}
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    uint256 private _totalSupply;
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

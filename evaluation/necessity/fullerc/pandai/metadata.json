@@ -1,0 +1,125 @@
+{
+    "file": "evaluation/audited/pandai.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "burn(uint256) returns()": "result-necessity/fullerc/pandai/PandAIToken/f/burn_uint256",
+                "burnFrom(address,uint256) returns()": "result-necessity/fullerc/pandai/PandAIToken/f/burnFrom_address_uint256",
+                "name() returns(string)": "result-necessity/fullerc/pandai/PandAIToken/f/name",
+                "symbol() returns(string)": "result-necessity/fullerc/pandai/PandAIToken/f/symbol",
+                "decimals() returns(uint8)": "result-necessity/fullerc/pandai/PandAIToken/f/decimals",
+                "totalSupply() returns(uint256)": "result-necessity/fullerc/pandai/PandAIToken/f/totalSupply",
+                "balanceOf(address) returns(uint256)": "result-necessity/fullerc/pandai/PandAIToken/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": "result-necessity/fullerc/pandai/PandAIToken/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/fullerc/pandai/PandAIToken/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": "result-necessity/fullerc/pandai/PandAIToken/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/fullerc/pandai/PandAIToken/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": "result-necessity/fullerc/pandai/PandAIToken/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": "result-necessity/fullerc/pandai/PandAIToken/f/decreaseAllowance_address_uint256",
+                "constructor() returns()": "result-necessity/fullerc/pandai/PandAIToken/f/constructor"
+            },
+            "func2attrs": {
+                "burn(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnFrom(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "20burnable",
+                "20metadata",
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "PandAIToken"
+        }
+    ]
+}

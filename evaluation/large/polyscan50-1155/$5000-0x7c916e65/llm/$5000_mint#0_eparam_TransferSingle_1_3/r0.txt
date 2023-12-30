@@ -1,0 +1,3 @@
+YES
+
+The `_mint` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_id` argument in the `TransferSingle` event is set to the token type being transferred, which in this case is the `coinbase` variable with a value of `0`. The `_mint` function is called with the `coinbase` as the token type (`id`), and the `TransferSingle` event is emitted with the same `id`. Therefore, the event is emitted according to the rule that the `_id` argument must be the token type being transferred.

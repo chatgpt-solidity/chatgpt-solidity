@@ -1,0 +1,33 @@
+Given a solidity function getCirculatingSupply and the related parts from a smart contract.
+Whether the function getCirculatingSupply and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+library SafeMath {
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        return sub(a, b, "SafeMath: subtraction overflow");
+    }
+    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        require(b <= a, errorMessage);
+        uint256 c = a - b;
+
+        return c;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+    address DEAD = 0x000000000000000000000000000000000000dEaD;
+    address ZERO = 0x0000000000000000000000000000000000000000;
+
+    uint256 private _totalSupply = 100000000000 * (10 ** _decimals);
+    mapping(address => uint256) private _balances;
+
+    function getCirculatingSupply() public view returns (uint256) {
+        return _totalSupply.sub(balanceOf(DEAD)).sub(balanceOf(ZERO));
+    }
+    function balanceOf(address account) public view override returns (uint256) { return _balances[account]; }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

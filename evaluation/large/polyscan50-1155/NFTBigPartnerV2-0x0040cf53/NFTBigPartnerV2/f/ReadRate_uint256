@@ -1,0 +1,7 @@
+contract NFTBigPartnerV2 is ERC1155, Ownable, ERC1155Burnable {
+    mapping(uint256=>uint256) public rate;
+   // new** for reading rate of locking.
+    function ReadRate(uint256 _n)public view returns(uint){
+        return rate[_n];
+    }
+}

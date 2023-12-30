@@ -1,0 +1,12 @@
+contract KIMEX is Owner {
+    mapping(address => mapping(address => uint256)) internal allowed;
+
+    // ERC20 standard function
+    function allowance(
+        address _owner,
+        address _spender
+    ) external constant returns (uint256) {
+        return allowed[_owner][_spender];
+    }
+}
+

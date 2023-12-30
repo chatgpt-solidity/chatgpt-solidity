@@ -1,0 +1,17 @@
+YES
+
+The `mintDrop` function in the `BaoDrops` contract calls the `_mint` function, which is defined in the `ERC1155` contract. The `_mint` function is responsible for creating `amount` tokens of token type `id` and assigning them to the address `to`.
+
+In the `_mint` function, the following steps are taken:
+
+1. It checks that the `to` address is not the zero address.
+2. It sets up the `operator` as the message sender.
+3. It creates singleton arrays for `id` and `amount` to pass to the `_beforeTokenTransfer` hook.
+4. It increases the balance of the `to` address by the `amount` for the token `id`.
+5. It emits the `TransferSingle` event with the `operator`, `from` address (which is zero in the case of minting), `to` address, `id`, and `amount`.
+6. It calls the `_afterTokenTransfer` hook.
+7. It performs a safe transfer acceptance check if `to` is a contract.
+
+The `TransferSingle` event is emitted with the `_value` argument set to the `amount` of tokens minted, which is the number of tokens the recipient's balance is increased by. Since the `from` address is zero in the case of minting, it represents the creation of new tokens rather than a transfer from an existing holder, so there is no holder balance to decrease.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, where `_value` matches the number of tokens the recipient balance is increased by during the minting process.

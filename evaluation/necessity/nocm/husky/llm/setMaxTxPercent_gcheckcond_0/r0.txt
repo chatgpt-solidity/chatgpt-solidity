@@ -1,0 +1,3 @@
+NO
+
+The function `setMaxTxPercent` does not call any callee that returns a `bool success`. It only performs arithmetic operations using the SafeMath library, which either return a uint256 value or revert the transaction with an error. There is no `bool success` return value to handle or directly return in this function.

@@ -1,0 +1,13 @@
+YES
+
+The provided Solidity function `safeBatchTransferFrom` and the related parts of the smart contract correctly emit the `TransferBatch` event according to the given rule. The rule states that the `_values` argument must match the list and order of tokens specified in `_ids` and reflect the number of tokens the holder's balance is decreased by, which should also match the increase in the recipient's balance.
+
+In the `_safeBatchTransferFrom` private function, we see a loop that iterates over the `ids` array and performs the following actions for each token ID:
+
+1. Checks if the `amounts[i]` to be transferred is greater than the balance of the `from` address for the token `ids[i]`. If so, it reverts with `InsufficientBalance()`.
+2. Decreases the balance of the `from` address by `amounts[i]` for the token `ids[i]`.
+3. Increases the balance of the `to` address by `amounts[i]` for the token `ids[i]`.
+
+After updating the balances, the `TransferBatch` event is emitted with the `msg.sender` as the `_operator`, the `from` address as `_from`, the `to` address as `_to`, the `ids` array as `_ids`, and the `amounts` array as `_values`. This matches the rule's requirement that the `_values` argument must be the list of the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by, in the same order as specified in the `_ids` array.
+
+Therefore, the `TransferBatch` event is emitted correctly according to the given rule.

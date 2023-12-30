@@ -1,0 +1,21 @@
+YES
+
+The `mintBatch` function in the `METARUFFY_ASSETS` contract calls the `_mintBatch` function in the `ERC1155` contract. The `_mintBatch` function is responsible for minting a batch of tokens and updating the balances accordingly.
+
+In the `_mintBatch` function, the `to` argument is used as the recipient address whose balance is increased. This is evident from the following line in the `_mintBatch` function:
+
+```solidity
+_balances[ids[i]][to] += amounts[i];
+```
+
+This line increases the balance of the `to` address for each token ID in the `ids` array by the corresponding amount in the `amounts` array.
+
+Furthermore, the `TransferBatch` event is emitted with the `to` argument as the recipient address:
+
+```solidity
+emit TransferBatch(operator, address(0), to, ids, amounts);
+```
+
+Here, `address(0)` is used as the `_from` argument, which indicates that the tokens are being minted (created) rather than transferred from an existing address. The `to` argument is used as the `_to` argument in the event, which is the address of the recipient whose balance is increased.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule, with the `_to` argument being the address of the recipient whose balance is increased.

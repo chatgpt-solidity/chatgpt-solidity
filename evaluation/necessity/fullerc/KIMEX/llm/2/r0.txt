@@ -1,0 +1,20 @@
+The provided Solidity code for the `KIMEX` contract does not appear to implement the ERC-20 token standard directly. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to ensure interoperability with other contracts and clients that expect ERC-20 functionality.
+
+The ERC-20 standard requires the following functions and events:
+
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `event Transfer(address indexed _from, address indexed _to, uint256 _value)`
+- `event Approval(address indexed _owner, address indexed _spender, uint256 _value)`
+
+The provided code does not include these functions or events. Instead, it seems to be a contract for managing an ICO (Initial Coin Offering) with a fallback function that allows sending Ether to the contract to purchase tokens during a sale. The contract uses a `walletAddress` to collect funds and has a mechanism for issuing tokens, but it does not provide the standard ERC-20 token transfer functionality.
+
+The `fallback` function in the contract is designed to handle incoming Ether transactions and issue tokens accordingly. It does not violate the ERC-20 standard because the contract does not claim to be an ERC-20 token. However, if the intention is for `KIMEX` to be an ERC-20 compliant token, then the contract is missing the required functions and events, and thus it would not be compliant with the ERC-20 standard.
+
+To make the `KIMEX` contract ERC-20 compliant, it would need to implement all the required functions and events from the ERC-20 specification. Additionally, the contract would need to manage token balances and allow for token transfers in a way that is consistent with the ERC-20 standard, including emitting the appropriate events.
+
+In summary, the `KIMEX` contract does not violate the ERC-20 standard because it does not claim to be an ERC-20 token. However, if it is intended to be an ERC-20 token, it is currently not compliant with the standard and would need to be updated to include the necessary functions and events.

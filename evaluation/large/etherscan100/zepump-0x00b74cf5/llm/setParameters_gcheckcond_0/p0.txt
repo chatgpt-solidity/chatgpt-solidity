@@ -1,0 +1,35 @@
+Given a solidity function setParameters and the related parts from a smart contract.
+Whether the function setParameters and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+library SafeMath {
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {return a * b;}
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {return a / b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+
+contract zepump is IERC20, tokenStaking, Ownable {
+    uint256 private _totalSupply = 1000000000 * (10 ** _decimals);
+    uint256 public _maxTxAmount = ( _totalSupply * 150 ) / 10000;
+    uint256 public _maxSellAmount = ( _totalSupply * 150 ) / 10000;
+    uint256 public _maxWalletToken = ( _totalSupply * 150 ) / 10000;
+    function totalSupply() public view override returns (uint256) {return _totalSupply;}
+
+    function setParameters(uint256 _buy, uint256 _trans, uint256 _wallet) external onlyOwner {
+        uint256 newTx = (totalSupply().mul(_buy)).div(uint256(10000)); uint256 newTransfer = (totalSupply().mul(_trans)).div(uint256(10000));
+        uint256 newWallet = (totalSupply().mul(_wallet)).div(uint256(10000)); uint256 limit = totalSupply().mul(5).div(1000);
+        require(newTx >= limit && newTransfer >= limit && newWallet >= limit, "ERC20: max TXs and max Wallet cannot be less than .5%");
+        _maxTxAmount = newTx; _maxSellAmount = newTransfer; _maxWalletToken = newWallet;
+        emit SetParameters(newTx, newWallet, newTransfer, block.timestamp);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

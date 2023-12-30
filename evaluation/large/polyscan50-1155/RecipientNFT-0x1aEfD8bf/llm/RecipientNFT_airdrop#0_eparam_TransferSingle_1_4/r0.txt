@@ -1,0 +1,13 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct arguments. The `_mint` function is called within the `airdrop` function for each recipient that is not a contract. The `_mint` function increases the balance of the recipient (`to`) by the `amount` specified, which is `1` in this case, as indicated by the line `_mint(recipients[i], coinbase, 1, "");`.
+
+The `TransferSingle` event is then emitted with the `amount` that was minted, which matches the increase in the recipient's balance. The event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint, obtained by `_msgSender()`.
+- `_from`: The zero address, indicating that tokens are being minted.
+- `_to`: The recipient's address.
+- `_id`: The token ID, which is `coinbase` in this case.
+- `_value`: The number of tokens minted, which is `1`.
+
+Since the `_value` in the `TransferSingle` event matches the number of tokens the recipient's balance is increased by, the rule is followed, and the event is correctly emitted.

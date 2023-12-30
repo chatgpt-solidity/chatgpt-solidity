@@ -1,0 +1,34 @@
+To determine if the `pull` function and related parts of the provided Solidity code violate the given ERC (which appears to be ERC-20 based on the description and methods), we need to compare the implementation against the ERC-20 standard's specifications.
+
+Here are the key points from the ERC-20 standard that are relevant to the `pull` function and related parts:
+
+1. `transferFrom` function:
+   - Should transfer tokens from one address to another.
+   - Should throw an error if the sender does not have enough balance or if the sender is not authorized to spend the specified amount from the source address.
+   - Must fire the `Transfer` event.
+
+2. `Transfer` event:
+   - Must be triggered when tokens are transferred, including zero value transfers.
+
+3. `approve` function:
+   - Allows a spender to withdraw from an account multiple times, up to the value amount.
+   - If called again, it overwrites the current allowance with the new value.
+
+4. Return values:
+   - Functions should return a boolean value to indicate success or failure.
+
+Now, let's analyze the provided code:
+
+- The `pull` function is a convenience function that calls `transferFrom` to transfer tokens from the `src` address to the caller's address (`msg.sender`). This is not part of the ERC-20 standard, but it does not violate the standard as long as it uses `transferFrom` correctly.
+
+- The `transferFrom` function in the code checks if the caller is not the source and if the approval is not set to the maximum uint value (`uint(-1)`). If these conditions are met, it subtracts the amount (`wad`) from the approved amount. It then updates the balances and fires the `Transfer` event. This is in line with the ERC-20 standard.
+
+- The `Transfer` event is correctly implemented and is fired within the `transferFrom` function.
+
+- The `DSMath` contract provides `add` and `sub` functions with overflow checks, which is a good practice for security, although not specified in the ERC-20 standard.
+
+- The `DSTokenBase` contract appears to implement the ERC-20 `balanceOf` and `allowance` functions, although the code for these is not provided. We assume they are implemented according to the standard.
+
+- The `DSStop` contract provides a `stoppable` modifier that can be used to stop token transfers in case of an emergency. This is not part of the ERC-20 standard but does not violate it as long as the ability to stop transfers is clearly documented and understood by users.
+
+Based on the provided code and the ERC-20 standard, the `pull` function and related parts do not appear to violate the ERC-20 standard. However, it is important to note that the full implementation of the `DSTokenBase` contract and other parts of the `DSToken` contract would need to be reviewed to ensure full compliance with the ERC-20 standard. Additionally, the code should be tested thoroughly to ensure that it behaves as expected in all scenarios.

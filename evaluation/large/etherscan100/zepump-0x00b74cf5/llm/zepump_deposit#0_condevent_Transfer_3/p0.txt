@@ -1,0 +1,31 @@
+Given a solidity function deposit and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+library SafeMath {
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {return a + b;}
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {return a - b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+
+contract zepump is IERC20, tokenStaking, Ownable {
+    mapping (address => uint256) _balances;
+    mapping(address => uint256) public amountStaked;
+    uint256 public totalStaked;
+    stakeIntegration internal stakingContract;
+
+    function deposit(uint256 amount) override external {
+        require(amount <= _balances[msg.sender].sub(amountStaked[msg.sender]), "ERC20: Cannot stake more than available balance");
+        stakingContract.stakingDeposit(msg.sender, amount);
+        amountStaked[msg.sender] = amountStaked[msg.sender].add(amount);
+        totalStaked = totalStaked.add(amount);
+        emit Deposit(msg.sender, amount, block.timestamp);
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

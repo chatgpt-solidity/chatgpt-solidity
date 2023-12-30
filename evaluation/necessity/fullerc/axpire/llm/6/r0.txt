@@ -1,0 +1,17 @@
+The provided Solidity code for the `balanceOf` function appears to be compliant with the ERC-20 token standard as described in the provided ERC documentation. The ERC-20 standard specifies that the `balanceOf` function should:
+
+- Return the account balance of another account with address `_owner`.
+- Be a public view function.
+- Return a `uint256` representing the balance.
+
+The Solidity code for the `balanceOf` function in the `StandardToken` contract meets these requirements:
+
+```solidity
+function balanceOf(address _owner) public view returns (uint256 balance) {
+    return balances[_owner];
+}
+```
+
+This function is marked as `public` and `view`, meaning it doesn't modify the state and can be called externally. It takes an address `_owner` as an argument and returns the balance of that address as a `uint256`. The balance is retrieved from the `balances` mapping, which is a standard way to keep track of token balances in ERC-20 tokens.
+
+There are no violations of the ERC-20 standard in the provided `balanceOf` function code. However, to fully assess compliance with the ERC-20 standard, the rest of the contract would need to be reviewed, including the implementation of other required functions such as `transfer`, `transferFrom`, `approve`, and `allowance`, as well as the proper triggering of `Transfer` and `Approval` events.

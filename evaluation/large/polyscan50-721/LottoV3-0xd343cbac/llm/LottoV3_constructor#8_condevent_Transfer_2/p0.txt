@@ -1,0 +1,114 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Token name
+
+    string private _name;
+    // Token symbol
+    string private _symbol;
+
+    /**
+     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     */
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+}
+
+contract RrpRequesterV0 {
+    IAirnodeRrpV0 public immutable airnodeRrp;
+
+    /// @dev Airnode RRP address is set at deployment and is immutable.
+    /// RrpRequester is made its own sponsor by default. RrpRequester can also
+    /// be sponsored by others and use these sponsorships while making
+    /// requests, i.e., using this default sponsorship is optional.
+    /// @param _airnodeRrp Airnode RRP contract address
+    constructor(address _airnodeRrp) {
+        airnodeRrp = IAirnodeRrpV0(_airnodeRrp);
+        IAirnodeRrpV0(_airnodeRrp).setSponsorshipStatus(address(this), true);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Internal function without access restriction.
+     */
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+contract LottoV3 is Ownable, RrpRequesterV0, ERC721, ERC721Burnable {
+
+    // LOTTO VARS
+    address private treasury;
+    address private staking;
+    address private dev1;
+    address private dev2;
+    address public erc20Token;
+    uint256 public betBase;
+    uint256 public betPrice;
+    uint256 public counter;
+    uint256 public restartDuration;
+    uint256 public restartTimer;
+    uint256 public taxRate;
+    bool public lottoOpen;
+    bool public taxSwitch;
+
+    constructor(
+        address _erc20Token,
+        address _treasury,
+        address _staking,
+        address _dev1,
+        address _dev2,
+        uint256 _betBase,
+        uint256 _restartDuration,
+        uint256 _taxRate,
+        address _airnodeRrp
+        ) RrpRequesterV0(_airnodeRrp)
+        ERC721("BON.Lotto - Medium Winner", "LOTTO"){
+        erc20Token = _erc20Token;
+        treasury = _treasury;
+        staking = _staking;
+        dev1 = _dev1;
+        dev2 = _dev2;
+        betBase = _betBase;
+        betPrice = betBase;
+        restartDuration = _restartDuration;
+        restartTimer = block.timestamp;
+        taxRate = _taxRate;
+        counter = 1;
+        lottoOpen = true;
+        taxSwitch = true;
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is destroyed and removed from circulation.
+"""

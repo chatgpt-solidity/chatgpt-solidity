@@ -1,0 +1,16 @@
+YES
+
+The `safeBatchTransferFrom` function checks if `msg.sender` is either the owner of the tokens or an approved operator before proceeding with the transfer. This is done with the following line:
+
+```solidity
+if (from != msg.sender && !_operatorApprovals[from][msg.sender])
+    revert NotTokenOwnerOrApproved();
+```
+
+If the check passes, the function calls `_safeBatchTransferFrom`, which performs the actual transfer of tokens. After updating the balances, the `_safeBatchTransferFrom` function emits the `TransferBatch` event:
+
+```solidity
+emit TransferBatch(msg.sender, from, to, ids, amounts);
+```
+
+Here, `msg.sender` is used as the `_operator` argument in the `TransferBatch` event, which is consistent with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer and should be `msg.sender`. Therefore, the event `TransferBatch` is emitted according to the given rule.

@@ -1,0 +1,52 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155Tradable` contract with the correct arguments. The `_to` argument is the address of the recipient whose balance is increased, which is in line with the given rule.
+
+Here is the relevant part of the `_mint` function where the `TransferSingle` event is emitted:
+
+```solidity
+function _mint(
+    address _to,
+    uint256 _id,
+    uint256 _amount,
+    bytes memory _data
+) internal virtual override whenNotPaused {
+    address operator = _msgSender();
+
+    // ... (other code)
+
+    balances[_id][_to] += _amount;
+    _supply[_id] += _amount;
+
+    emit TransferSingle(operator, address(0), _to, _id, _amount);
+
+    // ... (other code)
+}
+```
+
+In the `migrate` function of the `AssetContractShared` contract, the `_mint` function is called with the `owner` as the `_to` argument, which is the recipient whose balance should be increased:
+
+```solidity
+function migrate(Ownership[] memory _ownerships) public onlyOwnerOrProxy {
+    // ... (other code)
+
+    for (uint256 i = 0; i < _ownerships.length; ++i) {
+        uint256 id = _ownerships[i].id;
+        address owner = _ownerships[i].owner;
+
+        // ... (other code)
+
+        uint256 previousAmount = _migrationTarget.balanceOf(owner, id);
+
+        if (previousAmount == 0) {
+            continue;
+        }
+
+        _mint(owner, id, previousAmount, "");
+
+        // ... (other code)
+    }
+}
+```
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

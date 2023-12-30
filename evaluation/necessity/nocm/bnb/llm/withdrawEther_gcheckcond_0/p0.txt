@@ -1,0 +1,18 @@
+Given a solidity function withdrawEther and the related parts from a smart contract and a rule.
+Whether the function withdrawEther and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract BNB is SafeMath {
+    address public owner;
+
+    // transfer balance to owner
+    function withdrawEther(uint256 amount) {
+        if (msg.sender != owner) throw;
+        owner.transfer(amount);
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

@@ -1,0 +1,26 @@
+Given a solidity function transfer and the related parts from a smart contract and an rule for its return value.
+Whether function transfer return whether the transfer is successful? Reply in "YES" or "NO".
+
+Notes: In case of failure, it is allowed to revert the transaction instead of returning false.
+
+
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+
+contract ChadErc is Context, Ownable, IERC20 {
+    mapping (address => uint256) private _balances;
+    function transfer(address recipient, uint256 amount) public virtual override returns (bool) {
+    require(_balances[_msgSender()] >= amount, "TT: transfer amount exceeds balance");
+    _balances[_msgSender()] -= amount;
+    _balances[recipient] += amount;
+
+    emit Transfer(_msgSender(), recipient, amount);
+    return true;
+    }
+}
+"""

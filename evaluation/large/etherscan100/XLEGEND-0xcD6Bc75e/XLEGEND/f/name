@@ -1,0 +1,10 @@
+contract XLEGEND is IERC20, Ownable {
+
+    string private _name;
+    /**
+     * @dev Returns the name of the token.
+     */
+    function name() public view returns (string memory) {
+        return _name;
+    }
+}

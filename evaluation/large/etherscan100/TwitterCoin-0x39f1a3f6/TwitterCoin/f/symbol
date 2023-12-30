@@ -1,0 +1,11 @@
+contract TwitterCoin is Context, IERC20, Ownable {
+    string private _symbol;
+
+    /**
+     * @dev Returns the symbol of the token, usually a shorter version of the
+     * name.
+     */
+    function symbol() public view virtual override returns (string memory) {
+        return _symbol;
+    }
+}

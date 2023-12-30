@@ -1,0 +1,25 @@
+Given a solidity function reduceFee and the related parts from a smart contract.
+Whether the function reduceFee and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract TheEvocation is Context, IERC20, Ownable {
+    address payable private _taxWallet;
+    uint256 private _finalBuyTax=1;
+    uint256 private _finalSellTax=1;
+    function reduceFee(uint256 _newFee) external{
+      require(_msgSender()==_taxWallet);
+      require(_newFee<=_finalBuyTax && _newFee<=_finalSellTax);
+      _finalBuyTax=_newFee;
+      _finalSellTax=_newFee;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

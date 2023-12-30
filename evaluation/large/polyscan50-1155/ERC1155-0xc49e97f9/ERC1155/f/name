@@ -1,0 +1,9 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    string private constant _name = "ARBITDROP.NET COUPONS";
+
+    function name() external pure returns (string memory) {
+        return _name;
+    }
+}
+

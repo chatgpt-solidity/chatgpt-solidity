@@ -1,0 +1,8 @@
+contract AISenseNFT is ERC721Enumerable, Ownable, ContractMetadata {
+
+    NftData[] public nftTypes;
+
+    function exists(uint _nftType) external view returns (bool) {
+        return _nftType >= 0 && _nftType <= nftTypes.length;
+    }
+}

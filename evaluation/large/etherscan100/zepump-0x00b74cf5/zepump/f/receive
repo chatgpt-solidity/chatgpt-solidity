@@ -1,0 +1,4 @@
+contract zepump is IERC20, tokenStaking, Ownable {
+
+    receive() external payable {}
+}

@@ -1,0 +1,17 @@
+The function `getLeftPreSalesAMT` in the provided Solidity code does not directly violate the ERC-20 standard as described in the provided ERC documentation. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperability with other contracts and clients. These include functions for transferring tokens, querying balances, and allowing tokens to be spent by approved third parties.
+
+The `getLeftPreSalesAMT` function is a custom function that is not part of the ERC-20 standard. It calculates the amount of tokens left for pre-sales by subtracting a `limitAMT` from the balance of the `owner`. This function is read-only (as indicated by the `constant` keyword, which should be `view` in more recent versions of Solidity) and does not modify the state of the contract or perform any token transfers.
+
+Here are some points to consider regarding the ERC-20 compliance and the provided function:
+
+1. The function does not interfere with any of the ERC-20 mandatory functions such as `transfer`, `balanceOf`, `approve`, `allowance`, etc.
+2. The function does not emit any events, so it does not conflict with the `Transfer` or `Approval` events specified by the ERC-20 standard.
+3. The function is a helper function that provides additional information about the token's pre-sales state, which is outside the scope of the ERC-20 standard.
+
+However, there are a few things to note about the code quality and best practices:
+
+- The `constant` keyword is deprecated in favor of `view` and `pure` in newer versions of Solidity.
+- The function does not check for underflows. If `limitAMT` is greater than `balanceOf[owner]`, the subtraction could result in an underflow. This should be handled properly to avoid unexpected behavior.
+- The code does not include any information about the `limitAMT` variable, such as how it is set or modified. This could be important for understanding the full context of the `getLeftPreSalesAMT` function.
+
+In conclusion, the `getLeftPreSalesAMT` function does not violate the ERC-20 standard, but the contract should be reviewed for best practices and potential issues unrelated to ERC-20 compliance.

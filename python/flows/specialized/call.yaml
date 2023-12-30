@@ -1,0 +1,9 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a solidity function <function> and the related parts from a smart contract.
+      Whether it calls the <hook>? Reply in "YES" or "NO".
+
+      Function(and related parts) to audit:"""
+      <code>
+      """

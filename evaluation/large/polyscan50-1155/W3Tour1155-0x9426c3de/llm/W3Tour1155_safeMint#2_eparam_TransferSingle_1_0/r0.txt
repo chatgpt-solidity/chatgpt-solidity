@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called by the `_safeMint` function in the `W3Tour1155` contract, which is in turn called by the `safeMint` function.
+
+The `_mint` function sets the `operator` to the result of `_msgSender()`, which is an internal function that returns `msg.sender`. This means that the `_operator` argument in the `TransferSingle` event will be the address that called the `safeMint` function, which should be an account/contract that is approved to make the transfer, as per the given rule.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

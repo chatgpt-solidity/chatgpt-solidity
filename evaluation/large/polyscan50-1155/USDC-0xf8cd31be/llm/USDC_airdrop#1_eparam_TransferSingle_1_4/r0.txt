@@ -1,0 +1,3 @@
+NO
+
+The `TransferSingle` event is emitted with a `_value` of 1, but the function `airdrop` does not actually transfer any tokens. It only emits the event with a pseudo-random `randomish` address as the `_from` parameter and increments the `nonce`. There is no code in the provided function that changes the balances of the `_from` or `_to` addresses, which means the event does not reflect an actual change in token balances as required by the rule.

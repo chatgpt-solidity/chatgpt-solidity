@@ -1,0 +1,5 @@
+YES
+
+The `safeTransferFrom` function checks if the `msg.sender` is the owner of the token or is approved to make the transfer. If the check passes, it calls the `_safeTransferFrom` private function, which performs the actual transfer and emits the `TransferSingle` event.
+
+The `TransferSingle` event is emitted with `msg.sender` as the `_operator` argument, which is the correct implementation according to the given rule. The rule states that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`. Since the `safeTransferFrom` function ensures that `msg.sender` is either the owner or an approved operator before calling `_safeTransferFrom`, the event correctly reflects the `_operator` as `msg.sender`.

@@ -1,0 +1,31 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract MyToken {
+
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    /* A contract attempts to get the coins */
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) returns (bool success) {
+        if (balanceOf[_from] < _value) throw; // Check if the sender has enough
+        if (balanceOf[_to] + _value < balanceOf[_to]) throw; // Check for overflows
+        if (_value > allowance[_from][msg.sender]) throw; // Check allowance
+        balanceOf[_from] -= _value; // Subtract from the sender
+        balanceOf[_to] += _value; // Add the same to the recipient
+        allowance[_from][msg.sender] -= _value;
+        Transfer(_from, _to, _value);
+        return true;
+    }
+}
+"""
+
+Condition:"""
+tokens are burning or deallocating
+"""

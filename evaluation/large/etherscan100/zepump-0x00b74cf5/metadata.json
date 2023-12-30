@@ -1,0 +1,446 @@
+{
+    "file": "evaluation/etherscan100/zepump-0x00b74cf5.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.19",
+            "func2file": {
+                "isOwner(address) returns(bool)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/isOwner_address",
+                "transferOwnership(address) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/constructor",
+                "receive() returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/receive",
+                "name() returns(string)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/decimals",
+                "getOwner() returns(address)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/getOwner",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/approve_address_uint256",
+                "availableBalance(address) returns(uint256)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/availableBalance_address",
+                "circulatingSupply() returns(uint256)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/circulatingSupply",
+                "deposit(uint256) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/deposit_uint256",
+                "withdraw(uint256) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/withdraw_uint256",
+                "setStakingAddress(address) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/setStakingAddress_address",
+                "setStructure(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/setStructure_uint256_uint256_uint256_uint256_uint256_uint256_uint256_uint256",
+                "setParameters(uint256,uint256,uint256) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/setParameters_uint256_uint256_uint256",
+                "setPUMP(bool,uint256,uint256) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/setPUMP_bool_uint256_uint256",
+                "startTrading() returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/startTrading",
+                "setInternalAddresses(address,address,address,address,address) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/setInternalAddresses_address_address_address_address_address",
+                "setisExempt(address,bool) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/setisExempt_address_bool",
+                "rescueERC20(address,uint256) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/rescueERC20_address_uint256",
+                "setSwapbackSettings(uint256,uint256,uint256) returns()": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/setSwapbackSettings_uint256_uint256_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/zepump-0x00b74cf5/zepump/f/transferFrom_address_address_uint256"
+            },
+            "func2attrs": {
+                "isOwner(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "getOwner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "availableBalance(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "circulatingSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "deposit(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setStakingAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setStructure(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setParameters(uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setPUMP(bool,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "startTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setInternalAddresses(address,address,address,address,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setisExempt(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "rescueERC20(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setSwapbackSettings(uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "pair() returns(address)",
+                "_maxWalletToken() returns(uint256)",
+                "totalStaked() returns(uint256)",
+                "_maxSellAmount() returns(uint256)",
+                "PUMPMinAmount() returns(uint256)",
+                "_maxTxAmount() returns(uint256)",
+                "PUMPTrigger() returns(uint256)",
+                "PUMPBuyNeeded() returns(bool)",
+                "PUMPSells() returns(uint256)",
+                "amountStaked(address) returns(uint256)",
+                "PUMP() returns(bool)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Deposit",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Withdraw",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "SetStakingAddress",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "TradingEnabled",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ExcludeFromFees",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "SetDividendExempt",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Launch",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "SetInternalAddresses",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SetSwapBackSettings",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SetDistributionCriteria",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SetParameters",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SetStructure",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "CreateLiquidity",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "zepump"
+        }
+    ]
+}

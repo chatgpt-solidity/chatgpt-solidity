@@ -1,0 +1,34 @@
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    ////////////////////////////////////////
+    //                                    //
+    //         STATE VARIABLES            //
+    //                                    //
+    ////////////////////////////////////////
+    // contract owner adress
+    address private owner;
+
+    ////////////////////////////////////////
+    //                                    //
+    //              MODIFIERS             //
+    //                                    //      
+    ////////////////////////////////////////
+
+    /*
+    *  @notice  Restrict caller only owner
+    */
+    modifier onlyOwner() {
+        require(msg.sender == owner, "caller is not owner");
+        _;
+    }
+
+    /*
+    *  @notice  Allows the current owner pass ownership to another address
+    *  @dev
+    */
+    function changeOwner(address newOwner) 
+    external 
+    onlyOwner {
+        owner = newOwner;
+    }
+}

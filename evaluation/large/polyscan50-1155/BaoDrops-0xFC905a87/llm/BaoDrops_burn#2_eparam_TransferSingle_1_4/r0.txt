@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function with the correct arguments according to the rule provided. The `_value` argument in the event is the `amount` that is being burned, which is the number of tokens the holder's balance is decreased by. Since the `_to` address is the zero address (indicating a burn operation), there is no recipient whose balance is increased. The event correctly reflects the decrease in the balance of the `_from` address by the `_value` amount.

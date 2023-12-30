@@ -1,0 +1,31 @@
+Given a solidity function Recovery and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract EBLivePremios is ERC721 {
+    address private _Admin;
+
+    function Recovery() public onlyAdmin {
+        payable(_Admin).transfer(address(this).balance);
+    }
+
+    //Ownable
+    modifier onlyAdmin() {
+        require(_Admin == _msgSender(), "Ownable: caller is not the admin");
+        _;
+    }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

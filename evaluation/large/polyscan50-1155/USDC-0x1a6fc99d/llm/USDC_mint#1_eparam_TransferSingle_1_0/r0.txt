@@ -1,0 +1,5 @@
+YES
+
+The `mint` function in the provided `USDC` contract calls the `_mint` function from the `ERC1155` contract. The `_mint` function emits the `TransferSingle` event with the `operator` argument set to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`.
+
+Since the `mint` function in the `USDC` contract is only callable by the owner (due to the `onlyOwner` modifier), the `msg.sender` at the time of the event emission will be the owner of the contract, who is approved to make the transfer. Therefore, the `_operator` argument in the `TransferSingle` event will be the address of an account that is approved to make the transfer, which complies with the given rule.

@@ -1,0 +1,3 @@
+YES
+
+The `mintBatch` function in the provided Solidity code emits the `TransferSingle` event for each item in the `itemsIds` array. The event is emitted with the `_to` argument set to the corresponding address in the `to` array, which is the recipient whose balance is increased by the minting operation. This is in accordance with the given rule that the `_to` argument must be the address of the recipient whose balance is increased.

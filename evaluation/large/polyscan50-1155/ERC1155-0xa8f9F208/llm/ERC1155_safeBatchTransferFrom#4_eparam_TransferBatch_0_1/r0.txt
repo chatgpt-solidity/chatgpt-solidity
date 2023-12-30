@@ -1,0 +1,3 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_from` argument in the event is indeed the address of the holder whose balance is decreased, as required by the rule. The event is emitted within the `_safeBatchTransferFrom` private function, which is called by the `safeBatchTransferFrom` external function after performing the necessary checks and balance updates.

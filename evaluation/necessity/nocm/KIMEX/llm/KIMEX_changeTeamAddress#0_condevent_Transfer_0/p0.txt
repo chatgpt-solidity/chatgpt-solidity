@@ -1,0 +1,44 @@
+Given a solidity function changeTeamAddress and the related parts from a smart contract.
+Whether the function changeTeamAddress and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    address public teamAddress;
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Modify team address to receive team tokens allocation
+    function changeTeamAddress(address _newAddress) external onlyOwnerOrAdmin {
+        require(_newAddress != address(0));
+        require(teamAddress != _newAddress);
+        teamAddress = _newAddress;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred during the initial token distribution or crowdsale.
+"""

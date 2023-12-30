@@ -1,0 +1,43 @@
+contract WhatsMiner_M30S_104Th is ERC721Enumerable, Ownable {
+
+  function tokenURI(uint256 tokenId)
+      public
+      view
+      virtual
+      override
+      returns (string memory)
+  {
+      require(
+          _exists(tokenId),
+          "ERC721Metadata: URI query for nonexistent token"
+      );
+
+      string memory staticURI = "ipfs://QmbXra4Gf8kSFRxD2ttcKwb7zCxBdTtZ6tVYiq9cRxVoDu";
+      return staticURI;
+  }
+}
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+
+    }
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     * and stop existing when they are burned (`_burn`).
+     */
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _ownerOf(tokenId) != address(0);
+    }
+}
+

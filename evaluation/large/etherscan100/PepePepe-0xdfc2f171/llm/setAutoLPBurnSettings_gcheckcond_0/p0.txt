@@ -1,0 +1,57 @@
+Given a solidity function setAutoLPBurnSettings and the related parts from a smart contract.
+Whether the function setAutoLPBurnSettings and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract PepePepe is ERC20, Ownable {
+
+    uint256 public percentForLPBurn = 25; // 25 = .25%
+    bool public lpBurnEnabled = true;
+    uint256 public lpBurnFrequency = 3600 seconds;
+
+    function setAutoLPBurnSettings(
+        uint256 _frequencyInSeconds,
+        uint256 _percent,
+        bool _Enabled
+    ) external onlyOwner {
+        require(
+            _frequencyInSeconds >= 600,
+            "cannot set buyback more often than every 10 minutes"
+        );
+        require(
+            _percent <= 1000 && _percent >= 0,
+            "Must set auto LP burn percent between 0% and 10%"
+        );
+        lpBurnFrequency = _frequencyInSeconds;
+        percentForLPBurn = _percent;
+        lpBurnEnabled = _Enabled;
+    }
+}
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

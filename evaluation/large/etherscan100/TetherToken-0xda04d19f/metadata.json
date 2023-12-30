@@ -1,0 +1,374 @@
+{
+    "file": "evaluation/etherscan100/TetherToken-0xda04d19f.sol",
+    "contracts": [
+        {
+            "solc_version": "0.5.16",
+            "func2file": {
+                "transferFrom(address,address,uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/UpgradedStandardToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/UpgradedStandardToken/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/TetherToken-0xda04d19f/UpgradedStandardToken/f/allowance_address_address",
+                "transfer(address,uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/UpgradedStandardToken/f/transfer_address_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/TetherToken-0xda04d19f/UpgradedStandardToken/f/balanceOf_address",
+                "owner() returns(address)": ".temp/etherscan100/TetherToken-0xda04d19f/UpgradedStandardToken/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/TetherToken-0xda04d19f/UpgradedStandardToken/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/UpgradedStandardToken/f/transferOwnership_address"
+            },
+            "func2attrs": {
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "basisPointsRate() returns(uint256)",
+                "maximumFee() returns(uint256)",
+                "allowed(address,address) returns(uint256)",
+                "_totalSupply() returns(uint256)",
+                "MAX_UINT() returns(uint256)",
+                "balances(address) returns(uint256)"
+            ],
+            "ercs": [
+                "20",
+                "20basic"
+            ],
+            "events": [
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "UpgradedStandardToken"
+        },
+        {
+            "solc_version": "0.5.16",
+            "func2file": {
+                "getBlackListStatus(address) returns(bool)": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/getBlackListStatus_address",
+                "getOwner() returns(address)": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/getOwner",
+                "addBlackList(address) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/addBlackList_address",
+                "removeBlackList(address) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/removeBlackList_address",
+                "destroyBlackFunds(address) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/destroyBlackFunds_address",
+                "transfer(address,uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/transfer_address_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/balanceOf_address",
+                "owner() returns(address)": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/transferOwnership_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/allowance_address_address",
+                "pause() returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/pause",
+                "unpause() returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/unpause",
+                "constructor(uint256,string,string,uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/constructor_uint256_string_string_uint256",
+                "deprecate(address) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/deprecate_address",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/totalSupply",
+                "issue(uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/issue_uint256",
+                "redeem(uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/redeem_uint256",
+                "setParams(uint256,uint256) returns()": ".temp/etherscan100/TetherToken-0xda04d19f/TetherToken/f/setParams_uint256_uint256"
+            },
+            "func2attrs": {
+                "getBlackListStatus(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getOwner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "addBlackList(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeBlackList(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "destroyBlackFunds(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "pause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unpause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(uint256,string,string,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "deprecate(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "issue(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "redeem(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setParams(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "decimals() returns(uint256)",
+                "isBlackListed(address) returns(bool)",
+                "basisPointsRate() returns(uint256)",
+                "maximumFee() returns(uint256)",
+                "paused() returns(bool)",
+                "name() returns(string)",
+                "upgradedAddress() returns(address)",
+                "allowed(address,address) returns(uint256)",
+                "deprecated() returns(bool)",
+                "_totalSupply() returns(uint256)",
+                "MAX_UINT() returns(uint256)",
+                "balances(address) returns(uint256)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "20",
+                "20basic"
+            ],
+            "events": [
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Pause",
+                    "params": []
+                },
+                {
+                    "name": "Unpause",
+                    "params": []
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "DestroyedBlackFunds",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AddedBlackList",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "RemovedBlackList",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Issue",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Redeem",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Deprecate",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Params",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "TetherToken"
+        }
+    ]
+}

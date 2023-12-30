@@ -1,0 +1,18 @@
+The function `getUpgradeState` and the related parts from the `UpgradeableToken` contract do not directly violate the ERC-20 standard as specified in the provided ERC excerpt. The ERC-20 standard defines a set of functions and events that a compliant token should implement to allow for interoperability with other contracts and clients. These include:
+
+- `totalSupply`
+- `balanceOf`
+- `transfer`
+- `transferFrom`
+- `approve`
+- `allowance`
+- `Transfer` event
+- `Approval` event
+
+The `getUpgradeState` function is not part of the ERC-20 standard. It is an additional feature that is specific to the `UpgradeableToken` contract, which seems to be designed to allow the token to be upgraded to a new contract. This function provides information about the state of the upgrade process, which is not covered by the ERC-20 standard.
+
+The ERC-20 standard does not restrict the addition of new functions or features to a token contract as long as the required functions and events are correctly implemented and behave as specified. Therefore, adding extra functionality like an upgrade mechanism does not inherently violate the standard.
+
+However, it is important to note that adding such functionality could introduce additional complexity and potential security risks. It is crucial to ensure that the upgrade mechanism is secure and does not compromise the integrity of the token or the safety of the token holders' funds.
+
+In summary, the `getUpgradeState` function and related parts do not violate the ERC-20 standard, but they should be carefully reviewed and tested to ensure they do not introduce vulnerabilities or unexpected behavior in the contract.

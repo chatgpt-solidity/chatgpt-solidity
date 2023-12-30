@@ -1,0 +1,25 @@
+Given a solidity function totalSupply and the related parts from a smart contract.
+Whether the function totalSupply and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract TetherToken is Pausable, StandardToken, BlackList {
+    address public upgradedAddress;
+    bool public deprecated;
+
+    // deprecate current contract if favour of a new one
+    function totalSupply() public view returns (uint) {
+        if (deprecated) {
+            return StandardToken(upgradedAddress).totalSupply();
+        } else {
+            return _totalSupply;
+        }
+    }
+}
+contract ERC20Basic {
+    uint public _totalSupply;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

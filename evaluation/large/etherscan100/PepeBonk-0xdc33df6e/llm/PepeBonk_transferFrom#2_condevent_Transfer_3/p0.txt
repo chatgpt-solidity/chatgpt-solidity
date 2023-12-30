@@ -1,0 +1,39 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.12;
+contract PepeBonk is IERC20 {
+
+    mapping(address => uint256) public balanceOf;
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    function transferFrom(
+        address from,
+        address to,
+        uint256 amount
+    ) external override returns (bool) {
+        if (allowance[from][msg.sender] < type(uint).max) {
+            allowance[from][msg.sender] -= amount;
+        }
+        return _transfer(from, to, amount);
+    }
+
+    function _transfer(
+        address from,
+        address to,
+        uint256 amount
+    ) private returns (bool) {
+        balanceOf[from] -= amount;
+        balanceOf[to] += amount;
+        emit Transfer(from, to, amount);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

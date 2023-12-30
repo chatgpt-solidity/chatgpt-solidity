@@ -1,0 +1,10 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not have any explicit checks that would cause it to throw an error when transferring a value of 0. The `SafeMath` library's `sub` and `add` functions are used to safely subtract and add values without causing integer underflow or overflow, and they include checks that would throw an error if those conditions were met. However, transferring a value of 0 would not trigger these conditions:
+
+- `sub` would not throw because subtracting 0 from any balance would not cause an underflow.
+- `add` would not throw because adding 0 to any balance would not cause an overflow.
+
+Additionally, there are no other checks in the `transferFrom` function that would fail when transferring a value of 0. The only other checks are for the contract not being paused, the sender not being blacklisted, and the allowance being sufficient, none of which are related to the transfer value being 0.
+
+Therefore, the `transferFrom` function and its related parts will not throw if transfers of 0 values are performed.

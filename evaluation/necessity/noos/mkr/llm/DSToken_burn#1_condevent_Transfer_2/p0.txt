@@ -1,0 +1,68 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract DSStop is DSNote, DSAuth {
+
+    bool public stopped;
+    modifier stoppable() {
+        require(!stopped);
+        _;
+    }
+}
+
+contract DSMath {
+
+    function sub(uint x, uint y) internal pure returns (uint z) {
+        require((z = x - y) <= x);
+    }
+}
+
+contract DSToken is DSTokenBase(0), DSStop {
+
+    function burn(address guy, uint wad) public auth stoppable {
+        if (guy != msg.sender && _approvals[guy][msg.sender] != uint(-1)) {
+            _approvals[guy][msg.sender] = sub(_approvals[guy][msg.sender], wad);
+        }
+
+        _balances[guy] = sub(_balances[guy], wad);
+        _supply = sub(_supply, wad);
+        Burn(guy, wad);
+    }
+}
+
+contract DSTokenBase is ERC20, DSMath {
+    uint256 _supply;
+    mapping(address => uint256) _balances;
+    mapping(address => mapping(address => uint256)) _approvals;
+}
+
+contract DSAuth is DSAuthEvents {
+    DSAuthority public authority;
+    address public owner;
+
+    modifier auth() {
+        require(isAuthorized(msg.sender, msg.sig));
+        _;
+
+    }
+    function isAuthorized(
+        address src,
+        bytes4 sig
+    ) internal view returns (bool) {
+        if (src == address(this)) {
+            return true;
+        } else if (src == owner) {
+            return true;
+        } else if (authority == DSAuthority(0)) {
+            return false;
+        } else {
+            return authority.canCall(src, this, sig);
+        }
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

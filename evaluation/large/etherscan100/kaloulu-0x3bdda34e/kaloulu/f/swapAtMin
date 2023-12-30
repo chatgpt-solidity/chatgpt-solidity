@@ -1,0 +1,5 @@
+contract kaloulu is IERC20, Auth {
+    uint256 private _taxSwapMin = _tSupp * 100 / 1000000;
+
+    function swapAtMin() external view returns (uint256) { return _taxSwapMin;    }
+}

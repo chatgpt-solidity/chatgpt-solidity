@@ -1,0 +1,15 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "safeTransferFrom(address,address,uint256,uint256,bytes) returns()" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+supportsInterface(bytes4) returns(bool)
+constructor(string) returns()
+uri(uint256) returns(string)
+balanceOf(address,uint256) returns(uint256)
+balanceOfBatch(address[],uint256[]) returns(uint256[])
+setApprovalForAll(address,bool) returns()
+isApprovedForAll(address,address) returns(bool)
+safeTransferFrom(address,address,uint256,uint256,bytes) returns()
+safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()
+"""

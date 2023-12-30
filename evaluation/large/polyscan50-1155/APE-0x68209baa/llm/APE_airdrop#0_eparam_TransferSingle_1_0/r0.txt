@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called within the `airdrop` function of the `APE` contract, which is restricted to the contract owner by the `onlyOwner` modifier.
+
+The `_mint` function sets the `operator` to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`. Since the `airdrop` function can only be called by the owner (due to the `onlyOwner` modifier), and the `_mint` function uses `_msgSender()` to get the `operator`, the `_operator` argument in the `TransferSingle` event will be the address of the account that is approved to make the transfer, which should be `msg.sender`.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, with `_operator` being the address that initiated the transfer (the owner of the contract in this case).

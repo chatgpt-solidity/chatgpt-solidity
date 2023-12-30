@@ -1,0 +1,100 @@
+{
+    "file": "evaluation/audited/xn35.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.25",
+            "func2file": {
+                "transferOwnership(address) returns()": "result-necessity/s-nocm/xn35/Projecton/f/transferOwnership_address",
+                "constructor() returns()": "result-necessity/s-nocm/xn35/Projecton/f/constructor",
+                "totalSupply() returns(uint256)": "result-necessity/s-nocm/xn35/Projecton/f/totalSupply",
+                "balanceOf(address) returns(uint256)": "result-necessity/s-nocm/xn35/Projecton/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-nocm/xn35/Projecton/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-nocm/xn35/Projecton/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-nocm/xn35/Projecton/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-nocm/xn35/Projecton/f/allowance_address_address"
+            },
+            "func2attrs": {
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "symbol() returns(string)",
+                "decimals() returns(uint8)",
+                "owner() returns(address)",
+                "balances(address) returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "Projecton"
+        }
+    ]
+}

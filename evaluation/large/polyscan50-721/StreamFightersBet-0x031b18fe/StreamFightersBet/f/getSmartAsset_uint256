@@ -1,0 +1,54 @@
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    // holds all NFTs issued to winners
+    mapping(uint256 => SmartAsset) smartAssets;
+
+    /*
+    *  @notice Checks if the NFT is valid
+    *  @dev Validates NFT
+    */
+    modifier validateToken(uint256 _tokenId) {
+        require(_exists(_tokenId), "Invalid token");
+        _;
+    }
+
+    /*
+    *  @notice  Fetch single SmartAsset
+    *  @dev          
+    *  @param   _smartAssetId
+    *  @return  asset details
+    */
+    function getSmartAsset(uint256 _smartAssetId)
+        public 
+        view
+        validateToken(_smartAssetId)
+        returns(SmartAsset memory asset)
+    {
+        return smartAssets[_smartAssetId];
+    }
+}
+abstract contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Errors {
+
+    // Mapping from token ID to owner address
+    mapping(uint256 => address) private _owners;
+
+    /**
+     * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
+     */
+    function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
+        return _owners[tokenId];
+    }
+
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     * and stop existing when they are burned (`_burn`).
+     */
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _ownerOf(tokenId) != address(0);
+    }
+}
+

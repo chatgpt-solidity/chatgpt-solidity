@@ -1,0 +1,3 @@
+YES
+
+The `_burn` function in the `ERC1155` contract correctly emits the `TransferSingle` event after validating the requirements and updating the balance of the `from` address. The `_value` argument in the `TransferSingle` event is set to the `amount` parameter of the `_burn` function, which is the number of tokens to be burned from the `from` address. The `from` balance is decreased by this `amount`, and since burning is equivalent to sending the tokens to the zero address (`address(0)`), the `TransferSingle` event correctly reflects the decrease in the holder's balance with the `_value` argument matching the number of tokens burned.

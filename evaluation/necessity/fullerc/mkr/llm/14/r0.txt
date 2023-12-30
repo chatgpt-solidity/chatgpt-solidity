@@ -1,0 +1,28 @@
+The provided Solidity code for the `DSToken` contract and its related parts must be evaluated against the ERC-20 token standard to determine if it violates any of the specifications of the ERC.
+
+Let's go through the ERC-20 standard methods and events and compare them with the provided code:
+
+1. `totalSupply`: This method is not shown in the provided code, but it is required by the ERC-20 standard. The contract must implement this method to return the total token supply.
+
+2. `balanceOf`: This method is not explicitly shown in the provided code, but it is required by the ERC-20 standard. The contract must implement this method to return the account balance of another account with address `_owner`.
+
+3. `transfer`: The ERC-20 standard requires this method to transfer `_value` amount of tokens to address `_to` and to fire the `Transfer` event. The function should throw if the sender's balance is insufficient. The provided `move` function calls `transferFrom` internally, which is not standard behavior for a `transfer` function. The `transfer` function should only check the sender's balance and not allow transferring from another address unless it's a `transferFrom` call.
+
+4. `transferFrom`: The provided `transferFrom` function in the code seems to comply with the ERC-20 standard. It transfers `_value` amount of tokens from address `_from` to address `_to` and fires the `Transfer` event. It also checks for approval if the `src` is not the `msg.sender`.
+
+5. `approve`: This method is not shown in the provided code, but it is required by the ERC-20 standard. The contract must implement this method to allow `_spender` to withdraw from the sender's account multiple times, up to the `_value` amount.
+
+6. `allowance`: This method is not shown in the provided code, but it is required by the ERC-20 standard. The contract must implement this method to return the amount which `_spender` is still allowed to withdraw from `_owner`.
+
+7. `Transfer` event: The `Transfer` event is correctly fired in the `transferFrom` function, which is in line with the ERC-20 standard.
+
+8. `Approval` event: This event is not shown in the provided code, but it is required by the ERC-20 standard. The contract must implement this event to trigger on any successful call to `approve`.
+
+Based on the provided code and the ERC-20 standard, the following issues can be identified:
+
+- The `move` function is non-standard and could potentially confuse users since it does not follow the typical `transfer` behavior as defined by ERC-20.
+- The `approve`, `allowance`, and `totalSupply` methods are not shown in the provided code. These methods are required by the ERC-20 standard.
+- The `balanceOf` method is not shown in the provided code. This method is required by the ERC-20 standard.
+- The `Approval` event is not shown in the provided code. This event is required by the ERC-20 standard.
+
+In conclusion, the provided `DSToken` contract code does not fully comply with the ERC-20 standard as it is missing several required methods and events. Additionally, the `move` function introduces non-standard behavior that could lead to confusion or misuse. To be fully ERC-20 compliant, the contract needs to implement all the required methods and events as specified by the standard.

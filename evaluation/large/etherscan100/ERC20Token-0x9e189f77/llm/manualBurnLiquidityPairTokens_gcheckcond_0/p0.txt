@@ -1,0 +1,113 @@
+Given a solidity function manualBurnLiquidityPairTokens and the related parts from a smart contract.
+Whether the function manualBurnLiquidityPairTokens and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    mapping(address => uint256) private _balances;
+
+
+    function _transfer(
+        address sender,
+        address recipient,
+        uint256 amount
+    ) internal virtual {
+        require(sender != address(0), "ERC20: transfer from the zero address");
+        require(recipient != address(0), "ERC20: transfer to the zero address");
+
+        _beforeTokenTransfer(sender, recipient, amount);
+
+        uint256 senderBalance = _balances[sender];
+        require(senderBalance >= amount, "ERC20: transfer amount exceeds balance");
+        unchecked {
+            _balances[sender] = senderBalance - amount;
+        }
+        _balances[recipient] += amount;
+
+        emit Transfer(sender, recipient, amount);
+
+        _afterTokenTransfer(sender, recipient, amount);
+    }
+
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+
+
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+}
+
+contract ERC20Token is ERC20, Ownable {
+    address public immutable uniswapV2Pair;
+
+    uint256 public manualBurnFrequency = 60 minutes;
+    uint256 public lastManualLpBurnTime;
+
+    function manualBurnLiquidityPairTokens(uint256 percent)
+        external
+        onlyOwner
+        returns (bool)
+    {
+        require(
+            block.timestamp > lastManualLpBurnTime + manualBurnFrequency,
+            "Must wait for cooldown to finish"
+        );
+        require(percent <= 100, "May not nuke more than 10% of tokens in LP");
+        lastManualLpBurnTime = block.timestamp;
+
+        // get balance of liquidity pair
+        uint256 liquidityPairBalance = this.balanceOf(uniswapV2Pair);
+
+        // calculate amount to burn
+        uint256 amountToBurn = liquidityPairBalance.mul(percent).div(1000);
+
+        // pull tokens from pancakePair liquidity and move to dead address permanently
+        if (amountToBurn > 0) {
+            super._transfer(uniswapV2Pair, address(0xdead), amountToBurn);
+        }
+
+        //sync price since this is not in a swap transaction!
+        IUniswapV2Pair pair = IUniswapV2Pair(uniswapV2Pair);
+        pair.sync();
+        emit ManualNukeLP();
+        return true;
+    }
+}
+library SafeMath {
+
+
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a * b;
+    }
+
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a / b;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

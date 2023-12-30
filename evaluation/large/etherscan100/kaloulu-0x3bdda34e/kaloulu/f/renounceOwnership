@@ -1,0 +1,10 @@
+abstract contract Auth {
+    address internal _owner;
+    modifier onlyOwner() { 
+        require(msg.sender == _owner, "Only owner can call this");   _; 
+    }
+    function renounceOwnership() external onlyOwner { 
+        _owner = address(0); emit OwnershipTransferred(address(0)); 
+    }
+}
+

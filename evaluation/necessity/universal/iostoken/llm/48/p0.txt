@@ -1,0 +1,21 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract RegularToken is Token {
+
+    function allowance(
+        address _owner,
+        address _spender
+    ) constant returns (uint) {
+        return allowed[_owner][_spender];
+    }
+    mapping(address => mapping(address => uint)) allowed;
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

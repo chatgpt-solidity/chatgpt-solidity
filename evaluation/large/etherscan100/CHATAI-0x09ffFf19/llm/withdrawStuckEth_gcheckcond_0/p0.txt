@@ -1,0 +1,33 @@
+Given a solidity function withdrawStuckEth and the related parts from a smart contract.
+Whether the function withdrawStuckEth and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable is Context {
+    address internal _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract CHATAI is ERC20, Ownable {
+    function withdrawStuckEth(address toAddr) external onlyOwner {
+        (bool success, ) = toAddr.call{
+            value: address(this).balance
+        } ("");
+        require(success);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

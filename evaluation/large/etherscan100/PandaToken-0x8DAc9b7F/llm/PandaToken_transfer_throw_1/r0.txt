@@ -1,0 +1,7 @@
+YES
+
+The provided Solidity function `transfer` and its related parts will not throw if transfers of 0 values are made. The `SafeMath` library's `sub` function is used to subtract the transfer amount from the sender's balance, and it includes a require statement that will revert the transaction if the sender does not have enough balance. However, if the amount is 0, the subtraction will not cause the sender's balance to go below 0, and thus the require statement will not fail.
+
+Additionally, there are no other checks in the `_transfer` or `_basicTransfer` functions that would cause a revert if the amount is 0. The `require` statements in `_transfer` only check that the sender and recipient are not the zero address, not the amount being transferred.
+
+Therefore, a transfer of 0 value would simply result in the `Transfer` event being emitted with an amount of 0, and the function would return `true`.

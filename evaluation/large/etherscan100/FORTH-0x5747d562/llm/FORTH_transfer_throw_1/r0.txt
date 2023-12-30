@@ -1,0 +1,14 @@
+YES
+
+The provided Solidity code for the `FORTH` contract includes an `_transfer` function that handles the logic for transferring tokens. Within this function, there is a specific check for when the `amount` being transferred is zero:
+
+```solidity
+if(amount == 0) {
+    super._transfer(from, to, 0);
+    return;
+}
+```
+
+This check ensures that if the transfer amount is zero, the function will call the `super._transfer` function (which is the transfer function from the inherited ERC20 contract) with the zero amount and then immediately return, effectively bypassing any further logic or potential for throwing an error due to the transfer amount being zero.
+
+Therefore, the function and its related parts will not throw an error if transfers of 0 values are attempted.

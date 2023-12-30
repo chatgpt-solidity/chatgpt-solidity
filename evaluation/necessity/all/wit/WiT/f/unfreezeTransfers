@@ -1,0 +1,26 @@
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * True if tokens transfers are currently frozen, false otherwise.
+     */
+    bool frozen = false;
+
+    /**
+     * Unfreeze ALL token transfers.
+     * May only be called by smart contract owner.
+     */
+    function unfreezeTransfers() public {
+        require(msg.sender == owner);
+
+        if (frozen) {
+            frozen = false;
+            emit Unfreeze();
+        }
+    }
+}
+

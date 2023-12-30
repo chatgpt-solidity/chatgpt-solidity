@@ -1,0 +1,74 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+abstract contract Context {
+
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+
+contract SKR is Context, IERC20, Ownable {
+
+    address payable public marketingWallet = payable(0xE3d1BD7D3036F4E8DA2187E74d9De2fABeB4581d
+
+);
+    address payable public lpWallet = payable(0xE3d1BD7D3036F4E8DA2187E74d9De2fABeB4581d
+
+);
+
+    address public deadAddress = 0x000000000000000000000000000000000000dEaD;
+    mapping (address => uint256) _balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
+    mapping (address => bool) public isExcludedFromFee;
+    mapping (address => bool) public isMarketPair;
+
+
+    uint256 private _totalSupply = 10000000000 * 10 ** _decimals;
+
+    IUniswapV2Router02 public uniswapV2Router;
+    address public uniswapPair;
+    constructor () {
+        
+        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D); 
+
+        uniswapPair = IUniswapV2Factory(_uniswapV2Router.factory())
+            .createPair(address(this), _uniswapV2Router.WETH());
+
+        uniswapV2Router = _uniswapV2Router;
+        _allowances[address(this)][address(uniswapV2Router)] = _totalSupply;
+
+        isExcludedFromFee[owner()] = true;
+        isExcludedFromFee[address(this)] = true;
+        isExcludedFromFee[deadAddress] = true;
+        isExcludedFromFee[marketingWallet] = true;
+        isExcludedFromFee[lpWallet] = true;
+
+        isMarketPair[address(uniswapPair)] = true;
+
+        _balances[marketingWallet] = _totalSupply;
+        emit Transfer(address(0), _msgSender(), _totalSupply);
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    constructor () {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+
+    function owner() public view returns (address) {
+        return _owner;
+    }   
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

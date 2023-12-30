@@ -1,0 +1,11 @@
+YES
+
+The `_mint` function in the `MonsterGeads` contract calls the `_mint` function of the `ERC1155` contract, which emits the `TransferSingle` event. According to the ERC-1155 standard, when minting new tokens, the `_from` argument in the `TransferSingle` event should be the zero address, indicating that the tokens are being created rather than transferred from an existing holder.
+
+In the provided `_mint` function of the `ERC1155` contract, the `TransferSingle` event is emitted with the `_from` argument set to `address(0)`, which is the correct implementation for a mint operation:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This line correctly indicates that the tokens are being minted (created) and assigned to the `to` address, and the `_from` address is the zero address, as required by the rule.

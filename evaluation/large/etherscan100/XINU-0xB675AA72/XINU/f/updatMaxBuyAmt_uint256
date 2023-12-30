@@ -1,0 +1,28 @@
+abstract contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract XINU is Context, IERC20, Ownable {
+
+    uint8 private constant _decimals = 9;
+    uint256 public maxBuyAmount = 1_000_000_000_000_000 * 10**_decimals;
+
+    function updatMaxBuyAmt(uint256 amount) external onlyOwner{
+        maxBuyAmount = amount * 10**_decimals;
+    }
+}

@@ -1,0 +1,23 @@
+contract MyERC1155Token is BasicERC1155 {
+
+    // You can add any additional functions or override existing ones here
+
+    function mint(address to, uint256 id, uint256 amount) public {
+        // For simplicity, we're allowing anyone to mint tokens. 
+        // In a real-world scenario, you'd likely want to restrict this.
+        _update(address(0), to, id, amount);
+    }
+}
+abstract contract BasicERC1155 {
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    function _update(address from, address to, uint256 id, uint256 value) internal {
+        if (from != address(0)) {
+            _balances[id][from] -= value;
+        }
+        if (to != address(0)) {
+            _balances[id][to] += value;
+        }
+    }
+}
+

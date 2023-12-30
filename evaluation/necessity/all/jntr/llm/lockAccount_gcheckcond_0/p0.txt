@@ -1,0 +1,22 @@
+Given a solidity function lockAccount and the related parts from a smart contract.
+Whether the function lockAccount and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract JNTR is IST20, ERC20, SafeMath {
+    address public owner;
+
+    Account[] allowedAddress;
+    mapping(address => uint256) allowedIndex;
+
+    function lockAccount(address _address) public returns (bool) {
+        require(msg.sender == owner);
+        require(allowedAddress[allowedIndex[_address]]._address == _address);
+        allowedAddress[allowedIndex[_address]]._active = false;
+        return true;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

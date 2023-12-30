@@ -1,0 +1,34 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+totalSupply(uint256) returns(uint256)
+exists(uint256) returns(bool)
+supportsInterface(bytes4) returns(bool)
+uri(uint256) returns(string)
+balanceOf(address,uint256) returns(uint256)
+balanceOfBatch(address[],uint256[]) returns(uint256[])
+setApprovalForAll(address,bool) returns()
+isApprovedForAll(address,address) returns(bool)
+safeTransferFrom(address,address,uint256,uint256,bytes) returns()
+safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()
+burn(address,uint256,uint256) returns()
+burnBatch(address,uint256[],uint256[]) returns()
+owner() returns(address)
+renounceOwnership() returns()
+transferOwnership(address) returns()
+royaltyInfo(uint256,uint256) returns(address,uint256)
+constructor(address,string,string,uint96) returns()
+addMinter(address,bool) returns()
+setURI(string,uint256) returns()
+createCollection(uint256,string) returns(uint256)
+mint(address,uint256,uint256) returns()
+mintBatch(address,uint256[],uint256[],bytes) returns()
+name() returns(string)
+symbol() returns(string)
+tokenInfo(uint256) returns(uint256,uint256,string)
+burnForUpgrade(address,uint256,uint256) returns()
+setRoyalty(address,uint96) returns()
+minters(address) returns(bool)
+"""

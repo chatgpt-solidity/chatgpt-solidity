@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function with the `ids` array passed as the `_ids` argument, which according to the rule must be the list of tokens being transferred. The `amounts` array is passed as the `_values` argument, representing the amounts for each token in the `_ids` list being transferred. The event is emitted before the `_doSafeBatchTransferAcceptanceCheck` function is called, which is consistent with the expected behavior of emitting the event when the tokens are transferred.

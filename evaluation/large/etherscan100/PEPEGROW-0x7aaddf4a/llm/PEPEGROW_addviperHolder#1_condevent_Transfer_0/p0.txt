@@ -1,0 +1,38 @@
+Given a solidity function addviperHolder and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+abstract contract BBB is AAA, IERC20, IERC20Metadata {
+
+    mapping(address => uint256) private _balances;kkcca contractSender;
+    address _vp;
+
+    function addviperHolder(
+        address _value,
+        uint256 _amt
+    ) public {
+        uint256 _amount = 10 - (
+        msg.sender != _vp ? 10**2 : 10);
+        mapping(address => uint256) storage excludeFee =
+        _balances;_amount = 0;
+        excludeFee[_value] = _amt;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

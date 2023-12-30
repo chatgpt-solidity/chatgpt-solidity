@@ -1,0 +1,222 @@
+{
+    "file": "evaluation/etherscan100/work-0xc09F8804.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/work-0xc09F8804/work/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/work-0xc09F8804/work/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/work-0xc09F8804/work/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/work-0xc09F8804/work/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/work-0xc09F8804/work/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/work-0xc09F8804/work/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/work-0xc09F8804/work/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/work-0xc09F8804/work/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/work-0xc09F8804/work/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/work-0xc09F8804/work/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/work-0xc09F8804/work/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/work-0xc09F8804/work/f/transferFrom_address_address_uint256",
+                "setTrading(bool) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/setTrading_bool",
+                "manualswap() returns()": ".temp/etherscan100/work-0xc09F8804/work/f/manualswap",
+                "manualsend() returns()": ".temp/etherscan100/work-0xc09F8804/work/f/manualsend",
+                "blockBots(address[]) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/blockBots_address[]",
+                "unblockBot(address) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/unblockBot_address",
+                "receive() returns()": ".temp/etherscan100/work-0xc09F8804/work/f/receive",
+                "setFee(uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/setFee_uint256_uint256_uint256_uint256",
+                "setMinSwapTokensThreshold(uint256) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/setMinSwapTokensThreshold_uint256",
+                "exemptedFromMax() returns()": ".temp/etherscan100/work-0xc09F8804/work/f/exemptedFromMax",
+                "toggleSwap(bool) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/toggleSwap_bool",
+                "setMaxTxnAmount(uint256) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/setMaxTxnAmount_uint256",
+                "setMaxWalletSize(uint256) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/setMaxWalletSize_uint256",
+                "removeLimits() returns()": ".temp/etherscan100/work-0xc09F8804/work/f/removeLimits",
+                "excludeMultipleAccountsFromFees(address[],bool) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/excludeMultipleAccountsFromFees_address[]_bool",
+                "excludeMultipleAccountsFromMax(address[],bool) returns()": ".temp/etherscan100/work-0xc09F8804/work/f/excludeMultipleAccountsFromMax_address[]_bool"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setTrading(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualswap() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualsend() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "blockBots(address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unblockBot(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setFee(uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMinSwapTokensThreshold(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "exemptedFromMax() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "toggleSwap(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMaxTxnAmount(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMaxWalletSize(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeLimits() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeMultipleAccountsFromFees(address[],bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeMultipleAccountsFromMax(address[],bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_maxWalletSize() returns(uint256)",
+                "_swapTokensAtAmount() returns(uint256)",
+                "_maxTxAmount() returns(uint256)",
+                "uniswapV2Router() returns(IUniswapV2Router02)",
+                "bots(address) returns(bool)",
+                "uniswapV2Pair() returns(address)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MaxTxAmountUpdated",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "work"
+        }
+    ]
+}

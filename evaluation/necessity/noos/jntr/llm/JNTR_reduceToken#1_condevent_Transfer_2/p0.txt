@@ -1,0 +1,45 @@
+Given a solidity function reduceToken and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract JNTR is IST20, ERC20, SafeMath {
+    address public owner;
+
+    Account[] allowedAddress;
+    mapping(address => uint256) balances;
+    mapping(address => uint256) allowedIndex;
+
+    function reduceToken(
+        address _address,
+        uint256 _value
+    ) public returns (bool) {
+        require(msg.sender == owner);
+        require(allowedAddress[allowedIndex[_address]]._address == _address);
+        uint256 reducerBalance = balances[_address];
+        require(reducerBalance >= _value);
+        reducerBalance = safeSub(reducerBalance, _value);
+        balances[msg.sender] = safeAdd(balances[msg.sender], _value);
+        balances[_address] = reducerBalance;
+        emit Transfer(_address, msg.sender, _value);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

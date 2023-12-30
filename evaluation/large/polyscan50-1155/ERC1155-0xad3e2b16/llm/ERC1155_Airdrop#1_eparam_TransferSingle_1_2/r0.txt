@@ -1,0 +1,3 @@
+YES
+
+The `Airdrop` function in the provided Solidity code emits the `TransferSingle` event for each item ID in the `itemsIds` array, with the corresponding recipient address from the `to` array. The `_to` argument in the `TransferSingle` event is set to `to[i]`, which is the address of the recipient whose balance is increased by the airdrop. This matches the given rule that the `_to` argument must be the address of the recipient whose balance is increased.

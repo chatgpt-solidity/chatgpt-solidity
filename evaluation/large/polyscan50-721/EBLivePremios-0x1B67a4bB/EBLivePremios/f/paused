@@ -1,0 +1,7 @@
+contract EBLivePremios is ERC721 {
+    bool private _paused = true;
+
+    function paused() public view returns (bool) {
+        return _paused;
+    }
+}

@@ -1,0 +1,10 @@
+abstract contract Auth {
+    address internal _owner;
+    modifier onlyOwner() { 
+        require(msg.sender == _owner, "Only owner can call this");   _; 
+    }
+    function transferOwnership(address payable newOwner) external onlyOwner { 
+        _owner = newOwner; emit OwnershipTransferred(newOwner); 
+    }
+}
+

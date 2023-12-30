@@ -1,0 +1,16 @@
+Given a solidity function totalSupply and the related parts from a smart contract.
+Whether the function totalSupply and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract myToken is Context, IERC20, Ownable {
+    uint256 private constant _tTotal = 1000000000 * 10**_decimals;
+
+    function totalSupply() public pure override returns (uint256) {
+        return _tTotal;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

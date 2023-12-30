@@ -1,0 +1,9 @@
+NO
+
+The rule states that the `_from` argument must be the address of the holder whose balance is decreased. However, in the context of minting new tokens, there is no "from" address from which the balance is decreased, as new tokens are being created. In the `_mint` function, the `from` address is set to the zero address (`address(0)`) when emitting the `TransferSingle` event, which is a common practice to indicate that tokens are minted rather than transferred from an existing holder.
+
+The `TransferSingle` event is emitted with the following parameters:
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+Here, `address(0)` is used as the `_from` argument, which is correct for a minting operation according to the ERC-1155 standard. The rule provided does not apply to minting operations, only to transfers where there is an actual decrease in balance from a non-zero address.

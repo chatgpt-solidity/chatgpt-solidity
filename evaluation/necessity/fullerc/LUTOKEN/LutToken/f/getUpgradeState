@@ -1,0 +1,30 @@
+contract UpgradeableToken is StandardToken {
+
+    /** The next contract where the tokens will be migrated. */
+    UpgradeAgent public upgradeAgent;
+
+    /** How many tokens we have upgraded by now. */
+    uint256 public totalUpgraded;
+
+    /**
+     * Child contract can enable to provide the condition when the upgrade can begun.
+     */
+    function canUpgrade() public pure returns (bool) {
+        return true;
+    }
+
+    /**
+     * Get the state of the token upgrade.
+     */
+    function getUpgradeState() public view returns (UpgradeState) {
+        if (!canUpgrade()) {
+            return UpgradeState.NotAllowed;
+        } else if (upgradeAgent == address(0)) {
+            return UpgradeState.WaitingForAgent;
+        } else if (totalUpgraded == 0) {
+            return UpgradeState.ReadyToUpgrade;
+        }
+        return UpgradeState.Upgrading;
+    }
+}
+

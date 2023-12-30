@@ -1,0 +1,5 @@
+abstract contract Auth {
+    address internal _owner;
+    function owner() public view returns (address) { return _owner;   }
+}
+

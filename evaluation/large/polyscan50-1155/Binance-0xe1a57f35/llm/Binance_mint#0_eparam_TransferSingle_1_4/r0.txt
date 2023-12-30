@@ -1,0 +1,13 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct `_value` argument. The `_mint` function increases the balance of the `to` address by the `amount` specified, and the `TransferSingle` event is emitted with the same `amount` as the `_value`. The `_from` address is `address(0)` because tokens are being minted, not transferred from another address. The `_id` is the token type being minted, and the `_operator` is the address performing the operation, which is the message sender in this context.
+
+The event is emitted with the following parameters:
+
+- `_operator`: The address performing the mint operation, obtained by `_msgSender()`.
+- `_from`: The address the tokens are minted from, which is `address(0)` in the case of minting.
+- `_to`: The address the tokens are minted to.
+- `_id`: The token type that is being minted.
+- `_value`: The number of tokens that are being minted.
+
+The rule is satisfied because the `_value` in the `TransferSingle` event matches the number of tokens that the balance of the `to` address is increased by during the minting process.

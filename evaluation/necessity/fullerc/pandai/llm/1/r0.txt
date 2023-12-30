@@ -1,0 +1,18 @@
+The provided Solidity code for the `burnFrom` function and related parts of the smart contract are designed to be compatible with the ERC-20 token standard. The ERC-20 standard specifies a set of functions and events that a token contract must implement to be considered ERC-20 compliant.
+
+The `burnFrom` function in the `ERC20Burnable` contract is an extension of the ERC-20 standard, allowing tokens to be destroyed (burned) from a specific account, with the amount being deducted from the caller's allowance. This is not part of the original ERC-20 specification, but it does not violate the standard as long as the core ERC-20 functions and events are correctly implemented and the contract behaves as expected for those functions.
+
+The ERC-20 standard requires the following core functions and events:
+
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `Transfer` event
+- `Approval` event
+
+The provided code includes these functions and events, and the `burnFrom` function correctly uses the `_spendAllowance` internal function to check and update the allowance before burning tokens with `_burn`. The `_burn` function itself correctly reduces the balance of the account and the total supply, and emits a `Transfer` event with the `to` address set to the zero address, as required by the ERC-20 standard for token destruction.
+
+In conclusion, the `burnFrom` function and related parts of the contract do not violate the ERC-20 standard. They provide additional functionality that is compatible with the standard, as long as the core ERC-20 functions and events are correctly implemented and the contract adheres to the expected behavior of those functions.

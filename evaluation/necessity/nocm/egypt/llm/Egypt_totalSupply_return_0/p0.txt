@@ -1,0 +1,20 @@
+Given a solidity function totalSupply and the related parts from a smart contract and a ERC rule for its return value.
+Whether the function totalSupply returns as the rule required? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Egypt {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+    // 18 decimals is the strongly suggested default, avoid changing it
+    uint256 public totalSupply;
+
+    function totalSupply() public constant returns (uint) {
+        return totalSupply - balanceOf[address(0)];
+    }
+}
+"""
+
+ERC Rule:"""
+Returns the total token supply
+"""

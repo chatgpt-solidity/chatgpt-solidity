@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct `_value` argument. The `_mint` function increases the balance of the `to` address by the `amount` specified, and the `TransferSingle` event is emitted with the `amount` as the `_value`, which is the number of tokens the recipient balance is increased by. There is no decrease in the holder's balance since minting creates new tokens. The `_from` address is the zero address, indicating that the tokens are minted, not transferred from another holder.

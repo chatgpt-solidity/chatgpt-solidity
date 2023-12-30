@@ -1,0 +1,7 @@
+YES
+
+The function `_safeBatchTransferFrom` correctly emits the `TransferBatch` event according to the given rule. The rule states that the `_values` argument must match the list and order of tokens specified in `_ids` and reflect the number of tokens the holder's balance is decreased by, which should also match the increase in the recipient's balance.
+
+In the provided function, the `amounts` array represents the number of tokens to be transferred for each corresponding token ID in the `ids` array. The balances are updated accordingly before the `TransferBatch` event is emitted, ensuring that the decrease in the `from` address's balance and the increase in the `to` address's balance are consistent with the `amounts` provided.
+
+The `TransferBatch` event is then emitted with the `msg.sender` as the `_operator`, the `from` address as `_from`, the `to` address as `_to`, the `ids` array as `_ids`, and the `amounts` array as `_values`, which aligns with the rule specified.

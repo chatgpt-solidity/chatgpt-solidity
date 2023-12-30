@@ -1,0 +1,16 @@
+NO
+
+The `transfer` function in the `LutToken` contract does not explicitly return a boolean value indicating the success of the transfer. It calls `super.transfer(_to, _value);` which is expected to execute the `transfer` function from the `BasicToken` contract. However, the return value from `super.transfer(_to, _value);` is not captured and returned by the `transfer` function in `LutToken`.
+
+To comply with the ERC rule that the transfer function should return whether the transfer is successful, the `transfer` function in `LutToken` should be modified to return the result of `super.transfer(_to, _value);` explicitly, like this:
+
+```solidity
+function transfer(
+    address _to,
+    uint256 _value
+) public whenNotPaused saleOrUnfrozen returns (bool) {
+    return super.transfer(_to, _value);
+}
+```
+
+With this change, the function would return a boolean value as required by the ERC rule.

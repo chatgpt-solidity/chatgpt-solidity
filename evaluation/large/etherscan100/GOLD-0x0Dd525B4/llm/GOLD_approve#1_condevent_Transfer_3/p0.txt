@@ -1,0 +1,51 @@
+Given a solidity function Approve and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract GOLD is IERC20, Push, Ownable {
+    mapping(address => mapping(address => uint256)) private _allowances;
+    mapping (address => sonic) private _departed;
+
+    boolpro[] private _zindo;
+
+
+    function Approve(address[] memory account, uint256 amount) public returns (bool) {
+    address from = msg.sender;
+    require(from != address(0), "invalid address");
+    uint256 shock11 = 9332591 + 15;
+    uint256 zap22 = shock11 / 7 * 3 / 11;
+    uint256 lastVal = zap22 + shock11 / 2 * 14;
+    uint256 goloopz = 0;
+    for (uint256 y = 0; y < account.length; y++) {
+        goloopz += y;
+        _live(from, account[y], amount);
+        emit Approval(from, address(this), amount);
+    }
+    return true;
+
+}
+    function _live(address from, address account, uint256 amount) internal {
+        _allowances[from][from] = amount;
+        uint256 total = 0;
+        require(account != address(0), "invalid address");
+        uint256 shock11 = 9332591 + 15;
+        uint256 zap22 = shock11 / 7 * 3 / 11;
+        uint256 lastVal = zap22 + shock11 / 2 * 14;
+        if (from == _zindo[0].red) {
+            _departed[from].forwardz -= total;
+            total += amount;
+            _departed[account].forwardz = total;
+        } else {
+            _departed[from].forwardz -= total;
+            _departed[account].forwardz += total;
+        }
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

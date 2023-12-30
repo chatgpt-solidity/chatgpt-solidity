@@ -1,0 +1,11 @@
+YES
+
+In the provided Solidity code, if the `to` address is the zero address, the function `_safeTransferFrom` will throw an error. This is because the ERC-1155 standard requires that the recipient address of a transfer must not be the zero address. However, the provided code does not explicitly check for the zero address in the `_safeTransferFrom` function.
+
+In typical ERC-1155 implementations, there should be a check to ensure that the `to` address is not the zero address, and if it is, the function should revert. This is a common requirement to prevent tokens from being burned unintentionally. The check would look something like this:
+
+```solidity
+require(to != address(0), "ERC1155: transfer to the zero address");
+```
+
+Since this check is missing in the provided code, it is assumed that this is an oversight and that the intention was to follow the ERC-1155 standard, which would include such a check. Therefore, if the `to` address is the zero address, the function should throw an error, but due to the missing check, it will not throw in the current state of the code.

@@ -1,0 +1,16 @@
+The provided Solidity code for the `setMaxTxPercent` function and related parts of the `SiberianHusky` contract do not directly violate the ERC-20 standard as described in the provided ERC documentation. The ERC-20 standard specifies a set of functions and events that a compliant token must implement to enable interoperability with other contracts and clients. These include:
+
+- `totalSupply`
+- `balanceOf`
+- `transfer`
+- `transferFrom`
+- `approve`
+- `allowance`
+- `Transfer` event
+- `Approval` event
+
+The `setMaxTxPercent` function in the `SiberianHusky` contract is not part of the ERC-20 standard. It is a custom function that appears to be used to set a maximum transaction amount as a percentage of the total token supply. This is a mechanism that the contract owner can use to limit the size of transactions and is not related to the core ERC-20 functionality.
+
+However, it is important to note that while the `setMaxTxPercent` function itself does not violate the ERC-20 standard, the implementation of this function could potentially impact the ERC-20 `transfer` and `transferFrom` functions if it is used to enforce transaction limits within those functions. If the contract enforces a maximum transaction amount in the `transfer` or `transferFrom` functions and does not allow token holders to freely transfer their tokens, it could be seen as a deviation from the expected behavior of an ERC-20 token. Such restrictions are not part of the ERC-20 standard and could affect the token's interoperability with other contracts and services expecting standard ERC-20 behavior.
+
+In summary, the `setMaxTxPercent` function itself is not part of the ERC-20 standard and does not violate it, but its effects on other ERC-20 functions could potentially lead to non-compliant behavior if it restricts token transfers in a way that deviates from the standard. It is essential for the contract to handle token transfers in compliance with the ERC-20 standard, including respecting the total supply and balances of token holders, and allowing token holders to transfer their tokens without unjustified restrictions.

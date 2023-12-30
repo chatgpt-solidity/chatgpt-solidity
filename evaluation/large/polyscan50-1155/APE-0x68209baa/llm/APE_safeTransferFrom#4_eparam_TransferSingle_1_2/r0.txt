@@ -1,0 +1,18 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The event is emitted with the `_to` argument being the address of the recipient whose balance is increased by the `amount` of tokens of type `id`.
+
+The relevant part of the code is as follows:
+
+```solidity
+_safeTransferFrom(from, to, id, amount, data);
+```
+
+This internal function is called by `safeTransferFrom`, and within `_safeTransferFrom`, the following lines handle the balance update and event emission:
+
+```solidity
+_balances[id][to] += amount;
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+Here, the balance of the `to` address is increased by the `amount`, and then the `TransferSingle` event is emitted with the `to` address as the `_to` argument, which is the recipient of the transfer. This complies with the rule that the `_to` argument must be the address of the recipient whose balance is increased.

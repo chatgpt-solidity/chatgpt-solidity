@@ -1,0 +1,44 @@
+Given a solidity function enableTrading and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract simple is ERC20, Ownable {
+
+    uint256 public tradingActiveBlock = 0; // 0 means trading is not active
+    uint256 public blockForPenaltyEnd;
+    bool public tradingActive = false;
+    bool public swapEnabled = false;
+
+    // only enable if no plan to airdrop
+
+    function enableTrading(uint256 deadBlocks) external onlyOwner {
+        require(!tradingActive, "Cannot reenable trading");
+        tradingActive = true;
+        swapEnabled = true;
+        tradingActiveBlock = block.number;
+        blockForPenaltyEnd = tradingActiveBlock + deadBlocks;
+        emit EnabledTrading();
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

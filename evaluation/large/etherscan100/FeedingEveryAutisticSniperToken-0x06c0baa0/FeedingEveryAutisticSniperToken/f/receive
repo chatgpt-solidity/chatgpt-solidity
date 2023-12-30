@@ -1,0 +1,4 @@
+contract  FeedingEveryAutisticSniperToken  is IERC20, Ownable {
+
+    receive() external payable {}
+}

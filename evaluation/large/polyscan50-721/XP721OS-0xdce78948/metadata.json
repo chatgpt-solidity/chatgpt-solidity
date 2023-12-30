@@ -1,0 +1,234 @@
+{
+    "file": "evaluation/polyscan50-721/XP721OS-0xdce78948.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.17",
+            "func2file": {
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/supportsInterface_bytes4",
+                "royaltyInfo(uint256,uint256) returns(address,uint256)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/royaltyInfo_uint256_uint256",
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/tokenOfOwnerByIndex_address_uint256",
+                "totalSupply() returns(uint256)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/totalSupply",
+                "tokenByIndex(uint256) returns(uint256)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/tokenByIndex_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/safeTransferFrom_address_address_uint256_bytes",
+                "owner() returns(address)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/transferOwnership_address",
+                "constructor(string,string,string,address,XP721OS.SetRoyalty) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/constructor_string_string_string_address_XP721OS.SetRoyalty",
+                "baseURI() returns(string)": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/baseURI",
+                "mint(address,uint256,bytes) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/mint_address_uint256_bytes",
+                "burnFor(address,uint256) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/burnFor_address_uint256",
+                "updateName(string) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/updateName_string",
+                "updateSymbol(string) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/updateSymbol_string",
+                "setBaseURI(string) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/setBaseURI_string",
+                "setMinter(address) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/setMinter_address",
+                "updateDefaultRoyalty(address,uint96) returns()": ".temp/polyscan50-721/XP721OS-0xdce78948/XP721OS/f/updateDefaultRoyalty_address_uint96"
+            },
+            "func2attrs": {
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "royaltyInfo(uint256,uint256) returns(address,uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenByIndex(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(string,string,string,address,XP721OS.SetRoyalty) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "baseURI() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "mint(address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnFor(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateName(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSymbol(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMinter(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateDefaultRoyalty(address,uint96) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "baseUri() returns(string)"
+            ],
+            "ercs": [
+                "165",
+                "721metadata",
+                "721enumerable",
+                "2981",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "XP721OS"
+        }
+    ]
+}

@@ -1,0 +1,89 @@
+Given a solidity function resetLotto and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+
+    }
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if the sender is not the owner.
+     */
+    function _checkOwner() internal view virtual {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract LottoV3 is Ownable, RrpRequesterV0, ERC721, ERC721Burnable {
+
+    // LOTTO VARS
+    address private treasury;
+    address private staking;
+    address private dev1;
+    address private dev2;
+    address public erc20Token;
+    uint256 public taxRate;
+    bool public lottoOpen;
+    bool public taxSwitch;
+
+    function resetLotto(
+        bool _lottoOpen,
+        address _erc20token, 
+        address _treasury, 
+        address _staking, 
+        address _dev1, 
+        address _dev2, 
+        uint256 _taxRate,
+        bool _taxSwitch,
+        bool _resetFunds 
+        ) external onlyOwner{
+        lottoOpen = _lottoOpen;
+        erc20Token = _erc20token;
+        treasury = _treasury;
+        staking = _staking;
+        dev1 = _dev1;
+        dev2 = _dev2;
+        taxRate = _taxRate;
+        taxSwitch = _taxSwitch;
+        
+        if(_resetFunds == true){
+            uint256 erc20Balance = IERC20(erc20Token).balanceOf(address(this));
+            if(erc20Balance > 0){
+                IERC20(erc20Token).transfer(treasury, erc20Balance);
+            }
+            uint256 gasBalance = address(this).balance;
+            if(gasBalance > 0){
+                payable(treasury).transfer(gasBalance);
+            }
+        }
+
+    }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

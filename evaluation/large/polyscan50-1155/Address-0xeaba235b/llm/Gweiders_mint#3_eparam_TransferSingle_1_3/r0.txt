@@ -1,0 +1,22 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct arguments according to the rule provided. The `_id` argument is indeed the token type being transferred, as required. Here's the relevant part of the `_mint` function:
+
+```solidity
+function _mint(address to, uint256 id, uint256 amount, bytes memory data) internal virtual {
+    // ... (omitted code for brevity)
+
+    address operator = _msgSender();
+    uint256[] memory ids = _asSingletonArray(id);
+    uint256[] memory amounts = _asSingletonArray(amount);
+
+    // ... (omitted code for brevity)
+
+    _balances[id][to] += amount;
+    emit TransferSingle(operator, address(0), to, id, amount);
+
+    // ... (omitted code for brevity)
+}
+```
+
+The `id` parameter is used to create a singleton array `ids`, but the actual `id` is passed directly to the `TransferSingle` event, satisfying the rule that "_The `_id` argument MUST be the token type being transferred._"

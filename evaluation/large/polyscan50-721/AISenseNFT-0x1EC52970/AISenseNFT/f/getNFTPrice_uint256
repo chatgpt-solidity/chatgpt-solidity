@@ -1,0 +1,25 @@
+library SafeMath {
+
+    /**
+     * @dev Returns the multiplication of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `*` operator.
+     *
+     * Requirements:
+     *
+     * - Multiplication cannot overflow.
+     */
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a * b;
+    }
+}
+
+contract AISenseNFT is ERC721Enumerable, Ownable, ContractMetadata {
+    mapping(uint256 => uint256) public nftPrice;
+    uint8 decimals = 18;
+
+    function getNFTPrice(uint256 _duration) public view returns (uint256) {
+        return nftPrice[_duration].mul(10 ** decimals);
+    }
+}

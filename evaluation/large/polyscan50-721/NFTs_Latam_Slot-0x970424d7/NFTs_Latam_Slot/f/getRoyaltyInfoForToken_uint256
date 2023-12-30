@@ -1,0 +1,39 @@
+contract NFTs_Latam_Slot is
+    Initializable,
+    INFTlatamContract,
+    IOwnable,
+    IRoyalty,
+    IPrimarySale,
+    IPlatformFee,
+    ReentrancyGuardUpgradeable,
+    EIP712Upgradeable,
+    MulticallUpgradeable,
+    AccessControlEnumerableUpgradeable,
+    ERC721EnumerableUpgradeable,
+    ITokenERC721
+{
+
+    /// @dev The recipient of who gets the royalty.
+
+    address private royaltyRecipient;
+    /// @dev The percentage of royalty how much royalty in basis points.
+    uint128 private royaltyBps;
+
+    /// @dev Token ID => royalty recipient and bps for token
+    mapping(uint256 => RoyaltyInfo) private royaltyInfoForToken;
+
+    /// @dev Returns the royalty recipient for a particular token Id.
+    function getRoyaltyInfoForToken(uint256 _tokenId)
+        public
+        view
+        returns (address, uint16)
+    {
+        RoyaltyInfo memory royaltyForToken = royaltyInfoForToken[_tokenId];
+
+        return
+            royaltyForToken.recipient == address(0)
+                ? (royaltyRecipient, uint16(royaltyBps))
+                : (royaltyForToken.recipient, uint16(royaltyForToken.bps));
+    }
+}
+

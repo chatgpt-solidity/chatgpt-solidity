@@ -1,0 +1,155 @@
+{
+    "file": "evaluation/etherscan100/SWIFTBOT-0xfd84e746.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.0",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/transferOwnership_address",
+                "name() returns(string)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/decreaseAllowance_address_uint256",
+                "constructor() returns()": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/constructor",
+                "maxWallet() returns(uint256)": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/maxWallet",
+                "startTrade(address) returns()": ".temp/etherscan100/SWIFTBOT-0xfd84e746/SWIFTBOT/f/startTrade_address"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "maxWallet() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "startTrade(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "pool() returns(address)",
+                "totalSupplyOnStart() returns(uint256)"
+            ],
+            "ercs": [
+                "20",
+                "20metadata"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "SWIFTBOT"
+        }
+    ]
+}

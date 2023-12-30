@@ -1,0 +1,75 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract WiT is AbstractToken {
+    /**
+     * Maximum allowed number of tokens in circulation.
+     * tokenSupply = tokensIActuallyWant * (10 ^ decimals)
+     */
+
+
+    uint256 constant MAX_TOKEN_COUNT = 60000000000 * (10 ** 16);
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * Current number of tokens in circulation.
+     */
+    uint256 tokenCount = 0;
+
+    /**
+     * Create _value new tokens and give new created tokens to msg.sender.
+     * May only be called by smart contract owner.
+     *
+     * @param _value number of tokens to create
+     * @return true if tokens were created successfully, false otherwise
+     */
+    function createTokens(uint256 _value) public returns (bool success) {
+        require(msg.sender == owner);
+
+        if (_value > 0) {
+            if (_value > safeSub(MAX_TOKEN_COUNT, tokenCount)) return false;
+
+            accounts[msg.sender] = safeAdd(accounts[msg.sender], _value);
+            tokenCount = safeAdd(tokenCount, _value);
+
+            // adding transfer event and _from address as null address
+            emit Transfer(address(0), msg.sender, _value);
+
+            return true;
+        }
+
+        return false;
+    }
+}
+
+contract AbstractToken is Token, SafeMath {
+
+    /**
+     * Mapping from addresses of token holders to the numbers of tokens belonging
+     * to these token holders.
+     */
+    mapping(address => uint256) accounts;
+}
+
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

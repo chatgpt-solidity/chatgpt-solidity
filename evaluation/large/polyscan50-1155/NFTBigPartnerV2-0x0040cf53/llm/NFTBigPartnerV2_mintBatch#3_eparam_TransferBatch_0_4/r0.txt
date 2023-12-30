@@ -1,0 +1,15 @@
+YES
+
+The provided Solidity function `mintBatch` in the `NFTBigPartnerV2` contract calls the internal `_mintBatch` function of the `ERC1155` contract. The `_mintBatch` function is designed to mint a batch of tokens to a specified address (`to`), with the token IDs (`ids`) and corresponding amounts (`amounts`).
+
+The rule states that the `_values` argument in the `TransferBatch` event must match the list and order of tokens specified in `_ids` and reflect the number of tokens the holder's balance is increased by. In the `_mintBatch` function, the `TransferBatch` event is emitted with the `amounts` array as the `_values` argument, which represents the number of tokens minted for each token ID in the `ids` array.
+
+The `TransferBatch` event is emitted with the following parameters:
+
+- `_operator`: The address that initiated the batch minting, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred, which is `address(0)` since this is a minting operation.
+- `_to`: The address to which the tokens are minted.
+- `_ids`: The list of token IDs being minted.
+- `_values`: The list of amounts for each token ID being minted, which matches the `amounts` array.
+
+Since the `amounts` array represents the number of tokens each token ID is minted for and is used as the `_values` argument in the `TransferBatch` event, the rule is followed. Therefore, the `TransferBatch` event is emitted according to the given rule.

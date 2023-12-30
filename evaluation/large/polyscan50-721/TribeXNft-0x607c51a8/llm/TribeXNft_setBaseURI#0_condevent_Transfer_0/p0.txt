@@ -1,0 +1,32 @@
+Given a solidity function setBaseURI and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract TribeXNft is ERC721, ReentrancyGuard {
+    ITournamentHub public tournamentHub;
+
+    string private customBaseURI;
+
+    /**
+     * @dev Throws if called by any account other than the administrator.
+     */
+    modifier onlyAdministrator() {
+        // Check Permissions
+        require(tournamentHub.checkAdmin(msg.sender), "Sender is not admin");
+        _;
+    }
+
+    /** URI HANDLING **/
+
+    function setBaseURI(string memory customBaseURI_) external onlyAdministrator {
+        customBaseURI = customBaseURI_;
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

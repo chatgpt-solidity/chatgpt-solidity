@@ -1,0 +1,15 @@
+The provided Solidity code for the `createTokens` function and related parts of the `AxpireToken` contract do not fully comply with the ERC-20 token standard as described in the provided ERC excerpt. Here are the key points of non-compliance and other observations:
+
+1. **Missing ERC-20 Functions**: The ERC-20 standard requires specific functions such as `transfer`, `transferFrom`, `approve`, and `allowance`, which are not present in the provided code snippet. These functions are essential for ERC-20 compliance as they define the core functionality of transferring tokens and allowing others to spend tokens on behalf of the token holder.
+
+2. **Missing ERC-20 Events**: The ERC-20 standard specifies two events, `Transfer` and `Approval`, which must be emitted when tokens are transferred or when an approval is given. The provided code snippet includes a `CreateToken` event, which is not part of the ERC-20 standard. The standard `Transfer` event should be emitted when new tokens are created and assigned to a user, with the `_from` address set to `0x0` to indicate token creation.
+
+3. **Direct Balance Manipulation**: The `createTokens` function directly manipulates the `balances` mapping and `totalSupply` without using a `transfer` function. In ERC-20 compliant contracts, token transfers should be handled through the `transfer` function to ensure that all necessary checks, validations, and events are properly processed.
+
+4. **Revert Statements**: The function uses `revert()` statements for error handling, which is acceptable. However, the ERC-20 standard suggests that functions should throw an error (or revert) if certain conditions are not met, such as insufficient balance for transfers. The `createTokens` function correctly reverts if the token sale is not active, if the ICO is halted, if no ETH is sent, or if the token creation would exceed the cap.
+
+5. **Decimals**: The `decimals` variable is mentioned in a comment but not explicitly defined in the provided code snippet. The ERC-20 standard specifies that a `decimals` function should be available to return the number of decimals the token uses. This is important for user interfaces to display token amounts correctly.
+
+6. **Optional Functions**: The ERC-20 standard mentions optional functions like `name`, `symbol`, and `decimals`. These functions are not present in the provided code snippet, but their absence does not violate the standard as they are optional.
+
+To summarize, the `createTokens` function and related parts of the contract do not meet the ERC-20 standard due to the absence of required functions and events, and direct manipulation of balances. To be compliant, the contract would need to implement all the required functions and events as specified by the ERC-20 standard.

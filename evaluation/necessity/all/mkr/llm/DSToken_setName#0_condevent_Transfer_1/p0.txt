@@ -1,0 +1,46 @@
+Given a solidity function setName and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract DSToken is DSTokenBase(0), DSStop {
+
+    // Optional token name
+
+    bytes32 public name = "";
+    function setName(bytes32 name_) public auth {
+        name = name_;
+    }
+}
+
+contract DSAuth is DSAuthEvents {
+    DSAuthority public authority;
+    address public owner;
+
+    modifier auth() {
+        require(isAuthorized(msg.sender, msg.sig));
+        _;
+
+    }
+    function isAuthorized(
+        address src,
+        bytes4 sig
+    ) internal view returns (bool) {
+        if (src == address(this)) {
+            return true;
+        } else if (src == owner) {
+            return true;
+        } else if (authority == DSAuthority(0)) {
+            return false;
+        } else {
+            return authority.canCall(src, this, sig);
+        }
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

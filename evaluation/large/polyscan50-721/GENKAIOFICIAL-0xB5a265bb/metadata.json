@@ -1,0 +1,259 @@
+{
+    "file": "evaluation/polyscan50-721/GENKAIOFICIAL-0xB5a265bb.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.1",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/transferOwnership_address",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/supportsInterface_bytes4",
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/tokenOfOwnerByIndex_address_uint256",
+                "totalSupply() returns(uint256)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/totalSupply",
+                "tokenByIndex(uint256) returns(uint256)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/tokenByIndex_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor(string,string,string) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/constructor_string_string_string",
+                "mint(uint256) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/mint_uint256",
+                "walletOfOwner(address) returns(uint256[])": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/walletOfOwner_address",
+                "reveal() returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/reveal",
+                "setCost(uint256) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/setCost_uint256",
+                "setmaxMintAmount(uint256) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/setmaxMintAmount_uint256",
+                "setNotRevealedURI(string) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/setNotRevealedURI_string",
+                "setBaseURI(string) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/setBaseURI_string",
+                "setBaseExtension(string) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/setBaseExtension_string",
+                "pause(bool) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/pause_bool",
+                "withdraw() returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/withdraw",
+                "bulkAirdropERC20(IERC20,address[],uint256[]) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/bulkAirdropERC20_IERC20_address[]_uint256[]",
+                "bulkAirdropERC721(IERC721,address[],uint256[]) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/bulkAirdropERC721_IERC721_address[]_uint256[]",
+                "bulkAirdropERC1155(IERC1155,address[],uint256[],uint256[]) returns()": ".temp/polyscan50-721/GENKAIOFICIAL-0xB5a265bb/GENKAIOFICIAL/f/bulkAirdropERC1155_IERC1155_address[]_uint256[]_uint256[]"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenByIndex(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(string,string,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "walletOfOwner(address) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "reveal() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setCost(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setmaxMintAmount(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setNotRevealedURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseExtension(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "pause(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "bulkAirdropERC20(IERC20,address[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "bulkAirdropERC721(IERC721,address[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "bulkAirdropERC1155(IERC1155,address[],uint256[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "paused() returns(bool)",
+                "maxMintAmount() returns(uint256)",
+                "baseExtension() returns(string)",
+                "revealed() returns(bool)",
+                "notRevealedUri() returns(string)",
+                "cost() returns(uint256)",
+                "maxSupply() returns(uint256)"
+            ],
+            "ercs": [
+                "165",
+                "721enumerable",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "GENKAIOFICIAL"
+        }
+    ]
+}

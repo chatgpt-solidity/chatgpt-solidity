@@ -1,0 +1,19 @@
+Given a solidity function uploadfinaluri and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.4;
+contract NFT is ERC721URIStorage, Ownable {
+    string private imageURI;
+
+    function uploadfinaluri(string memory final_uri) public{
+        imageURI = final_uri;
+    }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is changed or reaffirmed
+"""

@@ -1,0 +1,233 @@
+{
+    "file": "evaluation/audited/mkr.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.17",
+            "func2file": {
+                "stop() returns()": "result-necessity/s-cm/mkr/DSToken/f/stop",
+                "start() returns()": "result-necessity/s-cm/mkr/DSToken/f/start",
+                "setOwner(address) returns()": "result-necessity/s-cm/mkr/DSToken/f/setOwner_address",
+                "setAuthority(DSAuthority) returns()": "result-necessity/s-cm/mkr/DSToken/f/setAuthority_DSAuthority",
+                "totalSupply() returns(uint256)": "result-necessity/s-cm/mkr/DSToken/f/totalSupply",
+                "balanceOf(address) returns(uint256)": "result-necessity/s-cm/mkr/DSToken/f/balanceOf_address",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-cm/mkr/DSToken/f/allowance_address_address",
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-cm/mkr/DSToken/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-cm/mkr/DSToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-cm/mkr/DSToken/f/approve_address_uint256",
+                "DSToken(bytes32) returns()": "result-necessity/s-cm/mkr/DSToken/f/DSToken_bytes32",
+                "approve(address) returns(bool)": "result-necessity/s-cm/mkr/DSToken/f/approve_address",
+                "push(address,uint256) returns()": "result-necessity/s-cm/mkr/DSToken/f/push_address_uint256",
+                "pull(address,uint256) returns()": "result-necessity/s-cm/mkr/DSToken/f/pull_address_uint256",
+                "move(address,address,uint256) returns()": "result-necessity/s-cm/mkr/DSToken/f/move_address_address_uint256",
+                "mint(uint256) returns()": "result-necessity/s-cm/mkr/DSToken/f/mint_uint256",
+                "burn(uint256) returns()": "result-necessity/s-cm/mkr/DSToken/f/burn_uint256",
+                "mint(address,uint256) returns()": "result-necessity/s-cm/mkr/DSToken/f/mint_address_uint256",
+                "burn(address,uint256) returns()": "result-necessity/s-cm/mkr/DSToken/f/burn_address_uint256",
+                "setName(bytes32) returns()": "result-necessity/s-cm/mkr/DSToken/f/setName_bytes32"
+            },
+            "func2attrs": {
+                "stop() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "start() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setOwner(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setAuthority(DSAuthority) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "DSToken(bytes32) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "push(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "pull(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "move(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setName(bytes32) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "symbol() returns(bytes32)",
+                "name() returns(bytes32)",
+                "authority() returns(DSAuthority)",
+                "owner() returns(address)",
+                "decimals() returns(uint256)",
+                "stopped() returns(bool)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "LogNote",
+                    "params": [
+                        {
+                            "type": "bytes4",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bytes32",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bytes",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "LogSetAuthority",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "LogSetOwner",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Mint",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "DSToken"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+YES
+
+The provided Solidity code includes the `_mint` function within the `ERC1155` contract, which is responsible for minting new tokens. The `_mint` function is called by the `mint` function in the `NFTBigPartnerV2` contract.
+
+The `_mint` function in the `ERC1155` contract performs several checks and operations:
+
+1. It checks that the `to` address is not the zero address.
+2. It sets the `operator` to the message sender (`_msgSender()`).
+3. It creates singleton arrays for the `id` and `amount`.
+4. It calls `_beforeTokenTransfer` hook.
+5. It increases the balance of the `to` address by the `amount` of tokens with the given `id`.
+6. It emits the `TransferSingle` event with the `operator`, `from` address (which is zero in the case of minting), `to` address, `id`, and `amount`.
+7. It calls `_afterTokenTransfer` hook.
+8. It performs a safe transfer acceptance check if the `to` address is a contract.
+
+The `TransferSingle` event is emitted with the `_to` argument set to the `to` address provided to the `_mint` function, which is the address of the recipient whose balance is increased. This is in accordance with the given rule that the `_to` argument must be the address of the recipient whose balance is increased.
+
+Therefore, the `TransferSingle` event is emitted correctly according to the given rule.

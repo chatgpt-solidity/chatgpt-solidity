@@ -1,0 +1,64 @@
+Given a solidity function decreaseAllowance and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract Context {
+
+    function _msgSender() internal view returns (address) {
+        return payable(msg.sender);
+    }
+}
+
+library SafeMath {
+
+    function sub(
+        uint256 a,
+        uint256 b,
+        string memory errorMessage
+    ) internal pure returns (uint256) {
+        require(b <= a, errorMessage);
+        uint256 c = a - b;
+
+        return c;
+    }
+}
+
+contract PandaToken is Context, IERC20{
+    mapping(address => mapping(address => uint256)) private _allowances;
+
+    function decreaseAllowance(address spender, uint256 subtractedValue)
+        public
+        virtual
+        returns (bool)
+    {
+        _approve(
+            _msgSender(),
+            spender,
+            _allowances[_msgSender()][spender].sub(
+                subtractedValue,
+                "ERC20: decreased allowance below zero"
+            )
+        );
+        return true;
+    }
+
+    function _approve(
+        address owner1,
+        address spender,
+        uint256 amount
+    ) private {
+        require(owner1 != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+
+        _allowances[owner1][spender] = amount;
+        emit Approval(owner1, spender, amount);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

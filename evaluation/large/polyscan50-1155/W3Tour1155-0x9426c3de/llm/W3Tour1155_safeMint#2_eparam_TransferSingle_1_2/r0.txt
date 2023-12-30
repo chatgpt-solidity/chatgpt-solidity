@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called by the `_safeMint` function in the `W3Tour1155` contract, which is in turn called by the `safeMint` function.
+
+The `_mint` function takes the `to` argument (which is the `_account` argument passed from `safeMint`), the `id` argument (which is the `_id` argument passed from `safeMint`), and the `amount` argument (which is the `_quantity` argument passed from `safeMint`). It then emits the `TransferSingle` event with the `_operator` as the sender of the message (`msg.sender`), `_from` as the zero address (since it's a mint operation), `_to` as the `to` argument provided, `_id` as the `id` argument provided, and `_value` as the `amount` argument provided.
+
+The rule states that the `_to` argument must be the address of the recipient whose balance is increased, which is indeed the case here. The `to` argument is the address where the new tokens are minted to, and the `TransferSingle` event correctly reflects this address in the `_to` field of the event.

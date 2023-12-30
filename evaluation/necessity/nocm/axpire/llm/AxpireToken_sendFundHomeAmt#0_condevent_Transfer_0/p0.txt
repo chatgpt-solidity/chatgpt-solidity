@@ -1,0 +1,44 @@
+Given a solidity function sendFundHomeAmt and the related parts from a smart contract.
+Whether the function sendFundHomeAmt and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.24;
+contract AxpireToken is AxpirePausableToken {
+    uint256 public constant decimals = 18;
+
+    address private ethFundDeposit;
+
+    function sendFundHomeAmt(uint _amt) external onlyOwner {
+        if (!ethFundDeposit.send(_amt * 10 ** decimals)) revert(); // send the eth to tge International
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred during the initial token distribution or crowdsale.
+"""

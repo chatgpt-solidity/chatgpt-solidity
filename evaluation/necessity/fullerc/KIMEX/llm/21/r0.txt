@@ -1,0 +1,15 @@
+The provided Solidity code for the `allocateSalesTokens` function and related parts of the `KIMEX` contract do not directly violate the ERC-20 token standard as described in the provided ERC documentation. However, there are a few points to consider:
+
+1. The ERC-20 standard specifies a set of methods and events that a compliant token contract must implement. The provided code snippet does not include the full implementation of the ERC-20 standard, such as the `transfer`, `transferFrom`, `approve`, `allowance`, `totalSupply`, `balanceOf`, `name`, `symbol`, and `decimals` functions, as well as the `Transfer` and `Approval` events. To be fully compliant, the `KIMEX` contract must implement all of these methods and events.
+
+2. The `allocateSalesTokens` function is not part of the ERC-20 standard. It appears to be a custom function for internal use within the contract, likely for the purpose of distributing tokens during a sale or similar event. As long as this function does not interfere with the standard ERC-20 functions and adheres to the rules of the token (such as not exceeding the total supply), it does not violate the standard.
+
+3. The `allocateSalesTokens` function uses the `SafeMath` library for arithmetic operations to prevent overflows and underflows, which is a good practice for security.
+
+4. The `allocateSalesTokens` function emits an event `AllocateSalesTokens`, which is not part of the ERC-20 standard. Custom events are allowed as long as the standard events (`Transfer` and `Approval`) are also implemented and emitted as required by the standard.
+
+5. The `allocateSalesTokens` function modifies the `balances` mapping and decreases the `totalRemainingTokensForSales`. It is important to ensure that the `totalRemainingTokensForSales` is correctly initialized and managed to reflect the actual available tokens for sale. This variable is not part of the ERC-20 standard, so its management is up to the contract's logic.
+
+6. The `isActive` and `onlyOwnerOrAdmin` modifiers are used to restrict access to the `allocateSalesTokens` function. This is a common practice for administrative functions and does not violate the ERC-20 standard as long as the standard functions remain accessible as specified.
+
+In conclusion, the `allocateSalesTokens` function itself does not violate the ERC-20 standard, but the contract must implement all required ERC-20 functions and events to be considered compliant. The provided code snippet is not sufficient to determine full compliance, as it does not include the entire contract. It is also important to ensure that any additional functions and state variables, such as `allocateSalesTokens` and `totalRemainingTokensForSales`, are managed in a way that does not conflict with the ERC-20 standard's requirements.

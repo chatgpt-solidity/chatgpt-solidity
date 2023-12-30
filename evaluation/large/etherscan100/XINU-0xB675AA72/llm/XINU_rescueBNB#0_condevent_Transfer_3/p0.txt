@@ -1,0 +1,39 @@
+Given a solidity function rescueBNB and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.10;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract XINU is Context, IERC20, Ownable {
+
+    //Use this in case BNB are sent to the contract by mistake
+    function rescueBNB(uint256 weiAmount) external onlyOwner{
+        require(address(this).balance >= weiAmount, "insufficient BNB balance");
+        payable(msg.sender).transfer(weiAmount);
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

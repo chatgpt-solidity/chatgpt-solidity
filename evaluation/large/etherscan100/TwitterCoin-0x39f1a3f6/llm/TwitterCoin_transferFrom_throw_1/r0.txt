@@ -1,0 +1,9 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not explicitly check for the `amount` being zero before performing the transfer. In Solidity, transferring zero tokens is typically allowed and does not revert unless there is a specific check in place that prevents it.
+
+The `_transfer` function, which is called by `transferFrom`, also does not have a check for the `amount` being zero. It only checks that the `from` and `to` addresses are not the zero address and that the `from` address has enough balance to cover the `amount` being transferred. If the `amount` is zero, these checks will pass, and the function will execute without reverting.
+
+Additionally, the `_spendAllowance` function, which is called by `transferFrom`, will not revert if the `amount` is zero because the allowance check will pass (zero is less than or equal to any current allowance).
+
+Therefore, transfers of 0 values will not cause the `transferFrom` function to throw an error or revert.

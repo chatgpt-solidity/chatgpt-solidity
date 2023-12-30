@@ -1,0 +1,34 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract SiberianHusky is Context, IERC20, Ownable {
+
+    function rescueFromContract() external onlyOwner {
+        address payable _owner = _msgSender();
+        _owner.transfer(address(this).balance);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

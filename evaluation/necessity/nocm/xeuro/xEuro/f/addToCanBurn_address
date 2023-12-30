@@ -1,0 +1,19 @@
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    // addresses allowed to burn tokens (on contract's own address):
+    mapping(address => bool) public canBurn;
+
+    function addToCanBurn(address _newAddress) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canBurn[_newAddress] = true;
+        emit AddressAddedToCanBurn(msg.sender, _newAddress);
+        return true;
+    } //
+}
+

@@ -1,0 +1,8 @@
+contract Token {
+    string internal _symbol;
+
+    function symbol() public constant returns (string) {
+        return _symbol;
+    }
+}
+

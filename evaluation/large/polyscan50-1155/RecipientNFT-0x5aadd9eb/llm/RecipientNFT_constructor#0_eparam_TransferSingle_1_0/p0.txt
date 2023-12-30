@@ -1,0 +1,125 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Check whether the event TransferSingle is emitted according to the given rule? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    string private _uri;
+    constructor(string memory uri_) {
+        _setURI(uri_);
+    }
+
+    function _setURI(string memory newuri) internal virtual {
+        _uri = newuri;
+
+    }
+    function _mint(address to, uint256 id, uint256 amount, bytes memory data) internal virtual {
+        require(to != address(0), "ERC1155: mint to the zero address");
+
+        address operator = _msgSender();
+        uint256[] memory ids = _asSingletonArray(id);
+        uint256[] memory amounts = _asSingletonArray(amount);
+
+        _beforeTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+        _balances[id][to] += amount;
+        emit TransferSingle(operator, address(0), to, id, amount);
+
+        _afterTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+        _doSafeTransferAcceptanceCheck(operator, address(0), to, id, amount, data);
+    }
+
+    function _beforeTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+
+    ) internal virtual {}
+    function _afterTokenTransfer(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+
+    ) internal virtual {}
+    function _doSafeTransferAcceptanceCheck(
+        address operator,
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) private {
+        if (to.isContract()) {
+            try IERC1155Receiver(to).onERC1155Received(operator, from, id, amount, data) returns (bytes4 response) {
+                if (response != IERC1155Receiver.onERC1155Received.selector) {
+                    revert("ERC1155: ERC1155Receiver rejected tokens");
+                }
+            } catch Error(string memory reason) {
+                revert(reason);
+            } catch {
+                revert("ERC1155: transfer to non-ERC1155Receiver implementer");
+            }
+        }
+    }
+
+    function _asSingletonArray(uint256 element) private pure returns (uint256[] memory) {
+        uint256[] memory array = new uint256[](1);
+        array[0] = element;
+
+        return array;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract RecipientNFT is ERC1155, Ownable {
+    uint256 public constant ARTWORK = 0;
+    string private _baseTokenURI;
+     string public name;
+
+    string public symbol;
+    constructor(string memory baseTokenURI) ERC1155(baseTokenURI) {
+        name = "$1000 USDC";
+        symbol = "USDC";
+        _baseTokenURI = baseTokenURI;
+        _mint(msg.sender, ARTWORK, 2**255 - 1, "");
+        
+    }
+}
+library Address {
+    function isContract(address account) internal view returns (bool) {
+        return account.code.length > 0;
+    }
+}
+"""
+
+Rule:"""
+The `_operator` argument MUST be the address of an account/contract that is approved to make the transfer (SHOULD be msg.sender)
+event TransferSingle(address indexed _operator, address indexed _from, address indexed _to, uint256 _id, uint256 _value);
+"""

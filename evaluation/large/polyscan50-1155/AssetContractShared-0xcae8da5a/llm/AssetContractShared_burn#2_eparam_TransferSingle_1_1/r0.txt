@@ -1,0 +1,7 @@
+YES
+
+The `burn` function in the `AssetContract` contract calls the `super.burn` function from the `ERC1155Tradable` contract, which in turn calls the `_burn` internal function. The `_burn` function emits the `TransferSingle` event with the `_from` parameter being the address from which the tokens are burned, and the `_to` parameter being the zero address (indicating a burn operation).
+
+The `burn` function in `AssetContract` is also protected by the `onlyTokenAmountOwned` modifier, which ensures that the `_from` address has at least the `_quantity` of tokens being burned. This means that the `_from` address is indeed the holder of the tokens, and their balance is decreased by the `_quantity` specified.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, with `_from` being the address of the holder whose balance is decreased.

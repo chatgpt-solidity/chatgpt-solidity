@@ -1,0 +1,103 @@
+{
+    "file": "evaluation/audited/egypt.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.22",
+            "func2file": {
+                "constructor() returns()": "result-necessity/s-noos/egypt/Egypt/f/constructor",
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-noos/egypt/Egypt/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-noos/egypt/Egypt/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-noos/egypt/Egypt/f/approve_address_uint256",
+                "approveAndCall(address,uint256,bytes) returns(bool)": "result-necessity/s-noos/egypt/Egypt/f/approveAndCall_address_uint256_bytes",
+                "giveBlockReward() returns()": "result-necessity/s-noos/egypt/Egypt/f/giveBlockReward"
+            },
+            "func2attrs": {
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approveAndCall(address,uint256,bytes) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "giveBlockReward() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "balanceOf(address) returns(uint256)",
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "symbol() returns(string)",
+                "allowance(address,address) returns(uint256)",
+                "decimals() returns(uint8)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "Egypt"
+        }
+    ]
+}

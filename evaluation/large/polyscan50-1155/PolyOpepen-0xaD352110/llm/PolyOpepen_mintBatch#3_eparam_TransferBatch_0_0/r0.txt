@@ -1,0 +1,35 @@
+YES
+
+The `mintBatch` function in the provided Solidity code calls the `_mintBatch` internal function, which is responsible for minting a batch of tokens. The `_mintBatch` function emits the `TransferBatch` event as required by the ERC-1155 standard.
+
+The `_mintBatch` function sets the `operator` to the address returned by `_msgSender()`, which is the same as `msg.sender` in the context of the transaction. This is in line with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+Here is the relevant part of the code:
+
+```solidity
+function _mintBatch(
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual {
+    require(to != address(0), "ERC1155: mint to the zero address");
+    require(ids.length == amounts.length, "ERC1155: ids and amounts length mismatch");
+
+    address operator = _msgSender(); // This is equivalent to msg.sender
+
+    _beforeTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+    for (uint256 i = 0; i < ids.length; i++) {
+        _balances[ids[i]][to] += amounts[i];
+    }
+
+    emit TransferBatch(operator, address(0), to, ids, amounts); // TransferBatch event is emitted here
+
+    _afterTokenTransfer(operator, address(0), to, ids, amounts, data);
+
+    _doSafeBatchTransferAcceptanceCheck(operator, address(0), to, ids, amounts, data);
+}
+```
+
+The `TransferBatch` event is emitted with the `operator` set to the address of the sender of the transaction, which complies with the given rule.

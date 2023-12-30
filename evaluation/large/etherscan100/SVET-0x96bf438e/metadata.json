@@ -1,0 +1,166 @@
+{
+    "file": "evaluation/etherscan100/SVET-0x96bf438e.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.19",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/balanceOf_address",
+                "_approve(address) returns(bool)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/_approve_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/transferFrom_address_address_uint256",
+                "enableTrading(address) returns()": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/enableTrading_address",
+                "receive() returns()": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/receive",
+                "removeLimits() returns()": ".temp/etherscan100/SVET-0x96bf438e/SVET/f/removeLimits"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "_approve(address) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "enableTrading(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeLimits() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_maxWalletSize() returns(uint256)",
+                "uniPair() returns(address)",
+                "_swapTokensAtAmount() returns(uint256)",
+                "uniRouter() returns(IUniswapV2Router02)",
+                "_maxTxAmount() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MaxTxAmountUpdated",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "SVET"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+YES
+
+The `mintBatch` function in the `NFTBigPartnerV2` contract calls the `_mintBatch` function in the `ERC1155` contract. The `_mintBatch` function is responsible for minting a batch of tokens and emitting the `TransferBatch` event.
+
+The `TransferBatch` event is emitted with the following arguments:
+- `_operator`: The address performing the mint operation, which is obtained by calling `_msgSender()`. This is the same as `msg.sender` in the context of the transaction.
+- `_from`: The address from which the tokens are being transferred. In the case of minting, this is the zero address (`address(0)`), as tokens are being created.
+- `_to`: The address to which the tokens are being minted.
+- `_ids`: An array of token IDs.
+- `_values`: An array of amounts for each token ID.
+
+The rule states that the `_operator` argument must be the address of an account/contract that is approved to make the transfer and should be `msg.sender`. In the provided code, the `_operator` is indeed set to the address returned by `_msgSender()`, which is `msg.sender` in the context of the transaction. Additionally, the `mintBatch` function can only be called by the owner of the contract due to the `onlyOwner` modifier, ensuring that the caller is authorized to perform the mint operation.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule, with `_operator` being the `msg.sender` who is authorized to make the transfer.

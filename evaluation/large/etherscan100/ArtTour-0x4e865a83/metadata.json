@@ -1,0 +1,210 @@
+{
+    "file": "evaluation/etherscan100/ArtTour-0x4e865a83.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.21",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/transferOwnership_address",
+                "supportsInterface(bytes4) returns(bool)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/supportsInterface_bytes4",
+                "constructor(address) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/constructor_address",
+                "name() returns(string)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/symbol",
+                "onERC721Received(address,address,uint256,bytes) returns(bytes4)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/onERC721Received_address_address_uint256_bytes",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/ownerOf_uint256",
+                "tokenURI(uint256) returns(string)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/tokenURI_uint256",
+                "setTokenURI(string) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/setTokenURI_string",
+                "approve(address,uint256) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/safeTransferFrom_address_address_uint256_bytes",
+                "toggleStaking() returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/toggleStaking",
+                "stake(uint256[]) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/stake_uint256[]",
+                "unstake(uint256[]) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/unstake_uint256[]",
+                "returnMofoWeDontKnowThough(address,uint256) returns()": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/returnMofoWeDontKnowThough_address_uint256",
+                "stakingPeriod(uint256) returns(bool,uint256,uint256)": ".temp/etherscan100/ArtTour-0x4e865a83/ArtTour/f/stakingPeriod_uint256"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "constructor(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "onERC721Received(address,address,uint256,bytes) returns(bytes4)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setTokenURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "toggleStaking() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "stake(uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unstake(uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "returnMofoWeDontKnowThough(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "stakingPeriod(uint256) returns(bool,uint256,uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_fomoMofo() returns(address)",
+                "baseURI() returns(string)",
+                "stakingIsEnabled() returns(bool)"
+            ],
+            "ercs": [
+                "721receiver",
+                "721",
+                "721metadata",
+                "165"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "ArtTour"
+        }
+    ]
+}

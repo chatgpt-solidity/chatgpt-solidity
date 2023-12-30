@@ -1,0 +1,20 @@
+The provided Solidity code for the `allowance` function appears to be compliant with the ERC-20 token standard as described in the given ERC documentation. The ERC-20 standard specifies that the `allowance` function should:
+
+> Returns the amount which _spender is still allowed to withdraw from _owner.
+
+The Solidity code for the `allowance` function does exactly that:
+
+```solidity
+function allowance(
+    address owner,
+    address spender
+) public view virtual override returns (uint256) {
+    return _allowances[owner][spender];
+}
+```
+
+This function takes two arguments, `owner` and `spender`, and returns the amount of tokens that `spender` is allowed to withdraw from `owner`'s account. The function is marked as `public` and `view`, meaning it can be called by anyone and does not modify the state of the contract. It is also marked as `virtual` and `override`, which are Solidity-specific keywords that allow for function behavior to be overridden in derived contracts.
+
+The `_allowances` mapping is used to keep track of how much each `spender` is allowed to withdraw from each `owner`. This is a private state variable, which is a common practice for encapsulating contract state in Solidity.
+
+There is no indication in the provided code that the `allowance` function violates the ERC-20 standard. It correctly implements the required functionality as per the specification. However, it is important to note that the rest of the contract would also need to be reviewed to ensure full compliance with the ERC-20 standard, including the implementation of other functions like `transfer`, `transferFrom`, and `approve`, as well as the proper triggering of the `Transfer` and `Approval` events.

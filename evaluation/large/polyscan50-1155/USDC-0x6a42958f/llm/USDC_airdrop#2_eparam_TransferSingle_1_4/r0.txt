@@ -1,0 +1,5 @@
+NO
+
+The `TransferSingle` event is emitted within the `airdrop` function, but the function does not actually transfer any tokens. It only emits the event, which is supposed to log the transfer of tokens. However, without the actual transfer logic (e.g., updating balances of the `_from` and `_to` addresses), the event does not reflect a real change in token balances.
+
+The rule states that the `_value` argument must match the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by. Since there is no code in the `airdrop` function that performs the balance update, the event does not adhere to the rule. The event should only be emitted after the actual transfer of tokens has occurred, ensuring that the `_value` represents a real transfer of tokens.

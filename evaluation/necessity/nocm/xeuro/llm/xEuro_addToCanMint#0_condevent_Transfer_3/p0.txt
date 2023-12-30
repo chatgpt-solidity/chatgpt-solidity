@@ -1,0 +1,31 @@
+Given a solidity function addToCanMint and the related parts from a smart contract.
+Whether the function addToCanMint and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.7;
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    // addresses allowed to mint tokens:
+    mapping(address => bool) public canMint;
+
+    function addToCanMint(address _newAddress) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canMint[_newAddress] = true;
+        emit AddressAddedToCanMint(msg.sender, _newAddress);
+        return true;
+    } //
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are burning or deallocating
+"""

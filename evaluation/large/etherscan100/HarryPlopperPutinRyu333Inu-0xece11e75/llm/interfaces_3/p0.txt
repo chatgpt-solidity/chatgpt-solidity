@@ -1,0 +1,31 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "approve(address,uint256) returns(bool)" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+isOwner(address) returns(bool)
+transferOwnership(address) returns()
+constructor() returns()
+receive() returns()
+name() returns(string)
+symbol() returns(string)
+decimals() returns(uint8)
+startTrading() returns()
+getOwner() returns(address)
+balanceOf(address) returns(uint256)
+transfer(address,uint256) returns(bool)
+allowance(address,address) returns(uint256)
+setisBot(address,bool) returns()
+setisExempt(address,bool) returns()
+approve(address,uint256) returns(bool)
+totalSupply() returns(uint256)
+_maxWalletToken() returns(uint256)
+_maxTxAmount() returns(uint256)
+_maxTransferAmount() returns(uint256)
+setStructure(uint256,uint256,uint256,uint256,uint256,uint256,uint256) returns()
+setParameters(uint256,uint256,uint256) returns()
+setSwapbackSettings(uint256,uint256,uint256) returns()
+transferFrom(address,address,uint256) returns(bool)
+pair() returns(address)
+isFeeExempt(address) returns(bool)
+"""

@@ -1,0 +1,38 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "totalSupply() returns(uint256)" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+owner() returns(address)
+renounceOwnership() returns()
+transferOwnership(address) returns()
+constructor() returns()
+name() returns(string)
+symbol() returns(string)
+decimals() returns(uint8)
+totalSupply() returns(uint256)
+balanceOf(address) returns(uint256)
+transfer(address,uint256) returns(bool)
+allowance(address,address) returns(uint256)
+approve(address,uint256) returns(bool)
+transferFrom(address,address,uint256) returns(bool)
+setTrading(bool) returns()
+manualswap() returns()
+manualsend() returns()
+blockBots(address[]) returns()
+unblockBot(address) returns()
+receive() returns()
+setFee(uint256,uint256,uint256,uint256) returns()
+setMinSwapTokensThreshold(uint256) returns()
+toggleSwap(bool) returns()
+setMaxTxnAmount(uint256) returns()
+setMaxWalletSize(uint256) returns()
+excludeMultipleAccountsFromFees(address[],bool) returns()
+_maxWalletSize() returns(uint256)
+_swapTokensAtAmount() returns(uint256)
+_maxTxAmount() returns(uint256)
+_buyMap(address) returns(uint256)
+uniswapV2Router() returns(IUniswapV2Router02)
+bots(address) returns(bool)
+uniswapV2Pair() returns(address)
+"""

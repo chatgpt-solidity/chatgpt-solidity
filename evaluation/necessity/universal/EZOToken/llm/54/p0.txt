@@ -1,0 +1,189 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract SafeMath {
+    function safeMul(uint256 a, uint256 b) internal pure returns (uint256) {
+        if (a == 0) {
+            return 0;
+        }
+        uint256 c = a * b;
+        assert(c / a == b);
+        return c;
+
+    }
+    function safeMull(uint256 a, uint256 b) internal pure returns (uint256) {
+        if (a == 0) {
+            return 0;
+        }
+        uint256 c = a * 1 ether;
+        assert(c / a == 1 ether);
+        return c;
+    }
+
+    function safeDiv(uint256 a, uint256 b) internal pure returns (uint256) {
+        // assert(b > 0); // Solidity automatically throws when dividing by 0
+        uint256 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+        return c;
+
+    }
+    function safeDivv(uint256 a, uint256 b) internal pure returns (uint256) {
+        // assert(b > 0); // Solidity automatically throws when dividing by 0
+        uint256 c = a / 1 ether;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+        return c;
+
+    }
+    function safeSub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract EZOToken is ERC20, SafeMath, Haltable {
+
+    uint256 public ezoTokenPriceUSD = 100;
+
+    //mapping of token balances
+    mapping(address => uint256) balances;
+
+    address systemAddress = 0x2a3a91f51CA13a464500c2200E6D025a53d39Bbb;
+    address public currencyPricesContract =
+
+        0x92F87532eDB5e7fc43F0641b37c5687f7fc7F04a;
+    mapping(address => PurchaseRecord) PurchaseRecordsAll;
+    mapping(address => uint256) transactionStatus;
+
+    //  Transfer `value` EZO tokens from sender's account
+    // `msg.sender` to provided account address `to`.
+    // @param _value The number of EZO tokens to transfer
+    // @return Whether the transfer was successful or not
+    function transfer(
+        address _uniqueId,
+        uint _value
+    ) public stopIfHalted returns (bool ok) {
+        //validate receiver address and value.Not allow 0 value
+        require(_uniqueId != address(0) && _value > 0);
+        if (_uniqueId != systemAddress) {
+            address payable _to = PurchaseRecordsAll[_uniqueId].sender;
+            uint256 _valueCal = 0;
+            uint256 senderBalance = 0;
+            address curAddress = PurchaseRecordsAll[_uniqueId].currency;
+            if (
+                transactionStatus[_uniqueId] != 0 &&
+                transactionStatus[_uniqueId] <= 2
+            ) {
+                require(transactionStatus[_uniqueId] == 1);
+                _valueCal = safeDivv(
+                    safeMul(
+                        CurrencyPrices(currencyPricesContract).currencyPrices(
+                            curAddress
+                        ),
+                        PurchaseRecordsAll[_uniqueId].amountSpent
+                    ),
+                    100
+                );
+                uint256 returnAmount = 0;
+                if (_valueCal < _value) {
+                    _valueCal = _valueCal;
+                } else {
+                    returnAmount = safeMul(
+                        safeSub(_valueCal, _value),
+                        ezoTokenPriceUSD
+                    );
+                    returnAmount = safeDiv(
+                        safeDiv(
+                            safeMull(returnAmount, 1),
+                            CurrencyPrices(currencyPricesContract)
+                                .currencyPrices(curAddress)
+                        ),
+                        100
+                    );
+                    _valueCal = _value;
+                }
+                assignTokens(msg.sender, _to, _valueCal);
+                transactionStatus[_uniqueId] = 2;
+                uint256 sentAmount = safeDiv(
+                    safeMull(_valueCal, 1),
+                    CurrencyPrices(currencyPricesContract).currencyPrices(
+                        curAddress
+                    )
+                );
+                emit Sell(
+                    _uniqueId,
+                    msg.sender,
+                    _to,
+                    _value,
+                    _valueCal,
+                    sentAmount,
+                    returnAmount,
+                    curAddress
+                );
+                emit Transfer(msg.sender, _to, _valueCal);
+                if (curAddress == address(0)) {
+                    assignEther(msg.sender, sentAmount);
+                    if (returnAmount != 0) {
+                        assignEther(_to, returnAmount);
+                    }
+                } else {
+                    Token(curAddress).transfer(msg.sender, sentAmount);
+                    if (returnAmount != 0) {
+                        Token(curAddress).transfer(_to, returnAmount);
+                    }
+                }
+                if (_valueCal < _value) {
+                    emit Transfer(
+                        msg.sender,
+                        msg.sender,
+                        safeSub(_value, _valueCal)
+                    );
+                }
+                return true;
+            } else {
+                emit Transfer(msg.sender, _uniqueId, _value);
+                emit Transfer(_uniqueId, msg.sender, _value);
+                emit TransferUnknown(msg.sender, _uniqueId, _value);
+            }
+        } else {
+            assignTokens(msg.sender, _uniqueId, _value);
+            emit Transfer(msg.sender, _uniqueId, _value);
+        }
+    }
+
+    // Function will transfer the tokens to investor's address
+    function assignTokens(address sender, address to, uint256 tokens) internal {
+        uint256 senderBalance = balances[sender];
+        //Check sender have enough balance
+        require(senderBalance >= tokens);
+        senderBalance = safeSub(senderBalance, tokens);
+        balances[sender] = senderBalance;
+        balances[to] = safeAdd(balances[to], tokens);
+
+    }
+    function assignEther(address payable recipient, uint256 _amount) internal {
+        require(recipient.send(_amount));
+    }
+}
+
+contract Haltable is Ownable {
+    // @dev To Halt in Emergency Condition
+    bool public halted = false;
+
+    // @dev Use this as function modifier that should not execute if contract state Halted
+    modifier stopIfHalted() {
+        require(!halted);
+        _;
+    }
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

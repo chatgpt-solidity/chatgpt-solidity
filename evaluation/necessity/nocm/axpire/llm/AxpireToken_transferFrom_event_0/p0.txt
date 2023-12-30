@@ -1,0 +1,56 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether it emits the event Transfer? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.24;
+contract Pausable is Ownable {
+
+
+    bool public paused = false;
+    /**
+     * @dev Modifier to make a function callable only when the contract is not paused.
+     */
+    modifier whenNotPaused() {
+        require(!paused);
+        _;
+    }
+}
+
+contract StandardToken is Token {
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        if (
+            balances[_from] >= _value &&
+            allowed[_from][msg.sender] >= _value &&
+            _value > 0
+        ) {
+            balances[_to] += _value;
+            balances[_from] -= _value;
+            allowed[_from][msg.sender] -= _value;
+            emit Transfer(_from, _to, _value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    mapping(address => uint256) balances;
+    mapping(address => mapping(address => uint256)) allowed;
+}
+
+contract AxpirePausableToken is StandardToken, Pausable, BurnableToken {
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public whenNotPaused returns (bool) {
+        return super.transferFrom(_from, _to, _value);
+    }
+}
+"""

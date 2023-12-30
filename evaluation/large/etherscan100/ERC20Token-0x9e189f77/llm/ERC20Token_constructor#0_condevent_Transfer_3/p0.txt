@@ -1,0 +1,179 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.10;
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    mapping(address => uint256) private _balances;
+
+
+    uint256 private _totalSupply;
+    string private _name;
+    string private _symbol;
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+
+
+    function _mint(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: mint to the zero address");
+
+        _beforeTokenTransfer(address(0x000000000000000000000000000000000000dEaD), account, amount);
+
+        _totalSupply += amount;
+        _balances[account] += amount;
+        emit Transfer(address(0), account, amount);
+
+        _afterTokenTransfer(address(0), account, amount);
+    }
+
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+
+
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+}
+
+contract ERC20Token is ERC20, Ownable {
+
+    IUniswapV2Router02 public immutable uniswapV2Router;
+    address public immutable uniswapV2Pair;
+
+    address public MarketingWallet;
+    address public devWallet;
+
+    uint256 public maxTransactionAmount;
+    uint256 public swapTokensAtAmount;
+    uint256 public maxWallet;
+
+    uint256 public buyTotalFees;
+    uint256 public buyMarketingFee;
+    uint256 public buyLiquidityFee;
+
+    uint256 public buyDevFee;
+    uint256 public sellTotalFees;
+    uint256 public sellMarketingFee;
+    uint256 public sellLiquidityFee;
+    uint256 public sellDevFee;
+
+    mapping(address => bool) private _isExcludedFromFees;
+    mapping(address => bool) public _isExcludedMaxTransactionAmount;
+
+
+    mapping(address => bool) public automatedMarketMakerPairs;
+
+    constructor() ERC20("Ethereum20", "ERC20") {
+        IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(
+            0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
+        );
+
+        excludeFromMaxTransaction(address(_uniswapV2Router), true);
+        uniswapV2Router = _uniswapV2Router;
+
+        uniswapV2Pair = IUniswapV2Factory(_uniswapV2Router.factory())
+            .createPair(address(this), _uniswapV2Router.WETH());(address(uniswapV2Pair), true);
+        _setAutomatedMarketMakerPair(address(uniswapV2Pair), true);
+
+        uint256 _buyMarketingFee = 10;
+        uint256 _buyLiquidityFee = 0;
+        uint256 _buydevfee = 0;
+
+        uint256 _sellMarketingFee = 30;  
+        uint256 _sellLiquidityFee = 0;
+        uint256 _selldevfee = 0;
+
+        uint256 totalSupply = 120_000_000 * 1e18;
+
+        maxTransactionAmount =  600_000 * 1e18; // 0.1% from total supply maxTransactionAmountTxn
+        maxWallet = 480_000 * 1e18; // 1.5% from total supply maxWallet
+        swapTokensAtAmount = (totalSupply * 5) / 10000; // 0.05% swap wallet
+
+        buyMarketingFee = _buyMarketingFee;
+        buyLiquidityFee = _buyLiquidityFee;
+        buyDevFee = _buydevfee;
+        buyTotalFees = buyMarketingFee + buyLiquidityFee + buyDevFee;
+
+        sellMarketingFee = _sellMarketingFee;
+        sellLiquidityFee = _sellLiquidityFee;
+        sellDevFee = _selldevfee;
+        sellTotalFees = sellMarketingFee + sellLiquidityFee + sellDevFee;
+
+        devWallet = address(0x6c64f84be2172FBa09260e8eAC698ED9E0a4268F); // set as dev wallet
+        MarketingWallet = address(0x6c64f84be2172FBa09260e8eAC698ED9E0a4268F); // set as mkt wallet
+        
+        // exclude from paying fees or having max transaction amount
+        excludeFromFees(owner(), true);
+        excludeFromFees(address(this), true);
+        excludeFromFees(address(0xdead), true);
+       
+
+        excludeFromMaxTransaction(owner(), true);
+        excludeFromMaxTransaction(address(this), true);
+        excludeFromMaxTransaction(address(0xdead), true);
+        
+
+        /*
+            _mint is an internal function in ERC20.sol that is only called here,
+            and CANNOT be called ever again
+        */
+        _mint(msg.sender, totalSupply);
+    }
+
+    function excludeFromMaxTransaction(address updAds, bool isEx)
+        public
+        onlyOwner
+    {
+        _isExcludedMaxTransactionAmount[updAds] = isEx;
+    }
+
+    function excludeFromFees(address account, bool excluded) public onlyOwner {
+        _isExcludedFromFees[account] = excluded;
+        emit ExcludeFromFees(account, excluded);
+    }
+
+    function _setAutomatedMarketMakerPair(address pair, bool value) private {
+        automatedMarketMakerPairs[pair] = value;
+
+        emit SetAutomatedMarketMakerPair(pair, value);
+    }
+}
+abstract contract Ownable is Context {
+    address private _owner;
+
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

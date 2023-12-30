@@ -1,0 +1,32 @@
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract simple is ERC20, Ownable {
+
+    uint256 public buyTotalFees;
+    uint256 public buyMarketingFee;
+    uint256 public buyLiquidityFee;
+    uint256 public buyDevCutFee;
+    uint256 public buyBurnFee;
+
+    function updateBuyFees(uint256 _MarketingFee, uint256 _liquidityFee, uint256 _DevCutFee, uint256 _burnFee) external onlyOwner {
+        buyMarketingFee = _MarketingFee;
+        buyLiquidityFee = _liquidityFee;
+        buyDevCutFee = _DevCutFee;
+        buyBurnFee = _burnFee;
+        buyTotalFees = buyMarketingFee + buyLiquidityFee + buyDevCutFee + buyBurnFee;
+        require(buyTotalFees <= 15, "Must keep fees at 15% or less");
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+

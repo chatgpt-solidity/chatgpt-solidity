@@ -1,0 +1,13 @@
+The function `getTxStatus` in the provided Solidity code does not directly violate the ERC-20 standard. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable token transfers and allow tokens to be approved for use by third parties. The standard includes methods like `transfer`, `transferFrom`, `approve`, `allowance`, `balanceOf`, and `totalSupply`, as well as `Transfer` and `Approval` events.
+
+The `getTxStatus` function is not part of the ERC-20 standard, but adding additional functions to an ERC-20 compliant contract does not inherently violate the standard, as long as the required functions and events are correctly implemented and the additional functions do not interfere with the standard's operations.
+
+However, there are a few points to consider:
+
+1. The `transactionStatus` mapping is not part of the ERC-20 standard. It seems to be a custom mapping that tracks some kind of status for transactions, which is not required by ERC-20. This is fine as long as it does not interfere with the standard token functionality.
+
+2. The `EZOToken` contract is inheriting from `ERC20`, `SafeMath`, and `Haltable`. The `ERC20` inheritance suggests that the contract is intended to be an ERC-20 token. The `SafeMath` library is typically used to prevent integer overflows and underflows, which is a good practice. The `Haltable` inheritance suggests there might be some mechanism to pause the contract, which is not part of the ERC-20 standard but is a common feature in many token contracts for emergency use.
+
+3. The `getTxStatus` function is a view function, meaning it does not modify the state of the blockchain. It simply returns the status associated with a given address. This should not affect the ERC-20 compliance.
+
+In conclusion, the `getTxStatus` function and the related `transactionStatus` mapping do not violate the ERC-20 standard. However, it is important to ensure that the rest of the contract correctly implements all the required ERC-20 functions and events and that any additional functionality does not interfere with the standard behavior of an ERC-20 token.

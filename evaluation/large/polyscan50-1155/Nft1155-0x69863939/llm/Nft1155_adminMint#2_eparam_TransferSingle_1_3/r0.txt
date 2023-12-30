@@ -1,0 +1,13 @@
+YES
+
+The `adminMint` function in the provided Solidity code calls the `_mint` function, which is responsible for minting new tokens. The `_mint` function, as defined in the `ERC1155` contract, emits a `TransferSingle` event upon successful minting of tokens.
+
+The `TransferSingle` event is emitted with the following parameters:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are being transferred. In the case of minting, this is the zero address (`address(0)`), indicating token creation.
+- `_to`: The address to which the tokens are being minted, which is the `_address` parameter passed to the `adminMint` function.
+- `_id`: The token type being transferred, which is the `_tokenId` parameter passed to the `adminMint` function.
+- `_value`: The number of tokens being transferred, which is the `_amount` parameter passed to the `adminMint` function.
+
+The rule states that the `_id` argument must be the token type being transferred, and in this case, the `_tokenId` represents the token type, and it is correctly passed to the `TransferSingle` event. Therefore, the event is emitted according to the given rule.

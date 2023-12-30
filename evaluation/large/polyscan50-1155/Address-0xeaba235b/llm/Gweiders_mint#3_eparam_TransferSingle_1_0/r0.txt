@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called by the `mint` function in the `Gweiders` contract, which has the `onlyOwner` modifier, ensuring that only the owner of the contract can call it.
+
+The `_operator` argument in the `TransferSingle` event is set to `operator`, which is assigned the value of `_msgSender()` at the beginning of the `_mint` function. The `_msgSender()` function (inherited from the `Context` contract) returns the `msg.sender`, which is the address of the account that called the function.
+
+Since the `mint` function can only be called by the owner (due to the `onlyOwner` modifier), and the `_mint` function uses `_msgSender()` to set the `operator`, the `_operator` argument in the `TransferSingle` event will be the address of the account that is approved to make the transfer, which should be `msg.sender`. This complies with the given rule.

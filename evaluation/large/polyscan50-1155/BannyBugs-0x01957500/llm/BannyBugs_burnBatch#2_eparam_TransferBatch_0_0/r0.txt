@@ -1,0 +1,5 @@
+YES
+
+The `burnBatch` function in the `ERC1155Burnable` contract calls the `_burnBatch` internal function in the `ERC1155` contract. The `_burnBatch` function emits the `TransferBatch` event with the `operator` argument set to `_msgSender()`, which is the address of the account that initiated the transaction (i.e., `msg.sender`).
+
+The rule states that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`. Since `_msgSender()` is used to obtain `msg.sender` and is passed as the `operator` argument in the `TransferBatch` event, the rule is satisfied.

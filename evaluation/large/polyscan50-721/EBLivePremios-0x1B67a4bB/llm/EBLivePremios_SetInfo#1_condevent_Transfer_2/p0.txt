@@ -1,0 +1,48 @@
+Given a solidity function SetInfo and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract EBLivePremios is ERC721 {
+    address private _Admin;
+
+    //Funciones Config OnlyAdmin
+    function SetInfo(
+        string memory Name,
+        string memory Symbol
+    ) public onlyAdmin {
+        _setInfo(Name, Symbol);
+    }
+
+    //Ownable
+    modifier onlyAdmin() {
+        require(_Admin == _msgSender(), "Ownable: caller is not the admin");
+        _;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    string private _Name;
+    string private _Symbol;
+
+    function _setInfo(
+        string memory Name,
+        string memory Symbol
+    ) internal virtual {
+        _Name = Name;
+        _Symbol = Symbol;
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is destroyed and removed from circulation.
+"""

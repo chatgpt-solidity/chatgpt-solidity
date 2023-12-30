@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct `_value` argument. The `_mint` function increases the balance of the `to` address by the `amount` specified, and the `TransferSingle` event is emitted with the `amount` as the `_value`, which is the number of tokens minted to the recipient's balance. This matches the rule that the `_value` argument must be the number of tokens the holder balance is increased by.

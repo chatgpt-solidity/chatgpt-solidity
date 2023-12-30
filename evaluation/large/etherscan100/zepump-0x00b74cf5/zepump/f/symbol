@@ -1,0 +1,4 @@
+contract zepump is IERC20, tokenStaking, Ownable {
+    string private constant _symbol = 'ZePUMP';
+    function symbol() public pure returns (string memory) {return _symbol;}
+}

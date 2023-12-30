@@ -1,0 +1,34 @@
+Given a solidity function freezeTransfers and the related parts from a smart contract.
+Whether the function freezeTransfers and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * True if tokens transfers are currently frozen, false otherwise.
+     */
+    bool frozen = false;
+
+    /**
+     * Freeze ALL token transfers.
+     * May only be called by smart contract owner.
+     */
+    function freezeTransfers() public {
+        require(msg.sender == owner);
+
+        if (!frozen) {
+            frozen = true;
+            emit Freeze();
+        }
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

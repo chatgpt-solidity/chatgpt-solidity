@@ -1,0 +1,8 @@
+contract MyToken {
+
+    /* This unnamed function is called whenever someone tries to send ether to it */
+    function() {
+        throw; // Prevents accidental sending of ether
+    }
+}
+

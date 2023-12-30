@@ -1,0 +1,22 @@
+Given a solidity function changeOwner and the related parts from a smart contract and a rule.
+Whether the function changeOwner and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract Owner {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+
+    function changeOwner(address _newOwnerAddr) public onlyOwner {
+        require(_newOwnerAddr != address(0));
+        owner = _newOwnerAddr;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

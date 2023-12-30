@@ -1,0 +1,50 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+abstract contract Auth {
+    address internal _owner;
+    constructor(address creatorOwner) { 
+        _owner = creatorOwner; 
+    }
+}
+
+contract kaloulu is IERC20, Auth {
+    uint256 private constant _tSupp  = 2_000_000 * (10**_decimals);
+    address payable private _walletMarketing = payable(0xE7721Ce47beFB821Bf11Fb04f8F86b2F898D0A3a); 
+    mapping (address => uint256) private _balances;
+    mapping (address => bool) private _noFees;
+
+    mapping (address => bool) private _noLimits;
+    address private lpowner;
+    address private constant _swapRouterAddress = address(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+
+    constructor() Auth(msg.sender) {
+        lpowner = msg.sender;
+
+        uint256 tokenReserve   = _tSupp * 2 / 100;
+        
+        _balances[address(this)] = _tSupp - tokenReserve;
+        emit Transfer(address(0), address(this), _balances[address(this)]);
+
+        _balances[_owner] = tokenReserve;
+        emit Transfer(address(0), _owner, _balances[_owner]);
+
+        _noFees[_owner] = true;
+        _noFees[address(this)] = true;
+        _noFees[_swapRouterAddress] = true;
+        _noFees[_walletMarketing] = true;
+        _noLimits[_owner] = true;
+        _noLimits[address(this)] = true;
+        _noLimits[_swapRouterAddress] = true;
+        _noLimits[_walletMarketing] = true;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

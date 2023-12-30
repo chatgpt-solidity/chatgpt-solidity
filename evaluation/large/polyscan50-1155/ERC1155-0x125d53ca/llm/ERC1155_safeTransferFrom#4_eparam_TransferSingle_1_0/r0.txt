@@ -1,0 +1,5 @@
+YES
+
+The `safeTransferFrom` function checks if the `msg.sender` is the owner or approved operator before proceeding with the transfer. If the `msg.sender` is not the owner or an approved operator, the function will revert due to the `NotTokenOwnerOrApproved` error.
+
+The `_safeTransferFrom` function is called within `safeTransferFrom`, and it emits the `TransferSingle` event with `msg.sender` as the `_operator` argument. Since the `safeTransferFrom` function has already verified that `msg.sender` is an approved operator (or the owner), the rule is satisfied, and the `TransferSingle` event is emitted with the correct `_operator` argument.

@@ -1,0 +1,264 @@
+{
+    "file": "evaluation/etherscan100/Address-0x99ef8707.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.4",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/decreaseAllowance_address_uint256",
+                "isExcludedFromReward(address) returns(bool)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/isExcludedFromReward_address",
+                "totalFees() returns(uint256)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/totalFees",
+                "deliver(uint256) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/deliver_uint256",
+                "reflectionFromToken(uint256,bool) returns(uint256)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/reflectionFromToken_uint256_bool",
+                "tokenFromReflection(uint256) returns(uint256)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/tokenFromReflection_uint256",
+                "excludeFromReward(address) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/excludeFromReward_address",
+                "includeInReward(address) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/includeInReward_address",
+                "excludeFromFee(address) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/excludeFromFee_address",
+                "includeInFee(address) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/includeInFee_address",
+                "setTaxFeePercent(uint256) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/setTaxFeePercent_uint256",
+                "setDevelopmentFeePercent(uint256) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/setDevelopmentFeePercent_uint256",
+                "setLiquidityFeePercent(uint256) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/setLiquidityFeePercent_uint256",
+                "setMaxTxPercent(uint256) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/setMaxTxPercent_uint256",
+                "setSwapAndLiquifyEnabled(bool) returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/setSwapAndLiquifyEnabled_bool",
+                "receive() returns()": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/receive",
+                "isExcludedFromFee(address) returns(bool)": ".temp/etherscan100/Address-0x99ef8707/CRUNCH/f/isExcludedFromFee_address"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isExcludedFromReward(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalFees() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "deliver(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "reflectionFromToken(uint256,bool) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenFromReflection(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "excludeFromReward(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "includeInReward(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeFromFee(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "includeInFee(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setTaxFeePercent(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setDevelopmentFeePercent(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setLiquidityFeePercent(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMaxTxPercent(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setSwapAndLiquifyEnabled(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isExcludedFromFee(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "swapAndLiquifyEnabled() returns(bool)",
+                "_maxTxAmount() returns(uint256)",
+                "uniswapV2Router() returns(IUniswapV2Router02)",
+                "_liquidityFee() returns(uint256)",
+                "_taxFee() returns(uint256)",
+                "_developmentFee() returns(uint256)",
+                "uniswapV2Pair() returns(address)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MinTokensBeforeSwapUpdated",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapAndLiquifyEnabledUpdated",
+                    "params": [
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapAndLiquify",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "CRUNCH"
+        }
+    ]
+}

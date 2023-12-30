@@ -1,0 +1,15 @@
+YES
+
+The `mintBatch` function in the `METARUFFY_ASSETS` contract calls the `_mintBatch` function from the `ERC1155` base contract. The `_mintBatch` function is responsible for minting a batch of tokens to the specified address `to`, with the token IDs and amounts specified in the `ids` and `amounts` arrays, respectively.
+
+The `_mintBatch` function performs several checks and operations:
+1. It checks that the `to` address is not the zero address.
+2. It checks that the `ids` and `amounts` arrays have the same length.
+3. It calls `_beforeTokenTransfer` to perform any necessary pre-transfer checks or actions.
+4. It updates the balances for each token ID in the `ids` array by adding the corresponding amount from the `amounts` array to the balance of the `to` address.
+5. It emits the `TransferBatch` event with the operator (the message sender), the `from` address as the zero address (indicating minting), the `to` address, the `ids` array, and the `amounts` array.
+6. It performs a safe transfer acceptance check if the `to` address is a contract.
+
+The `TransferBatch` event is emitted with the `_operator` as the message sender, `_from` as the zero address (since tokens are being minted), `_to` as the recipient address, `_ids` as the list of token IDs, and `_values` as the list of amounts for each token ID. This matches the rule specified, where the `_values` argument must be the list of the number of tokens the holder balance is increased by, which in the case of minting, is the `amounts` array provided to the `_mintBatch` function.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule.

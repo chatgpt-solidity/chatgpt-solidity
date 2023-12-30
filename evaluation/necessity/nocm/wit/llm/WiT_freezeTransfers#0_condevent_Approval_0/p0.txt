@@ -1,0 +1,38 @@
+Given a solidity function freezeTransfers and the related parts from a smart contract.
+Whether the function freezeTransfers and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.3;
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * True if tokens transfers are currently frozen, false otherwise.
+     */
+    bool frozen = false;
+
+    /**
+     * Freeze ALL token transfers.
+     * May only be called by smart contract owner.
+     */
+    function freezeTransfers() public {
+        require(msg.sender == owner);
+
+        if (!frozen) {
+            frozen = true;
+            emit Freeze();
+        }
+    }
+}
+"""
+
+Rule:"""
+Emit Approval if any successful call to approve(address _spender, uint256 _value)
+"""

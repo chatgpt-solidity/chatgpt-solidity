@@ -1,0 +1,18 @@
+YES
+
+The function `_mint` in the provided contract code emits the `TransferSingle` event with the `_operator` argument set to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`. This is in accordance with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+Here is the relevant part of the code:
+
+```solidity
+function _mint(address to, uint256 id, uint256 amount, bytes memory data) internal virtual {
+    require(to != address(0), "ERC1155: mint to the zero address");
+
+    address operator = _msgSender(); // This is effectively msg.sender
+    // ...
+    emit TransferSingle(operator, address(0), to, id, amount); // Emitting the event with the operator as msg.sender
+    // ...
+}
+```
+
+The `mint` function in the `BONE` contract calls `_mint` and is restricted to the contract owner by the `onlyOwner` modifier. The `TransferSingle` event is emitted with the correct `_operator` argument as per the given rule.

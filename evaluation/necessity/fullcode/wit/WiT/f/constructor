@@ -1,0 +1,25 @@
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * Create new token smart contract and make msg.sender the
+     * owner of this smart contract.
+     */
+    constructor() public {
+        owner = msg.sender;
+    }
+}
+
+contract AbstractToken is Token, SafeMath {
+    /**
+     * Create new Abstract Token contract.
+     */
+    constructor() public {
+        // Do nothing
+    }
+}
+

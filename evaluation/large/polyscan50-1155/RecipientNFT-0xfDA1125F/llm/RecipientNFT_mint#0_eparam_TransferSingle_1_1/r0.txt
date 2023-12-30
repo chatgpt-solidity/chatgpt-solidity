@@ -1,0 +1,5 @@
+NO
+
+The rule states that the `_from` argument in the `TransferSingle` event must be the address of the holder whose balance is decreased. However, in the case of minting new tokens, there is no "from" address that is losing tokens, since new tokens are being created. In the `_mint` function, the `TransferSingle` event is emitted with the `_from` argument set to the zero address (`address(0)`), which is a common convention to represent the creation of new tokens rather than a transfer from an existing holder.
+
+Therefore, the `TransferSingle` event is not emitted with a `_from` address that corresponds to a holder with a decreased balance, but rather with the zero address to indicate minting. This is in line with the ERC-1155 standard for minting new tokens.

@@ -1,0 +1,38 @@
+Given a solidity function endIco and the related parts from a smart contract.
+Whether the function endIco and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.24;
+contract AxpireToken is AxpirePausableToken {
+
+    //address public ;
+    // crowdsale parameters
+    bool public tokenSaleActive; // switched to true in operational state
+
+    function endIco() external onlyOwner {
+        // end ICO
+        // ensure that sale is active. is set to false at the end. can only be performed once.
+        require(tokenSaleActive == true);
+        tokenSaleActive = false;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred, including zero value transfers.
+"""

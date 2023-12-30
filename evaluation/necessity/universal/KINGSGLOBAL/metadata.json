@@ -1,0 +1,102 @@
+{
+    "file": "evaluation/audited/KINGSGLOBAL.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.25",
+            "func2file": {
+                "transfer(address,uint256) returns(bool)": "result-necessity/u-cm/KINGSGLOBAL/KINGSGLOBAL/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/u-cm/KINGSGLOBAL/KINGSGLOBAL/f/transferFrom_address_address_uint256",
+                "balanceOf(address) returns(uint256)": "result-necessity/u-cm/KINGSGLOBAL/KINGSGLOBAL/f/balanceOf_address",
+                "approve(address,uint256) returns(bool)": "result-necessity/u-cm/KINGSGLOBAL/KINGSGLOBAL/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/u-cm/KINGSGLOBAL/KINGSGLOBAL/f/allowance_address_address",
+                "KINGSGLOBAL() returns()": "result-necessity/u-cm/KINGSGLOBAL/KINGSGLOBAL/f/KINGSGLOBAL",
+                "fallback() returns()": "result-necessity/u-cm/KINGSGLOBAL/KINGSGLOBAL/f/fallback",
+                "approveAndCall(address,uint256,bytes) returns(bool)": "result-necessity/u-cm/KINGSGLOBAL/KINGSGLOBAL/f/approveAndCall_address_uint256_bytes"
+            },
+            "func2attrs": {
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "KINGSGLOBAL() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "fallback() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approveAndCall(address,uint256,bytes) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "decimals() returns(uint8)",
+                "symbol() returns(string)",
+                "fundsWallet() returns(address)",
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "version() returns(string)",
+                "totalEthInWei() returns(uint256)",
+                "unitsOneEthCanBuy() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "KINGSGLOBAL"
+        }
+    ]
+}

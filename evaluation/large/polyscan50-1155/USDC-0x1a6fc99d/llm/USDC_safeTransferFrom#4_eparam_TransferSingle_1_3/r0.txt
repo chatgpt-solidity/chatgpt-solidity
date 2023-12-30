@@ -1,0 +1,3 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_id` argument in the event is indeed the token type being transferred, as required by the rule. The `id` parameter from the `safeTransferFrom` function call is passed through to the `_safeTransferFrom` internal function, which then emits the `TransferSingle` event with the `id` as the `_id` argument, satisfying the rule.

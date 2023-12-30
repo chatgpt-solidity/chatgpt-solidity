@@ -1,0 +1,14 @@
+contract ERC721A is Context, ERC165, IERC721A {
+
+    // Mapping owner address to address data
+    mapping(address => AddressData) private _addressData;
+
+    /**
+     * @dev See {IERC721-balanceOf}.
+     */
+    function balanceOf(address owner) public view override returns (uint256) {
+        if (owner == address(0)) revert BalanceQueryForZeroAddress();
+        return uint256(_addressData[owner].balance);
+    }
+}
+

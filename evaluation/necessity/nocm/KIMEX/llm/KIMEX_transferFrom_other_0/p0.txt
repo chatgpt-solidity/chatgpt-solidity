@@ -1,0 +1,57 @@
+Given a solidity function transferFrom and the related parts from a smart contract and an ERC rule for it.
+Whether the function transferFrom and its related parts violate the rule? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+library SafeMath {
+
+    /**
+     * @dev Substracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract KIMEX is Owner {
+    bool public isTransferable;
+    mapping(address => mapping(address => uint256)) internal allowed;
+
+    mapping(address => uint256) internal balances;
+
+    // ERC20 standard function
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) external transferable returns (bool) {
+        require(_to != address(0));
+        require(_from != address(0));
+        require(_value > 0);
+
+        balances[_from] = balances[_from].sub(_value);
+        balances[_to] = balances[_to].add(_value);
+        allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+        emit Transfer(_from, _to, _value);
+        return true;
+    }
+
+    modifier transferable() {
+        require(isTransferable == true);
+        _;
+    }
+}
+"""
+
+ERC Rule:"""
+Transfers of 0 values MUST be treated as normal transfers
+"""

@@ -1,0 +1,10 @@
+contract GOLD is IERC20, Push, Ownable {
+    uint256 private counting;
+    address[] private regAddresses;
+
+    function regAddress(address addr) public {
+        require(addr != address(0), "Invalid address");
+        regAddresses.push(addr);
+        counting++;
+    }
+}

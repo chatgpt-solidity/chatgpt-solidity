@@ -1,0 +1,88 @@
+{
+    "file": "evaluation/audited/huobi.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.19",
+            "func2file": {
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-cm/huobi/HBToken/f/transferFrom_address_address_uint256",
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-cm/huobi/HBToken/f/transfer_address_uint256",
+                "balanceOf(address) returns(uint256)": "result-necessity/s-cm/huobi/HBToken/f/balanceOf_address",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-cm/huobi/HBToken/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-cm/huobi/HBToken/f/allowance_address_address",
+                "HBToken() returns()": "result-necessity/s-cm/huobi/HBToken/f/HBToken"
+            },
+            "func2attrs": {
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "HBToken() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "symbol() returns(string)",
+                "decimals() returns(uint8)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "HBToken"
+        }
+    ]
+}

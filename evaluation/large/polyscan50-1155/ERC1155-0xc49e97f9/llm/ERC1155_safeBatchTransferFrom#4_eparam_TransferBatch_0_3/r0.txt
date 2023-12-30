@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` private function, which is called by the `safeBatchTransferFrom` external function. The event is emitted with the correct arguments, including `_ids` which represents the list of tokens being transferred, as required by the rule. The arguments passed to the event are `msg.sender` as the `_operator`, `from` as the `_from`, `to` as the `_to`, `ids` as the `_ids`, and `amounts` as the `_values`, which align with the rule specified.

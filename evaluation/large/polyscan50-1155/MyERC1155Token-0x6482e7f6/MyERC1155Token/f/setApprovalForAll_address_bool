@@ -1,0 +1,8 @@
+abstract contract BasicERC1155 {
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function setApprovalForAll(address operator, bool approved) public {
+        _operatorApprovals[msg.sender][operator] = approved;
+    }
+}
+

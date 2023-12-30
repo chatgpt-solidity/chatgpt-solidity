@@ -1,0 +1,11 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract, which is called by the `airdrop` function in the `Binance` contract. The `_mint` function is designed to create (`mint`) new tokens and assign them to a recipient (`to`). In the context of minting new tokens, the `_from` argument is the zero address, which represents the creation of new tokens rather than the transfer of existing ones from a holder.
+
+The `_mint` function correctly sets the `_from` argument to the zero address when emitting the `TransferSingle` event, as shown in the following line of the `_mint` function:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This is in accordance with the ERC-1155 standard for minting new tokens, where the `_from` address is the zero address to indicate that tokens are being created rather than transferred from an existing balance. Therefore, the `TransferSingle` event is emitted according to the given rule when new tokens are minted.

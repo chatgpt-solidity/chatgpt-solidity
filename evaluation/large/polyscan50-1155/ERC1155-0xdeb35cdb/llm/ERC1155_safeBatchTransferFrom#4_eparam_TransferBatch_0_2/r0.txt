@@ -1,0 +1,9 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` private function, which is called by the `safeBatchTransferFrom` external function. The event is emitted with the correct arguments, including the `_to` argument which is the address of the recipient whose balance is increased. The event signature matches the rule provided:
+
+```solidity
+emit TransferBatch(msg.sender, from, to, ids, amounts);
+```
+
+Here, `to` is the recipient's address, and `amounts` is the array of values that correspond to the token balances being transferred to the `to` address. The `ids` array contains the token IDs being transferred, and `msg.sender` is the operator performing the transfer. The event is emitted before any state changes are reverted, ensuring that if the function completes without reverting, the event will be emitted as per the rule.

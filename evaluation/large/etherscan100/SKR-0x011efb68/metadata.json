@@ -1,0 +1,258 @@
+{
+    "file": "evaluation/etherscan100/SKR-0x011efb68.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.17",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/owner",
+                "waiveOwnership() returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/waiveOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/constructor",
+                "setBuyTaxes(uint256,uint256) returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/setBuyTaxes_uint256_uint256",
+                "setsellTaxes(uint256,uint256) returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/setsellTaxes_uint256_uint256",
+                "setShares(uint256,uint256) returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/setShares_uint256_uint256",
+                "name() returns(string)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/balanceOf_address",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/allowance_address_address",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/decreaseAllowance_address_uint256",
+                "minimumTokensBeforeSwapAmount() returns(uint256)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/minimumTokensBeforeSwapAmount",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/approve_address_uint256",
+                "setIsExcludedFromFee(address,bool) returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/setIsExcludedFromFee_address_bool",
+                "setMarketPairStatus(address,bool) returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/setMarketPairStatus_address_bool",
+                "setNumTokensBeforeSwap(uint256) returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/setNumTokensBeforeSwap_uint256",
+                "getCirculatingSupply() returns(uint256)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/getCirculatingSupply",
+                "receive() returns()": ".temp/etherscan100/SKR-0x011efb68/SKR/f/receive",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/SKR-0x011efb68/SKR/f/transferFrom_address_address_uint256"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "waiveOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBuyTaxes(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setsellTaxes(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setShares(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "minimumTokensBeforeSwapAmount() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setIsExcludedFromFee(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMarketPairStatus(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setNumTokensBeforeSwap(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getCirculatingSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_lpShare() returns(uint256)",
+                "_marketingShare() returns(uint256)",
+                "_buyLpFee() returns(uint256)",
+                "deadAddress() returns(address)",
+                "_sellLpFee() returns(uint256)",
+                "lpWallet() returns(address)",
+                "_totalDistributionShares() returns(uint256)",
+                "_totalTaxIfBuying() returns(uint256)",
+                "marketingWallet() returns(address)",
+                "startBlock() returns(uint256)",
+                "_sellMarketingFee() returns(uint256)",
+                "swapAndLiquifyEnabled() returns(bool)",
+                "_totalTaxIfSelling() returns(uint256)",
+                "uniswapV2Router() returns(IUniswapV2Router02)",
+                "uniswapPair() returns(address)",
+                "swapAndLiquifyByLimitOnly() returns(bool)",
+                "isMarketPair(address) returns(bool)",
+                "isExcludedFromFee(address) returns(bool)",
+                "_buyMarketingFee() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapAndLiquifyEnabledUpdated",
+                    "params": [
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapAndLiquify",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapETHForTokens",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "SwapTokensForETH",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address[]",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "SKR"
+        }
+    ]
+}

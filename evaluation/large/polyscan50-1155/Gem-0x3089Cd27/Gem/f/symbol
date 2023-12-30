@@ -1,0 +1,8 @@
+contract ERC20 is Context, IERC20 {
+    string private _symbol;
+
+    function symbol() public view virtual override returns (string memory) {
+        return _symbol;
+    }
+}
+

@@ -1,0 +1,8 @@
+YES
+
+The `transferFrom` function in the provided Solidity code uses the SafeMath library for arithmetic operations, which is designed to prevent overflow and underflow issues. When transferring a value of 0, the SafeMath `sub` and `add` functions will not throw an exception because:
+
+1. `sub`: The subtraction of 0 from any balance will not cause an underflow, so the assertion `assert(b <= a);` will pass.
+2. `add`: Adding 0 to any balance will not cause an overflow, and the result will be equal to the original balance, so the assertion `assert(c >= a);` will pass.
+
+Therefore, transfers of 0 values will not cause the `transferFrom` function to throw an exception.

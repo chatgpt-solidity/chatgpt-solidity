@@ -1,0 +1,279 @@
+{
+    "file": "evaluation/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.1",
+            "func2file": {
+                "totalSupply(uint256) returns(uint256)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/totalSupply_uint256",
+                "exists(uint256) returns(bool)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/exists_uint256",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/supportsInterface_bytes4",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/balanceOf_address_uint256",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/balanceOfBatch_address[]_uint256[]",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "burn(address,uint256,uint256) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/burn_address_uint256_uint256",
+                "burnBatch(address,uint256[],uint256[]) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/burnBatch_address_uint256[]_uint256[]",
+                "owner() returns(address)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/transferOwnership_address",
+                "royaltyInfo(uint256,uint256) returns(address,uint256)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/royaltyInfo_uint256_uint256",
+                "constructor(address,string,string,uint96) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/constructor_address_string_string_uint96",
+                "addMinter(address,bool) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/addMinter_address_bool",
+                "setURI(string,uint256) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/setURI_string_uint256",
+                "createCollection(uint256,string) returns(uint256)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/createCollection_uint256_string",
+                "mint(address,uint256,uint256) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/mint_address_uint256_uint256",
+                "mintBatch(address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/mintBatch_address_uint256[]_uint256[]_bytes",
+                "name() returns(string)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/symbol",
+                "tokenInfo(uint256) returns(uint256,uint256,string)": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/tokenInfo_uint256",
+                "burnForUpgrade(address,uint256,uint256) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/burnForUpgrade_address_uint256_uint256",
+                "setRoyalty(address,uint96) returns()": ".temp/polyscan50-1155/METARUFFY_ASSETS-0x86ff06f2/METARUFFY_ASSETS/f/setRoyalty_address_uint96"
+            },
+            "func2attrs": {
+                "totalSupply(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "exists(uint256) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnBatch(address,uint256[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "royaltyInfo(uint256,uint256) returns(address,uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "constructor(address,string,string,uint96) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addMinter(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setURI(string,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "createCollection(uint256,string) returns(uint256)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintBatch(address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenInfo(uint256) returns(uint256,uint256,string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "burnForUpgrade(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setRoyalty(address,uint96) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "minters(address) returns(bool)"
+            ],
+            "ercs": [
+                "165",
+                "1155",
+                "1155metadatauri",
+                "2981",
+                "1155burnable",
+                "1155supply"
+            ],
+            "events": [
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "burnItem",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "METARUFFY_ASSETS"
+        }
+    ]
+}

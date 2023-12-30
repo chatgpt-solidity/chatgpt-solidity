@@ -1,0 +1,7 @@
+contract CHMS is Context, IERC20, Ownable {
+	string private constant _symbol = "CHMS";
+
+	function symbol() public pure returns (string memory) {
+		return _symbol;
+	}
+}

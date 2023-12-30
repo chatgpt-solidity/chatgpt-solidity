@@ -1,0 +1,3 @@
+YES
+
+The function `_safeBatchTransferFrom` emits the `TransferBatch` event with the arguments `msg.sender` as the `_operator`, `from` as the `_from`, `to` as the `_to`, `ids` as the `_ids`, and `amounts` as the `_values`. The `ids` array is used in the loop to transfer the tokens and is then passed to the `TransferBatch` event, which satisfies the given rule that the `_ids` argument must be the list of tokens being transferred.

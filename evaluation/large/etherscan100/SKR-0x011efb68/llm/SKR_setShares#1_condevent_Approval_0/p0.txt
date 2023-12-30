@@ -1,0 +1,47 @@
+Given a solidity function setShares and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract Ownable is Context {
+    address private _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+
+contract SKR is Context, IERC20, Ownable {
+
+    uint256 public _marketingShare = 20;
+    uint256 public _lpShare = 0;
+    uint256 public _totalDistributionShares = 20;
+    function setShares(uint256 _marketingShareNew, uint256 _lpShareNew) external onlyOwner() {
+        _marketingShare = _marketingShareNew;
+        _lpShare = _lpShareNew;
+        _totalDistributionShares = _marketingShare.add(_lpShare);
+    }
+}
+library SafeMath {
+
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a, "SafeMath: addition overflow");
+
+        return c;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

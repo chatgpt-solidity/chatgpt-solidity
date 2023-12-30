@@ -1,0 +1,11 @@
+YES
+
+The given `transfer` function in the `Organicco` contract does not comply with the ERC rule stating that "Transfers of 0 values MUST be treated as normal transfers." The function includes a condition that checks if `_value > 0` before proceeding with the transfer:
+
+```solidity
+if (_value > 0 && _value <= _balanceOf[msg.sender] && isContract(_to)) {
+    // ...
+}
+```
+
+This condition prevents the transfer of 0 values, which violates the ERC rule. According to the rule, the function should allow transfers of 0 values and treat them the same as any other transfer.

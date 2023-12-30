@@ -1,0 +1,22 @@
+contract NFTs_Latam_Slot is
+    Initializable,
+    INFTlatamContract,
+    IOwnable,
+    IRoyalty,
+    IPrimarySale,
+    IPlatformFee,
+    ReentrancyGuardUpgradeable,
+    EIP712Upgradeable,
+    MulticallUpgradeable,
+    AccessControlEnumerableUpgradeable,
+    ERC721EnumerableUpgradeable,
+    ITokenERC721
+{
+    uint256 private constant VERSION = 4;
+
+    /// @dev Returns the version of the contract.
+    function contractVersion() external pure returns (uint8) {
+        return uint8(VERSION);
+    }
+}
+

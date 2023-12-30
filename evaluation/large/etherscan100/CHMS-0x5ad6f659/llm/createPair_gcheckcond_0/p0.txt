@@ -1,0 +1,75 @@
+Given a solidity function createPair and the related parts from a smart contract.
+Whether the function createPair and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+library SafeMath {
+
+	function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+		if (a == 0) {
+			return 0;
+		}
+		uint256 c = a * b;
+		require(c / a == b, "SafeMath: multiplication overflow");
+		return c;
+
+	}
+	function div(uint256 a, uint256 b) internal pure returns (uint256) {
+		return div(a, b, "SafeMath: division by zero");
+
+	}
+	function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+		require(b > 0, errorMessage);
+		uint256 c = a / b;
+		return c;
+	}
+}
+
+contract CHMS is Context, IERC20, Ownable {
+	mapping(address => uint256) private _balances;
+
+	IUniswapV2Router02 private uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+	address private uniswapV2Pair;
+	bool private pairCreated = false;
+
+	function balanceOf(address account) public view override returns (uint256) {
+		return _balances[account];
+	}
+
+	function createPair() external payable onlyOwner {
+		require(!pairCreated, "pair is already created");
+		uniswapV2Pair = IUniswapV2Factory(uniswapV2Router.factory()).createPair(address(this), uniswapV2Router.WETH());
+		uniswapV2Router.addLiquidityETH{ value: address(this).balance }(
+			address(this),
+			balanceOf(address(this)).mul(80).div(100),
+			0,
+			0,
+			owner(),
+			block.timestamp
+		);
+		IERC20(uniswapV2Pair).approve(address(uniswapV2Router), type(uint).max);
+		pairCreated = true;
+	}
+}
+contract Ownable is Context {
+	address private _owner;
+
+	function owner() public view returns (address) {
+		return _owner;
+	}
+
+	modifier onlyOwner() {
+		require(_owner == _msgSender(), "Ownable: caller is not the owner");
+		_;
+	}
+}
+
+abstract contract Context {
+	function _msgSender() internal view virtual returns (address) {
+		return msg.sender;
+	}
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

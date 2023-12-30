@@ -1,0 +1,27 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_operator` argument in the `TransferSingle` event is set to the result of the `_msgSender()` function, which returns `msg.sender`. This is consistent with the rule that the `_operator` must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+Here is the relevant part of the code that confirms this:
+
+```solidity
+function _safeTransferFrom(
+    address from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+) internal virtual {
+    // ... (other code)
+
+    address operator = _msgSender();
+
+    // ... (other code)
+
+    emit TransferSingle(operator, from, to, id, amount);
+
+    // ... (other code)
+}
+```
+
+The `safeTransferFrom` function calls `_safeTransferFrom`, which then emits the `TransferSingle` event with the `operator` set to the value returned by `_msgSender()`. This satisfies the rule provided.

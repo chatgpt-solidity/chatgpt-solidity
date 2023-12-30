@@ -1,0 +1,15 @@
+YES
+
+The `adminMint` function in the provided Solidity code calls the `_mint` function, which is responsible for creating new tokens and assigning them to a recipient address. The `_mint` function emits the `TransferSingle` event as part of its execution.
+
+The `TransferSingle` event is emitted with the following parameters:
+
+- `_operator`: The address which initiated the minting (usually the contract owner in the case of `adminMint`).
+- `_from`: The address from which the tokens are transferred, which is `address(0)` in the case of minting new tokens.
+- `_to`: The recipient address to which the tokens are minted.
+- `_id`: The token ID of the tokens being minted.
+- `_value`: The number of tokens that are minted.
+
+The rule states that the `_value` argument must be the number of tokens the holder's balance is decreased by and match what the recipient's balance is increased by. Since minting creates new tokens, the `_from` address is `address(0)`, indicating that no holder's balance is being decreased. The `_value` argument in the `TransferSingle` event matches the `_amount` argument passed to the `_mint` function, which is the number of tokens being created and assigned to the `_to` address.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, with the `_value` correctly representing the number of tokens minted and added to the recipient's balance.

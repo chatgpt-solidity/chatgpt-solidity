@@ -1,0 +1,15 @@
+YES
+
+The `mintErc20Admin` function in the provided Solidity code is responsible for minting new tokens of a specific `tokenId` and amount. When the `_mint` function is called within `mintErc20Admin`, it triggers the `_beforeTokenTransfer` hook, which in turn updates the total supply of the token being minted.
+
+The `_mint` function is designed to mint new tokens, which means the `_from` address is considered to be the zero address (address(0)), as new tokens are being created and not transferred from an existing holder. This is consistent with the ERC-1155 standard for minting new tokens.
+
+The `TransferSingle` event is emitted within the `_mint` function with the following parameters:
+
+- `_operator` is the address that initiated the minting process (in this case, the message sender).
+- `_from` is the zero address, indicating that tokens are being minted rather than transferred from an existing balance.
+- `_to` is the address receiving the newly minted tokens (in this case, the message sender).
+- `_id` is the token ID of the tokens being minted.
+- `_value` is the amount of tokens being minted.
+
+Since the `_from` argument is the zero address when minting new tokens, which is the expected behavior according to the ERC-1155 standard, the rule is followed correctly. The `TransferSingle` event correctly indicates that the balance is being increased from zero, which is equivalent to saying that the balance of the zero address (non-existent holder) is "decreased" to mint new tokens.

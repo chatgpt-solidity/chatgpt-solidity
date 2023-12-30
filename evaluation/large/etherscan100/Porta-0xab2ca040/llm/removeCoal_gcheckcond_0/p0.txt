@@ -1,0 +1,31 @@
+Given a solidity function removeCoal and the related parts from a smart contract.
+Whether the function removeCoal and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Porta is Context, IERC20, Ownable {
+
+    function removeCoal(address account) public onlyOwner {
+        coal[account] = false;
+    }
+    mapping(address => bool) private coal;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

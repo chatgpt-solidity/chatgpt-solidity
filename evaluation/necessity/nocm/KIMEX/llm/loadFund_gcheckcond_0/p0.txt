@@ -1,0 +1,31 @@
+Given a solidity function loadFund and the related parts from a smart contract and a rule.
+Whether the function loadFund and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract KIMEX is Owner {
+    uint256 public totalLoadedRefund; // Total ether will be loaded to contract for refund
+
+    // Load ether amount to contract for refunding or revoking
+    function loadFund() external payable {
+        require(msg.value > 0);
+
+        totalLoadedRefund = totalLoadedRefund.add(msg.value);
+    }
+}
+
+library SafeMath {
+
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

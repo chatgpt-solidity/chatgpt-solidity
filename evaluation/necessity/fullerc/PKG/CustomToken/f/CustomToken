@@ -1,0 +1,31 @@
+contract CustomToken is BaseToken, BurnToken, ICOToken {
+    function CustomToken() public {
+        totalSupply = 10000000000000000000000000000;
+        balanceOf[0x8cd103c2164d04d071f4014ac7b3aa42d8fa596c] = totalSupply;
+        name = "PKG Token";
+        symbol = "PKG";
+        decimals = 18;
+        icoRatio = 100000;
+        icoEndtime = 1601460000;
+        icoSender = 0x8cd103c2164d04d071f4014ac7b3aa42d8fa596c;
+        icoHolder = 0x8cd103c2164d04d071f4014ac7b3aa42d8fa596c;
+    }
+}
+
+contract ICOToken is BaseToken {
+    address public icoHolder;
+    uint256 public icoEndtime;
+    address public icoSender;
+    // 1 ether = icoRatio token
+    uint256 public icoRatio;
+}
+
+contract BaseToken {
+    uint256 public totalSupply;
+
+    mapping(address => uint256) public balanceOf;
+    string public symbol;
+    string public name;
+    uint8 public decimals;
+}
+

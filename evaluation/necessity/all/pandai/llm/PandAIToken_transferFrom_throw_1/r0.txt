@@ -1,0 +1,12 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not have any explicit checks that would cause it to throw an error when transferring a value of 0. The function checks for:
+
+1. The `from` address must not be the zero address.
+2. The `to` address must not be the zero address.
+3. The `from` address must have a balance of at least `amount`.
+4. The caller must have an allowance for `from`'s tokens of at least `amount`.
+
+However, if `amount` is 0, the balance and allowance checks will pass since 0 is less than or equal to any non-negative integer, including the balance and allowance of an address. Additionally, the ERC-20 standard does not prohibit transfers of 0 value, and such transfers can be used to trigger events without actually moving any tokens.
+
+Therefore, the `transferFrom` function should not throw an error when transferring a value of 0, assuming all other conditions (such as non-zero addresses) are met.

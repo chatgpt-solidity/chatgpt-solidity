@@ -1,0 +1,14 @@
+contract EBLivePremios is ERC721 {
+
+    function baseURI() public view returns (string memory) {
+        return _baseURI();
+    }
+}
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+    string private _baseUri;
+
+    function _baseURI() internal view virtual returns (string memory) {
+        return _baseUri;
+    }
+}
+

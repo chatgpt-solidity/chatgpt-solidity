@@ -1,0 +1,33 @@
+Based on the provided Solidity code and the ERC-20 token standard, we can perform a preliminary analysis to determine if the `DSToken` and related parts violate the given ERC. The ERC-20 standard specifies a set of methods and events that a compliant token contract must implement.
+
+Here are the key points from the ERC-20 standard and how the provided code matches up:
+
+1. **Token Information (Optional)**:
+   - `name()`: Not implemented in the provided code.
+   - `symbol()`: Partially implemented. The `symbol` is a `bytes32` instead of a `string`. This is a deviation from the standard, which could lead to compatibility issues.
+   - `decimals()`: Not implemented in the provided code.
+
+2. **Total Supply**:
+   - `totalSupply()`: Not explicitly shown in the provided code, but it is likely part of the `ERC20` interface that `DSTokenBase` inherits from.
+
+3. **Balance Queries**:
+   - `balanceOf(address _owner)`: Not explicitly shown in the provided code, but it is likely part of the `ERC20` interface that `DSTokenBase` inherits from.
+
+4. **Token Transfer**:
+   - `transfer(address _to, uint256 _value)`: Not explicitly shown in the provided code, but it is likely part of the `ERC20` interface that `DSTokenBase` inherits from.
+   - `transferFrom(address _from, address _to, uint256 _value)`: Not explicitly shown in the provided code, but it is likely part of the `ERC20` interface that `DSTokenBase` inherits from.
+
+5. **Allowance Mechanism**:
+   - `approve(address _spender, uint256 _value)`: Not explicitly shown in the provided code, but it is likely part of the `ERC20` interface that `DSTokenBase` inherits from.
+   - `allowance(address _owner, address _spender)`: Not explicitly shown in the provided code, but it is likely part of the `ERC20` interface that `DSTokenBase` inherits from.
+
+6. **Events**:
+   - `Transfer`: Not explicitly shown in the provided code, but it is likely part of the `ERC20` interface that `DSTokenBase` inherits from.
+   - `Approval`: Not explicitly shown in the provided code, but it is likely part of the `ERC20` interface that `DSTokenBase` inherits from.
+
+From the provided code, it is not possible to fully determine compliance with the ERC-20 standard because the implementation details of the `ERC20` interface are not shown. However, there are a few potential issues:
+
+- The `symbol` is defined as a `bytes32` instead of a `string`, which is not compliant with the ERC-20 standard.
+- The `name`, `decimals`, `totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, `allowance`, `Transfer`, and `Approval` functions and events are not shown in the provided code, so we cannot verify their existence or correctness.
+
+To fully assess compliance, the complete implementation of the `ERC20` interface and the `DSTokenBase`, `DSAuth`, and `DSStop` contracts would need to be reviewed. If any of the required functions or events are missing or incorrectly implemented, the contract would not be ERC-20 compliant.

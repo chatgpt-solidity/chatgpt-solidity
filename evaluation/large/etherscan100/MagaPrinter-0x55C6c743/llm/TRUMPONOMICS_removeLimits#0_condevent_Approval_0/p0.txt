@@ -1,0 +1,35 @@
+Given a solidity function removeLimits and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+    uint256 private _totalSupply = 100000000000 * (10 ** _decimals);
+
+    uint256 public maxTx = _totalSupply.mul(20).div(1000);
+    uint256 public maxWallet = _totalSupply.mul(30).div(1000);
+
+     function removeLimits() external onlyOwner{
+        maxTx = _totalSupply;
+        maxWallet = _totalSupply;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

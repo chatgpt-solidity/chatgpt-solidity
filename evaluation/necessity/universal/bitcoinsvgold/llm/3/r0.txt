@@ -1,0 +1,15 @@
+YES
+
+The given Solidity code does not explicitly use the `emit` keyword when emitting the `Transfer` event. The `emit` keyword is required by modern Solidity conventions (starting from version 0.4.21) to emit events. The correct syntax to emit an event is:
+
+```solidity
+emit Transfer(msg.sender, _to, _value);
+```
+
+However, the provided code uses the older syntax without the `emit` keyword:
+
+```solidity
+Transfer(msg.sender, _to, _value);
+```
+
+This would have been valid in older versions of Solidity, but it violates the ERC rule provided which specifies that the `emit` keyword must be used when emitting events.

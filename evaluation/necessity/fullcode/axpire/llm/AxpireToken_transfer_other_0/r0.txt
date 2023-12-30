@@ -1,0 +1,3 @@
+NO
+
+The provided Solidity function `transfer` in the `StandardToken` contract does not explicitly check for a transfer of 0 value and reject it. It allows transfers of 0 value as long as the sender's balance is greater than or equal to the value being transferred (which is always true for a transfer of 0). Therefore, it complies with the ERC rule that states "Transfers of 0 values MUST be treated as normal transfers."

@@ -1,0 +1,7 @@
+contract TRUMPONOMICS is IERC20, Auth {
+    function getOwner() external view override returns (address) { return owner; }
+}
+abstract contract Auth {
+    address internal owner;
+}
+

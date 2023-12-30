@@ -1,0 +1,11 @@
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    function transferFrom(address, address, uint256) external pure override {
+        _transferRevert();
+    }
+
+    function _transferRevert() private pure {
+        revert("Cannot perform transfers on a non-transferable token");
+    }
+}
+

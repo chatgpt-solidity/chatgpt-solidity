@@ -1,0 +1,31 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether the function constructor and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.25;
+contract Projecton is owned, IERC20 {
+
+    uint256 public constant _totalSupply = 100000000000000000000000000;
+
+    mapping(address => uint256) public balances;
+
+    constructor() public {
+        balances[msg.sender] = _totalSupply;
+    }
+}
+
+contract owned {
+
+    address public owner;
+    constructor() public {
+        owner = msg.sender;
+    }
+}
+"""
+
+Rule:"""
+Emit Approval if any successful call to approve(address _spender, uint256 _value)
+"""

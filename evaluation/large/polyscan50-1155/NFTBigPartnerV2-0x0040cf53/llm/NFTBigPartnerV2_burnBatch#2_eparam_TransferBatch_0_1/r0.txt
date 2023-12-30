@@ -1,0 +1,13 @@
+YES
+
+The `_burnBatch` function within the `ERC1155` contract is designed to burn a batch of tokens. The function takes the `from` address as an argument, which represents the holder of the tokens that are to be burned. The function checks that the `from` address is not the zero address and that the lengths of the `ids` and `amounts` arrays match, as required by the ERC1155 standard.
+
+Before any tokens are burned, the `_beforeTokenTransfer` hook is called with the `from` address and the zero address for `to`, indicating a burn operation. After the necessary checks, the function iterates over the `ids` and `amounts` arrays, reducing the balance of the `from` address by the specified `amounts` for each `id`.
+
+After the balances have been updated, the `TransferBatch` event is emitted with the `operator` (the address that initiated the burn operation), the `from` address (the holder of the tokens), the zero address for `to` (indicating that tokens are burned and not transferred to another address), and the `ids` and `amounts` arrays. This event emission follows the rule that the `_from` argument must be the address of the holder whose balance is decreased.
+
+Finally, the `_afterTokenTransfer` hook is called with the same arguments as the `_beforeTokenTransfer` hook.
+
+The `burnBatch` function in the `ERC1155Burnable` contract is a public function that allows a batch of tokens to be burned from the `account` address. It checks that the caller is either the token owner or approved to act on their behalf before calling the `_burnBatch` function.
+
+In conclusion, the `TransferBatch` event is emitted according to the given rule, with the `_from` argument being the address of the holder whose balance is decreased.

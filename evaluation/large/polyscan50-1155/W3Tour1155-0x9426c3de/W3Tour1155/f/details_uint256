@@ -1,0 +1,8 @@
+contract W3Tour1155 is ERC1155, AccessControl {
+
+    mapping(uint256 => Item) _items;
+
+    function details(uint256 _tokenId) external view returns (Item memory){
+        return _items[_tokenId];
+    }
+}

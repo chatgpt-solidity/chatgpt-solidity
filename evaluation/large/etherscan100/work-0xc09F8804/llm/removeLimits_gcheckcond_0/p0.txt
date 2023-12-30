@@ -1,0 +1,33 @@
+Given a solidity function removeLimits and the related parts from a smart contract.
+Whether the function removeLimits and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable is Context {
+    address internal _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract work is Context, IERC20, Ownable {
+    uint256 private constant _tTotal = 1000000000 * 10**9;
+    uint256 public _maxTxAmount = _tTotal.mul(3).div(100);
+    uint256 public _maxWalletSize = _tTotal.mul(3).div(100); 
+
+    function removeLimits() external onlyOwner{
+        _maxTxAmount = _tTotal;
+        _maxWalletSize = _tTotal;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

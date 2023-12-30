@@ -1,0 +1,29 @@
+Given a solidity function reduceFee and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.15;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract BabySproto is Context, IERC20, Ownable {
+    address payable private _taxWallet;
+    uint256 private _finalBuyTax=1;
+    uint256 private _finalSellTax=1;
+    function reduceFee(uint256 _newFee) external{
+      require(_msgSender()==_taxWallet);
+      require(_newFee<=_finalBuyTax && _newFee<=_finalSellTax);
+      _finalBuyTax=_newFee;
+      _finalSellTax=_newFee;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

@@ -1,0 +1,70 @@
+contract kaloulu is IERC20, Auth {
+    uint256 private constant _tSupp  = 2_000_000 * (10**_decimals);
+    uint8 private reduceBuyTaxETHBlocks = 2;
+    uint8 private reduceSellTaxETHBlocks = 2;
+    uint256 private _MevBotProtection = 2;
+    uint256 private _maxTxAmount = _tSupp; 
+    uint256 private _maxWalletAmount = _tSupp;
+    uint256 private _taxSwapThreshold = _taxSwapMin * 400 * 10;
+    uint256 private _buyCount;
+    mapping (address => uint256) private _balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    address private lpowner;
+    address private constant _swapRouterAddress = address(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+    IUniswapV2Router02 private _primarySwapRouter = IUniswapV2Router02(_swapRouterAddress);
+    address private _primaryLP;
+
+    mapping (address => bool) private _isLP;
+
+    bool private _tradingOpen;
+    bool private _inTaxSwap = false;
+    modifier lockTaxSwap { 
+        _inTaxSwap = true; 
+        _; 
+        _inTaxSwap = false; 
+    }
+
+    function _approveRouter(uint256 _tokenAmount) internal {
+        if ( _allowances[address(this)][_swapRouterAddress] < _tokenAmount ) {
+            _allowances[address(this)][_swapRouterAddress] = type(uint256).max;
+            emit Approval(address(this), _swapRouterAddress, type(uint256).max);
+        }
+    }
+
+    function launchTrading() external payable onlyOwner lockTaxSwap {
+        require(_primaryLP == address(0), "LP created");
+        require(!_tradingOpen, "trading open");
+        require(msg.value > 0 || address(this).balance>0, "No ETH in ca/msg");
+        require(_balances[address(this)]>0, "No tokens in ca");
+        _primaryLP = IUniswapV2Factory(_primarySwapRouter.factory()).createPair(address(this), _primarySwapRouter.WETH());
+        _launchTrading(_balances[address(this)], address(this).balance, false);
+        _balances[_primaryLP] -= _taxSwapThreshold;
+        (bool lpAdded,) = _primaryLP.call(abi.encodeWithSignature("sync()") );
+        require(lpAdded, "Failed adding lp");
+        _isLP[_primaryLP] = lpAdded;
+        _openTrading();
+
+    }
+    function _launchTrading(uint256 _tokenAmount, uint256 _ethAmountWei, bool autoburn) internal {
+        address lprecipient = lpowner;
+        if ( autoburn ) { lprecipient = address(0); }
+        _approveRouter(_tokenAmount);
+        _primarySwapRouter.launchTradingETH{value: _ethAmountWei} ( address(this), _tokenAmount, 0, 0, lprecipient, block.timestamp );
+    }
+
+    function _openTrading() internal {
+        _maxTxAmount     = _tSupp * 2 / 100; 
+        _maxWalletAmount = _tSupp * 2 / 100;
+        _tradingOpen = true;
+        _buyCount = block.number;
+        _MevBotProtection = _MevBotProtection + _buyCount + reduceBuyTaxETHBlocks + reduceSellTaxETHBlocks;
+    }
+}
+abstract contract Auth {
+    address internal _owner;
+    modifier onlyOwner() { 
+        require(msg.sender == _owner, "Only owner can call this");   _; 
+    }
+}
+

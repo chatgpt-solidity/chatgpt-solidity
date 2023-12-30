@@ -1,0 +1,5 @@
+NO
+
+The `TransferSingle` event is not emitted according to the given rule. The rule states that the `_from` argument must be the address of the holder whose balance is decreased. However, in the `airdrop` function, the `_from` argument is set to `randomish`, which is a pseudo-random address generated using the `nonce` and `blockhash`. This address is not necessarily the address of a token holder, and there is no balance decrease operation performed for this `randomish` address within the function.
+
+The correct implementation should have the `_from` argument set to the address of the actual token holder from whom the tokens are being deducted, which is typically the contract owner or a specific address that holds the tokens being airdropped. Since the `airdrop` function does not show any balance decrease for the `randomish` address, it does not comply with the ERC-1155 standard for the `TransferSingle` event emission.

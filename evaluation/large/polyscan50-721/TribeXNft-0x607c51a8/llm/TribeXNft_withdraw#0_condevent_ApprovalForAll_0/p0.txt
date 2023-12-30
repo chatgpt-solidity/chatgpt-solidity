@@ -1,0 +1,31 @@
+Given a solidity function withdraw and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract TribeXNft is ERC721, ReentrancyGuard {
+    ITournamentHub public tournamentHub;
+
+    /**
+     * @dev Throws if called by any account other than the administrator.
+     */
+    modifier onlyAdministrator() {
+        // Check Permissions
+        require(tournamentHub.checkAdmin(msg.sender), "Sender is not admin");
+        _;
+    }
+
+    /** WITHDRAW **/
+
+    function withdraw() external onlyAdministrator{
+        uint256 balance = address(this).balance;
+        payable(tournamentHub.feeWallet()).transfer(balance);
+    }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

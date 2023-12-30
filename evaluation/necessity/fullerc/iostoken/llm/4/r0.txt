@@ -1,0 +1,37 @@
+The provided Solidity function `allowance` within the `RegularToken` contract appears to be compliant with the ERC-20 token standard as described in the given ERC documentation. The ERC-20 standard specifies that the `allowance` function should have the following signature:
+
+```solidity
+function allowance(address _owner, address _spender) public view returns (uint256 remaining)
+```
+
+The function should return the amount which `_spender` is still allowed to withdraw from `_owner`. The provided `allowance` function in the `RegularToken` contract matches this signature and functionality:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) constant returns (uint) {
+    return allowed[_owner][_spender];
+}
+```
+
+However, there are a couple of minor discrepancies that should be noted:
+
+1. The `constant` keyword is used in the provided function, which is an older Solidity keyword that has been replaced by `view` in more recent versions of Solidity. The `constant` keyword indicates that the function does not modify the state and can be executed locally/off-chain. The ERC-20 standard uses the `view` keyword, which is the current standard for indicating that a function does not modify the state.
+
+2. The return type in the provided function is `uint`, which is an alias for `uint256` in Solidity. While this is not an issue since `uint` is equivalent to `uint256`, it is generally good practice to match the ERC-20 standard exactly by using `uint256` for clarity and consistency.
+
+Aside from these minor points, the function does not violate the ERC-20 standard. It correctly implements the required functionality by returning the remaining allowance that a spender has from an owner's account.
+
+To fully comply with the latest Solidity standards and ERC-20, the function could be updated as follows:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) public view returns (uint256) {
+    return allowed[_owner][_spender];
+}
+```
+
+This change includes the use of `public view` instead of `constant` and explicitly specifies the return type as `uint256`.

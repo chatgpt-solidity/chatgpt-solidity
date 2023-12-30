@@ -1,0 +1,4 @@
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    receive() external payable {}
+}

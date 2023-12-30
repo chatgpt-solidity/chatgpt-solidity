@@ -1,0 +1,213 @@
+{
+    "file": "evaluation/polyscan50-721/Registrar-0x8eC8952f.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.6",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/transferOwnership_address",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/supportsInterface_bytes4",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor(uint256) returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/constructor_uint256",
+                "setFee(uint256) returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/setFee_uint256",
+                "register(string) returns()": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/register_string",
+                "getDomainsByOwner(address) returns(uint256[])": ".temp/polyscan50-721/Registrar-0x8eC8952f/Registrar/f/getDomainsByOwner_address"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setFee(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "register(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getDomainsByOwner(address) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "addressToPrimaryDomain(address) returns(uint256)",
+                "fee() returns(uint256)",
+                "domainToId(string) returns(uint256)",
+                "domainId() returns(uint256)",
+                "ownerDomains(address,uint256) returns(uint256)",
+                "domains(uint256) returns(string,uint256,uint256)"
+            ],
+            "ercs": [
+                "165",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "DomainRegistered",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "Registrar"
+        }
+    ]
+}

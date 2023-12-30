@@ -1,0 +1,374 @@
+{
+    "file": "evaluation/polyscan50-1155/AssetContractShared-0xcae8da5a.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.4",
+            "func2file": {
+                "supportsFactoryInterface() returns(bool)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/supportsFactoryInterface",
+                "setTemplateURI(string) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/setTemplateURI_string",
+                "setURI(uint256,string) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/setURI_uint256_string",
+                "setPermanentURI(uint256,string) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/setPermanentURI_uint256_string",
+                "isPermanentURI(uint256) returns(bool)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/isPermanentURI_uint256",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/balanceOf_address_uint256",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "burn(address,uint256,uint256) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/burn_address_uint256_uint256",
+                "batchBurn(address,uint256[],uint256[]) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/batchBurn_address_uint256[]_uint256[]",
+                "pause() returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/pause",
+                "unpause() returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/unpause",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/balanceOfBatch_address[]_uint256[]",
+                "totalSupply(uint256) returns(uint256)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/totalSupply_uint256",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/isApprovedForAll_address_address",
+                "mint(address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/mint_address_uint256_uint256_bytes",
+                "batchMint(address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/batchMint_address_uint256[]_uint256[]_bytes",
+                "exists(uint256) returns(bool)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/exists_uint256",
+                "paused() returns(bool)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/paused",
+                "owner() returns(address)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/transferOwnership_address",
+                "executeMetaTransaction(address,bytes,bytes32,bytes32,uint8) returns(bytes)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/executeMetaTransaction_address_bytes_bytes32_bytes32_uint8",
+                "getNonce(address) returns(uint256)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/getNonce_address",
+                "getDomainSeperator() returns(bytes32)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/getDomainSeperator",
+                "getChainId() returns(uint256)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/getChainId",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/supportsInterface_bytes4",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/setApprovalForAll_address_bool",
+                "constructor(string,string,address,string,address) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/constructor_string_string_address_string_address",
+                "setProxyRegistryAddress(address) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/setProxyRegistryAddress_address",
+                "addSharedProxyAddress(address) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/addSharedProxyAddress_address",
+                "removeSharedProxyAddress(address) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/removeSharedProxyAddress_address",
+                "disableMigrate() returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/disableMigrate",
+                "migrate(AssetContractShared.Ownership[]) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/migrate_AssetContractShared.Ownership[]",
+                "setCreator(uint256,address) returns()": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/setCreator_uint256_address",
+                "creator(uint256) returns(address)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/creator_uint256",
+                "maxSupply(uint256) returns(uint256)": ".temp/polyscan50-1155/AssetContractShared-0xcae8da5a/AssetContractShared/f/maxSupply_uint256"
+            },
+            "func2attrs": {
+                "supportsFactoryInterface() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "setTemplateURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setURI(uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setPermanentURI(uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isPermanentURI(uint256) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "batchBurn(address,uint256[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "pause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unpause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "mint(address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "batchMint(address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "exists(uint256) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "paused() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "executeMetaTransaction(address,bytes,bytes32,bytes32,uint8) returns(bytes)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getNonce(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getDomainSeperator() returns(bytes32)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getChainId() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(string,string,address,string,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setProxyRegistryAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addSharedProxyAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeSharedProxyAddress(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "disableMigrate() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "migrate(AssetContractShared.Ownership[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setCreator(uint256,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "creator(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "maxSupply(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": true
+                }
+            },
+            "state_var_sigs": [
+                "symbol() returns(string)",
+                "sharedProxyAddresses(address) returns(bool)",
+                "proxyRegistryAddress() returns(address)",
+                "templateURI() returns(string)",
+                "ERC712_VERSION() returns(string)",
+                "name() returns(string)",
+                "migrationTarget() returns(AssetContractShared)"
+            ],
+            "ercs": [
+                "165",
+                "1155tradable",
+                "1155metadatauri",
+                "1155"
+            ],
+            "events": [
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MetaTransactionExecuted",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "address",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bytes",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Paused",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Unpaused",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "PermanentURI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "CreatorChanged",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "AssetContractShared"
+        }
+    ]
+}

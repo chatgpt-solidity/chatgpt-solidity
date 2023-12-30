@@ -1,0 +1,15 @@
+Given a solidity function setApprovalForAll and the related parts from a smart contract.
+Whether the function setApprovalForAll and the related parts allow multiple operators per owner.? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    function setApprovalForAll(address, bool) external pure override {
+        _transferRevert();
+    }
+
+    function _transferRevert() private pure {
+        revert("Cannot perform transfers on a non-transferable token");
+    }
+}
+"""

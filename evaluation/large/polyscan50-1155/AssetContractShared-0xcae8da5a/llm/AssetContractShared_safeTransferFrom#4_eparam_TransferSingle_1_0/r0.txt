@@ -1,0 +1,3 @@
+YES
+
+The `safeTransferFrom` function in the `ERC1155Tradable` contract emits the `TransferSingle` event as required by the rule. The `_operator` argument in the event is set to the value returned by `_msgSender()`, which is an internal function that correctly handles the case where `msg.sender` might be a contract (due to meta-transactions) or a regular user address. The `onlyApproved` modifier ensures that the caller (`_msgSender()`) is either the owner of the tokens (`_from`) or an approved operator for the owner's account, satisfying the rule that the `_operator` must be approved to make the transfer.

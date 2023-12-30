@@ -1,0 +1,52 @@
+Given a solidity function toggleCircuitBreaker and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    ////////////////////////////////////////
+    //                                    //
+    //         STATE VARIABLES            //
+    //                                    //
+    ////////////////////////////////////////
+    // contract owner adress
+    address private owner;
+
+    // flag to determine if contracts core functionalities can be performed
+    bool circuitBreaker = false;
+
+    ////////////////////////////////////////
+    //                                    //
+    //              MODIFIERS             //
+    //                                    //      
+    ////////////////////////////////////////
+
+    /*
+    *  @notice  Restrict caller only owner
+    */
+    modifier onlyOwner() {
+        require(msg.sender == owner, "caller is not owner");
+        _;
+    }
+
+    /*
+    *  @notice  Contract Circuit Breaker
+    *  @dev     Admin can [de]activate core functons in contract
+    *  @param   
+    *  @return  success success status
+    */
+    function toggleCircuitBreaker()
+        public 
+        onlyOwner
+    {
+        circuitBreaker = !circuitBreaker;
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is destroyed and removed from circulation.
+"""

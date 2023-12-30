@@ -1,0 +1,9 @@
+YES
+
+The `_safeTransferFrom` function includes a `require` statement that explicitly checks if the `to` address is the zero address and reverts if that is the case:
+
+```solidity
+require(to != address(0), "ERC1155: transfer to the zero address");
+```
+
+If `_to` is the zero address, this condition will cause the transaction to revert.

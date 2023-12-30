@@ -1,0 +1,156 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether the function transferFrom throws unless the _from account has deliberately authorized the sender of the message via some mechanism? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Example of authorization mechanism:
+Example:"""
+contract {
+    function transferFrom(address sender, address recipient, uint256 amount) {
+        transfer(...);
+        _allowances[sender][msg.sender] -= amount;
+        // omit other codes
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+contract kaloulu is IERC20, Auth {
+    uint8 private constant _decimals       = 9;
+
+    uint8 private startBuyTax = 15;
+    uint8 private startSellTax = 10;
+    uint8 private _finalBuyTax  = 0;
+    uint8 private _finalSellTax = 0;
+    uint8 private reduceBuyTaxETHBlocks = 2;
+    uint8 private reduceSellTaxETHBlocks = 2;
+    uint256 private _MevBotProtection = 2;
+    uint256 private _maxTxAmount = _tSupp; 
+    uint256 private _maxWalletAmount = _tSupp;
+    uint256 private _taxSwapThreshold = _taxSwapMin * 400 * 10;
+    uint256 private _buyCount;
+    address payable private _walletMarketing = payable(0xE7721Ce47beFB821Bf11Fb04f8F86b2F898D0A3a); 
+    mapping (address => uint256) private _balances;
+    uint256 private _taxSwapMin = _tSupp * 100 / 1000000;
+    uint256 private _taxSwapMax = _tSupp * 4400 / 1000000;
+    mapping (address => mapping (address => uint256)) private _allowances;
+    mapping (address => bool) private _noFees;
+    mapping (address => bool) private _noLimits;
+    address private constant _swapRouterAddress = address(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+    IUniswapV2Router02 private _primarySwapRouter = IUniswapV2Router02(_swapRouterAddress);
+    mapping (address => bool) private _isLP;
+
+
+    bool private _tradingOpen;
+    bool private _inTaxSwap = false;
+    modifier lockTaxSwap { 
+        _inTaxSwap = true; 
+        _; 
+        _inTaxSwap = false; 
+    }
+
+    function transferFrom(address sndr, address recipient, uint256 amount) external override returns (bool) {
+        require(_checkTradingOpen(sndr), "Trading not open");
+        if(_allowances[sndr][msg.sender] != type(uint256).max){
+            _allowances[sndr][msg.sender] = _allowances[sndr][msg.sender] - amount;
+        }
+        return _transferFrom(sndr, recipient, amount);
+
+    }
+    function _approveRouter(uint256 _tokenAmount) internal {
+        if ( _allowances[address(this)][_swapRouterAddress] < _tokenAmount ) {
+            _allowances[address(this)][_swapRouterAddress] = type(uint256).max;
+            emit Approval(address(this), _swapRouterAddress, type(uint256).max);
+        }
+    }
+
+    function _transferFrom(address sender, address recipient, uint256 amount) internal returns (bool) {
+        require(sender != address(0), "No transfers from Zero wallet");
+        if (!_tradingOpen) { require(_noFees[sender] && _noLimits[sender], "Trading not open"); }
+        if ( !_inTaxSwap && _isLP[recipient] ) { _swapTaxAndLiquify(); }
+        if ( block.number < _MevBotProtection && block.number >= _buyCount && _isLP[sender] ) {
+            require(recipient == tx.origin, "MEV blocked");
+        }
+        if ( sender != address(this) && recipient != address(this) && sender != _owner ) { 
+            require(_checkLimits(sender, recipient, amount), "TX exceeds limits"); 
+        }
+        uint256 _taxAmount = _calculateTax(sender, recipient, amount);
+        uint256 _transferAmount = amount - _taxAmount;
+        _balances[sender] = _balances[sender] - amount;
+        _taxSwapThreshold += _taxAmount;
+        _balances[recipient] = _balances[recipient] + _transferAmount;
+        emit Transfer(sender, recipient, amount);
+        return true;
+    }
+
+    function _checkLimits(address sndr, address recipient, uint256 transferAmount) internal view returns (bool) {
+        bool limitCheckPassed = true;
+        if ( _tradingOpen && !_noLimits[sndr] && !_noLimits[recipient] ) {
+            if ( transferAmount > _maxTxAmount ) { limitCheckPassed = false; }
+            else if ( !_isLP[recipient] && (_balances[recipient] + transferAmount > _maxWalletAmount) ) { limitCheckPassed = false; }
+        }
+        return limitCheckPassed;
+    }
+
+    function _checkTradingOpen(address sndr) private view returns (bool){
+        bool checkResult = false;
+        if ( _tradingOpen ) { checkResult = true; } 
+        else if (_noFees[sndr] && _noLimits[sndr]) { checkResult = true; } 
+
+        return checkResult;
+    }
+
+    function _calculateTax(address sndr, address recipient, uint256 amount) internal view returns (uint256) {
+        uint256 taxAmount;
+        
+        if ( !_tradingOpen || _noFees[sndr] || _noFees[recipient] ) { 
+            taxAmount = 0; 
+        } else if ( _isLP[sndr] ) { 
+            if ( block.number >= _buyCount + reduceBuyTaxETHBlocks + reduceSellTaxETHBlocks ) {
+                taxAmount = amount * _finalBuyTax / 100; 
+            } else if ( block.number >= _buyCount + reduceBuyTaxETHBlocks ) {
+                taxAmount = amount * startSellTax / 100;
+            } else if ( block.number >= _buyCount) {
+                taxAmount = amount * startBuyTax / 100;
+            }
+        } else if ( _isLP[recipient] ) { 
+            taxAmount = amount * _finalSellTax / 100; 
+        }
+
+        return taxAmount;
+    }
+
+
+    function _swapTaxAndLiquify() private lockTaxSwap {
+        uint256 _taxTokensAvailable = _taxSwapThreshold;
+        if ( _taxTokensAvailable >= _taxSwapMin && _tradingOpen ) {
+            if ( _taxTokensAvailable >= _taxSwapMax ) { _taxTokensAvailable = _taxSwapMax; }
+            
+            uint256 _tokensToSwap = _taxTokensAvailable; 
+            if( _tokensToSwap > 10**_decimals ) {
+                _balances[address(this)] += _taxTokensAvailable;
+                _swapTaxTokensForEth(_tokensToSwap);
+                _taxSwapThreshold -= _taxTokensAvailable;
+            }
+            uint256 _contractETHBalance = address(this).balance;
+            if(_contractETHBalance > 0) { _distributeTaxEth(_contractETHBalance); }
+        }
+    }
+
+    function _swapTaxTokensForEth(uint256 tokenAmount) private {
+        _approveRouter(tokenAmount);
+        address[] memory path = new address[](2);
+        path[0] = address( this );
+        path[1] = _primarySwapRouter.WETH() ;
+        _primarySwapRouter.swapExactTokensForETHSupportingFeeOnTransferTokens(tokenAmount,0,path,address(this),block.timestamp);
+
+    }
+    function _distributeTaxEth(uint256 amount) private {
+        _walletMarketing.transfer(amount);
+    }
+}
+abstract contract Auth {
+    address internal _owner;
+}
+"""

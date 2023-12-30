@@ -1,0 +1,3 @@
+NO
+
+The function `HBToken` in the provided Solidity code does emit a `Transfer` event when the total supply of tokens is assigned to the `msg.sender` during the contract's creation. However, since the Solidity version specified is 0.4.19, which is before version 0.5, the `emit` keyword is not required and not used in this context. The event is still emitted correctly according to the rules of Solidity prior to version 0.5. Therefore, the function does not violate the rule stated.

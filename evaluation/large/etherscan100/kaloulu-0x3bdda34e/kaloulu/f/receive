@@ -1,0 +1,4 @@
+contract kaloulu is IERC20, Auth {
+
+    receive() external payable {}
+}

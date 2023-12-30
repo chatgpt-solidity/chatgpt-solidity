@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called within the `airdrop` function of the `BlurSummer` contract, which is derived from `ERC1155`. The `_mint` function takes the `to` address, the `id` of the token, the `amount` to mint, and some `data`. It then performs the minting operation and emits the `TransferSingle` event with the correct arguments, including the `_id` which represents the token type being transferred.
+
+The `airdrop` function in the `BlurSummer` contract calls `_mint` with the `ARTWORK` variable as the `id`, which is the token type being transferred. Therefore, the `TransferSingle` event is emitted according to the given rule, with `_id` being the token type (`ARTWORK`) that is transferred to the recipients.

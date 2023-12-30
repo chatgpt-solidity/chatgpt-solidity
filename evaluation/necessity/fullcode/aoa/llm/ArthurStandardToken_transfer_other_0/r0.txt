@@ -1,0 +1,3 @@
+YES
+
+The given function `transfer` in the smart contract checks if the `_value` to be transferred is greater than 0 with the condition `_value > 0`. According to the ERC rule provided, transfers of 0 values must be treated as normal transfers, which means that the condition `_value > 0` should not be present. The function should allow the transfer of 0 values. Therefore, the function violates the ERC rule.

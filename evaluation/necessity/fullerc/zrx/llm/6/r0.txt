@@ -1,0 +1,21 @@
+Based on the provided Solidity code snippet and the ERC-20 token standard, we can perform a preliminary audit to check for compliance with the ERC-20 specification. The ERC-20 standard outlines a set of rules that a token contract must follow to be considered ERC-20 compliant.
+
+Here are the key points from the ERC-20 standard and how the provided code matches up:
+
+1. `totalSupply`: The ERC-20 standard requires a `totalSupply` function that returns the total token supply. The provided code has a public `totalSupply` variable, which is implicitly a getter function due to Solidity's automatic getter generation for public variables. This complies with the standard.
+
+2. `balanceOf`: The ERC-20 standard requires a `balanceOf` function that returns the account balance of another account with address `_owner`. The provided code has a `balances` mapping, but the `balanceOf` function itself is not shown. To be compliant, the contract must implement this function.
+
+3. `transfer`: The ERC-20 standard requires a `transfer` function that allows token transfers and must fire the `Transfer` event. The provided code does not show the implementation of the `transfer` function or the `Transfer` event, so we cannot determine compliance based on the given snippet.
+
+4. `transferFrom`: The ERC-20 standard requires a `transferFrom` function for transferring tokens on behalf of another account. The provided code does not show the implementation of the `transferFrom` function, so we cannot determine compliance based on the given snippet.
+
+5. `approve`: The ERC-20 standard requires an `approve` function that allows a spender to withdraw from an account multiple times, up to the `_value` amount. The provided code does not show the implementation of the `approve` function, so we cannot determine compliance based on the given snippet.
+
+6. `allowance`: The ERC-20 standard requires an `allowance` function that returns the amount a spender is still allowed to withdraw from an owner. The provided code does not show the implementation of the `allowance` function, so we cannot determine compliance based on the given snippet.
+
+7. `Approval` event: The ERC-20 standard requires an `Approval` event to be fired on any successful call to `approve`. The provided code does not show the implementation of the `Approval` event, so we cannot determine compliance based on the given snippet.
+
+8. Optional functions (`name`, `symbol`, `decimals`): These functions are optional according to the ERC-20 standard. The provided code does not include these, which is acceptable as they are not mandatory.
+
+In conclusion, the provided code snippet does not show the full implementation of the ERC-20 standard functions and events. To fully assess compliance, the implementation of `balanceOf`, `transfer`, `transferFrom`, `approve`, `allowance`, and the associated events `Transfer` and `Approval` would need to be provided and reviewed. Without these, we cannot confirm whether the `ZRXToken` contract is ERC-20 compliant.

@@ -1,0 +1,26 @@
+abstract contract AccessControlUpgradeable is
+    Initializable,
+    ContextUpgradeable,
+    IAccessControlUpgradeable,
+    ERC165Upgradeable
+{
+
+    mapping(bytes32 => RoleData) private _roles;
+
+    /**
+     * @dev Returns the admin role that controls `role`. See {grantRole} and
+     * {revokeRole}.
+     *
+     * To change a role's admin, use {_setRoleAdmin}.
+     */
+    function getRoleAdmin(bytes32 role)
+        public
+        view
+        virtual
+        override
+        returns (bytes32)
+    {
+        return _roles[role].adminRole;
+    }
+}
+

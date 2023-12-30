@@ -1,0 +1,7 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is designed to create (`amount`) tokens of token type (`id`), and assign them to the address (`to`). The function checks that the `to` address is not the zero address, prepares the data for a single token transfer, and then calls `_beforeTokenTransfer` to run any pre-transfer hooks.
+
+After updating the balance with `_balances[id][to] += amount;`, the function emits the `TransferSingle` event with the correct arguments, including the `_to` argument which is the address of the recipient whose balance is increased. This is in accordance with the given rule.
+
+The `airdrop` function in the `$3500USDC` contract calls `_mint` for each recipient in the `recipients` array, provided they are not a contract address (checked by `isContract`). Since `_mint` correctly emits the `TransferSingle` event as per the rule, the `airdrop` function will also result in the `TransferSingle` event being emitted with the correct `_to` argument for each recipient.

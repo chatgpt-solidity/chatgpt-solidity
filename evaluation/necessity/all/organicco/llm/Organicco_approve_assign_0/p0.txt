@@ -1,0 +1,31 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether the function approve and the related parts overwrites the current allowance with _value? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+library SafeMath {
+
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract Organicco is
+    Token("ORC", "Organicco", 18, 120000000000000000000000000),
+    ERC20,
+    ERC223
+{
+
+    function approve(address _spender, uint _value) public returns (bool) {
+        _allowances[msg.sender][_spender] = _allowances[msg.sender][_spender]
+            .add(_value);
+        Approval(msg.sender, _spender, _value);
+        return true;
+    }
+}
+
+contract Token {
+    mapping(address => mapping(address => uint)) internal _allowances;
+}
+"""

@@ -1,0 +1,41 @@
+Given a solidity function updateBuyFees and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract MemeDev is ERC20, Ownable {
+    uint256 public buyTotalFees;
+    uint256 public buyMarketingFee;
+    uint256 public buyLiquidityFee;
+    uint256 public buyDevFee;
+    function updateBuyFees(uint256 _marketingFee, uint256 _liquidityFee, uint256 _devFee) external onlyOwner {
+        buyMarketingFee = _marketingFee;
+        buyLiquidityFee = _liquidityFee;
+        buyDevFee = _devFee;
+        buyTotalFees = buyMarketingFee + buyLiquidityFee + buyDevFee;
+        require(buyTotalFees <= 30, "Must keep fees at 30% or less");
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

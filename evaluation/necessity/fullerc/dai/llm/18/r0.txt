@@ -1,0 +1,17 @@
+The provided Solidity code for the `burn` function and related parts of the smart contract do not directly violate the ERC-20 standard as described in the given ERC text. However, there are a few points to consider:
+
+1. The ERC-20 standard does not define a `burn` function. The `burn` function is an extension that some token contracts implement to allow tokens to be permanently removed from circulation. Since it is not part of the standard, its implementation is at the discretion of the contract developer, as long as it does not interfere with the standard ERC-20 functions and behaviors.
+
+2. The `burn` function in the provided code reduces the balance of the `guy` address by the `wad` amount and decreases the total supply (`_supply`) accordingly. This is the expected behavior for a burn function.
+
+3. The `burn` function emits a `Burn` event, which is not part of the ERC-20 standard. The standard requires a `Transfer` event to be emitted when tokens are transferred, including when they are created or burned. To comply with the ERC-20 standard, the `burn` function should emit a `Transfer` event with the `_from` address set to the address of the `guy` and the `_to` address set to the zero address (`0x0`) to indicate that the tokens are being burned (removed from circulation).
+
+4. The `burn` function includes a check for approvals if the caller is not the token holder. This is consistent with the ERC-20 standard's allowance mechanism, which allows for delegated token transfers.
+
+5. The `burn` function is protected by the `auth` modifier, which restricts the function to authorized users. This is not part of the ERC-20 standard, but it does not violate the standard as long as the token contract owner or other authorized users are the only ones allowed to burn tokens.
+
+6. The `burn` function is also protected by the `stoppable` modifier, which prevents the function from being called if the contract is stopped. This is an additional feature not covered by the ERC-20 standard, but it does not violate the standard.
+
+7. The `DSMath` contract's `sub` function includes a `require` statement that ensures no underflow occurs. This is a good practice for security but is not specified by the ERC-20 standard.
+
+In summary, the `burn` function itself does not violate the ERC-20 standard, but to fully comply with the standard, it should emit a `Transfer` event with the `_to` address set to `0x0` when tokens are burned. Additionally, while the `auth` and `stoppable` modifiers, as well as the `Burn` event, are not part of the ERC-20 standard, they do not conflict with it as long as the core ERC-20 functionalities remain intact.

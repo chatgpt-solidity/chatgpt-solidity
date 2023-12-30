@@ -1,0 +1,12 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    function supportsInterface(
+        bytes4 interfaceId
+    ) external pure returns (bool) {
+        return
+            interfaceId == type(IERC1155).interfaceId ||
+            interfaceId == type(IERC1155MetadataURI).interfaceId ||
+            interfaceId == type(IERC165).interfaceId;
+    }
+}
+

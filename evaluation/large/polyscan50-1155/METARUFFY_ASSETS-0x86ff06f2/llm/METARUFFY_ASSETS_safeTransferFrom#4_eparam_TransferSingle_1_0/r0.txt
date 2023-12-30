@@ -1,0 +1,42 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event with the `_operator` argument set to the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+Here's the relevant part of the code:
+
+```solidity
+function safeTransferFrom(
+    address from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+) public virtual override {
+    require(
+        from == _msgSender() || isApprovedForAll(from, _msgSender()),
+        "ERC1155: caller is not owner nor approved"
+    );
+    _safeTransferFrom(from, to, id, amount, data);
+}
+
+function _safeTransferFrom(
+    address from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+) internal virtual {
+    // ... (omitted for brevity)
+    address operator = _msgSender();
+
+    // ... (omitted for brevity)
+
+    emit TransferSingle(operator, from, to, id, amount);
+
+    // ... (omitted for brevity)
+}
+```
+
+In the `safeTransferFrom` function, it checks that the caller (`msg.sender`) is either the owner of the tokens (`from`) or is an approved operator for the owner's account. If this check passes, it calls the internal `_safeTransferFrom` function.
+
+Inside `_safeTransferFrom`, the `operator` is set to the result of `_msgSender()`, which is the `msg.sender` of the transaction. This `operator` is then used as the `_operator` argument in the `TransferSingle` event, satisfying the given rule.

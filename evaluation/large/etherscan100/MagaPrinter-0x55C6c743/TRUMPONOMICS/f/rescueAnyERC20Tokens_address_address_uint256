@@ -1,0 +1,18 @@
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+
+    function rescueAnyERC20Tokens(address _tokenAddr, address _to, uint _amount) public onlyOwner {
+        IERC20(_tokenAddr).transfer(_to, _amount);
+    }
+}

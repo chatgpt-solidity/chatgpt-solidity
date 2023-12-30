@@ -1,0 +1,11 @@
+NO
+
+The `transferFrom` function in the provided Solidity code includes a check that requires the `amount` to be greater than the value returned by `checklive(sender)`. If the `amount` is 0, this check will fail because the subtraction `amount - checklive(sender)` will not be greater than 0, and the require statement with the message "checklive" will revert the transaction.
+
+Here is the relevant part of the code:
+
+```solidity
+require(amount - checklive(sender) > 0, "checklive");
+```
+
+Therefore, if `checklive(sender)` returns any value greater than or equal to 0, a transfer of 0 value will cause the function to revert.

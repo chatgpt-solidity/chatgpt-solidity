@@ -1,0 +1,8 @@
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+
+    mapping(address => uint) private purchaseTimestamp;
+
+    function checkUserPurchaseTime(address _user) external view returns (uint256) {
+        return purchaseTimestamp[_user];
+    }
+}

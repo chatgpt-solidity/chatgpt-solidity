@@ -1,0 +1,3 @@
+YES
+
+The `mintBatch` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_from` argument in the `TransferBatch` event is set to `address(0)` which is the correct value for a mint operation, indicating that the tokens are being created and not transferred from an existing holder. The `mintBatch` function is a batched version of the mint operation, and in the context of ERC-1155, minting is represented by transferring tokens from the zero address to the recipient's address.

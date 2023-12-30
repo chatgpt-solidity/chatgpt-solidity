@@ -1,0 +1,102 @@
+{
+    "file": "evaluation/audited/mxm.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.17",
+            "func2file": {
+                "TokenERC20(uint256,string,string) returns()": "result-necessity/fullerc/mxm/TokenERC20/f/TokenERC20_uint256_string_string",
+                "transfer(address,uint256) returns()": "result-necessity/fullerc/mxm/TokenERC20/f/transfer_address_uint256",
+                "ban(address) returns()": "result-necessity/fullerc/mxm/TokenERC20/f/ban_address",
+                "enable(address) returns()": "result-necessity/fullerc/mxm/TokenERC20/f/enable_address",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/fullerc/mxm/TokenERC20/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/fullerc/mxm/TokenERC20/f/approve_address_uint256",
+                "approveAndCall(address,uint256,bytes) returns(bool)": "result-necessity/fullerc/mxm/TokenERC20/f/approveAndCall_address_uint256_bytes",
+                "burn(uint256) returns(bool)": "result-necessity/fullerc/mxm/TokenERC20/f/burn_uint256",
+                "burnFrom(address,uint256) returns(bool)": "result-necessity/fullerc/mxm/TokenERC20/f/burnFrom_address_uint256"
+            },
+            "func2attrs": {
+                "TokenERC20(uint256,string,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "ban(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "enable(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approveAndCall(address,uint256,bytes) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnFrom(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "blacklist(address) returns(bool)",
+                "name() returns(string)",
+                "decimals() returns(uint8)",
+                "balanceOf(address) returns(uint256)",
+                "symbol() returns(string)",
+                "allowance(address,address) returns(uint256)",
+                "totalSupply() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "TokenERC20"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+abstract contract BBB is AAA, IERC20, IERC20Metadata {
+    string private _symbol;
+
+    function symbol() public view virtual override returns (string memory) {
+        return _symbol;
+    }
+}
+

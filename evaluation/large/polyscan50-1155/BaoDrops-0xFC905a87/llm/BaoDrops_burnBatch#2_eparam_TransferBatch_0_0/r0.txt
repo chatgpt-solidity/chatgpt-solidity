@@ -1,0 +1,14 @@
+YES
+
+The `TransferBatch` event is emitted correctly according to the given rule. The `_operator` argument in the `TransferBatch` event is set to the address returned by `_msgSender()`, which is the current message sender (`msg.sender`). This is the expected behavior as per the rule, which states that the `_operator` must be the address of an account/contract that is approved to make the transfer, and it should be `msg.sender`.
+
+In the `burnBatch` function of the `ERC1155Burnable` contract, there is a check to ensure that the caller (`msg.sender`) is either the token owner or is approved to act on behalf of the token owner:
+
+```solidity
+require(
+    account == _msgSender() || isApprovedForAll(account, _msgSender()),
+    "ERC1155: caller is not token owner or approved"
+);
+```
+
+This check ensures that the `_operator` (which will be `msg.sender` in the `_burnBatch` function) is indeed approved to make the transfer. After this check passes, the `_burnBatch` function is called, which eventually emits the `TransferBatch` event with the `_operator` set to the address of the approved account/contract, fulfilling the rule's requirement.

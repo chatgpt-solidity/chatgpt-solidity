@@ -1,0 +1,45 @@
+Given a solidity function reveal and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract DeVULPEX is ERC721Enumerable, Ownable {
+  bool public revealed = false;
+
+  //only owner
+  function reveal() public onlyOwner {
+      revealed = true;
+  }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

@@ -1,0 +1,5 @@
+contract Ginger is Context, IERC20, Ownable {
+
+
+    receive() external payable {}
+}

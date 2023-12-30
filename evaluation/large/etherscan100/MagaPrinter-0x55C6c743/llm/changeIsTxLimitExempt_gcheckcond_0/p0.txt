@@ -1,0 +1,28 @@
+Given a solidity function changeIsTxLimitExempt and the related parts from a smart contract.
+Whether the function changeIsTxLimitExempt and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+    mapping (address => bool) public isTxLimitExempt;
+
+    function changeIsTxLimitExempt(address holder, bool exempt) external onlyOwner {      
+        isTxLimitExempt[holder] = exempt;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,36 @@
+The provided Solidity code defines a contract `DSToken` which inherits from `DSAuth`, `DSStop`, and `DSTokenBase`. The `DSTokenBase` contract, in turn, inherits from `ERC20` and `DSMath`. The `mint` function in the `DSToken` contract is designed to create new tokens and assign them to a specified address.
+
+To determine if the `mint` function violates the ERC-20 standard, we need to compare its behavior with the ERC-20 specification provided.
+
+The ERC-20 standard specifies the following for token creation:
+- A `Transfer` event must be triggered when tokens are transferred, including zero value transfers.
+- A token contract which creates new tokens should trigger a `Transfer` event with the `_from` address set to `0x0` when tokens are created.
+
+In the provided `mint` function, there is a call to `Mint(guy, wad);`, which suggests that there is a `Mint` event being emitted. However, according to the ERC-20 standard, the event that should be emitted is `Transfer`, with the `_from` address set to `0x0` to indicate token creation.
+
+Here is a potential issue with the `mint` function:
+- The `mint` function does not emit a `Transfer` event with the `_from` address set to `0x0`. Instead, it emits a `Mint` event, which is not part of the ERC-20 standard.
+
+To comply with the ERC-20 standard, the `mint` function should be modified to emit the `Transfer` event as specified. Here is a corrected version of the `mint` function:
+
+```solidity
+function mint(address guy, uint wad) public auth stoppable {
+    _balances[guy] = add(_balances[guy], wad);
+    _supply = add(_supply, wad);
+    emit Transfer(address(0), guy, wad); // Emitting the correct Transfer event
+}
+```
+
+Additionally, the ERC-20 standard requires the following functions and events to be implemented, which are not shown in the provided code snippet:
+- `name()`
+- `symbol()`
+- `decimals()`
+- `totalSupply()`
+- `balanceOf(address _owner)`
+- `transfer(address _to, uint256 _value)`
+- `transferFrom(address _from, address _to, uint256 _value)`
+- `approve(address _spender, uint256 _value)`
+- `allowance(address _owner, address _spender)`
+- `Approval` event
+
+To fully assess compliance with the ERC-20 standard, the implementation of these functions and events would need to be reviewed as well. If any of these are missing or incorrectly implemented, the contract would not be fully ERC-20 compliant.

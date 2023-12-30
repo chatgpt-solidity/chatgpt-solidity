@@ -1,0 +1,35 @@
+Given a solidity function withdrawStuckToken and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+abstract contract Ownable is Context {
+    address internal _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract CHATAI is ERC20, Ownable {
+    function withdrawStuckToken(address _token, address _to) external onlyOwner {
+        require(_token != address(0), "_token address cannot be 0");
+        uint256 _contractBalance = IERC20(_token).balanceOf(address(this));
+        IERC20(_token).transfer(_to, _contractBalance);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

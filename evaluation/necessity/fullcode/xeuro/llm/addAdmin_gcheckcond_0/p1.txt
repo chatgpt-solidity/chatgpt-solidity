@@ -1,0 +1,1 @@
+Whether caller handles or directly returns the result of those calls? Reply in "YES" or "NO".

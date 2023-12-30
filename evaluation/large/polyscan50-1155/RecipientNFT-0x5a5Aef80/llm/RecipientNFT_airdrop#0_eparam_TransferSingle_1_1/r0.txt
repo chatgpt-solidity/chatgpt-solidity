@@ -1,0 +1,9 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called within the `airdrop` function of the `RecipientNFT` contract, which inherits from `ERC1155`.
+
+The `_mint` function is designed to create (`mint`) new tokens and assign them to a recipient (`to`). When minting new tokens, the `_from` argument in the `TransferSingle` event is set to the zero address (`address(0)`), which is the correct behavior according to the ERC-1155 standard for minting new tokens. The zero address is used to indicate that the tokens are being created rather than transferred from an existing holder.
+
+The `airdrop` function checks if the recipient is not a contract using the `isContract` function before calling `_mint`. This check does not affect the correctness of the `TransferSingle` event emission, as the event is emitted with the correct `_from` argument (the zero address) regardless of whether the recipient is a contract or an externally-owned account (EOA).
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, with the `_from` argument being the zero address, which is the correct representation for the token holder whose balance is increased from zero in the case of minting new tokens.

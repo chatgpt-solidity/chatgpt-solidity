@@ -1,0 +1,16 @@
+Given a solidity function isApprovedForAll and the related parts from a smart contract and an rule for its return value.
+Whether function isApprovedForAll True if `_operator` is an approved operator for `_owner`, false otherwise? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    function isApprovedForAll(
+        address,
+        address
+    ) external pure override returns (bool) {
+        return false;
+    }
+}
+"""

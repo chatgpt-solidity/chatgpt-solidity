@@ -1,0 +1,38 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a solidity function <function> and the related parts from a smart contract.
+      Whether the function <function> throws unless <condition>? Reply in "YES" or "NO"
+      Note: returning false is not throwing.
+      
+      <example>
+
+      Function(and related parts) to audit:"""
+      <code>
+      """
+
+examples:
+  # - example: |
+  #     Example of authorization mechanism:
+  #     Example:"""
+  #     contract {
+  #         function transferFrom(...) {
+  #             transfer(...);
+  #             approve(sender, _msgSender(), _allowances[sender][_msgSender()].sub(amount, "ERC20: transfer amount exceeds allowance"));
+  #         }
+  #     }
+  #     """
+  #   matcher: "deliberately authorized"
+  - example: |
+      Example of authorization mechanism:
+      Example:"""
+      contract {
+          function transferFrom(address sender, address recipient, uint256 amount) {
+              transfer(...);
+              _allowances[sender][msg.sender] -= amount;
+              // omit other codes
+          }
+      }
+      """
+    matcher: "deliberately authorized"
+

@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract with the correct arguments. The `_id` argument is indeed the token type being transferred, which in this case is `ARTWORK` with a value of `0` as defined in the `RecipientNFT` contract. The `_mint` function is called within the `airdrop` function, and for each recipient, it mints one token of type `ARTWORK` and emits the `TransferSingle` event with the correct `_id` argument.

@@ -1,0 +1,9 @@
+YES
+
+The `mint` function in the `RecipientNFT` contract calls the `_mint` function from the `ERC1155` contract. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`. In this case, the `coinbase` variable is used as the `id` and the `amount` is hardcoded as `1`.
+
+The `_mint` function performs several operations, including updating the balance of the `to` address by the specified `amount`, and then emitting the `TransferSingle` event. The event is emitted with the `_value` argument set to the `amount` of tokens minted, which in this case is `1`.
+
+The rule states that the `_value` argument must match the number of tokens the holder's balance is increased by, which is indeed the case here. The holder's balance (the `to` address) is increased by `1`, and the `TransferSingle` event is emitted with `_value` also set to `1`.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

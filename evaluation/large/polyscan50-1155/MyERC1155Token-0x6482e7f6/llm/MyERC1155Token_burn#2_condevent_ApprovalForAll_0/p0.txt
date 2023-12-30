@@ -1,0 +1,32 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract MyERC1155Token is BasicERC1155 {
+
+    function burn(address owner, uint256 id, uint256 amount) public {
+        // For simplicity, we're allowing anyone to burn tokens. 
+        // In a real-world scenario, you'd likely want to restrict this or check the msg.sender.
+        _update(owner, address(0), id, amount);
+    }
+}
+abstract contract BasicERC1155 {
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    function _update(address from, address to, uint256 id, uint256 value) internal {
+        if (from != address(0)) {
+            _balances[id][from] -= value;
+        }
+        if (to != address(0)) {
+            _balances[id][to] += value;
+        }
+    }
+}
+"""
+
+Action:"""
+approval for a second party/operator address to manage all tokens for an owner address is enabled or disabled (absence of an event assumes disabled).
+"""

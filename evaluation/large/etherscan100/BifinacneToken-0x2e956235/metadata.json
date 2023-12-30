@@ -1,0 +1,262 @@
+{
+    "file": "evaluation/etherscan100/BifinacneToken-0x2e956235.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.26",
+            "func2file": {
+                "transferFrom(address,address,uint256) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/UpgradedStandardToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/UpgradedStandardToken/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/BifinacneToken-0x2e956235/UpgradedStandardToken/f/allowance_address_address",
+                "transfer(address,uint256) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/UpgradedStandardToken/f/transfer_address_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/BifinacneToken-0x2e956235/UpgradedStandardToken/f/balanceOf_address",
+                "transferOwnership(address) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/UpgradedStandardToken/f/transferOwnership_address"
+            },
+            "func2attrs": {
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "owner() returns(address)",
+                "allowed(address,address) returns(uint256)",
+                "_totalSupply() returns(uint256)",
+                "MAX_UINT() returns(uint256)",
+                "balances(address) returns(uint256)"
+            ],
+            "ercs": [
+                "20",
+                "20basic"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "UpgradedStandardToken"
+        },
+        {
+            "solc_version": "0.4.26",
+            "func2file": {
+                "getBlackListStatus(address) returns(bool)": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/getBlackListStatus_address",
+                "getOwner() returns(address)": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/getOwner",
+                "addBlackList(address) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/addBlackList_address",
+                "removeBlackList(address) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/removeBlackList_address",
+                "transfer(address,uint256) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/transfer_address_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/balanceOf_address",
+                "transferOwnership(address) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/transferOwnership_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/allowance_address_address",
+                "pause() returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/pause",
+                "unpause() returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/unpause",
+                "constructor() returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/constructor",
+                "deprecate(address,bool) returns()": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/deprecate_address_bool",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/BifinacneToken-0x2e956235/BifinacneToken/f/totalSupply"
+            },
+            "func2attrs": {
+                "getBlackListStatus(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "getOwner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "addBlackList(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeBlackList(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "pause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unpause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "deprecate(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "decimals() returns(uint256)",
+                "isBlackListed(address) returns(bool)",
+                "paused() returns(bool)",
+                "owner() returns(address)",
+                "name() returns(string)",
+                "upgradedAddress() returns(address)",
+                "allowed(address,address) returns(uint256)",
+                "deprecated() returns(bool)",
+                "_totalSupply() returns(uint256)",
+                "MAX_UINT() returns(uint256)",
+                "balances(address) returns(uint256)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "20",
+                "20basic"
+            ],
+            "events": [
+                {
+                    "name": "Pause",
+                    "params": []
+                },
+                {
+                    "name": "Unpause",
+                    "params": []
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "AddedBlackList",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "RemovedBlackList",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Deprecate",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "BifinacneToken"
+        }
+    ]
+}

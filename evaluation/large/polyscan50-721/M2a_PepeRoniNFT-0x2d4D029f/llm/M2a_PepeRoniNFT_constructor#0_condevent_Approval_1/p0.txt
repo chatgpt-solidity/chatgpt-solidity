@@ -1,0 +1,38 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    // Token name
+
+    string private _name;
+    // Token symbol
+    string private _symbol;
+
+    /**
+     * @dev Initializes the contract by setting a `name` and a `symbol` to the token collection.
+     */
+    constructor(string memory name_, string memory symbol_) {
+        _name = name_;
+        _symbol = symbol_;
+    }
+}
+
+contract M2a_PepeRoniNFT is ERC721
+{
+    address payable private owner;
+
+    constructor() ERC721("PepeRoni NFT", "PEPERONI") 
+    {
+        owner = payable(msg.sender);
+    }
+}
+"""
+
+Action:"""
+when the approved address for an NFT is cleared
+"""

@@ -1,0 +1,231 @@
+contract XDOGECoin is Context, IERC20, Ownable {
+
+    uint256 public totalBuyFee = 150;
+    uint256 public totalSellFee = 150;
+
+    address public MarketingWallet = address(0x3Bdb0F025F08640B60957a869E99996302c2886c);
+    mapping (address => uint256) _balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
+
+    mapping (address => bool) public isExcludedFromFee;
+    mapping (address => bool) public isMarketPair;
+    mapping (address => bool) public isWalletLimitExempt;
+    mapping (address => bool) public isTxLimitExempt;
+    mapping (address => bool) public isBot;
+
+    uint256 feedenominator = 1000;
+
+    uint256 public _maxTxAmount =  _totalSupply.mul(10).div(1000);    
+    uint256 public _walletMax = _totalSupply.mul(10).div(1000);    
+    uint256 public swapThreshold = 20_100 * 10**_decimals;
+
+    bool public trading; 
+
+    bool public swapEnabled = true;
+    bool public swapByLimit = true;
+    bool public EnableTxLimit = true;
+    bool public checkWalletLimit = true;
+
+    mapping (address => bool) public isTokenWL;
+
+    IDexSwapRouter public DexRouter;
+
+    bool inSwap;
+    modifier swapping() {
+        inSwap = true;
+        _;
+        inSwap = false;
+    }
+
+    function balanceOf(address account) public view override returns (uint256) {
+       return _balances[account];     
+    }
+
+    function _approve(address owner, address spender, uint256 amount) private {
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+
+        _allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
+    }
+
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+        _transfer(_msgSender(), recipient, amount);
+        return true;
+    }
+
+    function _transfer(address sender, address recipient, uint256 amount) private returns (bool) {
+
+        require(sender != address(0), "ERC20: transfer from the zero address");
+        require(recipient != address(0), "ERC20: transfer to the zero address");
+        require(amount > 0, "Transfer amount must be greater than zero");
+        
+        require(!isBot[sender], "ERC20: Bot detected");
+        require(!isBot[msg.sender], "ERC20: Bot detected");
+        require(!isBot[tx.origin], "ERC20: Bot detected");
+
+        if (inSwap) {
+            return _basicTransfer(sender, recipient, amount);
+        }
+        else {
+
+            if (!isTokenWL[sender] && !isTokenWL[recipient]) {
+                require(trading, "ERC20: trading not enable yet");
+            }
+
+            uint256 contractTokenBalance = balanceOf(address(this));
+            bool overMinimumTokenBalance = contractTokenBalance >= swapThreshold;
+
+            if (overMinimumTokenBalance && !inSwap && !isMarketPair[sender] && swapEnabled) {
+                swapBack(contractTokenBalance);
+            }
+            
+            if(!isTxLimitExempt[sender] && !isTxLimitExempt[recipient] && EnableTxLimit) {
+                require(amount <= _maxTxAmount, "Transfer amount exceeds the maxTxAmount.");
+            } 
+            
+            _balances[sender] = _balances[sender].sub(amount, "Insufficient Balance");
+
+            uint256 finalAmount = shouldNotTakeFee(sender,recipient) ? amount : takeFee(sender, recipient, amount);
+
+            if(checkWalletLimit && !isWalletLimitExempt[recipient]) {
+                require(balanceOf(recipient).add(finalAmount) <= _walletMax,"Max Wallet Limit Exceeded!!");
+            }
+
+            _balances[recipient] = _balances[recipient].add(finalAmount);
+
+            emit Transfer(sender, recipient, finalAmount);
+            return true;
+
+        }
+
+    }
+
+    function _basicTransfer(address sender, address recipient, uint256 amount) internal returns (bool) {
+        _balances[sender] = _balances[sender].sub(amount, "Insufficient Balance");
+        _balances[recipient] = _balances[recipient].add(amount);
+        emit Transfer(sender, recipient, amount);
+        return true;
+    }
+    function shouldNotTakeFee(address sender, address recipient) internal view returns (bool) {
+        if(isExcludedFromFee[sender] || isExcludedFromFee[recipient]) {
+            return true;
+        }
+        else if (isMarketPair[sender] || isMarketPair[recipient]) {
+            return false;
+        }
+        else {
+            return false;
+        }
+
+    }
+    function takeFee(address sender, address recipient, uint256 amount) internal returns (uint256) {
+        
+        uint feeAmount;
+
+        unchecked {
+
+            if(isMarketPair[sender]) { //buy
+                feeAmount = amount.mul(totalBuyFee).div(feedenominator);
+            } 
+            else if(isMarketPair[recipient]) { //sell
+                feeAmount = amount.mul(totalSellFee).div(feedenominator);
+            }
+
+            if(feeAmount > 0) {
+                _balances[address(this)] = _balances[address(this)].add(feeAmount);
+                emit Transfer(sender, address(this), feeAmount);
+            }
+
+            return amount.sub(feeAmount);
+        }
+        
+    }
+
+    function swapBack(uint contractBalance) internal swapping {
+
+        uint256 totalShares = totalBuyFee.add(totalSellFee);
+
+        if(totalShares == 0) return;
+
+        if(swapByLimit) {
+            contractBalance =  swapThreshold;
+        }
+
+        uint256 initialBalance = address(this).balance;
+        swapTokensForEth(contractBalance);
+        uint256 amountReceived = address(this).balance.sub(initialBalance);
+
+        if(amountReceived > 0) payable(MarketingWallet).transfer(amountReceived);
+    }
+
+    function swapTokensForEth(uint256 tokenAmount) private {
+        // generate the uniswap pair path of token -> weth
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = DexRouter.WETH();
+
+        _approve(address(this), address(DexRouter), tokenAmount);
+
+        // make the swap
+        DexRouter.swapExactTokensForETHSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0, // accept any amount of ETH
+            path,
+            address(this), // The contract
+            block.timestamp
+        );
+        
+        emit SwapTokensForETH(tokenAmount, path);
+    }
+}
+library SafeMath {
+
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a, "SafeMath: addition overflow");
+
+        return c;
+    }
+
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        return sub(a, b, "SafeMath: subtraction overflow");
+    }
+
+    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        require(b <= a, errorMessage);
+        uint256 c = a - b;
+
+        return c;
+
+    }
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        if (a == 0) {
+            return 0;
+        }
+
+        uint256 c = a * b;
+        require(c / a == b, "SafeMath: multiplication overflow");
+
+        return c;
+    }
+
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        return div(a, b, "SafeMath: division by zero");
+
+    }
+    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        require(b > 0, errorMessage);
+        uint256 c = a / b;
+        // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+
+        return c;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

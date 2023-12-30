@@ -1,0 +1,12 @@
+YES
+
+The `mint` function in the `METARUFFY_ASSETS` contract calls the `_mint` function of the `ERC1155` contract. The `_mint` function is responsible for creating `amount` tokens of token type `id` and assigning them to the `to` address. It also emits the `TransferSingle` event.
+
+The `TransferSingle` event is emitted with the following arguments:
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are being transferred, which in the case of minting is the zero address (`address(0)`).
+- `_to`: The address to which the tokens are being minted, which is the `account` parameter in the `mint` function.
+- `_id`: The token type being transferred, which is the `id` parameter in the `mint` function.
+- `_value`: The number of tokens being transferred, which is the `amount` parameter in the `mint` function.
+
+The rule states that the `_id` argument must be the token type being transferred, and in this case, it is. The `id` parameter in the `mint` function is used as the `_id` argument in the `TransferSingle` event, satisfying the given rule.

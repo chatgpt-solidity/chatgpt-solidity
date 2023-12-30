@@ -1,0 +1,5 @@
+YES
+
+The `_mint` function within the `C2RERC1155` contract calls the `emit TransferSingle(operator, address(0), to, id, amount);` line after updating the balance of the `to` address with the new token amount. In the context of minting new tokens, the `_from` argument is correctly set to the zero address (`address(0)`), which represents the creation of new tokens rather than the transfer from an existing holder. This is in line with the ERC-1155 standard for minting new tokens, where the `_from` field is the zero address to indicate that tokens are being created and not transferred from another address.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule when new tokens are minted.

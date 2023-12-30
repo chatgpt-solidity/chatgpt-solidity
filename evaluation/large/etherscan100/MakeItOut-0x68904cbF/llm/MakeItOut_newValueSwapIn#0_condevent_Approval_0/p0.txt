@@ -1,0 +1,19 @@
+Given a solidity function newValueSwapIn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+contract MakeItOut is Context, IERC20, Ownable {
+    int32 private hydloic = 1111;
+
+    function newValueSwapIn() external virtual{
+        hydloic = 1;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

@@ -1,0 +1,11 @@
+YES
+
+The `TransferBatch` event is emitted correctly according to the given rule. In the `_mintBatch` function, the `TransferBatch` event is emitted with the `_from` argument set to `address(0)`, which is the correct behavior for a mint operation. In the context of ERC-1155, a mint operation is considered a transfer from the zero address to the recipient's address, indicating the creation of new tokens. The `_mintBatch` function is called by the `mintBatch` function in the `NFTBigPartnerV2` contract, which is restricted to the contract owner by the `onlyOwner` modifier.
+
+The relevant line in the `_mintBatch` function is:
+
+```solidity
+emit TransferBatch(operator, address(0), to, ids, amounts);
+```
+
+This line correctly emits the `TransferBatch` event with the `_from` argument as `address(0)`, the `_to` argument as the recipient's address, and the `_ids` and `_values` (amounts) as the token IDs and the corresponding amounts being minted.

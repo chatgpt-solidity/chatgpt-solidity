@@ -1,0 +1,27 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_operator` argument in the `TransferSingle` event is set to the address returned by `_msgSender()`, which is the same as `msg.sender` in the `Context` contract. This ensures that the `_operator` is the address of an account/contract that is approved to make the transfer, as required by the rule.
+
+Here is the relevant part of the code:
+
+```solidity
+function _safeTransferFrom(
+    address from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+) internal virtual {
+    require(to != address(0), "ERC1155: transfer to the zero address");
+
+    address operator = _msgSender(); // This is the _operator for the event
+
+    // ... (omitted code for brevity)
+
+    emit TransferSingle(operator, from, to, id, amount); // Event is emitted here with the correct _operator
+
+    // ... (omitted code for brevity)
+}
+```
+
+The `safeTransferFrom` function calls `_safeTransferFrom`, which performs the transfer and emits the `TransferSingle` event with the correct `_operator` argument.

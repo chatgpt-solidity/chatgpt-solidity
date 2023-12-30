@@ -1,0 +1,8 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+    string private _symbol;
+
+    function symbol() external view returns (string memory) {
+        return _symbol;
+    }
+}
+

@@ -1,0 +1,20 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is responsible for creating tokens and assigning them to a recipient address. The function emits a `TransferSingle` event, which is used to log the transfer of a single token type.
+
+The `TransferSingle` event is emitted with the following parameters:
+- `_operator`: The address which initiated the transfer (in this case, the message sender).
+- `_from`: The address from which the tokens are transferred. For minting, this is the zero address.
+- `_to`: The address to which the tokens are transferred.
+- `_id`: The token type that is being transferred.
+- `_value`: The number of tokens that are being transferred.
+
+In the provided `airdrop` function, the `_mint` function is called with the following arguments:
+- `recipients[i]`: The recipient address.
+- `_currentTokenId`: The token type that is being minted.
+- `1`: The amount of tokens that are being minted.
+- `""`: An empty byte array for additional data.
+
+The `_mint` function checks that the recipient address is not the zero address, calculates the token balances, and then emits the `TransferSingle` event with the correct `_value` of `1`, which is the number of tokens minted for the recipient. This matches the rule that the `_value` argument must be the number of tokens the holder balance is decreased by (in this case, from the zero address, which represents minting) and match what the recipient balance is increased by.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

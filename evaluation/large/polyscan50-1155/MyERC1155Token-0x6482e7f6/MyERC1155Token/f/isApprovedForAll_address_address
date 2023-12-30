@@ -1,0 +1,8 @@
+abstract contract BasicERC1155 {
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function isApprovedForAll(address account, address operator) public view returns (bool) {
+        return _operatorApprovals[account][operator];
+    }
+}
+

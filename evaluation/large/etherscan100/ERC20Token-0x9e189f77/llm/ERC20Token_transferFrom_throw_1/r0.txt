@@ -1,0 +1,12 @@
+YES
+
+The `transferFrom` function in the provided Solidity code will not throw if transfers of 0 values are made. The `_transfer` function, which is called by `transferFrom`, has a specific check for the amount being 0:
+
+```solidity
+if (amount == 0) {
+    super._transfer(from, to, 0);
+    return;
+}
+```
+
+When the amount is 0, it calls the `super._transfer` function (which refers to the `_transfer` function in the parent contract) with the amount of 0 and then returns early, effectively bypassing any further logic that could potentially throw an error. This means that the function will complete successfully without reverting the transaction when the transfer amount is 0.

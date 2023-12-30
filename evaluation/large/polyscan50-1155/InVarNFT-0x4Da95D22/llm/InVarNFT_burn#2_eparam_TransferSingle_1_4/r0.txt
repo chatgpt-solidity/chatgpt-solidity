@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted correctly according to the given rule. The `_burn` function in the `ERC1155` contract decreases the balance of `account` by `amount` for the token type `id`. The `TransferSingle` event is then emitted with the `_operator` being the message sender, `_from` being the `account` from which tokens are burned, `_to` being the zero address (since tokens are being destroyed), `_id` being the token type, and `_value` being the `amount` that was burned.
+
+The rule states that the `_value` argument must match the number of tokens the holder's balance is decreased by, which is indeed the case here. The `amount` is subtracted from the `account`'s balance of token type `id`, and the same `amount` is used as the `_value` in the `TransferSingle` event. The recipient balance is not increased because the tokens are being burned (sent to the zero address), which is the standard way to represent token destruction in ERC-1155 contracts.

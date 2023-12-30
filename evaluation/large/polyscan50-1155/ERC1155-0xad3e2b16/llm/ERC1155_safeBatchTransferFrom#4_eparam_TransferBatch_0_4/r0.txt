@@ -1,0 +1,24 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The rule states that the `_values` argument must match the list and order of tokens specified in `_ids` and reflect the actual number of tokens the holder's balance is decreased by, which should also match the recipient's balance increase.
+
+In the `_safeBatchTransferFrom` private function, which is called by `safeBatchTransferFrom`, there is a loop that iterates over the `ids` array and performs the balance updates for each token ID:
+
+```solidity
+for (uint256 i; i < ids.length; ++i) {
+    if (amounts[i] > _balances[ids[i]][from])
+        revert InsufficientBalance();
+    unchecked {
+        _balances[ids[i]][from] -= amounts[i];
+    }
+    _balances[ids[i]][to] += amounts[i];
+}
+```
+
+After updating the balances, the `TransferBatch` event is emitted with the `msg.sender` as the `_operator`, `from` as the `_from`, `to` as the `_to`, `ids` as the `_ids`, and `amounts` as the `_values`:
+
+```solidity
+emit TransferBatch(msg.sender, from, to, ids, amounts);
+```
+
+This event emission is in accordance with the rule, as the `amounts` array represents the number of tokens that are being transferred for each corresponding token ID in the `ids` array, and the balances have been updated accordingly just before the event is emitted.

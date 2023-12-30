@@ -1,0 +1,24 @@
+The `balanceOf` function provided in the Solidity code snippet appears to be compliant with the ERC-20 token standard as described in the ERC documentation you provided. The ERC-20 standard specifies that the `balanceOf` function should:
+
+- Accept an address `_owner` as a parameter.
+- Return the balance of the `_owner` address.
+
+The Solidity code for the `balanceOf` function does exactly that:
+
+```solidity
+function balanceOf(
+    address _owner
+) public constant returns (uint256 balance) {
+    return balances[_owner];
+}
+```
+
+It takes an address `_owner` and returns the balance associated with that address from the `balances` mapping. The `constant` keyword in Solidity 0.4.x is equivalent to `view` in later versions, indicating that the function does not modify the state of the contract.
+
+However, there are a couple of minor discrepancies that should be noted:
+
+1. The ERC-20 standard specifies that the `balanceOf` function should be marked as `view` rather than `constant`. In Solidity 0.4.17 and later, `constant` is deprecated in favor of `view` and `pure`. The `constant` keyword is still valid in Solidity 0.4.x, but it is recommended to use `view` for functions that do not modify the state.
+
+2. The ERC-20 standard does not require the `balanceOf` function to be marked as `public`, but it is a common practice to do so because it allows the function to be called both internally and externally.
+
+Aside from these minor points, the provided `balanceOf` function does not violate the ERC-20 standard. It correctly implements the required functionality as per the specification.

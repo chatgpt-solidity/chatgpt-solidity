@@ -1,0 +1,12 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    function balanceOf(
+        address account,
+        uint256 id
+    ) external view override returns (uint256) {
+        return _balances[id][account];
+    }
+}
+

@@ -1,0 +1,3 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_to` argument in the event is indeed the address of the recipient whose balance is increased by the `_safeTransferFrom` internal function. The `TransferSingle` event is emitted after the balance update and uses the `to` variable as the `_to` argument, which is the recipient's address.

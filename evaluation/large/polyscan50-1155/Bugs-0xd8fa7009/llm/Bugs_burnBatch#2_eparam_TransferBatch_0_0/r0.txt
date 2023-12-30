@@ -1,0 +1,14 @@
+YES
+
+The `burnBatch` function in the `ERC1155Burnable` contract calls the `_burnBatch` internal function, which in turn emits the `TransferBatch` event. The `_operator` argument for the `TransferBatch` event is set to the address returned by `_msgSender()`, which is the same as `msg.sender` in the `Context` contract.
+
+The `burnBatch` function includes a requirement that ensures the caller (`msg.sender`) is either the owner of the tokens or is an approved operator for the owner's account. This is checked by the condition:
+
+```solidity
+require(
+    account == _msgSender() || isApprovedForAll(account, _msgSender()),
+    "ERC1155: caller is not token owner or approved"
+);
+```
+
+Since the `_burnBatch` function is only called after this check passes, the `_operator` argument in the `TransferBatch` event will always be an address that is approved to make the transfer, which complies with the given rule.

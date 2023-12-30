@@ -1,0 +1,80 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    constructor(address initialOwner) {
+        _transferOwnership(initialOwner);
+    }
+
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+contract Gem is
+    Ownable,
+    ERC20
+    
+    
+    
+      
+{
+    constructor(
+        address initialOwner_,
+        string memory name_,
+        string memory symbol_,
+        uint8 decimals_,
+        uint256 totalSupply_
+        
+    )
+        Ownable(initialOwner_)
+        ERC20(name_, symbol_, decimals_, totalSupply_)
+        
+    {
+        _balances[initialOwner_] = totalSupply_;
+    }
+}
+
+contract ERC20 is Context, IERC20 {
+    mapping(address => uint256) internal _balances;
+
+    uint256 internal _totalSupply;
+    uint8 internal _decimals;
+    string private _name;
+
+    string private _symbol;
+    constructor(
+        string memory name_,
+        string memory symbol_,
+        uint8 decimals_,
+        uint256 totalSupply_
+    ) {
+        _name = name_;
+        _symbol = symbol_;
+        _decimals = decimals_;
+        _totalSupply = totalSupply_;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

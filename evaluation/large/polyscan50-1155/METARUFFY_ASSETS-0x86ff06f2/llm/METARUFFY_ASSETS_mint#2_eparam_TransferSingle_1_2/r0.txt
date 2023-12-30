@@ -1,0 +1,35 @@
+YES
+
+The `mint` function in the `METARUFFY_ASSETS` contract calls the `_mint` function in the `ERC1155` contract, which is responsible for creating new tokens and assigning them to the recipient address `to`. The `_mint` function emits the `TransferSingle` event with the `_to` argument set to the address of the recipient whose balance is increased, as per the rule provided.
+
+Here's the relevant part of the `_mint` function that shows the `TransferSingle` event being emitted with the correct `_to` argument:
+
+```solidity
+function _mint(
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+) internal virtual {
+    require(to != address(0), "ERC1155: mint to the zero address");
+
+    address operator = _msgSender();
+
+    _beforeTokenTransfer(operator, address(0), to, _asSingletonArray(id), _asSingletonArray(amount), data);
+
+    _balances[id][to] += amount;
+    emit TransferSingle(operator, address(0), to, id, amount);
+
+    _doSafeTransferAcceptanceCheck(operator, address(0), to, id, amount, data);
+}
+```
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are transferred, which is `address(0)` because tokens are being minted.
+- `_to`: The address to which the tokens are transferred, which is the `to` parameter of the `_mint` function.
+- `_id`: The token ID.
+- `_value`: The amount of tokens being minted.
+
+This matches the rule that the `_to` argument must be the address of the recipient whose balance is increased.

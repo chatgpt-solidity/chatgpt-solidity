@@ -1,0 +1,15 @@
+contract ERC1155Tradable is
+    ContextMixin,
+    ERC1155,
+    NativeMetaTransaction,
+    Ownable,
+    Pausable
+{
+
+    mapping(uint256 => uint256) private _supply;
+
+    function exists(uint256 _id) public view returns (bool) {
+        return _supply[_id] > 0;
+    }
+}
+

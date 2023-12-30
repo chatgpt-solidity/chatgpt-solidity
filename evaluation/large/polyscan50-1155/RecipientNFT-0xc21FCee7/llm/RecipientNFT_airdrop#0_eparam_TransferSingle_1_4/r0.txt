@@ -1,0 +1,9 @@
+YES
+
+The `airdrop` function in the `RecipientNFT` contract is designed to mint a new token (with the `coinbase` ID) to each address in the `recipients` array, provided that the address is not a contract. The `_mint` function is called with the `amount` set to `1`, which means that exactly one token is minted for each recipient.
+
+The `_mint` function internally calls `_beforeTokenTransfer`, updates the recipient's balance, emits the `TransferSingle` event, calls `_afterTokenTransfer`, and finally performs a safe transfer acceptance check if the recipient is a contract.
+
+The `TransferSingle` event is emitted with the `_value` argument set to the amount of tokens minted, which in this case is `1`. This matches the number of tokens the recipient's balance is increased by, as per the rule provided.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, and the answer is "YES".

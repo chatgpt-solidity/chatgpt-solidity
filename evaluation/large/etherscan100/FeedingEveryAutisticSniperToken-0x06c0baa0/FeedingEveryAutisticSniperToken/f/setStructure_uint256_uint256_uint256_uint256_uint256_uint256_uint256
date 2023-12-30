@@ -1,0 +1,31 @@
+library SafeMath {
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {return a / b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+contract  FeedingEveryAutisticSniperToken  is IERC20, Ownable {
+    uint256 private liquidityFee = 0;
+    uint256 private marketingFee = 100;
+    uint256 private developmentFee = 100;
+    uint256 private burnFee = 0;
+    uint256 private totalFee = 200;
+    uint256 private sellFee = 200;
+    uint256 private transferFee = 200;
+    uint256 private denominator = 10000;
+
+    function setStructure(uint256 _liquidity, uint256 _marketing, uint256 _burn, uint256 _development, uint256 _total, uint256 _sell, uint256 _trans) external onlyOwner {
+        liquidityFee = _liquidity;
+        marketingFee = _marketing;
+        burnFee = _burn;
+        developmentFee = _development;
+        totalFee = _total;
+        sellFee = _sell;
+        transferFee = _trans;
+        require(totalFee <= denominator.div(4) && sellFee <= denominator.div(4), "totalFee and sellFee cannot be more than 25%");
+    }
+}

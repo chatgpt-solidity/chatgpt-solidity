@@ -1,0 +1,9 @@
+contract Projecton is owned, IERC20 {
+
+    uint256 public constant _totalSupply = 100000000000000000000000000;
+
+    function totalSupply() constant returns (uint256 totalSupply) {
+        return _totalSupply;
+    }
+}
+

@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract, which is called by the `airdrop` function in the `BlurSummer` contract. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`. The `TransferSingle` event is emitted with the `_value` argument set to the `amount` of tokens minted, which is the number of tokens the recipient's balance is increased by.
+
+In the provided code, the `airdrop` function calls `_mint` with an `amount` of `1` for each recipient in the `recipients` array, provided the recipient is not a contract (checked by `isContract`). The `_mint` function then emits the `TransferSingle` event with the `_value` set to `1`, which matches the number of tokens the recipient's balance is increased by. Therefore, the event `TransferSingle` is emitted according to the given rule.

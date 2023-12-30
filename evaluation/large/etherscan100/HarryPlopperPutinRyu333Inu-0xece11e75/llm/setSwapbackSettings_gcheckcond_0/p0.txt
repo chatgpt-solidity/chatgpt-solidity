@@ -1,0 +1,30 @@
+Given a solidity function setSwapbackSettings and the related parts from a smart contract.
+Whether the function setSwapbackSettings and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+contract HarryPlopperPutinRyu333Inu is IERC20, Ownable {
+    uint256 private _totalSupply = 1000000000 * (10 ** _decimals);
+    uint256 swapAmount = 3;
+    uint256 private swapThreshold = ( _totalSupply * 1000 ) / 100000;
+    uint256 private minTokenAmount = ( _totalSupply * 10 ) / 100000;
+
+    function setSwapbackSettings(uint256 _swapAmount, uint256 _swapThreshold, uint256 _minTokenAmount) external onlyOwner {
+        swapAmount = _swapAmount; swapThreshold = _totalSupply.mul(_swapThreshold).div(uint256(100000)); 
+        minTokenAmount = _totalSupply.mul(_minTokenAmount).div(uint256(100000));
+    }
+}
+library SafeMath {
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {return a * b;}
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {return a / b;}
+        unchecked{require(b > 0, errorMessage); return a % b;}}}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,19 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a solidity function <function> and the related parts from a smart contract.
+      Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+      Function(and related parts) to audit:"""
+      <code>
+      """
+
+      Action:"""
+      <condition>
+      """
+  - template: |
+      Whether the event <event> is emitted according to the given rule? Reply in "YES" or "NO".
+
+      Rule:"""
+      <rule>
+      """

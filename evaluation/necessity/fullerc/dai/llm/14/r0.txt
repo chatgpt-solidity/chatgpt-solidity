@@ -1,0 +1,35 @@
+The `move` function in the provided Solidity code is a wrapper around the `transferFrom` function. To determine if the `move` function violates the ERC-20 standard, we need to examine the `transferFrom` function and how `move` interacts with it.
+
+The ERC-20 standard specifies the following for the `transferFrom` function:
+
+- It should transfer a specified amount of tokens from one address to another.
+- It should fire the `Transfer` event.
+- It should throw an error if the transfer is not possible (e.g., if the sender does not have enough balance or if the sender is not authorized to spend the specified amount from the source address).
+
+The provided `transferFrom` function in the `DSToken` contract appears to adhere to these requirements. It checks for sufficient balance and approvals, updates balances, and emits the `Transfer` event.
+
+However, there are a few potential issues with the `move` function:
+
+1. The `move` function does not return a boolean value as specified by the ERC-20 standard for the `transferFrom` function. According to the ERC-20 standard, `transferFrom` should return `true` on success and `false` on failure. The `move` function should also adhere to this convention to be compliant.
+
+2. The `move` function does not have any access control or checks to ensure that the caller is authorized to move tokens from the `src` address. This could lead to unauthorized transfers if the `move` function is exposed to external callers.
+
+3. The `move` function does not check for the return value of `transferFrom`. While the current implementation of `transferFrom` always returns `true`, it is a good practice to check the return value in case the implementation changes in the future.
+
+4. The `move` function does not have a `stoppable` modifier, which means it could potentially bypass the circuit breaker pattern implemented in the `DSStop` contract. If the `stopped` variable is set to `true`, the `transferFrom` function will revert due to the `stoppable` modifier, but the `move` function does not have this check, which could lead to inconsistent behavior.
+
+To make the `move` function compliant with the ERC-20 standard and the design of the `DSToken` contract, the following changes should be considered:
+
+- Add a return type of `bool` to the `move` function and return the result of the `transferFrom` call.
+- Add appropriate access control checks to ensure that only authorized callers can invoke `move`.
+- Add the `stoppable` modifier to the `move` function to ensure it respects the circuit breaker pattern.
+
+Here's an example of how the `move` function could be modified:
+
+```solidity
+function move(address src, address dst, uint wad) public stoppable returns (bool) {
+    return transferFrom(src, dst, wad);
+}
+```
+
+With these changes, the `move` function would be more aligned with the ERC-20 standard and the intended behavior of the `DSToken` contract.

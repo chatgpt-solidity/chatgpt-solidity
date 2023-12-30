@@ -1,0 +1,278 @@
+{
+    "file": "evaluation/etherscan100/XINU-0xB675AA72.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.10",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/decreaseAllowance_address_uint256",
+                "isExcludedFromReward(address) returns(bool)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/isExcludedFromReward_address",
+                "reflectionFromToken(uint256,bool,bool) returns(uint256)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/reflectionFromToken_uint256_bool_bool",
+                "tokenFromReflection(uint256) returns(uint256)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/tokenFromReflection_uint256",
+                "excludeFromReward(address) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/excludeFromReward_address",
+                "includeInReward(address) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/includeInReward_address",
+                "excludeFromFee(address) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/excludeFromFee_address",
+                "includeInFee(address) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/includeInFee_address",
+                "isExcludedFromFee(address) returns(bool)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/isExcludedFromFee_address",
+                "setTaxes(uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/setTaxes_uint256_uint256_uint256_uint256",
+                "setSellTaxes(uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/setSellTaxes_uint256_uint256_uint256_uint256",
+                "updateMarketingWallet(address) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/updateMarketingWallet_address",
+                "updateDevWallet(address) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/updateDevWallet_address",
+                "updateMaxWalletBalance(uint256) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/updateMaxWalletBalance_uint256",
+                "updatMaxBuyAmt(uint256) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/updatMaxBuyAmt_uint256",
+                "updatMaxSellAmt(uint256) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/updatMaxSellAmt_uint256",
+                "updateSwapTokensAtAmount(uint256) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/updateSwapTokensAtAmount_uint256",
+                "updateSwapEnabled(bool) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/updateSwapEnabled_bool",
+                "setAntibot(address,bool) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/setAntibot_address_bool",
+                "bulkAntiBot(address[],bool) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/bulkAntiBot_address[]_bool",
+                "updateRouterAndPair(address,address) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/updateRouterAndPair_address_address",
+                "isBot(address) returns(bool)": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/isBot_address",
+                "rescueBNB(uint256) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/rescueBNB_uint256",
+                "rescueAnyBEP20Tokens(address,address,uint256) returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/rescueAnyBEP20Tokens_address_address_uint256",
+                "receive() returns()": ".temp/etherscan100/XINU-0xB675AA72/XINU/f/receive"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isExcludedFromReward(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "reflectionFromToken(uint256,bool,bool) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenFromReflection(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "excludeFromReward(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "includeInReward(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeFromFee(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "includeInFee(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isExcludedFromFee(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setTaxes(uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setSellTaxes(uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateMarketingWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateDevWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateMaxWalletBalance(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updatMaxBuyAmt(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updatMaxSellAmt(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSwapTokensAtAmount(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateSwapEnabled(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setAntibot(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "bulkAntiBot(address[],bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateRouterAndPair(address,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isBot(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "rescueBNB(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "rescueAnyBEP20Tokens(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "swapTokensAtAmount() returns(uint256)",
+                "pair() returns(address)",
+                "totFeesPaid() returns(uint256,uint256,uint256,uint256)",
+                "devAddress() returns(address)",
+                "taxes() returns(uint256,uint256,uint256,uint256)",
+                "marketingAddress() returns(address)",
+                "router() returns(IRouter)",
+                "sellTaxes() returns(uint256,uint256,uint256,uint256)",
+                "maxSellAmount() returns(uint256)",
+                "swapEnabled() returns(bool)",
+                "maxWalletBalance() returns(uint256)",
+                "maxBuyAmount() returns(uint256)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "FeesChanged",
+                    "params": []
+                }
+            ],
+            "name": "XINU"
+        }
+    ]
+}

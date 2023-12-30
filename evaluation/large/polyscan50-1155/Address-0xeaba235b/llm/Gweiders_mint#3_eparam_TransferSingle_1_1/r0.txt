@@ -1,0 +1,5 @@
+YES
+
+The `_mint` function in the `ERC1155` contract emits the `TransferSingle` event with the `_from` argument set to the zero address (`address(0)`), which is the correct behavior for a mint operation according to the ERC-1155 standard. When minting new tokens, the tokens are created out of thin air, and there is no holder from whom the balance is decreased. Therefore, the zero address is used to indicate that the tokens are being minted rather than transferred from an existing holder.
+
+The `mint` function in the `Gweiders` contract calls `_mint` and is restricted to the contract owner by the `onlyOwner` modifier. The `TransferSingle` event is emitted inside the `_mint` function with the correct arguments, including the zero address for the `_from` parameter, which complies with the given rule.

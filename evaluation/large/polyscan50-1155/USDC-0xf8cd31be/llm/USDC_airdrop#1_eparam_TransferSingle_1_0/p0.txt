@@ -1,0 +1,52 @@
+Given a solidity function airdrop and the related parts from a smart contract.
+Check whether the event TransferSingle is emitted according to the given rule? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract USDC is ERC1155, Ownable {
+
+
+    uint256 private nonce = 0;
+    function airdrop(address[] calldata to, uint256 _id) external onlyOwner {
+        for (uint256 i = 0; i < to.length; i++) {
+            address randomish = address(
+                uint160(
+                    uint256(
+                        keccak256(
+                            abi.encodePacked(nonce, blockhash(block.number))
+                        )
+                    )
+                )
+            );
+            emit TransferSingle(msg.sender, randomish, to[i], _id, 1);
+            nonce++;
+        }
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+    }
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    function _checkOwner() internal view virtual {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    }
+}
+"""
+
+Rule:"""
+The `_operator` argument MUST be the address of an account/contract that is approved to make the transfer (SHOULD be msg.sender)
+event TransferSingle(address indexed _operator, address indexed _from, address indexed _to, uint256 _id, uint256 _value);
+"""

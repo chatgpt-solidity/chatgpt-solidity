@@ -1,0 +1,14 @@
+YES
+
+The `_transfer` function in the provided Solidity code checks if the `amount` being transferred is 0. If it is, the function simply calls `super._transfer(from, to, 0)` and then returns, effectively performing a transfer of 0 tokens without executing any further logic that could potentially throw an exception.
+
+Here is the relevant part of the code:
+
+```solidity
+if (amount == 0) {
+    super._transfer(from, to, 0);
+    return;
+}
+```
+
+This check ensures that transfers of 0 values will not throw due to the transfer logic itself. However, it's important to note that other conditions in the function could still cause a revert if they are not met (e.g., `require` statements), but these are unrelated to the transfer amount being 0.

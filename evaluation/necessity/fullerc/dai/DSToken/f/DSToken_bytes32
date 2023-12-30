@@ -1,0 +1,27 @@
+contract DSToken is DSTokenBase(0), DSStop {
+    bytes32 public symbol;
+
+    function DSToken(bytes32 symbol_) public {
+        symbol = symbol_;
+    }
+}
+
+contract DSAuth is DSAuthEvents {
+    address public owner;
+
+    function DSAuth() public {
+        owner = msg.sender;
+        LogSetOwner(msg.sender);
+    }
+}
+
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => uint256) _balances;
+    uint256 _supply;
+
+    function DSTokenBase(uint supply) public {
+        _balances[msg.sender] = supply;
+        _supply = supply;
+    }
+}
+

@@ -1,0 +1,95 @@
+{
+    "file": "evaluation/etherscan100/VARK-0x939F2d70.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.0",
+            "func2file": {
+                "constructor() returns()": ".temp/etherscan100/VARK-0x939F2d70/VARK/f/constructor",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/VARK-0x939F2d70/VARK/f/transfer_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/VARK-0x939F2d70/VARK/f/transferFrom_address_address_uint256",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/VARK-0x939F2d70/VARK/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/VARK-0x939F2d70/VARK/f/balanceOf_address",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/VARK-0x939F2d70/VARK/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/VARK-0x939F2d70/VARK/f/approve_address_uint256"
+            },
+            "func2attrs": {
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "taxesRemoved() returns(bool)",
+                "sellTaxPercent() returns(uint256)",
+                "name() returns(string)",
+                "decimals() returns(uint8)",
+                "buyTaxPercent() returns(uint256)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "VARK"
+        }
+    ]
+}

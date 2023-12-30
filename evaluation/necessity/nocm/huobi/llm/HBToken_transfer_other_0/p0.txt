@@ -1,0 +1,27 @@
+Given a solidity function transfer and the related parts from a smart contract and an ERC rule for it.
+Whether the function transfer and its related parts violate the rule? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract RegularToken is Token {
+
+    mapping(address => uint) balances;
+    function transfer(address _to, uint _value) returns (bool) {
+        //Default assumes totalSupply can't be over max (2^256 - 1).
+        if (
+            balances[msg.sender] >= _value &&
+            balances[_to] + _value >= balances[_to]
+        ) {
+            balances[msg.sender] -= _value;
+            balances[_to] += _value;
+            Transfer(msg.sender, _to, _value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+"""
+
+ERC Rule:"""
+Transfers of 0 values MUST be treated as normal transfers
+"""

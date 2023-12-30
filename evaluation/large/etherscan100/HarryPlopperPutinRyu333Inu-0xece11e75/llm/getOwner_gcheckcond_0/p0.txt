@@ -1,0 +1,15 @@
+Given a solidity function getOwner and the related parts from a smart contract.
+Whether the function getOwner and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract HarryPlopperPutinRyu333Inu is IERC20, Ownable {
+    function getOwner() external view override returns (address) { return owner; }
+}
+abstract contract Ownable {
+    address internal owner;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

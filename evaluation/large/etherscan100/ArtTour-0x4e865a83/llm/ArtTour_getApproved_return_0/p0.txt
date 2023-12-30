@@ -1,0 +1,13 @@
+Given a solidity function getApproved and the related parts from a smart contract and an rule for its return value.
+Whether function getApproved The approved address for this NFT, or the zero address if there is none? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    function getApproved(uint256) external pure override returns (address) {
+        return address(0);
+    }
+}
+"""

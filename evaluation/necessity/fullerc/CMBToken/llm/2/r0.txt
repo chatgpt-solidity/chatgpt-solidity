@@ -1,0 +1,27 @@
+The `balanceOf` function provided in the `CMBToken` contract appears to be compliant with the ERC-20 standard as described in the ERC excerpt you provided. The ERC-20 `balanceOf` function is specified as follows:
+
+```solidity
+function balanceOf(address _owner) public view returns (uint256 balance);
+```
+
+The `balanceOf` function in the `CMBToken` contract has the same signature:
+
+```solidity
+function balanceOf(address _owner) constant returns (uint256 balance);
+```
+
+However, there are a couple of minor discrepancies that should be addressed to ensure full compliance with the ERC-20 standard and modern Solidity conventions:
+
+1. The `constant` keyword is used in the `balanceOf` function. In Solidity 0.4.17 and later, the `constant` keyword is deprecated in favor of `view` and `pure` for indicating that a function does not alter the state. The `constant` keyword should be replaced with `view` to indicate that the function does not modify the state and only reads from it.
+
+2. The `balanceOf` function should be marked as `public` to explicitly state its visibility. In Solidity, functions are public by default, but it is considered good practice to explicitly declare function visibility for clarity.
+
+Here is the revised `balanceOf` function that addresses these points:
+
+```solidity
+function balanceOf(address _owner) public view returns (uint256 balance) {
+    return balances[_owner];
+}
+```
+
+With these changes, the `balanceOf` function would be fully compliant with the ERC-20 standard. It's also important to note that the rest of the contract would need to implement the other required functions and events specified by ERC-20 to be considered a complete implementation of the standard.

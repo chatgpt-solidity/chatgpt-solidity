@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function with the correct arguments. The `_value` argument in the event is set to the `amount` parameter of the `_burn` function, which is the number of tokens to be burned from the `from` address. The `from` address's balance is decreased by this `amount`, and since this is a burn operation, there is no recipient whose balance is increased. The `_to` argument in the event is set to the zero address, which is correct for a burn operation.
+
+The `_burn` function checks that the `from` address has at least `amount` of tokens before proceeding with the burn operation, ensuring that the `_value` in the `TransferSingle` event matches the number of tokens the holder's balance is decreased by. There is no increase in any recipient's balance because the tokens are being burned.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

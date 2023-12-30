@@ -1,0 +1,6 @@
+contract XINU is Context, IERC20, Ownable {
+    mapping (address => bool) private _isBot;
+    function isBot(address account) public view returns(bool){
+        return _isBot[account];
+    }
+}

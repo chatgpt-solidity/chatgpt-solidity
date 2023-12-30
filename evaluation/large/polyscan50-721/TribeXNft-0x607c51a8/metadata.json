@@ -1,0 +1,178 @@
+{
+    "file": "evaluation/polyscan50-721/TribeXNft-0x607c51a8.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/supportsInterface_bytes4",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/safeTransferFrom_address_address_uint256_bytes",
+                "constructor(address) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/constructor_address",
+                "mint(uint256) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/mint_uint256",
+                "mintTo(uint256,address) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/mintTo_uint256_address",
+                "totalSupply() returns(uint256)": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/totalSupply",
+                "setSaleIsActive(bool,uint256) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/setSaleIsActive_bool_uint256",
+                "setBaseURI(string) returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/setBaseURI_string",
+                "withdraw() returns()": ".temp/polyscan50-721/TribeXNft-0x607c51a8/TribeXNft/f/withdraw"
+            },
+            "func2attrs": {
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintTo(uint256,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setSaleIsActive(bool,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBaseURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdraw() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "MAX_MULTIMINT() returns(uint256)",
+                "price() returns(uint256)",
+                "tournamentHub() returns(ITournamentHub)",
+                "MAX_SUPPLY() returns(uint256)",
+                "saleIsActive() returns(bool)"
+            ],
+            "ercs": [
+                "165",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "TribeXNft"
+        }
+    ]
+}

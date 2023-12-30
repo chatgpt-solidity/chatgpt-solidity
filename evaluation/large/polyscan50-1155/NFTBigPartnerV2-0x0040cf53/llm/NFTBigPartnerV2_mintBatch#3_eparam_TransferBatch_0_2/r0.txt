@@ -1,0 +1,21 @@
+YES
+
+The `mintBatch` function in the `NFTBigPartnerV2` contract calls the `_mintBatch` function in the `ERC1155` contract. The `_mintBatch` function is responsible for minting a batch of tokens and updating the balances accordingly.
+
+In the `_mintBatch` function, the `to` argument is used as the recipient address whose balance is increased. This is evident from the loop that iterates over the `ids` array and increases the balance of `to` for each token ID by the corresponding amount:
+
+```solidity
+for (uint256 i = 0; i < ids.length; i++) {
+    _balances[ids[i]][to] += amounts[i];
+}
+```
+
+After updating the balances, the `_mintBatch` function emits the `TransferBatch` event with the `to` argument as the recipient address:
+
+```solidity
+emit TransferBatch(operator, address(0), to, ids, amounts);
+```
+
+The `_from` argument in the `TransferBatch` event is set to the zero address (`address(0)`) because tokens are being minted, not transferred from another address. The `_to` argument is the address of the recipient whose balance is increased, which complies with the given rule.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule, with the `_to` argument being the address of the recipient whose balance is increased.

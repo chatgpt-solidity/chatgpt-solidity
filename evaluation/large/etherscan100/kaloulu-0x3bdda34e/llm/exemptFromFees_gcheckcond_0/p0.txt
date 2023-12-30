@@ -1,0 +1,17 @@
+Given a solidity function exemptFromFees and the related parts from a smart contract.
+Whether the function exemptFromFees and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract kaloulu is IERC20, Auth {
+    mapping (address => bool) private _noFees;
+
+
+    function exemptFromFees(address wlt) external view returns (bool) {
+        return _noFees[wlt];
+    } 
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

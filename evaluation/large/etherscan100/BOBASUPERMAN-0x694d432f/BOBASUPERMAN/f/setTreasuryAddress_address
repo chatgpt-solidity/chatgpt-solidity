@@ -1,0 +1,28 @@
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract BOBASUPERMAN is ERC20, Ownable {
+
+    address public TreasuryAddress;
+
+    function setTreasuryAddress(address _TreasuryAddress) external onlyOwner {
+        require(
+            _TreasuryAddress != address(0),
+            "_TreasuryAddress address cannot be 0"
+        );
+        TreasuryAddress = payable(_TreasuryAddress);
+        emit UpdatedTreasuryAddress(_TreasuryAddress);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

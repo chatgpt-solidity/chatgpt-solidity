@@ -1,0 +1,27 @@
+abstract contract Ownable {
+    address private _owner;
+
+    modifier onlyOwner() {
+        _checkOwner();
+        _;
+
+    }
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    function _checkOwner() internal view virtual {
+        require(owner() == msg.sender, "Ownable: caller is not the owner");
+    }
+
+    function renounceOwnership() public virtual onlyOwner {
+        _transferOwnership(address(0));
+    }
+
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+

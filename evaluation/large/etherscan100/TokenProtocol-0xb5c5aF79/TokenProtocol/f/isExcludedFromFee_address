@@ -1,0 +1,7 @@
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    mapping(address => bool) public excludedFromFee;
+
+    function isExcludedFromFee(address _user) public view returns (bool) {
+        return excludedFromFee[_user];
+    } 
+}

@@ -1,0 +1,67 @@
+{
+    "file": "evaluation/polyscan50-1155/ERC1155-0xd1346af3.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.8",
+            "func2file": {
+                "constructor() returns()": ".temp/polyscan50-1155/ERC1155-0xd1346af3/ERC1155/f/constructor",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/ERC1155-0xd1346af3/ERC1155/f/balanceOf_address_uint256",
+                "setURI(uint256,string) returns()": ".temp/polyscan50-1155/ERC1155-0xd1346af3/ERC1155/f/setURI_uint256_string",
+                "setBatchURI(address[],string) returns()": ".temp/polyscan50-1155/ERC1155-0xd1346af3/ERC1155/f/setBatchURI_address[]_string",
+                "mint(address,uint256,uint256) returns()": ".temp/polyscan50-1155/ERC1155-0xd1346af3/ERC1155/f/mint_address_uint256_uint256",
+                "airdropBatch(address[]) returns()": ".temp/polyscan50-1155/ERC1155-0xd1346af3/ERC1155/f/airdropBatch_address[]",
+                "updateTokenURI(uint256,string) returns()": ".temp/polyscan50-1155/ERC1155-0xd1346af3/ERC1155/f/updateTokenURI_uint256_string",
+                "getTokenURI(uint256) returns(string)": ".temp/polyscan50-1155/ERC1155-0xd1346af3/ERC1155/f/getTokenURI_uint256",
+                "batchTransfer(address[]) returns()": ".temp/polyscan50-1155/ERC1155-0xd1346af3/ERC1155/f/batchTransfer_address[]"
+            },
+            "func2attrs": {
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setURI(uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBatchURI(address[],string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "airdropBatch(address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateTokenURI(uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getTokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "batchTransfer(address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "INITIAL_SUPPLY() returns(uint256)",
+                "TOKEN_ID() returns(uint256)",
+                "owner() returns(address)"
+            ],
+            "ercs": [
+                "1155"
+            ],
+            "events": [],
+            "name": "ERC1155"
+        }
+    ]
+}

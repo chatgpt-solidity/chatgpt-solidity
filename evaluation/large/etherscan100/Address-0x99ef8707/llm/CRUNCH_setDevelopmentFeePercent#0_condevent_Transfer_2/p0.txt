@@ -1,0 +1,34 @@
+Given a solidity function setDevelopmentFeePercent and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.4;
+contract CRUNCH is Context, IERC20, Ownable {
+    uint256 public _developmentFee = 10;
+    function setDevelopmentFeePercent(uint256 developmentFee) external onlyOwner() {
+        _developmentFee = developmentFee;
+    }
+}
+abstract contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

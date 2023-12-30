@@ -1,0 +1,40 @@
+Given a solidity function setTaxes and the related parts from a smart contract.
+Whether the function setTaxes and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract XINU is Context, IERC20, Ownable {
+
+    Taxes public taxes = Taxes(0,0,2,0);
+
+    function setTaxes(uint256 _rfi, uint256 _marketing, uint256 _dev, uint256 _liquidity) public onlyOwner {
+        taxes.rfi = _rfi;
+        taxes.marketing = _marketing;
+        taxes.dev = _dev;
+        taxes.liquidity = _liquidity;
+        emit FeesChanged();
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

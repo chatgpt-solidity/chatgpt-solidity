@@ -1,0 +1,54 @@
+Given a solidity function setAutomatedMarketMakerPair and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract simple is ERC20, Ownable {
+    address public lpPair;
+
+    mapping (address => bool) public _isExcludedMaxTransactionAmount;
+    // store addresses that a automatic market maker pairs. Any transfer *to* these addresses
+    // could be subject to a maximum transfer amount
+    mapping (address => bool) public automatedMarketMakerPairs;
+
+    function _excludeFromMaxTransaction(address updAds, bool isExcluded) private {
+        _isExcludedMaxTransactionAmount[updAds] = isExcluded;
+        emit MaxTransactionExclusion(updAds, isExcluded);
+    }
+
+    function setAutomatedMarketMakerPair(address pair, bool value) external onlyOwner {
+        require(pair != lpPair, "The pair cannot be removed from automatedMarketMakerPairs");
+
+        _setAutomatedMarketMakerPair(pair, value);
+        emit SetAutomatedMarketMakerPair(pair, value);
+    }
+
+    function _setAutomatedMarketMakerPair(address pair, bool value) private {
+        automatedMarketMakerPairs[pair] = value;
+
+        _excludeFromMaxTransaction(pair, value);
+
+        emit SetAutomatedMarketMakerPair(pair, value);
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

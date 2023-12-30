@@ -1,0 +1,35 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_to` argument in the event is indeed the address of the recipient whose balance is increased by the batch transfer. The `TransferBatch` event is emitted within the `_safeBatchTransferFrom` internal function, which is called by the `safeBatchTransferFrom` public function.
+
+Here is the relevant part of the code that shows the `TransferBatch` event being emitted with the correct arguments:
+
+```solidity
+function _safeBatchTransferFrom(
+    address from,
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual {
+    // ... (omitted code for brevity)
+
+    for (uint256 i = 0; i < ids.length; ++i) {
+        uint256 id = ids[i];
+        uint256 amount = amounts[i];
+
+        uint256 fromBalance = _balances[id][from];
+        require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+        unchecked {
+            _balances[id][from] = fromBalance - amount;
+        }
+        _balances[id][to] += amount;
+    }
+
+    emit TransferBatch(operator, from, to, ids, amounts);
+
+    // ... (omitted code for brevity)
+}
+```
+
+The `emit TransferBatch(operator, from, to, ids, amounts);` line shows that the event is emitted with the `_to` argument set to the `to` variable, which is the recipient's address whose balance is increased by the amounts specified in the `amounts` array for the token IDs specified in the `ids` array. This behavior adheres to the rule provided.

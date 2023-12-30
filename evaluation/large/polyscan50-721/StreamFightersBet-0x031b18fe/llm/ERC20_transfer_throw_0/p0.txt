@@ -1,0 +1,14 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether the function transfer and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Function(and related parts) to audit:"""
+contract ERC20 {
+
+    function transfer(address dst, uint amount) public returns (bool) {}
+}
+"""
+
+Condition:"""
+the message caller's account balance does not have enough tokens to spend
+"""

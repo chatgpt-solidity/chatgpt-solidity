@@ -1,0 +1,3 @@
+YES
+
+The given Solidity interfaces contain the mapping `mapping(address => uint256) public balanceOf;` which implicitly creates a getter function with the signature `balanceOf(address) returns(uint256)`. This matches the interface "balanceOf(address) returns(uint256)" as requested. The parameter types and return types are also matched, with the `address` type for the input parameter and `uint256` for the return type.

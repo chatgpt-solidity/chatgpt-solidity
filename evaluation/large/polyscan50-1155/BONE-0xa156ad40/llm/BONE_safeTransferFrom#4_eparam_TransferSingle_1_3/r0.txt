@@ -1,0 +1,28 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_id` argument in the `TransferSingle` event is indeed the token type being transferred, as required by the rule.
+
+Here's the relevant part of the code that shows the `TransferSingle` event being emitted with the correct arguments:
+
+```solidity
+function _safeTransferFrom(
+    address from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    bytes memory data
+) internal virtual {
+    // ... (other code)
+
+    address operator = _msgSender();
+    // ... (other code)
+
+    emit TransferSingle(operator, from, to, id, amount);
+
+    // ... (other code)
+}
+```
+
+In the `_safeTransferFrom` function, the `id` parameter represents the token type being transferred, and the `amount` parameter represents the number of tokens of that type being transferred. The `TransferSingle` event is emitted with the `operator` (the caller of the function), `from` (the address from which the tokens are being transferred), `to` (the address to which the tokens are being transferred), `id` (the token type), and `amount` (the number of tokens).
+
+This matches the rule that the `_id` argument must be the token type being transferred.

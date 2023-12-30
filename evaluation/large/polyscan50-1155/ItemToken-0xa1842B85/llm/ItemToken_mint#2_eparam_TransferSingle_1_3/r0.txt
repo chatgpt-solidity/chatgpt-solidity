@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct arguments according to the rule provided. The `_id` argument is indeed the token type being transferred, as it is passed directly from the `mint` function to the `_mint` function without alteration. The `TransferSingle` event is then emitted with the `id` as the `_id` argument, satisfying the rule that "_id argument MUST be the token type being transferred."

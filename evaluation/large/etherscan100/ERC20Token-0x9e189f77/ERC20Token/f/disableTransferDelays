@@ -1,0 +1,26 @@
+contract ERC20Token is ERC20, Ownable {
+    bool public transferDelayEnabled = false;
+
+    // disable Transfer delay - cannot be reenabled
+    function disableTransferDelays() external onlyOwner returns (bool) {
+        transferDelayEnabled = false;
+        return true;
+    }
+}
+abstract contract Ownable is Context {
+    address private _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

@@ -1,0 +1,11 @@
+YES
+
+The provided Solidity function `_mint` within the `ERC1155` contract correctly emits the `TransferSingle` event according to the given rule. The `_to` argument in the `TransferSingle` event is set to the `to` parameter of the `_mint` function, which is the address of the recipient whose balance is increased by the `amount` of tokens of type `id`.
+
+The relevant line in the `_mint` function is:
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+This line is emitting the `TransferSingle` event with `_to` as `to`, which is the intended recipient's address. The `_from` argument is `address(0)` because tokens are being minted, not transferred from another address. The `_id` and `_value` arguments correspond to the token type and the amount being minted, respectively.
+
+The `mint` function in the `RecipientNFT` contract calls `_mint` and passes the `to` address, which is the recipient's address, thus satisfying the rule for the `TransferSingle` event emission.

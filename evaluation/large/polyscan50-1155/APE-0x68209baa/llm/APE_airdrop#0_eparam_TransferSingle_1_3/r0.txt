@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. The `_mint` function is called within the `airdrop` function of the `APE` contract, which is derived from `ERC1155`. The `airdrop` function iterates over the array of recipient addresses and calls `_mint` for each recipient that is not a contract, passing the `_currentTokenId` as the `id` argument, which represents the token type being transferred. The `_mint` function then emits the `TransferSingle` event with the correct `_id` argument, satisfying the given rule.

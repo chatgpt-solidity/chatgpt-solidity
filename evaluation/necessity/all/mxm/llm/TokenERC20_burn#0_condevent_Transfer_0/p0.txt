@@ -1,0 +1,47 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract TokenERC20 {
+    // 18 decimals is the strongly suggested default, avoid changing it
+    uint256 public totalSupply;
+
+    mapping(address => bool) public blacklist;
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+
+    /**
+     * Destroy tokens
+     *
+     * Remove `_value` tokens from the system irreversibly
+     *
+     * @param _value the amount of money to burn
+     */
+    function burn(uint256 _value) public returns (bool success) {
+        require(!blacklist[msg.sender]);
+        require(balanceOf[msg.sender] >= _value); // Check if the sender has enough
+        balanceOf[msg.sender] -= _value; // Subtract from the sender
+        totalSupply -= _value; // Updates totalSupply
+        Burn(msg.sender, _value);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

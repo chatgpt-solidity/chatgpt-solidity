@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function after the balances have been updated and before the `_afterTokenTransfer` hook is called. The `_from` argument in the `TransferBatch` event is indeed the address of the holder whose balance is decreased, as required by the rule. The function checks that the `from` address has enough balance for each token id in the `ids` array before performing the transfer, and it decreases the balance of the `from` address by the corresponding amount in the `amounts` array. After these operations, the `TransferBatch` event is emitted with the correct `_from` argument.

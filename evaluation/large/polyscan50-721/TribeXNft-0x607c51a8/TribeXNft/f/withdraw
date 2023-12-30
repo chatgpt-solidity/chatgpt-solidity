@@ -1,0 +1,19 @@
+contract TribeXNft is ERC721, ReentrancyGuard {
+    ITournamentHub public tournamentHub;
+
+    /**
+     * @dev Throws if called by any account other than the administrator.
+     */
+    modifier onlyAdministrator() {
+        // Check Permissions
+        require(tournamentHub.checkAdmin(msg.sender), "Sender is not admin");
+        _;
+    }
+
+    /** WITHDRAW **/
+
+    function withdraw() external onlyAdministrator{
+        uint256 balance = address(this).balance;
+        payable(tournamentHub.feeWallet()).transfer(balance);
+    }
+}

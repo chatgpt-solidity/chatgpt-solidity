@@ -1,0 +1,20 @@
+YES
+
+The `approve` function in the provided Solidity code sets the `_value` as the new allowance for a `_spender` to spend on behalf of `msg.sender`. It overwrites any existing allowance with the new `_value`. The relevant part of the code is:
+
+```solidity
+function approve(address _spender, uint _value) {
+    // To change the approve amount you first have to reduce the addresses`
+    //  allowance to zero by calling `approve(_spender, 0)` if it is not
+    //  already 0 to mitigate the race condition described here:
+    //  https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
+    if ((_value != 0) && (allowed[msg.sender][_spender] != 0)) throw;
+
+    allowed[msg.sender][_spender] = _value;
+    Approval(msg.sender, _spender, _value);
+}
+```
+
+This function first checks if the new `_value` is not zero and if the current allowance for `_spender` is not already zero. If both conditions are true, it throws an error to prevent a potential race condition. This requires users to set the allowance to zero before setting it to a new value, unless it is already zero.
+
+However, if the conditions are not met (either because `_value` is zero or the current allowance is already zero), the function proceeds to set the allowance to `_value`, effectively overwriting the current allowance.

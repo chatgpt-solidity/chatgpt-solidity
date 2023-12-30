@@ -1,0 +1,30 @@
+Given a solidity function changeWalletLimit and the related parts from a smart contract.
+Whether the function changeWalletLimit and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+
+contract TRUMPONOMICS is IERC20, Auth {
+    uint256 private _totalSupply = 100000000000 * (10 ** _decimals);
+    uint256 public maxWallet = _totalSupply.mul(30).div(1000);
+
+    function changeWalletLimit(uint256 amountPercent) external onlyOwner {
+        require(amountPercent>1);
+        maxWallet = (_totalSupply * amountPercent ) / 100;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

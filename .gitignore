@@ -1,0 +1,6 @@
+.venv
+*/prompts
+.functionfy
+__pycache__
+.temp
+.dataset

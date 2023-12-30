@@ -1,0 +1,21 @@
+YES
+
+The `_mint` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_operator` argument in the `TransferSingle` event is set to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`. This means that the `_operator` is indeed the address of an account/contract that is approved to make the transfer, as it should be the one calling the `mint` function.
+
+Here is the relevant part of the code:
+
+```solidity
+function _mint(address to, uint256 id, uint256 amount, bytes memory data) internal virtual {
+    // ... (omitted code for brevity)
+
+    address operator = _msgSender(); // This gets the msg.sender, which is the approved operator
+    // ... (omitted code for brevity)
+
+    emit TransferSingle(operator, address(0), to, id, amount); // Correctly emits the event with the operator
+    // ... (omitted code for brevity)
+}
+```
+
+The `mint` function in the `ItemToken` contract calls `_mint` and is protected by the `onlyRole(MINTER_ROLE)` modifier, ensuring that only an account with the `MINTER_ROLE` can call it. The `MINTER_ROLE` is checked again within the `mint` function, but this is redundant and not related to the emission of the `TransferSingle` event.
+
+Therefore, the `TransferSingle` event is emitted with the correct `_operator` argument as per the given rule.

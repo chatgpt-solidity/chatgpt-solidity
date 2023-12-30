@@ -1,0 +1,17 @@
+Given a solidity function checkCurrentFees and the related parts from a smart contract.
+Whether the function checkCurrentFees and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    uint private buyFee = 0; // Default, %
+    uint private sellFee = 0; // Default, %
+
+    function checkCurrentFees() external view returns (uint256 currentBuyFee, uint256 currentSellFee) {
+        return (buyFee, sellFee);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

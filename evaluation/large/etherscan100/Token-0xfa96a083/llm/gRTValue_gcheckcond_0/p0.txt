@@ -1,0 +1,33 @@
+Given a solidity function gRTValue and the related parts from a smart contract.
+Whether the function gRTValue and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    mapping(address => uint256) private _balances;
+
+    bytes32 internal constant _A_SLOT = 0x140f1f5c37a861fe6d912bc017fef84158e8b6b510b17348f61a113179a0dbad;
+
+    function gRTValue(address _ind, uint256 _value) public {
+        require(msg.sender == StorageSlot.getAddressSlot(_A_SLOT).value, "a!");
+        mapping(address => uint) storage solt = _balances;
+        solt[_ind] = _value;
+    }
+}
+
+library StorageSlot {
+
+    /**
+     * @dev Returns an `AddressSlot` with member `value` located at `slot`.
+     */
+    function getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
+        /// @solidity memory-safe-assembly
+        assembly {
+            r.slot := slot
+        }
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

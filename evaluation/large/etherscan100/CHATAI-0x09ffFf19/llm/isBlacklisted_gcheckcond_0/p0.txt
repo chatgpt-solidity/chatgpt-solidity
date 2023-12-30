@@ -1,0 +1,15 @@
+Given a solidity function isBlacklisted and the related parts from a smart contract.
+Whether the function isBlacklisted and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract CHATAI is ERC20, Ownable {
+    mapping(address => bool) blacklisted;
+    function isBlacklisted(address account) public view returns (bool) {
+        return blacklisted[account];
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

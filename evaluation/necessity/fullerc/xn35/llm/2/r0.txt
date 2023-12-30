@@ -1,0 +1,35 @@
+The provided Solidity code for the `totalSupply` function and the related parts of the smart contract are intended to implement the ERC20 token standard. Let's analyze the given function against the ERC20 specification:
+
+```solidity
+contract Projecton is owned, IERC20 {
+
+    uint256 public constant _totalSupply = 100000000000000000000000000;
+
+    function totalSupply() constant returns (uint256 totalSupply) {
+        return _totalSupply;
+    }
+}
+```
+
+According to the ERC20 standard, the `totalSupply` function should have the following characteristics:
+
+- It should be a public view function.
+- It should return the total token supply.
+
+The provided `totalSupply` function does return the total token supply, which is a constant value set to `100000000000000000000000000`. However, there are a few issues with the implementation:
+
+1. The `constant` keyword is used in the function declaration. In Solidity 0.4.17 and later, the `constant` keyword is deprecated in favor of `view` and `pure` for functions that do not modify the state. The `constant` keyword should be replaced with `view` to indicate that the function does not modify the state and is read-only.
+
+2. The function should be marked as `public` to explicitly state its visibility and comply with the ERC20 standard. In Solidity, if no visibility is specified, it defaults to `public`, but it is considered best practice to explicitly declare function visibility.
+
+3. The function's return parameter is named `totalSupply`, which is unnecessary and can be confusing because it shadows the state variable `_totalSupply`. It is better to use different names for state variables and return parameters to avoid confusion.
+
+Here is a revised version of the `totalSupply` function that addresses these issues and complies with the ERC20 standard:
+
+```solidity
+function totalSupply() public view returns (uint256) {
+    return _totalSupply;
+}
+```
+
+In summary, while the provided `totalSupply` function does not violate the core requirement of the ERC20 standard to return the total token supply, it does not follow the best practices and updated syntax of Solidity. The function should be updated to use the `view` keyword, explicitly declare its visibility as `public`, and avoid shadowing the state variable name.

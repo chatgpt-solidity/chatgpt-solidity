@@ -1,0 +1,21 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function setApprovalForAll(
+        address operator,
+        bool approved
+    ) external override {
+        _setApprovalForAll(msg.sender, operator, approved);
+    }
+
+    function _setApprovalForAll(
+        address owner,
+        address operator,
+        bool approved
+    ) private {
+        if (owner == operator) revert SelfApproval();
+        _operatorApprovals[owner][operator] = approved;
+        emit ApprovalForAll(owner, operator, approved);
+    }
+}
+

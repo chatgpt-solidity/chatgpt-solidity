@@ -1,0 +1,64 @@
+Given a solidity function mintToken and the related parts from a smart contract.
+Whether the function mintToken and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract SafeMath {
+
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * Current number of tokens in circulation.
+     */
+    uint256 tokenCount = 0;
+
+    /**
+     * For future use only whne we will need more tokens for our main application
+     * Create mintedAmount new tokens and give new created tokens to target.
+     * May only be called by smart contract owner.
+     * @param mintedAmount number of tokens to create
+     * @return true if tokens were created successfully, false otherwise
+     */
+
+    function mintToken(
+        address target,
+        uint256 mintedAmount
+    ) public returns (bool success) {
+        require(msg.sender == owner);
+        if (mintedAmount > 0) {
+            accounts[target] = safeAdd(accounts[target], mintedAmount);
+            tokenCount = safeAdd(tokenCount, mintedAmount);
+
+            // adding transfer event and _from address as null address
+            emit Transfer(address(0), target, mintedAmount);
+
+            return true;
+        }
+        return false;
+    }
+}
+
+contract AbstractToken is Token, SafeMath {
+
+    /**
+     * Mapping from addresses of token holders to the numbers of tokens belonging
+     * to these token holders.
+     */
+    mapping(address => uint256) accounts;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

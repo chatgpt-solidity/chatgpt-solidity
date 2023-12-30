@@ -1,0 +1,19 @@
+Given a solidity function symbol and the related parts from a smart contract and an rule for its return value.
+Whether function symbol returns the symbol of the token? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract GOLD is IERC20, Push, Ownable {
+    string private _symbol;
+
+
+    /**
+     * @dev Returns the symbol of the token, usually a shorter version of the
+     * name.
+     */
+    function symbol() public view virtual returns (string memory) {
+        return _symbol;
+    }
+}
+"""

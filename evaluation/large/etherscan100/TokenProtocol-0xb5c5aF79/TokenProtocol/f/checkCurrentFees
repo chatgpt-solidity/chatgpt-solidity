@@ -1,0 +1,8 @@
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    uint private buyFee = 0; // Default, %
+    uint private sellFee = 0; // Default, %
+
+    function checkCurrentFees() external view returns (uint256 currentBuyFee, uint256 currentSellFee) {
+        return (buyFee, sellFee);
+    }
+}

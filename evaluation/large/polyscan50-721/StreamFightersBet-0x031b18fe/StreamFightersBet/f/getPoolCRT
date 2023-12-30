@@ -1,0 +1,8 @@
+contract StreamFightersBet is ERC721, ReentrancyGuard {
+
+    uint256 poolCRT;
+
+    function getPoolCRT() public view returns (uint256) {
+        return poolCRT;
+    }
+}

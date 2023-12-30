@@ -1,0 +1,9 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function, which is called by the `safeTransferFrom` function. The event is emitted with the correct arguments, including the `_to` argument which is the address of the recipient whose balance is increased. The event signature matches the rule provided:
+
+```solidity
+emit TransferSingle(operator, from, to, id, amount);
+```
+
+Here, `to` is the recipient's address, `id` is the token type, and `amount` is the number of tokens transferred, which aligns with the rule that the `_to` argument must be the address of the recipient whose balance is increased.

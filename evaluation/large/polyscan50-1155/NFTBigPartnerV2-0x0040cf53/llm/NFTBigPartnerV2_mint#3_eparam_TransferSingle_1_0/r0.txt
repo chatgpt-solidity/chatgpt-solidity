@@ -1,0 +1,9 @@
+YES
+
+The `mint` function in the `NFTBigPartnerV2` contract calls the `_mint` function in the `ERC1155` contract. The `_mint` function is responsible for creating tokens and assigning them to the `to` address. It also emits the `TransferSingle` event.
+
+In the `_mint` function, the `operator` is set to the result of `_msgSender()`, which is an internal function that returns `msg.sender`. This means that the `operator` is indeed the address that is making the transfer, which is the `msg.sender`.
+
+The `TransferSingle` event is emitted with the `operator` as the `_operator` argument, `address(0)` as the `_from` argument (since minting creates new tokens), `to` as the `_to` argument, `id` as the `_id` argument, and `amount` as the `_value` argument.
+
+Since the `_operator` argument in the `TransferSingle` event is set to the `msg.sender` (which is the address approved to make the transfer), the rule is followed, and the event is emitted correctly according to the given rule.

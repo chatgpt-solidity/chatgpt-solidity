@@ -1,0 +1,30 @@
+Given a solidity function setNumTokensBeforeSwap and the related parts from a smart contract.
+Whether the function setNumTokensBeforeSwap and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract SKR is Context, IERC20, Ownable {
+    uint256 private minimumTokensBeforeSwap = 100000000 * 10 ** _decimals; 
+
+    function setNumTokensBeforeSwap(uint256 newLimit) external onlyOwner() {
+        minimumTokensBeforeSwap = newLimit;
+    }
+}
+abstract contract Context {
+
+    function _msgSender() internal view virtual returns (address payable) {
+        return payable(msg.sender);
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

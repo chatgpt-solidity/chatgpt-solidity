@@ -1,0 +1,33 @@
+Given a solidity function batchTransfer and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 {
+    mapping(address => mapping(uint256 => uint256)) private balances;
+    uint256 public constant TOKEN_ID = 0;
+
+    // New function for batch transferring the same NFT to multiple addresses
+    function batchTransfer(address[] memory recipients) external {
+        uint256 totalRecipients = recipients.length;
+        require(totalRecipients > 0, "No recipients provided");
+
+        address sender = msg.sender;
+        uint256 senderBalance = balances[sender][TOKEN_ID];
+
+        require(senderBalance >= totalRecipients, "Insufficient balance");
+
+        for (uint256 i = 0; i < totalRecipients; i++) {
+            address recipient = recipients[i];
+            balances[sender][TOKEN_ID]--;
+            balances[recipient][TOKEN_ID]++;
+        }
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

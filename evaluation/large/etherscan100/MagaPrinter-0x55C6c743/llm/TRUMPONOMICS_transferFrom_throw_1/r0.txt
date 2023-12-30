@@ -1,0 +1,7 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not have any explicit checks that would cause it to throw an error when transferring a value of 0. The function uses the SafeMath library for arithmetic operations, which includes checks for overflows and underflows but does not prevent operations with a value of 0.
+
+The `transferFrom` function reduces the allowance using the `sub` function from the SafeMath library, which will not throw an error if the amount being subtracted is 0, as long as the allowance is not below 0. The subsequent call to `_transfer` will also not throw an error for a 0 value transfer, as there are no checks against transferring 0 amounts.
+
+However, it is important to note that while the `transferFrom` function itself may not throw an error for 0 value transfers, other parts of the contract or the overall state (such as the `tradingOpen` variable) may affect the ability to execute transfers, including those with a value of 0.

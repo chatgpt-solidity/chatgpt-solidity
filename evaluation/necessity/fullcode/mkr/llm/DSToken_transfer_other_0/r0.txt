@@ -1,0 +1,19 @@
+NO
+
+The provided Solidity code does not explicitly violate the ERC-20 rule that states "Transfers of 0 values MUST be treated as normal transfers." There is no condition in the `transfer` or `transferFrom` functions that would prevent a transfer of 0 value from being processed like any other transfer. The code does not contain any checks for the transfer amount (`wad`) being greater than 0 before executing the transfer logic.
+
+However, it's worth noting that the code provided does not include the entire implementation of the ERC20 interface, and there are some issues with the code that could lead to unexpected behavior, but these are not directly related to the ERC rule in question:
+
+1. The `DSMath` functions do not return a value after performing the require checks, which will cause a compilation error. They should return the result of the addition or subtraction after the require statement.
+
+2. The `Transfer` event should be emitted with the correct casing (`emit Transfer(src, dst, wad);`), and it should be defined somewhere in the contract or inherited from the ERC20 interface.
+
+3. The `DSTokenBase` constructor is called with a parameter `(0)` which is not shown in the provided code, so it's unclear what this parameter is supposed to represent.
+
+4. The `DSNote` and `DSAuth` contracts are referenced but not provided, so it's not possible to assess their impact on the `transfer` and `transferFrom` functions.
+
+5. The `ERC20` interface is mentioned but not provided, so it's assumed that the `DSTokenBase` contract correctly implements the ERC20 standard.
+
+6. The `stoppable` modifier is used to prevent transfers when the contract is stopped, which is a feature not part of the standard ERC20, but it doesn't affect the rule regarding 0 value transfers.
+
+Assuming the rest of the contract correctly implements the ERC20 standard and the issues mentioned above are fixed, the code does not violate the specified ERC rule regarding 0 value transfers.

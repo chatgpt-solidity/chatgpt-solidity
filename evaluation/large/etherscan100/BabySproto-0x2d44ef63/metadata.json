@@ -1,0 +1,181 @@
+{
+    "file": "evaluation/etherscan100/BabySproto-0x2d44ef63.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.15",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/renounceOwnership",
+                "constructor() returns()": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/transferFrom_address_address_uint256",
+                "removeLimits() returns()": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/removeLimits",
+                "addBots(address[]) returns()": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/addBots_address[]",
+                "delBots(address[]) returns()": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/delBots_address[]",
+                "isBot(address) returns(bool)": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/isBot_address",
+                "openTrading() returns()": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/openTrading",
+                "reduceFee(uint256) returns()": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/reduceFee_uint256",
+                "receive() returns()": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/receive",
+                "manualSwap() returns()": ".temp/etherscan100/BabySproto-0x2d44ef63/BabySproto/f/manualSwap"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeLimits() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "addBots(address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "delBots(address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isBot(address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "openTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "reduceFee(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualSwap() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_maxWalletSize() returns(uint256)",
+                "_taxSwapThreshold() returns(uint256)",
+                "_maxTxAmount() returns(uint256)",
+                "_maxTaxSwap() returns(uint256)",
+                "transferDelayEnabled() returns(bool)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MaxTxAmountUpdated",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "BabySproto"
+        }
+    ]
+}

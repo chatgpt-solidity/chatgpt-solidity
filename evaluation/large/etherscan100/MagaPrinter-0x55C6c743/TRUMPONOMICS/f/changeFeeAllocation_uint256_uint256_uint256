@@ -1,0 +1,23 @@
+contract TRUMPONOMICS is IERC20, Auth {
+
+    uint256 public toReflections = 30;
+    uint256 public toLiquidity = 10;
+    uint256 public toMarketing = 60;
+    function changeFeeAllocation(uint256 newRewardFee, uint256 newLpFee, uint256 newMarketingFee) external onlyOwner {
+        toReflections = newRewardFee;
+        toLiquidity = newLpFee;
+        toMarketing = newMarketingFee;
+    }
+}
+abstract contract Auth {
+    address internal owner;
+
+    modifier onlyOwner() {
+        require(isOwner(msg.sender), "!Owner"); _;
+
+    }
+    function isOwner(address account) public view returns (bool) {
+        return account == owner;
+    }
+}
+

@@ -1,0 +1,16 @@
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+
+    // Mapping from account to operator approvals
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    /**
+     * @dev See {IERC1155-isApprovedForAll}.
+     */
+    function isApprovedForAll(
+        address account,
+        address operator
+    ) public view virtual override returns (bool) {
+        return _operatorApprovals[account][operator];
+    }
+}
+

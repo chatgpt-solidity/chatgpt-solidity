@@ -1,0 +1,27 @@
+contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract FORTH is ERC20, Ownable {
+
+    bool public limitsInEffect = true;
+    // remove limits after token is stable
+    function removeLimits() external onlyOwner returns (bool){
+        limitsInEffect = false;
+        return true;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

@@ -1,0 +1,20 @@
+YES
+
+The constructor of the `Projecton` contract is allocating the entire supply of tokens to the `msg.sender`, which is presumably the creator of the contract. According to the rule provided, a `Transfer` event should be emitted whenever tokens are minted or allocated. However, the provided code does not show the emission of a `Transfer` event upon the allocation of tokens to `msg.sender`. This omission violates the rule that states "Emit Transfer if tokens are minting or allocating."
+
+In a fully compliant ERC20 token contract, the `Transfer` event should be emitted to record the transfer of tokens, even if it is from the zero address (which is commonly used to denote minting). The event typically looks like this:
+
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 value);
+```
+
+And it should be emitted in the constructor after the initial balance is set, like so:
+
+```solidity
+constructor() public {
+    balances[msg.sender] = _totalSupply;
+    emit Transfer(0x0, msg.sender, _totalSupply); // This line is missing in the provided code
+}
+```
+
+Since the `emit` keyword is not used in the provided code (and is not required in Solidity versions before 0.5), the event should still be emitted without the `emit` keyword, but the code to do so is not present.

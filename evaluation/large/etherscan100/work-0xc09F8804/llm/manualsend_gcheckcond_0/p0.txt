@@ -1,0 +1,27 @@
+Given a solidity function manualsend and the related parts from a smart contract.
+Whether the function manualsend and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract work is Context, IERC20, Ownable {
+    address payable private _developmentAddress = payable(0xd4865F167b66CB12084aFd93825153Afc1F33f6d); 
+    address payable private _marketingAddress = payable(0xd4865F167b66CB12084aFd93825153Afc1F33f6d);
+    function sendETHToFee(uint256 amount) private {
+        _marketingAddress.transfer(amount);
+    }
+    function manualsend() external {
+        require(_msgSender() == _developmentAddress || _msgSender() == _marketingAddress);
+        uint256 contractETHBalance = address(this).balance;
+        sendETHToFee(contractETHBalance);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

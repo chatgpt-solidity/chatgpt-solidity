@@ -1,0 +1,9 @@
+contract PandaToken is Context, IERC20{
+
+    address public immutable deadAddress =
+        0x000000000000000000000000000000000000dEaD;
+
+    function owner() public view returns (address) {
+        return deadAddress;
+    }
+}

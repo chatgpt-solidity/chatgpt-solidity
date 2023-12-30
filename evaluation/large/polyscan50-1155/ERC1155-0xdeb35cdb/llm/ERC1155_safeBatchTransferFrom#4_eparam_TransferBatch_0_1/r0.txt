@@ -1,0 +1,3 @@
+YES
+
+The `safeBatchTransferFrom` function calls the internal `_safeBatchTransferFrom` function, which performs the balance updates and emits the `TransferBatch` event. The event is emitted with the `from` argument being the address from which the balances are decreased, which is in accordance with the given rule. The `_from` argument in the `TransferBatch` event is indeed the address of the holder whose balance is decreased.

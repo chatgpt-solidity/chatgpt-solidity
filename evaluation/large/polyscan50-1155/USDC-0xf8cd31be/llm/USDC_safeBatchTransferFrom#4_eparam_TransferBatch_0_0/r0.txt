@@ -1,0 +1,26 @@
+YES
+
+The `safeBatchTransferFrom` function checks if the caller (`msg.sender`) is either the token owner or approved for all by the token owner to make the transfer. This is done by the `require` statement:
+
+```solidity
+require(
+    from == _msgSender() || isApprovedForAll(from, _msgSender()),
+    "ERC1155: caller is not token owner or approved"
+);
+```
+
+If the caller is not the token owner or approved, the function will revert. If the caller passes this check, the function proceeds to call `_safeBatchTransferFrom`, which performs the actual transfer.
+
+Inside `_safeBatchTransferFrom`, the `operator` variable is set to the result of `_msgSender()`, which is the `msg.sender`:
+
+```solidity
+address operator = _msgSender();
+```
+
+This `operator` is then used as the `_operator` argument in the `TransferBatch` event:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+Since the `operator` is set to `msg.sender` and the `msg.sender` has already been verified to be approved to make the transfer, the event `TransferBatch` is emitted with the `_operator` argument being the address of an account/contract that is approved to make the transfer, which complies with the given rule.

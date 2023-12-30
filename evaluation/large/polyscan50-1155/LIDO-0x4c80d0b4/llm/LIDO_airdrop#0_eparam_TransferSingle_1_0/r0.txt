@@ -1,0 +1,5 @@
+YES
+
+The `_mint` function within the `ERC1155` contract emits the `TransferSingle` event after minting tokens. The `_operator` argument in the `TransferSingle` event is set to the address returned by `_msgSender()`, which is the same as `msg.sender` in the context of the `_mint` function. This is in accordance with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+The `airdrop` function in the `LIDO` contract calls `_mint` for each recipient that is not a contract, and since `airdrop` can only be called by the owner (due to the `onlyOwner` modifier), the `msg.sender` in this context is the owner of the contract, who is authorized to make the transfer. Therefore, the `TransferSingle` event is emitted with the correct `_operator` argument as per the given rule.

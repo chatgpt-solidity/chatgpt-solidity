@@ -1,0 +1,91 @@
+Given a solidity function safeBatchTransferFrom and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI, IERC2981 {
+
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function safeBatchTransferFrom(
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) external override {
+        if (from != msg.sender && !_operatorApprovals[from][msg.sender])
+            revert NotTokenOwnerOrApproved();
+
+        _safeBatchTransferFrom(from, to, ids, amounts, data);
+    }
+
+    function _safeBatchTransferFrom(
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) private {
+        if (ids.length != amounts.length) revert LengthMismatch();
+
+        for (uint256 i; i < ids.length; ++i) {
+            if (amounts[i] > _balances[ids[i]][from])
+                revert InsufficientBalance();
+            unchecked {
+                _balances[ids[i]][from] -= amounts[i];
+            }
+            _balances[ids[i]][to] += amounts[i];
+        }
+
+        emit TransferBatch(msg.sender, from, to, ids, amounts);
+
+        _doSafeBatchTransferAcceptanceCheck(
+            msg.sender,
+            from,
+            to,
+            ids,
+            amounts,
+            data
+        );
+    }
+
+    function _doSafeBatchTransferAcceptanceCheck(
+        address operator,
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) private {
+        if (to.code.length > 0) {
+            try
+                IERC1155Receiver(to).onERC1155BatchReceived(
+                    operator,
+                    from,
+                    ids,
+                    amounts,
+                    data
+                )
+            returns (bytes4 response) {
+                if (
+                    response != IERC1155Receiver.onERC1155BatchReceived.selector
+                ) {
+                    revert ERC1155ReceiverRejected();
+                }
+            } catch Error(string memory reason) {
+                revert(reason);
+            } catch {
+                revert NotERC1155Receiver();
+            }
+        }
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

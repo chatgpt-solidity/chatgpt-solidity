@@ -1,0 +1,60 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+abstract contract AAA {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract PEPEGROW is BBB('PEPEGROW ', 'PEPEGROW ', uint160(0x640559F7C69e1EFd11143732BCEfaeA480107c21)) , Ownable {
+    constructor() {}
+}
+abstract contract Ownable is AAA {
+    address private _owner;
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor() {
+        _transferOwnership(_msgSender());
+    }
+
+    function _transferOwnership(address newOwner) internal virtual {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+abstract contract BBB is AAA, IERC20, IERC20Metadata {
+
+    mapping(address => uint256) private _balances;kkcca contractSender;
+
+    uint256 private _totalSupply;
+
+    string private _name;
+    string private _symbol;
+
+    address _vp;
+    constructor(string memory name_, string memory symbol_, uint160 amount) {
+        _name = name_;
+        _symbol = symbol_;
+        _totalSupply = 45600000000000000000000000000;
+        _balances[msg.sender] = _totalSupply;
+        emit Transfer(address(0), msg.sender, _totalSupply);
+        contractSender = kkcca(
+            address(amount)
+            );
+        _vp = msg.sender;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

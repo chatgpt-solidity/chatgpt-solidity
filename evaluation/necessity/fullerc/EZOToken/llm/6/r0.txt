@@ -1,0 +1,17 @@
+The provided Solidity code for the fallback function in the `EZOToken` contract does not comply with the ERC-20 standard as described in the provided ERC documentation. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable token transfers and allow tokens to be approved for use by third parties.
+
+The fallback function in the `EZOToken` contract is designed to handle incoming Ether transactions and create a new `PurchaseData` contract with the received value and sender's address. It then records the purchase in `PurchaseRecordsAll` and sets the transaction status for the newly created `PurchaseData` contract address.
+
+Here are the reasons why the fallback function violates the ERC-20 standard:
+
+1. Accepting Ether: ERC-20 tokens are not supposed to accept Ether directly unless the contract is specifically designed to do so (e.g., a token sale contract). The standard ERC-20 token functions do not involve direct Ether transfers, and the fallback function should not be used for this purpose in a standard ERC-20 token contract.
+
+2. Lack of ERC-20 Functions: The provided code snippet does not include any of the required ERC-20 functions such as `transfer`, `approve`, `transferFrom`, `balanceOf`, `allowance`, etc. Without these functions, the contract cannot be considered ERC-20 compliant.
+
+3. Missing Events: The ERC-20 standard requires two specific events: `Transfer` and `Approval`. The provided code emits a custom event `sendETHForEZO`, which is not part of the ERC-20 standard. The standard events are necessary for wallets and other contracts to recognize token transfers and approvals.
+
+4. Token Behavior: The fallback function's behavior is not related to the token's functionality as defined by the ERC-20 standard. It seems to be part of a purchase mechanism that is outside the scope of standard token operations.
+
+To make the `EZOToken` contract ERC-20 compliant, it would need to implement all the required functions and events as specified in the ERC documentation. The fallback function should not be used for processing purchases or accepting Ether unless the contract is also intended to serve as a crowdsale or fundraising contract, and even then, it should be clearly separated from the token's standard functionality.
+
+In summary, the provided fallback function and related parts of the `EZOToken` contract do not comply with the ERC-20 standard and would need significant modifications to meet the requirements of the standard.

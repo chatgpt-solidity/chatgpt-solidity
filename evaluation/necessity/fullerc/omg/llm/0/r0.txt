@@ -1,0 +1,17 @@
+The provided Solidity code for the `mint` function and related parts of the `MintableToken` contract does not directly violate the ERC-20 standard, as the ERC-20 standard does not specify rules regarding the minting of new tokens. However, there are a few points to consider to ensure that the contract adheres to best practices and the spirit of the ERC-20 standard:
+
+1. **Transfer Event on Minting**: The ERC-20 standard requires that a `Transfer` event is emitted when tokens are transferred, including when new tokens are created (minted). The provided code emits a `Mint` event, but it should also emit a `Transfer` event with the `_from` address set to `0x0` to indicate token creation. This is important for ERC-20 token trackers and wallets to recognize the minting transaction as a token transfer.
+
+2. **SafeMath Library**: The provided code uses the `SafeMath` library for safe arithmetic operations, which is a good practice to prevent overflows and underflows.
+
+3. **Minting Finished Modifier**: The `canMint` modifier is used to prevent minting when `mintingFinished` is `true`. This is a custom feature and not part of the ERC-20 standard, but it is a common practice in many token contracts to allow for a minting phase that can be ended.
+
+4. **Total Supply**: The `totalSupply` variable is updated correctly when new tokens are minted, which is in line with the ERC-20 standard's requirement to keep track of the total token supply.
+
+5. **Access Control**: The `onlyOwner` modifier is used to restrict the `mint` function so that only the owner of the contract can mint new tokens. This is not specified in the ERC-20 standard but is a common practice for administrative functions.
+
+6. **Error Handling**: The code uses `throw` for error handling, which is an older practice in Solidity. It is recommended to use `require` and `revert` for error handling in newer Solidity versions to provide more gas-efficient and informative error handling.
+
+7. **ERC-20 Basic Functions**: The `BasicToken` contract implements the `ERC20Basic` interface, which should include the basic ERC-20 functions such as `balanceOf` and `transfer`. However, the full ERC-20 standard also includes `transferFrom`, `approve`, and `allowance` functions, which are not shown in the provided code. To be fully ERC-20 compliant, the contract must implement these functions as well.
+
+In summary, while the `mint` function itself does not violate the ERC-20 standard, the contract should ensure that a `Transfer` event is emitted during the minting process to be fully compliant with the standard's event requirements. Additionally, the contract should implement all the required ERC-20 functions and events if it is to be considered fully ERC-20 compliant. The use of `throw` should be updated to modern error handling practices.

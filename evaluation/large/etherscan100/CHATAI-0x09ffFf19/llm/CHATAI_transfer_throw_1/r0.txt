@@ -1,0 +1,12 @@
+YES
+
+The provided Solidity code for the `transfer` function and its related parts will not throw an error if transfers of 0 values are made. The `_transfer` function, which is called by the `transfer` function, has a specific check for the `amount` being 0:
+
+```solidity
+if (amount == 0) {
+    super._transfer(from, to, 0);
+    return;
+}
+```
+
+This check ensures that if the `amount` to be transferred is 0, the function will simply call the `super._transfer` with 0 and then return early, effectively performing a no-op (no operation) and not throwing an error. The rest of the function's logic, which includes checks for balances and fees, will be skipped in this case.

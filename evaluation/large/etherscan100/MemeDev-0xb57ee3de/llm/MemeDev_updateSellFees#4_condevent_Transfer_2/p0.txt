@@ -1,0 +1,46 @@
+Given a solidity function updateSellFees and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract Ownable is Context {
+    address private _owner;
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract MemeDev is ERC20, Ownable {
+    uint256 public sellTotalFees;
+    uint256 public sellMarketingFee;
+    uint256 public sellLiquidityFee;
+    uint256 public sellDevFee;
+    uint256 public earlySellLiquidityFee;
+    uint256 public earlySellMarketingFee;
+    function updateSellFees(uint256 _marketingFee, uint256 _liquidityFee, uint256 _devFee, uint256 _earlySellLiquidityFee, uint256 _earlySellMarketingFee) external onlyOwner {
+        sellMarketingFee = _marketingFee;
+        sellLiquidityFee = _liquidityFee;
+        sellDevFee = _devFee;
+        earlySellLiquidityFee = _earlySellLiquidityFee;
+        earlySellMarketingFee = _earlySellMarketingFee;
+        sellTotalFees = sellMarketingFee + sellLiquidityFee + sellDevFee;
+        require(sellTotalFees <= 99, "Must keep fees at 99% or less");
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

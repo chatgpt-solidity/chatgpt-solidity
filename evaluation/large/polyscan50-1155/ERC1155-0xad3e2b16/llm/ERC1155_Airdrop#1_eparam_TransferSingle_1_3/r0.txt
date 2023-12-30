@@ -1,0 +1,3 @@
+YES
+
+The `Airdrop` function in the provided Solidity code emits the `TransferSingle` event according to the given rule. The `_id` argument in the `TransferSingle` event is set to `itemsIds[i]`, which corresponds to the token type being transferred to the recipient `to[i]`. The `_value` argument is set to `1`, indicating that one token of the type `itemsIds[i]` is being transferred. The event is emitted within the loop for each airdropped item, ensuring that the correct token type (`_id`) is associated with each transfer.

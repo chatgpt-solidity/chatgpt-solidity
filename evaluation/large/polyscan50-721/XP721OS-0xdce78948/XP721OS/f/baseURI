@@ -1,0 +1,14 @@
+contract XP721OS is
+    Ownable,
+    ERC721Enumerable,
+    BridgeNFT,
+    ERC2981,
+    DefaultOperatorFilterer
+{
+
+    string public baseUri;
+
+    function baseURI() external view override returns (string memory) {
+        return string(abi.encodePacked(baseUri, "{id}"));
+    }
+}

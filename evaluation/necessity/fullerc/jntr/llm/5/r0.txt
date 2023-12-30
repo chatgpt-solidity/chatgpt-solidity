@@ -1,0 +1,27 @@
+The provided Solidity function `allowance` within the `JNTR` contract appears to be compliant with the ERC-20 token standard as described in the given ERC documentation. The ERC-20 standard specifies that the `allowance` function should:
+
+1. Return the amount which `_spender` is still allowed to withdraw from `_owner`.
+2. Be a public view function that returns a `uint256` indicating the remaining allowance.
+
+The `JNTR` contract's `allowance` function matches these requirements:
+
+```solidity
+function allowance(
+    address _owner,
+    address _spender
+) public view returns (uint) {
+    return allowed[_owner][_spender];
+}
+```
+
+It is a public view function that takes an `_owner` address and a `_spender` address as arguments and returns the remaining allowance as a `uint` (which is an alias for `uint256` in Solidity).
+
+However, there are a couple of minor points to consider:
+
+1. The `JNTR` contract is inheriting from `IST20` and `ERC20`. It is not clear from the provided code what these interfaces or contracts contain. If they contain any functionality that contradicts the ERC-20 standard, then there could be a violation. However, based solely on the `allowance` function provided, there is no violation.
+
+2. The `JNTR` contract uses `SafeMath`, but it is not shown how or if it is used within the `allowance` function. `SafeMath` is typically used to prevent overflow and underflow issues with arithmetic operations. Since the `allowance` function does not perform any arithmetic operations, the use of `SafeMath` is not directly relevant to the compliance of this function.
+
+3. The ERC-20 standard specifies that the `allowance` function should return a `uint256`, while the provided function returns `uint`. In Solidity, `uint` is an alias for `uint256`, so this is not an issue, but it is worth noting for clarity and consistency with the standard's language.
+
+In conclusion, the `allowance` function as provided does not violate the ERC-20 standard. It correctly implements the functionality as described in the ERC documentation.

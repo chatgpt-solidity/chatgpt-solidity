@@ -1,0 +1,9 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is responsible for emitting the `TransferSingle` event. According to the rule provided, the `_operator` argument in the `TransferSingle` event must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+In the `_mint` function, the `operator` variable is set to `_msgSender()`, which is an internal function that returns `msg.sender`. This means that the `operator` is indeed the address that initiated the transaction, which is the expected behavior according to the rule.
+
+The `TransferSingle` event is then emitted with the `operator` as the `_operator` argument, satisfying the rule that the `_operator` must be the address approved to make the transfer, which should be `msg.sender`.
+
+Therefore, the `TransferSingle` event is emitted correctly according to the given rule.

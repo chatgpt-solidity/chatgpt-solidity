@@ -1,0 +1,11 @@
+contract ERC1155 {
+    mapping(uint256 => mapping(address => uint256)) private balances;
+
+    function balanceOf(
+        address account,
+        uint256 tokenId
+    ) public view returns (uint256) {
+        return balances[tokenId][account];
+    }
+}
+

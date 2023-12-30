@@ -1,0 +1,93 @@
+Given a solidity function cancelOrder and the related parts from a smart contract.
+Whether the function cancelOrder and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.9;
+contract EZOToken is ERC20, SafeMath, Haltable {
+
+    //mapping of token balances
+    mapping(address => uint256) balances;
+
+    mapping(address => PurchaseRecord) PurchaseRecordsAll;
+    mapping(address => uint256) transactionStatus;
+    mapping(address => bool) public allowedAddresses;
+
+    function cancelOrder(address _uniqueId) public {
+        require(msg.sender == PurchaseRecordsAll[_uniqueId].sender);
+        require(transactionStatus[_uniqueId] == 1);
+        transactionStatus[_uniqueId] = 2;
+        generalFundAssign(
+            PurchaseRecordsAll[_uniqueId].currency,
+            PurchaseRecordsAll[_uniqueId].sender,
+            PurchaseRecordsAll[_uniqueId].amountSpent
+        );
+
+    }
+    function generalFundAssign(
+        address _currencySent,
+        address payable _recipient,
+        uint256 _amount
+    ) internal {
+        if (_currencySent == address(this)) {
+            mint(_recipient, _amount);
+            emit orderCanceled(_amount, _recipient, _currencySent);
+        } else if (_currencySent == address(0)) {
+            require(address(this).balance >= _amount);
+            assignEther(_recipient, _amount);
+            emit orderCanceled(_amount, _recipient, address(0));
+        } else {
+            require(Token(_currencySent).balanceOf(address(this)) >= _amount);
+            Token(_currencySent).transfer(_recipient, _amount);
+            emit orderCanceled(_amount, _recipient, _currencySent);
+        }
+    }
+
+    // Function will create new tokens and assign to investor's address
+    function mint(
+        address to,
+        uint256 tokens
+    ) public stopIfHalted returns (bool) {
+        require(allowedAddresses[msg.sender]);
+        totalSupply = safeAdd(totalSupply, tokens);
+        balances[to] = safeAdd(balances[to], tokens);
+        emit Mint(to, tokens);
+        emit Transfer(address(0), to, tokens);
+        return true;
+    }
+
+    function assignEther(address payable recipient, uint256 _amount) internal {
+        require(recipient.send(_amount));
+    }
+}
+
+contract ERC20 {
+    uint public totalSupply;
+}
+
+contract SafeMath {
+
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract Haltable is Ownable {
+    // @dev To Halt in Emergency Condition
+    bool public halted = false;
+
+    // @dev Use this as function modifier that should not execute if contract state Halted
+    modifier stopIfHalted() {
+        require(!halted);
+        _;
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are burning or deallocating
+"""

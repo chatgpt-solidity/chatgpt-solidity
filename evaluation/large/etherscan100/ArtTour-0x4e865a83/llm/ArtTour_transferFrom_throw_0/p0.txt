@@ -1,0 +1,20 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether the function transferFrom and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+Note: returning false is not throwing.
+
+Function(and related parts) to audit:"""
+contract ArtTour is FomoMofo, ERC165, Ownable, ReentrancyGuard {
+
+    function transferFrom(address, address, uint256) external pure override {
+        _transferRevert();
+    }
+
+    function _transferRevert() private pure {
+        revert("Cannot perform transfers on a non-transferable token");
+    }
+}
+"""
+
+Condition:"""
+`msg.sender` is not the current owner, not an authorized operator, and not the approved address for this NFT
+"""

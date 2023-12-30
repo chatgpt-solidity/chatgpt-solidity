@@ -1,0 +1,28 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a solidity function <function> and the related parts from a smart contract.
+      Whether the function <function> and the related parts violate the rule? Replay in "YES" or "NO".
+      Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+      <example>
+
+      Function(and related parts) to audit:"""
+      <code>
+      """
+
+      Rule:"""
+      <rule>
+      """
+examples:
+  - example: | 
+      Example of "initial token distribution" are provided below. 
+      Example:"""
+      construct <Contract Name> {
+          constructor() {
+              // tokens are transfer during the initial token distribution:
+              balances[msg.sender] = total;
+          }
+      }
+      """
+    matcher: "initial token distribution"

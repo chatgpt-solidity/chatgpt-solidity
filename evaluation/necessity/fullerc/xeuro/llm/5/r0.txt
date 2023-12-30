@@ -1,0 +1,17 @@
+The provided Solidity function `addAdmin` and the related parts from the smart contract `xEuro` do not directly relate to the ERC-20 token standard. The ERC-20 standard specifies a set of functions and events that a compliant token contract must implement to enable interoperability with other contracts, wallets, and exchanges. The standard includes functions for transferring tokens, querying balances, and allowing tokens to be spent by approved third parties.
+
+The `addAdmin` function in the `xEuro` contract appears to be an administrative function that allows the addition of new admin addresses to the contract. This functionality is not covered by the ERC-20 standard, as ERC-20 focuses on token-related operations rather than administrative control mechanisms.
+
+Here are the key points to consider:
+
+1. The ERC-20 standard does not require or specify any administrative roles or permissions. It is solely concerned with the token-related operations.
+
+2. The `addAdmin` function is a custom function that is not part of the ERC-20 interface. It is used to manage the administrative privileges within the `xEuro` contract.
+
+3. The `addAdmin` function does not interfere with the ERC-20 token functionality. It does not affect the token's transfer, balance, approval, or allowance mechanisms.
+
+4. The `xEuro` contract could still be ERC-20 compliant if it implements all the required functions and events as specified in the ERC-20 standard, in addition to its custom administrative functions.
+
+5. It is important to ensure that the administrative functions like `addAdmin` are secure and do not introduce vulnerabilities that could be exploited to manipulate the token supply or balances, as this would affect the integrity of the token and its compliance with the ERC-20 standard.
+
+In conclusion, the `addAdmin` function does not violate the ERC-20 standard as long as the `xEuro` contract also implements all the required ERC-20 functions and events and maintains the integrity and security of the token operations. However, it is crucial to carefully manage and secure administrative functions to prevent potential misuse or security breaches.

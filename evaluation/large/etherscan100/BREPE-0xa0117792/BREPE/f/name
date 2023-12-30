@@ -1,0 +1,8 @@
+contract BREPE is IERC20, Ownable {
+
+    string private _name = "BREPE";
+
+    function name() public view returns (string memory) {
+        return _name;
+    }
+}

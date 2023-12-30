@@ -1,0 +1,17 @@
+Given a solidity function receive and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract MemeDev is ERC20, Ownable {
+    receive() external payable {
+ 
+  	}
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

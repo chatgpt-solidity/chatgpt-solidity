@@ -1,0 +1,7 @@
+YES
+
+The `safeBatchTransferFrom` function calls the `_safeBatchTransferFrom` private function, which performs the actual transfer of tokens in batches. The for loop within `_safeBatchTransferFrom` iterates over the `ids` array and for each id, it decreases the balance of the `from` address and increases the balance of the `to` address by the corresponding amount specified in the `amounts` array.
+
+After updating the balances, the `TransferBatch` event is emitted with the `msg.sender` as the `_operator`, the `from` and `to` addresses, and the `ids` and `amounts` arrays as `_ids` and `_values` respectively. This matches the rule specified, as the `_values` argument (which is the `amounts` array in the code) represents the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by, in the same order as specified in the `_ids` array.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule.

@@ -1,0 +1,30 @@
+Based on the provided Solidity event interfaces and the ERC (which appears to be ERC-20 based on the description and functions/events listed), we can analyze whether the given events violate the ERC-20 standard.
+
+The ERC-20 standard specifies two events that must be implemented:
+
+1. `Transfer` event:
+```solidity
+event Transfer(address indexed _from, address indexed _to, uint256 _value);
+```
+
+2. `Approval` event:
+```solidity
+event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+```
+
+The provided Solidity event interfaces are:
+```solidity
+event Transfer(address indexed, address indexed, uint256);
+event Approval(address indexed, address indexed, uint256);
+event LogRefund(address indexed, uint256);
+event CreateBAT(address indexed, uint256);
+```
+
+Comparing the provided events with the ERC-20 standard:
+
+- The `Transfer` event matches the ERC-20 specification. It has the correct parameters and indexed attributes.
+- The `Approval` event also matches the ERC-20 specification with the correct parameters and indexed attributes.
+
+However, the ERC-20 standard does not specify the `LogRefund` and `CreateBAT` events. These events are not part of the ERC-20 standard, but their presence does not violate the standard. ERC-20 only requires that the `Transfer` and `Approval` events are implemented and does not prohibit additional events from being included in the contract.
+
+Therefore, based on the provided information, the given Solidity event interfaces do not violate the ERC-20 standard. They include the required `Transfer` and `Approval` events and may have additional events that are not part of the standard but do not conflict with it.

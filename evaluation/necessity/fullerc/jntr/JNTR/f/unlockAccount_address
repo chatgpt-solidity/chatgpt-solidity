@@ -1,0 +1,14 @@
+contract JNTR is IST20, ERC20, SafeMath {
+    address public owner;
+    mapping(address => uint256) allowedIndex;
+
+    Account[] allowedAddress;
+
+    function unlockAccount(address _address) public returns (bool) {
+        require(msg.sender == owner);
+        require(allowedAddress[allowedIndex[_address]]._address == _address);
+        allowedAddress[allowedIndex[_address]]._active = true;
+        return true;
+    }
+}
+

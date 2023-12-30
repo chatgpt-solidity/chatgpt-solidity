@@ -1,0 +1,52 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether the function constructor and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract CHMS is Context, IERC20, Ownable {
+	mapping(address => uint256) private _balances;
+	mapping(address => mapping(address => uint256)) private _allowances;
+	mapping(address => bool) private _isExcludedFromFee;
+	address payable private _taxWallet;
+	address payable private _devWallet = payable(0x84A63a4a764a382b0837Df6Bbea539D9df35A753);
+	uint256 private constant _tTotal = 100_000_000 * 10 ** _decimals;
+
+	IUniswapV2Router02 private uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+
+	constructor() {
+		_balances[address(this)] = _tTotal;
+		_taxWallet = payable(_msgSender());
+		_isExcludedFromFee[address(uniswapV2Router)] = true;
+		_isExcludedFromFee[address(this)] = true;
+		_isExcludedFromFee[_devWallet] = true;
+		_isExcludedFromFee[_taxWallet] = true;
+		_approve(address(this), address(uniswapV2Router), _tTotal);
+		emit Transfer(address(0), address(this), _tTotal);
+	}
+
+	function _approve(address owner, address spender, uint256 amount) private {
+		require(owner != address(0), "ERC20: approve from the zero address");
+		require(spender != address(0), "ERC20: approve to the zero address");
+		_allowances[owner][spender] = amount;
+		emit Approval(owner, spender, amount);
+	}
+}
+contract Ownable is Context {
+	address private _owner;
+
+	constructor() {
+		address msgSender = _msgSender();
+		_owner = msgSender;
+		emit OwnershipTransferred(address(0), msgSender);
+	}
+}
+
+abstract contract Context {
+	function _msgSender() internal view virtual returns (address) {
+		return msg.sender;
+	}
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

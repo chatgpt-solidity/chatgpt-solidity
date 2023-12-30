@@ -1,0 +1,192 @@
+{
+    "file": "evaluation/polyscan50-1155/USDC-0xf8cd31be.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.1",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/transferOwnership_address",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/supportsInterface_bytes4",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/balanceOf_address_uint256",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/balanceOfBatch_address[]_uint256[]",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "constructor() returns()": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/constructor",
+                "airdrop(address[],uint256) returns()": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/airdrop_address[]_uint256",
+                "mint(address,uint256) returns()": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/mint_address_uint256",
+                "airdrop(address[],uint256,address) returns()": ".temp/polyscan50-1155/USDC-0xf8cd31be/USDC/f/airdrop_address[]_uint256_address"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "airdrop(address[],uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "airdrop(address[],uint256,address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "name() returns(string)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "165",
+                "1155metadatauri",
+                "1155"
+            ],
+            "events": [
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "USDC"
+        }
+    ]
+}

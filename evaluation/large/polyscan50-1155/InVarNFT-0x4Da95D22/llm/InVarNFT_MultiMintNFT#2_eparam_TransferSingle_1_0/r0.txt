@@ -1,0 +1,7 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is called by the `MultiMintNFT` function in the `InVarNFT` contract. The `_mint` function emits the `TransferSingle` event with the `operator` argument set to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`.
+
+Since the `MultiMintNFT` function is only callable by the owner of the contract due to the `onlyOwner` modifier, and `_msgSender()` within the context of `MultiMintNFT` will return the address of the owner (which is the `msg.sender`), the `_operator` argument in the `TransferSingle` event will indeed be the address that is approved to make the transfer, which is the `msg.sender`.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

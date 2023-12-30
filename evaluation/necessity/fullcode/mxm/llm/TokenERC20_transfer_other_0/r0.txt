@@ -1,0 +1,5 @@
+NO
+
+The provided Solidity function `_transfer` and the `transfer` function do not explicitly check for a transfer value of 0. The ERC-20 rule states that transfers of 0 values must be treated as normal transfers, which means they should be allowed and events should be emitted accordingly.
+
+Since there is no condition in the provided code that would prevent a transfer of 0 value or treat it differently from a transfer of more than 0, the code does not violate the specified ERC rule. It will allow transfers of 0 value and will emit a Transfer event, which is in compliance with the rule.

@@ -1,0 +1,46 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+
+    string private _Name;
+    string private _Symbol;
+    string private _baseUri;
+    uint256 private _MaxSupply;
+
+    constructor(
+        string memory Name,
+        string memory Symbol,
+        string memory BaseUri,
+        uint256 MaxSupply
+    ) {
+        _Name = Name;
+        _Symbol = Symbol;
+        _baseUri = BaseUri;
+        _MaxSupply = MaxSupply;
+    }
+}
+
+contract EBLivePremios is ERC721 {
+    address private _Admin;
+
+    address private _Creator;
+    constructor() ERC721("EBLive2023", "EBL23", "ipfs://bafkreiew6ycz6hlfyr7uh3zfxfwqbgvwkvgnftbo6surefa5ciyfs3z2ne", 70) {
+        _Admin = _msgSender();
+        _Creator = _msgSender();
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

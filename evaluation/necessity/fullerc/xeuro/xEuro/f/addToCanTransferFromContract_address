@@ -1,0 +1,21 @@
+contract xEuro {
+
+    // addresses allowed to transfer tokens from contract's own address:
+    mapping(address => bool) public canTransferFromContract;
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    function addToCanTransferFromContract(
+        address _newAddress
+    ) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canTransferFromContract[_newAddress] = true;
+        emit AddressAddedToCanTransferFromContract(msg.sender, _newAddress);
+        return true;
+    } //
+}
+

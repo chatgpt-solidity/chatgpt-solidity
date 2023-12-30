@@ -1,0 +1,3 @@
+YES
+
+The `_mint` function in the provided `BlurSummer` contract calls the `emit TransferSingle` event with the correct arguments, including the `_to` argument which is the address of the recipient whose balance is increased. The `_mint` function is designed to create `amount` tokens of token type `id` and assign them to the `to` address, which is the recipient. The `TransferSingle` event is then emitted with the `to` address as the `_to` argument, satisfying the given rule.

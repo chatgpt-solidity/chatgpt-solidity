@@ -1,0 +1,3 @@
+YES
+
+The `_mint` function in the `APE` contract calls the `emit TransferSingle` event with the correct arguments, including the `_id` argument which is set to the token type being transferred. The `_currentTokenId` represents the token type, and it is passed to the `_mint` function which then emits the `TransferSingle` event with the `_id` parameter set to this value. Therefore, the rule is followed correctly.

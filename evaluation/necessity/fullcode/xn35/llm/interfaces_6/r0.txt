@@ -1,0 +1,3 @@
+YES
+
+The given Solidity interfaces contain the interface `name() returns (string)` in the `Projecton` contract. The `name` is declared as a public constant string, which means it is automatically provided with a getter function that matches the interface `name() returns (string)`. The parameter types and return types match as required.

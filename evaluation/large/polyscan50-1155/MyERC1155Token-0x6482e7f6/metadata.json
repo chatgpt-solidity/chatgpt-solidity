@@ -1,0 +1,64 @@
+{
+    "file": "evaluation/polyscan50-1155/MyERC1155Token-0x6482e7f6.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.18",
+            "func2file": {
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/MyERC1155Token-0x6482e7f6/MyERC1155Token/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/MyERC1155Token-0x6482e7f6/MyERC1155Token/f/balanceOf_address_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/MyERC1155Token-0x6482e7f6/MyERC1155Token/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/MyERC1155Token-0x6482e7f6/MyERC1155Token/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/MyERC1155Token-0x6482e7f6/MyERC1155Token/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "constructor(string) returns()": ".temp/polyscan50-1155/MyERC1155Token-0x6482e7f6/MyERC1155Token/f/constructor_string",
+                "mint(address,uint256,uint256) returns()": ".temp/polyscan50-1155/MyERC1155Token-0x6482e7f6/MyERC1155Token/f/mint_address_uint256_uint256",
+                "mintToMultiple(address[],uint256[],uint256[]) returns()": ".temp/polyscan50-1155/MyERC1155Token-0x6482e7f6/MyERC1155Token/f/mintToMultiple_address[]_uint256[]_uint256[]",
+                "burn(address,uint256,uint256) returns()": ".temp/polyscan50-1155/MyERC1155Token-0x6482e7f6/MyERC1155Token/f/burn_address_uint256_uint256"
+            },
+            "func2attrs": {
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintToMultiple(address[],uint256[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "1155token",
+                "1155"
+            ],
+            "events": [],
+            "name": "MyERC1155Token"
+        }
+    ]
+}

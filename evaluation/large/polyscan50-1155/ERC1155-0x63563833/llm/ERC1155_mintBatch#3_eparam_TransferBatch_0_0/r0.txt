@@ -1,0 +1,11 @@
+YES
+
+The `mintBatch` function in the provided Solidity code emits the `TransferBatch` event with `msg.sender` as the `_operator` argument. This is in accordance with the given rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`.
+
+The relevant line in the code is:
+
+```solidity
+emit TransferBatch(msg.sender, address(0), to, itemsIds, amounts);
+```
+
+This line is executed after the safety checks and the actual minting logic, ensuring that the event is emitted with the correct operator (`msg.sender`), from address (`address(0)` indicating minting), to address (`to`), item IDs (`itemsIds`), and amounts (`amounts`).

@@ -1,0 +1,14 @@
+Given a solidity function symbol and the related parts from a smart contract and an rule for its return value.
+Whether function symbol returns the symbol of the token? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+contract LoveActingRichPoorly is Context, IERC20, Ownable {
+    string private constant _symbol = unicode"LARP";
+
+    function symbol() public pure returns (string memory) {
+        return _symbol;
+    }
+}
+"""

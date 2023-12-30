@@ -1,0 +1,28 @@
+Based on the provided Solidity code and the ERC-20 token standard, there are several issues and missing elements in the `DSToken` and related contracts that do not comply with the ERC-20 standard:
+
+1. **Missing ERC-20 Functions**: The `DSTokenBase` contract, which is supposed to implement the ERC-20 interface, does not define all the required functions. The ERC-20 standard requires the following functions, which are not present in the provided code:
+   - `function name() public view returns (string)`
+   - `function symbol() public view returns (string)`
+   - `function decimals() public view returns (uint8)`
+   - `function totalSupply() public view returns (uint256)`
+   - `function balanceOf(address _owner) public view returns (uint256 balance)`
+   - `function transfer(address _to, uint256 _value) public returns (bool success)`
+   - `function transferFrom(address _from, address _to, uint256 _value) public returns (bool success)`
+   - `function approve(address _spender, uint256 _value) public returns (bool success)`
+   - `function allowance(address _owner, address _spender) public view returns (uint256 remaining)`
+
+2. **Missing ERC-20 Events**: The ERC-20 standard requires two events to be emitted, which are not present in the provided code:
+   - `event Transfer(address indexed _from, address indexed _to, uint256 _value)`
+   - `event Approval(address indexed _owner, address indexed _spender, uint256 _value)`
+
+3. **Incorrect Data Types**: The `symbol` in the `DSToken` contract is defined as `bytes32`, whereas the ERC-20 standard specifies that the `symbol` function should return a `string`. This could lead to compatibility issues with wallets and other contracts expecting a string.
+
+4. **Missing Return Values**: The ERC-20 standard specifies that functions like `transfer`, `transferFrom`, and `approve` must return a boolean value indicating success. The provided code does not include these functions, and thus it is not clear whether they return the required boolean value.
+
+5. **Constructor Naming**: The `DSTokenBase` and `DSAuth` contracts use the old-style constructor naming (same as the contract name), which is deprecated in newer versions of Solidity. The recommended way to define constructors in Solidity 0.4.22 and later is using the `constructor` keyword.
+
+6. **Event Logging**: The `DSAuth` contract emits an event `LogSetOwner`, which is not part of the ERC-20 standard. While this is not a violation of the ERC-20 standard, it is worth noting that additional events are present.
+
+7. **Inheritance and Interface Implementation**: The `DSTokenBase` contract is supposed to inherit from `ERC20`, but the actual `ERC20` interface is not provided in the code snippet. It is assumed that `ERC20` contains the necessary function declarations, but the implementation of these functions is missing in `DSTokenBase`.
+
+To conclude, the provided `DSToken` and related contracts do not comply with the ERC-20 standard. To be compliant, the contracts would need to implement all the required functions and events as specified by the ERC-20 standard, ensure correct data types are used, and follow the best practices for Solidity version compatibility.

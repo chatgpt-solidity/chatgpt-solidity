@@ -1,0 +1,16 @@
+Given a solidity function allowance and the related parts from a smart contract.
+Whether the function allowance and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    mapping(address => mapping(address => uint256)) private _allowances;
+
+    function allowance(address owner, address spender) public view virtual override returns (uint256) {
+        return _allowances[owner][spender];
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

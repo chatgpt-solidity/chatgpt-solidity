@@ -1,0 +1,27 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether the function transfer and its related parts will not throw if Transfers of 0 values? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract PepeBonk is IERC20 {
+
+    mapping(address => uint256) public balanceOf;
+
+    function transfer(
+        address to,
+        uint256 amount
+    ) external override returns (bool) {
+        return _transfer(msg.sender, to, amount);
+    }
+
+    function _transfer(
+        address from,
+        address to,
+        uint256 amount
+    ) private returns (bool) {
+        balanceOf[from] -= amount;
+        balanceOf[to] += amount;
+        emit Transfer(from, to, amount);
+        return true;
+    }
+}
+"""

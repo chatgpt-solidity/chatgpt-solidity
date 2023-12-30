@@ -1,0 +1,275 @@
+{
+    "file": "evaluation/etherscan100/myToken-0xfad0695c.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.17",
+            "func2file": {
+                "constructor(string,string) returns()": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/constructor_string_string",
+                "name() returns(string)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/myToken-0xfad0695c/ERC20/f/decreaseAllowance_address_uint256"
+            },
+            "func2attrs": {
+                "constructor(string,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "20",
+                "20metadata"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "ERC20"
+        },
+        {
+            "solc_version": "0.8.17",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/transferFrom_address_address_uint256",
+                "removeLimits() returns()": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/removeLimits",
+                "openTrading() returns()": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/openTrading",
+                "receive() returns()": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/receive",
+                "manualSwap() returns()": ".temp/etherscan100/myToken-0xfad0695c/myToken/f/manualSwap"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeLimits() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "openTrading() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualSwap() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_maxWalletSize() returns(uint256)",
+                "_taxSwapThreshold() returns(uint256)",
+                "_maxTxAmount() returns(uint256)",
+                "_maxTaxSwap() returns(uint256)",
+                "transferDelayEnabled() returns(bool)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MaxTxAmountUpdated",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "myToken"
+        }
+    ]
+}

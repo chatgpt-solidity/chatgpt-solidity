@@ -1,0 +1,192 @@
+{
+    "file": "evaluation/etherscan100/FortuneCat-0x1f5319c4.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.21",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/owner",
+                "renounceOwnership() returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/transferOwnership_address",
+                "constructor() returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/constructor",
+                "name() returns(string)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/balanceOf_address",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/transferFrom_address_address_uint256",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/approve_address_uint256",
+                "removeLimits() returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/removeLimits",
+                "manualswap() returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/manualswap",
+                "manualsend() returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/manualsend",
+                "setMinSwapTokensThreshold(uint256) returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/setMinSwapTokensThreshold_uint256",
+                "setMaxTxnAmount(uint256) returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/setMaxTxnAmount_uint256",
+                "setMaxWalletSize(uint256) returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/setMaxWalletSize_uint256",
+                "excludeMultipleAccountsFromFees(address[],bool) returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/excludeMultipleAccountsFromFees_address[]_bool",
+                "setFee(uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/setFee_uint256_uint256_uint256_uint256",
+                "receive() returns()": ".temp/etherscan100/FortuneCat-0x1f5319c4/FortuneCat/f/receive"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "removeLimits() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualswap() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "manualsend() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMinSwapTokensThreshold(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMaxTxnAmount(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setMaxWalletSize(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "excludeMultipleAccountsFromFees(address[],bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setFee(uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "_maxWalletSize() returns(uint256)",
+                "_swapTokensAtAmount() returns(uint256)",
+                "_maxTxAmount() returns(uint256)",
+                "_buyMap(address) returns(uint256)",
+                "uniswapV2Router() returns(IUniswapV2Router02)",
+                "uniswapV2Pair() returns(address)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "MaxTxAmountUpdated",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "FortuneCat"
+        }
+    ]
+}

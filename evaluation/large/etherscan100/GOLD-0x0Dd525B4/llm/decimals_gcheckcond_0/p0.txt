@@ -1,0 +1,24 @@
+Given a solidity function decimals and the related parts from a smart contract.
+Whether the function decimals and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract GOLD is IERC20, Push, Ownable {
+    uint8 private _decimals;
+
+    /**
+     * @dev Returns the number of decimals used to get its user representation.
+     * For example, if `decimals` equals `2`, a balance of `505` tokens should
+      /**
+     * @dev Emitted when the allowance of a `spender` for an `owner` is set by
+     * a call to {approve}. `value` is the new allowance.
+     * {IERC20-balanceOf} and {IERC20-transfer}.
+     */
+    function decimals() public view virtual returns (uint8) {
+        return _decimals;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

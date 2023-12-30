@@ -1,0 +1,17 @@
+YES
+
+The `mintBatch` function in the `METARUFFY_ASSETS` contract calls the `_mintBatch` function in the `ERC1155` contract. The `_mintBatch` function is responsible for minting a batch of tokens and updating the balances accordingly.
+
+In the context of the ERC1155 standard, minting is considered a transfer from the zero address to the recipient's address. This is why the `_from` argument in the `TransferBatch` event is set to the zero address (`address(0)`) when tokens are minted.
+
+The `TransferBatch` event is emitted within the `_mintBatch` function with the following line:
+
+```solidity
+emit TransferBatch(operator, address(0), to, ids, amounts);
+```
+
+Here, `operator` is the address that initiated the minting operation (typically the minter), `address(0)` represents the zero address from which the tokens are considered to be minted, `to` is the recipient's address, `ids` is the array of token IDs, and `amounts` is the array of quantities for each token ID.
+
+Since the `_from` argument is correctly set to the zero address (`address(0)`) during the minting process, the rule that "_The `_from` argument MUST be the address of the holder whose balance is decreased_" is satisfied, as the zero address is considered the "holder" from which the minted tokens originate.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule.

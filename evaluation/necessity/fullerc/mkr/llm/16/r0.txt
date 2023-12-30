@@ -1,0 +1,27 @@
+The provided Solidity code defines a `DSToken` contract that includes a `burn` function. The `burn` function is designed to destroy a certain amount of tokens (`wad`) from a specified address (`guy`). This function reduces the balance of `guy` by `wad` and also decreases the total supply (`_supply`) of tokens by the same amount. The `Burn` event is then emitted to log this action.
+
+The ERC-20 standard, as described in the provided ERC excerpt, specifies a set of functions and events that a compliant token contract should implement. The standard functions include `totalSupply`, `balanceOf`, `transfer`, `transferFrom`, `approve`, and `allowance`. The standard events include `Transfer` and `Approval`.
+
+The ERC-20 standard does not explicitly define a `burn` function. However, the `burn` function in the `DSToken` contract does not violate the ERC-20 standard as long as it properly adjusts the balances and total supply and ensures that the `Transfer` event is emitted with the `burn` action, as the `Transfer` event must be triggered when tokens are transferred, including when they are burned (transferred to address 0).
+
+In the provided code, there is a `Burn` event being emitted, which is not part of the ERC-20 standard. To be fully compliant with ERC-20, the `burn` function should emit the `Transfer` event with the `_from` address set to the address of the `guy` whose tokens are being burned and the `_to` address set to the zero address (`0x0`) to indicate that these tokens are being removed from circulation.
+
+Here's how the `burn` function could be modified to comply with the ERC-20 standard:
+
+```solidity
+event Transfer(address indexed _from, address indexed _to, uint256 _value);
+
+function burn(address guy, uint wad) public auth stoppable {
+    if (guy != msg.sender && _approvals[guy][msg.sender] != uint(-1)) {
+        _approvals[guy][msg.sender] = sub(_approvals[guy][msg.sender], wad);
+    }
+
+    _balances[guy] = sub(_balances[guy], wad);
+    _supply = sub(_supply, wad);
+    emit Transfer(guy, address(0), wad); // Emitting the standard Transfer event
+}
+```
+
+By emitting the `Transfer` event with the `_to` address as the zero address, the `burn` function would be following the ERC-20 standard's guidelines for token transfers, including burning tokens.
+
+In summary, the `burn` function does not violate the ERC-20 standard, but to be fully compliant, it should emit the `Transfer` event instead of a non-standard `Burn` event. The rest of the contract would need to be reviewed to ensure full compliance with the ERC-20 standard, including the implementation of all required functions and events.

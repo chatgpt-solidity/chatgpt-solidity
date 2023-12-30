@@ -1,0 +1,9 @@
+YES
+
+The provided Solidity function `safeBatchTransferFrom` and the related parts of the smart contract correctly emit the `TransferBatch` event according to the given rule. The `_operator` argument in the `TransferBatch` event is set to `msg.sender`, which is the address of the account that is approved to make the transfer. This is in compliance with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer and should be `msg.sender`.
+
+The relevant line in the `_safeBatchTransferFrom` function is:
+```solidity
+emit TransferBatch(msg.sender, from, to, ids, amounts);
+```
+This line is executed after the balances have been updated and before the `_doSafeBatchTransferAcceptanceCheck` function is called, ensuring that the event is emitted with the correct parameters.

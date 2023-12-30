@@ -1,0 +1,4 @@
+contract HarryPlopperPutinRyu333Inu is IERC20, Ownable {
+    string private constant _name = 'HarryPlopperPutinRyu333Inu';
+    function name() public pure returns (string memory) {return _name;}
+}

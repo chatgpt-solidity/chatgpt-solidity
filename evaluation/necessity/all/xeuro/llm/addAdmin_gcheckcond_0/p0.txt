@@ -1,0 +1,24 @@
+Given a solidity function addAdmin and the related parts from a smart contract.
+Whether the function addAdmin and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    function addAdmin(address _newAdmin) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        isAdmin[_newAdmin] = true;
+        emit AdminAdded(msg.sender, _newAdmin);
+        return true;
+    } //
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

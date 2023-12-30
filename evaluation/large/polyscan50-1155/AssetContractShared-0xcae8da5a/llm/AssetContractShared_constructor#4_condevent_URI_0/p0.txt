@@ -1,0 +1,241 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.4;
+contract EIP712Base is Initializable {
+
+    string public constant ERC712_VERSION = "1";
+
+    bytes32 internal constant EIP712_DOMAIN_TYPEHASH =
+        keccak256(
+            bytes(
+                "EIP712Domain(string name,string version,address verifyingContract,bytes32 salt)"
+            )
+        );
+
+    bytes32 internal domainSeperator;
+    function _initializeEIP712(string memory name) internal initializer {
+        _setDomainSeperator(name);
+    }
+
+    function _setDomainSeperator(string memory name) internal {
+        domainSeperator = keccak256(
+            abi.encode(
+                EIP712_DOMAIN_TYPEHASH,
+                keccak256(bytes(name)),
+                keccak256(bytes(ERC712_VERSION)),
+                address(this),
+                bytes32(getChainId())
+            )
+        );
+    }
+
+    function getChainId() public view returns (uint256) {
+        uint256 id;
+        assembly {
+            id := chainid()
+        }
+        return id;
+    }
+}
+
+abstract contract Ownable is Context {
+    address private _owner;
+
+    constructor() {
+        _setOwner(_msgSender());
+
+    }
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+
+    function _setOwner(address newOwner) private {
+        address oldOwner = _owner;
+        _owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+    }
+}
+
+contract ERC1155Tradable is
+    ContextMixin,
+    ERC1155,
+    NativeMetaTransaction,
+    Ownable,
+    Pausable
+{
+
+    address public proxyRegistryAddress;
+    string public name;
+    string public symbol;
+
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        address _proxyRegistryAddress
+    ) ERC1155("") {
+        name = _name;
+        symbol = _symbol;
+        proxyRegistryAddress = _proxyRegistryAddress;
+        _initializeEIP712(name);
+    }
+
+    modifier onlyOwnerOrProxy() {
+        require(
+            _isOwnerOrProxy(_msgSender()),
+            "ERC1155Tradable#onlyOwner: CALLER_IS_NOT_OWNER"
+        );
+        _;
+    }
+
+    function _isOwnerOrProxy(address _address) internal view returns (bool) {
+        return owner() == _address || _isProxyForUser(owner(), _address);
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        virtual
+        returns (bool)
+    {
+        if (!proxyRegistryAddress.isContract()) {
+            return false;
+        }
+        ProxyRegistry proxyRegistry = ProxyRegistry(proxyRegistryAddress);
+        return address(proxyRegistry.proxies(_user)) == _address;
+    }
+
+    function _msgSender() internal view override returns (address sender) {
+        return ContextMixin.msgSender();
+    }
+}
+
+abstract contract ContextMixin {
+    function msgSender() internal view returns (address payable sender) {
+        if (msg.sender == address(this)) {
+            bytes memory array = msg.data;
+            uint256 index = msg.data.length;
+            assembly {
+                sender := and(
+                    mload(add(array, index)),
+                    0xffffffffffffffffffffffffffffffffffffffff
+                )
+            }
+        } else {
+            sender = payable(msg.sender);
+        }
+        return sender;
+    }
+}
+
+contract AssetContractShared is AssetContract, ReentrancyGuard {
+
+    AssetContractShared public migrationTarget;
+    mapping(address => bool) public sharedProxyAddresses;
+
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        address _proxyRegistryAddress,
+        string memory _templateURI,
+        address _migrationAddress
+    ) AssetContract(_name, _symbol, _proxyRegistryAddress, _templateURI) {
+        migrationTarget = AssetContractShared(_migrationAddress);
+    }
+
+    function _isProxyForUser(address _user, address _address)
+        internal
+        view
+        override
+        returns (bool)
+    {
+        if (sharedProxyAddresses[_address]) {
+            return true;
+        }
+        return super._isProxyForUser(_user, _address);
+    }
+}
+
+abstract contract ReentrancyGuard {
+    uint256 private constant _NOT_ENTERED = 1;
+
+
+    uint256 private _status;
+    constructor() {
+        _status = _NOT_ENTERED;
+    }
+}
+
+contract AssetContract is ERC1155Tradable {
+
+    string public templateURI;
+
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        address _proxyRegistryAddress,
+        string memory _templateURI
+    ) ERC1155Tradable(_name, _symbol, _proxyRegistryAddress) {
+        if (bytes(_templateURI).length > 0) {
+            setTemplateURI(_templateURI);
+        }
+    }
+
+    function setTemplateURI(string memory _uri) public onlyOwnerOrProxy {
+        templateURI = _uri;
+    }
+}
+
+abstract contract Pausable is Context {
+
+
+    bool private _paused;
+    constructor() {
+        _paused = false;
+    }
+}
+
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+
+    string private _uri;
+
+    constructor(string memory uri_) {
+        _setURI(uri_);
+    }
+
+    function _setURI(string memory newuri) internal virtual {
+        _uri = newuri;
+    }
+}
+
+contract Initializable {
+
+    bool inited = false;
+    modifier initializer() {
+        require(!inited, "already inited");
+        _;
+        inited = true;
+    }
+}
+
+library Address {
+    function isContract(address account) internal view returns (bool) {
+        // This method relies on extcodesize, which returns 0 for contracts in
+        // construction, since the code is only stored at the end of the
+        // constructor execution.
+
+        uint256 size;
+        assembly {
+            size := extcodesize(account)
+        }
+        return size > 0;
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

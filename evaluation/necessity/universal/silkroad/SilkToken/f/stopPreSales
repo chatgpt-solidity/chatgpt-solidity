@@ -1,0 +1,18 @@
+contract SilkToken is owned, TokenERC20 {
+    bool public isPreSales = false;
+
+    /// @notice Stop presales with setting state variable
+    function stopPreSales() public onlyOwner {
+        isPreSales = false;
+    }
+}
+
+contract owned {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+

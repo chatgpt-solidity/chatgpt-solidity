@@ -1,0 +1,31 @@
+YES
+
+The `_mint` function in the `BONE` contract, which is an extension of the `ERC1155` contract, emits the `TransferSingle` event as part of its execution. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`. In the provided code, the `mint` function in the `BONE` contract calls `_mint` with the following parameters:
+
+- `to`: the address that will receive the minted tokens
+- `_currentTokenId`: the token ID of the tokens to be minted
+- `1`: the amount of tokens to be minted
+- `""`: an empty byte array for additional data
+
+The `_mint` function in the `ERC1155` contract performs several steps:
+
+1. It checks that the `to` address is not the zero address.
+2. It sets the `operator` to the message sender (`_msgSender()`).
+3. It creates singleton arrays for `id` and `amount` to pass to `_beforeTokenTransfer`.
+4. It calls `_beforeTokenTransfer`.
+5. It updates the balance of `to` for the token `id` by the `amount`.
+6. It emits the `TransferSingle` event with the `operator`, `from` address (zero address for minting), `to` address, token `id`, and `amount`.
+7. It calls `_afterTokenTransfer`.
+8. It performs a safe transfer acceptance check if `to` is a contract.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: the address performing the mint (the message sender)
+- `_from`: the zero address, since tokens are being minted
+- `_to`: the address receiving the minted tokens
+- `_id`: the token ID of the minted tokens
+- `_value`: the number of tokens minted
+
+The rule states that the `_value` argument must be the number of tokens the holder balance is decreased by and match what the recipient balance is increased by. Since we are minting new tokens, the `_from` balance is not decreased (as it is the zero address), and the `_to` balance is increased by the exact amount of `_value`, which is `1` in this case.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, and the answer is "YES".

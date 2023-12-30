@@ -1,0 +1,7 @@
+contract SKR is Context, IERC20, Ownable {
+    uint256 private minimumTokensBeforeSwap = 100000000 * 10 ** _decimals; 
+
+    function minimumTokensBeforeSwapAmount() public view returns (uint256) {
+        return minimumTokensBeforeSwap;
+    }
+}

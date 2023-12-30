@@ -1,0 +1,142 @@
+{
+    "file": "evaluation/polyscan50-721/MopTrader-0x47988eD5.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.4",
+            "func2file": {
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/supportsInterface_bytes4",
+                "constructor(string,string) returns()": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/constructor_string_string",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/symbol",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/tokenURI_uint256",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/MopTrader-0x47988eD5/ERC721/f/safeTransferFrom_address_address_uint256_bytes"
+            },
+            "func2attrs": {
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "constructor(string,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "165",
+                "721metadata",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "ERC721"
+        }
+    ]
+}

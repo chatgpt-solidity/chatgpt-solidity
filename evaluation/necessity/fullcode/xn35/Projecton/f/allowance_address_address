@@ -1,0 +1,11 @@
+contract Projecton is owned, IERC20 {
+    mapping(address => mapping(address => uint256)) allowed;
+
+    function allowance(
+        address _owner,
+        address _spender
+    ) constant returns (uint256 remaining) {
+        return allowed[_owner][_spender];
+    }
+}
+

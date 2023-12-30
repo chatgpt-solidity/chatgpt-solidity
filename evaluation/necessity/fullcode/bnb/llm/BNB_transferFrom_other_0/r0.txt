@@ -1,0 +1,15 @@
+YES
+
+The function `transferFrom` in the provided code snippet includes the following line:
+
+```solidity
+if (_value <= 0) throw;
+```
+
+This line explicitly throws an error if the `_value` to be transferred is less than or equal to 0, which violates the ERC-20 rule that states:
+
+```
+Transfers of 0 values MUST be treated as normal transfers
+```
+
+According to the ERC-20 standard, the contract should allow transfers of 0 value to be treated the same as any other transfer, without throwing an error. The code should not throw an exception for a transfer of 0 value, but instead, it should allow it and emit the Transfer event accordingly.

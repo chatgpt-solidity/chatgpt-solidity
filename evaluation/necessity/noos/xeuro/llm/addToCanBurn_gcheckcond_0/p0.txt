@@ -1,0 +1,27 @@
+Given a solidity function addToCanBurn and the related parts from a smart contract.
+Whether the function addToCanBurn and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    // addresses allowed to burn tokens (on contract's own address):
+    mapping(address => bool) public canBurn;
+
+    function addToCanBurn(address _newAddress) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canBurn[_newAddress] = true;
+        emit AddressAddedToCanBurn(msg.sender, _newAddress);
+        return true;
+    } //
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

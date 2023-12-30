@@ -1,0 +1,29 @@
+YES
+
+The function `HelpMembertoMintCard` in the `NFTBigPartnerV2` contract calls the `_mint` function from the `ERC1155` contract. The `_mint` function is designed to create `_amount` tokens of token type `_id`, and assign them to the address `to`. It also emits a `TransferSingle` event as required by the ERC1155 standard.
+
+In the provided code, the `_mint` function is called with the following arguments:
+
+```solidity
+_mint(_member, _n, _cardsNum, "0x");
+```
+
+Here, `_member` is the address that will receive the tokens, `_n` is the token type (ID), and `_cardsNum` is the number of tokens to mint.
+
+The `_mint` function constructs the `ids` and `amounts` arrays using the `_asSingletonArray` helper function, which creates an array with a single element. This ensures that the `ids` array contains only the token type `_id` and the `amounts` array contains only the number of tokens `_amount`.
+
+After the internal checks and balance updates, the `_mint` function emits the `TransferSingle` event:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+The arguments for the `TransferSingle` event are:
+
+- `_operator`: The address which initiated the minting (in this case, the message sender).
+- `_from`: The address from which the tokens are transferred, which is `address(0)` for minting operations.
+- `_to`: The address to which the tokens are transferred, which is the `_member` variable in the `HelpMembertoMintCard` function.
+- `_id`: The token type being transferred, which is the `_n` variable in the `HelpMembertoMintCard` function.
+- `_value`: The number of tokens being transferred, which is the `_cardsNum` variable in the `HelpMembertoMintCard` function.
+
+Since the `_id` argument in the `TransferSingle` event corresponds to the token type being transferred, the rule is satisfied.

@@ -1,0 +1,9 @@
+The provided Solidity code defines a contract `KIMEX` which inherits from another contract `Owner`. The `KIMEX` contract has a function `changeWallet` that allows the owner of the contract to change the `walletAddress` state variable. This function is protected by the `onlyOwner` modifier, ensuring that only the owner can execute this function.
+
+The ERC (Ethereum Request for Comment) provided is the ERC-20 standard, which is a standard interface for fungible tokens on the Ethereum blockchain. The ERC-20 standard specifies a set of functions and events that a token contract should implement to be considered ERC-20 compliant. These functions and events relate to the transfer of tokens, querying token balances, and allowing tokens to be approved for spending by third parties.
+
+The `changeWallet` function in the `KIMEX` contract does not directly relate to the ERC-20 standard's required functions and events. It is a function that is specific to the `KIMEX` contract's logic and is not part of the ERC-20 token interface. The ERC-20 standard does not dictate how the contract's internal mechanisms, such as changing a wallet address, should be implemented. It only specifies the external interface for token-related actions.
+
+Therefore, the `changeWallet` function and the related parts do not violate the ERC-20 standard, as they do not pertain to the token transfer functionality or other aspects defined by the standard. The function is part of the contract's administrative features and is unrelated to the ERC-20 token interface requirements.
+
+In conclusion, the `changeWallet` function does not infringe upon the ERC-20 standard, as it is not part of the standard's specified interface for tokens. It is an additional feature specific to the `KIMEX` contract.

@@ -1,0 +1,8 @@
+contract W3Tour1155 is ERC1155, AccessControl {
+
+    string private _name;
+
+    function name() public view virtual returns (string memory) {
+        return _name;
+    }
+}

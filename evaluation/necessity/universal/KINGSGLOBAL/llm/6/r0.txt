@@ -1,0 +1,9 @@
+YES
+
+The given Solidity code snippet defines a `transferFrom` function within a `StandardToken` contract that appears to be implementing an ERC token standard (likely ERC-20 based on the context). The function is meant to transfer tokens from one address to another, given that certain conditions are met.
+
+The ERC rule provided states that the contract should "emit Event Transfer" when a transfer occurs. In Solidity, events are emitted using the `emit` keyword followed by the event name and the parameters to log.
+
+In the provided code, the line `Transfer(_from, _to, _value);` is intended to emit the Transfer event, but it does not use the `emit` keyword, which is required by the Solidity language (starting from version 0.4.21). The correct syntax should be `emit Transfer(_from, _to, _value);`.
+
+Therefore, the code violates the given ERC rule by not using the `emit` keyword when emitting the Transfer event.

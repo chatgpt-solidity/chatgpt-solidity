@@ -1,0 +1,26 @@
+NO
+
+The `migrate` function in the `AssetContractShared` contract is designed to migrate ownerships from one contract to another. However, the function contains a logic flaw that prevents the `TransferSingle` event from being emitted according to the given rule.
+
+The issue lies in the following conditional check:
+
+```solidity
+uint256 previousAmount = _migrationTarget.balanceOf(owner, id);
+
+if (previousAmount == 0) {
+    continue;
+}
+```
+
+This check is intended to skip the migration for a token ID (`id`) if the `owner` does not have any balance of that token in the `_migrationTarget` contract. However, the condition should be checking for a non-zero balance instead of zero. The correct logic should be:
+
+```solidity
+if (previousAmount > 0) {
+    _mint(owner, id, previousAmount, "");
+    ...
+}
+```
+
+With the current incorrect logic, the `TransferSingle` event will never be emitted because the `_mint` function (which emits the event) is only called when `previousAmount` is zero, which is the opposite of what should happen. The `_mint` function should be called when there is a non-zero balance to migrate, and that's when the `TransferSingle` event should be emitted.
+
+Therefore, the `TransferSingle` event is not emitted according to the given rule, as the `_value` argument (which should be the number of tokens the holder balance is decreased by and match what the recipient balance is increased by) will never be processed due to the incorrect conditional check.

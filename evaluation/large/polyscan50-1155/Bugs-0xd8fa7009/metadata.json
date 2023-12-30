@@ -1,0 +1,233 @@
+{
+    "file": "evaluation/polyscan50-1155/Bugs-0xd8fa7009.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "burn(address,uint256,uint256) returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/burn_address_uint256_uint256",
+                "burnBatch(address,uint256[],uint256[]) returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/burnBatch_address_uint256[]_uint256[]",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/supportsInterface_bytes4",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/balanceOf_address_uint256",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/balanceOfBatch_address[]_uint256[]",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "paused() returns(bool)": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/paused",
+                "owner() returns(address)": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/transferOwnership_address",
+                "constructor() returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/constructor",
+                "setURI(string) returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/setURI_string",
+                "pause() returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/pause",
+                "unpause() returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/unpause",
+                "mint(address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/mint_address_uint256_uint256_bytes",
+                "mintBatch(address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/Bugs-0xd8fa7009/Bugs/f/mintBatch_address_uint256[]_uint256[]_bytes"
+            },
+            "func2attrs": {
+                "burn(address,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burnBatch(address,uint256[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "paused() returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setURI(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "pause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unpause() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mint(address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintBatch(address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "165",
+                "1155metadatauri",
+                "1155burnable",
+                "1155"
+            ],
+            "events": [
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Paused",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Unpaused",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "Bugs"
+        }
+    ]
+}

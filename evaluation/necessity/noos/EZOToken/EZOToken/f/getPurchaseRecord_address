@@ -1,0 +1,15 @@
+contract EZOToken is ERC20, SafeMath, Haltable {
+
+    mapping(address => PurchaseRecord) PurchaseRecordsAll;
+
+    function getPurchaseRecord(
+        address _uniqueId
+    ) public view returns (address, uint256, address) {
+        return (
+            PurchaseRecordsAll[_uniqueId].sender,
+            PurchaseRecordsAll[_uniqueId].amountSpent,
+            PurchaseRecordsAll[_uniqueId].currency
+        );
+    }
+}
+

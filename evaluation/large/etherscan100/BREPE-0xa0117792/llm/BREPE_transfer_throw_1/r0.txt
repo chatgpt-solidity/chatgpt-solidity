@@ -1,0 +1,7 @@
+YES
+
+The provided Solidity function `transfer` and its related parts will not throw if transfers of 0 values are made. The `SafeMath` library's `sub` and `add` functions are used to safely subtract and add the amount to the sender's and recipient's balances, respectively. These functions include checks to prevent overflow and underflow.
+
+When the amount is 0, the `sub` function will not throw because subtracting 0 from any balance will not cause an underflow (as long as the sender's balance is not negative, which is not possible with unsigned integers in Solidity). Similarly, the `add` function will not throw because adding 0 to any balance will not cause an overflow.
+
+Therefore, the contract is designed to handle transfers of 0 values without reverting.

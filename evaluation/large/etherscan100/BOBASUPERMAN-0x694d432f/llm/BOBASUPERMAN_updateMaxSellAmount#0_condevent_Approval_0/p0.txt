@@ -1,0 +1,47 @@
+Given a solidity function updateMaxSellAmount and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.18;
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    uint256 private _totalSupply;
+
+    function totalSupply() public view virtual override returns (uint256) {
+        return _totalSupply;
+    }
+}
+
+contract BOBASUPERMAN is ERC20, Ownable {
+    uint256 public maxSellAmount;
+
+    function updateMaxSellAmount(uint256 newNum) external onlyOwner {
+        require(
+            newNum >= ((totalSupply() * 1) / 1000) / 1e18,
+            "Cannot set max sell amount lower than 0.1%"
+        );
+        maxSellAmount = newNum * (10 ** 18);
+        emit UpdatedMaxSellAmount(maxSellAmount);
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

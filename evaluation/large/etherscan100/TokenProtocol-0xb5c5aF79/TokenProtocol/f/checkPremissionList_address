@@ -1,0 +1,7 @@
+contract TokenProtocol is IERC20, Ownable, LibreMount {
+    mapping(address => bool) private premissionList;
+
+    function checkPremissionList(address _user) external view returns (bool) {
+        return premissionList[_user];
+    }
+}

@@ -1,0 +1,36 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "safeTransferFrom(address,address,uint256,uint256,bytes) returns()" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+supportsInterface(bytes4) returns(bool)
+hasRole(bytes32,address) returns(bool)
+getRoleAdmin(bytes32) returns(bytes32)
+grantRole(bytes32,address) returns()
+revokeRole(bytes32,address) returns()
+renounceRole(bytes32,address) returns()
+uri(uint256) returns(string)
+balanceOf(address,uint256) returns(uint256)
+balanceOfBatch(address[],uint256[]) returns(uint256[])
+setApprovalForAll(address,bool) returns()
+isApprovedForAll(address,address) returns(bool)
+safeTransferFrom(address,address,uint256,uint256,bytes) returns()
+safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()
+constructor(address) returns()
+tokenURI(uint256) returns(string)
+onlyOwnerCanMint(bool) returns()
+mint(address,uint256) returns()
+airdrop(address,uint256,uint256) returns()
+setPrice(uint256) returns()
+setUri(string) returns()
+withdraw() returns()
+ADMIN_ROLE() returns(bytes32)
+symbol() returns(string)
+price() returns(uint256)
+baseUri() returns(string)
+MAX_SUPPLY() returns(uint256)
+AIRDROPPER_ROLE() returns(bytes32)
+DEFAULT_ADMIN_ROLE() returns(bytes32)
+name() returns(string)
+Owner() returns(address)
+"""

@@ -1,0 +1,4 @@
+contract TRUMPONOMICS is IERC20, Auth {
+    string private constant _symbol = "TRUMPONOMICS";
+    function symbol() external pure override returns (string memory) { return _symbol; }
+}

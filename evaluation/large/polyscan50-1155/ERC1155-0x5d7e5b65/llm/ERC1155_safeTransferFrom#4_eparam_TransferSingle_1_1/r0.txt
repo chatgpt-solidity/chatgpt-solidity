@@ -1,0 +1,3 @@
+YES
+
+The `safeTransferFrom` function calls the internal `_safeTransferFrom` function, which performs the balance update and emits the `TransferSingle` event. The `_from` argument in the `TransferSingle` event is indeed the address of the holder whose balance is decreased, as required by the rule. The `from` parameter is used to decrease the balance of the `_balances[id][from]` mapping, and the same `from` parameter is passed to the `TransferSingle` event as the `_from` argument. Therefore, the event is emitted according to the given rule.

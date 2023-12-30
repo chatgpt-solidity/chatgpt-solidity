@@ -1,0 +1,41 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    function assert(bool assertion) internal {
+        if (!assertion) {
+            throw;
+        }
+    }
+}
+
+contract BNB is SafeMath {
+    uint256 public totalSupply;
+
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+
+    function burn(uint256 _value) returns (bool success) {
+        if (balanceOf[msg.sender] < _value) throw; // Check if the sender has enough
+        if (_value <= 0) throw;
+        balanceOf[msg.sender] = SafeMath.safeSub(balanceOf[msg.sender], _value); // Subtract from the sender
+        totalSupply = SafeMath.safeSub(totalSupply, _value); // Updates totalSupply
+        Burn(msg.sender, _value);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

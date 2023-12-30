@@ -1,0 +1,44 @@
+Given a solidity function SetUnLimited and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.9;
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
+    bool private _limited = false;
+
+    function _setUnLimited() internal virtual {
+        _limited = false;
+    }
+
+    function _getLimited() internal view virtual returns (bool) {
+        return _limited;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract EBLivePremios is ERC721 {
+    address private _Admin;
+
+    function SetUnLimited() public onlyAdmin {
+        require(_getLimited(), "Limite: Already Unlimited");
+        _setUnLimited();
+    }
+
+    //Ownable
+    modifier onlyAdmin() {
+        require(_Admin == _msgSender(), "Ownable: caller is not the admin");
+        _;
+    }
+}
+"""
+
+Action:"""
+when an operator is enabled or disabled for an owner
+"""

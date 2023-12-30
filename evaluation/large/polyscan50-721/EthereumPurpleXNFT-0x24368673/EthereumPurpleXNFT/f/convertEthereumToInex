@@ -1,0 +1,24 @@
+contract EthereumPurpleXNFT is ERC721, Ownable {
+
+    AggregatorV3Interface internal ETHpriceFeed;
+    uint256 public inexPrice = 0.000 ether;
+
+     function convertEthereumToInex() public view returns (uint256) {
+        (, int256 ethPrice, , , ) = ETHpriceFeed.latestRoundData();
+        uint256 ethValue;
+        uint256 ethereumPurpleValue;
+        uint256 ethereumPurpleValueInMATIC;
+        uint256 maticValue;
+        uint256 finalMaticValue;
+        // Chainlink provides price data with 8 decimals
+        uint256 ethDecimals = 10**uint256(ETHpriceFeed.decimals());
+        //uint256 maticDecimals = 10**uint256(MATICpriceFeed.decimals());
+
+        ethValue = uint256(ethPrice) / ethDecimals; // ETH value in USD
+        ethereumPurpleValue = ethValue / 2 ; // 1 ETH Purple value in USD
+        maticValue = inexPrice; // ETH value in USD
+        finalMaticValue = (((10**18) * inexPrice) / maticValue) * (1 ether);
+        ethereumPurpleValueInMATIC = (finalMaticValue / 10**18) / 2; // 1 Bitcoin Purple value in USD
+        return ethereumPurpleValueInMATIC;
+    }
+}

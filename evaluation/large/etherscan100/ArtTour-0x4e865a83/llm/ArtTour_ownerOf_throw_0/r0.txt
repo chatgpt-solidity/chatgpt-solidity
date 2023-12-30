@@ -1,0 +1,3 @@
+YES
+
+The `ownerOf` function in the provided Solidity code checks if the owner address of a given token ID is the zero address (address(0)). If the owner address is the zero address, the function will revert with the message "ERC721: invalid token ID". The `require` statement is used to enforce this condition, and if the condition is not met (i.e., if the owner is indeed the zero address), the function will throw an exception and revert the transaction.

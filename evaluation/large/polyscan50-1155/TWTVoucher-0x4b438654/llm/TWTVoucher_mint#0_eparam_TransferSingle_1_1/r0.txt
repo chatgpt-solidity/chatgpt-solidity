@@ -1,0 +1,7 @@
+YES
+
+The `mint` function in the `TWTVoucher` contract calls the `_mint` function in the `ERC1155` contract. The `_mint` function is designed to create new tokens and assign them to the `to` address. When minting new tokens, the `_from` address is conventionally set to the zero address (`address(0)`) to indicate that the tokens are being created rather than transferred from an existing holder.
+
+In the `_mint` function, the `TransferSingle` event is emitted with the `_from` argument set to the zero address, which is correct according to the rule provided. The rule states that the `_from` argument must be the address of the holder whose balance is decreased. In the case of minting, there is no holder from whom the balance is decreased, so the zero address is used to represent the "creation" of tokens.
+
+Therefore, the `TransferSingle` event is emitted correctly according to the given rule when the `mint` function is called.

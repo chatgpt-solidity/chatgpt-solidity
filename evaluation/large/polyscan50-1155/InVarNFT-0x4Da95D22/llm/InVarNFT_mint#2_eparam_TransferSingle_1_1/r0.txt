@@ -1,0 +1,7 @@
+YES
+
+The `_mint` function in the provided Solidity code is designed to create (`mint`) new tokens of a specific token type (`id`) and assign them to an `account`. According to the ERC-1155 standard, when new tokens are minted, they are considered to be transferred from the zero address (which represents the creation of new tokens).
+
+In the `_mint` function, the `TransferSingle` event is emitted with the `_from` argument set to the zero address (`address(0)`), the `_to` argument set to the `account` to which the tokens are being minted, the `_id` argument set to the token type being minted, and the `_value` argument set to the `amount` of tokens being minted.
+
+This behavior is consistent with the rule provided, as the `_from` argument is indeed the address of the holder whose balance is decreased—in this case, the zero address, which is the convention for indicating that tokens are being minted rather than transferred from an existing holder. Therefore, the `TransferSingle` event is emitted according to the given rule.

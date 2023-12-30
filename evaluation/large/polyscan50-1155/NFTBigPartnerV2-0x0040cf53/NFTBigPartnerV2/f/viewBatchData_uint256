@@ -1,0 +1,17 @@
+contract NFTBigPartnerV2 is ERC1155, Ownable, ERC1155Burnable {
+
+    address public rightperson;
+    address public assistance;
+    mapping(uint256=>uint256) public ReleasedTime;
+    mapping(uint256=>address) public MintAddr;
+    mapping(uint256=>uint256) public Deposited;
+    mapping(uint256=>uint256) public CardAmount;
+    mapping(uint256=>uint256) public CardType;
+
+    // change** 0: address, 1: card type, 2: card amount, 3: BIGP deposited, 4: redemption time
+    function viewBatchData(uint256 _batch)public view returns(address,uint,uint,uint, uint){
+       require(msg.sender==MintAddr[_batch]||msg.sender==rightperson||msg.sender==assistance);
+       return(MintAddr[_batch],CardType[_batch],CardAmount[_batch],Deposited[_batch],ReleasedTime[_batch]);
+
+    }
+}

@@ -1,0 +1,20 @@
+contract Owner {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract KIMEX is Owner {
+    address public walletAddress;
+
+    // Modify wallet
+    function changeWallet(address _newAddress) external onlyOwner {
+        require(_newAddress != address(0));
+        require(walletAddress != _newAddress);
+        walletAddress = _newAddress;
+    }
+}
+

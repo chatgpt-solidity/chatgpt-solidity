@@ -1,0 +1,11 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function with the correct arguments, including the `_to` argument which is the address of the recipient whose balance is increased. The event is emitted after the balances have been updated and before the `_doSafeBatchTransferAcceptanceCheck` function is called, which ensures that the recipient is capable of receiving the tokens (if it's a contract).
+
+The relevant part of the code is:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+This line is correctly placed after the loop that updates the balances for each token ID in the `ids` array, and before any checks that could revert the transaction, which means the event is emitted according to the given rule.

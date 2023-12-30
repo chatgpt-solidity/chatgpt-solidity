@@ -1,0 +1,11 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function, which is called by the `safeBatchTransferFrom` function. The event is emitted with the correct arguments, including `_ids` which represents the list of tokens being transferred. The function signature for the event emission is:
+
+```solidity
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+This matches the rule provided, where `_operator` is the address performing the transfer, `_from` is the address of the current token holder, `_to` is the address of the recipient, `_ids` is the list of token IDs, and `_values` (represented by `amounts` in the code) is the list of transfer amounts for each token ID.
+
+The rule is satisfied because the `_ids` argument is indeed the list of tokens being transferred, and the event `TransferBatch` is emitted with the correct parameters as per the ERC-1155 standard.

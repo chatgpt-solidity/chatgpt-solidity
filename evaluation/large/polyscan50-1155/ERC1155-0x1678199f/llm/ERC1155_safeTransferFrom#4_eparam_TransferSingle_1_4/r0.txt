@@ -1,0 +1,3 @@
+YES
+
+The `safeTransferFrom` function in the provided Solidity code correctly emits the `TransferSingle` event according to the given rule. The `_value` argument in the event is set to the `amount` variable, which represents the number of tokens to be transferred. The balance of the `from` address is decreased by this `amount`, and the balance of the `to` address is increased by the same `amount`, ensuring that the `_value` argument matches the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by.

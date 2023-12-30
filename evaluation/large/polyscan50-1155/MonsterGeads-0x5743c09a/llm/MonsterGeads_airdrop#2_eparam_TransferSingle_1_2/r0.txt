@@ -1,0 +1,13 @@
+YES
+
+The provided Solidity function `airdrop` in the `MonsterGeads` contract calls the `_mint` function, which is responsible for creating (`amount`) tokens of token type (`id`), and assigning them to (`to`).
+
+The `_mint` function has the following line:
+
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+This line emits the `TransferSingle` event with the `_to` argument being the address of the recipient whose balance is increased, as per the rule. The `to` variable in the `emit` statement corresponds to the `_to` argument in the `airdrop` function, which is the recipient of the minted tokens.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

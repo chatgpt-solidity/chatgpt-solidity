@@ -1,0 +1,56 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+library SafeMath {
+
+    /**
+     * @dev Substracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract KIMEX is Owner {
+
+    mapping(address => uint256) internal balances;
+    bool public isTransferable;
+
+    modifier transferable() {
+        require(isTransferable == true);
+        _;
+    }
+
+    // ERC20 standard function
+    function transfer(
+        address _to,
+        uint256 _value
+    ) external transferable returns (bool) {
+        require(_to != address(0));
+        require(_value > 0);
+
+        balances[msg.sender] = balances[msg.sender].sub(_value);
+        balances[_to] = balances[_to].add(_value);
+        emit Transfer(msg.sender, _to, _value);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

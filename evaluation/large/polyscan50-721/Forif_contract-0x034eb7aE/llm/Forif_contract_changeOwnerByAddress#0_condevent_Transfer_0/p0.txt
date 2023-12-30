@@ -1,0 +1,50 @@
+Given a solidity function changeOwnerByAddress and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract ManagersRepo{
+    Manager[] managers = new Manager[](0);
+    function isOwnerByAddress(address _ownerAddress)view public returns(bool){
+        if(getOwner()==_ownerAddress){
+            return true;
+        }
+        return false;
+    }
+
+    function getOwner()public view returns(address){
+        for(uint256 i = 0; i < managers.length; i++){
+            if(managers[i].isOwner()){
+                return managers[i].getManagerAddress();
+            }
+        }
+        return address(0);
+    }
+
+    function isManagerByAddress(address _managerAddress) view public returns(bool){
+        for(uint256 i = 0; i < managers.length; i++){
+            if(managers[i].getManagerAddress()==_managerAddress){
+                return true;
+            }
+        }
+        return false;
+    }
+    function changeOwnerByAddress(address _owner)public{
+        require(!isManagerByAddress(_owner),"He is already manager. Before use this function, you must delete him from managers list.(use deleteManager function!)");
+        require(isOwnerByAddress(msg.sender),"You are not owner. changeOwner function is allowed for owner.");
+        Owner owner = new Owner(_owner);
+        for(uint256 i = 0; i < managers.length; ++i){
+            if(managers[i].isOwner()){
+                managers[i] = owner;
+                return ;
+            }
+        }
+    }
+}
+"""
+
+Action:"""
+When ownership of any NFT changes by any mechanism
+"""

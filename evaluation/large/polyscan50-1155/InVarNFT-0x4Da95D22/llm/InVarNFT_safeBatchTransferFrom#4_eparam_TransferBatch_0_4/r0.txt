@@ -1,0 +1,21 @@
+YES
+
+The `TransferBatch` event is emitted according to the given rule. The rule states that the `_values` argument must be the list of the number of tokens the holder balance is decreased by and match what the recipient balance is increased by. In the provided function `_safeBatchTransferFrom`, the `amounts` array represents the number of tokens to be transferred for each token ID in the `ids` array. The balances are updated accordingly before the event is emitted:
+
+```solidity
+for (uint256 i = 0; i < ids.length; ++i) {
+    uint256 id = ids[i];
+    uint256 amount = amounts[i];
+
+    uint256 fromBalance = _balances[id][from];
+    require(fromBalance >= amount, "ERC1155: insufficient balance for transfer");
+    unchecked {
+        _balances[id][from] = fromBalance - amount;
+    }
+    _balances[id][to] += amount;
+}
+
+emit TransferBatch(operator, from, to, ids, amounts);
+```
+
+The `amounts` array is used to decrease the balance of the `from` address and increase the balance of the `to` address for each token ID. After these balance updates, the `TransferBatch` event is emitted with the `operator`, `from`, `to`, `ids`, and `amounts` as arguments, which aligns with the rule provided.

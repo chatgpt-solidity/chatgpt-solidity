@@ -1,0 +1,14 @@
+library Counters {
+
+    function current(Counter storage counter) internal view returns (uint256) {
+        return counter._value;
+    }
+}
+
+contract W3Tour1155 is ERC1155, AccessControl {
+    Counters.Counter private _itemCounter;
+
+    function totalRegisteredItems() public view returns (uint256) {
+        return _itemCounter.current();
+    }        
+}

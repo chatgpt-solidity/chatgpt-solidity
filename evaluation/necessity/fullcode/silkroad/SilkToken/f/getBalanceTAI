@@ -1,0 +1,16 @@
+contract SilkToken is owned, TokenERC20 {
+
+    /// @notice Get the balance of taitoss
+    function getBalanceTAI() public constant returns (uint256) {
+        uint256 balTAI;
+        balTAI = balanceOf[msg.sender];
+        return balTAI;
+    }
+}
+
+contract TokenERC20 {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+}
+

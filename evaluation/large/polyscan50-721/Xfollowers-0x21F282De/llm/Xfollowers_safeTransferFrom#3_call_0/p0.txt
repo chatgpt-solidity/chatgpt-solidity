@@ -1,0 +1,15 @@
+Given a solidity function safeTransferFrom and the related parts from a smart contract.
+Whether the function and related parts explicitly contain the given condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Xfollowers is ERC721, Ownable {
+
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public override {
+        revert("Transfers are disabled");
+    }
+}
+"""
+
+Condition:"""
+checks if `_to` is a smart contract (code size > 0)
+"""

@@ -1,0 +1,75 @@
+Given a solidity function safeTransferFrom and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.8;
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI {
+
+    mapping(uint256 => mapping(address => uint256)) private _balances;
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
+
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) external override {
+        if (from != msg.sender && !_operatorApprovals[from][msg.sender])
+            revert NotTokenOwnerOrApproved();
+
+        _safeTransferFrom(from, to, id, amount, data);
+    }
+
+    function _safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) private {
+        if (amount > _balances[id][from]) revert InsufficientBalance();
+        unchecked {
+            _balances[id][from] -= amount;
+        }
+        _balances[id][to] += amount;
+        emit TransferSingle(msg.sender, from, to, id, amount);
+        _doSafeTransferAcceptanceCheck(msg.sender, from, to, id, amount, data);
+    }
+
+    function _doSafeTransferAcceptanceCheck(
+        address operator,
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) private {
+        if (to.code.length > 0) {
+            try
+                IERC1155Receiver(to).onERC1155Received(
+                    operator,
+                    from,
+                    id,
+                    amount,
+                    data
+                )
+            returns (bytes4 response) {
+                if (response != IERC1155Receiver.onERC1155Received.selector) {
+                    revert ERC1155ReceiverRejected();
+                }
+            } catch Error(string memory reason) {
+                revert(reason);
+            } catch {
+                revert NotERC1155Receiver();
+            }
+        }
+    }
+}
+"""
+
+Action:"""
+URI is updated for a token ID.
+"""

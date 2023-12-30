@@ -1,0 +1,215 @@
+{
+    "file": "evaluation/polyscan50-721/DAI$1099-0xb48911af.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.9",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/owner",
+                "renounceOwnership() returns()": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/renounceOwnership",
+                "transferOwnership(address) returns()": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/transferOwnership_address",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/supportsInterface_bytes4",
+                "tokenURI(uint256) returns(string)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/tokenURI_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/balanceOf_address",
+                "ownerOf(uint256) returns(address)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/ownerOf_uint256",
+                "name() returns(string)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/symbol",
+                "approve(address,uint256) returns()": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/approve_address_uint256",
+                "getApproved(uint256) returns(address)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/getApproved_uint256",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/isApprovedForAll_address_address",
+                "transferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/transferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256) returns()": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/safeTransferFrom_address_address_uint256",
+                "safeTransferFrom(address,address,uint256,bytes) returns()": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/safeTransferFrom_address_address_uint256_bytes",
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/tokenOfOwnerByIndex_address_uint256",
+                "totalSupply() returns(uint256)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/totalSupply",
+                "tokenByIndex(uint256) returns(uint256)": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/tokenByIndex_uint256",
+                "constructor() returns()": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/constructor",
+                "safeMint(address,uint256,string) returns()": ".temp/polyscan50-721/DAI$1099-0xb48911af/DAI$1099/f/safeMint_address_uint256_string"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceOwnership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenURI(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "ownerOf(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getApproved(uint256) returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "tokenOfOwnerByIndex(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "tokenByIndex(uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeMint(address,uint256,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "165",
+                "721uristorage",
+                "721metadata",
+                "4906",
+                "721enumerable",
+                "721"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "MetadataUpdate",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "BatchMetadataUpdate",
+                    "params": [
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "DAI$1099"
+        }
+    ]
+}

@@ -1,0 +1,5 @@
+YES
+
+The `mintBatch` function in the provided Solidity code emits the `TransferSingle` event for each item ID in the `itemsIds` array. The `_value` argument in the `TransferSingle` event is set to `1`, which corresponds to the number of tokens that the recipient's balance is increased by, as indicated by the line `_balances[itemsIds[i]][to[i]]++;`. This line increments the balance of the recipient (`to[i]`) for the token ID (`itemsIds[i]`) by `1`.
+
+Since the `_value` argument in the `TransferSingle` event matches the number of tokens the recipient's balance is increased by, the event is emitted according to the given rule.

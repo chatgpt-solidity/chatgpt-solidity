@@ -1,0 +1,12 @@
+YES
+
+The `gift_mint` function in the provided Smart Contract code calls the `_mint` function, which in turn emits the `TransferSingle` event. The `_mint` function is designed to create `amount` tokens of token type `id` and assign them to the `to` address, which is the recipient whose balance is increased. The `TransferSingle` event is emitted with the correct arguments, including the `_to` argument that represents the recipient's address.
+
+The relevant line in the `_mint` function that emits the event is:
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+
+Here, `operator` is the address performing the mint operation, `address(0)` signifies that the tokens are being minted (as opposed to transferred from an existing address), `to` is the recipient's address, `id` is the token type, and `amount` is the number of tokens being minted.
+
+The `to` argument in the `TransferSingle` event corresponds to the `to` parameter of the `_mint` function, which is the recipient's address as required by the rule. Therefore, the `TransferSingle` event is emitted according to the given rule.

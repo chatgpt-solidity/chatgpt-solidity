@@ -1,0 +1,221 @@
+{
+    "file": "evaluation/etherscan100/PrintTheXRP-0x0ce3b55d.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.0",
+            "func2file": {
+                "constructor() returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/constructor",
+                "setBots(address[]) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/setBots_address[]",
+                "changeFees(uint256,uint256,uint256,uint256,uint256,uint256) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/changeFees_uint256_uint256_uint256_uint256_uint256_uint256",
+                "changeTxLimit(uint256) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/changeTxLimit_uint256",
+                "changeWalletLimit(uint256) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/changeWalletLimit_uint256",
+                "changeRestrictWhales(bool) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/changeRestrictWhales_bool",
+                "changeIsFeeExempt(address,bool) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/changeIsFeeExempt_address_bool",
+                "changeIsTxLimitExempt(address,bool) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/changeIsTxLimitExempt_address_bool",
+                "setDevWallet(address) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/setDevWallet_address",
+                "setLpWallet(address) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/setLpWallet_address",
+                "setOwnerWallet(address) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/setOwnerWallet_address",
+                "changeSwapBackSettings(bool,uint256) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/changeSwapBackSettings_bool_uint256",
+                "setDistributionCriteria(uint256,uint256) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/setDistributionCriteria_uint256_uint256",
+                "delBot(address) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/delBot_address",
+                "changeDistributorGas(uint256) returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/changeDistributorGas_uint256",
+                "getCirculatingSupply() returns(uint256)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/getCirculatingSupply",
+                "name() returns(string)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/decimals",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/totalSupply",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/transferFrom_address_address_uint256",
+                "increaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/increaseAllowance_address_uint256",
+                "decreaseAllowance(address,uint256) returns(bool)": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/decreaseAllowance_address_uint256",
+                "receive() returns()": ".temp/etherscan100/PrintTheXRP-0x0ce3b55d/PrintTheXRP/f/receive"
+            },
+            "func2attrs": {
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setBots(address[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeFees(uint256,uint256,uint256,uint256,uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeTxLimit(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeWalletLimit(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeRestrictWhales(bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeIsFeeExempt(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeIsTxLimitExempt(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setDevWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setLpWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setOwnerWallet(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeSwapBackSettings(bool,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "setDistributionCriteria(uint256,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "delBot(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "changeDistributorGas(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "getCirculatingSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "increaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "decreaseAllowance(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "receive() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "tokenOwner() returns(address)",
+                "lpFeeOnSell() returns(uint256)",
+                "_walletMax() returns(uint256)",
+                "lpFee() returns(uint256)",
+                "totalFee() returns(uint256)",
+                "dividendDistributor() returns(IDividendDistributor)",
+                "restrictWhales() returns(bool)",
+                "devFee() returns(uint256)",
+                "pair() returns(address)",
+                "devFeeOnSell() returns(uint256)",
+                "lpWallet() returns(address)",
+                "isTxLimitExempt(address) returns(bool)",
+                "isDividendExempt(address) returns(bool)",
+                "reflectionFee() returns(uint256)",
+                "swapAndLiquifyEnabled() returns(bool)",
+                "launchedAt() returns(uint256)",
+                "totalFeeIfSelling() returns(uint256)",
+                "reflectionFeeOnSell() returns(uint256)",
+                "factory() returns(address)",
+                "isFeeExempt(address) returns(bool)",
+                "devWallet() returns(address)",
+                "tradingStatus() returns(bool)",
+                "router() returns(IUniswapV2Router02)",
+                "_maxTxAmount() returns(uint256)",
+                "swapThreshold() returns(uint256)",
+                "distributorGas() returns(uint256)"
+            ],
+            "ercs": [
+                "20",
+                "20metadata"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "PrintTheXRP"
+        }
+    ]
+}

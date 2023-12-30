@@ -1,0 +1,22 @@
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+    address public tokenOwner;
+    bool public swapAndLiquifyEnabled = true;
+    uint256 public swapThreshold;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function changeSwapBackSettings(bool enableSwapBack, uint256 newSwapBackLimit) external onlyOwner {
+        swapAndLiquifyEnabled  = enableSwapBack;
+        swapThreshold = newSwapBackLimit;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

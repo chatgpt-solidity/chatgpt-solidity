@@ -1,0 +1,17 @@
+NO
+
+The `transferFrom` function in the `LutToken` contract does not explicitly return a value. It calls `super.transferFrom(_from, _to, _value);` which is expected to execute the `transferFrom` function in the `StandardToken` contract. The `transferFrom` function in `StandardToken` does return a boolean value (`true`), indicating success, but this return value is not captured or returned by the `transferFrom` function in `LutToken`.
+
+To comply with the ERC rule that the function should return whether the transfer is successful, the `transferFrom` function in `LutToken` should return the result of the `super.transferFrom` call, like this:
+
+```solidity
+function transferFrom(
+    address _from,
+    address _to,
+    uint256 _value
+) public whenNotPaused saleOrUnfrozen returns (bool) {
+    return super.transferFrom(_from, _to, _value);
+}
+```
+
+Without this change, the `transferFrom` function in `LutToken` does not explicitly return a boolean value as required by the ERC rule.

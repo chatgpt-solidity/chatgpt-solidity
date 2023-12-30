@@ -1,0 +1,15 @@
+YES
+
+The `mintErc20Admin` function in the provided Solidity code calls the `_mint` function, which is part of the `ERC1155` contract. The `_mint` function is responsible for creating new tokens and assigning them to a recipient address (`to`). As part of the minting process, the `_mint` function emits the `TransferSingle` event.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is set to the address returned by `_msgSender()`. In the context of the `mintErc20Admin` function, `_msgSender()` will return `msg.sender`, which is the address of the account that called the `mintErc20Admin` function.
+- `_from`: The address from which the tokens are transferred. Since this is a mint operation, `_from` is set to the zero address (`address(0)`), indicating that new tokens are being created rather than transferred from an existing address.
+- `_to`: The address to which the tokens are being minted. This is the recipient of the new tokens.
+- `_id`: The token ID of the tokens being minted.
+- `_value`: The amount of tokens being minted.
+
+The rule states that the `_operator` argument must be the address of an account/contract that is approved to make the transfer and should be `msg.sender`. In the provided code, the `_operator` is indeed set to the address of the account that initiated the mint operation (`msg.sender`), which complies with the rule.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

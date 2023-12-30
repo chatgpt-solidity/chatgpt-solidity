@@ -1,0 +1,7 @@
+YES
+
+The function `_safeTransferFrom` within the `ERC1155` contract emits the `TransferSingle` event as required by the rule. The `_operator` argument in the `TransferSingle` event is set to the result of `_msgSender()`, which returns the `msg.sender` value. The `msg.sender` is the address of the entity that initiated the transaction, which should be the account or contract approved to make the transfer.
+
+The `safeTransferFrom` function, which is the public function that external callers would use, includes a `require` statement that checks if the `msg.sender` is the token owner or is approved for all (via `isApprovedForAll`). This ensures that the `_operator` (which is set to `msg.sender` in `_safeTransferFrom`) is indeed authorized to make the transfer.
+
+Therefore, the `TransferSingle` event is emitted with the `_operator` argument correctly set to an approved address, satisfying the given rule.

@@ -1,0 +1,4 @@
+contract PepePepe is ERC20, Ownable {
+
+    receive() external payable {}
+}

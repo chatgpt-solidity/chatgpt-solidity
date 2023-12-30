@@ -1,0 +1,10 @@
+abstract contract Ownable {
+    address internal owner;
+    modifier onlyOwner() {require(isOwner(msg.sender), "!OWNER"); _;}
+    function isOwner(address account) public view returns (bool) {return account == owner;}
+}
+
+contract  FeedingEveryAutisticSniperToken  is IERC20, Ownable {
+    bool private tradingAllowed = false;
+    function startTrading() external onlyOwner {tradingAllowed = true;}
+}

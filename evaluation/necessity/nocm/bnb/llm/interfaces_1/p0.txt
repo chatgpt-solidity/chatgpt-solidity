@@ -1,0 +1,23 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "balanceOf(address) returns(uint256)" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+BNB(uint256,string,uint8,string) returns()
+transfer(address,uint256) returns()
+approve(address,uint256) returns(bool)
+transferFrom(address,address,uint256) returns(bool)
+burn(uint256) returns(bool)
+freeze(uint256) returns(bool)
+unfreeze(uint256) returns(bool)
+withdrawEther(uint256) returns()
+fallback() returns()
+freezeOf(address) returns(uint256)
+allowance(address,address) returns(uint256)
+name() returns(string)
+symbol() returns(string)
+balanceOf(address) returns(uint256)
+decimals() returns(uint8)
+owner() returns(address)
+totalSupply() returns(uint256)
+"""

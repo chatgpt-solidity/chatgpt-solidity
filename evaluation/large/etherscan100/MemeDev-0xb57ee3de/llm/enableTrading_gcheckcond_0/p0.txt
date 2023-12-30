@@ -1,0 +1,39 @@
+Given a solidity function enableTrading and the related parts from a smart contract.
+Whether the function enableTrading and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract MemeDev is ERC20, Ownable {
+    uint256 public lastLpBurnTime;
+    bool public tradingActive = false;
+    bool public swapEnabled = false;
+    // block number of opened trading
+    uint256 launchedAt;
+    // once enabled, can never be turned off
+    function enableTrading() external onlyOwner {
+        tradingActive = true;
+        swapEnabled = true;
+        lastLpBurnTime = block.timestamp;
+        launchedAt = block.number;
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

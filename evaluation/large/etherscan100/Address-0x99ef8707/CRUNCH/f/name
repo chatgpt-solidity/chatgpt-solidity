@@ -1,0 +1,6 @@
+contract CRUNCH is Context, IERC20, Ownable {
+    string private _name = "Doge Eat Shib";
+    function name() public view returns (string memory) {
+        return _name;
+    }
+}

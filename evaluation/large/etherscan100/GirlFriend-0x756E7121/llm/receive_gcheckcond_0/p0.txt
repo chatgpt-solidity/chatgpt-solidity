@@ -1,0 +1,13 @@
+Given a solidity function receive and the related parts from a smart contract.
+Whether the function receive and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract GirlFriend is Context, IERC20, Ownable {
+
+    receive() external payable {}
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

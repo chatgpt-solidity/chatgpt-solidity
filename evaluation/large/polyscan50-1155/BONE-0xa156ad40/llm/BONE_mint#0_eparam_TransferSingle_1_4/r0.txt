@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the correct arguments. The `_value` argument in the `TransferSingle` event is set to `amount`, which is the number of tokens that are being minted and assigned to the `to` address. The balance of the `to` address is increased by this `amount` as indicated by the line `_balances[id][to] += amount;`. This matches the rule that the `_value` argument must be the number of tokens the holder balance is increased by, which in the case of minting, is the amount of tokens created and assigned to the `to` address.

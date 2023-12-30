@@ -1,0 +1,7 @@
+YES
+
+The function `allocateReservedTokens` in the provided Solidity code updates the balance of an address with an amount of tokens, which is effectively a transfer of tokens. However, the function emits a custom event `AllocateReservedTokens` instead of the standard `Transfer` event as required by the ERC-20 token standard and the rule provided.
+
+According to the ERC-20 standard, a `Transfer` event should be emitted whenever tokens are transferred, including zero value transfers. This is important for external entities like wallets, block explorers, and other smart contracts to track token movements accurately.
+
+Since the `Transfer` event is not emitted in the `allocateReservedTokens` function, the rule is violated.

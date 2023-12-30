@@ -1,0 +1,21 @@
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+
+    bool public restrictWhales = true;
+    address public tokenOwner;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function changeRestrictWhales(bool newValue) external onlyOwner {            
+        restrictWhales = newValue;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

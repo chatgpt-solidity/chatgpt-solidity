@@ -1,0 +1,8 @@
+contract WashingtonJeffersonLincolnHamiltonJacksonGrantFranklin is Context, IERC20, Ownable {
+
+    string private constant _name = "WashingtonJeffersonLincolnHamiltonJacksonGrantFranklin";
+
+    function name() public pure returns (string memory) {
+        return _name;
+    }
+}

@@ -1,0 +1,31 @@
+Given a solidity function changeDistributorGas and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.0;
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+    uint256 public distributorGas = 50000;
+    address public tokenOwner;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function changeDistributorGas(uint256 _distributorGas) external onlyOwner {
+        distributorGas = _distributorGas;
+    }           
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

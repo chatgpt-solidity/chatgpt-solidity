@@ -1,0 +1,7 @@
+YES
+
+The `_mint` function within the `BlurSummer` contract, which inherits from `ERC1155`, is designed to mint tokens. The `TransferSingle` event is emitted within the `_mint` function, and the `_operator` argument is set to the address returned by `_msgSender()`, which is the `msg.sender` of the transaction.
+
+The `mint` function in the `BlurSummer` contract is restricted by the `onlyOwner` modifier, ensuring that only the owner of the contract can call it. When the `mint` function is called, it delegates to the `_mint` function, which correctly sets the `_operator` to the `msg.sender` (which is the owner due to the `onlyOwner` modifier) before emitting the `TransferSingle` event.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule, with the `_operator` being the address that is approved to make the transfer, which in this case is the `msg.sender` (the owner of the contract).

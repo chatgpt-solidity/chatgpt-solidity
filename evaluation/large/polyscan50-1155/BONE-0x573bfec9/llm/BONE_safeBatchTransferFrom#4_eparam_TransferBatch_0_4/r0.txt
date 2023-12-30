@@ -1,0 +1,13 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The rule states that the `_values` argument must be the list of the number of tokens the holder balance is decreased by and match what the recipient balance is increased by. In the context of the `TransferBatch` event, `_values` corresponds to the `amounts` array.
+
+Here's how the function adheres to the rule:
+
+1. The function checks that the `ids` and `amounts` arrays are of the same length, ensuring that each token ID has a corresponding amount.
+2. It requires that the `to` address is not the zero address.
+3. It iterates over the `ids` and `amounts` arrays, updating the balances for the `from` and `to` addresses for each token ID.
+4. The `TransferBatch` event is emitted with the `operator`, `from`, `to`, `ids`, and `amounts` as arguments, where `amounts` represents the list of the number of tokens transferred for each corresponding token ID in `ids`.
+5. The function performs a safe transfer acceptance check if the `to` address is a contract, ensuring that the contract knows how to handle ERC1155 tokens.
+
+The `TransferBatch` event is emitted after the balances have been updated and before the acceptance check, which is consistent with the rule that the `_values` (or `amounts` in the code) must reflect the actual change in balances for the batch transfer operation.

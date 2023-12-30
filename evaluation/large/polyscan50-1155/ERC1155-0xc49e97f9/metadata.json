@@ -1,0 +1,189 @@
+{
+    "file": "evaluation/polyscan50-1155/ERC1155-0xc49e97f9.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.8",
+            "func2file": {
+                "owner() returns(address)": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/owner",
+                "transferOwnership(address) returns()": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/transferOwnership_address",
+                "constructor() returns()": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/constructor",
+                "name() returns(string)": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/name",
+                "symbol() returns(string)": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/symbol",
+                "supportsInterface(bytes4) returns(bool)": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/supportsInterface_bytes4",
+                "uri(uint256) returns(string)": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/uri_uint256",
+                "balanceOf(address,uint256) returns(uint256)": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/balanceOf_address_uint256",
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/balanceOfBatch_address[]_uint256[]",
+                "setApprovalForAll(address,bool) returns()": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/setApprovalForAll_address_bool",
+                "isApprovedForAll(address,address) returns(bool)": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/isApprovedForAll_address_address",
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/safeTransferFrom_address_address_uint256_uint256_bytes",
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/safeBatchTransferFrom_address_address_uint256[]_uint256[]_bytes",
+                "updateUri(string) returns()": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/updateUri_string",
+                "mintBatch(address[],uint256[]) returns()": ".temp/polyscan50-1155/ERC1155-0xc49e97f9/ERC1155/f/mintBatch_address[]_uint256[]"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transferOwnership(address) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "supportsInterface(bytes4) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": true
+                },
+                "uri(uint256) returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOf(address,uint256) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "balanceOfBatch(address[],uint256[]) returns(uint256[])": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "setApprovalForAll(address,bool) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "isApprovedForAll(address,address) returns(bool)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "safeTransferFrom(address,address,uint256,uint256,bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "updateUri(string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "mintBatch(address[],uint256[]) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "165",
+                "1155metadatauri",
+                "1155"
+            ],
+            "events": [
+                {
+                    "name": "OwnershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferSingle",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "TransferBatch",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256[]",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "ApprovalForAll",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "bool",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "URI",
+                    "params": [
+                        {
+                            "type": "string",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "ERC1155"
+        }
+    ]
+}

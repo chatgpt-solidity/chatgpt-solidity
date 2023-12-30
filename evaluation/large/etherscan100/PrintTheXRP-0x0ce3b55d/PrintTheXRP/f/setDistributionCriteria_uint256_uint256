@@ -1,0 +1,21 @@
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+
+    IDividendDistributor public dividendDistributor;
+    address public tokenOwner;
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function setDistributionCriteria(uint256 newMinPeriod, uint256 newMinDistribution) external onlyOwner {
+        dividendDistributor.setDistributionCriteria(newMinPeriod, newMinDistribution);        
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

@@ -1,0 +1,9 @@
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+
+    function balanceOf(address _owner) constant returns (uint256 balance) {
+        return balances[_owner];
+    }
+}
+

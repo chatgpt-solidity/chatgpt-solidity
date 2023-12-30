@@ -1,0 +1,7 @@
+YES
+
+The `burnForUpgrade` function in the `METARUFFY_ASSETS` contract calls the `_burn` function from the `ERC1155` contract. The `_burn` function emits the `TransferSingle` event with the `_operator` argument set to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`.
+
+The rule states that the `_operator` argument must be the address of an account/contract that is approved to make the transfer and should be `msg.sender`. Since `_msgSender()` is used to obtain the `msg.sender` value, the `_operator` in the `TransferSingle` event will indeed be the `msg.sender`, which is the account that initiated the transaction and is expected to be an approved operator in this context.
+
+Therefore, the `TransferSingle` event is emitted according to the given rule.

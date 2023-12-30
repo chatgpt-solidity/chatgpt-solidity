@@ -1,0 +1,21 @@
+contract PrintTheXRP is Context, IERC20, IERC20Metadata {
+    address public tokenOwner;
+
+    mapping (address => bool) private bots;    
+
+
+    modifier onlyOwner() {
+        require(tokenOwner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    function delBot(address notbot) external onlyOwner {
+        bots[notbot] = false;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+

@@ -1,0 +1,4 @@
+contract HarryPotterSkibidiToiletShibaSonic9Inu is Context, IERC20, Ownable {
+
+    receive() external payable {}
+}

@@ -1,0 +1,39 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract SilkToken is owned, TokenERC20 {
+    uint256 public limitAMT = 0;
+    bool public isPreSales = false;
+
+    /// @notice Start presales with initializing presales amount
+    /// @param amtPreSales The amount of presales
+    function startPreSales(
+        uint256 amtPreSales
+    ) public onlyOwner returns (uint256) {
+        require(balanceOf[owner] - amtPreSales > 0);
+        limitAMT = balanceOf[owner] - amtPreSales;
+        isPreSales = true;
+        return limitAMT;
+    }
+}
+
+contract owned {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract TokenERC20 {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+}
+"""
+
+Condition:"""
+tokens are burning or deallocating
+"""

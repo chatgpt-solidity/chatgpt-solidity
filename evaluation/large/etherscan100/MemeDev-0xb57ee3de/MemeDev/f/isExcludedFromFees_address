@@ -1,0 +1,7 @@
+contract MemeDev is ERC20, Ownable {
+    // exclude from fees and max transaction amount
+    mapping (address => bool) private _isExcludedFromFees;
+    function isExcludedFromFees(address account) public view returns(bool) {
+        return _isExcludedFromFees[account];
+    }
+}

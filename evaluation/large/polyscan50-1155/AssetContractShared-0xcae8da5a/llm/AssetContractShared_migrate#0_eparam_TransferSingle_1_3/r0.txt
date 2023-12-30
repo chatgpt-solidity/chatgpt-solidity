@@ -1,0 +1,27 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155Tradable` contract, which is called by the `migrate` function in the `AssetContractShared` contract. The `_mint` function takes `_id` as an argument, which represents the token type being transferred. The event is emitted with the `_id` argument passed to the `_mint` function, thus satisfying the rule that "_id argument MUST be the token type being transferred."
+
+Here is the relevant part of the code from the `_mint` function:
+
+```solidity
+function _mint(
+    address _to,
+    uint256 _id,
+    uint256 _amount,
+    bytes memory _data
+) internal virtual override whenNotPaused {
+    address operator = _msgSender();
+
+    // ... other code ...
+
+    balances[_id][_to] += _amount;
+    _supply[_id] += _amount;
+
+    emit TransferSingle(operator, address(0), _to, _id, _amount);
+
+    // ... other code ...
+}
+```
+
+The `TransferSingle` event is emitted with the correct `_id` argument, which is the token type being transferred.

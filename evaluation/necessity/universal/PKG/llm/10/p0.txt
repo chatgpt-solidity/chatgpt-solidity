@@ -1,0 +1,23 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract BaseToken {
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+        return true;
+    }
+}
+
+
+"""
+
+Rule:"""
+overwrites the current allowance with _value
+"""

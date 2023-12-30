@@ -1,0 +1,5 @@
+YES
+
+The `mintBatch` function in the provided Solidity code emits the `TransferSingle` event for each token being minted in the batch. The `_id` argument in the `TransferSingle` event is set to `itemsIds[i]`, which corresponds to the token type being transferred to the address `to[i]`. The `_value` argument is set to `1`, indicating that one token of the given type is being minted and transferred.
+
+The rule states that the `_id` argument must be the token type being transferred, and the code adheres to this rule by using `itemsIds[i]` as the `_id` for the `TransferSingle` event within the loop that iterates over each item in the batch. Therefore, the event is emitted according to the given rule.

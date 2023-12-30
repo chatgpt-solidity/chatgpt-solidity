@@ -1,0 +1,30 @@
+Given a solidity function fallback and the related parts from a smart contract.
+Whether the function fallback and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract MyToken {
+
+    /* This unnamed function is called whenever someone tries to send ether to it */
+    function() {
+        throw; // Prevents accidental sending of ether
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred during the initial token distribution or crowdsale.
+"""

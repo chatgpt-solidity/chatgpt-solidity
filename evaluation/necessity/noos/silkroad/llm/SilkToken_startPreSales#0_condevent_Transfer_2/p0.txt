@@ -1,0 +1,39 @@
+Given a solidity function startPreSales and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract owned {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract SilkToken is owned, TokenERC20 {
+    uint256 public limitAMT = 0;
+    bool public isPreSales = false;
+
+    /// @notice Start presales with initializing presales amount
+    /// @param amtPreSales The amount of presales
+    function startPreSales(
+        uint256 amtPreSales
+    ) public onlyOwner returns (uint256) {
+        require(balanceOf[owner] - amtPreSales > 0);
+        limitAMT = balanceOf[owner] - amtPreSales;
+        isPreSales = true;
+        return limitAMT;
+    }
+}
+
+contract TokenERC20 {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

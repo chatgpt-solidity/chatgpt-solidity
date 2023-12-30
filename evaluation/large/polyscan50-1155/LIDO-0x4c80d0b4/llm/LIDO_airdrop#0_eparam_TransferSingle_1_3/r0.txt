@@ -1,0 +1,12 @@
+YES
+
+The `_mint` function within the `ERC1155` contract is responsible for creating `amount` tokens of token type `id` and assigning them to the address `to`. The function emits a `TransferSingle` event, which is in line with the ERC-1155 standard and the rule provided.
+
+The `TransferSingle` event is emitted with the following arguments:
+
+- `_operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `_from`: The address from which the tokens are being transferred, which is the zero address (`address(0)`) in the case of minting new tokens.
+- `_id`: The token type being transferred, which is the `id` argument passed to the `_mint` function.
+- `_value`: The number of tokens being transferred, which is the `amount` argument passed to the `_mint` function.
+
+The `airdrop` function in the `LIDO` contract calls `_mint` for each recipient in the `recipients` array, provided the recipient is not a contract (checked by `isContract`). The `_currentTokenId` is used as the `id` for the minted tokens, and the `amount` is set to 1. The `TransferSingle` event is emitted within the `_mint` function, satisfying the rule that the `_id` argument must be the token type being transferred.

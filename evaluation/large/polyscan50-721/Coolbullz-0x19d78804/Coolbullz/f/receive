@@ -1,0 +1,15 @@
+contract Coolbullz is ERC721, ERC721URIStorage, Pausable, AccessControl {
+
+    //PAID MINT(AUTO-MINT) VARIABLES
+    mapping(address => bool) public has_paid;
+    mapping(address => uint256) public amount_paid;
+
+    // fallback function
+
+    receive() external payable {
+        has_paid[msg.sender] = true;
+        amount_paid[msg.sender] = msg.value;
+
+        emit UserPaid(msg.sender, msg.value);
+    }
+}

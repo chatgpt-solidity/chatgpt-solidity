@@ -1,0 +1,9 @@
+contract ERC1155 is Ownable, IERC165, IERC1155, IERC1155MetadataURI, IERC2981 {
+    mapping(uint256 => Item) private _items;
+
+    function uri(uint256 id) external view override returns (string memory) {
+        if (!_items[id].exist) revert ItemNotExist();
+        return _items[id]._uri;
+    }
+}
+

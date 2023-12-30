@@ -1,0 +1,3 @@
+YES
+
+The given Solidity interfaces contain the mapping `mapping(address => mapping(address => uint256)) public allowance;` which corresponds to a function with the signature `allowance(address,address) returns(uint256)`. The `public` keyword for a mapping in Solidity automatically generates a getter function with the same name as the mapping. This getter function takes the key as an argument (in this case, two addresses) and returns the value corresponding to the key (in this case, a uint256). Therefore, the interface implicitly contains the `allowance` function with the correct parameter types and return type.

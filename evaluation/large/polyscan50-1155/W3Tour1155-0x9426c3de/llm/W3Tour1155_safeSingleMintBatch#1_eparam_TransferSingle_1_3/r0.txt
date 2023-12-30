@@ -1,0 +1,11 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function within the `ERC1155` contract. The `_mint` function is called by the `_safeMint` function in the `W3Tour1155` contract, which is in turn called by the `safeSingleMintBatch` function for each token ID in the `_ids` array.
+
+The `_mint` function constructs a singleton array for both the `id` and `amount` using the `_asSingletonArray` function, ensuring that the `_id` argument corresponds to the token type being transferred. The `TransferSingle` event is then emitted with the correct `_id` and `_value` (amount) as required by the rule.
+
+The relevant line in the `_mint` function is:
+```solidity
+emit TransferSingle(operator, address(0), to, id, amount);
+```
+This line confirms that the event is emitted with the correct `_id` and `_value` for each minting operation within the batch process initiated by `safeSingleMintBatch`.

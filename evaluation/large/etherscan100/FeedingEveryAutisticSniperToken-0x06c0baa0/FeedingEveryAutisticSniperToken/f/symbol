@@ -1,0 +1,4 @@
+contract  FeedingEveryAutisticSniperToken  is IERC20, Ownable {
+    string private constant _symbol = 'FEAST';
+    function symbol() public pure returns (string memory) {return _symbol;}
+}

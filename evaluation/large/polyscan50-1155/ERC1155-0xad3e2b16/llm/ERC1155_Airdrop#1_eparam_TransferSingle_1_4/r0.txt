@@ -1,0 +1,7 @@
+NO
+
+The `TransferSingle` event is emitted with a hardcoded value of `1` for the `_value` argument, which indicates that the recipient's balance is increased by 1 token for the given `itemsIds[i]`. However, the rule states that the `_value` argument must match the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by.
+
+Since the function `Airdrop` does not show any decrease in the holder's balance (there is no corresponding deduction from any address's balance), the `_value` should represent the actual increase in the recipient's balance, which is correctly set to `1`. However, the rule's wording suggests that there should be a corresponding decrease in the holder's balance, which is not present in the given function.
+
+Therefore, based on the given rule and the provided function, the event `TransferSingle` does not fully adhere to the rule as it does not show a decrease in the holder's balance. The rule might be misinterpreted in this context since airdrops typically involve minting new tokens rather than transferring from an existing holder, but strictly speaking, the rule is not followed as written.

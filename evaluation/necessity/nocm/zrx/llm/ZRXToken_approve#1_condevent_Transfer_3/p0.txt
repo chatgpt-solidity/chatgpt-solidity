@@ -1,0 +1,22 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether the function approve and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract StandardToken is Token {
+
+    function approve(address _spender, uint _value) returns (bool) {
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+        return true;
+    }
+    mapping(address => mapping(address => uint)) allowed;
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are burning or deallocating
+"""

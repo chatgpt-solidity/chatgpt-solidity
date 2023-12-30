@@ -1,0 +1,132 @@
+Given a solidity function updateTokenURI and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.7.6;
+library EnumerableMap {
+
+    /**
+     * @dev Returns true if the key is in the map. O(1).
+     */
+    function _contains(Map storage map, bytes32 key) private view returns (bool) {
+        return map._indexes[key] != 0;
+    }
+
+    /**
+     * @dev Returns true if the key is in the map. O(1).
+     */
+    function contains(UintToAddressMap storage map, uint256 key) internal view returns (bool) {
+        return _contains(map._inner, bytes32(key));
+    }
+}
+
+library EnumerableSet {
+
+    /**
+     * @dev Returns true if the value is in the set. O(1).
+     */
+    function _contains(Set storage set, bytes32 value) private view returns (bool) {
+        return set._indexes[value] != 0;
+    }
+
+    /**
+     * @dev Returns true if the value is in the set. O(1).
+     */
+    function contains(AddressSet storage set, address value) internal view returns (bool) {
+        return _contains(set._inner, bytes32(uint256(uint160(value))));
+    }
+}
+
+contract NFT721 is ERC721, Operable {
+
+    /**
+     *
+     * @dev Only operator is allowed to update token URI.
+     *
+     * This method is invoked by VideoCoin marketplace to update token URI
+     * right after transfer. As VideoCoin is dealing with encrypted video
+     * hosted on IPFS/FileCoin, every time when token is passed to a new
+     * owner video reencryption with owner's key is invoked. This requires
+     * to update URI accordingly to new IPFS/FileCoin CID. Otherwise owner
+     * won't be able to prove ownership of a token.
+     *
+     * Token transfer is powered by VideoCoin Proof-of-Ownership mechanism.
+     * See https://medium.com/videocoin/nft-proof-of-ownership-on-filecoin-videocoin-how-to-store-nfts-right-4c828a09f0a2
+     */
+    function updateTokenURI(uint256 tokenId, string memory tokenURI)
+        public
+        onlyOperator
+    {
+        _setTokenURI(tokenId, tokenURI);
+    }
+}
+contract ERC721 is Context, ERC165, IERC721, IERC721Metadata, IERC721Enumerable {
+
+    // Enumerable mapping from token ids to their owners
+    EnumerableMap.UintToAddressMap private _tokenOwners;
+
+    // Optional mapping for token URIs
+    mapping (uint256 => string) private _tokenURIs;
+
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     * and stop existing when they are burned (`_burn`).
+     */
+    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+        return _tokenOwners.contains(tokenId);
+    }
+
+    /**
+     * @dev Sets `_tokenURI` as the tokenURI of `tokenId`.
+     *
+     * Requirements:
+     *
+     * - `tokenId` must exist.
+     */
+    function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
+        require(_exists(tokenId), "ERC721Metadata: URI set of nonexistent token");
+        _tokenURIs[tokenId] = _tokenURI;
+    }
+}
+
+abstract contract AccessControl is Context {
+
+    mapping (bytes32 => RoleData) private _roles;
+
+    /**
+     * @dev Returns `true` if `account` has been granted `role`.
+     */
+    function hasRole(bytes32 role, address account) public view returns (bool) {
+        return _roles[role].members.contains(account);
+    }
+}
+
+abstract contract Operable is AccessControl {
+    bytes32 public constant OPERATOR_ROLE = keccak256("OPERATOR");
+
+    modifier onlyOperator() {
+        require(isOperator(_msgSender()), "Operable: restricted to operators");
+        _;
+    }
+
+    function isOperator(address account) public view virtual returns (bool) {
+        return hasRole(OPERATOR_ROLE, account);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is destroyed and removed from circulation.
+"""

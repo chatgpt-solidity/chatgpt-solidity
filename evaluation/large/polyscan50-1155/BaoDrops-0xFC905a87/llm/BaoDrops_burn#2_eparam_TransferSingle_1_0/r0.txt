@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_burn` function of the `ERC1155` contract, which is called by the `burn` function in the `ERC1155Burnable` contract. The `_operator` argument in the `TransferSingle` event is set to the result of `_msgSender()`, which returns the address of the sender of the message (`msg.sender`). This is in accordance with the rule that the `_operator` argument must be the address of an account/contract that is approved to make the transfer, which should be `msg.sender`. Therefore, the `TransferSingle` event is emitted correctly according to the given rule.

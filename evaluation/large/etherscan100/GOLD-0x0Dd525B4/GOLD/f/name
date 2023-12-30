@@ -1,0 +1,11 @@
+contract GOLD is IERC20, Push, Ownable {
+    string private _name;
+
+
+    /**
+     * @dev Returns the name of the token.
+     */
+    function name() public view virtual returns (string memory) {
+        return _name;
+    }
+}

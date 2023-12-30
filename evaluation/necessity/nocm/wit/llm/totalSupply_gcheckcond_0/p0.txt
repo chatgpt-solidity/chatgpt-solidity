@@ -1,0 +1,25 @@
+Given a solidity function totalSupply and the related parts from a smart contract and a rule.
+Whether the function totalSupply and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract WiT is AbstractToken {
+
+    /**
+     * Current number of tokens in circulation.
+     */
+    uint256 tokenCount = 0;
+
+    /**
+     * Get total number of tokens in circulation.
+     *
+     * @return total number of tokens in circulation
+     */
+    function totalSupply() public view returns (uint256 supply) {
+        return tokenCount;
+    }
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

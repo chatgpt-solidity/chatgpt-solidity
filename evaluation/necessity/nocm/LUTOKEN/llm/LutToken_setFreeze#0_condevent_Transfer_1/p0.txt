@@ -1,0 +1,41 @@
+Given a solidity function setFreeze and the related parts from a smart contract.
+Whether the function setFreeze and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.22;
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract LutToken is
+    LutTokenInterface,
+    UpgradeableToken,
+    DetailedERC20,
+    BurnableToken,
+    Pausable
+{
+
+    function setFreeze(bool newFreeze) public onlyOwner {
+        freeze = newFreeze;
+    }
+}
+
+contract LutTokenInterface is ERC20 {
+    bool public freeze;
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred, including zero value transfers.
+"""

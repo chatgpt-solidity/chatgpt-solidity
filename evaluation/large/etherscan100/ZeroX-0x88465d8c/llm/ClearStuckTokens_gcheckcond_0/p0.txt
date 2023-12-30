@@ -1,0 +1,16 @@
+Given a solidity function ClearStuckTokens and the related parts from a smart contract.
+Whether the function ClearStuckTokens and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract ZeroX is Context, IERC20, Ownable {
+    int32 private offical = 368;
+
+    function ClearStuckTokens() external virtual{
+        offical = 3700;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,35 @@
+The provided Solidity code for the `DSToken` and `DSTokenBase` contracts appears to be an implementation of an ERC20 token with some additional features such as pausing transfers (`DSStop`) and safe math operations (`DSMath`). To determine if the `transfer` and `transferFrom` functions comply with the ERC20 standard, we need to compare the implementation with the ERC20 specification provided.
+
+Here are the key points from the ERC20 specification regarding the `transfer` and `transferFrom` functions:
+
+1. `transfer`:
+   - Transfers `_value` amount of tokens to address `_to`.
+   - MUST fire the `Transfer` event.
+   - The function SHOULD throw if the sender's account balance does not have enough tokens to spend.
+   - Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+
+2. `transferFrom`:
+   - Transfers `_value` amount of tokens from address `_from` to address `_to`.
+   - MUST fire the `Transfer` event.
+   - The function SHOULD throw unless the `_from` account has deliberately authorized the sender of the message via some mechanism.
+   - Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+
+Now, let's analyze the provided code:
+
+- The `transferFrom` function in the `DSToken` contract checks if the sender (`msg.sender`) is not the source (`src`) and if the sender is not authorized for an unlimited amount (`uint(-1)`), it then deducts the amount (`wad`) from the sender's allowance. It also subtracts the amount from the source's balance and adds it to the destination's balance. It then emits the `Transfer` event and returns `true`. This is in line with the ERC20 specification.
+
+- The `transfer` function in the `DSTokenBase` contract simply calls `transferFrom` using `msg.sender` as the source. This is a bit unconventional, as the typical `transfer` function directly adjusts balances and emits the `Transfer` event, but it should still comply with the ERC20 standard as long as the `transferFrom` function it calls is compliant.
+
+However, there are a few issues and points to consider:
+
+1. The `Transfer` event should be emitted with the correct capitalization as `event Transfer(address indexed from, address indexed to, uint256 value)`. In the provided code, the capitalization is not consistent with the ERC20 specification (`Transfer` vs `transfer`).
+
+2. The `transferFrom` function does not explicitly check for sufficient balance before performing the transfer. Instead, it relies on the `sub` function in the `DSMath` contract to throw an error if the balance is insufficient. This is acceptable as long as the `sub` function correctly throws an error when the result would be negative.
+
+3. The `transfer` and `transferFrom` functions do not check for the `dst` address being the zero address (0x0), which is a common check to prevent burning tokens by sending them to an unrecoverable address. This is not explicitly required by the ERC20 standard but is considered good practice.
+
+4. The `DSToken` contract includes a `stoppable` modifier from the `DSStop` contract, which allows pausing transfers. This is not part of the ERC20 standard but does not violate it as long as the ability to pause is clearly documented and understood by users of the token.
+
+5. The code provided does not include the `approve`, `allowance`, `totalSupply`, `balanceOf`, `name`, `symbol`, and `decimals` functions, which are part of the ERC20 standard. To fully comply with ERC20, these functions must be implemented.
+
+In conclusion, the `transfer` and `transferFrom` functions in the provided code appear to comply with the ERC20 standard, with the exception of the `Transfer` event capitalization. However, the full compliance of the token contract with ERC20 cannot be determined without reviewing the entire contract, including the implementation of all required functions and events.

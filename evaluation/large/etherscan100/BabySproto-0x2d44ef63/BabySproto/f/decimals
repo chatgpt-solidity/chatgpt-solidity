@@ -1,0 +1,8 @@
+contract BabySproto is Context, IERC20, Ownable {
+
+    uint8 private constant _decimals = 9;
+
+    function decimals() public pure returns (uint8) {
+        return _decimals;
+    }
+}

@@ -1,0 +1,16 @@
+type: llm-flow
+flows:
+  - template: |
+      Given a solidity function <function> and the related parts from a smart contract.
+      Whether the function and related parts explicitly contain the given condition? Reply in "YES" or "NO".
+
+      Function(and related parts) to audit:"""
+      <code>
+      """
+
+      Condition:"""
+      <condition>
+      """
+    stopIf: "NO"
+  - template: |
+      Whether it calls the <hook> after that? Reply in "YES" or "NO".

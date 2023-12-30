@@ -1,0 +1,166 @@
+Given a solidity function forceSwapBack and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.17;
+contract simple is ERC20, Ownable {
+
+    IDexRouter public dexRouter;
+
+    bool private swapping;
+    uint256 public swapTokensAtAmount;
+
+    address MarketingAddress;
+    address DevCutAddress;
+
+    uint256 public tokensForMarketing;
+    uint256 public tokensForLiquidity;
+    uint256 public tokensForDevCut;
+    uint256 public tokensForBurn;
+
+    function swapTokensForEth(uint256 tokenAmount) private {
+
+        // generate the uniswap pair path of token -> weth
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = dexRouter.WETH();
+
+        _approve(address(this), address(dexRouter), tokenAmount);
+
+        // make the swap
+        dexRouter.swapExactTokensForETHSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0, // accept any amount of ETH
+            path,
+            address(this),
+            block.timestamp
+        );
+    }
+
+    function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
+        // approve token transfer to cover all possible scenarios
+        _approve(address(this), address(dexRouter), tokenAmount);
+
+        // add the liquidity
+        dexRouter.addLiquidityETH{value: ethAmount}(
+            address(this),
+            tokenAmount,
+            0, // slippage is unavoidable
+            0, // slippage is unavoidable
+            address(MarketingAddress),
+            block.timestamp
+        );
+
+    }
+    function swapBack() private {
+
+        if(tokensForBurn > 0 && balanceOf(address(this)) >= tokensForBurn) {
+            _burn(address(this), tokensForBurn);
+        }
+        tokensForBurn = 0;
+
+        uint256 contractBalance = balanceOf(address(this));
+        uint256 totalTokensToSwap = tokensForLiquidity + tokensForMarketing + tokensForDevCut;
+
+        if(contractBalance == 0 || totalTokensToSwap == 0) {return;}
+
+        if(contractBalance > swapTokensAtAmount * 20){
+            contractBalance = swapTokensAtAmount * 20;
+        }
+
+        bool success;
+
+        // Halve the amount of liquidity tokens
+        uint256 liquidityTokens = contractBalance * tokensForLiquidity / totalTokensToSwap / 2;
+
+        swapTokensForEth(contractBalance - liquidityTokens);
+
+        uint256 ethBalance = address(this).balance;
+        uint256 ethForLiquidity = ethBalance;
+
+        uint256 ethForMarketing = ethBalance * tokensForMarketing / (totalTokensToSwap - (tokensForLiquidity/2));
+        uint256 ethForDevCut = ethBalance * tokensForDevCut / (totalTokensToSwap - (tokensForLiquidity/2));
+
+        ethForLiquidity -= ethForMarketing + ethForDevCut;
+
+        tokensForLiquidity = 0;
+        tokensForMarketing = 0;
+        tokensForDevCut = 0;
+        tokensForBurn = 0;
+
+        if(liquidityTokens > 0 && ethForLiquidity > 0){
+            addLiquidity(liquidityTokens, ethForLiquidity);
+        }
+
+        (success,) = address(DevCutAddress).call{value: ethForDevCut}("");
+
+        (success,) = address(MarketingAddress).call{value: address(this).balance}("");
+    }
+
+    // force Swap back if slippage issues.
+    function forceSwapBack() external onlyOwner {
+        require(balanceOf(address(this)) >= swapTokensAtAmount, "Can only swap when token amount is at or higher than restriction");
+        swapping = true;
+        swapBack();
+        swapping = false;
+        emit OwnerForcedSwapBack(block.timestamp);
+    }
+}
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    mapping(address => uint256) private _balances;
+    mapping(address => mapping(address => uint256)) private _allowances;
+
+    uint256 private _totalSupply;
+
+    function balanceOf(address account) public view virtual override returns (uint256) {
+        return _balances[account];
+    }
+
+    function _burn(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: burn from the zero address");
+        uint256 accountBalance = _balances[account];
+        require(accountBalance >= amount, "ERC20: burn amount exceeds balance");
+        unchecked {
+            _balances[account] = accountBalance - amount;
+            // Overflow not possible: amount <= accountBalance <= totalSupply.
+            _totalSupply -= amount;
+        }
+
+        emit Transfer(account, address(0), amount);
+
+    }
+    function _approve(
+        address owner,
+        address spender,
+        uint256 amount
+    ) internal virtual {
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+
+        _allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

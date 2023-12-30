@@ -1,0 +1,3 @@
+YES
+
+The `TransferSingle` event is emitted in the `_safeTransferFrom` function, which is called by the `safeTransferFrom` function. The `_safeTransferFrom` function ensures that the `amount` of tokens transferred from `from` to `to` is exactly the amount by which the holder's balance is decreased and the recipient's balance is increased. The `TransferSingle` event is emitted with the `amount` as the `_value` argument, which matches the rule specified.

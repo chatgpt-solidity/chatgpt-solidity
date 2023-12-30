@@ -1,0 +1,7 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract. According to the provided Solidity code, the `_mint` function is called by the `mint` function in the `Binance` contract, which has the `onlyOwner` modifier. This ensures that only the owner of the contract can call the `mint` function.
+
+The `_mint` function sets the `operator` to the address returned by `_msgSender()`, which is an internal function that returns `msg.sender`. Since the `mint` function can only be called by the owner, and the owner is the `msg.sender` at the time of the transaction, the `_operator` argument in the `TransferSingle` event will be the address that is approved to make the transfer, which is the `msg.sender`.
+
+Therefore, the `TransferSingle` event is emitted with the `_operator` argument being the address that is approved to make the transfer, following the given rule.

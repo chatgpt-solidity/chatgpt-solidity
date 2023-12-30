@@ -1,0 +1,33 @@
+Given a solidity function setMaxLimitAmounts and the related parts from a smart contract.
+Whether the function setMaxLimitAmounts and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract ZeroX is Context, IERC20, Ownable {
+    uint256 private constant _tTotal = 1000000000 * 10**_decimals;
+    uint256 public _maxTxAmount = _tTotal;
+
+    function setMaxLimitAmounts(uint256 newTxAmt) external onlyOwner {
+        _maxTxAmount = _tTotal * newTxAmt/100;
+        require(newTxAmt >=1);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

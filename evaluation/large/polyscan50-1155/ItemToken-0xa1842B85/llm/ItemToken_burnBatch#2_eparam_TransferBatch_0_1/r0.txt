@@ -1,0 +1,3 @@
+YES
+
+The `TransferBatch` event is emitted in the `_burnBatch` function with the correct arguments according to the given rule. The `_from` argument is indeed the address of the holder whose balance is decreased, as required by the rule. The `_to` argument is the zero address, which indicates that tokens are being burned. The `_ids` and `_values` arguments represent the token types and the amounts being burned, respectively. The `_operator` argument is the address that initiated the transaction, which is typically the message sender or an approved operator.

@@ -1,0 +1,25 @@
+Based on the provided Solidity code and the ERC-20 token standard, we can perform a basic audit to check for compliance with the ERC-20 specification. Here are some key points to consider:
+
+1. **Token Information (name, symbol, decimals):**
+   - The ERC-20 standard specifies that `name`, `symbol`, and `decimals` are optional, but if they are included, they should be public view functions rather than public state variables. The provided code declares them as public state variables, which is a common practice for simplicity, but it deviates from the ERC-20 specification that suggests using functions. This is not a severe violation, as it does not affect the core functionality of the token.
+
+2. **totalSupply:**
+   - The `totalSupply` is correctly implemented as a public view function, which is in line with the ERC-20 standard.
+
+3. **balanceOf:**
+   - The `balanceOf` mapping is correctly implemented as a public view function, which is in line with the ERC-20 standard.
+
+4. **transfer:**
+   - The `transfer` function is not provided in the code snippet. For full ERC-20 compliance, the contract must implement a `transfer` function that allows token holders to transfer their tokens to another address and must emit a `Transfer` event.
+
+5. **transferFrom, approve, allowance:**
+   - The `transferFrom`, `approve`, and `allowance` functions are not provided in the code snippet. These functions are essential for ERC-20 compliance as they enable delegated token transfers.
+
+6. **Events:**
+   - The `Transfer` event is correctly emitted in the constructor when the initial supply is assigned to an address. This is in line with the ERC-20 standard, which requires a `Transfer` event to be emitted when tokens are created or transferred.
+   - The `Approval` event is not shown in the provided code snippet, but it must be implemented and emitted whenever the `approve` function is successfully called.
+
+7. **Constructor:**
+   - The constructor correctly initializes the contract with an initial supply of tokens to the creator's address. However, it is worth noting that the address receiving the initial supply is hardcoded, which may not be flexible for different deployment scenarios.
+
+In conclusion, the provided code snippet does not fully comply with the ERC-20 standard because it lacks the implementation of the `transfer`, `transferFrom`, `approve`, and `allowance` functions, as well as the `Approval` event. Additionally, while the use of public state variables for `name`, `symbol`, and `decimals` is common and not a severe issue, it is not the exact implementation suggested by the ERC-20 standard, which prefers functions for these properties. To be fully compliant, the contract must implement all the required functions and events as specified by the ERC-20 standard.

@@ -1,0 +1,5 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not have any explicit checks that would cause it to throw an error when the transfer amount is 0. The `SafeMath` library's `sub` function is used to subtract the transfer amount from the sender's balance and the allowance, but as long as the sender has a balance and allowance equal to or greater than the amount being transferred (including 0), the subtraction will not cause an error.
+
+If the amount is 0, the subtraction will result in the same value, and the function will proceed without reverting. The `require` statements in the `_transfer` and `_approve` functions check for valid addresses but do not check the amount being transferred. Therefore, a transfer of 0 value should not cause the function to throw an error.

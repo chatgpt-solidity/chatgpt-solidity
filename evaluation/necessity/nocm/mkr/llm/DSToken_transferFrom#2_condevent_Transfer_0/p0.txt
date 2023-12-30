@@ -1,0 +1,66 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether the function transferFrom and the related parts violate the rule? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract DSStop is DSNote, DSAuth {
+
+    bool public stopped;
+    modifier stoppable() {
+        require(!stopped);
+        _;
+    }
+}
+
+contract DSToken is DSTokenBase(0), DSStop {
+
+    function transferFrom(
+        address src,
+        address dst,
+        uint wad
+    ) public stoppable returns (bool) {
+        if (src != msg.sender && _approvals[src][msg.sender] != uint(-1)) {
+            _approvals[src][msg.sender] = sub(_approvals[src][msg.sender], wad);
+        }
+
+        _balances[src] = sub(_balances[src], wad);
+        _balances[dst] = add(_balances[dst], wad);
+
+        Transfer(src, dst, wad);
+
+        return true;
+    }
+}
+
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => uint256) _balances;
+    mapping(address => mapping(address => uint256)) _approvals;
+}
+
+contract DSMath {
+    function add(uint x, uint y) internal pure returns (uint z) {
+        require((z = x + y) >= x);
+
+    }
+    function sub(uint x, uint y) internal pure returns (uint z) {
+        require((z = x - y) <= x);
+    }
+}
+"""
+
+Rule:"""
+Emit Transfer if tokens are transferred during the initial token distribution or crowdsale.
+"""

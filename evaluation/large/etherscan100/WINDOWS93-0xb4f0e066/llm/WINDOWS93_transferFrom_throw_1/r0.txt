@@ -1,0 +1,11 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not explicitly check for a transfer amount of zero. It only checks that the amount is greater than zero before proceeding with the transfer:
+
+```solidity
+require(amount > 0, "Transfer amount must be greater than zero");
+```
+
+However, if the amount is zero, this check will not pass, and the function will revert due to the requirement not being met. Therefore, the function will throw an error if an attempt is made to transfer an amount of zero.
+
+It's important to note that the ERC-20 standard does not specify that transfers of 0 value must be allowed or disallowed, so this behavior is up to the implementation of the contract. In this case, the contract has chosen to disallow transfers of 0 value.

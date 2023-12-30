@@ -1,0 +1,6 @@
+contract ERC20 {
+
+    // funds goes as `msg.value`
+    function deposit() public payable {}
+}
+

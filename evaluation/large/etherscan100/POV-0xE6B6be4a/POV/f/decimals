@@ -1,0 +1,7 @@
+contract POV is IERC20, Context, Ownable  {
+    uint8 private constant _decimals = 9;
+
+    function decimals() public pure returns (uint8) {
+        return _decimals;
+    }
+}

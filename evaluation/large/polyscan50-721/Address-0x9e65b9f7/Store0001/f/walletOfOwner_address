@@ -1,0 +1,6 @@
+contract Store0001 is ERC721, Ownable {
+
+  function walletOfOwner(address _owner) public view returns (uint256[] memory) {
+  }
+}
+

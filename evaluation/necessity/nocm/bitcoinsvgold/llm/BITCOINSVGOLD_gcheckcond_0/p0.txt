@@ -1,0 +1,35 @@
+Given a solidity function BITCOINSVGOLD and the related parts from a smart contract and a rule.
+Whether the function BITCOINSVGOLD and its related parts violate the rule? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract BITCOINSVGOLD is StandardToken {
+    /* Public variables of the token */
+
+    string public name;
+    uint8 public decimals;
+    string public symbol;
+    uint256 public unitsOneEthCanBuy;
+
+    address public fundsWallet;
+    //constructor function
+    function BITCOINSVGOLD() {
+        balances[msg.sender] = 21000000000000000000000000;
+        totalSupply = 21000000000000000000000000;
+        name = "BITCOIN SVGOLD";
+        decimals = 18;
+        symbol = "BSVG";
+        unitsOneEthCanBuy = 500;
+        fundsWallet = msg.sender;
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+    uint256 public totalSupply;
+}
+"""
+
+Rule:"""
+caller handles or directly returns the result of those calls if call any callee that returns (bool success)
+"""

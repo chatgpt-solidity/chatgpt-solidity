@@ -1,0 +1,11 @@
+YES
+
+The provided Solidity interfaces contain the event `Approval(address indexed, address indexed, uint256);` with the correct parameter types and index attributes as specified in the `Token` contract:
+
+```solidity
+event Approval(
+    address indexed _owner,
+    address indexed _spender,
+    uint256 _value
+);
+```

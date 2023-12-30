@@ -1,0 +1,37 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether the function approve and the related parts overwrites the current allowance with _value? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract StandardToken is BasicToken, ERC20 {
+
+    mapping (address => mapping (address => uint)) public allowed;
+
+    /**
+    * @dev Approve the passed address to spend the specified amount of tokens on behalf of msg.sender.
+    * @param _spender The address which will spend the funds.
+    * @param _value The amount of tokens to be spent.
+    */
+    function approve(address _spender, uint _value) public onlyPayloadSize(2 * 32) {
+
+        // To change the approve amount you first have to reduce the addresses`
+        //  allowance to zero by calling `approve(_spender, 0)` if it is not
+        //  already 0 to mitigate the race condition described here:
+        //  https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
+        require(!((_value != 0) && (allowed[msg.sender][_spender] != 0)));
+
+        allowed[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+    }
+}
+
+contract BasicToken is Ownable, ERC20Basic {
+
+    /**
+    * @dev Fix for the ERC20 short address attack.
+    */
+    modifier onlyPayloadSize(uint size) {
+        require(!(msg.data.length < size + 4));
+        _;
+    }
+}
+"""

@@ -1,0 +1,3 @@
+NO
+
+The `TransferBatch` event is emitted with `address(0)` as the `_from` argument, which is correct for minting operations according to the ERC-1155 standard. When new tokens are minted, they are created out of thin air, and there is no "holder" from whom the balance is decreased. The zero address (`address(0)`) is used to indicate that the tokens are being minted rather than transferred from an existing holder. Therefore, the event is emitted according to the standard for minting new tokens.

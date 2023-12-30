@@ -1,0 +1,65 @@
+Given a solidity function openTrading and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.20;
+contract Bition is Context, IERC20, Ownable {
+    mapping (address => uint256) private _balances;
+    mapping (address => mapping (address => uint256)) private _allowances;
+    uint256 private constant _tTotal = 10000000 * 10**_decimals;
+    uint256 public startTradeBlock;   
+
+
+    IUniswapV2Router02 private uniswapV2Router;
+    address private uniswapV2Pair;
+    bool private tradingOpen;
+    bool private swapEnabled = false;
+
+    function balanceOf(address account) public view override returns (uint256) {
+        return _balances[account];
+    }
+
+    function _approve(address owner, address spender, uint256 amount) private {
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+        _allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
+    }
+
+    function openTrading() external onlyOwner() {
+        require(!tradingOpen,"trading is already open");
+        uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
+        _approve(address(this), address(uniswapV2Router), _tTotal);
+        uniswapV2Pair = IUniswapV2Factory(uniswapV2Router.factory()).createPair(address(this), uniswapV2Router.WETH());
+        uniswapV2Router.addLiquidityETH{value: address(this).balance}(address(this),balanceOf(address(this)),0,0,owner(),block.timestamp);
+        IERC20(uniswapV2Pair).approve(address(uniswapV2Router), type(uint).max);
+        swapEnabled = true;
+        tradingOpen = true;
+        startTradeBlock = block.number;
+    }
+}
+contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view returns (address) {
+        return _owner;
+
+    }
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

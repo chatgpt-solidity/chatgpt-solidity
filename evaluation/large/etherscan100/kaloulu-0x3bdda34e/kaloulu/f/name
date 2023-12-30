@@ -1,0 +1,4 @@
+contract kaloulu is IERC20, Auth {
+    string private constant _name          = "Japanese Frog";
+    function name() external pure override returns (string memory) { return _name; }
+}

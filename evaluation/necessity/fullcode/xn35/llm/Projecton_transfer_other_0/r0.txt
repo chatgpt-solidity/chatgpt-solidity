@@ -1,0 +1,3 @@
+NO
+
+The given `transfer` function in the `Projecton` contract does not violate the ERC rule that states "Transfers of 0 values MUST be treated as normal transfers." The function checks that the `_value` to be transferred is greater than 0 with the condition `_value > 0`. If `_value` is 0, the function will revert due to the `require` statement, and the transfer will not be treated as a normal transfer. This behavior is in violation of the ERC rule specified.

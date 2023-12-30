@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function of the `ERC1155` contract, which is called by the `airdrop` function in the `BONE` contract. The `_mint` function is designed to create `amount` tokens of token type `id`, and assign them to `to`, which is exactly what the `TransferSingle` event requires according to the rule provided.
+
+The `_mint` function includes the line `emit TransferSingle(operator, address(0), to, id, amount);`, which emits the `TransferSingle` event with the `_id` argument set to the token type being transferred (`id`). This satisfies the rule that the `_id` argument must be the token type being transferred.

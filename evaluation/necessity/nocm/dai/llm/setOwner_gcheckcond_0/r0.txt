@@ -1,0 +1,3 @@
+NO
+
+The function `setOwner` does not call any external contracts or functions that return a boolean value indicating success. It simply assigns the `owner_` parameter to the `owner` state variable and emits a `LogSetOwner` event. The rule provided is concerned with handling or returning the result of calls that return a boolean success value, which is not applicable in this case.

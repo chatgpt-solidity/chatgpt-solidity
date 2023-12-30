@@ -1,0 +1,8 @@
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    string private _name;
+
+    function name() public view virtual override returns (string memory) {
+        return _name;
+    }
+}
+

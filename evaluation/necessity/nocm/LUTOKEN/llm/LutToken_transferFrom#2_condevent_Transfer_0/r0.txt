@@ -1,0 +1,5 @@
+YES
+
+The provided Solidity code does not show any explicit event emission for the initial token distribution within the constructor of the contract. The constructor is setting the balance of the `msg.sender` to the total supply, but it does not emit a `Transfer` event to reflect this initial distribution.
+
+According to the rule provided, a `Transfer` event should be emitted if tokens are transferred during the initial token distribution or crowdsale. Since the constructor is part of the initial token distribution and it does not emit a `Transfer` event, the code violates the rule.

@@ -1,0 +1,278 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.21;
+contract CHATAI is ERC20, Ownable {
+    IUniswapV2Router02 public uniswapV2Router;
+    bool private swapping;
+    address public teamWallet;
+    uint256 public maxTransactionAmount;
+    uint256 public swapTokensAtAmount;
+    uint256 public maxWallet;
+    bool public limitsInEffect = true;
+    bool public tradingActive = false;
+    bool public swapEnabled = false;
+    mapping(address => bool) blacklisted;
+    uint256 public buyTotalFees;
+    uint256 public buyLotteryFee;
+    uint256 public buyLiquidityFee;
+    uint256 public buyTeamFee;
+    uint256 public sellTotalFees;
+    uint256 public sellLotteryFee;
+    uint256 public sellLiquidityFee;
+    uint256 public sellTeamFee;
+    uint256 public tokensForLottery;
+    uint256 public tokensForLiquidity;
+    uint256 public tokensForTeam;
+    mapping(address => bool) private _isExcludedFromFees;
+    mapping(address => bool) public _isExcludedMaxTransactionAmount;
+    mapping(address => bool) public automatedMarketMakerPairs;
+    function _transfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal override {
+        require(from != address(0), "ERC20: transfer from the zero address");
+        require(to != address(0), "ERC20: transfer to the zero address");
+        require(!blacklisted[from],"Sender blacklisted");
+        require(!blacklisted[to],"Receiver blacklisted");
+        if (amount == 0) {
+            super._transfer(from, to, 0);
+            return;
+        }
+        if (limitsInEffect) {
+            if (
+                from != owner() &&
+                to != owner() &&
+                to != address(0) &&
+                to != address(0xdead) &&
+                !swapping
+            ) {
+                if (!tradingActive) {
+                    require(
+                        _isExcludedFromFees[from] || _isExcludedFromFees[to],
+                        "Trading is not active."
+                    );
+                }
+                if (
+                    automatedMarketMakerPairs[from] &&
+                    !_isExcludedMaxTransactionAmount[to]
+                ) {
+                    require(
+                        amount <= maxTransactionAmount,
+                        "Buy transfer amount exceeds the maxTransactionAmount."
+                    );
+                    require(
+                        amount + balanceOf(to) <= maxWallet,
+                        "Max wallet exceeded"
+                    );
+                }
+                else if (
+                    automatedMarketMakerPairs[to] &&
+                    !_isExcludedMaxTransactionAmount[from]
+                ) {
+                    require(
+                        amount <= maxTransactionAmount,
+                        "Sell transfer amount exceeds the maxTransactionAmount."
+                    );
+                } else if (!_isExcludedMaxTransactionAmount[to]) {
+                    require(
+                        amount + balanceOf(to) <= maxWallet,
+                        "Max wallet exceeded"
+                    );
+                }
+            }
+        }
+        uint256 contractTokenBalance = balanceOf(address(this));
+        bool canSwap = contractTokenBalance >= swapTokensAtAmount;
+        if (
+            canSwap &&
+            swapEnabled &&
+            !swapping &&
+            !automatedMarketMakerPairs[from] &&
+            !_isExcludedFromFees[from] &&
+            !_isExcludedFromFees[to]
+        ) {
+            swapping = true;
+            swapBack();
+            swapping = false;
+        }
+        bool takeFee = !swapping;
+        if (_isExcludedFromFees[from] || _isExcludedFromFees[to]) {
+            takeFee = false;
+        }
+        uint256 fees = 0;
+        if (takeFee) {
+            if (automatedMarketMakerPairs[to]) {
+                if (sellTotalFees > 0) {
+                    fees = amount.mul(sellTotalFees).div(100);
+                    tokensForLiquidity += (fees * sellLiquidityFee) / sellTotalFees;
+                    tokensForTeam += (fees * sellTeamFee) / sellTotalFees;
+                    tokensForLottery += (fees * sellLotteryFee) / sellTotalFees;
+                }
+            }
+            else if (automatedMarketMakerPairs[from] && buyTotalFees > 0) {
+                fees = amount.mul(buyTotalFees).div(100);
+                tokensForLiquidity += (fees * buyLiquidityFee) / buyTotalFees;
+                tokensForTeam += (fees * buyTeamFee) / buyTotalFees;
+                tokensForLottery += (fees * buyLotteryFee) / buyTotalFees;
+            }
+            if (fees > 0) {
+                super._transfer(from, address(this), fees);
+            }
+            amount -= fees;
+        }
+        super._transfer(from, to, amount);
+    }
+    function swapTokensForEth(uint256 tokenAmount) private {
+        address[] memory path = new address[](2);
+        path[0] = address(this);
+        path[1] = uniswapV2Router.WETH();
+        _approve(address(this), address(uniswapV2Router), tokenAmount);
+        uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+            tokenAmount,
+            0, 
+            path,
+            address(this),
+            block.timestamp
+        );
+    }
+    function addLiquidity(uint256 tokenAmount, uint256 ethAmount) private {
+        _approve(address(this), address(uniswapV2Router), tokenAmount);
+        uniswapV2Router.addLiquidityETH{value: ethAmount}(
+            address(this),
+            tokenAmount,
+            0, 
+            0, 
+            owner(),
+            block.timestamp
+        );
+    }
+    function swapBack() private {
+        uint256 contractBalance = balanceOf(address(this));
+        uint256 tokensToSwap = tokensForLiquidity - contractBalance;
+        uint256 totalTokensToSwap = tokensForLiquidity +
+            tokensForLottery +
+            tokensForTeam;
+        bool success;
+        if (contractBalance == 0 || totalTokensToSwap == 0) {
+            return;
+        }
+        if (contractBalance > swapTokensAtAmount * 20) {
+            contractBalance = swapTokensAtAmount * 20;
+        }
+        uint256 liquidityTokens = (contractBalance * tokensForLiquidity) /
+            totalTokensToSwap /
+            2;
+        uint256 amountToSwapForETH = contractBalance.sub(liquidityTokens);
+        uint256 initialETHBalance = address(this).balance;
+        swapTokensForEth(amountToSwapForETH);
+        uint256 ethBalance = address(this).balance.sub(initialETHBalance);
+        uint256 ethForLottery = ethBalance.mul(tokensForLottery).div(totalTokensToSwap - (tokensForLiquidity / 2));
+        uint256 ethForTeam = ethBalance.mul(tokensForTeam).div(totalTokensToSwap - (tokensForLiquidity / 2));
+        uint256 ethForLiquidity = ethBalance - ethForLottery - ethForTeam;
+        tokensForLiquidity = 0;
+        tokensForLottery = 0;
+        tokensForTeam = 0;
+        (success, ) = address(teamWallet).call{value: ethForTeam}("");
+        if (liquidityTokens > 0 && ethForLiquidity > 0) {
+            addLiquidity(liquidityTokens, ethForLiquidity);
+            emit SwapAndLiquify(
+                amountToSwapForETH,
+                ethForLiquidity,
+                tokensForLiquidity
+            );
+        }
+        (success, ) = address(teamWallet).call{value: address(this).balance}("");
+    }
+}
+abstract contract Ownable is Context {
+    address internal _owner;
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+}
+
+library SafeMath {
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a - b;
+    }
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a * b;
+    }
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a / b;
+    }
+}
+
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    mapping(address => uint256) internal _balances;
+    mapping(address => mapping(address => uint256)) private _allowances;
+    function balanceOf(address account) public view virtual override returns (uint256) {
+        return _balances[account];
+    }
+    function transferFrom(
+        address sender,
+        address recipient,
+        uint256 amount
+    ) public virtual override returns (bool) {
+        _transfer(sender, recipient, amount);
+        uint256 currentAllowance = _allowances[sender][_msgSender()];
+        require(currentAllowance >= amount, "ERC20: transfer amount exceeds allowance");
+        unchecked {
+            _approve(sender, _msgSender(), currentAllowance - amount);
+        }
+        return true;
+    }
+    function _transfer(
+        address sender,
+        address recipient,
+        uint256 amount
+    ) internal virtual {
+        require(sender != address(0), "ERC20: transfer from the zero address");
+        require(recipient != address(0), "ERC20: transfer to the zero address");
+        _beforeTokenTransfer(sender, recipient, amount);
+        uint256 senderBalance = _balances[sender];
+        require(senderBalance >= amount, "ERC20: transfer amount exceeds balance");
+        unchecked {
+            _balances[sender] = senderBalance - amount;
+        }
+        _balances[recipient] += amount;
+        emit Transfer(sender, recipient, amount);
+        _afterTokenTransfer(sender, recipient, amount);
+    }
+    function _approve(
+        address owner,
+        address spender,
+        uint256 amount
+    ) internal virtual {
+        require(owner != address(0), "ERC20: approve from the zero address");
+        require(spender != address(0), "ERC20: approve to the zero address");
+        _allowances[owner][spender] = amount;
+        emit Approval(owner, spender, amount);
+    }
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual {}
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

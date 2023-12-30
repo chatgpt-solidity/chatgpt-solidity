@@ -1,0 +1,145 @@
+{
+    "file": "evaluation/audited/organicco.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.17",
+            "state_var_sigs": [],
+            "ercs": [
+                "223receivingcontract"
+            ],
+            "events": [],
+            "name": "ERC223ReceivingContract"
+        },
+        {
+            "solc_version": "0.4.17",
+            "func2file": {
+                "name() returns(string)": "result-necessity/s-nocm/organicco/Organicco/f/name",
+                "symbol() returns(string)": "result-necessity/s-nocm/organicco/Organicco/f/symbol",
+                "decimals() returns(uint8)": "result-necessity/s-nocm/organicco/Organicco/f/decimals",
+                "totalSupply() returns(uint256)": "result-necessity/s-nocm/organicco/Organicco/f/totalSupply",
+                "Organicco() returns()": "result-necessity/s-nocm/organicco/Organicco/f/Organicco",
+                "balanceOf(address) returns(uint256)": "result-necessity/s-nocm/organicco/Organicco/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": "result-necessity/s-nocm/organicco/Organicco/f/transfer_address_uint256",
+                "transfer(address,uint256,bytes) returns(bool)": "result-necessity/s-nocm/organicco/Organicco/f/transfer_address_uint256_bytes",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-nocm/organicco/Organicco/f/transferFrom_address_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-nocm/organicco/Organicco/f/approve_address_uint256",
+                "allowance(address,address) returns(uint256)": "result-necessity/s-nocm/organicco/Organicco/f/allowance_address_address"
+            },
+            "func2attrs": {
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "Organicco() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256,bytes) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "FOUNDING_TEAM() returns(address)",
+                "PARTNER_SALES() returns(address)",
+                "PRESALES() returns(address)",
+                "ICO() returns(address)",
+                "BONUS() returns(address)"
+            ],
+            "ercs": [
+                "20",
+                "223"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "bytes",
+                            "indexed": true
+                        }
+                    ]
+                }
+            ],
+            "name": "Organicco"
+        }
+    ]
+}

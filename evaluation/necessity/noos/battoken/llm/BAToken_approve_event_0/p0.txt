@@ -1,0 +1,14 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it emits the event Approval? Replay in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract StandardToken is Token {
+
+    function approve(address _spender, uint256 _value) returns (bool success) {
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+        return true;
+    }
+    mapping(address => mapping(address => uint256)) allowed;
+}
+"""

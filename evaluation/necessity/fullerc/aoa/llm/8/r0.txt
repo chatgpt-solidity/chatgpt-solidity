@@ -1,0 +1,22 @@
+The Solidity event interfaces provided in the code snippet are:
+
+```solidity
+event Transfer(address indexed, address indexed, uint256);
+event Approval(address indexed, address indexed, uint256);
+```
+
+These events are part of the ERC-20 token standard, which is the standard interface for tokens as described in the ERC provided. The ERC-20 standard specifies two events that must be triggered under certain conditions:
+
+1. `Transfer` event must be triggered when tokens are transferred, including zero value transfers.
+2. `Approval` event must be triggered on any successful call to the `approve` function.
+
+The event signatures in the code snippet match the ERC-20 standard's event specifications:
+
+```solidity
+event Transfer(address indexed _from, address indexed _to, uint256 _value);
+event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+```
+
+The parameters `_from`, `_to`, `_owner`, and `_spender` are marked as `indexed`, which allows these parameters to be searchable in the event logs. The `_value` parameter represents the number of tokens transferred or approved, which is not indexed.
+
+Based on the information provided, the event interfaces in the code snippet do not violate the ERC-20 standard. They correctly define the `Transfer` and `Approval` events as required by the standard.

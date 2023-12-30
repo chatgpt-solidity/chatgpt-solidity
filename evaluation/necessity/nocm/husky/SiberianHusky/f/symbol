@@ -1,0 +1,8 @@
+contract SiberianHusky is Context, IERC20, Ownable {
+    string private _symbol = "SHUSKY";
+
+    function symbol() public view returns (string memory) {
+        return _symbol;
+    }
+}
+

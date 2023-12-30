@@ -1,0 +1,127 @@
+Given a solidity function bet and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.1;
+contract LottoV3 is Ownable, RrpRequesterV0, ERC721, ERC721Burnable {
+
+    // LOTTO VARS
+    address private treasury;
+    address private staking;
+    address private dev1;
+    address private dev2;
+    address public erc20Token;
+    address public player1W;
+    address public player2W;
+    uint256 public betPrice;
+    uint256 public counter;
+    uint256 public taxRate;
+    bool public lottoOpen;
+    bool public taxSwitch;
+
+    mapping(uint256 => address) public pastLottoPlayer1;
+    mapping(uint256 => address) public pastLottoPlayer2;
+    mapping(uint256 => uint256) public pastLottoRewards;
+    mapping(bytes32 => uint256) public pastLottoAPI3CallCounter;
+
+    // API3 VARS
+    address public airnode;
+    bytes32 public endpointIdUint256;
+    address public sponsorWallet;
+    mapping(bytes32 => bool) public expectingRequestWithIdToBeFulfilled;
+
+    // --- PUBLIC FUNCTIONS ---
+
+    function bet() public payable {
+        // --- REQUIREMENTS STAGE ---
+        require(lottoOpen == true, "Lotto is not accepting bets");
+        require(player1W != msg.sender, "Can not bet twice");
+
+        // --- PAYMENT STAGE ---
+        uint256 payment;
+        if(erc20Token == address(0)){
+            // GAS PAYMENT
+            require(betPrice <= msg.value, "Need more gas to pay the betPrice");
+            payment = betPrice;
+        } else {
+            // ERC20 PAYMENT
+            uint256 beforeBal = IERC20(erc20Token).balanceOf(address(this));
+            IERC20(erc20Token).transferFrom(msg.sender, address(this), betPrice);
+            payment = IERC20(erc20Token).balanceOf(address(this)) - beforeBal;
+        }
+
+        // --- TAX STAGE ---
+        if(taxSwitch){_sendTaxes(payment);}
+        
+        // --- EVALUATE STAGE ---
+        if ((player1W == address(0)) && (player2W == address(0))){
+            // PLAYER'S 1 TURN
+            player1W = msg.sender;
+            pastLottoPlayer1[counter] = player1W;
+            uint256 paymentAfterTax = payment * taxRate / 1000;
+            pastLottoRewards[counter] = (payment - paymentAfterTax) *2;
+
+            /* END */
+            emit BetDetails(counter, msg.sender, pastLottoRewards[counter]);
+
+        } else if ((player1W != address(0)) && (player2W == address(0))){
+            // PLAYER'S 2 TURN
+            player2W = msg.sender;
+            pastLottoPlayer2[counter] = player2W;
+            _makeAPICall();
+
+            // UPDATE LOTTO
+            counter++;
+            player1W = address(0);
+            player2W = address(0);
+
+            /* END */
+            uint256 ctr = counter-1;
+            emit BetDetails(ctr, msg.sender, pastLottoRewards[ctr]);
+        }
+    }
+    // --- DEV FUNCTIONS ---
+    function _sendTaxes(uint256 _payment) internal {
+        uint256 tt = _payment * taxRate / 1000;
+        uint256 t1 = tt * 50 / 100;
+        uint256 t2 = tt * 40 / 100;
+        uint256 t3 = tt * 5 / 100;
+        uint256 t4 = tt * 5 / 100;
+        if(erc20Token == address(0)){
+            payable(treasury).transfer(t1);
+            payable(staking).transfer(t2);
+            payable(dev1).transfer(t3);
+            payable(dev2).transfer(t4);
+        } else {
+            IERC20(erc20Token).transfer(treasury, t1);
+            IERC20(erc20Token).transfer(staking, t2);
+            IERC20(erc20Token).transfer(dev1, t3);
+            IERC20(erc20Token).transfer(dev2, t4);
+        }
+    }
+
+    function _makeAPICall() private{
+        bytes32 requestId = airnodeRrp.makeFullRequest(
+            airnode,
+            endpointIdUint256,
+            address(this),
+            sponsorWallet,
+            address(this),
+            this.fulfillUint256.selector,
+            ""
+        );
+        expectingRequestWithIdToBeFulfilled[requestId] = true;
+        //
+        pastLottoAPI3CallCounter[requestId] = counter;
+    }
+}
+contract RrpRequesterV0 {
+    IAirnodeRrpV0 public immutable airnodeRrp;
+}
+"""
+
+Action:"""
+When `tokenId` is destroyed and removed from circulation.
+"""

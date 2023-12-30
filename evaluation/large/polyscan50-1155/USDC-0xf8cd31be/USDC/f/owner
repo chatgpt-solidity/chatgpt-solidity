@@ -1,0 +1,8 @@
+abstract contract Ownable is Context {
+    address private _owner;
+
+    function owner() public view virtual returns (address) {
+        return _owner;
+    }
+}
+

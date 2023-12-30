@@ -1,0 +1,129 @@
+{
+    "file": "evaluation/audited/bnb.sol",
+    "contracts": [
+        {
+            "solc_version": "0.4.17",
+            "func2file": {
+                "BNB(uint256,string,uint8,string) returns()": "result-necessity/s-cm/bnb/BNB/f/BNB_uint256_string_uint8_string",
+                "transfer(address,uint256) returns()": "result-necessity/s-cm/bnb/BNB/f/transfer_address_uint256",
+                "approve(address,uint256) returns(bool)": "result-necessity/s-cm/bnb/BNB/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": "result-necessity/s-cm/bnb/BNB/f/transferFrom_address_address_uint256",
+                "burn(uint256) returns(bool)": "result-necessity/s-cm/bnb/BNB/f/burn_uint256",
+                "freeze(uint256) returns(bool)": "result-necessity/s-cm/bnb/BNB/f/freeze_uint256",
+                "unfreeze(uint256) returns(bool)": "result-necessity/s-cm/bnb/BNB/f/unfreeze_uint256",
+                "withdrawEther(uint256) returns()": "result-necessity/s-cm/bnb/BNB/f/withdrawEther_uint256",
+                "fallback() returns()": "result-necessity/s-cm/bnb/BNB/f/fallback"
+            },
+            "func2attrs": {
+                "BNB(uint256,string,uint8,string) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "burn(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "freeze(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "unfreeze(uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "withdrawEther(uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "fallback() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [
+                "totalSupply() returns(uint256)",
+                "name() returns(string)",
+                "balanceOf(address) returns(uint256)",
+                "owner() returns(address)",
+                "freezeOf(address) returns(uint256)",
+                "decimals() returns(uint8)",
+                "allowance(address,address) returns(uint256)",
+                "symbol() returns(string)"
+            ],
+            "ercs": [
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Burn",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Freeze",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Unfreeze",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "BNB"
+        }
+    ]
+}

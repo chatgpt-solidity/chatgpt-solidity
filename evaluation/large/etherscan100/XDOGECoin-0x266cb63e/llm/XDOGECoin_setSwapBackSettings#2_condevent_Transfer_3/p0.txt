@@ -1,0 +1,51 @@
+Given a solidity function setSwapBackSettings and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.10;
+abstract contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view virtual returns (address) {
+        return _owner;
+
+    }
+    /**
+     * @dev Throws if called by any _account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+
+contract XDOGECoin is Context, IERC20, Ownable {
+    uint256 public swapThreshold = 20_100 * 10**_decimals;
+
+    bool public swapEnabled = true;
+    bool public swapByLimit = true;
+
+    function setSwapBackSettings(bool _enabled, uint256 _amount, bool _limited)
+        external
+        onlyOwner
+    {
+        swapEnabled = _enabled;
+        swapThreshold = _amount;
+        swapByLimit = _limited;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

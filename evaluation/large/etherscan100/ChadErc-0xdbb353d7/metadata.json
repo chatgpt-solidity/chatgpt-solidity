@@ -1,0 +1,149 @@
+{
+    "file": "evaluation/etherscan100/ChadErc-0xdbb353d7.sol",
+    "contracts": [
+        {
+            "solc_version": "0.8.7",
+            "func2file": {
+                "owner() returns(address)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/owner",
+                "renounceownership() returns()": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/renounceownership",
+                "constructor(string,string,uint8,uint256) returns()": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/constructor_string_string_uint8_uint256",
+                "name() returns(string)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/name",
+                "symbol() returns(string)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/symbol",
+                "decimals() returns(uint8)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/decimals",
+                "TransferrTransferr(address[],uint256) returns()": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/TransferrTransferr_address[]_uint256",
+                "balanceOf(address) returns(uint256)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/balanceOf_address",
+                "transfer(address,uint256) returns(bool)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/transfer_address_uint256",
+                "allowance(address,address) returns(uint256)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/allowance_address_address",
+                "approve(address,uint256) returns(bool)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/approve_address_uint256",
+                "transferFrom(address,address,uint256) returns(bool)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/transferFrom_address_address_uint256",
+                "totalSupply() returns(uint256)": ".temp/etherscan100/ChadErc-0xdbb353d7/ChadErc/f/totalSupply"
+            },
+            "func2attrs": {
+                "owner() returns(address)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "renounceownership() returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "constructor(string,string,uint8,uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "name() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "symbol() returns(string)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "decimals() returns(uint8)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "TransferrTransferr(address[],uint256) returns()": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "balanceOf(address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "transfer(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "allowance(address,address) returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                },
+                "approve(address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "transferFrom(address,address,uint256) returns(bool)": {
+                    "is_view": false,
+                    "is_pure": false
+                },
+                "totalSupply() returns(uint256)": {
+                    "is_view": true,
+                    "is_pure": false
+                }
+            },
+            "state_var_sigs": [],
+            "ercs": [
+                "",
+                "20"
+            ],
+            "events": [
+                {
+                    "name": "ownershipTransferred",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        }
+                    ]
+                },
+                {
+                    "name": "Transfer",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "Approval",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                },
+                {
+                    "name": "BalanceAdjusted",
+                    "params": [
+                        {
+                            "type": "address",
+                            "indexed": true
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        },
+                        {
+                            "type": "uint256",
+                            "indexed": false
+                        }
+                    ]
+                }
+            ],
+            "name": "ChadErc"
+        }
+    ]
+}

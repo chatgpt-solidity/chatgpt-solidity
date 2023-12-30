@@ -1,0 +1,7 @@
+YES
+
+The `TransferBatch` event is emitted in the `_safeBatchTransferFrom` function after the balances have been updated and before the `_afterTokenTransfer` hook and `_doSafeBatchTransferAcceptanceCheck` function are called. The event is emitted with the `operator`, `from`, `to`, `ids`, and `amounts` parameters, which correspond to the `_operator`, `_from`, `_to`, `_ids`, and `_values` in the event definition, respectively.
+
+The `amounts` array represents the number of tokens to be transferred for each token ID in the `ids` array. The function ensures that the `from` balance of each token is decreased by the corresponding amount and that the `to` balance is increased by the same amount, which satisfies the rule that the `_values` argument must match the number of tokens the holder's balance is decreased by and what the recipient's balance is increased by.
+
+Therefore, the `TransferBatch` event is emitted according to the given rule.

@@ -1,0 +1,5 @@
+YES
+
+The `TransferSingle` event is emitted in the `_mint` function with the `operator` argument being set to the address returned by `_msgSender()`. In the context of the `mint` function, `_msgSender()` will return `msg.sender`, which is the address of the account or contract that called the `mint` function.
+
+Since the `mint` function is only callable by the owner of the contract (as it is guarded by the `onlyOwner` modifier), the `_msgSender()` in this context will be the owner of the contract, which is an approved account to make the transfer. Therefore, the rule is satisfied, and the `TransferSingle` event is emitted correctly with the `_operator` argument being the address that is approved to make the transfer.

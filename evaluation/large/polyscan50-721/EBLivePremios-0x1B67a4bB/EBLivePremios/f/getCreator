@@ -1,0 +1,7 @@
+contract EBLivePremios is ERC721 {
+    address private _Creator;
+
+    function getCreator() public view returns (address) {
+        return _Creator;
+    }
+}

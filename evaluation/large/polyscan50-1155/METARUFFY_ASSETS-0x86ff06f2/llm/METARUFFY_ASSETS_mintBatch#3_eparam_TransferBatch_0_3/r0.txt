@@ -1,0 +1,13 @@
+YES
+
+The `mintBatch` function in the `METARUFFY_ASSETS` contract calls the `_mintBatch` function, which is responsible for minting a batch of tokens. The `_mintBatch` function, in turn, calls the `_beforeTokenTransfer` hook and then performs the minting operation by updating the balances of the tokens for the recipient address `to`.
+
+After updating the balances, the `_mintBatch` function emits the `TransferBatch` event with the following arguments:
+
+- `operator`: The address performing the mint operation, which is the message sender (`_msgSender()`).
+- `from`: The address from which the tokens are being transferred, which is the zero address (`address(0)`) since tokens are being minted.
+- `to`: The recipient address to which the tokens are being minted.
+- `ids`: The list of token IDs being minted.
+- `amounts`: The corresponding list of amounts for each token ID being minted.
+
+The `TransferBatch` event is emitted with the `_ids` argument being the list of tokens being transferred (minted in this case), which complies with the given rule. Therefore, the event `TransferBatch` is emitted according to the rule specified.

@@ -1,0 +1,13 @@
+contract ManagersRepo{
+    Manager[] managers = new Manager[](0);
+
+    function isManagerByAddress(address _managerAddress) view public returns(bool){
+        for(uint256 i = 0; i < managers.length; i++){
+            if(managers[i].getManagerAddress()==_managerAddress){
+                return true;
+            }
+        }
+        return false;
+    }
+}
+

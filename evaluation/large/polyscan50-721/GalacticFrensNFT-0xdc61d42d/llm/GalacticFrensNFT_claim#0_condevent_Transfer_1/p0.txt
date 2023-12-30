@@ -1,0 +1,151 @@
+Given a solidity function claim and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract ERC721A is Context, ERC165, IERC721A {
+
+    // The tokenId of the next token to be minted.
+    uint256 internal _currentIndex;
+
+    // The number of tokens burned.
+    uint256 internal _burnCounter;
+
+    // Mapping from token ID to ownership details
+    // An empty struct value does not necessarily mean the token is unowned. See _ownershipOf implementation for details.
+    mapping(uint256 => TokenOwnership) internal _ownerships;
+
+    // Mapping owner address to address data
+    mapping(address => AddressData) private _addressData;
+
+    /**
+     * To change the starting tokenId, please override this function.
+     */
+    function _startTokenId() internal view virtual returns (uint256) {
+        return 1;
+    }
+
+    /**
+     * @dev Burned tokens are calculated here, use _totalMinted() if you want to count just minted tokens.
+     */
+    function totalSupply() public view override returns (uint256) {
+        // Counter underflow is impossible as _burnCounter cannot be incremented
+        // more than _currentIndex - _startTokenId() times
+        unchecked {
+            return _currentIndex - _burnCounter - _startTokenId();
+        }
+    }
+
+    /**
+     * @dev See {IERC721-balanceOf}.
+     */
+    function balanceOf(address owner) public view override returns (uint256) {
+        if (owner == address(0)) revert BalanceQueryForZeroAddress();
+        return uint256(_addressData[owner].balance);
+    }
+
+    /**
+     * Gas spent here starts off proportional to the maximum mint batch size.
+     * It gradually moves to O(1) as tokens get transferred around in the collection over time.
+     */
+    function _ownershipOf(uint256 tokenId) internal view returns (TokenOwnership memory) {
+        uint256 curr = tokenId;
+
+        unchecked {
+            if (_startTokenId() <= curr) if (curr < _currentIndex) {
+                TokenOwnership memory ownership = _ownerships[curr];
+                if (!ownership.burned) {
+                    if (ownership.addr != address(0)) {
+                        return ownership;
+                    }
+                    // Invariant:
+                    // There will always be an ownership that has an address and is not burned
+                    // before an ownership that does not have an address and is not burned.
+                    // Hence, curr will not underflow.
+                    while (true) {
+                        curr--;
+                        ownership = _ownerships[curr];
+                        if (ownership.addr != address(0)) {
+                            return ownership;
+                        }
+                    }
+                }
+            }
+        }
+        revert OwnerQueryForNonexistentToken();
+
+    }
+    /**
+     * @dev See {IERC721-ownerOf}.
+     */
+    function ownerOf(uint256 tokenId) public view override returns (address) {
+        return _ownershipOf(tokenId).addr;
+    }
+
+    /**
+     * @dev Returns whether `tokenId` exists.
+     *
+     * Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
+     *
+     * Tokens start existing when they are minted (`_mint`),
+     */
+    function _exists(uint256 tokenId) internal view returns (bool) {
+        return _startTokenId() <= tokenId && tokenId < _currentIndex && !_ownerships[tokenId].burned;
+    }
+}
+
+contract GalacticFrensNFT is ERC721A, Ownable, DefaultOperatorFilterer {
+    mapping(uint256 => string) private _tokenURIs; // Mapping from tokenId to tokenURI
+    mapping(uint256 => bool) private _claimedTokens; 
+
+
+
+    function tokenOfOwnerByIndex(address owner, uint256 index) public view returns (uint256) {
+        require(index < balanceOf(owner), "Owner does not own this token");
+
+        for (uint256 i = 0; i < totalSupply(); i++) {
+            if (_exists(i) && ownerOf(i) == owner) {
+                if (index == 0) {
+                    return i;
+                }
+                index--;
+            }
+        }
+        revert("Token not found");
+    }
+
+
+
+    function claim() external {
+        uint256 firstUnclaimedTokenId = _getFirstUnclaimedToken(msg.sender);
+
+        // Check that the token exists and is owned by the sender
+        require(_exists(firstUnclaimedTokenId), "No unclaimed token owned by sender");
+
+        // Update the tokenURI
+        _tokenURIs[firstUnclaimedTokenId] = "ipfs://bafkreihp6xeuaispxwvzdilcsarwsylgjthbln2s2ukj2ertnexzai43ay";
+        
+        // Mark the token as claimed
+        _claimedTokens[firstUnclaimedTokenId] = true;
+
+    }
+    function _getFirstUnclaimedToken(address owner) public view returns (uint256) {
+        uint256 ownerTokenCount = balanceOf(owner);
+
+        for (uint256 i = 0; i < ownerTokenCount; i++) {
+            uint256 tokenId = tokenOfOwnerByIndex(owner, i);
+            if (!_claimedTokens[tokenId]) {
+                return tokenId;
+            }
+        }
+
+        revert("No unclaimed tokens owned by sender");
+    }
+}
+"""
+
+Action:"""
+When `tokenId` is created with `owner` address as the owner.
+"""

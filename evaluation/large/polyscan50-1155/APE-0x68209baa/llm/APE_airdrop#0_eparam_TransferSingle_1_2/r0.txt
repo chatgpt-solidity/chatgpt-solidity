@@ -1,0 +1,7 @@
+YES
+
+The `airdrop` function in the provided APE contract is designed to mint tokens to a list of recipient addresses, provided they are not contracts. The `_mint` function is called within the `airdrop` function, which in turn emits the `TransferSingle` event.
+
+The `_mint` function is defined to emit the `TransferSingle` event with the following parameters: the operator (which is the message sender), the from address (which is zero since it's a mint operation), the to address (which is the recipient's address), the token ID, and the amount of tokens minted.
+
+The rule states that the `_to` argument must be the address of the recipient whose balance is increased. In the `airdrop` function, the `_mint` function is called with `recipients[i]` as the `to` argument, which is indeed the address of the recipient whose balance is being increased. Therefore, the `TransferSingle` event is emitted according to the given rule.

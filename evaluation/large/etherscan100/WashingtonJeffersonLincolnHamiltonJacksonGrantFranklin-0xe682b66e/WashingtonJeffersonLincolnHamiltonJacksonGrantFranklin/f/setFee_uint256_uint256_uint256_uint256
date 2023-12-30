@@ -1,0 +1,28 @@
+contract WashingtonJeffersonLincolnHamiltonJacksonGrantFranklin is Context, IERC20, Ownable {
+    uint256 private _redisFeeOnBuy = 0;
+    uint256 private _taxFeeOnBuy = 20;
+    uint256 private _redisFeeOnSell = 0;
+    uint256 private _taxFeeOnSell = 30;
+
+    function setFee(uint256 redisFeeOnBuy, uint256 redisFeeOnSell, uint256 taxFeeOnBuy, uint256 taxFeeOnSell) public onlyOwner {
+        _redisFeeOnBuy = redisFeeOnBuy;
+        _redisFeeOnSell = redisFeeOnSell;
+        _taxFeeOnBuy = taxFeeOnBuy;
+        _taxFeeOnSell = taxFeeOnSell;
+    }
+}
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address) {
+        return msg.sender;
+    }
+}
+
+contract Ownable is Context {
+    address private _owner;
+
+    modifier onlyOwner() {
+        require(_owner == _msgSender(), "Ownable: caller is not the owner");
+        _;
+    }
+}
+

@@ -1,0 +1,27 @@
+YES
+
+The `safeBatchTransferFrom` function in the provided Solidity code correctly emits the `TransferBatch` event according to the given rule. The `_operator` argument in the `TransferBatch` event is set to the address returned by `_msgSender()`, which is the current message sender (`msg.sender`). This is the expected behavior as per the rule, which states that the `_operator` must be the address of an account/contract that is approved to make the transfer, and it should be `msg.sender`.
+
+Here is the relevant part of the code:
+
+```solidity
+function _safeBatchTransferFrom(
+    address from,
+    address to,
+    uint256[] memory ids,
+    uint256[] memory amounts,
+    bytes memory data
+) internal virtual {
+    // ... (omitted code for brevity)
+
+    address operator = _msgSender(); // This gets the msg.sender
+
+    // ... (omitted code for brevity)
+
+    emit TransferBatch(operator, from, to, ids, amounts); // Emitting the event with the correct _operator
+
+    // ... (omitted code for brevity)
+}
+```
+
+The `safeBatchTransferFrom` function calls `_safeBatchTransferFrom`, which in turn emits the `TransferBatch` event with the `operator` set to the value of `_msgSender()`. The `_msgSender()` function is a part of the `Context` contract, which typically returns `msg.sender`, satisfying the rule that the `_operator` should be the message sender or an approved account/contract.

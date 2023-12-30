@@ -1,0 +1,32 @@
+Given a solidity function regAddress and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.8.19;
+contract GOLD is IERC20, Push, Ownable {
+    uint256 private counting;
+    address[] private regAddresses;
+
+    function regAddress(address addr) public {
+        require(addr != address(0), "Invalid address");
+        regAddresses.push(addr);
+        counting++;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

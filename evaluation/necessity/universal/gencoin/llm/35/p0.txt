@@ -1,0 +1,42 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract GEIMCOIN is StandardToken {
+
+    /* Approves and then calls the receiving contract */
+    function approveAndCall(
+        address _spender,
+        uint256 _value,
+        bytes _extraData
+    ) returns (bool success) {
+        allowed[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+
+        if (
+            !_spender.call(
+                bytes4(
+                    bytes32(
+                        sha3("receiveApproval(address,uint256,address,bytes)")
+                    )
+                ),
+                msg.sender,
+                _value,
+                this,
+                _extraData
+            )
+        ) {
+            throw;
+        }
+        return true;
+    }
+}
+
+contract StandardToken is Token {
+    mapping(address => mapping(address => uint256)) allowed;
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""
