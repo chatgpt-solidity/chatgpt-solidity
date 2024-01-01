@@ -1,0 +1,6 @@
+```yaml
+- if: "function does not return `bytes4(keccak256('onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)'))`"
+  throw: true
+- if: "transfer(s) is rejected"
+  throw: true
+```

@@ -1,0 +1,67 @@
+```yaml
+- name: safeTransferFrom
+  arg_types:
+    - name: _from
+      type: address
+    - name: _to
+      type: address
+    - name: _id
+      type: uint256
+    - name: _value
+      type: uint256
+    - name: _data
+      type: bytes
+  return_type: 
+  optional: false
+
+- name: safeBatchTransferFrom
+  arg_types:
+    - name: _from
+      type: address
+    - name: _to
+      type: address
+    - name: _ids
+      type: uint256[]
+    - name: _values
+      type: uint256[]
+    - name: _data
+      type: bytes
+  return_type: 
+  optional: false
+
+- name: balanceOf
+  arg_types:
+    - name: _owner
+      type: address
+    - name: _id
+      type: uint256
+  return_type: uint256
+  optional: false
+
+- name: balanceOfBatch
+  arg_types:
+    - name: _owners
+      type: address[]
+    - name: _ids
+      type: uint256[]
+  return_type: uint256[]
+  optional: false
+
+- name: setApprovalForAll
+  arg_types:
+    - name: _operator
+      type: address
+    - name: _approved
+      type: bool
+  return_type: 
+  optional: false
+
+- name: isApprovedForAll
+  arg_types:
+    - name: _owner
+      type: address
+    - name: _operator
+      type: address
+  return_type: bool
+  optional: false
+```

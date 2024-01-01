@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "The JSON formatted URI of the current ERC-3525 contract, which should contain metadata about the contract itself. This URI is expected to start with the header 'data:application/json;' and follow the JSON schema for contract URI as per the ERC-3525 standard."
+```

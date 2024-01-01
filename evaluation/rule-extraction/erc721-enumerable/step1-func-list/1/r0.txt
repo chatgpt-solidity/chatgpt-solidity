@@ -1,0 +1,20 @@
+```yaml
+- name: totalSupply
+  arg_types: []
+  return_type: uint256
+  optional: true
+- name: tokenByIndex
+  arg_types:
+    - name: _index
+      type: uint256
+  return_type: uint256
+  optional: true
+- name: tokenOfOwnerByIndex
+  arg_types:
+    - name: _owner
+      type: address
+    - name: _index
+      type: uint256
+  return_type: uint256
+  optional: true
+```

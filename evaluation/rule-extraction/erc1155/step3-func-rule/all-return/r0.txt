@@ -1,0 +1,12 @@
+```yaml
+functionRule:
+  balanceOf:
+    return:
+      - The balance of the token type requested for the given address
+  balanceOfBatch:
+    return:
+      - The balances of the token types requested for each (owner, id) pair
+  isApprovedForAll:
+    return:
+      - True if the operator is approved, false if not
+```

@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "Indicates whether the operation to approve the specified address to spend up to the specified number of tokens on behalf of the message sender was successful. A return value of true means the approval was successful, while a return value of false indicates the operation failed."
+```

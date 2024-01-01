@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "Indicates whether the transferFrom operation was successful. A return value of true means the tokens were successfully transferred from the _from address to the _to address. A return value of false indicates that the transfer failed, which could happen for various reasons such as insufficient balance or lack of authorization."
+```

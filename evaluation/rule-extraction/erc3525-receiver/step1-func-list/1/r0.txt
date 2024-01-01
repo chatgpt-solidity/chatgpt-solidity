@@ -1,0 +1,16 @@
+```yaml
+- name: onERC3525Received
+  arg_types:
+    - name: _operator
+      type: address
+    - name: _fromTokenId
+      type: uint256
+    - name: _toTokenId
+      type: uint256
+    - name: _value
+      type: uint256
+    - name: _data
+      type: bytes
+  return_type: bytes4
+  optional: false
+```

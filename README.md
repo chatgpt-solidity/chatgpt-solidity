@@ -25,7 +25,7 @@ AuditGPT: Using LLM to validate whether a smart contract follows the standard, s
   - `commands/run.py`: Command 'run', feeding the generated LLM prompts to LLM and collecting the results
   - `llm`: Code related to LLM executing
   - `prompt`: Code related to generate prompts for a smart contract
-- `rules`: Formatted ERC rules
+- `rules`: Manually fixed ERC rules after LLM extraction
 - `flows`: Prompt templates
 
 `auditor` is an easy-to-use executable entrypoint for `python/main.py`
@@ -35,6 +35,9 @@ All the smart contract source code used in evaluation is in `dataset`:
 - `dataset/etherscan100`: Part of large dataset, 100 ERC20 smart contracts from etherscan
 - `dataset/polyscan50-721`: Part of large dataset, 50 ERC721 smart contracts from polyscan
 - `dataset/polyscan50-1155`: Part of large dataset, 50 ERC1155 smart contracts from polyscan
+
+ERC rule extraction results (Section 4.2) are in `evaluation/rule-extraction`.
+
 
 ## Figure 1 (Section 1): ERC20 Smart contract that has high severity violation found on large dataset
 

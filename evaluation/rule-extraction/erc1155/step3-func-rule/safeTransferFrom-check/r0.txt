@@ -1,0 +1,10 @@
+```yaml
+- if: "_to is the zero address"
+  throw: true
+- if: "balance of holder for token _id is lower than the _value sent"
+  throw: true
+- if: "any other error occurs"
+  throw: true
+- if: "_to is a smart contract (e.g. code size > 0)"
+  throw: false
+```

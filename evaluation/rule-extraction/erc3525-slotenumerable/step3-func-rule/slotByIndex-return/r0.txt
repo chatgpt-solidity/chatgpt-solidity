@@ -1,0 +1,2 @@
+returns:
+  - The slot at the specified index of all slots stored by the contract.

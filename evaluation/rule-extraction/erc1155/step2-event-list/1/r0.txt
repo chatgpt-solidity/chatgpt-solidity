@@ -1,0 +1,55 @@
+```yaml
+- name: TransferSingle
+  params:
+    - name: _operator
+      type: address
+      indexed: true
+    - name: _from
+      type: address
+      indexed: true
+    - name: _to
+      type: address
+      indexed: true
+    - name: _id
+      type: uint256
+      indexed: false
+    - name: _value
+      type: uint256
+      indexed: false
+- name: TransferBatch
+  params:
+    - name: _operator
+      type: address
+      indexed: true
+    - name: _from
+      type: address
+      indexed: true
+    - name: _to
+      type: address
+      indexed: true
+    - name: _ids
+      type: uint256[]
+      indexed: false
+    - name: _values
+      type: uint256[]
+      indexed: false
+- name: ApprovalForAll
+  params:
+    - name: _owner
+      type: address
+      indexed: true
+    - name: _operator
+      type: address
+      indexed: true
+    - name: _approved
+      type: bool
+      indexed: false
+- name: URI
+  params:
+    - name: _value
+      type: string
+      indexed: false
+    - name: _id
+      type: uint256
+      indexed: true
+```

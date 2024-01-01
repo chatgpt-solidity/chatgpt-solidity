@@ -1,0 +1,2 @@
+returns:
+  - "The function `onERC721Received` returns a `bytes4` value that signals the successful transfer of an ERC721 token. The return value must be equal to `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))`. This serves as a magic value that confirms the receiving contract has implemented the function correctly and is prepared to handle ERC721 tokens. If the return value is anything other than this magic value, the transaction is reverted, ensuring that the NFT is not transferred to a contract that does not support the ERC721 protocol."

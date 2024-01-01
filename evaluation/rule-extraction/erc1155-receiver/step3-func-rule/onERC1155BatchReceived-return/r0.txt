@@ -1,0 +1,2 @@
+returns:
+  - "Indicates acceptance of the batch transfer. MUST return `bytes4(keccak256("onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)"))` (i.e., 0xbc197c81) if the transfer is accepted and the contract can handle ERC1155 tokens properly. If any other value is returned or the function call reverts, the transaction MUST be reverted by the caller."

@@ -1,0 +1,25 @@
+```yaml
+- name: setApprovalForSlot
+  arg_types:
+    - name: _owner
+      type: address
+    - name: _slot
+      type: uint256
+    - name: _operator
+      type: address
+    - name: _approved
+      type: bool
+  return_type: 
+  optional: true
+
+- name: isApprovedForSlot
+  arg_types:
+    - name: _owner
+      type: address
+    - name: _slot
+      type: uint256
+    - name: _operator
+      type: address
+  return_type: bool
+  optional: true
+```

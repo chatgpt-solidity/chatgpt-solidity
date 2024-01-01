@@ -1,0 +1,56 @@
+```yaml
+- name: valueDecimals
+  arg_types: []
+  return_type: uint8
+  optional: false
+- name: balanceOf
+  arg_types:
+    - name: _tokenId
+      type: uint256
+  return_type: uint256
+  optional: false
+- name: slotOf
+  arg_types:
+    - name: _tokenId
+      type: uint256
+  return_type: uint256
+  optional: false
+- name: approve
+  arg_types:
+    - name: _tokenId
+      type: uint256
+    - name: _operator
+      type: address
+    - name: _value
+      type: uint256
+  return_type: 
+  optional: false
+- name: allowance
+  arg_types:
+    - name: _tokenId
+      type: uint256
+    - name: _operator
+      type: address
+  return_type: uint256
+  optional: false
+- name: transferFrom
+  arg_types:
+    - name: _fromTokenId
+      type: uint256
+    - name: _toTokenId
+      type: uint256
+    - name: _value
+      type: uint256
+  return_type: 
+  optional: false
+- name: transferFrom
+  arg_types:
+    - name: _fromTokenId
+      type: uint256
+    - name: _to
+      type: address
+    - name: _value
+      type: uint256
+  return_type: uint256
+  optional: false
+```

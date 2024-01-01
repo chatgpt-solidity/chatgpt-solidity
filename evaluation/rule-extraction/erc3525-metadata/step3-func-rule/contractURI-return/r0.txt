@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "The JSON formatted URI of the specified slot, which should contain metadata for that slot in the ERC-3525 contract. The metadata is expected to be in JSON format, starting with the header `data:application/json;`."
+```

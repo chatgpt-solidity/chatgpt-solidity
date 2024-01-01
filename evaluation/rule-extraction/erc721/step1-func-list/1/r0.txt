@@ -1,0 +1,84 @@
+```yaml
+- name: balanceOf
+  arg_types:
+    - name: _owner
+      type: address
+  return_type: uint256
+  optional: false
+
+- name: ownerOf
+  arg_types:
+    - name: _tokenId
+      type: uint256
+  return_type: address
+  optional: false
+
+- name: safeTransferFrom
+  arg_types:
+    - name: _from
+      type: address
+    - name: _to
+      type: address
+    - name: _tokenId
+      type: uint256
+    - name: data
+      type: bytes
+  return_type: 
+  optional: false
+
+- name: safeTransferFrom
+  arg_types:
+    - name: _from
+      type: address
+    - name: _to
+      type: address
+    - name: _tokenId
+      type: uint256
+  return_type: 
+  optional: false
+
+- name: transferFrom
+  arg_types:
+    - name: _from
+      type: address
+    - name: _to
+      type: address
+    - name: _tokenId
+      type: uint256
+  return_type: 
+  optional: false
+
+- name: approve
+  arg_types:
+    - name: _approved
+      type: address
+    - name: _tokenId
+      type: uint256
+  return_type: 
+  optional: false
+
+- name: setApprovalForAll
+  arg_types:
+    - name: _operator
+      type: address
+    - name: _approved
+      type: bool
+  return_type: 
+  optional: false
+
+- name: getApproved
+  arg_types:
+    - name: _tokenId
+      type: uint256
+  return_type: address
+  optional: false
+
+- name: isApprovedForAll
+  arg_types:
+    - name: _owner
+      type: address
+    - name: _operator
+      type: address
+  return_type: bool
+  optional: false
+```

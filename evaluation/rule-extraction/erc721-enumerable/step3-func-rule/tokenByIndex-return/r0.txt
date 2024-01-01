@@ -1,0 +1,2 @@
+returns:
+  - The token identifier for the `_index`th NFT, where `_index` is a counter less than `totalSupply()` and the order is not specified.

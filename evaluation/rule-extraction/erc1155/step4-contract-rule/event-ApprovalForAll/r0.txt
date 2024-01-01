@@ -1,0 +1,5 @@
+```yaml
+conditions:
+  - "approval for a second party/operator address to manage all tokens for an owner address is enabled"
+  - "approval for a second party/operator address to manage all tokens for an owner address is disabled"
+```

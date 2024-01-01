@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "The balance of the specified token type (_id) held by the specified owner address (_owner)."
+```

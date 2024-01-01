@@ -1,0 +1,6 @@
+```yaml
+- if: "the message caller’s account balance does not have enough tokens to spend"
+  throw: true
+- if: "Transfers of 0 values"
+  throw: false
+```

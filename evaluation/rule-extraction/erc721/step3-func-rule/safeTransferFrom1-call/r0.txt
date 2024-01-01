@@ -1,0 +1,3 @@
+Calls:
+   onERC721Received:
+      - if: "`_to` is a smart contract (code size > 0)"

@@ -1,0 +1,12 @@
+```yaml
+- if: '_fromTokenId or _toTokenId is zero token id or does not exist'
+  throw: true
+- if: 'slots of _fromTokenId and _toTokenId do not match'
+  throw: true
+- if: '_value exceeds the balance of _fromTokenId or its allowance to the operator'
+  throw: true
+- if: 'msg.sender is not the owner of _fromTokenId, an authorized operator or an operator who has been approved the whole token or at least _value of it'
+  throw: true
+- if: 'the owner of _toTokenId is a smart contract and does not implement onERC3525Received or the call to onERC3525Received does not return 0x009ce20b'
+  throw: true
+```

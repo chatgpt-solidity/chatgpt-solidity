@@ -1,0 +1,2 @@
+returns:
+  - "A distinct Uniform Resource Identifier (URI) for a given asset. The URI points to a JSON file that conforms to the 'ERC721 Metadata JSON Schema', providing metadata associated with the NFT identified by the specified `_tokenId`."

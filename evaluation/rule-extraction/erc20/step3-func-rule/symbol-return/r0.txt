@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "The 'symbol' function returns the ticker symbol of the token, which is a shorter way to represent the token's name, typically composed of uppercase letters. This symbol is used to uniquely identify the token on exchanges and within wallets."
+```

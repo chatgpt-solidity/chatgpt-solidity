@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "The number of decimals the token uses for display and calculations. It indicates how many decimal places can be used to represent the smallest unit of the token. For example, a value of 8 means that the token amount should be divided by 10^8 (100,000,000) to get its user representation."
+```

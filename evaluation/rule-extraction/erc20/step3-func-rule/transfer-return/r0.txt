@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "Indicates whether the transfer was successful. True if the transfer succeeded, False if it failed."
+```

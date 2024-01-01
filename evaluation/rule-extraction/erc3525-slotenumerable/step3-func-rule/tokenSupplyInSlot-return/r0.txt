@@ -1,0 +1,2 @@
+returns:
+  - The total amount of tokens with the specified `_slot` within the contract.

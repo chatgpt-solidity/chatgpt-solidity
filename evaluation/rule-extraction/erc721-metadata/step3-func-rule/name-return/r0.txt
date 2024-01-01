@@ -1,0 +1,2 @@
+returns:
+  - "The name of the collection of NFTs represented by the contract"

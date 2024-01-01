@@ -1,0 +1,4 @@
+```yaml
+- if: "_index >= totalSupply()"
+  throw: true
+```

@@ -1,0 +1,2 @@
+returns:
+  - The total number of valid NFTs tracked by the contract, where each one has an assigned and queryable owner not equal to the zero address.

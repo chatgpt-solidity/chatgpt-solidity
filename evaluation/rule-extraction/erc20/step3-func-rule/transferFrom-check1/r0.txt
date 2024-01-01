@@ -1,0 +1,8 @@
+```yaml
+- if: the message caller's account balance does not have enough tokens to spend
+  throw: true
+- unless: the _from account has deliberately authorized the sender of the message via some mechanism
+  throw: true
+- if: Transfers of 0 values
+  throw: false
+```

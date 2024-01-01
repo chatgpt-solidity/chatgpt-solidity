@@ -1,0 +1,2 @@
+returns:
+  - The total number of unique slots that have been created and are stored by the contract. Each slot represents a category of semi-fungible tokens that are fungible within the same slot but are distinguishable from tokens in other slots.

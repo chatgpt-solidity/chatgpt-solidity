@@ -1,0 +1,26 @@
+```yaml
+- name: slotCount
+  arg_types: []
+  return_type: uint256
+  optional: false
+- name: slotByIndex
+  arg_types:
+    - name: _index
+      type: uint256
+  return_type: uint256
+  optional: false
+- name: tokenSupplyInSlot
+  arg_types:
+    - name: _slot
+      type: uint256
+  return_type: uint256
+  optional: false
+- name: tokenInSlotByIndex
+  arg_types:
+    - name: _slot
+      type: uint256
+    - name: _index
+      type: uint256
+  return_type: uint256
+  optional: false
+```

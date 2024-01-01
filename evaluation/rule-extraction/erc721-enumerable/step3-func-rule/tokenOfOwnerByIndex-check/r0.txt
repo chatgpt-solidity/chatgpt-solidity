@@ -1,0 +1,6 @@
+```yaml
+- if: "_owner is the zero address"
+  throw: true
+- if: "_index is greater than or equal to the balance of _owner"
+  throw: true
+```

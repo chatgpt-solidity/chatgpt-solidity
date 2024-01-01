@@ -1,0 +1,2 @@
+returns:
+  - The slot of the token, which is a unique identifier representing a category or class of tokens within the ERC-3525 contract where tokens with the same slot are considered fungible with each other.

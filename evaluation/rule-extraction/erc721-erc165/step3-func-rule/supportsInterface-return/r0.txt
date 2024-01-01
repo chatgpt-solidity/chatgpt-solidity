@@ -1,0 +1,2 @@
+returns:
+  - "Indicates whether the contract implements a specific interface (identified by `interfaceID`) and that `interfaceID` is not 0xffffffff. If the function returns `true`, it means the contract does implement the specified interface. If the function returns `false`, it either does not implement the interface or `interfaceID` is 0xffffffff, which is a reserved value indicating non-support of the interface."

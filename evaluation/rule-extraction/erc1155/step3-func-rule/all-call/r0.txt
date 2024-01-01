@@ -1,0 +1,19 @@
+```yaml
+functionRule:
+  safeTransferFrom:
+    call:
+      onERC1155Received:
+        - if: "_to is a smart contract (e.g. code size > 0)"
+  safeBatchTransferFrom:
+    call:
+      onERC1155BatchReceived:
+        - if: "_to is a smart contract (e.g. code size > 0)"
+  balanceOf:
+    call: {}
+  balanceOfBatch:
+    call: {}
+  setApprovalForAll:
+    call: {}
+  isApprovedForAll:
+    call: {}
+```

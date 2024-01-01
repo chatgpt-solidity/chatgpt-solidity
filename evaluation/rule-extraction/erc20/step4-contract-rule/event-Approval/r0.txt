@@ -1,0 +1,4 @@
+```yaml
+conditions:
+  - "on any successful call to approve(address _spender, uint256 _value)"
+```

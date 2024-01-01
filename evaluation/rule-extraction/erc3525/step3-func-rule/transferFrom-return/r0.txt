@@ -1,0 +1,2 @@
+returns:
+  - The ID of the token which receives the transferred value when transferring value from a specified token to an address. This ID represents the destination token that now holds the transferred value. If a new token is created to receive the value, this return value will be the new token's ID. If the value is transferred to an existing token owned by the recipient address, the return value will be the ID of that existing token.

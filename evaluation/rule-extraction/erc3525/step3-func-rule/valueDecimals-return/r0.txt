@@ -1,0 +1,2 @@
+returns:
+  - The number of decimals the token uses for value representation, which is used to determine how to display the token's value to users. For example, a return value of 6 means that the token's value should be divided by 1,000,000 to get its user representation.

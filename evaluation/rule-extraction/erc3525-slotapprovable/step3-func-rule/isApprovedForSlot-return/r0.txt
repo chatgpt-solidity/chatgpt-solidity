@@ -1,0 +1,2 @@
+returns:
+  - "Indicates whether the specified `_operator` is authorized to manage all of the `_owner`'s tokens with the specified `_slot`."

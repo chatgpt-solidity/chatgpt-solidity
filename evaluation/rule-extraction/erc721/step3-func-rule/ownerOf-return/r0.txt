@@ -1,0 +1,2 @@
+returns:
+  - "The address of the current owner of the specified NFT (Non-Fungible Token) identified by the given unique token ID (_tokenId)."

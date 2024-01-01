@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "Indicates acceptance of the ERC-3525 token value transfer. Must return 0x009ce20b (the method selector for onERC3525Received) if the transfer is accepted. If any other value is returned or the transaction reverts, it is considered a rejection of the transfer."
+```

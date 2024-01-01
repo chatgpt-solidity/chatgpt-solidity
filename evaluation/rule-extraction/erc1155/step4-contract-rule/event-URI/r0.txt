@@ -1,0 +1,6 @@
+```yaml
+conditions:
+  - "when the URI is updated for a token ID"
+assign:
+  - ""
+```

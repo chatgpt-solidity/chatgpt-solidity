@@ -1,0 +1,7 @@
+```yaml
+conditions:
+  - "caller is the current owner, an authorized operator, or the approved address for `_tokenId`"
+  - "the approval value of a token is set or changed"
+assign:
+  - ""
+```

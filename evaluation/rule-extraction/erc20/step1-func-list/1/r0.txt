@@ -1,0 +1,58 @@
+```yaml
+- name: name
+  arg_types: []
+  return_type: string
+  optional: true
+- name: symbol
+  arg_types: []
+  return_type: string
+  optional: true
+- name: decimals
+  arg_types: []
+  return_type: uint8
+  optional: true
+- name: totalSupply
+  arg_types: []
+  return_type: uint256
+  optional: false
+- name: balanceOf
+  arg_types:
+    - name: _owner
+      type: address
+  return_type: uint256
+  optional: false
+- name: transfer
+  arg_types:
+    - name: _to
+      type: address
+    - name: _value
+      type: uint256
+  return_type: bool
+  optional: false
+- name: transferFrom
+  arg_types:
+    - name: _from
+      type: address
+    - name: _to
+      type: address
+    - name: _value
+      type: uint256
+  return_type: bool
+  optional: false
+- name: approve
+  arg_types:
+    - name: _spender
+      type: address
+    - name: _value
+      type: uint256
+  return_type: bool
+  optional: false
+- name: allowance
+  arg_types:
+    - name: _owner
+      type: address
+    - name: _spender
+      type: address
+  return_type: uint256
+  optional: false
+```

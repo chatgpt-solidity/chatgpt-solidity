@@ -1,0 +1,4 @@
+```yaml
+- if: "NFTs assigned to the zero address"
+  throw: true
+```

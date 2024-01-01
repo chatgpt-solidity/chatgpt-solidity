@@ -1,0 +1,10 @@
+```yaml
+- if: "message caller’s account balance does not have enough tokens to spend"
+  throw: true
+- if: "the _from account has not authorized the sender of the message via some mechanism"
+  throw: true
+- if: "transfers of 0 values"
+  throw: false
+- if: "setting allowance to another value for the same spender without first setting it to 0"
+  throw: false
+```

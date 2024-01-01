@@ -1,0 +1,16 @@
+```yaml
+- name: ApprovalForSlot
+  params:
+  - name: _owner
+    type: address
+    indexed: true
+  - name: _slot
+    type: uint256
+    indexed: true
+  - name: _operator
+    type: address
+    indexed: true
+  - name: _approved
+    type: bool
+    indexed: false
+```

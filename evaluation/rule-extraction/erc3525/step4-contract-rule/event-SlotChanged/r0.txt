@@ -1,0 +1,10 @@
+```yaml
+conditions:
+  - "value of a token is transferred to another token with the same slot"
+  - "approval value of a token is set or changed"
+  - "slot of a token is set or changed"
+assign:
+  - ""
+  - ""
+  - ""
+```

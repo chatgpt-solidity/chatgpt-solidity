@@ -1,0 +1,2 @@
+returns:
+  - The token ID at the specified `_index` within the list of all tokens that share the same `_slot`.

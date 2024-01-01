@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "The amount of tokens that the _spender is still allowed to withdraw from the _owner's account."
+```

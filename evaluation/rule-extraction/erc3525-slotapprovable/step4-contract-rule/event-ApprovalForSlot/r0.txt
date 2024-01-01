@@ -1,0 +1,6 @@
+```yaml
+conditions:
+- "an operator is approved or disapproved to manage all of `_owner`'s tokens with the same slot"
+assign:
+- ""
+```

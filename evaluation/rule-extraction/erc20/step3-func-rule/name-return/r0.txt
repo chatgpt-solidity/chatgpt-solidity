@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "The name of the token, which is a human-readable string that identifies the token."
+```

@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "The amount of tokens that the specified address currently holds in its balance."
+```

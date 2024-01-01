@@ -1,0 +1,14 @@
+```yaml
+- name: onERC721Received
+  arg_types:
+    - name: _operator
+      type: address
+    - name: _from
+      type: address
+    - name: _tokenId
+      type: uint256
+    - name: _data
+      type: bytes
+  return_type: bytes4
+  optional: false
+```

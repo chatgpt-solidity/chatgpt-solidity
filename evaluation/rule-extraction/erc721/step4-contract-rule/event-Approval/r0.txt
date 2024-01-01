@@ -1,0 +1,6 @@
+```yaml
+conditions:
+  - "when the approved address for an NFT is changed"
+  - "when the approved address for an NFT is reaffirmed"
+  - "when a Transfer event emits, indicating that the approved address for that NFT (if any) is reset to none"
+```

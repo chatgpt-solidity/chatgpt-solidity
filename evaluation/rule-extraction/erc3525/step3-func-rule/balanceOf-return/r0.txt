@@ -1,0 +1,2 @@
+returns:
+  - The value of the specified token ID, representing the quantitative nature of the token, similar to the balance of an ERC-20 token.

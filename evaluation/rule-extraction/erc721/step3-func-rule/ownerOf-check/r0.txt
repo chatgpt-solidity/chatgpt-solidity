@@ -1,0 +1,6 @@
+```yaml
+- if: "NFTs assigned to zero address are considered invalid"
+  throw: true
+- if: "queries about them do throw"
+  throw: true
+```

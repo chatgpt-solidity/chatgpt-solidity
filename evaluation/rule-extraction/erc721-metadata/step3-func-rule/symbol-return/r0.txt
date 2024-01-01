@@ -1,0 +1,2 @@
+returns:
+  - "The semantic meaning of the return value for the function 'function symbol() external view returns (string)' in ERC721Metadata is to provide an abbreviated name (often a ticker symbol) for the collection of NFTs represented by the contract. This symbol is typically a shorter version of the full name provided by the 'name()' function and is used to identify the collection of NFTs in a more compact form, similar to stock ticker symbols in financial markets."

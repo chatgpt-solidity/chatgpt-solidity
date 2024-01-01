@@ -1,0 +1,35 @@
+```yaml
+- name: TransferValue
+  params:
+  - name: _fromTokenId
+    type: uint256
+    indexed: true
+  - name: _toTokenId
+    type: uint256
+    indexed: true
+  - name: _value
+    type: uint256
+    indexed: false
+- name: ApprovalValue
+  params:
+  - name: _tokenId
+    type: uint256
+    indexed: true
+  - name: _operator
+    type: address
+    indexed: true
+  - name: _value
+    type: uint256
+    indexed: false
+- name: SlotChanged
+  params:
+  - name: _tokenId
+    type: uint256
+    indexed: true
+  - name: _oldSlot
+    type: uint256
+    indexed: true
+  - name: _newSlot
+    type: uint256
+    indexed: true
+```

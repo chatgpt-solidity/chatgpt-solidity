@@ -1,0 +1,4 @@
+```yaml
+- if: "_owner is the zero address"
+  throw: true
+```

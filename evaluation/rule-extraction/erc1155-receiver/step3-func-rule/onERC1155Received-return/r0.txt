@@ -1,0 +1,2 @@
+returns:
+  - "Indicates acceptance of the token transfer. The function must return `bytes4(keccak256("onERC1155Received(address,address,uint256,uint256,bytes)"))` (i.e., 0xf23a6e61) if it accepts the transfer. If any other value is returned or the function reverts, the transfer is not successful and must be reverted by the caller."

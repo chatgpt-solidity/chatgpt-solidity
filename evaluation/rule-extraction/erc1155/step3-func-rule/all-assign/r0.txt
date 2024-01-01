@@ -1,0 +1,20 @@
+```yaml
+functionRule:
+  safeTransferFrom:
+    assign:
+      - "MUST emit the `TransferSingle` event to reflect the balance change"
+      - "MUST check if `_to` is a smart contract and if so, it MUST call `onERC1155Received` on `_to`"
+  safeBatchTransferFrom:
+    assign:
+      - "MUST emit `TransferSingle` or `TransferBatch` event(s) such that all the balance changes are reflected"
+      - "MUST check if `_to` is a smart contract and if so, it MUST call the relevant `ERC1155TokenReceiver` hook(s) on `_to`"
+  balanceOf:
+    assign: []
+  balanceOfBatch:
+    assign: []
+  setApprovalForAll:
+    assign:
+      - "MUST emit the `ApprovalForAll` event on success"
+  isApprovedForAll:
+    assign: []
+```

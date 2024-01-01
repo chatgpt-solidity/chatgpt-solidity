@@ -1,0 +1,2 @@
+returns:
+  - "The approved address for the specified NFT (identified by `_tokenId`), or the zero address if there is no approved address. This address is the one that has been given permission by the owner of the NFT to transfer the ownership of that specific NFT on their behalf."

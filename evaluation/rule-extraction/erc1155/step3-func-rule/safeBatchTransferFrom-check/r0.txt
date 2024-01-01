@@ -1,0 +1,10 @@
+```yaml
+- if: "_to is the zero address"
+  throw: true
+- if: "length of _ids is not the same as length of _values"
+  throw: true
+- if: "any of the balance(s) of the holder(s) for token(s) in _ids is lower than the respective amount(s) in _values sent to the recipient"
+  throw: true
+- if: "caller must be approved to manage the tokens being transferred out of the _from account"
+  throw: true
+```

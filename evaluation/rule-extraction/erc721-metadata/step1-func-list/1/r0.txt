@@ -1,0 +1,16 @@
+```yaml
+- name: name
+  arg_types: []
+  return_type: "string"
+  optional: true
+- name: symbol
+  arg_types: []
+  return_type: "string"
+  optional: true
+- name: tokenURI
+  arg_types:
+    - name: _tokenId
+      type: "uint256"
+  return_type: "string"
+  optional: true
+```

@@ -1,0 +1,12 @@
+```yaml
+- if: Caller is not the current owner, an authorized operator, or an operator who has been approved the whole `_fromTokenId` or part of it
+  throw: true
+- if: `_fromTokenId` or `_toTokenId` is zero token id or does not exist
+  throw: true
+- if: Slots of `_fromTokenId` and `_toTokenId` do not match
+  throw: true
+- if: `_value` exceeds the balance of `_fromTokenId` or its allowance to the operator
+  throw: true
+- if: The owner of `_toTokenId` is a smart contract and does not implement the `onERC3525Received` function or the function does not return 0x009ce20b
+  throw: true
+```

@@ -1,0 +1,4 @@
+```yaml
+returns:
+  - "The total number of tokens currently in circulation within the smart contract system, represented as an unsigned integer."
+```

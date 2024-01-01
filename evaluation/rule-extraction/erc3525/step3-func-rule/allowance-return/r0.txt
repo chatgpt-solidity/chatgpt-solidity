@@ -1,0 +1,2 @@
+returns:
+  - The current approval value of the specified `_tokenId` that the `_operator` is allowed to manage. This value represents the maximum amount of the token's value that the `_operator` has been granted permission to use or transfer on behalf of the token's owner.

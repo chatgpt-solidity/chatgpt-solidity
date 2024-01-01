@@ -1,0 +1,2 @@
+returns:
+  - "Indicates whether the queried address is an authorized operator for the owner address, meaning the operator is allowed to manage all of the owner's assets."

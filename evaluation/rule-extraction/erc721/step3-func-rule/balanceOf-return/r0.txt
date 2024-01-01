@@ -1,0 +1,2 @@
+returns:
+  - The number of NFTs (non-fungible tokens) owned by the specified address.

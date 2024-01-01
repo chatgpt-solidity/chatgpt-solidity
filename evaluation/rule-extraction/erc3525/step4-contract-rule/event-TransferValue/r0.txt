@@ -1,0 +1,9 @@
+```yaml
+conditions:
+  - "value of a token is transferred to another token with the same slot"
+  - "including zero value transfers (_value == 0)"
+  - "transfers when tokens are created (`_fromTokenId` == 0)"
+  - "transfers when tokens are destroyed (`_toTokenId` == 0)"
+assign:
+  - ""
+```

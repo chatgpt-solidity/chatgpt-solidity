@@ -1,0 +1,8 @@
+```yaml
+conditions:
+  - "ownership of any NFT changes by any mechanism"
+  - "NFTs are created (`from` == 0)"
+  - "NFTs are destroyed (`to` == 0)"
+  - "during contract creation, any number of NFTs may be created and assigned without emitting Transfer"
+  - "at the time of any transfer, the approved address for that NFT (if any) is reset to none"
+```

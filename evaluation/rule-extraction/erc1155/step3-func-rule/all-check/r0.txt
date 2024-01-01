@@ -1,0 +1,29 @@
+```yaml
+functionRule:
+  safeTransferFrom:
+    check:
+      - if: "_to is the zero address"
+        throw: true
+      - if: "balance of holder for token _id is lower than the _value sent"
+        throw: true
+      - if: "any other error"
+        throw: true
+  safeBatchTransferFrom:
+    check:
+      - if: "_to is the zero address"
+        throw: true
+      - if: "length of _ids is not the same as length of _values"
+        throw: true
+      - if: "any of the balance(s) of the holder(s) for token(s) in _ids is lower than the respective amount(s) in _values sent to the recipient"
+        throw: true
+      - if: "any other error"
+        throw: true
+  balanceOf:
+    check: []
+  balanceOfBatch:
+    check: []
+  setApprovalForAll:
+    check: []
+  isApprovedForAll:
+    check: []
+```
