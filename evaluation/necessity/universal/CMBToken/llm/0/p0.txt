@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract CMBToken is IERC20 {
+    uint public constant _totalSupply = 6500000000000000;
+
+    function totalSupply() constant returns (uint256 totalSupply) {
+        return _totalSupply;
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the total token supply
+"""

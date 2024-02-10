@@ -1,0 +1,13 @@
+YES
+
+The given Solidity code does not use the `emit` keyword when triggering the `Transfer` event, which is required by the ERC standards (such as ERC-20) for emitting events. The correct syntax to emit an event is to use the `emit` keyword followed by the event name and the parameters to be logged.
+
+The line in the code that violates the ERC rule is:
+```solidity
+Transfer(msg.sender, _to, _value); // Notify anyone listening that this transfer took place
+```
+
+It should be written as:
+```solidity
+emit Transfer(msg.sender, _to, _value); // Notify anyone listening that this transfer took place
+```

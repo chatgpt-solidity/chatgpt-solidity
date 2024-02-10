@@ -1,0 +1,9 @@
+YES
+
+The given Solidity code for the `transfer` function checks if the `_value` is greater than 0 before proceeding with the transfer:
+
+```solidity
+if (balances[msg.sender] >= _value && _value > 0) {
+```
+
+According to the provided ERC rule, transfers of 0 values must be treated as normal transfers. However, the code explicitly prevents transfers of 0 value by requiring `_value > 0`. Therefore, the code violates the given ERC rule.

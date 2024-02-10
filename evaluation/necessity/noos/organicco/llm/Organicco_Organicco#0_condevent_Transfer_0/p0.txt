@@ -1,0 +1,51 @@
+Given a solidity function Organicco and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Organicco is
+    Token("ORC", "Organicco", 18, 120000000000000000000000000),
+    ERC20,
+    ERC223
+{
+    address public constant FOUNDING_TEAM =
+        0x001c3234d614F12D5ef931E2871BFf35D8C05a29;
+    address public constant PARTNER_SALES =
+        0x00749ea1Ca25e9C027426D74Bb3659A80493fa6d;
+    address public constant PRESALES =
+        0x00faf4afd47ebA1D1713C0506f4a05BC36cc590D;
+    address public constant ICO = 0x000E945D52F3EF8602B3484ce04036fF4d2888CA;
+
+    address public constant BONUS = 0x009C88134EE3636E7f92A402ed9531DF54B802BB;
+    function Organicco() public {
+        _balanceOf[FOUNDING_TEAM] = (_totalSupply * 20) / 100; //24,000,000 (24 million)
+        _balanceOf[PARTNER_SALES] = (_totalSupply * 16) / 100; //19,200,000 (19.2 million)
+        _balanceOf[PRESALES] = (_totalSupply * 10) / 100; //12,000,000 (12 million)
+        _balanceOf[ICO] = (_totalSupply * 50) / 100; //60,000,000 (60 million)
+        _balanceOf[BONUS] = (_totalSupply * 4) / 100; //4,800,000 (4.8 million)
+    }
+}
+
+contract Token {
+    string internal _symbol;
+    string internal _name;
+    uint8 internal _decimals;
+    uint internal _totalSupply = 1000;
+    mapping(address => uint) internal _balanceOf;
+
+    function Token(
+        string symbol,
+        string name,
+        uint8 decimals,
+        uint totalSupply
+    ) public {
+        _symbol = symbol;
+        _name = name;
+        _decimals = decimals;
+        _totalSupply = totalSupply;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

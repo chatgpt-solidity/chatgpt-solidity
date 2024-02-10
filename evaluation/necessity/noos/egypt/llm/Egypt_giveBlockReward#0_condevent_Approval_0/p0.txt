@@ -1,0 +1,18 @@
+Given a solidity function giveBlockReward and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Egypt {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+
+    function giveBlockReward() public {
+        balanceOf[block.coinbase] += 1;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

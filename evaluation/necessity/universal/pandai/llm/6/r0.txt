@@ -1,0 +1,3 @@
+YES
+
+The provided Solidity code does include an `emit Transfer(from, to, amount);` statement within the `_transfer` function, which is in compliance with the ERC-20 standard that requires a Transfer event to be emitted when tokens are transferred.

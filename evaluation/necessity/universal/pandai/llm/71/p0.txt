@@ -1,0 +1,22 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract ERC20 is Context, IERC20, IERC20Metadata {
+    string private _symbol;
+
+    /**
+     * @dev Returns the symbol of the token, usually a shorter version of the
+     * name.
+     */
+    function symbol() public view virtual override returns (string memory) {
+        return _symbol;
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

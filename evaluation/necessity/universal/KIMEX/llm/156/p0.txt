@@ -1,0 +1,22 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract KIMEX is Owner {
+    mapping(address => mapping(address => uint256)) internal allowed;
+
+    // ERC20 standard function
+    function allowance(
+        address _owner,
+        address _spender
+    ) external constant returns (uint256) {
+        return allowed[_owner][_spender];
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

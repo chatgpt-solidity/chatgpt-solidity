@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract SiberianHusky is Context, IERC20, Ownable {
+    string private _symbol = "SHUSKY";
+
+    function symbol() public view returns (string memory) {
+        return _symbol;
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the symbol of the token
+"""

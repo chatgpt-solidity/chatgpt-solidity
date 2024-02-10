@@ -1,0 +1,23 @@
+Given a solidity function totalSupply and the related parts from a smart contract and an rule for its return value.
+Whether function totalSupply returns the total token supply? Reply in "YES" or "NO".
+
+<example>
+
+Function(and related parts) to audit:"""
+contract WiT is AbstractToken {
+
+    /**
+     * Current number of tokens in circulation.
+     */
+    uint256 tokenCount = 0;
+
+    /**
+     * Get total number of tokens in circulation.
+     *
+     * @return total number of tokens in circulation
+     */
+    function totalSupply() public view returns (uint256 supply) {
+        return tokenCount;
+    }
+}
+"""

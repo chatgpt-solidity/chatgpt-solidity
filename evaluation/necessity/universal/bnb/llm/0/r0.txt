@@ -1,0 +1,9 @@
+YES
+
+The given Solidity code does not throw a specific message indicating that the caller's account balance does not have enough tokens to spend. Instead, it uses the `throw` statement without any message when the sender's balance is insufficient for the transfer:
+
+```solidity
+if (balanceOf[msg.sender] < _value) throw; // Check if the sender has enough
+```
+
+This line checks if the sender has enough balance to send the tokens, but it does not provide a specific error message as required by the given ERC rule. It simply reverts the transaction without any explanation. Therefore, the code violates the given ERC rule.

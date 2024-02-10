@@ -1,0 +1,47 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.9;
+contract Haltable is Ownable {
+
+    //empty contructor
+    constructor() public {}
+}
+
+contract EZOToken is ERC20, SafeMath, Haltable {
+    //flag to determine if address is for real contract or not
+    bool public isEZOToken = false;
+
+    //mapping of token balances
+    mapping(address => uint256) balances;
+
+    constructor() public {
+        totalSupply = 2400 ether;
+        balances[msg.sender] = totalSupply;
+        isEZOToken = true;
+    }
+}
+
+contract ERC20 {
+    uint public totalSupply;
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+     * account.
+     */
+    constructor() public {
+        owner = msg.sender;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

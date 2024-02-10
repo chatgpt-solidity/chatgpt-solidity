@@ -1,0 +1,28 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract MyToken {
+    uint256 public totalSupply;
+
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+
+    /// @notice Remove `_value` tokens from the system irreversibly
+    /// @param _value the amount of money to burn
+    function burn(uint256 _value) returns (bool success) {
+        require(balanceOf[msg.sender] > _value); // Check if the sender has enough
+        balanceOf[msg.sender] -= _value; // Subtract from the sender
+        totalSupply -= _value; // Updates totalSupply
+        Burn(msg.sender, _value);
+        return true;
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

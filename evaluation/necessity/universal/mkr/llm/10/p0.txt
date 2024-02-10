@@ -1,0 +1,38 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract DSToken is DSTokenBase(0), DSStop {
+
+    function approve(address guy, uint wad) public stoppable returns (bool) {
+        return super.approve(guy, wad);
+    }
+}
+
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => mapping(address => uint256)) _approvals;
+
+    function approve(address guy, uint wad) public returns (bool) {
+        _approvals[msg.sender][guy] = wad;
+
+        Approval(msg.sender, guy, wad);
+
+        return true;
+    }
+}
+
+contract DSStop is DSNote, DSAuth {
+
+    bool public stopped;
+    modifier stoppable() {
+        require(!stopped);
+        _;
+    }
+}
+
+
+"""
+
+Rule:"""
+emit Event Approval
+"""

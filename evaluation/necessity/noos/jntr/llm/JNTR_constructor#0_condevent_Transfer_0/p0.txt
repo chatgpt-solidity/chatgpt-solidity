@@ -1,0 +1,24 @@
+Given a solidity function constructor and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract JNTR is IST20, ERC20, SafeMath {
+    uint256 public totalSupply = 1000000000 * 10 ** 18; // tokens per 1 ether
+    address public owner;
+
+    Account[] allowedAddress;
+    mapping(address => uint256) balances;
+    mapping(address => uint256) allowedIndex;
+
+    constructor() public {
+        owner = msg.sender;
+        balances[msg.sender] = totalSupply;
+        allowedIndex[msg.sender] = 0;
+        allowedAddress.push(Account({_address: msg.sender, _active: true}));
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

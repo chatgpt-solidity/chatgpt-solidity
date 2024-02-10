@@ -1,0 +1,17 @@
+Given a solidity function balanceOf and the related parts from a smart contract.
+Whether the function balanceOf and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract CMBToken is IERC20 {
+
+    mapping(address => uint256) balances;
+
+    function balanceOf(address _owner) constant returns (uint256 balance) {
+        return balances[_owner];
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,22 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    string private _name;
+
+    /**
+     * @dev Returns the name of the token.
+     */
+    function name() public view virtual override returns (string memory) {
+        return _name;
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the name of the token
+"""

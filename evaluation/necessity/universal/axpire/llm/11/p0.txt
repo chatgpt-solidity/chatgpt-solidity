@@ -1,0 +1,47 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract Pausable is Ownable {
+
+
+    bool public paused = false;
+    /**
+     * @dev Modifier to make a function callable only when the contract is not paused.
+     */
+    modifier whenNotPaused() {
+        require(!paused);
+        _;
+    }
+}
+
+contract StandardToken is Token {
+
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        require(_value == 0 || allowed[msg.sender][_spender] == 0);
+        allowed[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+    }
+    mapping(address => mapping(address => uint256)) allowed;
+}
+
+contract AxpirePausableToken is StandardToken, Pausable, BurnableToken {
+
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public whenNotPaused returns (bool) {
+        return super.approve(_spender, _value);
+    }
+}
+
+
+"""
+
+Rule:"""
+overwrites the current allowance with _value
+"""

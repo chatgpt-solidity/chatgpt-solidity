@@ -1,0 +1,17 @@
+YES
+
+The given Solidity code for the `transfer` function in the `RegularToken` contract does not explicitly use the `emit` keyword when triggering the `Transfer` event. The `emit` keyword is required by modern Solidity conventions (starting from version 0.4.21) to clearly indicate that an event is being emitted.
+
+The correct way to emit the event would be:
+
+```solidity
+emit Transfer(msg.sender, _to, _value);
+```
+
+However, the code provided uses the older syntax which was allowed in earlier versions of Solidity:
+
+```solidity
+Transfer(msg.sender, _to, _value);
+```
+
+This older syntax is not compliant with the current ERC standards that require the `emit` keyword for emitting events. Therefore, the code violates the given ERC rule.

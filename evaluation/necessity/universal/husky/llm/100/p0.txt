@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract SiberianHusky is Context, IERC20, Ownable {
+    uint256 private constant _tTotal = 100000000000 * 10 ** 6 * 10 ** 9;
+
+    function totalSupply() public view override returns (uint256) {
+        return _tTotal;
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

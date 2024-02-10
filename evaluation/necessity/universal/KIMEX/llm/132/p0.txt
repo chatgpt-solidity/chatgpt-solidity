@@ -1,0 +1,66 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract KIMEX is Owner {
+
+    mapping(address => uint256) internal balances;
+
+    address public adminAddress;
+    bool public inActive;
+    uint256 public totalReservedTokenAllocation; // Total tokens allocated for reserved and bonuses
+
+    modifier isActive() {
+        require(inActive == false);
+        _;
+    }
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Allocate reserved tokens
+    function allocateReservedTokens(
+        address _addr,
+        uint _amount
+    ) external isActive onlyOwnerOrAdmin {
+        require(_amount > 0);
+        require(_addr != address(0));
+
+        balances[_addr] = balances[_addr].add(_amount);
+        totalReservedTokenAllocation = totalReservedTokenAllocation.sub(
+            _amount
+        );
+        emit AllocateReservedTokens(_addr, _amount);
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+
+library SafeMath {
+
+    /**
+     * @dev Substracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+"""
+
+Condition:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

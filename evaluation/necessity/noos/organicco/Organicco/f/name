@@ -1,0 +1,8 @@
+contract Token {
+    string internal _name;
+
+    function name() public constant returns (string) {
+        return _name;
+    }
+}
+

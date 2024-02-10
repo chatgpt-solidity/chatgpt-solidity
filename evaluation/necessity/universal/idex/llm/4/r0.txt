@@ -1,0 +1,7 @@
+YES
+
+The given Solidity code for the `transferFrom` function in the `MyToken` contract does not explicitly emit an event for the transfer. The ERC-20 standard requires that a `Transfer` event is emitted when tokens are transferred, including in the `transferFrom` function.
+
+The line `Transfer(_from, _to, _value);` in the provided code looks like an attempt to emit an event, but in Solidity, events are emitted using the `emit` keyword, which is missing in this code. The correct syntax to emit an event is `emit Transfer(_from, _to, _value);`.
+
+Therefore, the code violates the given ERC rule that requires the `Transfer` event to be emitted.

@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract SiberianHusky is Context, IERC20, Ownable {
+    uint8 private _decimals = 9;
+
+    function decimals() public view returns (uint8) {
+        return _decimals;
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the number of decimals the token uses
+"""

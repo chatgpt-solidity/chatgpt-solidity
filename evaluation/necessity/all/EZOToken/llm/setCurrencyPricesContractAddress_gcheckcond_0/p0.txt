@@ -1,0 +1,34 @@
+Given a solidity function setCurrencyPricesContractAddress and the related parts from a smart contract.
+Whether the function setCurrencyPricesContractAddress and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract EZOToken is ERC20, SafeMath, Haltable {
+    address public currencyPricesContract =
+        0x92F87532eDB5e7fc43F0641b37c5687f7fc7F04a;
+
+    //Owner can Set CurrencyPrices contract address
+    //@ param _currencyPricesContract Address of EZOToken contract.
+    function setCurrencyPricesContractAddress(
+        address _currencyPricesContract
+    ) public onlyOwner {
+        require(_currencyPricesContract != address(0));
+        currencyPricesContract = _currencyPricesContract;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

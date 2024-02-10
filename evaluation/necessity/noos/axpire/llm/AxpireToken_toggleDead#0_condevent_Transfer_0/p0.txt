@@ -1,0 +1,28 @@
+Given a solidity function toggleDead and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract AxpireToken is AxpirePausableToken {
+    bool public dead = false;
+
+    function toggleDead() external onlyOwner returns (bool) {
+        dead = !dead;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

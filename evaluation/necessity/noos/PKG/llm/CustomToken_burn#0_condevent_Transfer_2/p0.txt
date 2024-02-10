@@ -1,0 +1,25 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract BurnToken is BaseToken {
+
+    function burn(uint256 _value) public returns (bool success) {
+        require(balanceOf[msg.sender] >= _value);
+        balanceOf[msg.sender] -= _value;
+        totalSupply -= _value;
+        Burn(msg.sender, _value);
+        return true;
+    }
+}
+
+contract BaseToken {
+    uint256 public totalSupply;
+
+    mapping(address => uint256) public balanceOf;
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

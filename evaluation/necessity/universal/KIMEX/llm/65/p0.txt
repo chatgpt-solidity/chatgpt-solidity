@@ -1,0 +1,74 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract KIMEX is Owner {
+
+    mapping(address => uint256) internal balances;
+
+    address public adminAddress;
+    address public teamAddress;
+
+    uint constant lockPeriod1 = 1 years; // 1nd locked period for tokens allocation of founder and team
+    uint constant END_SALE = 2; // End sales
+    uint256 public constant teamAllocation = 22500000 * 10 ** 18; // 22.5 mil tokens allocated for team
+
+    uint saleState;
+    uint public icoEndTime;
+    bool public inActive;
+    uint public teamAllocatedTime = 1;
+
+    modifier isActive() {
+        require(inActive == false);
+        _;
+    }
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Allocate tokens for team vested gradually for 1 year
+    function allocateTokensForTeam() external isActive onlyOwnerOrAdmin {
+        require(saleState == END_SALE);
+        require(teamAddress != address(0));
+        uint256 amount;
+        if (teamAllocatedTime == 1) {
+            amount = (teamAllocation * 40) / 100;
+            balances[teamAddress] = balances[teamAddress].add(amount);
+            emit AllocateTokensForTeam(teamAddress, teamAllocatedTime, amount);
+            teamAllocatedTime = 2;
+            return;
+        }
+        if (teamAllocatedTime == 2) {
+            require(now >= icoEndTime + lockPeriod1);
+            amount = (teamAllocation * 60) / 100;
+            balances[teamAddress] = balances[teamAddress].add(amount);
+            emit AllocateTokensForTeam(teamAddress, teamAllocatedTime, amount);
+            teamAllocatedTime = 3;
+            return;
+        }
+        revert();
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+
+library SafeMath {
+
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

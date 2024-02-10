@@ -1,0 +1,6 @@
+contract BNB is SafeMath {
+
+    // can accept ether
+    function() payable {}
+}
+

@@ -1,0 +1,19 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract SiberianHusky is Context, IERC20, Ownable {
+
+    mapping(address => bool) private _isExcluded;
+
+    function isExcluded(address account) public view returns (bool) {
+        return _isExcluded[account];
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

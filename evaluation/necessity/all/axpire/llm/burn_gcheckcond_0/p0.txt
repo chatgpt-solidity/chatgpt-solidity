@@ -1,0 +1,48 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether the function burn and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract BurnableToken is StandardToken, Ownable {
+
+    /**
+     * @dev Anybody can burn a specific amount of their tokens.
+     * @param _amount The amount of token to be burned.
+     */
+    function burn(uint256 _amount) public {
+        require(_amount > 0);
+        require(_amount <= balances[msg.sender]);
+        // no need to require _amount <= totalSupply, since that would imply the
+        // sender's balance is greater than the totalSupply, which *should* be an assertion failure
+
+        address burner = msg.sender;
+        balances[burner] = SafeMath.sub(balances[burner], _amount);
+        totalSupply = SafeMath.sub(totalSupply, _amount);
+        emit Transfer(burner, address(0), _amount);
+        emit Burn(burner, _amount);
+    }
+}
+
+contract Token {
+    uint256 public totalSupply;
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+}
+
+library SafeMath {
+
+    /**
+     * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

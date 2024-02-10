@@ -1,0 +1,51 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract JNTR is IST20, ERC20, SafeMath {
+
+    Account[] allowedAddress;
+    mapping(address => uint256) balances;
+    mapping(address => uint256) allowedIndex;
+
+    function verifyTransaction(
+        address _sender,
+        address _reciver
+    ) internal returns (bool) {
+        require(allowedAddress[allowedIndex[_sender]]._address == _sender);
+        require(allowedAddress[allowedIndex[_reciver]]._address == _reciver);
+        require(allowedAddress[allowedIndex[_sender]]._active == true);
+        require(allowedAddress[allowedIndex[_reciver]]._active == true);
+        return true;
+
+    }
+    function transfer(address _to, uint _value) public returns (bool ok) {
+        require(verifyTransaction(msg.sender, _to));
+        uint256 senderBalance = balances[msg.sender];
+        require(senderBalance >= _value);
+        senderBalance = safeSub(senderBalance, _value);
+        balances[msg.sender] = senderBalance;
+        balances[_to] = safeAdd(balances[_to], _value);
+        emit Transfer(msg.sender, _to, _value);
+        return true;
+    }
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

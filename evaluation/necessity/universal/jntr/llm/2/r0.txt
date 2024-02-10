@@ -1,0 +1,9 @@
+YES
+
+The given Solidity code for the contract `JNTR` includes the `emit` statement for the `Transfer` event within the `transfer` function:
+
+```solidity
+emit Transfer(msg.sender, _to, _value);
+```
+
+This line of code is in compliance with the ERC rule that states "emit Event Transfer," as it correctly emits the `Transfer` event when tokens are transferred from one address to another.

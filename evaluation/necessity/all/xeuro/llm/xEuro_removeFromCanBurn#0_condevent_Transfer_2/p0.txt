@@ -1,0 +1,30 @@
+Given a solidity function removeFromCanBurn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.7;
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    // addresses allowed to burn tokens (on contract's own address):
+    mapping(address => bool) public canBurn;
+
+    function removeFromCanBurn(address _addressToRemove) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canBurn[_addressToRemove] = false;
+        emit AddressRemovedFromCanBurn(msg.sender, _addressToRemove);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract Token {
+    string internal _name;
+
+    function name() public constant returns (string) {
+        return _name;
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

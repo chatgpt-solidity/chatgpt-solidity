@@ -1,0 +1,109 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract xEuro {
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#balanceof
+    // function balanceOf(address _owner) constant returns (uint256 balance)
+    mapping(address => uint256) public balanceOf;
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#allowance
+    // function allowance(address _owner, address _spender) constant returns (uint256 remaining)
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    // addresses allowed to transfer tokens from contract's own address:
+    mapping(address => bool) public canTransferFromContract;
+
+    /* --- ERC-20 Functions */
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#methods
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#transfer
+    function transfer(address _to, uint256 _value) public returns (bool) {
+        return transferFrom(msg.sender, _to, _value);
+
+    }
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#transferfrom
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool) {
+        // Transfers of 0 values MUST be treated as normal transfers and fire the Transfer event (ERC-20)
+        require(_value >= 0);
+
+        // The function SHOULD throw unless the _from account has deliberately authorized the sender of the message via some mechanism
+        require(
+            msg.sender == _from ||
+                _value <= allowance[_from][msg.sender] ||
+                (_from == address(this) && canTransferFromContract[msg.sender])
+        );
+
+        // check if _from account have required amount
+        require(_value <= balanceOf[_from]);
+
+        if (_to == address(this)) {
+            // (!) only token holder can send tokens to smart contract to get fiat, not using allowance
+            require(_from == msg.sender);
+        }
+
+        balanceOf[_from] = balanceOf[_from].sub(_value);
+        balanceOf[_to] = balanceOf[_to].add(_value);
+
+        // If allowance used, change allowances correspondingly
+        if (_from != msg.sender && _from != address(this)) {
+            allowance[_from][msg.sender] = allowance[_from][msg.sender].sub(
+                _value
+            );
+        }
+
+        if (_to == address(this) && _value > 0) {
+            require(_value >= minExchangeAmount);
+
+            tokensInEventsCounter++;
+            tokensInTransfer[tokensInEventsCounter].from = _from;
+            tokensInTransfer[tokensInEventsCounter].value = _value;
+            tokensInTransfer[tokensInEventsCounter].receivedOn = now;
+
+            emit TokensIn(_from, _value, tokensInEventsCounter);
+        }
+
+        emit Transfer(_from, _to, _value);
+
+        return true;
+    }
+
+    uint256 minExchangeAmount = 12; // xEuro tokens
+
+    /* -- Accounting: exchange tokens to fiat (tokens sent to contract owns address > fiat payment) */
+    uint public tokensInEventsCounter = 0; //
+    mapping(uint256 => TokensInTransfer) public tokensInTransfer; //
+}
+
+library SafeMath {
+
+    /**
+     * @dev Subtracts two unsigned integers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        require(b <= a);
+        uint256 c = a - b;
+        return c;
+
+    }
+    /**
+     * @dev Adds two unsigned integers, reverts on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a);
+        return c;
+    }
+}
+
+
+"""
+
+Rule:"""
+return whether the transfer is successful
+"""

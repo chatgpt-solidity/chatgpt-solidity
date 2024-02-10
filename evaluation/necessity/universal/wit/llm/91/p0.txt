@@ -1,0 +1,36 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract WiT is AbstractToken {
+
+    /**
+     * Address of the owner of this smart contract.
+     */
+    address private owner;
+
+    /**
+     * True if tokens transfers are currently frozen, false otherwise.
+     */
+    bool frozen = false;
+
+    /**
+     * Unfreeze ALL token transfers.
+     * May only be called by smart contract owner.
+     */
+    function unfreezeTransfers() public {
+        require(msg.sender == owner);
+
+        if (frozen) {
+            frozen = false;
+            emit Unfreeze();
+        }
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

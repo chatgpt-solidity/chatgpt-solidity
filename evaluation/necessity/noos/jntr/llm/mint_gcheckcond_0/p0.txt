@@ -1,0 +1,31 @@
+Given a solidity function mint and the related parts from a smart contract.
+Whether the function mint and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract SafeMath {
+
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract JNTR is IST20, ERC20, SafeMath {
+    uint256 public totalSupply = 1000000000 * 10 ** 18; // tokens per 1 ether
+    address public owner;
+    mapping(address => uint256) balances;
+
+    function mint(uint256 _value) public returns (bool) {
+        require(msg.sender == owner);
+        require(_value > 0);
+        balances[msg.sender] = safeAdd(balances[msg.sender], _value);
+        totalSupply = safeAdd(totalSupply, _value);
+        return true;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

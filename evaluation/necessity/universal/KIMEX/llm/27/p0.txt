@@ -1,0 +1,31 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+library SafeMath {
+
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract KIMEX is Owner {
+    uint256 public totalLoadedRefund; // Total ether will be loaded to contract for refund
+
+    // Load ether amount to contract for refunding or revoking
+    function loadFund() external payable {
+        require(msg.value > 0);
+
+        totalLoadedRefund = totalLoadedRefund.add(msg.value);
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

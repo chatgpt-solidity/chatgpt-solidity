@@ -1,0 +1,45 @@
+Given a solidity function KIMEX and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Owner {
+    address public owner;
+
+    function Owner(address _owner) public {
+        owner = _owner;
+    }
+}
+
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    address public walletAddress;
+
+    uint256 public constant salesAllocation = 150000000 * 10 ** 18; // 150 mil tokens allocated for sales
+    uint256 public constant reservedAllocation = 22500000 * 10 ** 18; // 22.5 mil tokens allocated for reserved, bounty campaigns, ICO partners, and bonus fund
+    uint256 totalInvestedAmount;
+    bool public inActive;
+
+    uint256 public totalRemainingTokensForSales; // Total tokens remaining for sales
+    uint256 public totalReservedTokenAllocation; // Total tokens allocated for reserved and bonuses
+
+    function KIMEX(
+        address _walletAddr,
+        address _adminAddr
+    ) public Owner(msg.sender) {
+        require(_walletAddr != address(0));
+        require(_adminAddr != address(0));
+
+        walletAddress = _walletAddr;
+        adminAddress = _adminAddr;
+        inActive = true;
+        totalInvestedAmount = 0;
+        totalRemainingTokensForSales = salesAllocation;
+        totalReservedTokenAllocation = reservedAllocation;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

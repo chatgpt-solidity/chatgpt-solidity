@@ -1,0 +1,26 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract SilkToken is owned, TokenERC20 {
+    bool public isPreSales = false;
+
+    /// @notice Stop presales with setting state variable
+    function stopPreSales() public onlyOwner {
+        isPreSales = false;
+    }
+}
+
+contract owned {
+    address public owner;
+
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

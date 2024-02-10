@@ -1,0 +1,35 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract Organicco is
+    Token("ORC", "Organicco", 18, 120000000000000000000000000),
+    ERC20,
+    ERC223
+{
+
+    function approve(address _spender, uint _value) public returns (bool) {
+        _allowances[msg.sender][_spender] = _allowances[msg.sender][_spender]
+            .add(_value);
+        Approval(msg.sender, _spender, _value);
+        return true;
+    }
+}
+
+contract Token {
+    mapping(address => mapping(address => uint)) internal _allowances;
+}
+
+library SafeMath {
+
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

@@ -1,0 +1,9 @@
+YES
+
+The given Solidity code does emit the "Approval" event in the `approve` function of the `StandardToken` contract, which is in compliance with the ERC-20 standard that requires an Approval event to be emitted when the `approve` function is called. Here is the relevant part of the code:
+
+```solidity
+emit Approval(msg.sender, _spender, _value);
+```
+
+This line is responsible for emitting the event whenever the `approve` function is successfully executed, thus adhering to the given ERC rule.

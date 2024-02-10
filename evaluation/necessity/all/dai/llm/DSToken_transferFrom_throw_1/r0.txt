@@ -1,0 +1,8 @@
+YES
+
+The `transferFrom` function in the provided Solidity code does not have any explicit checks that would cause it to throw an error when transferring a value of 0. The `sub` and `add` functions from the `DSMath` contract use `require` statements to ensure that underflows and overflows do not occur, but these checks will not fail for a transfer of 0 because:
+
+- Subtracting 0 from a number `x` will not cause an underflow, as `x - 0` is always equal to `x`.
+- Adding 0 to a number `y` will not cause an overflow, as `y + 0` is always equal to `y`.
+
+Therefore, if the `transferFrom` function is called with a `wad` value of 0, it should complete successfully without throwing, assuming that the contract is not stopped (i.e., `stopped` is `false`) and that the `src` address has authorized the `msg.sender` to transfer at least 0 tokens on its behalf.

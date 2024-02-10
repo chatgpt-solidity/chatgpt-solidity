@@ -1,0 +1,30 @@
+Given a solidity function sendFundHomeAmt and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract AxpireToken is AxpirePausableToken {
+    uint256 public constant decimals = 18;
+
+    address private ethFundDeposit;
+
+    function sendFundHomeAmt(uint _amt) external onlyOwner {
+        if (!ethFundDeposit.send(_amt * 10 ** decimals)) revert(); // send the eth to tge International
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are minting or allocating
+"""

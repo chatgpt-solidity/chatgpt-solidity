@@ -1,0 +1,44 @@
+Given a solidity function loadFund and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract KIMEX is Owner {
+    uint256 public totalLoadedRefund; // Total ether will be loaded to contract for refund
+
+    // Load ether amount to contract for refunding or revoking
+    function loadFund() external payable {
+        require(msg.value > 0);
+
+        totalLoadedRefund = totalLoadedRefund.add(msg.value);
+    }
+}
+
+library SafeMath {
+
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

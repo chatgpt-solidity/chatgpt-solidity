@@ -1,0 +1,11 @@
+YES
+
+The given Solidity code for the `UnlimitedAllowanceToken` contract includes a `transferFrom` function that is intended to emit a `Transfer` event upon a successful transfer of tokens. However, the code provided does not explicitly emit the `Transfer` event using the `emit` keyword, which is required by the ERC-20 standard for logging transfer events.
+
+The correct implementation should include the `emit` keyword before the `Transfer` event, like so:
+
+```solidity
+emit Transfer(_from, _to, _value);
+```
+
+Since the provided code uses `Transfer(_from, _to, _value);` without the `emit` keyword, it violates the given ERC rule that requires the `Transfer` event to be emitted.

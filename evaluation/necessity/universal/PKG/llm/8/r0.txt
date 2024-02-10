@@ -1,0 +1,10 @@
+YES
+
+The given Solidity code defines an `approve` function within the `BaseToken` contract that sets an allowance for a spender to use a certain amount of tokens on behalf of the message sender. However, the code does not properly emit the `Approval` event as per the ERC-20 standard. The line `Approval(msg.sender, _spender, _value);` attempts to call an event, but it is missing the `emit` keyword which is required to actually emit the event in Solidity (0.4.21 or later).
+
+The correct line should be:
+```solidity
+emit Approval(msg.sender, _spender, _value);
+```
+
+Since the `emit` keyword is missing, the code violates the given ERC rule to "emit Event Approval".

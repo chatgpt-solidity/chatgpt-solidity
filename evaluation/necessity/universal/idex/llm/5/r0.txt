@@ -1,0 +1,13 @@
+NO
+
+The provided Solidity code does not violate the given ERC rule. The rule states that the `_from` account must have authorized the sender of the message via some mechanism. In the context of ERC-20 tokens, this authorization is typically done through the `approve` function, which sets an allowance for another address to spend tokens on behalf of the `_from` address.
+
+In the provided `transferFrom` function, there is a check to ensure that the `msg.sender` has been authorized to spend the specified `_value` of tokens from the `_from` address:
+
+```solidity
+if (_value > allowance[_from][msg.sender]) throw; // Check allowance
+```
+
+This line checks that the allowance mapping for `_from` and `msg.sender` is greater than or equal to the `_value` that is being transferred. If the allowance is not sufficient, the function will throw, which is the old way of reverting the transaction in Solidity (modern Solidity uses `require` or `revert` for this purpose).
+
+Therefore, the code enforces the rule that the `_from` account must have authorized the sender (`msg.sender`) before the `transferFrom` function can move tokens, and thus it does not violate the given ERC rule.

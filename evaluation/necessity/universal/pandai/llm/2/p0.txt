@@ -1,0 +1,17 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract PandAIToken is ERC20, ERC20Burnable {
+
+    function decimals() public view virtual override returns (uint8) {
+        return 6;
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the number of decimals the token uses
+"""

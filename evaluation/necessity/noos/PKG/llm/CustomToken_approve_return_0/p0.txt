@@ -1,0 +1,19 @@
+Given a solidity function approve and the related parts from a smart contract and an rule for its return value.
+Whether function approve return whether the approve is successful? Reply in "YES" or "NO".
+
+<example>
+
+Function(and related parts) to audit:"""
+contract BaseToken {
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+        Approval(msg.sender, _spender, _value);
+        return true;
+    }
+}
+"""

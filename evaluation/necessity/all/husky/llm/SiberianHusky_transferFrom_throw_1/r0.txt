@@ -1,0 +1,10 @@
+YES
+
+The `transferFrom` function in the provided Solidity code uses the SafeMath library for arithmetic operations, which includes checks for overflows and underflows. When transferring a value of 0, the SafeMath functions such as `sub` (subtraction) and `add` (addition) will not throw an exception because:
+
+1. Subtracting 0 from any number does not cause an underflow.
+2. Adding 0 to any number does not cause an overflow.
+
+Additionally, the `transferFrom` function itself does not have any explicit checks that would cause it to revert when the transfer amount is 0. It only checks that the sender and recipient are not the zero address, and that the amount is not greater than the allowance (which would not be the case for a transfer of 0).
+
+Therefore, transfers of 0 values will not cause the `transferFrom` function to throw an exception.

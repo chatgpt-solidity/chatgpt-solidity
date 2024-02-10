@@ -1,0 +1,31 @@
+Given a solidity function approve and the related parts from a smart contract and an rule for its return value.
+Whether function approve return whether the approve is successful? Reply in "YES" or "NO".
+
+Notes: In case of failure, it is allowed to revert the transaction instead of returning false.
+
+
+
+Function(and related parts) to audit:"""
+contract KIMEX is Owner {
+    mapping(address => mapping(address => uint256)) internal allowed;
+    bool public isTransferable;
+
+    modifier transferable() {
+        require(isTransferable == true);
+        _;
+    }
+
+    // ERC20 standard function
+    function approve(
+        address _spender,
+        uint256 _value
+    ) external transferable returns (bool) {
+        require(_spender != address(0));
+        require(_value > 0);
+
+        allowed[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+    }
+}
+"""

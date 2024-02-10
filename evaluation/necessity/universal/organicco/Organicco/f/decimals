@@ -1,0 +1,8 @@
+contract Token {
+    uint8 internal _decimals;
+
+    function decimals() public constant returns (uint8) {
+        return _decimals;
+    }
+}
+

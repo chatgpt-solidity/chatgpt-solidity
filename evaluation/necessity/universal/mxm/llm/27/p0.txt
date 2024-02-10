@@ -1,0 +1,31 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract TokenERC20 {
+
+    mapping(address => bool) public blacklist;
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    /**
+     * Set allowance for other address
+     *
+     * Allows `_spender` to spend no more than `_value` tokens on your behalf
+     *
+     * @param _spender The address authorized to spend
+     * @param _value the max amount they can spend
+     */
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        require(!blacklist[msg.sender]);
+        allowance[msg.sender][_spender] = _value;
+        return true;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

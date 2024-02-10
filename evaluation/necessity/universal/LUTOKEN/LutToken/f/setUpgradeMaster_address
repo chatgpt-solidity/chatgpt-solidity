@@ -1,0 +1,17 @@
+contract UpgradeableToken is StandardToken {
+
+    /** Contract / person who can set the upgrade path. This can be the same as team multisig wallet, as what it is with its default value. */
+    address public upgradeMaster;
+
+    /**
+     * Change the upgrade master.
+     *
+     * This allows us to set a new owner for the upgrade mechanism.
+     */
+    function setUpgradeMaster(address master) public {
+        require(master != address(0));
+        require(msg.sender == upgradeMaster);
+        upgradeMaster = master;
+    }
+}
+

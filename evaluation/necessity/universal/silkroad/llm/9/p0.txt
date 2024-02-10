@@ -1,0 +1,30 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract TokenERC20 {
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    /**
+     * Set allowance for other address
+     *
+     * Allows `_spender` to spend no more than `_value` tokens in your behalf
+     *
+     * @param _spender The address authorized to spend
+     * @param _value the max amount they can spend
+     */
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+        return true;
+    }
+}
+
+
+"""
+
+Rule:"""
+return whether the approve is successful
+"""

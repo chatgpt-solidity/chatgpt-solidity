@@ -1,0 +1,19 @@
+Given a solidity function fallback and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract MyToken {
+
+    /* This unnamed function is called whenever someone tries to send ether to it */
+    function() {
+        throw; // Prevents accidental sending of ether
+    }
+}
+"""
+
+Action:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

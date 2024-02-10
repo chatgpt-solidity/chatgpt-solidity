@@ -1,0 +1,29 @@
+contract LutToken is
+    LutTokenInterface,
+    UpgradeableToken,
+    DetailedERC20,
+    BurnableToken,
+    Pausable
+{
+
+    function setFreeze(bool newFreeze) public onlyOwner {
+        freeze = newFreeze;
+    }
+}
+
+contract LutTokenInterface is ERC20 {
+    bool public freeze;
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+

@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract SiberianHusky is Context, IERC20, Ownable {
+    uint256 private constant _tTotal = 100000000000 * 10 ** 6 * 10 ** 9;
+
+    function totalSupply() public view override returns (uint256) {
+        return _tTotal;
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the total token supply
+"""

@@ -1,0 +1,21 @@
+Given a solidity function getWallet and the related parts from a smart contract.
+Whether the function getWallet and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract JNTR is IST20, ERC20, SafeMath {
+
+    Account[] allowedAddress;
+    mapping(address => uint256) allowedIndex;
+
+    function getWallet(
+        address _owner
+    ) public view returns (address _address, bool _active) {
+        uint256 index = allowedIndex[_owner];
+        return (allowedAddress[index]._address, allowedAddress[index]._active);
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

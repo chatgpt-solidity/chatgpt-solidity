@@ -1,0 +1,11 @@
+YES
+
+The given Solidity code does not explicitly throw a message stating that the caller's account balance does not have enough tokens to spend. Instead, it uses the `throw` statement without providing any specific error message. The `throw` statement reverts all changes to the state and balance but does not provide a way to return a custom error message.
+
+As of Solidity 0.4.13, the recommended way to handle such conditions is to use `require` with an error message, like so:
+
+```solidity
+require(balanceOf[msg.sender] >= _value, "Sender's account balance does not have enough tokens to spend");
+```
+
+This would check the sender's balance and revert the transaction if the condition is not met, providing the specified error message. However, the code provided uses an older pattern without a custom error message, thus violating the given ERC rule.

@@ -1,0 +1,9 @@
+YES
+
+The given Solidity code does emit the Approval event in the approve function as required by the ERC rule. Here is the relevant line from the code:
+
+```solidity
+emit Approval(msg.sender, _spender, _value);
+```
+
+This line is in compliance with the ERC-20 token standard, which requires an Approval event to be emitted when the approve function is called. The Approval event signals that a certain amount of tokens from the owner's balance can be spent by a spender.

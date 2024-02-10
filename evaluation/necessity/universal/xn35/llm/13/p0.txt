@@ -1,0 +1,21 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract Projecton is owned, IERC20 {
+    mapping(address => mapping(address => uint256)) allowed;
+
+    function allowance(
+        address _owner,
+        address _spender
+    ) constant returns (uint256 remaining) {
+        return allowed[_owner][_spender];
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the amount which _spender is still allowed to withdraw from _owner
+"""

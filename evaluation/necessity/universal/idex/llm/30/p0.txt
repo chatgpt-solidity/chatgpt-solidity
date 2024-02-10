@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract MyToken {
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    /* Allow another contract to spend some tokens in your behalf */
+    function approve(address _spender, uint256 _value) returns (bool success) {
+        allowance[msg.sender][_spender] = _value;
+        return true;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

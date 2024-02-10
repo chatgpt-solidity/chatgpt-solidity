@@ -1,0 +1,32 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    // addresses allowed to transfer tokens from contract's own address:
+    mapping(address => bool) public canTransferFromContract;
+
+    function removeFromCanTransferFromContract(
+        address _addressToRemove
+    ) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canTransferFromContract[_addressToRemove] = false;
+        emit AddressRemovedFromCanTransferFromContract(
+            msg.sender,
+            _addressToRemove
+        );
+        return true;
+    }
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

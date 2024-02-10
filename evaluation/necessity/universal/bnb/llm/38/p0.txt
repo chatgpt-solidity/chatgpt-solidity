@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract BNB is SafeMath {
+    address public owner;
+
+    // transfer balance to owner
+    function withdrawEther(uint256 amount) {
+        if (msg.sender != owner) throw;
+        owner.transfer(amount);
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

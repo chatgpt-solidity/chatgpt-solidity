@@ -1,0 +1,17 @@
+Given a solidity function fallback and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract BNB is SafeMath {
+
+    // can accept ether
+    function() payable {}
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

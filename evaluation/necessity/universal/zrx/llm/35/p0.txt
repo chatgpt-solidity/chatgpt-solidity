@@ -1,0 +1,21 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract ZRXToken is UnlimitedAllowanceToken {
+    uint public totalSupply = 10 ** 27; // 1 billion tokens, 18 decimal places
+
+    function ZRXToken() {
+        balances[msg.sender] = totalSupply;
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint) balances;
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

@@ -1,0 +1,11 @@
+NO
+
+The provided `transferFrom` function in the `StandardToken` contract does not explicitly return a value. According to the ERC20 standard, the `transferFrom` function should return a boolean value indicating whether the transfer was successful. However, in the given code, there is no `return` statement at all.
+
+The ERC20 `transferFrom` function typically has a signature like this:
+
+```solidity
+function transferFrom(address _from, address _to, uint256 _value) public returns (bool success);
+```
+
+And it should return `true` if the transfer was successful. The absence of a return statement in the provided function means it does not comply with the ERC rule as stated.

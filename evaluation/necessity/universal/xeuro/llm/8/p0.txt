@@ -1,0 +1,45 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+constructor() returns()
+transfer(address,uint256) returns(bool)
+transferFrom(address,address,uint256) returns(bool)
+transferAndCall(address,uint256,bytes) returns(bool)
+transferAllAndCall(address,bytes) returns(bool)
+addAdmin(address) returns(bool)
+removeAdmin(address) returns(bool)
+changeMinExchangeAmount(uint256) returns(bool)
+addToCanMint(address) returns(bool)
+removeFromCanMint(address) returns(bool)
+addToCanTransferFromContract(address) returns(bool)
+removeFromCanTransferFromContract(address) returns(bool)
+addToCanBurn(address) returns(bool)
+removeFromCanBurn(address) returns(bool)
+mintTokens(uint256,uint256) returns(bool)
+mintAndTransfer(uint256,uint256,address) returns(bool)
+burnTokens(uint256,uint256,uint256) returns(bool)
+decimals() returns(uint8)
+fiatInPaymentsToMintTokensEvent(uint256) returns(address,uint256,uint256,uint256,uint256)
+canMint(address) returns(bool)
+totalSupply() returns(uint256)
+isAdmin(address) returns(bool)
+fiatOutPaymentIdsUsed(uint256) returns(bool)
+name() returns(string)
+allowance(address,address) returns(uint256)
+tokensInEventsCounter() returns(uint256)
+canBurn(address) returns(bool)
+canTransferFromContract(address) returns(bool)
+burnTokensEvents(uint256) returns(address,uint256,uint256,uint256,uint256,uint256)
+burnTokensEventsCounter() returns(uint256)
+mintTokensEvent(uint256) returns(address,uint256,uint256,uint256,uint256)
+mintTokensEventsCounter() returns(uint256)
+fiatInPaymentIds(uint256) returns(bool)
+tokensInTransfer(uint256) returns(address,uint256,uint256)
+symbol() returns(string)
+balanceOf(address) returns(uint256)
+"""
+
+Rule:"""
+totalSupply() returns(uint256)
+"""

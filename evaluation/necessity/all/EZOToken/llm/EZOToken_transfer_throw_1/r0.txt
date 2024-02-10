@@ -1,0 +1,9 @@
+NO
+
+The `transfer` function in the provided smart contract code includes a `require` statement that explicitly checks for the `_value` to be greater than 0:
+
+```solidity
+require(_uniqueId != address(0) && _value > 0);
+```
+
+This means that if `_value` is 0, the `require` condition will fail, and the function will throw an exception (revert the transaction). Therefore, transfers of 0 values will not be allowed and will cause the function to throw.

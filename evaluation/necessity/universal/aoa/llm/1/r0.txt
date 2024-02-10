@@ -1,0 +1,5 @@
+YES
+
+The given Solidity code does not explicitly throw an error message stating that the message caller's account balance does not have enough tokens to spend. Instead, it performs a check to see if the balance is sufficient and the value to transfer is greater than 0, and if not, it simply returns false without providing a specific error message.
+
+According to the ERC rule provided, the contract should throw an error message when the balance is not sufficient. The code should be modified to include a require statement or revert with an error message to comply with the given ERC rule.

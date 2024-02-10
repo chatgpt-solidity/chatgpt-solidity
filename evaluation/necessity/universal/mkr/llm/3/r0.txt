@@ -1,0 +1,12 @@
+YES
+
+The code provided for the `DSToken` contract includes a `Transfer` event call, but it is not using the `emit` keyword which is required by the Solidity language (starting from version 0.4.21) to emit events. The correct syntax to emit an event is `emit EventName(arguments);`. Therefore, the code violates the given ERC rule which requires the use of `emit` keyword before emitting the `Transfer` event.
+
+The line in the `transferFrom` function should be corrected from:
+```solidity
+Transfer(src, dst, wad);
+```
+to:
+```solidity
+emit Transfer(src, dst, wad);
+```

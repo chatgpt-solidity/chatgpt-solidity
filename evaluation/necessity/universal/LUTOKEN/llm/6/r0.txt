@@ -1,0 +1,7 @@
+YES
+
+The provided Solidity code does not explicitly emit an event named "Transfer" within the `transferFrom` function of the `LutToken` contract. However, it does call `super.transferFrom(_from, _to, _value);`, which suggests that it is calling the `transferFrom` function from a parent contract.
+
+Looking further into the code, we can see that the `LutToken` contract inherits from `StandardToken`, which has its own `transferFrom` function. Within this function, there is an `emit Transfer(_from, _to, _value);` statement, which emits the Transfer event as required by the ERC rule.
+
+Therefore, while the `LutToken` contract's `transferFrom` function does not directly emit the Transfer event, it does so indirectly through inheritance by calling the `transferFrom` function of the `StandardToken` contract, which does emit the Transfer event. This means the code does not violate the given ERC rule.

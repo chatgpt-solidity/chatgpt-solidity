@@ -1,0 +1,134 @@
+Given a solidity function transferAllAndCall and the related parts from a smart contract.
+Whether the function transferAllAndCall and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+library SafeMath {
+
+    /**
+     * @dev Subtracts two unsigned integers, reverts on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        require(b <= a);
+        uint256 c = a - b;
+        return c;
+    }
+
+    /**
+     * @dev Adds two unsigned integers, reverts on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        require(c >= a);
+        return c;
+    }
+}
+
+contract xEuro {
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#balanceof
+    // function balanceOf(address _owner) constant returns (uint256 balance)
+    mapping(address => uint256) public balanceOf;
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#allowance
+    // function allowance(address _owner, address _spender) constant returns (uint256 remaining)
+    mapping(address => mapping(address => uint256)) public allowance;
+
+    // addresses allowed to transfer tokens from contract's own address:
+    mapping(address => bool) public canTransferFromContract;
+
+    // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md#transferfrom
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool) {
+        // Transfers of 0 values MUST be treated as normal transfers and fire the Transfer event (ERC-20)
+        require(_value >= 0);
+
+        // The function SHOULD throw unless the _from account has deliberately authorized the sender of the message via some mechanism
+        require(
+            msg.sender == _from ||
+                _value <= allowance[_from][msg.sender] ||
+                (_from == address(this) && canTransferFromContract[msg.sender])
+        );
+
+        // check if _from account have required amount
+        require(_value <= balanceOf[_from]);
+
+        if (_to == address(this)) {
+            // (!) only token holder can send tokens to smart contract to get fiat, not using allowance
+            require(_from == msg.sender);
+        }
+
+        balanceOf[_from] = balanceOf[_from].sub(_value);
+        balanceOf[_to] = balanceOf[_to].add(_value);
+
+        // If allowance used, change allowances correspondingly
+        if (_from != msg.sender && _from != address(this)) {
+            allowance[_from][msg.sender] = allowance[_from][msg.sender].sub(
+                _value
+            );
+        }
+
+        if (_to == address(this) && _value > 0) {
+            require(_value >= minExchangeAmount);
+
+            tokensInEventsCounter++;
+            tokensInTransfer[tokensInEventsCounter].from = _from;
+            tokensInTransfer[tokensInEventsCounter].value = _value;
+            tokensInTransfer[tokensInEventsCounter].receivedOn = now;
+
+            emit TokensIn(_from, _value, tokensInEventsCounter);
+        }
+
+        emit Transfer(_from, _to, _value);
+
+        return true;
+
+    }
+    /*  ---------- Interaction with other contracts  */
+
+    /* https://github.com/ethereum/EIPs/issues/677
+     * transfer tokens with additional info to another smart contract, and calls its correspondent function
+     * @param address _to - another smart contract address
+     * @param uint256 _value - number of tokens
+     * @param bytes _extraData - data to send to another contract
+     * > this may be used to convert pre-ICO tokens to ICO tokens
+     */
+    function transferAndCall(
+        address _to,
+        uint256 _value,
+        bytes memory _extraData
+    ) public returns (bool) {
+        tokenRecipient receiver = tokenRecipient(_to);
+
+        if (transferFrom(msg.sender, _to, _value)) {
+            if (receiver.tokenFallback(msg.sender, _value, _extraData)) {
+                emit DataSentToAnotherContract(msg.sender, _to, _extraData);
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // the same as above, but for all tokens on user account
+    // for example for converting ALL tokens of user account to another tokens
+    function transferAllAndCall(
+        address _to,
+        bytes memory _extraData
+    ) public returns (bool) {
+        return transferAndCall(_to, balanceOf[msg.sender], _extraData);
+    }
+
+    uint256 minExchangeAmount = 12; // xEuro tokens
+
+    /* -- Accounting: exchange tokens to fiat (tokens sent to contract owns address > fiat payment) */
+    uint public tokensInEventsCounter = 0; //
+    mapping(uint256 => TokensInTransfer) public tokensInTransfer; //
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

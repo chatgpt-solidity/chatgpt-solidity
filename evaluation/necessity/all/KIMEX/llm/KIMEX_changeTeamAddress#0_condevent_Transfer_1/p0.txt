@@ -1,0 +1,33 @@
+Given a solidity function changeTeamAddress and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.21;
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    address public teamAddress;
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Modify team address to receive team tokens allocation
+    function changeTeamAddress(address _newAddress) external onlyOwnerOrAdmin {
+        require(_newAddress != address(0));
+        require(teamAddress != _newAddress);
+        teamAddress = _newAddress;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

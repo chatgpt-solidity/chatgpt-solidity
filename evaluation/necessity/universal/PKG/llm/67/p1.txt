@@ -1,0 +1,5 @@
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Rule:"""
+caller handles or directly returns the result of those calls
+"""

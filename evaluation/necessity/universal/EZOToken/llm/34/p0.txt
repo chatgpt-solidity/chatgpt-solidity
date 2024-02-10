@@ -1,0 +1,31 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract EZOToken is ERC20, SafeMath, Haltable {
+    mapping(address => bool) public allowedAddresses;
+
+    function addAllowedAddress(
+        address _allowAddr,
+        bool _permission
+    ) public onlyOwner {
+        allowedAddresses[_allowAddr] = _permission;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

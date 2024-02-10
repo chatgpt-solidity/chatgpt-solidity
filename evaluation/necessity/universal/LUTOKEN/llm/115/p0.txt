@@ -1,0 +1,22 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract BasicToken is ERC20Basic {
+
+
+    uint256 totalSupply_;
+    /**
+     * @dev total number of tokens in existence
+     */
+    function totalSupply() public view returns (uint256) {
+        return totalSupply_;
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,44 @@
+Given a solidity function unfreeze and the related parts from a smart contract.
+Whether the function unfreeze and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    function safeAdd(uint256 a, uint256 b) internal returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a && c >= b);
+        return c;
+    }
+
+    function assert(bool assertion) internal {
+        if (!assertion) {
+            throw;
+        }
+    }
+}
+
+contract BNB is SafeMath {
+
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+    mapping(address => uint256) public freezeOf;
+
+    function unfreeze(uint256 _value) returns (bool success) {
+        if (freezeOf[msg.sender] < _value) throw; // Check if the sender has enough
+        if (_value <= 0) throw;
+        freezeOf[msg.sender] = SafeMath.safeSub(freezeOf[msg.sender], _value); // Subtract from the sender
+        balanceOf[msg.sender] = SafeMath.safeAdd(balanceOf[msg.sender], _value);
+        Unfreeze(msg.sender, _value);
+        return true;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,9 @@
+YES
+
+The provided Solidity code for the `xEuro` contract includes an `emit` statement for the `Transfer` event within the `transferFrom` function:
+
+```solidity
+emit Transfer(_from, _to, _value);
+```
+
+This is in compliance with the ERC-20 standard, which requires that a `Transfer` event be emitted when tokens are transferred, including transfers of 0 value. The `emit` keyword is used in Solidity to trigger events, and in this case, it is correctly used to emit the `Transfer` event whenever the `transferFrom` function is successfully executed. Therefore, the code does not violate the given ERC rule.

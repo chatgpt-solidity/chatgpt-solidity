@@ -1,0 +1,30 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    address public teamAddress;
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Modify team address to receive team tokens allocation
+    function changeTeamAddress(address _newAddress) external onlyOwnerOrAdmin {
+        require(_newAddress != address(0));
+        require(teamAddress != _newAddress);
+        teamAddress = _newAddress;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Condition:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

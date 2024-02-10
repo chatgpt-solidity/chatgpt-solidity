@@ -1,0 +1,82 @@
+Given a solidity function transfer and the related parts from a smart contract.
+Whether the function transfer and its related parts will throw if the given condition exist? Reply in "YES" or "NO"
+
+Function(and related parts) to audit:"""
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract AbstractToken is Token, SafeMath {
+
+    /**
+     * Transfer given number of tokens from message sender to given recipient.
+     *
+     * @param _to address to transfer tokens to the owner of
+     * @param _value number of tokens to transfer to the owner of given address
+     * @return true if tokens were transferred successfully, false otherwise
+     * accounts [_to] + _value > accounts [_to] for overflow check
+     * which is already in safeMath
+     */
+    function transfer(
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        require(_to != address(0));
+        if (accounts[msg.sender] < _value) return false;
+        if (_value > 0 && msg.sender != _to) {
+            accounts[msg.sender] = safeSub(accounts[msg.sender], _value);
+            accounts[_to] = safeAdd(accounts[_to], _value);
+        }
+        emit Transfer(msg.sender, _to, _value);
+        return true;
+    }
+
+    /**
+     * Mapping from addresses of token holders to the numbers of tokens belonging
+     * to these token holders.
+     */
+    mapping(address => uint256) accounts;
+}
+
+contract WiT is AbstractToken {
+
+    /**
+     * Frozen account list holder
+     */
+    mapping(address => bool) private frozenAccount;
+
+    /**
+     * True if tokens transfers are currently frozen, false otherwise.
+     */
+    bool frozen = false;
+
+    /**
+     * Transfer given number of tokens from message sender to given recipient.
+     * @param _to address to transfer tokens to the owner of
+     * @param _value number of tokens to transfer to the owner of given address
+     * @return true if tokens were transferred successfully, false otherwise
+     */
+    function transfer(
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        require(!frozenAccount[msg.sender]);
+        if (frozen) return false;
+        else return AbstractToken.transfer(_to, _value);
+    }
+}
+"""
+
+Condition:"""
+Transfers of 0 values
+"""

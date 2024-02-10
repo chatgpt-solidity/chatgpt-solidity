@@ -1,0 +1,34 @@
+Given a solidity function burn and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.22;
+contract JNTR is IST20, ERC20, SafeMath {
+    uint256 public totalSupply = 1000000000 * 10 ** 18; // tokens per 1 ether
+    address public owner;
+    mapping(address => uint256) balances;
+
+    function burn(uint256 _value) public returns (bool) {
+        require(_value > 0);
+        require(_value < balances[msg.sender]);
+        require(msg.sender == owner);
+        balances[msg.sender] = safeSub(balances[msg.sender], _value);
+        totalSupply = safeSub(totalSupply, _value);
+        return true;
+    }
+}
+
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

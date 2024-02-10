@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract Token {
+    string internal _name;
+
+    function name() public constant returns (string) {
+        return _name;
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the name of the token
+"""

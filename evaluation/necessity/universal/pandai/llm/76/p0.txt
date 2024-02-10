@@ -1,0 +1,25 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract ERC20 is Context, IERC20, IERC20Metadata {
+
+    mapping(address => mapping(address => uint256)) private _allowances;
+
+    /**
+     * @dev See {IERC20-allowance}.
+     */
+    function allowance(
+        address owner,
+        address spender
+    ) public view virtual override returns (uint256) {
+        return _allowances[owner][spender];
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

@@ -1,0 +1,22 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract JNTR is IST20, ERC20, SafeMath {
+    address public owner;
+
+    Account[] allowedAddress;
+    mapping(address => uint256) allowedIndex;
+
+    function unlockAccount(address _address) public returns (bool) {
+        require(msg.sender == owner);
+        require(allowedAddress[allowedIndex[_address]]._address == _address);
+        allowedAddress[allowedIndex[_address]]._active = true;
+        return true;
+    }
+}
+"""
+
+Condition:"""
+tokens are burning or deallocating
+"""

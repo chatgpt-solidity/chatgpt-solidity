@@ -1,0 +1,20 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+event Approval(address indexed, address indexed, uint256);
+event Transfer(address indexed, address indexed, uint256);
+event ModifyWhiteList(address, bool);
+event StartICO(uint256);
+event EndICO(uint256);
+event SetICOPrice(uint256);
+event IssueTokens(address, uint256, uint256, uint256);
+event AllocateTokensForFounder(address, uint256, uint256);
+event AllocateTokensForTeam(address, uint256, uint256);
+event AllocateReservedTokens(address, uint256);
+event AllocateSalesTokens(address, uint256);
+"""
+
+Rule:"""
+event Transfer(address indexed, address indexed, uint256);
+"""

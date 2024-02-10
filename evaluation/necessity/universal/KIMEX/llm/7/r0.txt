@@ -1,0 +1,9 @@
+YES
+
+The given Solidity code for the `transferFrom` function in the `KIMEX` contract includes the line:
+
+```solidity
+require(_value > 0);
+```
+
+This line of code requires that the `_value` (the amount to be transferred) must be greater than 0. According to the ERC rule provided, transfers of 0 values must be treated as normal transfers. However, the code explicitly prohibits transfers of 0 values, which violates the given ERC rule. Therefore, the answer is YES, the code violates the given ERC rule.

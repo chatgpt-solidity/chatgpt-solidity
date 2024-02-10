@@ -1,0 +1,21 @@
+Given a solidity function withdraw and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.23;
+contract ICOToken is BaseToken {
+    address public icoHolder;
+
+    function withdraw() {
+        uint256 balance = this.balance;
+        icoHolder.transfer(balance);
+        Withdraw(msg.sender, icoHolder, balance);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

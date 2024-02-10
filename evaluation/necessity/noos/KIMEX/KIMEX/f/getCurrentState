@@ -1,0 +1,10 @@
+contract KIMEX is Owner {
+
+    uint saleState;
+
+    // Get current sales state
+    function getCurrentState() public view returns (uint256) {
+        return saleState;
+    }
+}
+

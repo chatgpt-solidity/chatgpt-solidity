@@ -1,0 +1,26 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract JNTR is IST20, ERC20, SafeMath {
+    address public owner;
+
+    Account[] allowedAddress;
+    mapping(address => uint256) balances;
+    mapping(address => uint256) allowedIndex;
+
+    function setAccount(address _address) public returns (bool) {
+        require(msg.sender == owner);
+        require(allowedAddress[allowedIndex[_address]]._address != _address);
+        uint256 x = allowedAddress.length;
+        allowedIndex[_address] = x;
+        allowedAddress.push(Account({_address: _address, _active: true}));
+        balances[_address] = 0;
+        return true;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

@@ -1,0 +1,9 @@
+YES
+
+The provided Solidity code does include an `emit` statement for the `Transfer` event within the `transfer` function of the `AbstractToken` contract. Here is the relevant part of the code:
+
+```solidity
+emit Transfer(msg.sender, _to, _value);
+```
+
+This line is responsible for emitting the `Transfer` event whenever a transfer of tokens is successfully executed, which is in compliance with the ERC-20 standard for token transfer events. Therefore, the code does not violate the given ERC rule.

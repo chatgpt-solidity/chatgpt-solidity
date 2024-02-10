@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract DSTokenBase is ERC20, DSMath {
+    uint256 _supply;
+
+    function totalSupply() public view returns (uint) {
+        return _supply;
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

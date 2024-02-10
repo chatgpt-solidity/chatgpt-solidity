@@ -1,0 +1,45 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract SilkToken is owned, TokenERC20 {
+
+    mapping(address => bool) public frozenAccount;
+
+    /* Internal transfer, only can be called by this contract */
+    function _transfer(address _from, address _to, uint _value) internal {
+        require(_to != 0x0); // Prevent transfer to 0x0 address. Use burn() instead
+        require(balanceOf[_from] >= _value); // Check if the sender has enough
+        require(balanceOf[_to] + _value > balanceOf[_to]); // Check for overflows
+        require(!frozenAccount[_from]); // Check if sender is frozen
+        require(!frozenAccount[_to]); // Check if recipient is frozen
+        balanceOf[_from] -= _value; // Subtract from the sender
+        balanceOf[_to] += _value; // Add the same to the recipient
+        Transfer(_from, _to, _value);
+    }
+}
+
+contract TokenERC20 {
+
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+
+    /**
+     * Transfer tokens
+     *
+     * Send `_value` tokens to `_to` from your account
+     *
+     * @param _to The address of the recipient
+     * @param _value the amount to send
+     */
+    function transfer(address _to, uint256 _value) public {
+        _transfer(msg.sender, _to, _value);
+    }
+}
+
+
+"""
+
+Rule:"""
+return whether the transfer is successful
+"""

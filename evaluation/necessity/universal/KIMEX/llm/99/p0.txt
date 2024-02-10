@@ -1,0 +1,44 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    uint constant END_SALE = 2; // End sales
+
+    uint saleState;
+    uint public icoEndTime;
+    bool public inActive;
+    bool public isSelling;
+
+    modifier isActive() {
+        require(inActive == false);
+        _;
+    }
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // End ICO
+    function endICO() external isActive onlyOwnerOrAdmin returns (bool) {
+        require(icoEndTime == 0);
+
+        saleState = END_SALE;
+        isSelling = false;
+        icoEndTime = now;
+        emit EndICO(saleState);
+        return true;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Condition:"""
+tokens are burning or deallocating
+"""

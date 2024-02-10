@@ -1,0 +1,20 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract KIMEX is Owner {
+    uint256 public constant minInvestedCap = 5000 * 10 ** 18; // 5000 ether for softcap
+    uint256 totalInvestedAmount;
+
+    // Get softcap reaching status
+    function isSoftCapReached() public view returns (bool) {
+        return totalInvestedAmount >= minInvestedCap;
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

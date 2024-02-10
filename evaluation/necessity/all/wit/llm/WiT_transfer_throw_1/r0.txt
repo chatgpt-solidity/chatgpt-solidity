@@ -1,0 +1,15 @@
+YES
+
+The provided Solidity code for the `transfer` function and its related parts will not throw if transfers of 0 values are made. Here's why:
+
+1. The `safeSub` function in the `SafeMath` contract uses an `assert` statement to ensure that the second argument (`b`) is less than or equal to the first argument (`a`). If `_value` is 0, `safeSub` will not fail because `0` is always less than or equal to any positive balance.
+
+2. The `safeAdd` function in the `SafeMath` contract also uses an `assert` statement to ensure that the result of the addition is greater than or equal to the first argument (`a`). Adding 0 to any account balance will not change the balance, so the assertion will pass.
+
+3. In the `AbstractToken` contract's `transfer` function, there is a check to ensure that the sender has enough balance to transfer (`accounts[msg.sender] < _value`). If `_value` is 0, this check will pass because 0 is less than or equal to any balance.
+
+4. The `transfer` function in the `AbstractToken` contract also checks if `_value` is greater than 0 and if the sender is not the recipient before performing the subtraction and addition of balances. If `_value` is 0, the condition `_value > 0` will be false, and the code inside the if block will not execute. However, the function will still return `true`.
+
+5. The `transfer` function in the `WiT` contract checks for frozen accounts and the frozen state of the contract. If the sender's account is not frozen and the contract is not in a frozen state, it calls the `transfer` function of the `AbstractToken` contract. Since the `AbstractToken` contract's `transfer` function can handle a transfer of 0 value, the `WiT` contract's `transfer` function will also not throw.
+
+Therefore, the `transfer` function will return `true` and not throw an exception when transferring a value of 0, assuming the sender's account is not frozen, the contract is not in a frozen state, and the recipient's address is not the zero address.

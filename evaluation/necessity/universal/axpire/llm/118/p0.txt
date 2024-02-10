@@ -1,0 +1,33 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract AxpireToken is AxpirePausableToken {
+
+    address private ethFundDeposit;
+
+    /// @dev Ends the funding period and sends the ETH home
+    function sendFundHome() external onlyOwner {
+        // move to operational
+        if (!ethFundDeposit.send(address(this).balance)) revert(); // send the eth to tge International
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

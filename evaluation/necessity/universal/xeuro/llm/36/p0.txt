@@ -1,0 +1,36 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+
+    mapping(address => bool) public isAdmin;
+    // addresses allowed to mint tokens:
+
+    mapping(address => bool) public canMint;
+    // addresses allowed to transfer tokens from contract's own address:
+    mapping(address => bool) public canTransferFromContract;
+
+    // addresses allowed to burn tokens (on contract's own address):
+
+    mapping(address => bool) public canBurn;
+    /* ---------- Constructor */
+    // do not forget about:
+    // https://medium.com/@codetractio/a-look-into-paritys-multisig-wallet-bug-affecting-100-million-in-ether-and-tokens-356f5ba6e90a
+    constructor() public {
+        // Constructor must be public or internal
+        isAdmin[msg.sender] = true;
+        canMint[msg.sender] = true;
+        canTransferFromContract[msg.sender] = true;
+        canBurn[msg.sender] = true;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

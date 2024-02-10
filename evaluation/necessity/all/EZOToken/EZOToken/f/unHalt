@@ -1,0 +1,28 @@
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract Haltable is Ownable {
+    // @dev To Halt in Emergency Condition
+    bool public halted = false;
+
+    // @dev Use this as function modifier that should execute only if contract state Halted
+    modifier runIfHalted() {
+        require(halted);
+        _;
+    }
+
+    // @dev called by only owner to stop the emergency situation
+    function unHalt() public onlyOwner runIfHalted {
+        halted = false;
+    }
+}
+

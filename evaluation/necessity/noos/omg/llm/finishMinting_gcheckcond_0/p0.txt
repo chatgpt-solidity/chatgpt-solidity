@@ -1,0 +1,37 @@
+Given a solidity function finishMinting and the related parts from a smart contract.
+Whether the function finishMinting and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract MintableToken is StandardToken, Ownable {
+
+    bool public mintingFinished = false;
+
+    /**
+     * @dev Function to stop minting new tokens.
+     * @return True if the operation was successful.
+     */
+    function finishMinting() onlyOwner returns (bool) {
+        mintingFinished = true;
+        MintFinished();
+        return true;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        if (msg.sender != owner) {
+            throw;
+        }
+        _;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

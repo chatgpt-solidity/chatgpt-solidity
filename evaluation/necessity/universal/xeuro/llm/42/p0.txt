@@ -1,0 +1,26 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    function removeAdmin(address _oldAdmin) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        // prevents from deleting the last admin (can be multisig smart contract) by itself:
+        require(msg.sender != _oldAdmin);
+        isAdmin[_oldAdmin] = false;
+        emit AdminRemoved(msg.sender, _oldAdmin);
+        return true;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

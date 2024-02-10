@@ -1,0 +1,33 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract GEIMCOIN is StandardToken {
+    */
+    string public name;
+    uint8 public decimals;
+    string public symbol;
+    uint256 public unitsOneEthCanBuy;
+
+    address public fundsWallet;
+    function GEIMCOIN() {
+        balances[msg.sender] = 500000000000000000000000;
+        totalSupply = 500000000000000000000000;
+        name = "GEIMCOIN";
+        decimals = 18;
+        symbol = "GMC";
+        unitsOneEthCanBuy = 1000;
+        fundsWallet = msg.sender;
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+    uint256 public totalSupply;
+}
+"""
+
+Condition:"""
+tokens are burning or deallocating
+"""

@@ -1,0 +1,35 @@
+Given a solidity function DSToken and the related parts from a smart contract.
+Whether the function DSToken and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract DSTokenBase is ERC20, DSMath {
+    uint256 _supply;
+    mapping(address => uint256) _balances;
+
+    function DSTokenBase(uint supply) public {
+        _balances[msg.sender] = supply;
+        _supply = supply;
+    }
+}
+
+contract DSAuth is DSAuthEvents {
+
+    address public owner;
+    function DSAuth() public {
+        owner = msg.sender;
+        LogSetOwner(msg.sender);
+    }
+}
+
+contract DSToken is DSTokenBase(0), DSStop {
+    bytes32 public symbol;
+
+    function DSToken(bytes32 symbol_) public {
+        symbol = symbol_;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

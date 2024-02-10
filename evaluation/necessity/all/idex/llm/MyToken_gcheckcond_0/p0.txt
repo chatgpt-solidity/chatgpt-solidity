@@ -1,0 +1,32 @@
+Given a solidity function MyToken and the related parts from a smart contract.
+Whether the function MyToken and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract MyToken {
+    string public name;
+    string public symbol;
+    uint8 public decimals;
+
+    uint256 public totalSupply;
+    /* This creates an array with all balances */
+    mapping(address => uint256) public balanceOf;
+
+    /* Initializes contract with initial supply tokens to the creator of the contract */
+    function MyToken(
+        uint256 initialSupply,
+        string tokenName,
+        uint8 decimalUnits,
+        string tokenSymbol
+    ) {
+        balanceOf[msg.sender] = initialSupply; // Give the creator all initial tokens
+        totalSupply = initialSupply; // Update total supply
+        name = tokenName; // Set the name for display purposes
+        symbol = tokenSymbol; // Set the symbol for display purposes
+        decimals = decimalUnits; // Amount of decimals for display purposes
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

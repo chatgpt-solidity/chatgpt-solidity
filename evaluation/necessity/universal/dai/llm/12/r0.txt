@@ -1,0 +1,5 @@
+NO
+
+The given Solidity code for the `approve` function in both `DSTokenBase` and `DSToken` contracts does return a boolean value indicating whether the approval is successful. In `DSTokenBase`, the `approve` function explicitly returns `true` after setting the approval amount in the `_approvals` mapping and emitting the `Approval` event. In `DSToken`, the `approve` function calls the `approve` function of its superclass `DSTokenBase` using `super.approve(guy, wad)` and returns its result, which is `true` if the operation is successful.
+
+The code does not violate the given ERC rule, which requires the `approve` function to return whether the approval is successful.

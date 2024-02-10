@@ -1,0 +1,60 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract Pausable is Ownable {
+
+
+    bool public paused = false;
+    /**
+     * @dev Modifier to make a function callable only when the contract is not paused.
+     */
+    modifier whenNotPaused() {
+        require(!paused);
+        _;
+    }
+}
+
+contract AxpirePausableToken is StandardToken, Pausable, BurnableToken {
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public whenNotPaused returns (bool) {
+        return super.transferFrom(_from, _to, _value);
+    }
+}
+
+contract StandardToken is Token {
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        if (
+            balances[_from] >= _value &&
+            allowed[_from][msg.sender] >= _value &&
+            _value > 0
+        ) {
+            balances[_to] += _value;
+            balances[_from] -= _value;
+            allowed[_from][msg.sender] -= _value;
+            emit Transfer(_from, _to, _value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    mapping(address => uint256) balances;
+    mapping(address => mapping(address => uint256)) allowed;
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

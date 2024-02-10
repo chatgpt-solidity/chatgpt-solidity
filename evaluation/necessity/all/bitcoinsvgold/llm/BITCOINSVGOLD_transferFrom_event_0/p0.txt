@@ -1,0 +1,34 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether it emits the event Transfer? Replay in "YES" or "NO".
+Notes: Before Solidity version 0.5, events are emitting without "emit" keyword.
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract StandardToken is Token {
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) returns (bool success) {
+        //same as above. Replace this line with the following if you want to protect against wrapping uints.
+        //if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
+        if (
+            balances[_from] >= _value &&
+            allowed[_from][msg.sender] >= _value &&
+            _value > 0
+        ) {
+            balances[_to] += _value;
+            balances[_from] -= _value;
+            allowed[_from][msg.sender] -= _value;
+            Transfer(_from, _to, _value);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    mapping(address => uint256) balances;
+    mapping(address => mapping(address => uint256)) allowed;
+}
+"""

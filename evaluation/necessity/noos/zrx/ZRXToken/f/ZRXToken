@@ -1,0 +1,13 @@
+contract ZRXToken is UnlimitedAllowanceToken {
+    uint public totalSupply = 10 ** 27; // 1 billion tokens, 18 decimal places
+
+    function ZRXToken() {
+        balances[msg.sender] = totalSupply;
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint) balances;
+}
+

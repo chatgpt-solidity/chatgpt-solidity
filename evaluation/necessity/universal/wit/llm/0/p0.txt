@@ -1,0 +1,27 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract WiT is AbstractToken {
+
+    /**
+     * Current number of tokens in circulation.
+     */
+    uint256 tokenCount = 0;
+
+    /**
+     * Get total number of tokens in circulation.
+     *
+     * @return total number of tokens in circulation
+     */
+    function totalSupply() public view returns (uint256 supply) {
+        return tokenCount;
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the total token supply
+"""

@@ -1,0 +1,48 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract SilkToken is owned, TokenERC20 {
+    uint256 public buyPrice = 1000000000000000000; // Initialization with default value
+
+    /// @notice Buy tokens from contract by sending ether
+    /*************************************************************
+//////////////////////////////////////////////////////////////
+///    function buy() payable public {
+///        uint amount = msg.value / buyPrice;               // calculates the amount
+///        _transfer(this, msg.sender, amount);              // makes the transfers
+///    }
+//////////////////////////////////////////////////////////////
+*************************************************************/
+
+    /// @notice Sell `amount` tokens to contract
+    /// @param amount amount of tokens to be sold
+    /*************************************************************
+//////////////////////////////////////////////////////////////
+///    function sell(uint256 amount) public {
+///        require(this.balance >= amount * sellPrice);      // checks if the contract has enough ether to buy
+///        _transfer(msg.sender, this, amount);              // makes the transfers
+///        msg.sender.transfer(amount * sellPrice);          // sends ether to the seller. It's important to do this last to avoid recursion attacks
+///    }
+//////////////////////////////////////////////////////////////
+*************************************************************/
+
+    /// @notice Get taitoss transaction amount
+    /// @param amtETH The amount of ether to convert with taitoss
+    function getTaiAMT(uint256 amtETH) public constant returns (uint256) {
+        uint256 amount = amtETH / buyPrice;
+        amount = amount * 10 ** uint256(decimals);
+        return amount;
+    }
+}
+
+contract TokenERC20 {
+    uint8 public decimals = 18;
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

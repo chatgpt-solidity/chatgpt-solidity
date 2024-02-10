@@ -1,0 +1,9 @@
+YES
+
+The given ERC rule specifies that the `name()` function should return a `string` type. However, in the provided Solidity code, the `name()` function is declared to return a `bytes32` type:
+
+```
+name() returns(bytes32)
+```
+
+This is a violation of the given ERC rule, as the return type does not match the expected `string` type.

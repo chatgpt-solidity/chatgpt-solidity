@@ -1,0 +1,44 @@
+Given a solidity function pause and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        if (msg.sender != owner) {
+            throw;
+        }
+        _;
+    }
+}
+
+contract Pausable is Ownable {
+
+    bool public paused = false;
+
+    /**
+     * @dev modifier to allow actions only when the contract IS paused
+     */
+    modifier whenNotPaused() {
+        if (paused) throw;
+        _;
+    }
+
+    /**
+     * @dev called by the owner to pause, triggers stopped state
+     */
+    function pause() onlyOwner whenNotPaused returns (bool) {
+        paused = true;
+        Pause();
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

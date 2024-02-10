@@ -1,0 +1,9 @@
+YES
+
+The given Solidity code for the contract "Egypt" includes an `emit` statement for a `Transfer` event within the `_transfer` internal function:
+
+```solidity
+emit Transfer(_from, _to, _value);
+```
+
+This line is emitting a `Transfer` event, which is in compliance with the ERC rule that states "emit Event Transfer". Therefore, the code does not violate the given ERC rule.

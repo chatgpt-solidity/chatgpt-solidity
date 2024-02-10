@@ -1,0 +1,3 @@
+NO
+
+The given Solidity code does not violate the provided ERC rule. The rule states that "Transfers of 0 values MUST be treated as normal transfers," and the code does not explicitly reject transfers of 0 value. The condition `_value > 0` is not present, which means that the function does not prevent transfers of 0 value from being treated the same way as any other transfer. Therefore, the code complies with the rule as written.

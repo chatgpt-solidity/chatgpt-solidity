@@ -1,0 +1,22 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract HBToken is UnboundedRegularToken {
+    uint public totalSupply = 5 * 10 ** 26;
+
+    function HBToken() {
+        balances[msg.sender] = totalSupply;
+        Transfer(address(0), msg.sender, totalSupply);
+    }
+}
+
+contract RegularToken is Token {
+
+    mapping(address => uint) balances;
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

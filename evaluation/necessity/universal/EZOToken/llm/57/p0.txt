@@ -1,0 +1,32 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract EZOToken is ERC20, SafeMath, Haltable {
+
+    uint256 public ezoTokenPriceUSD = 100;
+
+    //Owner can Set EZO token price
+    //@ param _ezoTokenPriceUSD Current price EZO token.
+    function setEZOTokenPriceUSD(uint256 _ezoTokenPriceUSD) public onlyOwner {
+        require(_ezoTokenPriceUSD != 0);
+        ezoTokenPriceUSD = _ezoTokenPriceUSD;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

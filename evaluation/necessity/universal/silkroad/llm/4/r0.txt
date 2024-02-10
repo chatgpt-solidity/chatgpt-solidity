@@ -1,0 +1,9 @@
+NO
+
+The provided Solidity code does not explicitly emit an event named "Transfer" using the emit keyword. The line `Transfer(_from, _to, _value);` appears to be an attempt to emit an event, but it is not using the correct syntax as per the ERC standards (such as ERC-20). The correct syntax to emit an event in Solidity is:
+
+```solidity
+emit Transfer(_from, _to, _value);
+```
+
+Since the code does not use the `emit` keyword, it violates the given ERC rule that requires the use of `emit` when triggering events.

@@ -1,0 +1,45 @@
+Given a solidity function approve and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract Pausable is Ownable {
+
+
+    bool public paused = false;
+    /**
+     * @dev Modifier to make a function callable only when the contract is not paused.
+     */
+    modifier whenNotPaused() {
+        require(!paused);
+        _;
+    }
+}
+
+contract StandardToken is Token {
+
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public returns (bool success) {
+        require(_value == 0 || allowed[msg.sender][_spender] == 0);
+        allowed[msg.sender][_spender] = _value;
+        emit Approval(msg.sender, _spender, _value);
+        return true;
+    }
+    mapping(address => mapping(address => uint256)) allowed;
+}
+
+contract AxpirePausableToken is StandardToken, Pausable, BurnableToken {
+
+    function approve(
+        address _spender,
+        uint256 _value
+    ) public whenNotPaused returns (bool) {
+        return super.approve(_spender, _value);
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

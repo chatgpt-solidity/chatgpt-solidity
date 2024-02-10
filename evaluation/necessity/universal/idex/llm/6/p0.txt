@@ -29,5 +29,5 @@ contract MyToken {
 """
 
 Rule:"""
-not throw ifTransfers of 0 valuesTransfers of 0 values
+not throw if Transfers of 0 values
 """

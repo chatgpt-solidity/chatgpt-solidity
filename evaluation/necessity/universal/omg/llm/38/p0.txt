@@ -1,0 +1,54 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract BasicToken is ERC20Basic {
+
+    mapping(address => uint) balances;
+
+    /**
+     * @dev Fix for the ERC20 short address attack.
+     */
+    modifier onlyPayloadSize(uint size) {
+        if (msg.data.length < size + 4) {
+            throw;
+        }
+        _;
+
+    }
+    /**
+     * @dev transfer token for a specified address
+     * @param _to The address to transfer to.
+     * @param _value The amount to be transferred.
+     */
+    function transfer(address _to, uint _value) onlyPayloadSize(2 * 32) {
+        balances[msg.sender] = balances[msg.sender].sub(_value);
+        balances[_to] = balances[_to].add(_value);
+        Transfer(msg.sender, _to, _value);
+    }
+}
+
+library SafeMath {
+
+    function sub(uint a, uint b) internal returns (uint) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    function add(uint a, uint b) internal returns (uint) {
+        uint c = a + b;
+        assert(c >= a);
+        return c;
+    }
+
+    function assert(bool assertion) internal {
+        if (!assertion) {
+            throw;
+        }
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

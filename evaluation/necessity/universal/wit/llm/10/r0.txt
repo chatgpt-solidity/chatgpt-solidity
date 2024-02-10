@@ -1,0 +1,16 @@
+YES
+
+The given Solidity code for the `WiT` contract and the `AbstractToken` contract does include an `emit` statement for the `Approval` event in the `approve` function of the `AbstractToken` contract. Here is the relevant part of the code:
+
+```solidity
+function approve(
+    address _spender,
+    uint256 _value
+) public returns (bool success) {
+    allowances[msg.sender][_spender] = _value;
+    emit Approval(msg.sender, _spender, _value); // This line emits the Approval event
+    return true;
+}
+```
+
+This `emit` statement is in accordance with the ERC-20 standard, which requires that an `Approval` event be emitted when the `approve` function is called to log the approval of a spender by the owner. The `WiT` contract inherits from `AbstractToken` and does not override the `approve` function in a way that would remove or change the `emit` statement for the `Approval` event. Therefore, the code does not violate the given ERC rule.

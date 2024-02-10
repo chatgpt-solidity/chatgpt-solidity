@@ -1,0 +1,12 @@
+contract KIMEX is Owner {
+
+    mapping(address => uint256) internal balances;
+
+    // ERC20 standard function
+    function balanceOf(
+        address _owner
+    ) external constant returns (uint256 balance) {
+        return balances[_owner];
+    }
+}
+

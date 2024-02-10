@@ -1,0 +1,10 @@
+contract KIMEX is Owner {
+    uint256 public constant minInvestedCap = 5000 * 10 ** 18; // 5000 ether for softcap
+    uint256 totalInvestedAmount;
+
+    // Get softcap reaching status
+    function isSoftCapReached() public view returns (bool) {
+        return totalInvestedAmount >= minInvestedCap;
+    }
+}
+

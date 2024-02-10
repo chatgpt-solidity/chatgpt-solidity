@@ -1,0 +1,41 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+transfer(address,uint256) returns()
+transferFrom(address,address,uint256) returns(bool)
+approve(address,uint256) returns(bool)
+approveAndCall(address,uint256,bytes) returns(bool)
+burn(uint256) returns(bool)
+burnFrom(address,uint256) returns(bool)
+transferOwnership(address) returns()
+SilkToken(uint256,string,string) returns()
+mintToken(address,uint256) returns()
+freezeAccount(address,bool) returns()
+setPrices(uint256,uint256) returns()
+startPreSales(uint256) returns(uint256)
+stopPreSales() returns()
+getTaiAMT(uint256) returns(uint256)
+getBalanceTAI() returns(uint256)
+getSalesPrice() returns(uint256)
+getLeftPreSalesAMT() returns(uint256)
+procPreSales() returns(uint256)
+procNormalSales() returns(uint256)
+procNormalBuyBack(address) returns(uint256)
+sellPrice() returns(uint256)
+allowance(address,address) returns(uint256)
+decimals() returns(uint8)
+isPreSales() returns(bool)
+symbol() returns(string)
+totalSupply() returns(uint256)
+buyPrice() returns(uint256)
+frozenAccount(address) returns(bool)
+name() returns(string)
+limitAMT() returns(uint256)
+balanceOf(address) returns(uint256)
+owner() returns(address)
+"""
+
+Rule:"""
+allowance(address,address) returns(uint256)
+"""

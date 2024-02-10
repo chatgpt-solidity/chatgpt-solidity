@@ -1,0 +1,22 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+MyToken(uint256,string,uint8,string) returns()
+transfer(address,uint256) returns()
+approve(address,uint256) returns(bool)
+approveAndCall(address,uint256,bytes) returns(bool)
+transferFrom(address,address,uint256) returns(bool)
+fallback() returns()
+allowance(address,address) returns(uint256)
+decimals() returns(uint8)
+symbol() returns(string)
+totalSupply() returns(uint256)
+name() returns(string)
+balanceOf(address) returns(uint256)
+standard() returns(string)
+"""
+
+Rule:"""
+name() returns(string)
+"""

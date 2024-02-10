@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract CMBToken is IERC20 {
+    uint public constant _totalSupply = 6500000000000000;
+
+    mapping(address => uint256) balances;
+
+    function CMBToken() {
+        balances[msg.sender] = _totalSupply;
+    }
+}
+"""
+
+Condition:"""
+tokens are burning or deallocating
+"""

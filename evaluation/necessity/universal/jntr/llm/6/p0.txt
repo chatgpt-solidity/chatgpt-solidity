@@ -1,0 +1,64 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract JNTR is IST20, ERC20, SafeMath {
+
+    Account[] allowedAddress;
+    mapping(address => uint256) balances;
+    mapping(address => uint256) allowedIndex;
+    mapping(address => mapping(address => uint256)) allowed;
+
+    function verifyTransaction(
+        address _sender,
+        address _reciver
+    ) internal returns (bool) {
+        require(allowedAddress[allowedIndex[_sender]]._address == _sender);
+        require(allowedAddress[allowedIndex[_reciver]]._address == _reciver);
+        require(allowedAddress[allowedIndex[_sender]]._active == true);
+        require(allowedAddress[allowedIndex[_reciver]]._active == true);
+        return true;
+    }
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint _value
+    ) public returns (bool ok) {
+        require(verifyTransaction(_from, _to));
+        require(_value > 0);
+        //Check amount is approved by the owner for spender to spent and owner have enough balances
+        require(
+            allowed[_from][msg.sender] >= _value && balances[_from] >= _value
+        );
+        balances[_from] = safeSub(balances[_from], _value);
+        balances[_to] = safeAdd(balances[_to], _value);
+        allowed[_from][msg.sender] = safeSub(
+            allowed[_from][msg.sender],
+            _value
+        );
+        emit Transfer(_from, _to, _value);
+        return true;
+    }
+}
+
+
+"""
+
+Rule:"""
+throw the _from account has deliberately authorized the sender of the message via some mechanism
+"""

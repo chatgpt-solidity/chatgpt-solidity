@@ -1,0 +1,3 @@
+NO
+
+The code provided includes the function `totalSupply() returns(uint256)` which matches the ERC rule given. There is no violation of the rule based on the information provided.

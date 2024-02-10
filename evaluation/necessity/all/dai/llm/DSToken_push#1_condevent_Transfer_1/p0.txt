@@ -1,0 +1,59 @@
+Given a solidity function push and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.17;
+contract DSMath {
+    function add(uint x, uint y) internal pure returns (uint z) {
+        require((z = x + y) >= x);
+    }
+
+    function sub(uint x, uint y) internal pure returns (uint z) {
+        require((z = x - y) <= x);
+    }
+}
+
+contract DSToken is DSTokenBase(0), DSStop {
+
+    function transferFrom(
+        address src,
+        address dst,
+        uint wad
+    ) public stoppable returns (bool) {
+        if (src != msg.sender && _approvals[src][msg.sender] != uint(-1)) {
+            _approvals[src][msg.sender] = sub(_approvals[src][msg.sender], wad);
+        }
+
+        _balances[src] = sub(_balances[src], wad);
+        _balances[dst] = add(_balances[dst], wad);
+
+        Transfer(src, dst, wad);
+
+        return true;
+
+    }
+    function push(address dst, uint wad) public {
+        transferFrom(msg.sender, dst, wad);
+    }
+}
+
+contract DSTokenBase is ERC20, DSMath {
+    mapping(address => uint256) _balances;
+    mapping(address => mapping(address => uint256)) _approvals;
+}
+
+contract DSStop is DSNote, DSAuth {
+
+    bool public stopped;
+    modifier stoppable() {
+        require(!stopped);
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

@@ -1,0 +1,9 @@
+YES
+
+The provided Solidity code for the ERC20 contract does emit a Transfer event in the `_transfer` function, which is in accordance with the given ERC rule to "emit Event Transfer". Here is the relevant part of the code:
+
+```solidity
+emit Transfer(from, to, amount);
+```
+
+This line is responsible for emitting the Transfer event whenever a transfer of tokens occurs, which complies with the ERC-20 standard for token transfers.

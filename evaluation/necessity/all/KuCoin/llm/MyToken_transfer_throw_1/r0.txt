@@ -1,0 +1,3 @@
+NO
+
+The function `_transfer` contains the line `require(balanceOf[_from] > _value);` which will revert the transaction if the `_value` to transfer is not strictly greater than the balance of `_from`. If `_value` is 0, this condition will not be satisfied for any non-zero balance, and the function will throw an exception.

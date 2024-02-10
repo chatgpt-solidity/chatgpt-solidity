@@ -1,0 +1,3 @@
+NO
+
+The `transfer` function in the `StandardToken` contract does return a boolean indicating whether the transfer is successful. However, the `transfer` function in the `AxpirePausableToken` contract, which overrides the `StandardToken` transfer function, also returns a boolean indicating the success of the transfer, as it calls `super.transfer(_to, _value)` and returns its result. The ERC rule that requires the function to return whether the transfer is successful is not violated by this code.

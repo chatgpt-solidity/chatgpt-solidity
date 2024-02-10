@@ -1,0 +1,76 @@
+Given a solidity function createTokens and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.24;
+library SafeMath {
+    /**
+     * @dev Multiplies two numbers, throws on overflow.
+     */
+    function mul(uint256 a, uint256 b) internal pure returns (uint256 c) {
+        // Gas optimization: this is cheaper than asserting 'a' not being zero, but the
+        // benefit is lost if 'b' is also tested.
+        // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522
+        if (a == 0) {
+            return 0;
+        }
+
+        c = a * b;
+        assert(c / a == b);
+        return c;
+    }
+
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256 c) {
+        c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract AxpireToken is AxpirePausableToken {
+
+    uint256 public icoTokenExchangeRate = 715; // 715 b66 tokens per 1 ETH
+    uint256 public tokenCreationCap = 350 * (10 ** 6) * 10 ** decimals;
+
+    //address public ;
+    // crowdsale parameters
+    bool public tokenSaleActive; // switched to true in operational state
+    bool public haltIco;
+
+    /// @dev Accepts ether and creates new tge tokens.
+    function createTokens() external payable {
+        if (!tokenSaleActive) revert();
+        if (haltIco) revert();
+        if (msg.value == 0) revert();
+
+        uint256 tokens;
+        tokens = SafeMath.mul(msg.value, icoTokenExchangeRate); // check that we're not over totals
+        uint256 checkedSupply = SafeMath.add(totalSupply, tokens);
+
+        // return money if something goes wrong
+        if (tokenCreationCap < checkedSupply) revert(); // odd fractions won't be found
+
+        totalSupply = checkedSupply;
+        balances[msg.sender] += tokens; // safeAdd not needed; bad semantics to use here
+        emit CreateToken(msg.sender, tokens); // logs token creation
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+}
+
+contract Token {
+    uint256 public totalSupply;
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

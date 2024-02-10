@@ -1,0 +1,42 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+pause() returns()
+unpause() returns()
+renounceOwnership() returns()
+transferOwnership(address) returns()
+burn(uint256) returns()
+totalSupply() returns(uint256)
+transfer(address,uint256) returns(bool)
+balanceOf(address) returns(uint256)
+upgrade(uint256) returns()
+setUpgradeAgent(address) returns()
+getUpgradeState() returns(UpgradeableToken.UpgradeState)
+setUpgradeMaster(address) returns()
+canUpgrade() returns(bool)
+transferFrom(address,address,uint256) returns(bool)
+approve(address,uint256) returns(bool)
+allowance(address,address) returns(uint256)
+increaseApproval(address,uint256) returns(bool)
+decreaseApproval(address,uint256) returns(bool)
+constructor(string,string,uint8,uint256) returns()
+setSale(address) returns()
+setFreeze(bool) returns()
+thaw() returns()
+sale() returns(address)
+totalUpgraded() returns(uint256)
+decimals() returns(uint8)
+frozen() returns(bool)
+symbol() returns(string)
+freeze() returns(bool)
+upgradeAgent() returns(UpgradeAgent)
+upgradeMaster() returns(address)
+paused() returns(bool)
+name() returns(string)
+owner() returns(address)
+"""
+
+Rule:"""
+transfer(address,uint256) returns(bool)
+"""

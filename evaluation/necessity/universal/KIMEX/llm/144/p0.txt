@@ -1,0 +1,36 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    uint256 public icoStandardPrice;
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // Set ICO price including ICO standard price
+    function setICOPrice(
+        uint256 _tokenPerEther
+    ) external onlyOwnerOrAdmin returns (bool) {
+        require(_tokenPerEther > 0);
+
+        icoStandardPrice = _tokenPerEther;
+        emit SetICOPrice(icoStandardPrice);
+        return true;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

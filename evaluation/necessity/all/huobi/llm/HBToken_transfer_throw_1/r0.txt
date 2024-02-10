@@ -1,0 +1,10 @@
+YES
+
+The provided Solidity function `transfer` in the `RegularToken` contract checks if the sender (`msg.sender`) has a balance greater than or equal to the `_value` they want to transfer, and if the recipient's (`_to`) balance will not overflow when the `_value` is added to it.
+
+If the `_value` is 0, the conditions:
+
+- `balances[msg.sender] >= _value` will be true because any balance is greater than or equal to 0.
+- `balances[_to] + _value >= balances[_to]` will also be true because adding 0 to any number does not change the number, so the recipient's balance will not overflow.
+
+Therefore, the function will not throw an exception; it will execute the transfer of 0 value, emit the `Transfer` event, and return `true`.

@@ -1,0 +1,42 @@
+Given a solidity function changeMinExchangeAmount and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.7;
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    uint256 minExchangeAmount = 12; // xEuro tokens
+
+    function changeMinExchangeAmount(
+        uint256 _minExchangeAmount
+    ) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        uint256 from = minExchangeAmount;
+        minExchangeAmount = _minExchangeAmount;
+        emit minExchangeAmountChanged(msg.sender, from, minExchangeAmount);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

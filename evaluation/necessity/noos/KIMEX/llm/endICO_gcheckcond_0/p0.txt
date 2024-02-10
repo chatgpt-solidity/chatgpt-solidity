@@ -1,0 +1,44 @@
+Given a solidity function endICO and the related parts from a smart contract.
+Whether the function endICO and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract KIMEX is Owner {
+
+    address public adminAddress;
+    uint constant END_SALE = 2; // End sales
+
+    uint saleState;
+    uint public icoEndTime;
+    bool public inActive;
+    bool public isSelling;
+
+    modifier isActive() {
+        require(inActive == false);
+        _;
+    }
+
+    modifier onlyOwnerOrAdmin() {
+        require(msg.sender == owner || msg.sender == adminAddress);
+        _;
+    }
+
+    // End ICO
+    function endICO() external isActive onlyOwnerOrAdmin returns (bool) {
+        require(icoEndTime == 0);
+
+        saleState = END_SALE;
+        isSelling = false;
+        icoEndTime = now;
+        emit EndICO(saleState);
+        return true;
+    }
+}
+
+contract Owner {
+    address public owner;
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

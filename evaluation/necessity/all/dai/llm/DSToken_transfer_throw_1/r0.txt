@@ -1,0 +1,9 @@
+YES
+
+The `transfer` function in the provided code snippet calls `transferFrom` to move tokens from the sender's address to the destination address. The `transferFrom` function, in turn, uses the `sub` and `add` functions from the `DSMath` contract to decrease and increase the balances, respectively.
+
+The `sub` function has a `require` statement that ensures that the subtraction does not result in an underflow (where `z = x - y` must be less than or equal to `x`). The `add` function has a `require` statement that ensures that the addition does not result in an overflow (where `z = x + y` must be greater than or equal to `x`).
+
+If the transfer amount (`wad`) is 0, the `sub` function will not underflow because subtracting 0 from any number `x` will result in `x`, which is always less than or equal to itself. Similarly, the `add` function will not overflow because adding 0 to any number `x` will result in `x`, which is always greater than or equal to itself.
+
+Therefore, transfers of 0 value will not cause the `require` statements in the `sub` and `add` functions to fail, and the `transfer` function should complete without throwing an exception.

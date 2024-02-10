@@ -1,0 +1,31 @@
+Given a solidity function setIcoTokenExchangeRate and the related parts from a smart contract.
+Whether the function setIcoTokenExchangeRate and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract AxpireToken is AxpirePausableToken {
+
+    uint256 public icoTokenExchangeRate = 715; // 715 b66 tokens per 1 ETH
+
+    function setIcoTokenExchangeRate(
+        uint _icoTokenExchangeRate
+    ) external onlyOwner {
+        icoTokenExchangeRate = _icoTokenExchangeRate;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

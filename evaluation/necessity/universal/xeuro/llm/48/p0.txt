@@ -1,0 +1,27 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    // addresses allowed to burn tokens (on contract's own address):
+    mapping(address => bool) public canBurn;
+
+    function addToCanBurn(address _newAddress) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        canBurn[_newAddress] = true;
+        emit AddressAddedToCanBurn(msg.sender, _newAddress);
+        return true;
+    } //
+}
+"""
+
+Condition:"""
+tokens are transferred, including zero value transfers.
+"""

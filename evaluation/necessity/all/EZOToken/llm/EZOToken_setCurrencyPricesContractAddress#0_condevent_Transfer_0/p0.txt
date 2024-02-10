@@ -1,0 +1,47 @@
+Given a solidity function setCurrencyPricesContractAddress and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.9;
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+
+contract EZOToken is ERC20, SafeMath, Haltable {
+    address public currencyPricesContract =
+        0x92F87532eDB5e7fc43F0641b37c5687f7fc7F04a;
+
+    //Owner can Set CurrencyPrices contract address
+    //@ param _currencyPricesContract Address of EZOToken contract.
+    function setCurrencyPricesContractAddress(
+        address _currencyPricesContract
+    ) public onlyOwner {
+        require(_currencyPricesContract != address(0));
+        currencyPricesContract = _currencyPricesContract;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

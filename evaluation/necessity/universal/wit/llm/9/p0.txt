@@ -1,0 +1,103 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract AbstractToken is Token, SafeMath {
+
+    /**
+     * Transfer given number of tokens from given owner to given recipient.
+     *
+     * @param _from address to transfer tokens from the owner of
+     * @param _to address to transfer tokens to the owner of
+     * @param _value number of tokens to transfer from given owner to given
+     *        recipient
+     * @return true if tokens were transferred successfully, false otherwise
+     * accounts [_to] + _value > accounts [_to] for overflow check
+     * which is already in safeMath
+     */
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        require(_to != address(0));
+        if (allowances[_from][msg.sender] < _value) return false;
+        if (accounts[_from] < _value) return false;
+
+        if (_value > 0 && _from != _to) {
+            allowances[_from][msg.sender] = safeSub(
+                allowances[_from][msg.sender],
+                _value
+            );
+            accounts[_from] = safeSub(accounts[_from], _value);
+            accounts[_to] = safeAdd(accounts[_to], _value);
+        }
+        emit Transfer(_from, _to, _value);
+        return true;
+    }
+
+    /**
+     * Mapping from addresses of token holders to the numbers of tokens belonging
+     * to these token holders.
+     */
+
+    mapping(address => uint256) accounts;
+    /**
+     * Mapping from addresses of token holders to the mapping of addresses of
+     * spenders to the allowances set by these token holders to these spenders.
+     */
+    mapping(address => mapping(address => uint256)) private allowances;
+}
+
+contract SafeMath {
+
+    function safeSub(uint256 a, uint256 b) internal pure returns (uint256) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    function safeAdd(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract WiT is AbstractToken {
+
+    /**
+     * Frozen account list holder
+     */
+    mapping(address => bool) private frozenAccount;
+
+    /**
+     * True if tokens transfers are currently frozen, false otherwise.
+     */
+    bool frozen = false;
+
+    /**
+     * Transfer given number of tokens from given owner to given recipient.
+     *
+     * @param _from address to transfer tokens from the owner of
+     * @param _to address to transfer tokens to the owner of
+     * @param _value number of tokens to transfer from given owner to given
+     *        recipient
+     * @return true if tokens were transferred successfully, false otherwise
+     */
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) public returns (bool success) {
+        require(!frozenAccount[_from]);
+        if (frozen) return false;
+        else return AbstractToken.transferFrom(_from, _to, _value);
+    }
+}
+
+
+"""
+
+Rule:"""
+return whether the transfer is successful
+"""

@@ -1,0 +1,19 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract CMBToken is IERC20 {
+
+    mapping(address => uint256) balances;
+
+    function balanceOf(address _owner) constant returns (uint256 balance) {
+        return balances[_owner];
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the account balance of another account with address _owner
+"""

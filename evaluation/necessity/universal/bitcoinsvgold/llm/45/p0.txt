@@ -1,0 +1,35 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract BITCOINSVGOLD is StandardToken {
+    /* Public variables of the token */
+
+    string public name;
+    uint8 public decimals;
+    string public symbol;
+    uint256 public unitsOneEthCanBuy;
+
+    address public fundsWallet;
+    //constructor function
+    function BITCOINSVGOLD() {
+        balances[msg.sender] = 21000000000000000000000000;
+        totalSupply = 21000000000000000000000000;
+        name = "BITCOIN SVGOLD";
+        decimals = 18;
+        symbol = "BSVG";
+        unitsOneEthCanBuy = 500;
+        fundsWallet = msg.sender;
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+    uint256 public totalSupply;
+}
+"""
+
+Condition:"""
+tokens are burning or deallocating
+"""

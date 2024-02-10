@@ -1,0 +1,54 @@
+Given a solidity function setSale and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Example of "initial token distribution" are provided below. 
+Example:"""
+construct <Contract Name> {
+    constructor() {
+        // tokens are transfer during the initial token distribution:
+        balances[msg.sender] = total;
+    }
+}
+"""
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.4.22;
+contract LutToken is
+    LutTokenInterface,
+    UpgradeableToken,
+    DetailedERC20,
+    BurnableToken,
+    Pausable
+{
+
+    /// @notice set of sale account which can freeze tokens
+
+    address public sale;
+    /// @notice when true - all tokens are frozen and only sales or contract owner can move their tokens
+    ///         when false - all tokens are unfrozen and can be moved by their owners
+    bool public frozen = true;
+
+    function setSale(address _sale) public onlyOwner {
+        frozen = true;
+        sale = _sale;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+"""
+
+Action:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

@@ -1,0 +1,25 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract Organicco is
+    Token("ORC", "Organicco", 18, 120000000000000000000000000),
+    ERC20,
+    ERC223
+{
+
+    function totalSupply() public constant returns (uint) {
+        return _totalSupply;
+    }
+}
+
+contract Token {
+    uint internal _totalSupply = 1000;
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

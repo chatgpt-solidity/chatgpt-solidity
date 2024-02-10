@@ -1,0 +1,53 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+library SafeMath {
+
+    /**
+     * @dev Substracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).
+     */
+    function sub(uint256 a, uint256 b) internal returns (uint256) {
+        assert(b <= a);
+        return a - b;
+
+    }
+    /**
+     * @dev Adds two numbers, throws on overflow.
+     */
+    function add(uint256 a, uint256 b) internal returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
+    }
+}
+
+contract CMBToken is IERC20 {
+
+    mapping(address => uint256) balances;
+    mapping(address => mapping(address => uint256)) allowed;
+
+    function transferFrom(
+        address _from,
+        address _to,
+        uint256 _value
+    ) returns (bool success) {
+        require(
+            allowed[_from][msg.sender] >= _value &&
+                balances[_from] >= _value &&
+                _value > 0
+        );
+        balances[_from] = balances[msg.sender].sub(_value);
+        balances[_to] = balances[_to].add(_value);
+        allowed[_from][msg.sender] = balances[msg.sender].sub(_value);
+        Transfer(_from, _to, _value);
+        return true;
+    }
+}
+
+
+"""
+
+Rule:"""
+throw the _from account has deliberately authorized the sender of the message via some mechanism
+"""

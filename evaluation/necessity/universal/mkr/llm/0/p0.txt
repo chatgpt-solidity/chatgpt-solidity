@@ -1,0 +1,18 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract DSTokenBase is ERC20, DSMath {
+    uint256 _supply;
+
+    function totalSupply() public view returns (uint) {
+        return _supply;
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the total token supply
+"""

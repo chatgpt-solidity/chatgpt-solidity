@@ -1,0 +1,8 @@
+contract JNTR is IST20, ERC20, SafeMath {
+    mapping(address => uint256) balances;
+
+    function balanceOf(address _owner) public view returns (uint256 balance) {
+        return balances[_owner];
+    }
+}
+

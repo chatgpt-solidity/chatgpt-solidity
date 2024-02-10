@@ -1,0 +1,9 @@
+YES
+
+The given Solidity code for the `transferFrom` function in the `StandardToken` contract does not explicitly emit an event with the name `Transfer`. The line `Transfer(_from, _to, _value);` appears to be an attempt to emit an event, but in Solidity, the correct syntax to emit an event is using the `emit` keyword, like so:
+
+```solidity
+emit Transfer(_from, _to, _value);
+```
+
+Since the `emit` keyword is missing, this code violates the given ERC rule that requires the `Transfer` event to be emitted properly.

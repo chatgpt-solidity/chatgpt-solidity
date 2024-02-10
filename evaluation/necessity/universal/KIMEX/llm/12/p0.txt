@@ -1,0 +1,22 @@
+Given a solidity code from a smart contract and a ERC rule.
+Whether the code violates the given ERC rule? Reply in "YES" or "NO".
+
+Code:"""
+contract KIMEX is Owner {
+    mapping(address => mapping(address => uint256)) internal allowed;
+
+    // ERC20 standard function
+    function allowance(
+        address _owner,
+        address _spender
+    ) external constant returns (uint256) {
+        return allowed[_owner][_spender];
+    }
+}
+
+
+"""
+
+Rule:"""
+returns the amount which _spender is still allowed to withdraw from _owner
+"""

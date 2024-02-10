@@ -1,0 +1,5 @@
+YES
+
+The given Solidity code does not explicitly throw an error message stating that the message caller's account balance does not have enough tokens to spend. Instead, it uses the `SafeMath` library's `sub` function to subtract the value from the sender's balance, which will throw an error if the subtraction would result in a negative balance (due to the `assert` statement in the `sub` function). However, this error is not a custom message; it's a generic throw without a specific error message.
+
+The ERC rule you provided seems to suggest that the contract should provide a specific error message when the sender does not have enough tokens. Since the code does not do this and instead uses a generic throw, it violates the given ERC rule.

@@ -1,0 +1,38 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract Egypt {
+    // Public variables of the token
+    string public name;
+    string public symbol;
+    uint8 public decimals = 18;
+    // 18 decimals is the strongly suggested default, avoid changing it
+
+    uint256 public totalSupply;
+    // This creates an array with all balances
+    mapping(address => uint256) public balanceOf;
+
+    /**
+     * Constructor function
+     *
+     * Initializes contract with initial supply tokens to the creator of the contract
+     */
+    constructor() public {
+        symbol = "EGY";
+        name = "EGYPT";
+        decimals = 18;
+        totalSupply = 1000000000000000000000000000;
+        balanceOf[0x2D12749695305bbde9bA7e1E12fA481C71314F28] = totalSupply;
+        emit Transfer(
+            address(0),
+            0x2D12749695305bbde9bA7e1E12fA481C71314F28,
+            totalSupply
+        ); // Set the symbol for display purposes
+    }
+}
+"""
+
+Condition:"""
+any successful call to approve(address _spender, uint256 _value)
+"""

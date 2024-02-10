@@ -1,0 +1,44 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract Pausable is Ownable {
+
+    bool public paused = false;
+
+    /**
+     * @dev modifier to allow actions only when the contract IS NOT paused
+     */
+    modifier whenPaused() {
+        if (!paused) throw;
+        _;
+    }
+
+    /**
+     * @dev called by the owner to unpause, returns to normal state
+     */
+    function unpause() onlyOwner whenPaused returns (bool) {
+        paused = false;
+        Unpause();
+        return true;
+    }
+}
+
+contract Ownable {
+    address public owner;
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        if (msg.sender != owner) {
+            throw;
+        }
+        _;
+    }
+}
+"""
+
+Condition:"""
+tokens are minting or allocating
+"""

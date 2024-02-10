@@ -1,0 +1,18 @@
+contract KIMEX is Owner {
+    bool public inActive;
+
+    // Activate token sale function
+    function activate() external onlyOwner {
+        inActive = false;
+    }
+}
+
+contract Owner {
+
+    address public owner;
+    modifier onlyOwner() {
+        require(msg.sender == owner);
+        _;
+    }
+}
+

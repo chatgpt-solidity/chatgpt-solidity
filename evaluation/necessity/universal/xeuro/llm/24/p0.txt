@@ -1,0 +1,24 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    function addAdmin(address _newAdmin) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        isAdmin[_newAdmin] = true;
+        emit AdminAdded(msg.sender, _newAdmin);
+        return true;
+    } //
+}
+"""
+
+Condition:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

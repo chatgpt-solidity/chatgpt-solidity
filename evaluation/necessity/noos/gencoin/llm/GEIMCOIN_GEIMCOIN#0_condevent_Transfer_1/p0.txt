@@ -1,0 +1,33 @@
+Given a solidity function GEIMCOIN and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract GEIMCOIN is StandardToken {
+    */
+    string public name;
+    uint8 public decimals;
+    string public symbol;
+    uint256 public unitsOneEthCanBuy;
+
+    address public fundsWallet;
+    function GEIMCOIN() {
+        balances[msg.sender] = 500000000000000000000000;
+        totalSupply = 500000000000000000000000;
+        name = "GEIMCOIN";
+        decimals = 18;
+        symbol = "GMC";
+        unitsOneEthCanBuy = 1000;
+        fundsWallet = msg.sender;
+    }
+}
+
+contract StandardToken is Token {
+
+    mapping(address => uint256) balances;
+    uint256 public totalSupply;
+}
+"""
+
+Action:"""
+tokens are transferred, including zero value transfers.
+"""

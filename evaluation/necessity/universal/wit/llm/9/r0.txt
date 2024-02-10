@@ -1,0 +1,7 @@
+NO
+
+The `transferFrom` function in the `WiT` contract does not always return whether the transfer is successful. It has a condition that checks if the `frozen` boolean is true, and if so, it returns false without attempting the transfer. However, if the `frozen` boolean is false, it delegates the transfer to the `AbstractToken.transferFrom` function.
+
+The `transferFrom` function in the `AbstractToken` contract does return true if the transfer is successful, as it checks for sufficient balance and allowance, performs the transfer if the conditions are met, and then emits a `Transfer` event.
+
+However, the `WiT` contract's `transferFrom` function does not follow the ERC rule strictly because it has an additional condition that could prevent the transfer from being attempted, thus not always returning the actual success of the transfer operation.

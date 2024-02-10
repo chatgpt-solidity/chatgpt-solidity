@@ -1,0 +1,29 @@
+Given a solidity function removeAdmin and the related parts from a smart contract.
+Whether it explicitly contains the given action? Reply in "YES" or "NO".
+
+
+
+Function(and related parts) to audit:"""
+pragma solidity 0.5.7;
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    function removeAdmin(address _oldAdmin) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        // prevents from deleting the last admin (can be multisig smart contract) by itself:
+        require(msg.sender != _oldAdmin);
+        isAdmin[_oldAdmin] = false;
+        emit AdminRemoved(msg.sender, _oldAdmin);
+        return true;
+    }
+}
+"""
+
+Action:"""
+tokens are burning or deallocating
+"""

@@ -1,0 +1,11 @@
+YES
+
+The given Solidity code for the `approve` function in the `Projecton` contract does not explicitly emit the `Approval` event as required by the ERC-20 standard. The ERC-20 `Approval` event should be emitted whenever the `approve` function is called to ensure that the approval is logged on the blockchain.
+
+The correct implementation should include the `emit` keyword before the event is called, like so:
+
+```solidity
+emit Approval(msg.sender, _spender, _value);
+```
+
+Since the provided code snippet uses `Approval(msg.sender, _spender, _value);` without the `emit` keyword, it violates the given ERC rule.

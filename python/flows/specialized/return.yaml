@@ -2,14 +2,14 @@ type: llm-flow
 flows:
   - template: |
       Given a solidity function <function> and the related parts from a smart contract and an rule for its return value.
-      Whether function <function> <rule>? Reply in "YES" or "NO".
-
+      Whether function <function> <rule>? 
       <example>
+      Reply in "YES" or "NO".
 
       Function(and related parts) to audit:"""
       <code>
       """
 examples:
   - example: |
-      Notes: In case of failure, it is allowed to revert the transaction instead of returning false.
+      Return "YES" if reverting the transaction on failure conditions.
     matcher: "success"

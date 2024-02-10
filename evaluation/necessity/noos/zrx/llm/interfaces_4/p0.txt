@@ -1,0 +1,16 @@
+Given only the Solidity interfaces of a smart contract. 
+Check whether the given interfaces contain the interface: "allowance(address,address) returns(uint256)" and parameter types and return types are matched?
+Reply in "YES" or "NO".
+
+Solidity interfaces:"""
+transferFrom(address,address,uint256) returns(bool)
+transfer(address,uint256) returns(bool)
+balanceOf(address) returns(uint256)
+approve(address,uint256) returns(bool)
+allowance(address,address) returns(uint256)
+ZRXToken() returns()
+name() returns(string)
+decimals() returns(uint8)
+totalSupply() returns(uint256)
+symbol() returns(string)
+"""

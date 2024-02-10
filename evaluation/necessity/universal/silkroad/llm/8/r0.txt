@@ -1,0 +1,15 @@
+YES
+
+The given Solidity code for the `approve` function in the `TokenERC20` contract does not emit an event upon successfully setting an allowance. According to the ERC-20 standard, it is required to emit an `Approval` event when the `approve` function is called and successfully executed. The event should be emitted to log the approval action, which typically looks like this:
+
+```solidity
+event Approval(address indexed _owner, address indexed _spender, uint256 _value);
+```
+
+The `approve` function should include a line to emit the event, such as:
+
+```solidity
+emit Approval(msg.sender, _spender, _value);
+```
+
+Since the provided code does not include this, it violates the given ERC rule.

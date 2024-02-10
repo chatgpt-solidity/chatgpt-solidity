@@ -1,0 +1,29 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract xEuro {
+
+    /* --- administrative variables  */
+
+    // admins
+    mapping(address => bool) public isAdmin;
+
+    uint256 minExchangeAmount = 12; // xEuro tokens
+
+    function changeMinExchangeAmount(
+        uint256 _minExchangeAmount
+    ) public returns (bool) {
+        require(isAdmin[msg.sender]);
+
+        uint256 from = minExchangeAmount;
+        minExchangeAmount = _minExchangeAmount;
+        emit minExchangeAmountChanged(msg.sender, from, minExchangeAmount);
+        return true;
+    }
+}
+"""
+
+Condition:"""
+tokens are transferred during the initial token distribution or crowdsale.
+"""

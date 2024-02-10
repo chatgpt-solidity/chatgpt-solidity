@@ -1,0 +1,69 @@
+Given a solidity function transferFrom and the related parts from a smart contract.
+Whether the function transferFrom and its related parts explicitly contains the condition? Reply in "YES" or "NO".
+
+Function(and related parts) to audit:"""
+contract BasicToken is ERC20Basic {
+
+
+    mapping(address => uint) balances;
+    /**
+     * @dev Fix for the ERC20 short address attack.
+     */
+    modifier onlyPayloadSize(uint size) {
+        if (msg.data.length < size + 4) {
+            throw;
+        }
+        _;
+    }
+}
+
+contract StandardToken is BasicToken, ERC20 {
+
+    mapping(address => mapping(address => uint)) allowed;
+    /**
+     * @dev Transfer tokens from one address to another
+     * @param _from address The address which you want to send tokens from
+     * @param _to address The address which you want to transfer to
+     * @param _value uint the amout of tokens to be transfered
+     */
+    function transferFrom(
+        address _from,
+        address _to,
+        uint _value
+    ) onlyPayloadSize(3 * 32) {
+        var _allowance = allowed[_from][msg.sender];
+
+        // Check is not needed because sub(_allowance, _value) will already throw if this condition is not met
+        // if (_value > _allowance) throw;
+
+        balances[_to] = balances[_to].add(_value);
+        balances[_from] = balances[_from].sub(_value);
+        allowed[_from][msg.sender] = _allowance.sub(_value);
+        Transfer(_from, _to, _value);
+    }
+}
+
+library SafeMath {
+
+    function sub(uint a, uint b) internal returns (uint) {
+        assert(b <= a);
+        return a - b;
+    }
+
+    function add(uint a, uint b) internal returns (uint) {
+        uint c = a + b;
+        assert(c >= a);
+        return c;
+    }
+
+    function assert(bool assertion) internal {
+        if (!assertion) {
+            throw;
+        }
+    }
+}
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

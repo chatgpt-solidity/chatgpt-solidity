@@ -1,0 +1,41 @@
+Given a solidity code from a smart contract and a condition.
+Whether the code contain the condition? Reply in "YES" or "NO".
+
+Code:"""
+contract Ownable is Context {
+    address private _owner;
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor() internal {
+        address msgSender = _msgSender();
+        _owner = msgSender;
+        emit OwnershipTransferred(address(0), msgSender);
+    }
+}
+
+contract SiberianHusky is Context, IERC20, Ownable {
+
+    mapping(address => uint256) private _rOwned;
+    uint256 private constant _tTotal = 100000000000 * 10 ** 6 * 10 ** 9;
+    uint256 private _rTotal = (MAX - (MAX % _tTotal));
+
+    constructor() public {
+        _rOwned[_msgSender()] = _rTotal;
+        emit Transfer(address(0), _msgSender(), _tTotal);
+    }
+}
+
+abstract contract Context {
+    function _msgSender() internal view virtual returns (address payable) {
+        return msg.sender;
+    }
+}
+
+
+"""
+
+Condition:"""
+call any callee that returns (bool success)
+"""

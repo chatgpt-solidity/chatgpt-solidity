@@ -1,0 +1,19 @@
+YES
+
+The given Solidity code for the `CMBToken` contract includes a `transfer` function that is intended to emit a `Transfer` event when tokens are transferred from one address to another. However, the code snippet provided does not define the `Transfer` event, nor does it use the `emit` keyword which is required by the Solidity language (starting from version 0.4.21) to emit events.
+
+The correct implementation should include the event definition at the contract level and use the `emit` keyword when emitting the event, like so:
+
+```solidity
+event Transfer(address indexed from, address indexed to, uint256 value);
+
+function transfer(address _to, uint256 _value) public returns (bool success) {
+    require(balances[msg.sender] >= _value && _value > 0);
+    balances[msg.sender] = balances[msg.sender].sub(_value);
+    balances[_to] = balances[_to].add(_value);
+    emit Transfer(msg.sender, _to, _value); // Correct usage of emit keyword
+    return true;
+}
+```
+
+Since the provided code does not follow this pattern, it violates the given ERC rule to "emit Event Transfer".
